@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogs/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogs/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blogs/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blogs/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vvfzz.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blogs/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E5%85%B6%E4%BB%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E5%85%B6%E4%BB%96/","path":"JAVA/基础/其他/","title":"其他"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>其他 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blogs/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blogs/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blogs/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section">Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#System-exit-n-n-%E7%9A%84%E5%80%BC%E5%AF%B9%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">System.exit(n)n 的值对程序运行的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">使用静态方法的场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">3.</span> <span class="nav-text">方法参数使用情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">初始化块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java%E6%9E%90%E6%9E%84%E6%96%B9%E6%B3%95finalize"><span class="nav-number">5.</span> <span class="nav-text">java析构方法finalize</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#javadoc%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">javadoc使用方法？？？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#final"><span class="nav-number">7.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD"><span class="nav-number">8.</span> <span class="nav-text">重载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E7%9B%B8%E7%AD%89"><span class="nav-number">9.</span> <span class="nav-text">比较相等</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link"><span class="nav-number">9.1.</span> <span class="nav-text">&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#equals"><span class="nav-number">9.2.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Integer-%E7%89%B9%E6%AE%8A%E8%AF%B4%E6%98%8E"><span class="nav-number">9.3.</span> <span class="nav-text">Integer 特殊说明</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Objects-equals-a-b"><span class="nav-number">9.4.</span> <span class="nav-text">Objects.equals(a,b)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%AE%8C%E7%BE%8E%E7%9A%84-equals-%E6%96%B9%E6%B3%95%E7%9A%84%E5%BB%BA%E8%AE%AE%EF%BC%9A"><span class="nav-number">9.5.</span> <span class="nav-text">编写一个完美的 equals 方法的建议：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#hashcode"><span class="nav-number">10.</span> <span class="nav-text">hashcode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#toString-NaN"><span class="nav-number">11.</span> <span class="nav-text">toString</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ArraryList-trimTosize"><span class="nav-number">12.</span> <span class="nav-text">ArraryList.trimTosize()</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blogs/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blogs/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E5%85%B6%E4%BB%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogs/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="其他 | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          其他
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-20 10:51:58" itemprop="dateCreated datePublished" datetime="2024-04-20T10:51:58+08:00">2024-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-21 21:44:00" itemprop="dateModified" datetime="2024-04-21T21:44:00+08:00">2024-04-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h5 id="System-exit-n-n-的值对程序运行的作用"><a href="#System-exit-n-n-的值对程序运行的作用" class="headerlink" title="System.exit(n)n 的值对程序运行的作用"></a>System.exit(n)n 的值对程序运行的作用</h5><p>退出标识，根据不同标识可触发不同操作</p>
+<p>为什么类内部声明私有属性，但提供公开的getter，setter方法？</p>
+<ol>
+<li>可以改变getter，setter方法的实现，不影响其他代码</li>
+<li>setter方法可做数据检查</li>
+</ol>
+<h5 id="使用静态方法的场景"><a href="#使用静态方法的场景" class="headerlink" title="使用静态方法的场景"></a>使用静态方法的场景</h5><ol>
+<li>方法不访问对象状态，方法需要的参数都是通过显示参数提供</li>
+<li>方法只需要访问类的静态域</li>
+</ol>
+<h5 id="方法参数使用情况"><a href="#方法参数使用情况" class="headerlink" title="方法参数使用情况"></a>方法参数使用情况</h5><ol>
+<li>方法不能修改基本数据类型的参数</li>
+<li>方法可以改变一个对象参数的状态</li>
+<li>方法不能让对象参数引用一个新对象</li>
+</ol>
+<h5 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h5><p>在构造函数前执行</p>
+<h5 id="java析构方法finalize"><a href="#java析构方法finalize" class="headerlink" title="java析构方法finalize"></a>java析构方法finalize</h5><ul>
+<li>java不支持，但可自己添加finalize方法。</li>
+<li>在垃圾回收前调用，但调用时机不确定（所以不要依赖他释放资源）</li>
+<li>System.mnFinalizersOnExit(true) 的方法能够确保 finalizer 方法在 Java 关<br>闭前被调用，但不安全，不鼓励使用。替代方案：Runtime.addShutdownHook 添加关闭钩；手动调用close方法关闭</li>
+</ul>
+<h5 id="javadoc使用方法？？？"><a href="#javadoc使用方法？？？" class="headerlink" title="javadoc使用方法？？？"></a>javadoc使用方法？？？</h5><p>…  </p>
+<h5 id="final"><a href="#final" class="headerlink" title="final"></a>final</h5><p>将方法或类声明为final的意义：确保它们不会在子类中改变语义<br>final 修饰域（字段） 赋值后不可修改<br>final 修饰方法 子类不可重写<br>final 修饰类 子类不可重写父类方法</p>
+<p>内联：如果一个方法没有被覆盖并且很短， 编译器就能够对它进行优化处理（编译时优化）， 这个过程为称为内联<br>( inlining )。例如，内联调用 e.getName( ) 将被替换为访问 e.name 域。</p>
+<h5 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h5><p>重载父类方法时，返回值应是父类返回值或其子类</p>
+<h5 id="比较相等"><a href="#比较相等" class="headerlink" title="比较相等"></a>比较相等</h5><h6 id=""><a href="#" class="headerlink" title="&#x3D;&#x3D;"></a>&#x3D;&#x3D;</h6><ul>
+<li>比较对象为基本数据类型时，比较的是数据的大小</li>
+<li>比较对象为引用类型时，比较的是引用类型中存放的地址</li>
+</ul>
+<h6 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h6><ul>
+<li>object 类 使用 &#x3D;&#x3D; 实现，比较引用相同则返回true    </li>
+<li>String Integer Date file 此四个类java实现时覆盖了Object类的实现，其他没有覆盖的类使用Object类实现<ol>
+<li>String 值相同则相同（内部实现：先比较引用，想通返回true；再比较字符，相同则返回true）Integer 值相同则相同</li>
+<li>Integer 值相同则相同</li>
+</ol>
+</li>
+</ul>
+<h6 id="Integer-特殊说明"><a href="#Integer-特殊说明" class="headerlink" title="Integer 特殊说明"></a>Integer 特殊说明</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Integer n1=128;</span><br><span class="line">Integer n2=128;</span><br><span class="line">System.out.print(&quot;n1==n2:&quot;);</span><br><span class="line">System.out.println(n1==n2);//false</span><br><span class="line"></span><br><span class="line">Integer n3=127;</span><br><span class="line">Integer n4=127;</span><br><span class="line">System.out.print(&quot;n3==n4:&quot;);</span><br><span class="line">System.out.println(n3==n4);//true</span><br></pre></td></tr></table></figure>
+<p>Integer包装类型中存在自动装箱的情况，<br>当数据范围在-128～127之间时，创建的对象会在方法区的常量池中开辟空间（可复用），<br>数据超出范围就会在堆区中开辟空间，<br>由于指向不同对象所以n1&#x3D;&#x3D;n2判等的结果为false，n3与n4指向常量池同一地址所以判等结果为true。</p>
+<h6 id="Objects-equals-a-b"><a href="#Objects-equals-a-b" class="headerlink" title="Objects.equals(a,b)"></a>Objects.equals(a,b)</h6><ul>
+<li>两个参数都是null 返回true</li>
+</ul>
+<p>实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static boolean equals(Object a, Object b) &#123;</span><br><span class="line">    return (a == b) || (a != null &amp;&amp; a.equals(b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="编写一个完美的-equals-方法的建议："><a href="#编写一个完美的-equals-方法的建议：" class="headerlink" title="编写一个完美的 equals 方法的建议："></a>编写一个完美的 equals 方法的建议：</h6><ol>
+<li>显式参数命名为 otherObject, 稍后需要将它转换成另一个叫做 other 的变量。</li>
+<li>检测 this 与 otherObject 是否引用同一个对象：<code>if (this = otherObject) return true;</code></li>
+<li>检测 otherObject 是否为 null, 如 果 为 null, 返 回 false。<code>if (otherObject = null) return false;</code></li>
+<li>比较 this 与 otherObject 是否属于同一个类。如果 equals 的语义在每个子类中有所改<br>变，就使用 getClass 检测：<code>if (getClass() != otherObject.getCIassO) return false;</code>如果所有的子类都拥有统一的语义，就使用 instanceof 检测：<code>if (!(otherObject instanceof ClassName)) return false;</code></li>
+<li>将 otherObject 转换为相应的类类型变量：<code>ClassName other = (ClassName) otherObject</code></li>
+<li>对所有需要比较的域进行比较了。使用&#x3D;比较基本类型域，使用 equals 比<br>较对象域。如果所有的域都匹配， 就返回 true; 否 则 返 回 false<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return fieldl == other.field</span><br><span class="line">&amp;&amp; Objects.equa1s(fie1d2, other.field2)</span><br><span class="line">&amp;&amp; ...;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><i>实现equals时的常见错误：</i><br>以下代码声明了一个新equals 没有覆盖object类的equals<br><code>©Override public boolean equals(Object other)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Employee</span><br><span class="line">&#123;</span><br><span class="line">    public boolean equals(Employee other) //</span><br><span class="line">    &#123;</span><br><span class="line">        return other != null</span><br><span class="line">        &amp;&amp; getClassO == other.getClass0</span><br><span class="line">        &amp;&amp; Objects.equals(name , other.name)</span><br><span class="line">        &amp;&amp; salary— other,sal ary</span><br><span class="line">        &amp;&amp; Objects.equals(hireDay, other.hireDay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h5 id="hashcode"><a href="#hashcode" class="headerlink" title="hashcode"></a>hashcode</h5><ul>
+<li>返回一个整形数值（可负数）</li>
+<li>合理组合字段的散列码（以便不同对象的散列码均匀分布）<br>例如：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Employee&#123;</span><br><span class="line">    public int hashCode()&#123;</span><br><span class="line">        return 7 * name.hashCode0</span><br><span class="line">            + 11 * new Double(salary).hashCode0</span><br><span class="line">            + 13 * hireDay.hashCode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//更好的方法1 ：使用null 安全的方法 Objects.hashCode。</span><br><span class="line">public int hashCode()&#123;</span><br><span class="line">    return 7 * Objects.hashCode(name)</span><br><span class="line">        + 11 * Double.hashCode(salary)</span><br><span class="line">        + 13 * Objects.hashCode(hireDay);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//更好的方法2 ：</span><br><span class="line">public int hashCodeO</span><br><span class="line">&#123;</span><br><span class="line">return Objects.hash(name, salary, hireDay);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">其他数组散列码：Arrays.hashCode</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>Equals 与 hashCode 的定义必须一致：如果 x.equals(y) 返回 true, 那么 x.hashCode( ) 就必须与 y.hashCode( ) 具有相同的值。例如， 如果用定义的 Employee.equals 比较雇员的ID，那么 hashCode 方法就需要散列 ID，而不是雇员的姓名或存储地址。</li>
+</ul>
+<h5 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h5><p>数组：Arrary.toString()</p>
+<h5 id="ArraryList-trimTosize"><a href="#ArraryList-trimTosize" class="headerlink" title="ArraryList.trimTosize()"></a>ArraryList.trimTosize()</h5><p>确认数组列表的大小不再发生变化，就可以调用 trimToSize方法,将<br>存储区域的大小调整为当前元素数量所需要的存储空间数目。垃圾回收器将回收多余的存储<br>空间。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/JAVA/%E5%9F%BA%E7%A1%80/1-2%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="prev" title="运算符">
+                  <i class="fa fa-chevron-left"></i> 运算符
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/JAVA/%E5%9F%BA%E7%A1%80/4-10%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/" rel="next" title="4-10类设计技巧">
+                  4-10类设计技巧 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/schemes/muse.js"></script><script src="/blogs/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

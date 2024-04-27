@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogs/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogs/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blogs/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blogs/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"vvfzz.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blogs/js/config.js"></script>
+
+
+
+<link rel="canonical" href="https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/","path":"JAVA/基础/6-3lambda表达式/","title":"6-3lambda表达式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>6-3lambda表达式 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blogs/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blogs/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blogs/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section">Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">函数式接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA%E6%8F%90%E4%BE%9B%E7%9A%84%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">JAVA提供的通用函数式接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">方法引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%95%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">构造器引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.</span> <span class="nav-text">变量作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">处理lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%8D%E8%B0%88Comparator"><span class="nav-number">8.</span> <span class="nav-text">再谈Comparator</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blogs/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blogs/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogs/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="6-3lambda表达式 | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          6-3lambda表达式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-23 15:59:45" itemprop="dateCreated datePublished" datetime="2024-04-23T15:59:45+08:00">2024-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-26 15:46:30" itemprop="dateModified" datetime="2024-04-26T15:46:30+08:00">2024-04-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h3><p>对于只有一个抽象方法的接口， 需要这种接口的对象时，就可以提供一个 lambda表达式。这种接口称为函数式接口 （ functional interface )。</p>
+<p>在 Java 中， 对 lambda 表达式所能做的也只是能转换为函数式接口。其他支持函数字面量的语言中，可以声明函数类型（如（String, String) -&gt; int)、 声明这些类型的变量，使用变量保存函数表达式（如C#委托）。不过，Java 设计者决定保持接口概念， 没有为 Java增加函数类型。</p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>Arrays.sort 第二个参数需要Comparator 实例对象， Comparator是只有一个方法的接口， 所以可以提供一个 lambda 表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort (words,</span><br><span class="line">(first, second) -&gt; first.lengthO - second.lengthO) ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JAVA提供的通用函数式接口"><a href="#JAVA提供的通用函数式接口" class="headerlink" title="JAVA提供的通用函数式接口"></a>JAVA提供的通用函数式接口</h3><p>Java API 在java.util.fimction 包中定义了很多非常通用的函数式接口<br>BiFunction&lt;T, U, R&gt; 描述了参数类型为 T 和 U 而且返回类型为 R 的函数.可以把我们的字符串比较 lambda 表达式保存在这个类型的变量中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BiFunction&lt;String, String, Integer〉comp</span><br><span class="line">= (first, second) -&gt; first.lengthO - second.length();</span><br></pre></td></tr></table></figure>
+<p>java.util.function 包中有一个尤其有用的接口 Predicate:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Predicate&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">boolean test(T t);</span><br><span class="line">// Additional default and static methods</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayList 类有一个 removelf 方法， 它的参数就是一个 Predicate。下面的语句将从一个数组列表删除所有 null 值：<br><code>list.removelf(e -&gt; e == null);</code></p>
+<h3 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h3><p>要用 :: 操作符分隔方法名与对象或类名。主要有 3 种情况：</p>
+<ul>
+<li>object::instanceMethod</li>
+<li>Class::staticMethod</li>
+<li>Class.instanceMethod 第 1 个参数会成为方法的目标。<br>  例如：String::compareToIgnoreCase 等同于 (x, y) -&gt; x.compareToIgnoreCase(y)</li>
+</ul>
+<h3 id="构造器引用"><a href="#构造器引用" class="headerlink" title="构造器引用"></a>构造器引用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; names = . . .;</span><br><span class="line">Stream&lt;Person&gt; stream = names.stream().map(Person::new);</span><br><span class="line">List&lt;Person&gt; people = stream.col1ect(Col1ectors.toList());</span><br><span class="line"></span><br><span class="line">Object[] people = stream.toArrayO；</span><br><span class="line">Person[] people = stream.toArray(Person[]::new):</span><br></pre></td></tr></table></figure>
+
+<h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static void repeatMsg(String text, int delay) &#123;</span><br><span class="line"></span><br><span class="line">       ActionListener listener = event -&gt; &#123;</span><br><span class="line">           System.out.println(text);</span><br><span class="line">           Toolkit.getDefaultToolkit().beep();</span><br><span class="line">       &#125;;</span><br><span class="line"></span><br><span class="line">       new Timer(delay, listener).start();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>lambda 表达式有3个部分：</p>
+<ul>
+<li>一个代码块</li>
+<li>参数</li>
+<li>自由变量的值， 这是指非参数而且不在代码中定义的变量 (上例的text变量)</li>
+</ul>
+<p>自由变量的限制：lambda 表达式可以捕获外围作用域中变量的值，但引用值不能改变的变量。<br>限制原因：避免并发产生的数据一致性问题</p>
+<p><b>lambda表达式中的this关键字</b>指创建这个 lambda 表达式的方法的 this参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class ApplicationO</span><br><span class="line">    &#123;</span><br><span class="line">        public void init()</span><br><span class="line">        &#123;</span><br><span class="line">            ActionListener listener * event -&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.print n(this.toString());</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>表达式 this.toString()会调用 Application 对象的 toString方法， 而不是 ActionListener 实<br>例的方法。</p>
+<h3 id="处理lambda表达式"><a href="#处理lambda表达式" class="headerlink" title="处理lambda表达式"></a>处理lambda表达式</h3><p>常用函数式接口<br><img src="/blogs/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/6-3-1.png"><br>基本类型的函数式接口<br><img src="/blogs/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/6-3-2.png"><br>使用时注意<b>避免装箱拆箱</b>，如根据实际情况选择使用 IntConsumer 还是Consume<lnteger></p>
+<p>用 @FunctionalInterface 注解来标记只有一个抽象方法的接口<br>两个优点：</p>
+<ul>
+<li>无意中增加了另一个非抽象方法， 编译器会产生一个错误消息</li>
+<li>javadoc 页里会指出你的接口是一个函数式接口</li>
+</ul>
+<h3 id="再谈Comparator"><a href="#再谈Comparator" class="headerlink" title="再谈Comparator"></a>再谈Comparator</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(arr, Comparator.comparing(Person::getName, Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName, Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
+<p>排序规则：<br>根据Name长度倒序，长度大在前<br>根据lName长度倒序，长度大在前，为空在最后。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/JAVA/%E5%9F%BA%E7%A1%80/6-1%E6%8E%A5%E5%8F%A3/" rel="prev" title="6-1接口">
+                  <i class="fa fa-chevron-left"></i> 6-1接口
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%A9%B7%E7%88%B8%E7%88%B8%E5%AF%8C%E7%88%B8%E7%88%B8/" rel="next" title="穷爸爸富爸爸">
+                  穷爸爸富爸爸 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/schemes/muse.js"></script><script src="/blogs/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

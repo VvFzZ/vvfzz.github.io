@@ -21,15 +21,14 @@
 
 
 
-<link rel="canonical" href="https://vvfzz.github.io/blogs/timeline/">
+<link rel="canonical" href="https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":true,"permalink":"https://vvfzz.github.io/blogs/timeline/index.html","path":"timeline/index.html","title":"timeline"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/","path":"JAVA/基础/反射/","title":"反射"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>timeline | VvfzZ
-</title>
+<title>反射 | VvfzZ</title>
   
 
 
@@ -88,7 +87,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -101,6 +100,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Class"><span class="nav-number">1.</span> <span class="nav-text">获取Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%88%86%E6%9E%90%E7%B1%BB%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">2.</span> <span class="nav-text">反射分析类的能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">运行时分析对象</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,34 +135,109 @@
 
     </div>
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
 
 
-    
-    
-    
-    <div class="post-block" lang="en"><header class="post-header">
+  
 
-<h1 class="post-title" itemprop="name headline">timeline
-</h1>
 
-<div class="post-meta-container">
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://vvfzz.github.io/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogs/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="反射 | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          反射
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-22 10:07:38" itemprop="dateCreated datePublished" datetime="2024-04-22T10:07:38+08:00">2024-04-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-23 09:34:04" itemprop="dateModified" datetime="2024-04-23T09:34:04+08:00">2024-04-23</time>
+    </span>
+
+  
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      <div class="post-body">
-          
-      </div>
-      
-      
-      
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="获取Class"><a href="#获取Class" class="headerlink" title="获取Class"></a>获取Class</h3><ul>
+<li><code>String dassName = &quot;java.util .Random&quot;;    Class cl = Class.forName(dassName);</code></li>
+<li>getClass方法</li>
+<li><code>Class dl = Random.class; Gass cl 2 = int.class;Class cl 3 = Doublet.class;</code></li>
+</ul>
+<h3 id="反射分析类的能力"><a href="#反射分析类的能力" class="headerlink" title="反射分析类的能力"></a>反射分析类的能力</h3><p>java.lang.reflect 包中有三个类 Field、 Method 和 Constructor 分别用于描述类的域、 方<br>法和构造器</p>
+<h3 id="运行时分析对象"><a href="#运行时分析对象" class="headerlink" title="运行时分析对象"></a>运行时分析对象</h3><ul>
+<li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor<br>类的公共超类。</li>
+</ul>
+<p>优点：易于编写通用性代码<br>缺点：编译时不容易发现问题，运行时易出错。</p>
+
     </div>
 
     
     
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blogs/tags/%E5%8F%8D%E5%B0%84/" rel="tag"># 反射</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/JAVA/%E5%9F%BA%E7%A1%80/%E6%9E%9A%E4%B8%BE/" rel="prev" title="枚举">
+                  <i class="fa fa-chevron-left"></i> 枚举
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/JAVA/Tomcat/%E5%AE%89%E8%A3%85Tomcat/" rel="next" title="安装Tomcat">
+                  安装Tomcat <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
 </div>
