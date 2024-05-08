@@ -100,7 +100,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Class"><span class="nav-number">1.</span> <span class="nav-text">获取Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%88%86%E6%9E%90%E7%B1%BB%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">2.</span> <span class="nav-text">反射分析类的能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">运行时分析对象</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Class"><span class="nav-number">1.</span> <span class="nav-text">获取Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%88%86%E6%9E%90%E7%B1%BB%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">2.</span> <span class="nav-text">反射分析类的能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%88%86%E6%9E%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">运行时分析对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BB%A7%E6%89%BF%E8%A7%84%E5%88%99"><span class="nav-number">4.</span> <span class="nav-text">泛型类型的继承规则</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -113,13 +113,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -160,7 +160,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="反射 | VvfzZ">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="获取Class、反射分析类的能力、运行时分析对象">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -182,12 +182,13 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-23 09:34:04" itemprop="dateModified" datetime="2024-04-23T09:34:04+08:00">2024-04-23</time>
+      <time title="Modified: 2024-04-30 14:34:12" itemprop="dateModified" datetime="2024-04-30T14:34:12+08:00">2024-04-30</time>
     </span>
 
   
 </div>
 
+            <div class="post-description">获取Class、反射分析类的能力、运行时分析对象</div>
         </div>
       </header>
 
@@ -195,16 +196,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="获取Class"><a href="#获取Class" class="headerlink" title="获取Class"></a>获取Class</h3><ul>
+        <p>运行时分析任意的对象。</p>
+<h3 id="获取Class"><a href="#获取Class" class="headerlink" title="获取Class"></a>获取Class</h3><ul>
 <li><code>String dassName = &quot;java.util .Random&quot;;    Class cl = Class.forName(dassName);</code></li>
 <li>getClass方法</li>
 <li><code>Class dl = Random.class; Gass cl 2 = int.class;Class cl 3 = Doublet.class;</code></li>
 </ul>
-<h3 id="反射分析类的能力"><a href="#反射分析类的能力" class="headerlink" title="反射分析类的能力"></a>反射分析类的能力</h3><p>java.lang.reflect 包中有三个类 Field、 Method 和 Constructor 分别用于描述类的域、 方<br>法和构造器</p>
+<h3 id="反射分析类的能力"><a href="#反射分析类的能力" class="headerlink" title="反射分析类的能力"></a>反射分析类的能力</h3><p>java.lang.reflect 包中有三个类 Field、 Method 和 Constructor 分别用于描述类的域、 方法和构造器</p>
 <h3 id="运行时分析对象"><a href="#运行时分析对象" class="headerlink" title="运行时分析对象"></a>运行时分析对象</h3><ul>
 <li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor<br>类的公共超类。</li>
 </ul>
 <p>优点：易于编写通用性代码<br>缺点：编译时不容易发现问题，运行时易出错。</p>
+<h3 id="泛型类型的继承规则"><a href="#泛型类型的继承规则" class="headerlink" title="泛型类型的继承规则"></a>泛型类型的继承规则</h3><p>S extends T , Pair<S> 与 Pair<T>没有什么联系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Parent1&gt; aa = new ArrayList&lt;Sun2&gt;(); // ERROR</span><br><span class="line">Parent1[] aaaa = new Sun2[1]; // TRUE</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -214,6 +219,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/JAVA/" rel="tag"># JAVA</a>
               <a href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag"># 反射</a>
           </div>
 

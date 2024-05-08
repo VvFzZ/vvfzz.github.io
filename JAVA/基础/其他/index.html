@@ -113,13 +113,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -160,7 +160,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="其他 | VvfzZ">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -182,12 +182,13 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-21 21:44:00" itemprop="dateModified" datetime="2024-04-21T21:44:00+08:00">2024-04-21</time>
+      <time title="Modified: 2024-05-06 11:44:16" itemprop="dateModified" datetime="2024-05-06T11:44:16+08:00">2024-05-06</time>
     </span>
 
   
 </div>
 
+            <div class="post-description">...</div>
         </div>
       </header>
 
@@ -227,12 +228,12 @@
 <h6 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h6><ul>
 <li>object 类 使用 &#x3D;&#x3D; 实现，比较引用相同则返回true    </li>
 <li>String Integer Date file 此四个类java实现时覆盖了Object类的实现，其他没有覆盖的类使用Object类实现<ol>
-<li>String 值相同则相同（内部实现：先比较引用，想通返回true；再比较字符，相同则返回true）Integer 值相同则相同</li>
+<li>String 值相同则相同（内部实现：先比较引用，相同返回true；再比较字符，相同则返回true）Integer 值相同则相同</li>
 <li>Integer 值相同则相同</li>
 </ol>
 </li>
 </ul>
-<h6 id="Integer-特殊说明"><a href="#Integer-特殊说明" class="headerlink" title="Integer 特殊说明"></a>Integer 特殊说明</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Integer n1=128;</span><br><span class="line">Integer n2=128;</span><br><span class="line">System.out.print(&quot;n1==n2:&quot;);</span><br><span class="line">System.out.println(n1==n2);//false</span><br><span class="line"></span><br><span class="line">Integer n3=127;</span><br><span class="line">Integer n4=127;</span><br><span class="line">System.out.print(&quot;n3==n4:&quot;);</span><br><span class="line">System.out.println(n3==n4);//true</span><br></pre></td></tr></table></figure>
+<h6 id="Integer-特殊说明"><a href="#Integer-特殊说明" class="headerlink" title="Integer 特殊说明"></a>Integer 特殊说明</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Integer n1=128;</span><br><span class="line">Integer n2=128;</span><br><span class="line">System.out.print(&quot;n1==n2:&quot;);</span><br><span class="line">System.out.println(n1==n2);//false</span><br><span class="line">System.out.print(&quot;n1.equals(n2):&quot;);</span><br><span class="line">System.out.println(n1.equals(n2));//true</span><br><span class="line"></span><br><span class="line">Integer n3=127;</span><br><span class="line">Integer n4=127;</span><br><span class="line">System.out.print(&quot;n3==n4:&quot;);</span><br><span class="line">System.out.println(n3==n4);//true</span><br></pre></td></tr></table></figure>
 <p>Integer包装类型中存在自动装箱的情况，<br>当数据范围在-128～127之间时，创建的对象会在方法区的常量池中开辟空间（可复用），<br>数据超出范围就会在堆区中开辟空间，<br>由于指向不同对象所以n1&#x3D;&#x3D;n2判等的结果为false，n3与n4指向常量池同一地址所以判等结果为true。</p>
 <h6 id="Objects-equals-a-b"><a href="#Objects-equals-a-b" class="headerlink" title="Objects.equals(a,b)"></a>Objects.equals(a,b)</h6><ul>
 <li>两个参数都是null 返回true</li>
@@ -274,8 +275,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/JAVA/%E5%9F%BA%E7%A1%80/1-3%E9%80%92%E5%BD%92/" rel="prev" title="递归">
-                  <i class="fa fa-chevron-left"></i> 递归
+                <a href="/JAVA/%E5%9F%BA%E7%A1%80/1-2%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="prev" title="运算符">
+                  <i class="fa fa-chevron-left"></i> 运算符
                 </a>
             </div>
             <div class="post-nav-item">
