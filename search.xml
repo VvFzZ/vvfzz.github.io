@@ -7,6 +7,25 @@
 ]]></content>
   </entry>
   <entry>
+    <title>设计模式之美</title>
+    <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/</url>
+    <content><![CDATA[<p>高质量代码长什么样？</p>
+<p>为什么用这种设计原则、思想或模式？解决什么编程问题？有哪些应用场景？如何权衡、恰当的在项目中应用？</p>
+<p>操作系统、组成原理、编译原理等计算机基础知识在开发中用不上，很难转换成开发“生产力”。但是，它能潜移默化地，间接地提高技术理解。</p>
+<p>为什么学习设计模式？</p>
+<ul>
+<li>第一个功利性目的：应对面试。平时多积累，面试钱复习即可做到成竹在胸，不再担心设计模式是自己的短板，被问到。</li>
+<li>告别烂代码</li>
+<li>提高复杂代码设计和开发能力</li>
+<li>读源码、学框架事半功倍</li>
+<li>职场发展做铺垫</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>markdown</title>
     <url>/markdown/</url>
     <content><![CDATA[<p><strong>加粗1</strong>  <strong>加粗2</strong><br><em>斜体</em><br><del>删除线</del><br><u>下划线</u><br>下标<sub>1</sub><br>上标<sup>1</sup><br><small>小号字体1</small> <small><small>小号字体2</small></small><br><big>大号字体1</big> <big><big>大号字体2</big></big><br>111<code>行内代码高亮</code>111<br><mark>高亮</mark><br>图片1:<img src="/"><br>图片2：<img src="1.png" width="10px" height="10px"></p>
@@ -25,16 +44,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>设计模式之美</title>
-    <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/</url>
-    <content><![CDATA[<p>高质量代码长什么样？</p>
-<p>为什么用这种设计原则、思想或模式？解决什么编程问题？有哪些应用场景？如何权衡、恰当的在项目中应用？</p>
-]]></content>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>0-1学习路径</title>
     <url>/JAVA/0-1%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</url>
     <content><![CDATA[<h1 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h1><h3 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h3><p>基础<br>IO<br>多线程<br>并发<br>网络<br>jvm</p>
@@ -44,6 +53,354 @@
 <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h3 id="面向对象设计"><a href="#面向对象设计" class="headerlink" title="面向对象设计"></a>面向对象设计</h3><p>设计模式、面向对象分析设计</p>
 <p>对象的变量是多态的。多态动态绑定机制：编译时生成类方法表，运行时根据对象实例类型确定具体执行的方法</p>
 <h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3>]]></content>
+  </entry>
+  <entry>
+    <title>crontab</title>
+    <url>/linux/crontab/</url>
+    <content><![CDATA[<p>crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段：minute hour day month week command</p>
+<span id="more"></span>
+<p>其中：<br>minute：表示分钟，可以是从0到59之间的任何整数。<br>hour：表示小时，可以是从0到23之间的任何整数。<br>day：表示日期，可以是从1到31之间的任何整数。<br>month：表示月份，可以是从1到12之间的任何整数。<br>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。<br>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</p>
+<h1 id="安装crontab"><a href="#安装crontab" class="headerlink" title="安装crontab"></a>安装crontab</h1><p>yum install crontabs</p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>service crond start         &#x2F;&#x2F;启动服务<br>service crond stop          &#x2F;&#x2F;关闭服务<br>service crond restart       &#x2F;&#x2F;重启服务<br>service crond reload        &#x2F;&#x2F;重新载入配置<br>crontab -e                  &#x2F;&#x2F; 编辑任务<br>crontab -l                  &#x2F;&#x2F; 查看任务列表<br>service crond status		&#x2F;&#x2F;查看服务状态</p>
+<h1 id="常用表达式"><a href="#常用表达式" class="headerlink" title="常用表达式"></a>常用表达式</h1><p>*&#x2F;1 * * * *   &#x2F;&#x2F;每分钟执行一次</p>
+<p>59 23 * * *   &#x2F;&#x2F;每天23：59分执行一次</p>
+<p>0 1 * * *     &#x2F;&#x2F;每天凌晨一点执行一次</p>
+<ul>
+<li>23,00-07&#x2F;1 * * *  &#x2F;&#x2F;当天23点，第二天0点到凌晨7点 每隔1分钟执行一次</li>
+</ul>
+<h1 id="添加任务"><a href="#添加任务" class="headerlink" title="添加任务"></a>添加任务</h1><p>执行 crontab -e<br>添加命令行 <code>*/1 * * * * /usr/local/nginx/sbin/cut_my_log.sh</code></p>
+]]></content>
+      <tags>
+        <tag>crontab</tag>
+        <tag>定时任务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用命令</title>
+    <url>/linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="chmod-change-mode"><a href="#chmod-change-mode" class="headerlink" title="chmod(change mode)"></a>chmod(change mode)</h1><p>控制用户对文件的权限</p>
+<p>语法：<code>chmod [-cfvR] [--help] [--version] mode file...</code></p>
+<span id="more"></span>
+<h2 id="mode参数说明"><a href="#mode参数说明" class="headerlink" title="mode参数说明"></a>mode参数说明</h2><ul>
+<li>符号模式<ol>
+<li>u 文件所有者，g 文件所有者所在组，o 其他用户，a 表示这三者皆是。</li>
+<li><ul>
+<li>增加权限、- 取消权限、&#x3D; 设置指定用户权限的设置，即将用户类型的所有权限重新设置。</li>
+</ul>
+</li>
+<li>r 读，w 写，x 执行，X 特殊执行权限。只有当文件为目录文件，或者其他类型的用户有可执行权限时，才将文件权限设置可执行</li>
+</ol>
+</li>
+<li>八进制语法<br>  <code>chmod 777 file1.sh</code>:给file1.sh 所有用户读写执行的权限。<br>  三个数字分别代表user，group，other用户权限。<br>  数字的权限含义：<img src="/linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/1.png"></li>
+</ul>
+<h2 id="其他参数说明"><a href="#其他参数说明" class="headerlink" title="其他参数说明:"></a>其他参数说明:</h2><ul>
+<li>c : 若该文件权限确实已经更改，才显示其更改动作</li>
+<li>f : 若该文件权限无法被更改也不要显示错误讯息</li>
+<li>v : 显示权限变更的详细资料</li>
+<li>R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递归的方式逐个变更)<ul>
+<li><code>chmod -R a+r *</code>:将目前目录下的所有文件与子目录皆设为任何人可读取</li>
+</ul>
+</li>
+<li>-help : 显示辅助说明</li>
+<li>-version : 显示版本</li>
+</ul>
+<h1 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h1><ol>
+<li>-c	创建新的归档文件（打包）； <code>tar -cf documents.tar /home/user/documents</code> </li>
+<li>-x	从归档文件中提取文件（解包） ；<code>tar -xzvf doc.tar.gz</code> 解压 doc.tar.gz到当前目录</li>
+<li>-f  &lt;文件名&gt;	指定归档文件名</li>
+<li>-v	显示操作的详细信息</li>
+<li>-z	通过gzip压缩归档文件</li>
+<li>-j	通过bzip2压缩归档文件</li>
+<li>-C  &lt;目录&gt;	切换到指定目录</li>
+<li>–exclude&#x3D;&lt;模式&gt;	排除匹配模式的文件 ； <code>tar -cf documents.tar --exclude=&#39;*.txt&#39; /home/user/documents</code> 排除txt文件</li>
+<li>–list	列出归档文件的内容 ；<code>tar --list -f documents.tar</code>显示出documents.tar中包含的所有文件和目录列表</li>
+<li>–help	显示帮助信息</li>
+</ol>
+<h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><h2 id="firewall-cmd"><a href="#firewall-cmd" class="headerlink" title="firewall-cmd"></a>firewall-cmd</h2><ol>
+<li>查询端口是否开放<br>firewall-cmd –query-port&#x3D;8080&#x2F;tcp</li>
+<li>开放80端口<br>firewall-cmd –permanent –add-port&#x3D;80&#x2F;tcp</li>
+<li>移除端口<br>firewall-cmd –permanent –remove-port&#x3D;8080&#x2F;tcp</li>
+<li>重启防火墙(修改配置后要重启防火墙)<br>firewall-cmd –reload</li>
+<li>添加服务<br>firewall-cmd –zone&#x3D;public –add-service&#x3D;http –permanent</li>
+<li>删除服务：<br>firewall-cmd –zone&#x3D;public –remove-service&#x3D;http –permanent</li>
+<li>列出所有规则<br>firewall-cmd –list-all</li>
+<li>重新加载防火墙规则<br>firewall-cmd –reload</li>
+<li>列出所有可用的服务<br>firewall-cmd –list-services</li>
+<li>列出所有开发端口<br>firewall-cmd –list-port</li>
+</ol>
+<h2 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h2><ol>
+<li>关闭<br>systemctl stop firewalld.service</li>
+<li>开启<br>systemctl start firewalld.service</li>
+<li>若无法打开<br>先用：systemctl unmask firewalld.service<br>然后：systemctl start firewalld.service</li>
+<li>开启开机启动<br>systemctl enable firewalld.service</li>
+<li>关闭开机启动<br>systemctl disable firewalld.service<br>6.查看防火墙状态<br>systemctl status firewalld</li>
+</ol>
+<h1 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h1><p>ifconfig -a 查询ip地址</p>
+<h1 id="安装apt"><a href="#安装apt" class="headerlink" title="安装apt"></a>安装apt</h1><p>sudo yum install epel-release<br>sudo yum install apt</p>
+<p>goaccess access.log -o ..&#x2F;html&#x2F;report.html –real-time-html –time-formate&#x3D;’%H:%M:%S’ –date-formate&#x3D;’%d&#x2F;%b&#x2F;%Y’ –log-formate&#x3D;COMBINE</p>
+<p>time-format %T<br>date-format %d&#x2F;%b&#x2F;%Y<br>log_format %h - %^ [%d:%t %^] “%r” %s %b “%R”  “%u” “%^” “%T”</p>
+]]></content>
+      <tags>
+        <tag>linux常用命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1_初识Nginx</title>
+    <url>/nginx/1_%E5%88%9D%E8%AF%86Nginx/</url>
+    <content><![CDATA[<h1 id="nginx优点"><a href="#nginx优点" class="headerlink" title="nginx优点"></a>nginx优点</h1><ul>
+<li>高并发，高性能</li>
+<li>扩展性好  模块化设计</li>
+<li>高可靠  持续不间断提供服务（不宕机）</li>
+<li>热部署</li>
+<li>BSD许可证 开源免费，可商业用途下修改源码</li>
+</ul>
+<span id="more"></span>
+<h1 id="nginx版本"><a href="#nginx版本" class="headerlink" title="nginx版本"></a>nginx版本</h1><ul>
+<li>开源免费版 <a href="http://nginx.org/">http://nginx.org</a></li>
+<li>非开源商业版 nginx plus, <a href="http://nginx.com/">http://nginx.com</a></li>
+<li>tengine 阿里巴巴版 不能同步升级官方版本</li>
+<li>开源免费版OpenResty <a href="http://openresty.org/">http://OpenResty.org</a></li>
+<li>商业版OpenResty</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><code>./configure</code> 配置和准备软件包以进行编译和安装<ul>
+<li>参数说明<ul>
+<li>指定 –prefix 目录 ，其他目录会在此目录下新建相应目录</li>
+<li>–with-*_module  、 –without-*_module 指定使用或不使用哪些模块</li>
+<li>–with-* 编译时需指定的特殊参数</li>
+</ul>
+</li>
+<li>生成objs目录</li>
+</ul>
+</li>
+<li><code>make</code> 编译 <ul>
+<li>新安装可用make install</li>
+<li>升级版本 make后拷贝文件(文件在objs目录)到已安装目录</li>
+</ul>
+</li>
+</ol>
+<h1 id="nginx配置文件的通用语法"><a href="#nginx配置文件的通用语法" class="headerlink" title="nginx配置文件的通用语法"></a>nginx配置文件的通用语法</h1><ul>
+<li>配置文件由指令与指令块构成</li>
+<li>每条指令以分号结尾，指令与参数间以空格分隔</li>
+<li>指令块以大括号将多条指令组织在一起</li>
+<li>incluede语句允许组合多个配置文件以提升可维护性</li>
+<li>使用#注释</li>
+<li>$符号使用变量</li>
+<li>部分指令的参数支持正则表达式</li>
+</ul>
+<p>http配置指令块</p>
+<ul>
+<li>http</li>
+<li>server</li>
+<li>upstream</li>
+<li>location</li>
+</ul>
+<h1 id="Nginx命令"><a href="#Nginx命令" class="headerlink" title="Nginx命令"></a>Nginx命令</h1><p>格式  nginx -s reload</p>
+<ul>
+<li>帮助 -h</li>
+<li>指定配置文件 -c</li>
+<li>指定运行目录 -p</li>
+<li>发送信号 -s <ol>
+<li>立刻停止服务 stop</li>
+<li>优雅停止服务 quit</li>
+<li>重载配置文件 reload</li>
+<li>重新开始记录日志文件 reopen</li>
+</ol>
+</li>
+<li>测试配置文件语法 -t -T</li>
+<li>打印版本、编译信息等 -v -V</li>
+</ul>
+<h1 id="热部署"><a href="#热部署" class="headerlink" title="热部署"></a>热部署</h1><ul>
+<li>备份旧文件，拷贝新文件覆盖</li>
+<li>告诉旧master进程要热部署了，kill -USR2 oldProcessId<ol>
+<li>会新启动一个master进程（使用新nginx二进制文件启动）和worker进程</li>
+<li>旧worker进程已不监听端口了，新请求都由新进程处理</li>
+</ol>
+</li>
+<li>kill -WINCH oldProcessId  通知旧master进程关闭旧的worker进程<ol>
+<li>此时旧master进程依然存在，如果升级有问题需版本回退，reload可使旧master唤醒旧worker进程</li>
+</ol>
+</li>
+</ul>
+<h1 id="日志切割"><a href="#日志切割" class="headerlink" title="日志切割"></a>日志切割</h1><ul>
+<li><p>手动</p>
+<ol>
+<li>备份旧日志</li>
+<li>执行 nginx -s reopen</li>
+</ol>
+</li>
+<li><p>自动</p>
+<ol>
+<li><p>新建rotate.sh脚本 内容如下 （分配执行权限）</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">LOG_PATH=&quot;/var/log/nginx/&quot; #日志的根目录</span><br><span class="line">RECORD_TIME=$(date -d &quot;yesterday&quot; +%Y-%m-%d+%H:%M) #切割日志的后缀</span><br><span class="line">PID=/var/run/nginx/nginx.pid</span><br><span class="line">mv $&#123;LOG_PATH&#125;/access.log $&#123;LOG_PATH&#125;/access.$&#123;RECORD_TIME&#125;.log</span><br><span class="line">mv $&#123;LOG_PATH&#125;/error.log $&#123;LOG_PATH&#125;/error.$&#123;RECORD_TIME&#125;.log</span><br><span class="line"></span><br><span class="line">#向Nginx主进程发送信号，用于重新打开日志文件</span><br><span class="line">kill -USR1 `cat $PID`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增crontab定时任务</p>
+  <a href="/linux/crontab/" title="crontab">crontab</a></li>
+</ol>
+</li>
+</ul>
+<h1 id="配置静态资源服务器"><a href="#配置静态资源服务器" class="headerlink" title="配置静态资源服务器"></a>配置静态资源服务器</h1><h2 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h2><p>location &#x2F;statics&#x2F; {<br>    alias statics;&#x2F;&#x2F;静态文件根目录  不使用root，root会带入rul路径<br>    autoindex on; &#x2F;&#x2F;开启目录浏览<br>    set $limit_rate 1k; &#x2F;&#x2F;每秒传输1k字节到浏览器；多用户高并发时限制响应流量，防止大文件传输影响其他文件访问<br>}</p>
+<h2 id="配置gzip"><a href="#配置gzip" class="headerlink" title="配置gzip"></a>配置gzip</h2><p>gzip on;<br>gzip_min_length 1;&#x2F;&#x2F;1个字节时不压缩（一个字节一个tcp报文可以直接发送，再进行压缩没有意义）<br>gzip_comp_level 2; &#x2F;&#x2F;压缩级别<br>gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;javascript application&#x2F;x-httpd-php image&#x2F;jpeg image&#x2F;gif image&#x2F;png application&#x2F;vnd.ms-fontobject font&#x2F;ttf font&#x2F;opentype font&#x2F;x-woff image&#x2F;svg+xml; &#x2F;&#x2F; 压缩包没必要再压缩</p>
+<p>access日志<br>定义格式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    log_format main &#x27;$remote_addr - $remote_user [$time_local]&#x27;  &#x27; &quot;$request&quot; $status $body_bytes_sent &#x27; &#x27; &quot;$http_referer&quot; &quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; &#x27;;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        access_log logs/access.log main;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="搭建具备缓存功能的反向代理服务"><a href="#搭建具备缓存功能的反向代理服务" class="headerlink" title="搭建具备缓存功能的反向代理服务"></a>搭建具备缓存功能的反向代理服务</h1><p>缓存上游服务器响应内容，如果需要实时状态则不可使用</p>
+<h2 id="代理服务器配置"><a href="#代理服务器配置" class="headerlink" title="代理服务器配置"></a>代理服务器配置</h2><p>http{<br>    upstream local{<br>        server 127.0.0.1:8080;&#x2F;&#x2F;真是服务地址<br>    }</p>
+<pre><code>proxy_cache_path /tmp/nginxcache levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m use_temp_path=off; //
+
+location / &#123;
+    proxy_set_header Host $host; //将代理服务器获取到浏览器的Host发送到真实服务器，不然真是服务器获取的是代理服务器host
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_cache my_cache;//在http模块定义
+    proxy_cache_key $host$uri$is_args$args;
+    proxy_cached_valid 200 304 302 ld;
+    proxy_pass http://local;
+&#125;
+</code></pre>
+<p>}</p>
+<h3 id="proxy-cache-path"><a href="#proxy-cache-path" class="headerlink" title="proxy_cache_path"></a>proxy_cache_path</h3><p>语法:	<code>proxy_cache_path path [levels=levels] keys_zone=name:size [inactive=time] [max_size=size] [loader_files=number] [loader_sleep=time] [loader_threshold=time];</code></p>
+<ul>
+<li>path 定义缓存文件存放目录；</li>
+<li>levels：level 定义了缓存的层次结构，每层可以用1（最多16中选择，0-f）或2（最多256种选择，00-ff）表示，中间用 [冒号] 分隔。“levels&#x3D;1:2”表示开启1、2层级(第2层级理论有16*256个目录)。    </li>
+<li>keys_zone：共享内存区的名称和大小；</li>
+<li>inactive inactive&#x3D;30m 表示 30 分钟没有被访问的文件会被 cache manager 删除，inactive的默认值是10分钟。 需要注意的是，inactive和expired配置项的含义是不同的，expired只是缓存过期，但不会被删除，inactive是删除指定时间内未被访问的缓存文件</li>
+<li>max_size：限制被缓存的响应数据的总量,基于LRU清除数据，不指定会占满磁盘空间</li>
+</ul>
+<h1 id="用GoAccess实现可视化实时监控access日志"><a href="#用GoAccess实现可视化实时监控access日志" class="headerlink" title="用GoAccess实现可视化实时监控access日志"></a>用GoAccess实现可视化实时监控access日志</h1><h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>GoAccess在使用源码安装时，依赖下列组件。</p>
+<ul>
+<li>为方便最终日志统计时显示IP地理位置，需要安装依赖项GeoIP-devel：<br>执行命令：yum install GeoIP-devel.x86_64</li>
+<li>安装ncurses-devel开发库：<br>执行命令：yum install ncurses-devel</li>
+<li>安装tokyocabinet-devel开发库：<br>执行命令：yum install tokyocabinet-devel</li>
+<li>安装openssl-devel开发库：<br>执行命令：yum install openssl-devel</li>
+</ul>
+<h3 id="下载-解压goaccess"><a href="#下载-解压goaccess" class="headerlink" title="下载,解压goaccess"></a>下载,解压goaccess</h3><p>wget <a href="https://tar.goaccess.io/goaccess-1.9.2.tar.gz">https://tar.goaccess.io/goaccess-1.9.2.tar.gz</a></p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><ul>
+<li><code>./configure --enable-utf8 --enable-geoip=legacy -prefix=/home/vvf/goaccess</code></li>
+<li><code>make</code></li>
+<li><code>make install</code></li>
+</ul>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>.&#x2F;goaccess &#x2F;home&#x2F;vvf&#x2F;nginx&#x2F;logs&#x2F;access.log -o &#x2F;home&#x2F;vvf&#x2F;nginx&#x2F;html&#x2F;report.html –real-time-html  daemonize</p>
+<ul>
+<li>注：*</li>
+<li>Tx.Amount：流量 *</li>
+<li>1KiB&#x3D;2^10&#x3D;1024, *</li>
+<li>1MiB&#x3D;2^20&#x3D;1048576&#x3D;1024KiB*</li>
+<li>1GiB&#x3D;2^30&#x3D;1,073,741,824&#x3D;1024MiB *</li>
+</ul>
+<h1 id="从网络原理来看SSL安全协议"><a href="#从网络原理来看SSL安全协议" class="headerlink" title="从网络原理来看SSL安全协议"></a>从网络原理来看SSL安全协议</h1><h2 id="SSL-TLS通用模型"><a href="#SSL-TLS通用模型" class="headerlink" title="SSL&#x2F;TLS通用模型"></a>SSL&#x2F;TLS通用模型</h2><p><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/1.png"></p>
+<h2 id="TLS安全密码套件解读"><a href="#TLS安全密码套件解读" class="headerlink" title="TLS安全密码套件解读"></a>TLS安全密码套件解读</h2><p><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/TLS%E5%AE%89%E5%85%A8%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E8%A7%A3%E8%AF%BB.png"></p>
+<ul>
+<li>ECDHE：椭圆曲线加密算法 一种非对称加密算法 ，浏览器和服务器独立生成相同的秘钥，使用此秘钥加密数据</li>
+<li>RSA：身份验证算法 （非对称）</li>
+<li>AES: 对称加密算法</li>
+<li>GCM 分组模式 提高多核CPU加解密性能</li>
+</ul>
+<h1 id="对称加密与非对称加密各自的应用场景"><a href="#对称加密与非对称加密各自的应用场景" class="headerlink" title="对称加密与非对称加密各自的应用场景"></a>对称加密与非对称加密各自的应用场景</h1><h2 id="对称加密："><a href="#对称加密：" class="headerlink" title="对称加密："></a>对称加密：</h2><p><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%861.0.png"><br>    - 加密：秘钥 XOR 明文 &#x3D; 密文<br>    - 解密：秘钥 XOR 密文 &#x3D; 明文<br>    - 加解密性能高：遍历一遍即可得到密文或者明文</p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><pre><code>- 加密 公钥加密私钥解密
+- 身份验证 私钥加密公钥解密（公钥能解开则说明报文是私钥持有者发送的）提供签名保障
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>nginx</title>
+    <url>/nginx/index/</url>
+    <content><![CDATA[<ol>
+<li><a href="/nginx/1_%E5%88%9D%E8%AF%86Nginx/" title="1_初识Nginx">初识Nginx</a>
+<p> 基本用法</p>
+</li>
+<li><p>Nginx架构基础<br> 进程模型，数据结构</p>
+</li>
+<li><p>详解HTTP模块<br> 学习如何处理Http请求，常用模块的指令，变量用法</p>
+</li>
+<li><p>反向代理与负载均衡 </p>
+</li>
+<li><p>Nginx的系统层性能优化<br> 学习cpu、内存、网络、磁盘配置，配合nginx.config使nginx性能最大化</p>
+</li>
+<li><p>从源码视角深入使用Nginx与OpenResty</p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTPS</title>
+    <url>/%E7%BD%91%E7%BB%9C/HTTPS/</url>
+    <content><![CDATA[<h1 id="图解HTTPS"><a href="#图解HTTPS" class="headerlink" title="图解HTTPS"></a>图解HTTPS</h1><ol>
+<li>第一次握手<br>client发送TLS版本，密码套件，随机数1给服务端,收到server发送的ack结束</li>
+<li>第二次握手<br>server发送1.确定的密码套件，TLS版本，随机数2  2.服务端证书 3.ServerHelloDone 到client，收到client发送的ack结束。<br>客户端校验证书</li>
+<li>第三次握手 <ul>
+<li>client生成新随机数3（pre-master） 并用第二次握手确定的加密算法（一般是RSA）使用公钥加密，发送到服务端。</li>
+<li>client根据三个随机数生成秘钥（对称加密秘钥），发送Change Cipther Spc，告诉服务端开始使用加密消息</li>
+<li>client 发送 Encrypted Handshake Message（Finishd）消息到服务端（验证客户端加密，服务端解密）</li>
+<li>收到服务端发送的ack结束</li>
+</ul>
+</li>
+<li>第四次握手<ul>
+<li>服务端发送 Change Cipher Spc到服务端</li>
+<li>服务端发送 Encrypted Handshake Mesage（Finish）到客户端（验证服务端加密，客户端解密）</li>
+<li>收到客户端 ack结束<span id="more"></span>
+<img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E5%9B%BE%E8%A7%A3HTTPS.png"></li>
+</ul>
+</li>
+</ol>
+<h2 id="TLS-第一次握手"><a href="#TLS-第一次握手" class="headerlink" title="TLS 第一次握手"></a>TLS 第一次握手</h2><p>客户端首先会发一个「Client Hello」消息，字面意思我们也能理解到，这是跟服务器「打招呼」。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands1.png"><br>消息里面有客户端使用的 TLS 版本号、支持的密码套件列表，以及生成的随机数（Client Random），这个随机数会被服务端保留，它是生成对称加密密钥的材料之一。</p>
+<h2 id="TLS-第二次握手"><a href="#TLS-第二次握手" class="headerlink" title="TLS 第二次握手"></a>TLS 第二次握手</h2><p>当服务端收到客户端的「Client Hello」消息后，会确认 TLS 版本号是否支持，和从密码套件列表中选择一个密码套件，以及生成随机数（Server Random）。</p>
+<p>接着，返回「Server Hello」消息，消息里面有服务器确认的 TLS 版本号，也给出了随机数（Server Random），然后从客户端的密码套件列表选择了一个合适的密码套件。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands2.png"><br>可以看到，服务端选择的密码套件是 “Cipher Suite: TLS_RSA_WITH_AES_128_GCM_SHA256”。</p>
+<h3 id="密码套件"><a href="#密码套件" class="headerlink" title="密码套件"></a>密码套件</h3><p><img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6.png"><br>基本的形式是「密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法」， 一般 WITH 单词前面有两个单词，第一个单词是约定密钥交换的算法，第二个单词是约定证书的验证算法。比如刚才的密码套件的意思就是：</p>
+<ul>
+<li>由于 WITH 单词只有一个 RSA，则说明握手时密钥交换算法和签名算法都是使用 RSA；</li>
+<li>握手后的通信使用 AES 对称算法，密钥长度 128 位，分组模式是 GCM；</li>
+<li>摘要算法 SHA256 用于消息认证和产生随机数；<br>就前面这两个客户端和服务端相互「打招呼」的过程，客户端和服务端就已确认了 TLS 版本和使用的密码套件，而且你可能发现客户端和服务端都会各自生成一个随机数，并且还会把随机数传递给对方。<br>那这个随机数有啥用呢？其实这两个随机数是后续作为生成「会话密钥」的条件，所谓的会话密钥就是数据传输时，所使用的对称加密密钥。</li>
+</ul>
+<p>然后，服务端为了证明自己的身份，会发送「Server Certificate」给客户端，这个消息里含有数字证书。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands2.2.png"><br>随后，服务端发了「Server Hello Done」消息，目的是告诉客户端，我已经把该给你的东西都给你了，本次打招呼完毕。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands2.3.png"></p>
+<h3 id="客户端验证证书"><a href="#客户端验证证书" class="headerlink" title="客户端验证证书"></a>客户端验证证书</h3><p>在这里刹个车，客户端拿到了服务端的数字证书后，要怎么校验该数字证书是真实有效的呢？</p>
+<h4 id="数字证书和-CA-机构"><a href="#数字证书和-CA-机构" class="headerlink" title="数字证书和 CA 机构"></a>数字证书和 CA 机构</h4><p>在说校验数字证书是否可信的过程前，我们先来看看数字证书是什么，一个数字证书通常包含了：</p>
+<ul>
+<li>公钥；</li>
+<li>持有者信息；</li>
+<li>证书认证机构（CA）的信息；</li>
+<li>CA 对这份文件的数字签名及使用的算法</li>
+<li>证书有效期；</li>
+<li>还有一些其他额外信息<br>那数字证书的作用，是用来认证公钥持有者的身份，以防止第三方进行冒充。说简单些，证书就是用来告诉客户端，该服务端是否是合法的，因为只有证书合法，才代表服务端身份是可信的。</li>
+</ul>
+<p>我们用证书来认证公钥持有者的身份（服务端的身份），那证书又是怎么来的？又该怎么认证证书呢？</p>
+<p>为了让服务端的公钥被大家信任，服务端的证书都是由 CA （Certificate Authority，证书认证机构）签名的，CA 就是网络世界里的公安局、公证中心，具有极高的可信度，所以由它来给各个公钥签名，信任的一方签发的证书，那必然证书也是被信任的。</p>
+<p>之所以要签名，是因为签名的作用可以避免中间人在获取证书时对证书内容的篡改。</p>
+<h4 id="数字证书签发和验证流程"><a href="#数字证书签发和验证流程" class="headerlink" title="数字证书签发和验证流程"></a>数字证书签发和验证流程</h4><p>如下图图所示，为数字证书签发和验证流程：<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%8F%91%E5%92%8C%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B.png"><br>CA 签发证书的过程，如上图左边部分：</p>
+<ul>
+<li><p>首先 CA 会把持有者的公钥、用途、颁发者、有效时间等信息打成一个包，然后对这些信息进行 Hash 计算，得到一个 Hash 值；</p>
+</li>
+<li><p>然后 CA 会使用自己的私钥将该 Hash 值加密，生成 Certificate Signature，也就是 CA 对证书做了签名；</p>
+</li>
+<li><p>最后将 Certificate Signature 添加在文件证书上，形成数字证书；<br>客户端校验服务端的数字证书的过程，如上图右边部分：</p>
+</li>
+<li><p>首先客户端会使用同样的 Hash 算法获取该证书的 Hash 值 H1；</p>
+</li>
+<li><p>通常浏览器和操作系统中集成了 CA 的公钥信息，浏览器收到证书后可以使用 CA 的公钥解密 Certificate Signature 内容，得到一个 Hash 值 H2 ；</p>
+</li>
+<li><p>最后比较 H1 和 H2，如果值相同，则为可信赖的证书，否则则认为证书不可信。</p>
+</li>
+</ul>
+<h4 id="证书链"><a href="#证书链" class="headerlink" title="证书链"></a>证书链</h4><p>但事实上，证书的验证过程中还存在一个证书信任链的问题，因为我们向 CA 申请的证书一般不是根证书签发的，而是由中间证书签发的，比如百度的证书，从下图你可以看到，证书的层级有三级：<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E8%AF%81%E4%B9%A6%E9%93%BE.png"><br>对于这种三级层级关系的证书的验证过程如下：</p>
+<ul>
+<li>客户端收到 baidu.com 的证书后，发现这个证书的签发者不是根证书，就无法根据本地已有的根证书中的公钥去验证 baidu.com 证书是否可信。于是，客户端根据 baidu.com 证书中的签发者，找到该证书的颁发机构是 “GlobalSign Organization Validation CA - SHA256 - G2”，然后向 CA 请求该中间证书。</li>
+<li>请求到证书后发现 “GlobalSign Organization Validation CA - SHA256 - G2” 证书是由 “GlobalSign Root CA” 签发的，由于 “GlobalSign Root CA” 没有再上级签发机构，说明它是根证书，也就是自签证书。应用软件会检查此证书有否已预载于根证书清单上，如果有，则可以利用根证书中的公钥去验证 “GlobalSign Organization Validation CA - SHA256 - G2” 证书，如果发现验证通过，就认为该中间证书是可信的。</li>
+<li>“GlobalSign Organization Validation CA - SHA256 - G2” 证书被信任后，可以使用 “GlobalSign Organization Validation CA - SHA256 - G2” 证书中的公钥去验证 baidu.com 证书的可信性，如果验证通过，就可以信任 baidu.com 证书。<br>在这四个步骤中，最开始客户端只信任根证书 GlobalSign Root CA 证书的，然后 “GlobalSign Root CA” 证书信任 “GlobalSign Organization Validation CA - SHA256 - G2” 证书，而 “GlobalSign Organization Validation CA - SHA256 - G2” 证书又信任 baidu.com 证书，于是客户端也信任 baidu.com 证书。</li>
+</ul>
+<p>总括来说，由于用户信任 GlobalSign，所以由 GlobalSign 所担保的 baidu.com 可以被信任，另外由于用户信任操作系统或浏览器的软件商，所以由软件商预载了根证书的 GlobalSign 都可被信任。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E8%AF%81%E4%B9%A6%E4%BF%A1%E4%BB%BB.png"><br>这样的一层层地验证就构成了一条信任链路，整个证书信任链验证流程如下图所示：<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E8%AF%81%E4%B9%A6%E9%93%BE2.png"><br>最后一个问题，为什么需要证书链这么麻烦的流程？Root CA 为什么不直接颁发证书，而是要搞那么多中间层级呢？</p>
+<p>这是为了确保根证书的绝对安全性，将根证书隔离地越严格越好，不然根证书如果失守了，那么整个信任链都会有问题。</p>
+<h2 id="TLS-第三次握手"><a href="#TLS-第三次握手" class="headerlink" title="TLS 第三次握手"></a>TLS 第三次握手</h2><p>客户端验证完证书后，认为可信则继续往下走。接着，客户端就会生成一个新的随机数 (pre-master)，用服务器的 RSA 公钥加密该随机数，通过「Change Cipher Key Exchange」消息传给服务端。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands3.1.png"><br>服务端收到后，用 RSA 私钥解密，得到客户端发来的随机数 (pre-master)。</p>
+<p>至此，客户端和服务端双方都共享了三个随机数，分别是 Client Random、Server Random、pre-master。</p>
+<p>于是，双方根据已经得到的三个随机数，生成会话密钥（Master Secret），它是对称密钥，用于对后续的 HTTP 请求&#x2F;响应的数据加解密。</p>
+<p>生成完会话密钥后，然后客户端发一个「Change Cipher Spec」，告诉服务端开始使用加密方式发送消息。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands3.2.png"><br>然后，客户端再发一个「Encrypted Handshake Message（Finishd）」消息，把之前所有发送的数据做个摘要，再用会话密钥（master secret）加密一下，让服务器做个验证，验证加密通信是否可用和之前握手信息是否有被中途篡改过。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands3.3.png"><br>可以发现，「Change Cipher Spec」之前传输的 TLS 握手数据都是明文，之后都是对称密钥加密的密文。</p>
+<h2 id="TLS-第四次握手"><a href="#TLS-第四次握手" class="headerlink" title="TLS 第四次握手"></a>TLS 第四次握手</h2><p>服务器也是同样的操作，发「Change Cipher Spec」和「Encrypted Handshake Message」消息，如果双方都验证加密和解密没问题，那么握手正式完成。</p>
+<p>最后，就用「会话密钥」加解密 HTTP 请求和响应了。</p>
+<h1 id="RSA-算法的缺陷"><a href="#RSA-算法的缺陷" class="headerlink" title="RSA 算法的缺陷"></a>RSA 算法的缺陷</h1><p>巨人的肩膀:<br><a href="https://mp.weixin.qq.com/s/U9SRLE7jZTB6lUZ6c8gTKg">https://mp.weixin.qq.com/s/U9SRLE7jZTB6lUZ6c8gTKg</a> 几幅图，拿下 HTTPS<br><a href="https://www.cnblogs.com/xiaolincoding/p/14318338.html">https://www.cnblogs.com/xiaolincoding/p/14318338.html</a> 图解ECDHE秘钥交换算法</p>
+]]></content>
   </entry>
   <entry>
     <title>开篇词</title>
@@ -60,9 +417,31 @@
       </tags>
   </entry>
   <entry>
+    <title>民谣</title>
+    <url>/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/</url>
+    <content><![CDATA[<h1 id="热河"><a href="#热河" class="headerlink" title="热河"></a>热河</h1><iframe width="560" height="315" src="https://www.youtube.com/embed/K2QE-FRAP0o?si=numZREXREMKuJ_Vk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+]]></content>
+      <tags>
+        <tag>音乐</tag>
+        <tag>民谣</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>VivaLaVida</title>
     <url>/%E9%9F%B3%E4%B9%90/VivaLaVida/</url>
     <content><![CDATA[<iframe src="//player.bilibili.com/player.html?aid=13622752&bvid=BV1Fx411n7bX&cid=22293606&p=1&muted=0&autoplay=0&t=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" > </iframe>]]></content>
+  </entry>
+  <entry>
+    <title>MeasuringPersonalGrowth</title>
+    <url>/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/MeasuringPersonalGrowth/</url>
+    <content><![CDATA[<h1 id="Measuring-personal-growth"><a href="#Measuring-personal-growth" class="headerlink" title="Measuring personal growth"></a><a href="https://huyenchip.com/2024/04/17/personal-growth.html">Measuring personal growth</a></h1><h2 id="Rate-of-change"><a href="#Rate-of-change" class="headerlink" title="Rate of change"></a>Rate of change</h2><p>Every 3-6 years, become a different person</p>
+<h2 id="Time-to-solve-problems"><a href="#Time-to-solve-problems" class="headerlink" title="Time to solve problems"></a>Time to solve problems</h2><ol>
+<li>For the first decade after graduation, you figure out what you want to do with your life</li>
+<li>For the next decade, you get married, buy a house, and have kids.</li>
+<li>For the next decade, you build out your savings to retire.</li>
+</ol>
+<h2 id="Number-of-future-options"><a href="#Number-of-future-options" class="headerlink" title="Number of future options"></a>Number of future options</h2><p>take actions that help me maximize future options.</p>
+]]></content>
   </entry>
   <entry>
     <title>穷爸爸富爸爸</title>
@@ -186,16 +565,6 @@
     <title>安装Tomcat</title>
     <url>/JAVA/Tomcat/%E5%AE%89%E8%A3%85Tomcat/</url>
     <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>民谣</title>
-    <url>/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/</url>
-    <content><![CDATA[<h1 id="热河"><a href="#热河" class="headerlink" title="热河"></a>热河</h1><iframe width="560" height="315" src="https://www.youtube.com/embed/K2QE-FRAP0o?si=numZREXREMKuJ_Vk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-]]></content>
-      <tags>
-        <tag>音乐</tag>
-        <tag>民谣</tag>
-      </tags>
   </entry>
   <entry>
     <title>1.1数据类型</title>

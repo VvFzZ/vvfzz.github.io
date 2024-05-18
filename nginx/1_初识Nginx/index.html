@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/nginx/1_%E5%88%9D%E8%AF%86Nginx/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/nginx/1_%E5%88%9D%E8%AF%86Nginx/","path":"nginx/1_初识Nginx/","title":"1_初识Nginx"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>1_初识Nginx | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E4%BC%98%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">nginx优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">nginx版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%9A%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">nginx配置文件的通用语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">Nginx命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E9%83%A8%E7%BD%B2"><span class="nav-number">6.</span> <span class="nav-text">热部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2"><span class="nav-number">7.</span> <span class="nav-text">日志切割</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">8.</span> <span class="nav-text">配置静态资源服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AElocation"><span class="nav-number">8.1.</span> <span class="nav-text">配置location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEgzip"><span class="nav-number">8.2.</span> <span class="nav-text">配置gzip</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%85%B7%E5%A4%87%E7%BC%93%E5%AD%98%E5%8A%9F%E8%83%BD%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1"><span class="nav-number">9.</span> <span class="nav-text">搭建具备缓存功能的反向代理服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">9.1.</span> <span class="nav-text">代理服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-cache-path"><span class="nav-number">9.1.1.</span> <span class="nav-text">proxy_cache_path</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8GoAccess%E5%AE%9E%E7%8E%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7access%E6%97%A5%E5%BF%97"><span class="nav-number">10.</span> <span class="nav-text">用GoAccess实现可视化实时监控access日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-1"><span class="nav-number">10.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">10.1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-%E8%A7%A3%E5%8E%8Bgoaccess"><span class="nav-number">10.1.2.</span> <span class="nav-text">下载,解压goaccess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">10.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">10.1.4.</span> <span class="nav-text">启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E6%9D%A5%E7%9C%8BSSL%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE"><span class="nav-number">11.</span> <span class="nav-text">从网络原理来看SSL安全协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-TLS%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">11.1.</span> <span class="nav-text">SSL&#x2F;TLS通用模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS%E5%AE%89%E5%85%A8%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">11.2.</span> <span class="nav-text">TLS安全密码套件解读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%90%84%E8%87%AA%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">12.</span> <span class="nav-text">对称加密与非对称加密各自的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%EF%BC%9A"><span class="nav-number">12.1.</span> <span class="nav-text">对称加密：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">12.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/nginx/1_%E5%88%9D%E8%AF%86Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="1_初识Nginx | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1_初识Nginx
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-17 09:21:39" itemprop="dateCreated datePublished" datetime="2024-05-17T09:21:39+08:00">2024-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-18 23:37:11" itemprop="dateModified" datetime="2024-05-18T23:37:11+08:00">2024-05-18</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="nginx优点"><a href="#nginx优点" class="headerlink" title="nginx优点"></a>nginx优点</h1><ul>
+<li>高并发，高性能</li>
+<li>扩展性好  模块化设计</li>
+<li>高可靠  持续不间断提供服务（不宕机）</li>
+<li>热部署</li>
+<li>BSD许可证 开源免费，可商业用途下修改源码</li>
+</ul>
+<span id="more"></span>
+<h1 id="nginx版本"><a href="#nginx版本" class="headerlink" title="nginx版本"></a>nginx版本</h1><ul>
+<li>开源免费版 <a target="_blank" rel="noopener" href="http://nginx.org/">http://nginx.org</a></li>
+<li>非开源商业版 nginx plus, <a target="_blank" rel="noopener" href="http://nginx.com/">http://nginx.com</a></li>
+<li>tengine 阿里巴巴版 不能同步升级官方版本</li>
+<li>开源免费版OpenResty <a target="_blank" rel="noopener" href="http://openresty.org/">http://OpenResty.org</a></li>
+<li>商业版OpenResty</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><code>./configure</code> 配置和准备软件包以进行编译和安装<ul>
+<li>参数说明<ul>
+<li>指定 –prefix 目录 ，其他目录会在此目录下新建相应目录</li>
+<li>–with-*_module  、 –without-*_module 指定使用或不使用哪些模块</li>
+<li>–with-* 编译时需指定的特殊参数</li>
+</ul>
+</li>
+<li>生成objs目录</li>
+</ul>
+</li>
+<li><code>make</code> 编译 <ul>
+<li>新安装可用make install</li>
+<li>升级版本 make后拷贝文件(文件在objs目录)到已安装目录</li>
+</ul>
+</li>
+</ol>
+<h1 id="nginx配置文件的通用语法"><a href="#nginx配置文件的通用语法" class="headerlink" title="nginx配置文件的通用语法"></a>nginx配置文件的通用语法</h1><ul>
+<li>配置文件由指令与指令块构成</li>
+<li>每条指令以分号结尾，指令与参数间以空格分隔</li>
+<li>指令块以大括号将多条指令组织在一起</li>
+<li>incluede语句允许组合多个配置文件以提升可维护性</li>
+<li>使用#注释</li>
+<li>$符号使用变量</li>
+<li>部分指令的参数支持正则表达式</li>
+</ul>
+<p>http配置指令块</p>
+<ul>
+<li>http</li>
+<li>server</li>
+<li>upstream</li>
+<li>location</li>
+</ul>
+<h1 id="Nginx命令"><a href="#Nginx命令" class="headerlink" title="Nginx命令"></a>Nginx命令</h1><p>格式  nginx -s reload</p>
+<ul>
+<li>帮助 -h</li>
+<li>指定配置文件 -c</li>
+<li>指定运行目录 -p</li>
+<li>发送信号 -s <ol>
+<li>立刻停止服务 stop</li>
+<li>优雅停止服务 quit</li>
+<li>重载配置文件 reload</li>
+<li>重新开始记录日志文件 reopen</li>
+</ol>
+</li>
+<li>测试配置文件语法 -t -T</li>
+<li>打印版本、编译信息等 -v -V</li>
+</ul>
+<h1 id="热部署"><a href="#热部署" class="headerlink" title="热部署"></a>热部署</h1><ul>
+<li>备份旧文件，拷贝新文件覆盖</li>
+<li>告诉旧master进程要热部署了，kill -USR2 oldProcessId<ol>
+<li>会新启动一个master进程（使用新nginx二进制文件启动）和worker进程</li>
+<li>旧worker进程已不监听端口了，新请求都由新进程处理</li>
+</ol>
+</li>
+<li>kill -WINCH oldProcessId  通知旧master进程关闭旧的worker进程<ol>
+<li>此时旧master进程依然存在，如果升级有问题需版本回退，reload可使旧master唤醒旧worker进程</li>
+</ol>
+</li>
+</ul>
+<h1 id="日志切割"><a href="#日志切割" class="headerlink" title="日志切割"></a>日志切割</h1><ul>
+<li><p>手动</p>
+<ol>
+<li>备份旧日志</li>
+<li>执行 nginx -s reopen</li>
+</ol>
+</li>
+<li><p>自动</p>
+<ol>
+<li><p>新建rotate.sh脚本 内容如下 （分配执行权限）</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">LOG_PATH=&quot;/var/log/nginx/&quot; #日志的根目录</span><br><span class="line">RECORD_TIME=$(date -d &quot;yesterday&quot; +%Y-%m-%d+%H:%M) #切割日志的后缀</span><br><span class="line">PID=/var/run/nginx/nginx.pid</span><br><span class="line">mv $&#123;LOG_PATH&#125;/access.log $&#123;LOG_PATH&#125;/access.$&#123;RECORD_TIME&#125;.log</span><br><span class="line">mv $&#123;LOG_PATH&#125;/error.log $&#123;LOG_PATH&#125;/error.$&#123;RECORD_TIME&#125;.log</span><br><span class="line"></span><br><span class="line">#向Nginx主进程发送信号，用于重新打开日志文件</span><br><span class="line">kill -USR1 `cat $PID`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增crontab定时任务</p>
+  <a href="/linux/crontab/" title="crontab">crontab</a></li>
+</ol>
+</li>
+</ul>
+<h1 id="配置静态资源服务器"><a href="#配置静态资源服务器" class="headerlink" title="配置静态资源服务器"></a>配置静态资源服务器</h1><h2 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h2><p>location &#x2F;statics&#x2F; {<br>    alias statics;&#x2F;&#x2F;静态文件根目录  不使用root，root会带入rul路径<br>    autoindex on; &#x2F;&#x2F;开启目录浏览<br>    set $limit_rate 1k; &#x2F;&#x2F;每秒传输1k字节到浏览器；多用户高并发时限制响应流量，防止大文件传输影响其他文件访问<br>}</p>
+<h2 id="配置gzip"><a href="#配置gzip" class="headerlink" title="配置gzip"></a>配置gzip</h2><p>gzip on;<br>gzip_min_length 1;&#x2F;&#x2F;1个字节时不压缩（一个字节一个tcp报文可以直接发送，再进行压缩没有意义）<br>gzip_comp_level 2; &#x2F;&#x2F;压缩级别<br>gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;javascript application&#x2F;x-httpd-php image&#x2F;jpeg image&#x2F;gif image&#x2F;png application&#x2F;vnd.ms-fontobject font&#x2F;ttf font&#x2F;opentype font&#x2F;x-woff image&#x2F;svg+xml; &#x2F;&#x2F; 压缩包没必要再压缩</p>
+<p>access日志<br>定义格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    log_format main &#x27;$remote_addr - $remote_user [$time_local]&#x27;  &#x27; &quot;$request&quot; $status $body_bytes_sent &#x27; &#x27; &quot;$http_referer&quot; &quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; &#x27;;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        access_log logs/access.log main;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="搭建具备缓存功能的反向代理服务"><a href="#搭建具备缓存功能的反向代理服务" class="headerlink" title="搭建具备缓存功能的反向代理服务"></a>搭建具备缓存功能的反向代理服务</h1><p>缓存上游服务器响应内容，如果需要实时状态则不可使用</p>
+<h2 id="代理服务器配置"><a href="#代理服务器配置" class="headerlink" title="代理服务器配置"></a>代理服务器配置</h2><p>http{<br>    upstream local{<br>        server 127.0.0.1:8080;&#x2F;&#x2F;真是服务地址<br>    }</p>
+<pre><code>proxy_cache_path /tmp/nginxcache levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m use_temp_path=off; //
+
+location / &#123;
+    proxy_set_header Host $host; //将代理服务器获取到浏览器的Host发送到真实服务器，不然真是服务器获取的是代理服务器host
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_cache my_cache;//在http模块定义
+    proxy_cache_key $host$uri$is_args$args;
+    proxy_cached_valid 200 304 302 ld;
+    proxy_pass http://local;
+&#125;
+</code></pre>
+<p>}</p>
+<h3 id="proxy-cache-path"><a href="#proxy-cache-path" class="headerlink" title="proxy_cache_path"></a>proxy_cache_path</h3><p>语法:	<code>proxy_cache_path path [levels=levels] keys_zone=name:size [inactive=time] [max_size=size] [loader_files=number] [loader_sleep=time] [loader_threshold=time];</code></p>
+<ul>
+<li>path 定义缓存文件存放目录；</li>
+<li>levels：level 定义了缓存的层次结构，每层可以用1（最多16中选择，0-f）或2（最多256种选择，00-ff）表示，中间用 [冒号] 分隔。“levels&#x3D;1:2”表示开启1、2层级(第2层级理论有16*256个目录)。    </li>
+<li>keys_zone：共享内存区的名称和大小；</li>
+<li>inactive inactive&#x3D;30m 表示 30 分钟没有被访问的文件会被 cache manager 删除，inactive的默认值是10分钟。 需要注意的是，inactive和expired配置项的含义是不同的，expired只是缓存过期，但不会被删除，inactive是删除指定时间内未被访问的缓存文件</li>
+<li>max_size：限制被缓存的响应数据的总量,基于LRU清除数据，不指定会占满磁盘空间</li>
+</ul>
+<h1 id="用GoAccess实现可视化实时监控access日志"><a href="#用GoAccess实现可视化实时监控access日志" class="headerlink" title="用GoAccess实现可视化实时监控access日志"></a>用GoAccess实现可视化实时监控access日志</h1><h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>GoAccess在使用源码安装时，依赖下列组件。</p>
+<ul>
+<li>为方便最终日志统计时显示IP地理位置，需要安装依赖项GeoIP-devel：<br>执行命令：yum install GeoIP-devel.x86_64</li>
+<li>安装ncurses-devel开发库：<br>执行命令：yum install ncurses-devel</li>
+<li>安装tokyocabinet-devel开发库：<br>执行命令：yum install tokyocabinet-devel</li>
+<li>安装openssl-devel开发库：<br>执行命令：yum install openssl-devel</li>
+</ul>
+<h3 id="下载-解压goaccess"><a href="#下载-解压goaccess" class="headerlink" title="下载,解压goaccess"></a>下载,解压goaccess</h3><p>wget <a target="_blank" rel="noopener" href="https://tar.goaccess.io/goaccess-1.9.2.tar.gz">https://tar.goaccess.io/goaccess-1.9.2.tar.gz</a></p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><ul>
+<li><code>./configure --enable-utf8 --enable-geoip=legacy -prefix=/home/vvf/goaccess</code></li>
+<li><code>make</code></li>
+<li><code>make install</code></li>
+</ul>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>.&#x2F;goaccess &#x2F;home&#x2F;vvf&#x2F;nginx&#x2F;logs&#x2F;access.log -o &#x2F;home&#x2F;vvf&#x2F;nginx&#x2F;html&#x2F;report.html –real-time-html  daemonize</p>
+<ul>
+<li>注：*</li>
+<li>Tx.Amount：流量 *</li>
+<li>1KiB&#x3D;2^10&#x3D;1024, *</li>
+<li>1MiB&#x3D;2^20&#x3D;1048576&#x3D;1024KiB*</li>
+<li>1GiB&#x3D;2^30&#x3D;1,073,741,824&#x3D;1024MiB *</li>
+</ul>
+<h1 id="从网络原理来看SSL安全协议"><a href="#从网络原理来看SSL安全协议" class="headerlink" title="从网络原理来看SSL安全协议"></a>从网络原理来看SSL安全协议</h1><h2 id="SSL-TLS通用模型"><a href="#SSL-TLS通用模型" class="headerlink" title="SSL&#x2F;TLS通用模型"></a>SSL&#x2F;TLS通用模型</h2><p><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/1.png"></p>
+<h2 id="TLS安全密码套件解读"><a href="#TLS安全密码套件解读" class="headerlink" title="TLS安全密码套件解读"></a>TLS安全密码套件解读</h2><p><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/TLS%E5%AE%89%E5%85%A8%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E8%A7%A3%E8%AF%BB.png"></p>
+<ul>
+<li>ECDHE：椭圆曲线加密算法 一种非对称加密算法 ，浏览器和服务器独立生成相同的秘钥，使用此秘钥加密数据</li>
+<li>RSA：身份验证算法 （非对称）</li>
+<li>AES: 对称加密算法</li>
+<li>GCM 分组模式 提高多核CPU加解密性能</li>
+</ul>
+<h1 id="对称加密与非对称加密各自的应用场景"><a href="#对称加密与非对称加密各自的应用场景" class="headerlink" title="对称加密与非对称加密各自的应用场景"></a>对称加密与非对称加密各自的应用场景</h1><h2 id="对称加密："><a href="#对称加密：" class="headerlink" title="对称加密："></a>对称加密：</h2><p><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%861.0.png"><br>    - 加密：秘钥 XOR 明文 &#x3D; 密文<br>    - 解密：秘钥 XOR 密文 &#x3D; 明文<br>    - 加解密性能高：遍历一遍即可得到密文或者明文</p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><pre><code>- 加密 公钥加密私钥解密
+- 身份验证 私钥加密公钥解密（公钥能解开则说明报文是私钥持有者发送的）提供签名保障
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/linux/crontab/" rel="prev" title="crontab">
+                  <i class="fa fa-chevron-left"></i> crontab
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="常用命令">
+                  常用命令 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
