@@ -139,13 +139,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -246,6 +246,213 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/nginx/2_Nginx%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nginx/2_Nginx%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">2_Nginx架构基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-05-26 10:35:05 / Modified: 21:12:36" itemprop="dateCreated datePublished" datetime="2024-05-26T10:35:05+08:00">2024-05-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="请求处理流程"><a href="#请求处理流程" class="headerlink" title="请求处理流程"></a>请求处理流程</h1><p><img src="nginx请求处理流程.png"></img></p>
+<h1 id="进程结构"><a href="#进程结构" class="headerlink" title="进程结构"></a>进程结构</h1><ul>
+<li>单进程 开发</li>
+<li>多进程 生产，保持健壮，充分利用多核处理器<br><img src="nginx进程结构.png"></img></li>
+<li>Master 进程 监控管理worker进程（启动，检查，配置文件载入，热部署等）</li>
+<li>worker 进程 处理请求</li>
+<li>Cache manager 管理缓存</li>
+<li>Cache loader 加载缓存（后端服务响应缓存到内存）<br><strong>为什么使用多进程，而非多线程？</strong><br>保证可高用性，可靠性，线程件共享内存空间，若第三方模块引发地址越界时会导致nginx进程挂掉。</li>
+</ul>
+<p>不仅将worker线程数设置为cpu核数，还应将worker进程绑定到固定的核上，减少缓存失效。</p>
+<h1 id="Nginx进程结构实例演示"><a href="#Nginx进程结构实例演示" class="headerlink" title="Nginx进程结构实例演示"></a>Nginx进程结构实例演示</h1><p>kill -SIGHUP masterPI  与 -s reload结果相同 ：重新启动新的worker进程、Cache Manager进程</p>
+<p>kill -SIGTERM workerPI ，worker进程收到停止信号会退出，并会向master进程发送CHLD信号，master将再拉起一个worker进程</p>
+<p>结论：命令行中的一些子命令 是在向master进程发送信号</p>
+<h1 id="Nginx进程管理：信号"><a href="#Nginx进程管理：信号" class="headerlink" title="Nginx进程管理：信号"></a>Nginx进程管理：信号</h1><p><img src="信号管理进程.png"></img></p>
+<ul>
+<li>master进程<ol>
+<li>CHLD linux规定子进程终止时向父进程发送CHLD信号</li>
+<li>TERM,INT 立刻停止nginx进程</li>
+<li>QUIT 优雅停止，不立刻结束连接</li>
+<li>USR1 重新打开日志文件（切割文件）</li>
+<li>USR2、WINCH 不能使用Nginx命令行+特定命令向master发送命令，只能使用linux 命令行kill直接向master进程发送信号（需要先找到PI）</li>
+</ol>
+</li>
+<li>worker进程<br>一般不直接向worker进程发送信号，而是通过向master进程发送信号管理worker进程</li>
+<li>nginx命令行<br>nginx命令行工具会读取 nginxpid 文件中的NginxPID  将nginx命令转换为linux命令发送信号</li>
+</ul>
+<h1 id="reload配置文件的真相（reload流程）"><a href="#reload配置文件的真相（reload流程）" class="headerlink" title="reload配置文件的真相（reload流程）"></a>reload配置文件的真相（reload流程）</h1><ol>
+<li>向master发送HUP信号（reload命令）</li>
+<li>master进程检查配置语法</li>
+<li>master进程打开新的监听端口</li>
+<li>master进程启动新worker</li>
+<li>master向老worker发送QUIT信号</li>
+<li>老worker关闭监听句柄，处理完当前请求后结束进程<br><img src="reload真相.png"></img></li>
+</ol>
+<h1 id="热部署流程"><a href="#热部署流程" class="headerlink" title="热部署流程"></a>热部署流程</h1><p><img src="热部署.png"></img></p>
+<ol>
+<li>更新配置文件</li>
+<li>向master发送USR2信号</li>
+<li>master修改pid文件名，加后缀.oldbin</li>
+<li>master用新配置文件启动新master（新master是老master的子进程，新master会启动worker；此时新老master共存）</li>
+<li>向老master进程发送QUIT信号，关闭老master</li>
+<li>回滚：向老master发送HUP（reload），向新master发送QUIT</li>
+</ol>
+<h1 id="优雅关闭worker"><a href="#优雅关闭worker" class="headerlink" title="优雅关闭worker"></a>优雅关闭worker</h1><p>对于http请求可以识别出当前连接没有在处理请求，此时可以优雅关闭<br>对于TCP&#x2F;UDP&#x2F;WebSocket 无法识别</p>
+<ol>
+<li>设定定时器 worker_shutdown_timeout</li>
+<li>关闭监听句柄（不再处理新请求）</li>
+<li>关闭空闲连接</li>
+<li>在循环中等待全部连接关闭（当超过定时器后会强制关闭，不再优雅）</li>
+<li>退出进程</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/" class="post-title-link" itemprop="url">Stream库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-23 08:35:07" itemprop="dateCreated datePublished" datetime="2024-05-23T08:35:07+08:00">2024-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-26 23:40:04" itemprop="dateModified" datetime="2024-05-26T23:40:04+08:00">2024-05-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用步骤</p>
+<ul>
+<li>创建 </li>
+<li>转换为其他流的操作</li>
+<li>终止操作，产生结果（执行之前的惰性操作）
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/%E7%BD%91%E7%BB%9C/HTTPS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -274,9 +481,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-05-18 16:19:18 / Modified: 23:38:16" itemprop="dateCreated datePublished" datetime="2024-05-18T16:19:18+08:00">2024-05-18</time>
+      <time title="Created: 2024-05-18 16:19:18" itemprop="dateCreated datePublished" datetime="2024-05-18T16:19:18+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-26 09:58:41" itemprop="dateModified" datetime="2024-05-26T09:58:41+08:00">2024-05-26</time>
     </span>
 
   
@@ -290,19 +503,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="图解HTTPS"><a href="#图解HTTPS" class="headerlink" title="图解HTTPS"></a>图解HTTPS</h1><ol>
-<li>第一次握手<br>client发送TLS版本，密码套件，随机数1给服务端,收到server发送的ack结束</li>
-<li>第二次握手<br>server发送1.确定的密码套件，TLS版本，随机数2  2.服务端证书 3.ServerHelloDone 到client，收到client发送的ack结束。<br>客户端校验证书</li>
-<li>第三次握手 <ul>
-<li>client生成新随机数3（pre-master） 并用第二次握手确定的加密算法（一般是RSA）使用公钥加密，发送到服务端。</li>
-<li>client根据三个随机数生成秘钥（对称加密秘钥），发送Change Cipther Spc，告诉服务端开始使用加密消息</li>
-<li>client 发送 Encrypted Handshake Message（Finishd）消息到服务端（验证客户端加密，服务端解密）</li>
-<li>收到服务端发送的ack结束</li>
-</ul>
-</li>
-<li>第四次握手<ul>
-<li>服务端发送 Change Cipher Spc到服务端</li>
-<li>服务端发送 Encrypted Handshake Mesage（Finish）到客户端（验证服务端加密，客户端解密）</li>
-<li>收到客户端 ack结束
+<li>第一次握手<ul>
+<li>client发送（client hello消息）TLS版本，密码套件，随机数1给服务端</li>
+<li>收到server发送的ack结束
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%BD%91%E7%BB%9C/HTTPS/#more" rel="contents">
@@ -448,7 +651,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-18 11:30:34" itemprop="dateModified" datetime="2024-05-18T11:30:34+08:00">2024-05-18</time>
+      <time title="Modified: 2024-05-21 17:08:43" itemprop="dateModified" datetime="2024-05-21T17:08:43+08:00">2024-05-21</time>
     </span>
 
   
@@ -532,7 +735,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-18 23:37:11" itemprop="dateModified" datetime="2024-05-18T23:37:11+08:00">2024-05-18</time>
+      <time title="Modified: 2024-05-26 10:39:34" itemprop="dateModified" datetime="2024-05-26T10:39:34+08:00">2024-05-26</time>
     </span>
 
   
@@ -704,7 +907,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-18 23:33:44" itemprop="dateModified" datetime="2024-05-18T23:33:44+08:00">2024-05-18</time>
+      <time title="Modified: 2024-05-26 10:38:53" itemprop="dateModified" datetime="2024-05-26T10:38:53+08:00">2024-05-26</time>
     </span>
 
   
@@ -721,7 +924,8 @@
 <li><a href="/nginx/1_%E5%88%9D%E8%AF%86Nginx/" title="1_初识Nginx">初识Nginx</a>
 <p> 基本用法</p>
 </li>
-<li><p>Nginx架构基础<br> 进程模型，数据结构</p>
+<li><a href="/nginx/2_Nginx%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/" title="2_Nginx架构基础">Nginx架构基础</a>
+<p> 进程模型，数据结构</p>
 </li>
 <li><p>详解HTTP模块<br> 学习如何处理Http请求，常用模块的指令，变量用法</p>
 </li>
@@ -810,171 +1014,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/%E9%9F%B3%E4%B9%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E9%9F%B3%E4%B9%90/" class="post-title-link" itemprop="url">音乐</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-05-15 17:18:58" itemprop="dateCreated datePublished" datetime="2024-05-15T17:18:58+08:00">2024-05-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-18 23:32:45" itemprop="dateModified" datetime="2024-05-18T23:32:45+08:00">2024-05-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ol>
-<li><a href="/%E9%9F%B3%E4%B9%90/VivaLaVida/" title="VivaLaVida">VivaLaVida</a></li>
-<li><a href="/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/" title="民谣">民谣</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/" class="post-title-link" itemprop="url">设计模式之美</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-05-13 21:45:30" itemprop="dateCreated datePublished" datetime="2024-05-13T21:45:30+08:00">2024-05-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-15 23:29:02" itemprop="dateModified" datetime="2024-05-15T23:29:02+08:00">2024-05-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>高质量代码长什么样？</p>
-<p>为什么用这种设计原则、思想或模式？解决什么编程问题？有哪些应用场景？如何权衡、恰当的在项目中应用？</p>
-<p>操作系统、组成原理、编译原理等计算机基础知识在开发中用不上，很难转换成开发“生产力”。但是，它能潜移默化地，间接地提高技术理解。</p>
-<p>为什么学习设计模式？</p>
-<ul>
-<li>第一个功利性目的：应对面试。平时多积累，面试钱复习即可做到成竹在胸，不再担心设计模式是自己的短板，被问到。</li>
-<li>告别烂代码</li>
-<li>提高复杂代码设计和开发能力</li>
-<li>读源码、学框架事半功倍</li>
-<li>职场发展做铺垫</li>
-</ul>
-
       
     </div>
 

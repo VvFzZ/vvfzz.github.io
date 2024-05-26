@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -201,9 +201,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-05-18 16:19:18 / Modified: 23:38:16" itemprop="dateCreated datePublished" datetime="2024-05-18T16:19:18+08:00">2024-05-18</time>
+      <time title="Created: 2024-05-18 16:19:18" itemprop="dateCreated datePublished" datetime="2024-05-18T16:19:18+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-26 09:58:41" itemprop="dateModified" datetime="2024-05-26T09:58:41+08:00">2024-05-26</time>
     </span>
 
   
@@ -224,8 +230,16 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="图解HTTPS"><a href="#图解HTTPS" class="headerlink" title="图解HTTPS"></a>图解HTTPS</h1><ol>
-<li>第一次握手<br>client发送TLS版本，密码套件，随机数1给服务端,收到server发送的ack结束</li>
-<li>第二次握手<br>server发送1.确定的密码套件，TLS版本，随机数2  2.服务端证书 3.ServerHelloDone 到client，收到client发送的ack结束。<br>客户端校验证书</li>
+<li>第一次握手<ul>
+<li>client发送（client hello消息）TLS版本，密码套件，随机数1给服务端</li>
+<li>收到server发送的ack结束 <span id="more"></span></li>
+</ul>
+</li>
+<li>第二次握手<ul>
+<li>server发送（server hello消息）1.确定的密码套件，TLS版本，随机数2  2.服务端证书 3.发送ServerHelloDone消息到client，</li>
+<li>收到client发送的ack结束。<br> <em>2,3消息之间会发送椭圆曲线算法参数，客户端收到证书后要验证证书有效性</em></li>
+</ul>
+</li>
 <li>第三次握手 <ul>
 <li>client生成新随机数3（pre-master） 并用第二次握手确定的加密算法（一般是RSA）使用公钥加密，发送到服务端。</li>
 <li>client根据三个随机数生成秘钥（对称加密秘钥），发送Change Cipther Spc，告诉服务端开始使用加密消息</li>
@@ -236,11 +250,11 @@
 <li>第四次握手<ul>
 <li>服务端发送 Change Cipher Spc到服务端</li>
 <li>服务端发送 Encrypted Handshake Mesage（Finish）到客户端（验证服务端加密，客户端解密）</li>
-<li>收到客户端 ack结束<span id="more"></span>
-<img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E5%9B%BE%E8%A7%A3HTTPS.png"></li>
+<li>收到客户端 ack结束</li>
 </ul>
 </li>
 </ol>
+<p><img src="/%E7%BD%91%E7%BB%9C/HTTPS/%E5%9B%BE%E8%A7%A3HTTPS.png"></p>
 <h2 id="TLS-第一次握手"><a href="#TLS-第一次握手" class="headerlink" title="TLS 第一次握手"></a>TLS 第一次握手</h2><p>客户端首先会发一个「Client Hello」消息，字面意思我们也能理解到，这是跟服务器「打招呼」。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands1.png"><br>消息里面有客户端使用的 TLS 版本号、支持的密码套件列表，以及生成的随机数（Client Random），这个随机数会被服务端保留，它是生成对称加密密钥的材料之一。</p>
 <h2 id="TLS-第二次握手"><a href="#TLS-第二次握手" class="headerlink" title="TLS 第二次握手"></a>TLS 第二次握手</h2><p>当服务端收到客户端的「Client Hello」消息后，会确认 TLS 版本号是否支持，和从密码套件列表中选择一个密码套件，以及生成随机数（Server Random）。</p>
 <p>接着，返回「Server Hello」消息，消息里面有服务器确认的 TLS 版本号，也给出了随机数（Server Random），然后从客户端的密码套件列表选择了一个合适的密码套件。<br><img src="/%E7%BD%91%E7%BB%9C/HTTPS/HttpsShakehands2.png"><br>可以看到，服务端选择的密码套件是 “Cipher Suite: TLS_RSA_WITH_AES_128_GCM_SHA256”。</p>
@@ -312,6 +326,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/" rel="next" title="Stream库">
+                  Stream库 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

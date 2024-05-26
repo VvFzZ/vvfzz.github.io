@@ -127,7 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#chmod-change-mode"><span class="nav-number">1.</span> <span class="nav-text">chmod(change mode)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mode%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">mode参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">其他参数说明:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tar"><span class="nav-number">2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">3.</span> <span class="nav-text">防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#firewall-cmd"><span class="nav-number">3.1.</span> <span class="nav-text">firewall-cmd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl"><span class="nav-number">3.2.</span> <span class="nav-text">systemctl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ifconfig"><span class="nav-number">4.</span> <span class="nav-text">ifconfig</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85apt"><span class="nav-number">5.</span> <span class="nav-text">安装apt</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#chmod-change-mode"><span class="nav-number">1.</span> <span class="nav-text">chmod(change mode)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mode%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">mode参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">其他参数说明:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tar"><span class="nav-number">2.</span> <span class="nav-text">tar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">3.</span> <span class="nav-text">防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#firewall-cmd"><span class="nav-number">3.1.</span> <span class="nav-text">firewall-cmd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl"><span class="nav-number">3.2.</span> <span class="nav-text">systemctl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ifconfig"><span class="nav-number">4.</span> <span class="nav-text">ifconfig</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85apt"><span class="nav-number">5.</span> <span class="nav-text">安装apt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#host%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">host文件位置</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-18 11:30:34" itemprop="dateModified" datetime="2024-05-18T11:30:34+08:00">2024-05-18</time>
+      <time title="Modified: 2024-05-21 17:08:43" itemprop="dateModified" datetime="2024-05-21T17:08:43+08:00">2024-05-21</time>
     </span>
 
   
@@ -288,8 +288,7 @@
 </ol>
 <h1 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h1><p>ifconfig -a 查询ip地址</p>
 <h1 id="安装apt"><a href="#安装apt" class="headerlink" title="安装apt"></a>安装apt</h1><p>sudo yum install epel-release<br>sudo yum install apt</p>
-<p>goaccess access.log -o ..&#x2F;html&#x2F;report.html –real-time-html –time-formate&#x3D;’%H:%M:%S’ –date-formate&#x3D;’%d&#x2F;%b&#x2F;%Y’ –log-formate&#x3D;COMBINE</p>
-<p>time-format %T<br>date-format %d&#x2F;%b&#x2F;%Y<br>log_format %h - %^ [%d:%t %^] “%r” %s %b “%R”  “%u” “%^” “%T”</p>
+<h1 id="host文件位置"><a href="#host文件位置" class="headerlink" title="host文件位置"></a>host文件位置</h1><p>&#x2F;etc&#x2F;hosts</p>
 
     </div>
 

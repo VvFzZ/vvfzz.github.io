@@ -127,7 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E4%BC%98%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">nginx优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">nginx版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%9A%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">nginx配置文件的通用语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">Nginx命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E9%83%A8%E7%BD%B2"><span class="nav-number">6.</span> <span class="nav-text">热部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2"><span class="nav-number">7.</span> <span class="nav-text">日志切割</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">8.</span> <span class="nav-text">配置静态资源服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AElocation"><span class="nav-number">8.1.</span> <span class="nav-text">配置location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEgzip"><span class="nav-number">8.2.</span> <span class="nav-text">配置gzip</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%85%B7%E5%A4%87%E7%BC%93%E5%AD%98%E5%8A%9F%E8%83%BD%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1"><span class="nav-number">9.</span> <span class="nav-text">搭建具备缓存功能的反向代理服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">9.1.</span> <span class="nav-text">代理服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-cache-path"><span class="nav-number">9.1.1.</span> <span class="nav-text">proxy_cache_path</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8GoAccess%E5%AE%9E%E7%8E%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7access%E6%97%A5%E5%BF%97"><span class="nav-number">10.</span> <span class="nav-text">用GoAccess实现可视化实时监控access日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-1"><span class="nav-number">10.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">10.1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-%E8%A7%A3%E5%8E%8Bgoaccess"><span class="nav-number">10.1.2.</span> <span class="nav-text">下载,解压goaccess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">10.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">10.1.4.</span> <span class="nav-text">启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E6%9D%A5%E7%9C%8BSSL%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE"><span class="nav-number">11.</span> <span class="nav-text">从网络原理来看SSL安全协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-TLS%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">11.1.</span> <span class="nav-text">SSL&#x2F;TLS通用模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS%E5%AE%89%E5%85%A8%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">11.2.</span> <span class="nav-text">TLS安全密码套件解读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%90%84%E8%87%AA%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">12.</span> <span class="nav-text">对称加密与非对称加密各自的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%EF%BC%9A"><span class="nav-number">12.1.</span> <span class="nav-text">对称加密：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">12.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E4%BC%98%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">nginx优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">nginx版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%9A%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">nginx配置文件的通用语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">Nginx命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E9%83%A8%E7%BD%B2"><span class="nav-number">6.</span> <span class="nav-text">热部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2"><span class="nav-number">7.</span> <span class="nav-text">日志切割</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">8.</span> <span class="nav-text">配置静态资源服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AElocation"><span class="nav-number">8.1.</span> <span class="nav-text">配置location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEgzip"><span class="nav-number">8.2.</span> <span class="nav-text">配置gzip</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%85%B7%E5%A4%87%E7%BC%93%E5%AD%98%E5%8A%9F%E8%83%BD%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1"><span class="nav-number">9.</span> <span class="nav-text">搭建具备缓存功能的反向代理服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">9.1.</span> <span class="nav-text">代理服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy-cache-path"><span class="nav-number">9.1.1.</span> <span class="nav-text">proxy_cache_path</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8GoAccess%E5%AE%9E%E7%8E%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7access%E6%97%A5%E5%BF%97"><span class="nav-number">10.</span> <span class="nav-text">用GoAccess实现可视化实时监控access日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-1"><span class="nav-number">10.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">10.1.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-%E8%A7%A3%E5%8E%8Bgoaccess"><span class="nav-number">10.1.2.</span> <span class="nav-text">下载,解压goaccess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">10.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">10.1.4.</span> <span class="nav-text">启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E6%9D%A5%E7%9C%8BSSL%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE"><span class="nav-number">11.</span> <span class="nav-text">从网络原理来看SSL安全协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-TLS%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">11.1.</span> <span class="nav-text">SSL&#x2F;TLS通用模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS%E5%AE%89%E5%85%A8%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">11.2.</span> <span class="nav-text">TLS安全密码套件解读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%90%84%E8%87%AA%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">12.</span> <span class="nav-text">对称加密与非对称加密各自的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%EF%BC%9A"><span class="nav-number">12.1.</span> <span class="nav-text">对称加密：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">12.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E7%9A%84%E5%85%AC%E4%BF%A1%E5%8A%9B%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81"><span class="nav-number">13.</span> <span class="nav-text">证书的公信力如何保证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSL%E5%8D%8F%E8%AE%AE%E6%8F%A1%E6%89%8B%E6%97%B6Nginx%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88"><span class="nav-number">14.</span> <span class="nav-text">SSL协议握手时Nginx性能瓶颈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%8D%E8%B4%B9SSL%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0HTTPS%E7%BD%91%E7%AB%99"><span class="nav-number">15.</span> <span class="nav-text">使用免费SSL证书实现HTTPS网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LetsEncrypt"><span class="nav-number">15.1.</span> <span class="nav-text">LetsEncrypt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1"><span class="nav-number">15.2.</span> <span class="nav-text">内网服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EOpenResty%E7%94%A8lua%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E6%9C%8D%E5%8A%A1"><span class="nav-number">16.</span> <span class="nav-text">基于OpenResty用lua语言实现简单服务</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-18 23:37:11" itemprop="dateModified" datetime="2024-05-18T23:37:11+08:00">2024-05-18</time>
+      <time title="Modified: 2024-05-26 10:39:34" itemprop="dateModified" datetime="2024-05-26T10:39:34+08:00">2024-05-26</time>
     </span>
 
   
@@ -245,7 +245,8 @@
 <li>商业版OpenResty</li>
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li><code>./configure</code> 配置和准备软件包以进行编译和安装<ul>
+<li><p><code>./configure</code> 配置和准备软件包以进行编译和安装</p>
+<ul>
 <li>参数说明<ul>
 <li>指定 –prefix 目录 ，其他目录会在此目录下新建相应目录</li>
 <li>–with-*_module  、 –without-*_module 指定使用或不使用哪些模块</li>
@@ -255,12 +256,20 @@
 <li>生成objs目录</li>
 </ul>
 </li>
-<li><code>make</code> 编译 <ul>
+<li><p><code>make</code> 编译 </p>
+<ul>
 <li>新安装可用make install</li>
 <li>升级版本 make后拷贝文件(文件在objs目录)到已安装目录</li>
 </ul>
 </li>
+<li><p>配置环境变量</p>
+</li>
 </ol>
+<ul>
+<li>vim &#x2F;etc&#x2F;profile</li>
+<li>结尾加入<br><code>export NGINX_HOME=/usr/local/nginx</code><br><code>export PATH=$PATH:$NGINX_HOME/sbin</code></li>
+<li>source &#x2F;etc&#x2F;profile</li>
+</ul>
 <h1 id="nginx配置文件的通用语法"><a href="#nginx配置文件的通用语法" class="headerlink" title="nginx配置文件的通用语法"></a>nginx配置文件的通用语法</h1><ul>
 <li>配置文件由指令与指令块构成</li>
 <li>每条指令以分号结尾，指令与参数间以空格分隔</li>
@@ -383,7 +392,49 @@ location / &#123;
 <h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><pre><code>- 加密 公钥加密私钥解密
 - 身份验证 私钥加密公钥解密（公钥能解开则说明报文是私钥持有者发送的）提供签名保障
 </code></pre>
-
+<h1 id="证书的公信力如何保证"><a href="#证书的公信力如何保证" class="headerlink" title="证书的公信力如何保证"></a>证书的公信力如何保证</h1><p>浏览器验证证书有效性，主要根据：</p>
+<ul>
+<li>是否过期</li>
+<li>颁发此证书的根证书是否有效<br><img src="/nginx/1_%E5%88%9D%E8%AF%86Nginx/TLS%E9%80%9A%E8%AE%AF%E8%BF%87%E7%A8%8B.png"></li>
+</ul>
+<p>TLS通讯最主要任务：</p>
+<ol>
+<li>交换密钥</li>
+<li>加密数据</li>
+</ol>
+<h1 id="SSL协议握手时Nginx性能瓶颈"><a href="#SSL协议握手时Nginx性能瓶颈" class="headerlink" title="SSL协议握手时Nginx性能瓶颈"></a>SSL协议握手时Nginx性能瓶颈</h1><p>影响qps主要指标：</p>
+<ul>
+<li>小文件：握手 （密钥交换算法，RSA算法）</li>
+<li>大文件：对称加密算法(AES)</li>
+</ul>
+<p>优化手段：</p>
+<ul>
+<li>小文件较多时优化密钥交换算法（椭圆曲线算法）和RSA算法的密码强度</li>
+<li>大文件较多时优化AES算法的密码强度</li>
+<li>使用更高效算法</li>
+</ul>
+<h1 id="使用免费SSL证书实现HTTPS网站"><a href="#使用免费SSL证书实现HTTPS网站" class="headerlink" title="使用免费SSL证书实现HTTPS网站"></a>使用免费SSL证书实现HTTPS网站</h1><h2 id="LetsEncrypt"><a href="#LetsEncrypt" class="headerlink" title="LetsEncrypt"></a>LetsEncrypt</h2><ol>
+<li>yum install python2-certbot-nginx</li>
+<li>certbot –nginx –nginx-server-root&#x3D;&#x2F;home&#x2F;vvf&#x2F;nginx&#x2F;conf&#x2F; -d  自己的域名<ul>
+<li>配置文件的server块自动新增了配置<img src="LetsEncrypt1.1.png">    <ol>
+<li><p>通用参数：&#x2F;etc&#x2F;letsencrypt&#x2F;options-ssl-nginx.conf<img src="LetsEncrypt1.2.png"/></p>
+<ul>
+<li>ssl_session_cache 设置1m 大概缓存4000个链接</li>
+<li>ssl_session_timeout 1440m （1440分钟&#x3D;一天）</li>
+<li>ssl_protocols 支持的TLS协议</li>
+<li>ssl_prefer_server_ciphers on;&#x2F;&#x2F;开启由nginx决定使用哪些协议（ssl_ciphers配置提供可选协议）与浏览器通讯</li>
+<li>ssl_ciphers nginx支持的安全套件，靠前优先级高</li>
+</ul>
+</li>
+<li><p>ssl_dhparam 非对称加密使用参数设置，决定加密强度</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="内网服务"><a href="#内网服务" class="headerlink" title="内网服务"></a>内网服务</h2><p>ngrok</p>
+<h1 id="基于OpenResty用lua语言实现简单服务"><a href="#基于OpenResty用lua语言实现简单服务" class="headerlink" title="基于OpenResty用lua语言实现简单服务"></a>基于OpenResty用lua语言实现简单服务</h1>
     </div>
 
     
@@ -391,6 +442,9 @@ location / &#123;
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          </div>
 
         
 
