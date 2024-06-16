@@ -16,15 +16,6 @@
       </tags>
   </entry>
   <entry>
-    <title>音乐</title>
-    <url>/%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[<ol>
-<li><a href="/%E9%9F%B3%E4%B9%90/VivaLaVida/" title="VivaLaVida">VivaLaVida</a></li>
-<li><a href="/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/" title="民谣">民谣</a></li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
     <title>旅行</title>
     <url>/%E6%97%85%E8%A1%8C/</url>
     <content><![CDATA[<h1 id="四川"><a href="#四川" class="headerlink" title="四川"></a>四川</h1><p>九寨沟<br>四姑娘山<br>峨眉山<br>三星堆<br>稻城亚丁<br>都江堰</p>
@@ -90,6 +81,15 @@
       <tags>
         <tag>旅行</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>音乐</title>
+    <url>/%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[<ol>
+<li><a href="/%E9%9F%B3%E4%B9%90/VivaLaVida/" title="VivaLaVida">VivaLaVida</a></li>
+<li><a href="/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/" title="民谣">民谣</a></li>
+</ol>
+]]></content>
   </entry>
   <entry>
     <title>0-1学习路径</title>
@@ -210,20 +210,42 @@
 <li>商业版OpenResty</li>
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><p>解压后的文件说明</p>
+<ul>
+<li>auto <ul>
+<li>cc 用于编译</li>
+<li>lib lib库</li>
+<li>os 对操作系统的判断</li>
+<li>type</li>
+</ul>
+</li>
+<li>CHANGE 特性</li>
+<li>conf 示例文件</li>
+<li>configure 脚本，编译前准备工作</li>
+<li>contrib </li>
+<li>LICENSE</li>
+<li>man nginx帮助文件</li>
+<li>src 源码</li>
+</ul>
+</li>
 <li><p><code>./configure</code> 配置和准备软件包以进行编译和安装</p>
 <ul>
-<li>参数说明<ul>
+<li>参数说明 (帮助命令<code>./configure --help|more</code>)<ul>
 <li>指定 –prefix 目录 ，其他目录会在此目录下新建相应目录</li>
 <li>–with-*_module  、 –without-*_module 指定使用或不使用哪些模块</li>
 <li>–with-* 编译时需指定的特殊参数</li>
+<li>–add-module&#x3D;第三方模块路径</li>
 </ul>
 </li>
-<li>生成objs目录</li>
+<li>生成objs目录  <ol>
+<li>ngx_modules.c 包含的模块</li>
+</ol>
+</li>
 </ul>
 </li>
 <li><p><code>make</code> 编译 </p>
 <ul>
-<li>新安装可用make install</li>
+<li>新安装可用make install </li>
 <li>升级版本 make后拷贝文件(文件在objs目录)到已安装目录</li>
 </ul>
 </li>
@@ -295,7 +317,7 @@
 </ol>
 </li>
 </ul>
-<h1 id="配置静态资源服务器"><a href="#配置静态资源服务器" class="headerlink" title="配置静态资源服务器"></a>配置静态资源服务器</h1><h2 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h2><p>location &#x2F;statics&#x2F; {<br>    alias statics;&#x2F;&#x2F;静态文件根目录  不使用root，root会带入rul路径<br>    autoindex on; &#x2F;&#x2F;开启目录浏览<br>    set $limit_rate 1k; &#x2F;&#x2F;每秒传输1k字节到浏览器；多用户高并发时限制响应流量，防止大文件传输影响其他文件访问<br>}</p>
+<h1 id="配置静态资源服务器"><a href="#配置静态资源服务器" class="headerlink" title="配置静态资源服务器"></a>配置静态资源服务器</h1><h2 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h2><p>location &#x2F;statics&#x2F; {<br>    alias statics;&#x2F;&#x2F;静态文件根目录  不使用root，root会带入url路径<br>    autoindex on; &#x2F;&#x2F;开启目录浏览<br>    set $limit_rate 1k; &#x2F;&#x2F;每秒传输1k字节到浏览器；多用户高并发时限制响应流量，防止大文件传输影响其他文件访问<br>}</p>
 <h2 id="配置gzip"><a href="#配置gzip" class="headerlink" title="配置gzip"></a>配置gzip</h2><p>gzip on;<br>gzip_min_length 1;&#x2F;&#x2F;1个字节时不压缩（一个字节一个tcp报文可以直接发送，再进行压缩没有意义）<br>gzip_comp_level 2; &#x2F;&#x2F;压缩级别<br>gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;javascript application&#x2F;x-httpd-php image&#x2F;jpeg image&#x2F;gif image&#x2F;png application&#x2F;vnd.ms-fontobject font&#x2F;ttf font&#x2F;opentype font&#x2F;x-woff image&#x2F;svg+xml; &#x2F;&#x2F; 压缩包没必要再压缩</p>
 <p>access日志<br>定义格式</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    log_format main &#x27;$remote_addr - $remote_user [$time_local]&#x27;  &#x27; &quot;$request&quot; $status $body_bytes_sent &#x27; &#x27; &quot;$http_referer&quot; &quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; &#x27;;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        access_log logs/access.log main;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -417,8 +439,8 @@ location / &#123;
 <li>Cache loader 加载缓存（后端服务响应缓存到内存）<br><strong>为什么使用多进程，而非多线程？</strong><br>保证可高用性，可靠性，线程件共享内存空间，若第三方模块引发地址越界时会导致nginx进程挂掉。</li>
 </ul>
 <p>不仅将worker线程数设置为cpu核数，还应将worker进程绑定到固定的核上，减少缓存失效。</p>
-<h1 id="Nginx进程结构实例演示"><a href="#Nginx进程结构实例演示" class="headerlink" title="Nginx进程结构实例演示"></a>Nginx进程结构实例演示</h1><p>kill -SIGHUP masterPI  与 -s reload结果相同 ：重新启动新的worker进程、Cache Manager进程</p>
-<p>kill -SIGTERM workerPI ，worker进程收到停止信号会退出，并会向master进程发送CHLD信号，master将再拉起一个worker进程</p>
+<h1 id="Nginx进程结构实例演示"><a href="#Nginx进程结构实例演示" class="headerlink" title="Nginx进程结构实例演示"></a>Nginx进程结构实例演示</h1><p><code>kill -SIGHUP masterPI</code>  与 <code>-s reload</code>结果相同 ：重新启动新的worker进程、Cache Manager进程</p>
+<p><code>kill -SIGTERM workerPI</code> ，worker进程收到停止信号会退出，并会向master进程发送CHLD信号，master将再拉起一个worker进程</p>
 <p>结论：命令行中的一些子命令 是在向master进程发送信号</p>
 <h1 id="Nginx进程管理：信号"><a href="#Nginx进程管理：信号" class="headerlink" title="Nginx进程管理：信号"></a>Nginx进程管理：信号</h1><p><img src="信号管理进程.png"></img></p>
 <ul>
@@ -458,10 +480,251 @@ location / &#123;
 <li>在循环中等待全部连接关闭（当超过定时器后会强制关闭，不再优雅）</li>
 <li>退出进程</li>
 </ol>
+<h1 id="网络收发与Nginx事件的对应关系"><a href="#网络收发与Nginx事件的对应关系" class="headerlink" title="网络收发与Nginx事件的对应关系"></a>网络收发与Nginx事件的对应关系</h1><p>Nginx事件驱动（网络事件）框架<br>每对链接对应读事件、写事件</p>
+<img src="TCP协议与非阻塞接口.png"/>
+
+<h1 id="Nginx网络事件实例演示"><a href="#Nginx网络事件实例演示" class="headerlink" title="Nginx网络事件实例演示"></a>Nginx网络事件实例演示</h1><img src="TCP抓包1.png"/>
+当nginx所在服务器收到客户端返回的ack后，操作系统通知nginx收到读事件，此读事件是一个建立新链接
+
+<h1 id="Nginx事件驱动模型"><a href="#Nginx事件驱动模型" class="headerlink" title="Nginx事件驱动模型"></a>Nginx事件驱动模型</h1><img src="Nginx事件循环.png" />
+
+<p>Nginx服务器上第三方模块占用大量cpu时导致大量事件超时<br>解决：如GZIP分段使用CPU</p>
+<h1 id="epoll的优劣及原理"><a href="#epoll的优劣及原理" class="headerlink" title="epoll的优劣及原理"></a>epoll的优劣及原理</h1><p>Number of file description 句柄数（并发链接数）<br>获取事件队列的间隔很短，收到有效的报文有限，活跃链接有限<br>select或poll实现有问题：将所有链接丢给操作系统判断哪些链接有事件输入<br>epoll维护一个链表rdllink，取活跃链接时遍历此链表即可<br>操作系统接收到事件插入或nginx处理完成删除时间复杂度Log(n)<br><img src="epoll.png" /></p>
+<h1 id="Nginx的请求切换"><a href="#Nginx的请求切换" class="headerlink" title="Nginx的请求切换"></a>Nginx的请求切换</h1><img src="请求切换.png" />
+当前cpu频率进程间切换消耗大概5微妙
+当并发请求低时几百左右，可以接受进程切换
+当并发数到达万级已不可接受
+
+<h1 id="同步、异步、阻塞、非阻塞"><a href="#同步、异步、阻塞、非阻塞" class="headerlink" title="同步、异步、阻塞、非阻塞"></a>同步、异步、阻塞、非阻塞</h1><p>阻塞、非阻塞：操作系统提供的方法被调用，不满足条件时导致进程切换，当前进程阻塞。非阻塞不会在时间片未结束时切换被切换。<br>同步、异步：代码调用方式的区别</p>
+<h2 id="阻塞调用"><a href="#阻塞调用" class="headerlink" title="阻塞调用"></a>阻塞调用</h2><img src="阻塞调用.png" />
+Nginx并发连接太多不适合阻塞调用
+
+<h2 id="非租塞调用"><a href="#非租塞调用" class="headerlink" title="非租塞调用"></a>非租塞调用</h2><img src="非租塞调用.png" />
+
+<h2 id="非阻塞调用下的同步与异步"><a href="#非阻塞调用下的同步与异步" class="headerlink" title="非阻塞调用下的同步与异步"></a>非阻塞调用下的同步与异步</h2><img src="非阻塞调用下的同步与异步.png" />
+同步调用代码使用非阻塞方式
+
+<p><code>local ok，err = client:connect(ip,port)</code>  同步调用代码阻塞openresty调用代码，但不会阻塞nginx代码。</p>
+<h1 id="Nginx的模块究竟是什么"><a href="#Nginx的模块究竟是什么" class="headerlink" title="Nginx的模块究竟是什么"></a>Nginx的模块究竟是什么</h1><img src="Nginx模块.png" />
+通用模块 ngx_module 
+子模块 
+ngx_core_module_t 
+ngx_http_module_t
+ngx_event_module_t
+...
+
+<h1 id="模块分类"><a href="#模块分类" class="headerlink" title="模块分类"></a>模块分类</h1><ul>
+<li>NGX_CORE_MODULE<ol>
+<li>events类模块 （源码文件&#x2F;nginx&#x2F;event）<ul>
+<li>event_core :每类模块的通用模块（index:1）</li>
+<li>epoll</li>
+</ul>
+</li>
+<li>http类模块 （源码文件&#x2F;nginx&#x2F;http）<ul>
+<li>ngx_http_core_module</li>
+<li>请求处理模块 </li>
+<li>相应过滤模块 （请求二次处理）</li>
+<li>upstream相关模块 （负载均衡）</li>
+</ul>
+</li>
+<li>mail类模块 （源码文件&#x2F;nginx&#x2F;mail）</li>
+<li>stream类模块 （源码文件&#x2F;nginx&#x2F;stream）</li>
+</ol>
+</li>
+<li>NGX_CONF_MODULE<img src="模块分类.png" /></li>
+</ul>
+<h1 id="Nginx如何通过连接池处理网络请求"><a href="#Nginx如何通过连接池处理网络请求" class="headerlink" title="Nginx如何通过连接池处理网络请求"></a>Nginx如何通过连接池处理网络请求</h1><img src="连接池.png" />
+connections 用于客户端与上游服务器的连接，所以若做一层反向代理，每一个客户端消耗两个connection。
+
+<img src="核心数据结构.png" />
+每个connection对应两个事件，一个读和一个写事件 
+使用一个链接内存大小：232+96*2 字节，connections配置会预分配相应内存
+
+<p>高并发nginx配置需要配置足够大的connection</p>
+<h1 id="内存池对性能的影响"><a href="#内存池对性能的影响" class="headerlink" title="内存池对性能的影响"></a>内存池对性能的影响</h1><p>connection_pool_size 连接内存池<br>预分配内存，减少运行时分配次数，提高性能<br>小块内存优化，减少碎片，提高利用率</p>
+<p>request_pool_size 请求内存池<br>需要保存url信息，相对较长</p>
+<p>对于长链接，一个connection对应n个request</p>
+<p>注意：两个内存池不可混用 (释放延迟，内存使用增加)</p>
+<h1 id="所有worker进程协同工作的关键：共享内存"><a href="#所有worker进程协同工作的关键：共享内存" class="headerlink" title="所有worker进程协同工作的关键：共享内存"></a>所有worker进程协同工作的关键：共享内存</h1><h2 id="通讯方式"><a href="#通讯方式" class="headerlink" title="通讯方式"></a>通讯方式</h2><ul>
+<li>信号（进程管理）</li>
+<li>共享内存（数据同步，nginx跨进程通信最有效手段）<ol>
+<li>锁</li>
+<li>slab内存管理器</li>
+<li>可用的两种数据结构：rbtree、链表</li>
+</ol>
+</li>
+</ul>
+<h2 id="使用共享内存的模块"><a href="#使用共享内存的模块" class="headerlink" title="使用共享内存的模块"></a>使用共享内存的模块</h2><img src="使用共享内存的模块.png" />
+
+<h3 id="OpenResty共享内存"><a href="#OpenResty共享内存" class="headerlink" title="OpenResty共享内存"></a>OpenResty共享内存</h3><img src="OpenResty共享内存代码示例.png" />
+同时使用rbtree（保存kv）和链表（超过内存上限lru淘汰）
+
+<p><code>lua_shared_dict</code> 分配共享内存指令</p>
+<h1 id="用好共享内存的工具：slab管理器"><a href="#用好共享内存的工具：slab管理器" class="headerlink" title="用好共享内存的工具：slab管理器"></a>用好共享内存的工具：slab管理器</h1><img src="Slab内存管理.png" />
+分页-切分不同大小的slot（32Byte、64Byte...） 
+
+<ul>
+<li>bestfit分配方式 <ol>
+<li>适合小对象 ,有内存浪费（最多两倍的内存消耗）</li>
+<li>避免碎片</li>
+<li>避免重复初始化(特定页存储特定数据结构的数据)</li>
+</ol>
+</li>
+</ul>
+<h1 id="哈希表的max-size与bucket-zize如何配置"><a href="#哈希表的max-size与bucket-zize如何配置" class="headerlink" title="哈希表的max_size与bucket_zize如何配置"></a>哈希表的max_size与bucket_zize如何配置</h1><h1 id="Nginx常用容器：红黑树"><a href="#Nginx常用容器：红黑树" class="headerlink" title="Nginx常用容器：红黑树"></a>Nginx常用容器：红黑树</h1><h1 id="使用动态模块来提升运维效率"><a href="#使用动态模块来提升运维效率" class="headerlink" title="使用动态模块来提升运维效率"></a>使用动态模块来提升运维效率</h1><img src="动态模块.png" />
+动态库目录：/nginx/modules
+
+<p>配置文件需配置动态模块位置：load_modules modules&#x2F;module_name.so (load_modules与event、http同级)</p>
+<p>linux 动态库：*.so </p>
 ]]></content>
       <tags>
         <tag>Nginx</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>3_详解HTTP模块</title>
+    <url>/nginx/3_%E8%AF%A6%E8%A7%A3HTTP%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<h1 id="冲突的配置指令"><a href="#冲突的配置指令" class="headerlink" title="冲突的配置指令"></a>冲突的配置指令</h1><img src="配置块的嵌套.png" />
+
+<h1 id="Listen指令"><a href="#Listen指令" class="headerlink" title="Listen指令"></a>Listen指令</h1><h1 id="处理HTTP请求头的流程"><a href="#处理HTTP请求头的流程" class="headerlink" title="处理HTTP请求头的流程"></a>处理HTTP请求头的流程</h1><h2 id="接收请求事件模块"><a href="#接收请求事件模块" class="headerlink" title="接收请求事件模块"></a>接收请求事件模块</h2><img src="接收请求事件模块.png" />
+clinet_header_buffer_size 从链接内存池中分配，用于接收内核中的请求数据
+
+<h2 id="接收请求HTTP模块"><a href="#接收请求HTTP模块" class="headerlink" title="接收请求HTTP模块"></a>接收请求HTTP模块</h2><img src="接收请求HTTP模块.png" />
+
+<h1 id="Nginx中的正则表达式"><a href="#Nginx中的正则表达式" class="headerlink" title="Nginx中的正则表达式"></a>Nginx中的正则表达式</h1><img src="常用正则表达式.png" />
+
+<p>检测正则表达式工具：pcretest，下载源码安装<br><img src="常用正则表达式2.png" /></p>
+<h1 id="如何找到处理请求的server指令块"><a href="#如何找到处理请求的server指令块" class="headerlink" title="如何找到处理请求的server指令块"></a>如何找到处理请求的server指令块</h1><img src="server_name指令.png" />
+
+<img src="server_name指令_匹配规则.png" />
+
+<img src="server匹配顺序.png" />
+
+<h1 id="详解HTTP请求的11个阶段"><a href="#详解HTTP请求的11个阶段" class="headerlink" title="详解HTTP请求的11个阶段"></a>详解HTTP请求的11个阶段</h1><h1 id="11个阶段的顺序处理"><a href="#11个阶段的顺序处理" class="headerlink" title="11个阶段的顺序处理"></a>11个阶段的顺序处理</h1><h1 id="postread阶段：获取真实客户端地址的realip模块"><a href="#postread阶段：获取真实客户端地址的realip模块" class="headerlink" title="postread阶段：获取真实客户端地址的realip模块"></a>postread阶段：获取真实客户端地址的realip模块</h1><h1 id="rewrite阶段的rewrite模块：return指令"><a href="#rewrite阶段的rewrite模块：return指令" class="headerlink" title="rewrite阶段的rewrite模块：return指令"></a>rewrite阶段的rewrite模块：return指令</h1><h2 id="return指令"><a href="#return指令" class="headerlink" title="return指令"></a>return指令</h2><img src="rewrite模块return指令.png" />
+
+<h2 id="error-page指令"><a href="#error-page指令" class="headerlink" title="error_page指令"></a>error_page指令</h2><img src="rewrite模块return指令与error_page.png" />
+
+<h2 id="return与errpr-page指令优先级"><a href="#return与errpr-page指令优先级" class="headerlink" title="return与errpr_page指令优先级"></a>return与errpr_page指令优先级</h2><img src="return示例.png" />
+
+<ul>
+<li>上图中location块return 语句优先级高于server块 error_page</li>
+<li>server块 return语句优先级高于 location块return语句</li>
+</ul>
+<h1 id="rewrite阶段的rewrite模块：重写URL"><a href="#rewrite阶段的rewrite模块：重写URL" class="headerlink" title="rewrite阶段的rewrite模块：重写URL"></a>rewrite阶段的rewrite模块：重写URL</h1><h2 id="rewrite指令"><a href="#rewrite指令" class="headerlink" title="rewrite指令"></a>rewrite指令</h2><img src="rewrite模块_rewrite指令.png" />
+
+<h2 id="rewrite示例"><a href="#rewrite示例" class="headerlink" title="rewrite示例"></a>rewrite示例</h2><img src="rewrite示例.png">
+
+<ul>
+<li>访问&#x2F;first&#x2F;3.txt  输出 third!</li>
+<li>去掉 break后 访问&#x2F;first&#x2F;3.txt  输出 second!</li>
+</ul>
+<img src="rewrite示例2.png">
+
+<ul>
+<li>访问 &#x2F;redirect1&#x2F; 返回301 </li>
+<li>访问 &#x2F;redirect2&#x2F; 返回302 </li>
+<li>访问 &#x2F;redirect3&#x2F; 返回302 </li>
+<li>访问 &#x2F;redirect4&#x2F; 返回301</li>
+</ul>
+<p>rewrite_log on; &#x2F;&#x2F;默认关闭  ，开启重定向日志，写入error_log文件</p>
+<h1 id="rewrite阶段的rewrite模块：条件判断"><a href="#rewrite阶段的rewrite模块：条件判断" class="headerlink" title="rewrite阶段的rewrite模块：条件判断"></a>rewrite阶段的rewrite模块：条件判断</h1><h2 id="if指令"><a href="#if指令" class="headerlink" title="if指令"></a>if指令</h2><img src="if指令.png">
+
+<h2 id="if条件表达式"><a href="#if条件表达式" class="headerlink" title="if条件表达式"></a>if条件表达式</h2><img src="if条件表达式.png">
+
+<h2 id="if条件表达式实例"><a href="#if条件表达式实例" class="headerlink" title="if条件表达式实例"></a>if条件表达式实例</h2><img src="if条件表达式实例.png">
+
+
+<h1 id="find-config截断：找到处理请求的location指令块"><a href="#find-config截断：找到处理请求的location指令块" class="headerlink" title="find_config截断：找到处理请求的location指令块"></a>find_config截断：找到处理请求的location指令块</h1><h2 id="location指令"><a href="#location指令" class="headerlink" title="location指令"></a>location指令</h2><img src="location指令.png">
+merge_slashes 合并连续/ , 启用base64等时需要关闭
+
+<h2 id="location匹配规则"><a href="#location匹配规则" class="headerlink" title="location匹配规则"></a>location匹配规则</h2><img src="location匹配规则_仅匹配URI忽略参数.png">
+
+<h2 id="location匹配顺序"><a href="#location匹配顺序" class="headerlink" title="location匹配顺序"></a>location匹配顺序</h2><ol>
+<li>精确匹配</li>
+<li>^~匹配上后不再进行正则匹配</li>
+<li>正则匹配</li>
+<li>最长前缀匹配</li>
+</ol>
+<img src="location匹配顺序.png">
+<img src="location示例.png">
+
+<ul>
+<li>示例1<br>访问 <a href="http://domain/Test1/Test2">http://domain/Test1/Test2</a><br>无精确匹配，无^~匹配，前缀正则匹配成功，所以输出longest regular expressions match</li>
+<li>示例2<br>访问 <a href="http://domain/Test1/Test2/">http://domain/Test1/Test2/</a><br>无精确匹配，无^~匹配，前缀正则匹配不成功，前缀匹配成功，所以输出 longest prefix string match</li>
+</ul>
+<h1 id="preaccess阶段：对连接做限制的limit-conn模块"><a href="#preaccess阶段：对连接做限制的limit-conn模块" class="headerlink" title="preaccess阶段：对连接做限制的limit_conn模块"></a>preaccess阶段：对连接做限制的limit_conn模块</h1><p>限制并发连接数</p>
+<h1 id="preaccess阶段：对请求做限制的limit-req模块"><a href="#preaccess阶段：对请求做限制的limit-req模块" class="headerlink" title="preaccess阶段：对请求做限制的limit_req模块"></a>preaccess阶段：对请求做限制的limit_req模块</h1><p>限制链接请求数</p>
+<h1 id="access阶段：对ip做限制的access模块"><a href="#access阶段：对ip做限制的access模块" class="headerlink" title="access阶段：对ip做限制的access模块"></a>access阶段：对ip做限制的access模块</h1><img src="限制IP地址访问权限.png">
+
+<h1 id="access阶段：对ip做限制的access模块-1"><a href="#access阶段：对ip做限制的access模块-1" class="headerlink" title="access阶段：对ip做限制的access模块"></a>access阶段：对ip做限制的access模块</h1><p>进入access阶段前不生效</p>
+<img src="限制IP地址的访问权限.png">
+192.168.1.0/24子网掩码
+2001:0db8::/32 ipv6子网掩码
+
+<p>引入黑名单配置文件：新建blocksip.conf ,并引入inclue blocksip.conf</p>
+<h1 id="access阶段：对用户名密码做限制的auth-basic模块"><a href="#access阶段：对用户名密码做限制的auth-basic模块" class="headerlink" title="access阶段：对用户名密码做限制的auth_basic模块"></a>access阶段：对用户名密码做限制的auth_basic模块</h1><h2 id="auth-basic模块的指令"><a href="#auth-basic模块的指令" class="headerlink" title="auth_basic模块的指令"></a>auth_basic模块的指令</h2><img src="auth_basic模块的指令.png">
+
+<h2 id="生成密码文件"><a href="#生成密码文件" class="headerlink" title="生成密码文件"></a>生成密码文件</h2><p>工具 httpd-tools<br>命令 htpasswd -c file -b user pwd<br>文件内容格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># commet</span><br><span class="line">name1:pwd1</span><br><span class="line">name2:pwd2:comment  # comment是注释</span><br></pre></td></tr></table></figure>
+<p>当提供一些简单的页面服务时，快捷得对他们做安全保护可使用auth_basic（如goaccess页面）</p>
+<h1 id="access阶段：使用第三方做权限控制的auth-request模块"><a href="#access阶段：使用第三方做权限控制的auth-request模块" class="headerlink" title="access阶段：使用第三方做权限控制的auth_request模块"></a>access阶段：使用第三方做权限控制的auth_request模块</h1><p>可配置提供统一的第三方鉴权系统<br><img src="auth_request配置示例.png"><br>说明：</p>
+<ol>
+<li>访问<a href="http://access.taohui.tech页面/">http://access.taohui.tech页面</a></li>
+<li>转发到第三方权限控制模块<a href="http://127.0.0.1:8090/auth_upstream">http://127.0.0.1:8090/auth_upstream</a> </li>
+<li><ul>
+<li>若返回200，则返回访问html&#x2F;文件夹下的index.html</li>
+<li>若返回403，则返回第三方模块返回的错误</li>
+</ul>
+</li>
+</ol>
+<h1 id="access阶段的satisfy指令"><a href="#access阶段的satisfy指令" class="headerlink" title="access阶段的satisfy指令"></a>access阶段的satisfy指令</h1><p>控制指令的行为</p>
+<h2 id="satisfy指令说明"><a href="#satisfy指令说明" class="headerlink" title="satisfy指令说明"></a>satisfy指令说明</h2><img src="satisfy指令说明.png">
+satisfy any任意一个指令成功即成功
+satisfy all任意一个指令失败则失败
+
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><img src="access_satisfy指令.png">
+
+<ol>
+<li>不会生效，return指令在rewrite阶段已执行，return，access配置的先后顺序无关</li>
+<li>有影响，</li>
+<li>可以访问，satisfy any表示 access模块任何一个成功则通过access模块验证</li>
+<li>配置文件指令顺序无关</li>
+<li>没有机会</li>
+</ol>
+<h1 id="precontent阶段：按序访问资源的try-files模块"><a href="#precontent阶段：按序访问资源的try-files模块" class="headerlink" title="precontent阶段：按序访问资源的try_files模块"></a>precontent阶段：按序访问资源的try_files模块</h1><img src="procontent_try_files指令.png">
+
+<img src="procontent_try_files指令示例.png">
+
+<h1 id="实时拷贝流量：precontent阶段的mirror模块"><a href="#实时拷贝流量：precontent阶段的mirror模块" class="headerlink" title="实时拷贝流量：precontent阶段的mirror模块"></a>实时拷贝流量：precontent阶段的mirror模块</h1><img src="precontent_mirror模块.png">
+
+<img src="precontent_mirror模块_配置示例.png">
+
+<h1 id="content阶段：详解root和alias指令"><a href="#content阶段：详解root和alias指令" class="headerlink" title="content阶段：详解root和alias指令"></a>content阶段：详解root和alias指令</h1><img src="root和alias指令.png" />
+
+<h1 id="static-模块提供的三个变量"><a href="#static-模块提供的三个变量" class="headerlink" title="static 模块提供的三个变量"></a>static 模块提供的三个变量</h1><p>request_filename、document_root、realpath_root</p>
+<h2 id="生成待访问文件的三个相关变量"><a href="#生成待访问文件的三个相关变量" class="headerlink" title="生成待访问文件的三个相关变量"></a>生成待访问文件的三个相关变量</h2><img src="生成待访问文件的三个相关变量.png" />
+
+<img src="生成待访问文件的三个相关变量_Conf.png" />
+
+<img src="生成待访问文件的三个相关变量_ll.png" />
+realpath是软连接，指向first文件夹
+<img src="生成待访问文件的三个相关变量_r.png" />
+
+<h1 id="static模块对url不以斜杠结尾访问目录的做法"><a href="#static模块对url不以斜杠结尾访问目录的做法" class="headerlink" title="static模块对url不以斜杠结尾访问目录的做法"></a>static模块对url不以斜杠结尾访问目录的做法</h1><img src="重定向跳转的域名.png" />
+
+<h1 id="index和autoindex模块的用法"><a href="#index和autoindex模块的用法" class="headerlink" title="index和autoindex模块的用法"></a>index和autoindex模块的用法</h1><h2 id="指定index文件"><a href="#指定index文件" class="headerlink" title="指定index文件"></a>指定index文件</h2><img src="指定index文件.png" />
+
+<p>index模块先于autoindex模块执行，所以有时访问目录会返回目录下的index页面</p>
+<h2 id="autoindex"><a href="#autoindex" class="headerlink" title="autoindex"></a>autoindex</h2><p>可通过<code>--without-http_autoindex_module</code>禁用autoindex<br><img src="autoindex指令.png" /></p>
+]]></content>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>4_反向代理与负载均衡</title>
+    <url>/nginx/4_%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>nginx</title>
@@ -588,7 +851,13 @@ location / &#123;
   <entry>
     <title>设计模式之美</title>
     <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/</url>
-    <content><![CDATA[<p>高质量代码长什么样？</p>
+    <content><![CDATA[<p>思考：</p>
+<ol>
+<li>解决什么问题</li>
+<li>应用场景</li>
+<li>如何权衡，恰当应用于项目</li>
+</ol>
+<p>高质量代码长什么样？</p>
 <p>为什么用这种设计原则、思想或模式？解决什么编程问题？有哪些应用场景？如何权衡、恰当的在项目中应用？</p>
 <p>操作系统、组成原理、编译原理等计算机基础知识在开发中用不上，很难转换成开发“生产力”。但是，它能潜移默化地，间接地提高技术理解。</p>
 <p>为什么学习设计模式？</p>
@@ -631,9 +900,122 @@ location / &#123;
 <h2 id="面向对象分析和面向对象设计"><a href="#面向对象分析和面向对象设计" class="headerlink" title="面向对象分析和面向对象设计"></a>面向对象分析和面向对象设计</h2><p>OOA Object Oriented Analysis :分析做什么<br>OOD Object Oriented Design ：怎么做<br>OOP ：将分析和设计的的结果翻译成代码的过程</p>
 <p>OOA、OOD围绕着对象或类做需求分析和设计。<strong>分析和设计最终产出类的设计</strong>，包括程序拆解为哪些类，类有哪些属性方法，类之间如何交互等等。OOA、AAD产出更加具体、更加落地、更加贴近编码，更能够顺利地过渡到面向对象编程环节。</p>
 <h2 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h2><p>Unified Model Language 统一建模语言</p>
-<h1 id="封装、抽象、继承、多态解决什么问题"><a href="#封装、抽象、继承、多态解决什么问题" class="headerlink" title="封装、抽象、继承、多态解决什么问题"></a>封装、抽象、继承、多态解决什么问题</h1>]]></content>
+<h1 id="封装、抽象、继承、多态解决什么问题"><a href="#封装、抽象、继承、多态解决什么问题" class="headerlink" title="封装、抽象、继承、多态解决什么问题"></a>封装、抽象、继承、多态解决什么问题</h1><p>不同语言实现此四特性的语法机制有所不同</p>
+<h2 id="封装-Encapsulation"><a href="#封装-Encapsulation" class="headerlink" title="封装 Encapsulation"></a>封装 Encapsulation</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>封装也叫作信息隐藏与数据访问保护（隐藏信息、保护数据）。类暴漏有限的访问接口，授权外部通过类提供的方式（或函数）访问内部信息（或数据）</p>
+<p>语法机制支持：访问权限控制（private，public…）</p>
+<h3 id="解决问题（意义）"><a href="#解决问题（意义）" class="headerlink" title="解决问题（意义）"></a>解决问题（意义）</h3><ul>
+<li>保护数据不被随意修改，提高可维护性；<small><em>增加访问限制（控制灵活性）减少属性随意修改，导致逻辑混乱，而影响可读、维护性</em></small></li>
+<li>暴露有限的必要接口，提高类的易用性<small><em>暴漏必要的方法，让使用更加简单，不必理解业务细节，减少用错概率。</em></small></li>
+</ul>
+<h2 id="抽象-Abstraction"><a href="#抽象-Abstraction" class="headerlink" title="抽象 Abstraction"></a>抽象 Abstraction</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>隐藏方法实现，只需直到提供了此功能而不必了解具体实现</p>
+<p>语法机制支持： 利用interface 和Abstract 两种语法机制，实现抽象特性</p>
+<h3 id="为什么抽象有时不被认为是面向对象的特性"><a href="#为什么抽象有时不被认为是面向对象的特性" class="headerlink" title="为什么抽象有时不被认为是面向对象的特性"></a>为什么抽象有时不被认为是面向对象的特性</h3><p>不需要必须依靠接口类或者抽象类这些特殊语法机制来支持，因为函数本身就是一种抽象（通过函数包裹具体的实现逻辑），不需要了解内部实现。所以只提供函数语法机制，即可实现抽象特性，所以，没有很强的“特异性”，有时不被看作面向对象编程的特性。</p>
+<h3 id="解决问题（意义）-1"><a href="#解决问题（意义）-1" class="headerlink" title="解决问题（意义）"></a>解决问题（意义）</h3><ul>
+<li>提高代码的可扩展性、维护性，修改实现不需要改变定义，减少代码的改动范围；</li>
+<li>处理复杂系统的有效手段，能有效地过滤掉不必要关注的信息。</li>
+</ul>
+<h2 id="继承-Inheritance"><a href="#继承-Inheritance" class="headerlink" title="继承 Inheritance"></a>继承 Inheritance</h2><p>表示类之间的 is-a 关系，分为两种模式：单继承和多继承</p>
+<p>语法机制支持： java是使用extends关键字实现继承</p>
+<h3 id="解决问题（意义）-2"><a href="#解决问题（意义）-2" class="headerlink" title="解决问题（意义）"></a>解决问题（意义）</h3><ul>
+<li>代码复用（重用父类代码），但可通过组合关系实现</li>
+<li>反应现实世界is-a的关系，符合人类认知</li>
+</ul>
+<h2 id="多态-Polymorphism"><a href="#多态-Polymorphism" class="headerlink" title="多态 Polymorphism"></a>多态 Polymorphism</h2><p>子类可替换父类，在运行时调用子类方法实现。</p>
+<p>其他两种实现多态的方式：利用接口（C++不支持），duck-typing 语法（动态语言py，js支持）</p>
+<p>语法机制支持：</p>
+<ul>
+<li>支持父类对象可以引用子类对象</li>
+<li>支持继承</li>
+<li>支持子类可以重写父类中的方法</li>
+</ul>
+<h3 id="解决问题（意义）-3"><a href="#解决问题（意义）-3" class="headerlink" title="解决问题（意义）"></a>解决问题（意义）</h3><ul>
+<li>提高代码的可扩展性和复用性</li>
+<li>是许多设计原则、模式、编程技巧的基础（比如策略模式、基于接口而非实现编程、依赖倒置原则、里式替换原则、利用多态去掉冗长的 if-else 语句等等）</li>
+</ul>
+<h1 id="面向对象相比面向过程有哪些优势？面向过程真的过时了吗？"><a href="#面向对象相比面向过程有哪些优势？面向过程真的过时了吗？" class="headerlink" title="面向对象相比面向过程有哪些优势？面向过程真的过时了吗？"></a>面向对象相比面向过程有哪些优势？面向过程真的过时了吗？</h1><h2 id="面向对象的优势"><a href="#面向对象的优势" class="headerlink" title="面向对象的优势"></a>面向对象的优势</h2><ul>
+<li><p>OOP更好应对大规模复杂程序开发<br>  复杂程序处理流程是复杂的网状结构，用面向过程线性的思维方式，把程序拆解为顺序执行的方法很吃力。<br>  OOP强制使用类组织数据结构和函数，复杂系统也保持模块清晰    </p>
+<p>  面相对象编程，以类为思考对象。</p>
+<ol>
+<li>分析设计时不是先思考复杂流程拆分为一个一个方法，而是先思考如何给业务建模，将需求翻译为类</li>
+<li>建立类之间的关系，完成这些不需要考虑错综复杂的处理流程。</li>
+<li>完成类设计之后，按照处理流程，将类组装起来形成程序</li>
+</ol>
+</li>
+<li><p>OOP风格的代码更易复用、易扩展、易维护<br>  利用面向对象特性更易写出易复用、易扩展、可维护的程序</p>
+</li>
+<li><p>OOP更加人性化、高级、智能<br>  二进制指令、汇编语言、面向过程 计算机思维方式思考如何设计一组指令，让机器执行指令，操作某些数据，完成某个任务。面向对象编程时思考，如何业务建模，如何将真实的世界映射为类或者对象，更加聚焦到业务，而不是思考跟机器打交道。</p>
+</li>
+</ul>
+<h1 id="哪些代码设计看似是面向对象，实际是面向过程的"><a href="#哪些代码设计看似是面向对象，实际是面向过程的" class="headerlink" title="哪些代码设计看似是面向对象，实际是面向过程的"></a>哪些代码设计看似是面向对象，实际是面向过程的</h1><ol>
+<li><p>滥用<code>getter</code> <code>setter</code><br>getter返回集合容器，要防范集合内部数据被修改的风险</p>
+</li>
+<li><p>滥用全局变量和全局方法<br>最好应将全局变量放入业务类中。若不能应细分类，尽量做到职责单一。</p>
+<p> 大全局变量类的缺点</p>
+<ul>
+<li>影响可维护性（多人开发，容易冲突）</li>
+<li>增加编译时间，全局变量一个小改动，所有依赖它的类文件都重新编译。对于大工程一次编译耗费时间几分钟到十几分钟。影响单元测试。</li>
+<li>影响复用性，引入此文件时会引入无关变量</li>
+</ul>
+</li>
+<li><p>定义数据和方法分离的类<br>基于贫血模型的开发模式：后端三层架构VO BO Entity<br><em>为什么这种开发模式如此流行？</em></p>
+</li>
+</ol>
+<h2 id="面向对象编程中，为什么容易写出面向过程风格的代码？"><a href="#面向对象编程中，为什么容易写出面向过程风格的代码？" class="headerlink" title="面向对象编程中，为什么容易写出面向过程风格的代码？"></a>面向对象编程中，为什么容易写出面向过程风格的代码？</h2><ol>
+<li><p>人类做事的思路就是思考一步一步做什么才能完成任务。而面向过程需先设计模块（类），再将类组装起来，完成任务。这样适合复杂程序开发，不符合人类习惯。</p>
+</li>
+<li><p>面向对象相对难一些。类设计需要技巧与经验，思考设计哪些类，包含哪些数据与方法；思考类间关系；思考类间交互。</p>
+</li>
+</ol>
+<p>基于以上两点，大多数人选择不太需要动脑子的方式实现需求，不由自主的写出面相过程代码了。</p>
+<h2 id="面向过程编程及面向过程编程语言就真的无用武之地了吗？"><a href="#面向过程编程及面向过程编程语言就真的无用武之地了吗？" class="headerlink" title="面向过程编程及面向过程编程语言就真的无用武之地了吗？"></a>面向过程编程及面向过程编程语言就真的无用武之地了吗？</h2><ul>
+<li>开发的是微小程序，或者是一个数据处理相关的代码，以算法为主，数据为辅，那脚本式的面向过程的编程风格就更适合一些。</li>
+<li>面向过程编程是面向对象编程的基础<br>类中每个方法的实现逻辑，不就是面向过程风格的代码吗？</li>
+<li>两种编程风格不是完全对立的。<br>面向对象编程语言开发的软件中，面向过程的代码并不少见，一些标准的开发库（比如 JDK、Apache Commons、Google Guava）中，也有很多面向过程风格的代码。</li>
+</ul>
+<h1 id="接口vs抽象类的区别？如何用普通的类模拟抽象类和接口"><a href="#接口vs抽象类的区别？如何用普通的类模拟抽象类和接口" class="headerlink" title="接口vs抽象类的区别？如何用普通的类模拟抽象类和接口"></a>接口vs抽象类的区别？如何用普通的类模拟抽象类和接口</h1><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>实现抽象类 说明：is-a关系<br>实现接口 说明：具有某些功能</p>
+<p>抽象类</p>
+<ul>
+<li>不可实例化，可继承（复用）</li>
+<li>子类必须所有抽象方法</li>
+<li>可以包含属性和方法<br>接口</li>
+<li>不包含属性（成员变量）</li>
+<li>只能声明方法</li>
+<li>类实现接口，实现所有方法</li>
+</ul>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><ul>
+<li>抽象类<br>解决复用问题<br>不可实例化父类，必须实现抽象方法方法，相比普通类更易用，可维护性高。</li>
+<li>接口<br>对方法的抽象，解决解耦问题，定义与实现分离，提高扩展性</li>
+</ul>
+<h2 id="普通类模拟接口和抽象类"><a href="#普通类模拟接口和抽象类" class="headerlink" title="普通类模拟接口和抽象类"></a>普通类模拟接口和抽象类</h2><ul>
+<li>模拟接口<br>protected修饰符，方法抛出异常</li>
+<li>模拟抽象类<br>私有化构造方法，方法抛出异常</li>
+</ul>
+<h2 id="抽象类和接口的应用场景区别"><a href="#抽象类和接口的应用场景区别" class="headerlink" title="抽象类和接口的应用场景区别"></a>抽象类和接口的应用场景区别</h2><p>is-a 的关系，并且是为了解决代码复用问题用抽象类<br>has-a 关系，并且是为了解决抽象而非代码复用问题就用接口</p>
+<h1 id="为什么基于接口而非实现编程？有必要为每个类都定义接口吗？"><a href="#为什么基于接口而非实现编程？有必要为每个类都定义接口吗？" class="headerlink" title="为什么基于接口而非实现编程？有必要为每个类都定义接口吗？"></a>为什么基于接口而非实现编程？有必要为每个类都定义接口吗？</h1><p>“基于抽象而非实现编程”的表述方式其实更能体现这条原则的设计初衷。<br>软件开发时要有抽象意识、封装意识、接口意识。越抽象、越顶层、越脱离具体某一实现的设计，越能提高代码的灵活性、扩展性、可维护性。</p>
+<p>设计接口时思考：</p>
+<ul>
+<li>设计是否足够通用，不能包含跟具体实现相关的字眼</li>
+<li>与特定实现有关的方法不要定义在接口中</li>
+</ul>
+<p>接口和实现分离，封装不稳定的实现，暴露稳定的接口。<br>降低耦合，提高扩展性，可维护性。</p>
+]]></content>
       <tags>
         <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VivaLaVida</title>
+    <url>/%E9%9F%B3%E4%B9%90/VivaLaVida/</url>
+    <content><![CDATA[<iframe src="//player.bilibili.com/player.html?aid=13622752&bvid=BV1Fx411n7bX&cid=22293606&p=1&muted=0&autoplay=0&t=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" > </iframe>]]></content>
+  </entry>
+  <entry>
+    <title>民谣</title>
+    <url>/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/</url>
+    <content><![CDATA[<h1 id="热河"><a href="#热河" class="headerlink" title="热河"></a>热河</h1><iframe width="560" height="315" src="https://www.youtube.com/embed/K2QE-FRAP0o?si=numZREXREMKuJ_Vk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+]]></content>
+      <tags>
+        <tag>音乐</tag>
+        <tag>民谣</tag>
       </tags>
   </entry>
   <entry>
@@ -646,6 +1028,29 @@ location / &#123;
 <li>For the next decade, you build out your savings to retire.</li>
 </ol>
 <h2 id="Number-of-future-options"><a href="#Number-of-future-options" class="headerlink" title="Number of future options"></a>Number of future options</h2><p>take actions that help me maximize future options.</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>乞力马扎罗的雪</title>
+    <url>/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E4%B9%9E%E5%8A%9B%E9%A9%AC%E6%89%8E%E7%BD%97%E7%9A%84%E9%9B%AA/</url>
+    <content><![CDATA[<ol>
+<li><p><code>自从他的右腿开始生坏疽以来，他就不觉得痛，随着疼痛的消失，恐惧也消失了，他现在只是一种强烈的厌倦和愤怒：这居然就是结局。至于这种结局现在正在来临，他倒不感到多大奇怪。多少年来就一直萦绕这他；但是现在它本身并不能说明任何意义。真奇怪，只要你厌倦够了，就能这样轻而易举的达到这样的结局</code><br>自己的结局会是什么样的？应该怎样安排自己的结局？</p>
+</li>
+<li><p><code>再也不能把打算留到将来写作的题材写出来了，他本来想等到有足够的了解以后才动笔，这样可以写得好一些。他也再也不用在试着写这些东西时遭遇失败了。也许你永远也不能写出来这些东西，这就是为什么你一直延宕，迟迟没有动笔的缘故。</code><br>要行动起来</p>
+</li>
+<li><p><code>自从他对自己说的话不再当真以后，他靠谎话和女人相处，比他过去对他们说真心话更成功</code><br>额(⊙o⊙)…<br><code>如果他以谎言为生，他就应该试着以谎言为死。</code></p>
+</li>
+<li><p><code>你说你不属于他们这一类，而只是他们这个国度里的一个间谍；你说你会离开这个国度，并且写这个国度，而且是第一次由一个熟悉这个国度的人来写它。可是他永远也不会写了，因为每天什么都不写，贪图安逸，扮演自己所鄙夷的角色，就磨钝了他的才能，松懈了他的工作意志，最后他干脆什么都不干了。</code></p>
+</li>
+<li><p><code>旅行,变换一下环境，结识新的人，看到愉快的事物。</code></p>
+</li>
+<li><p><code>哈里：“我现在满身都是诗，腐烂和诗，腐烂的诗”</code></p>
+</li>
+<li><p><code>他虽然有才能，但是因为弃而不用，因为出卖了自己，也出买了自己所信仰的一切，因为酗酒过度而磨钝了敏锐的感觉，因为懒散，因为怠惰，因为势力，因为傲慢和偏见，因为种种其他缘故，他毁灭了自己的才能。</code></p>
+</li>
+<li><p><code>他的一生都是出卖生命力，不管是以这种形式还是那种形式。当你并不是十分钟情的时候，你越是看中金钱。</code></p>
+</li>
+</ol>
 ]]></content>
   </entry>
   <entry>
@@ -767,21 +1172,6 @@ location / &#123;
 ]]></content>
   </entry>
   <entry>
-    <title>民谣</title>
-    <url>/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/</url>
-    <content><![CDATA[<h1 id="热河"><a href="#热河" class="headerlink" title="热河"></a>热河</h1><iframe width="560" height="315" src="https://www.youtube.com/embed/K2QE-FRAP0o?si=numZREXREMKuJ_Vk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-]]></content>
-      <tags>
-        <tag>音乐</tag>
-        <tag>民谣</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VivaLaVida</title>
-    <url>/%E9%9F%B3%E4%B9%90/VivaLaVida/</url>
-    <content><![CDATA[<iframe src="//player.bilibili.com/player.html?aid=13622752&bvid=BV1Fx411n7bX&cid=22293606&p=1&muted=0&autoplay=0&t=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" > </iframe>]]></content>
-  </entry>
-  <entry>
     <title>安装Tomcat</title>
     <url>/JAVA/Tomcat/%E5%AE%89%E8%A3%85Tomcat/</url>
     <content><![CDATA[]]></content>
@@ -839,20 +1229,6 @@ location / &#123;
       </tags>
   </entry>
   <entry>
-    <title>运算符</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/1-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-    <content><![CDATA[<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
-<li>算术运算符: +，-，*，&#x2F;，%，++，– </li>
-<li>赋值运算符 &#x3D;  +&#x3D;，-&#x3D;，*&#x3D;，&#x2F;&#x3D;  </li>
-<li>关系运算符: &gt;，&lt;，&gt;&#x3D;，&lt;&#x3D;，&#x3D;&#x3D;，!&#x3D;  </li>
-<li>逻辑运算符: &amp;&amp;，||，! </li>
-<li>位运算符: &amp;，|，^（异或，相同为0不同为1） ，~ ， &gt;&gt;，&lt;&lt;，&gt;&gt;&gt; (了解！！！) </li>
-<li>条件运算符 ？：</li>
-</ul>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>类型转换的方向<br>低——————————————————&gt;高<br>  byte —&gt; short,char—&gt;int —&gt;long—&gt;float —&gt;double</p>
-]]></content>
-  </entry>
-  <entry>
     <title>递归</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/1-3%E9%80%92%E5%BD%92/</url>
     <content><![CDATA[<p>直接或间接调用自身的方法</p>
@@ -867,16 +1243,17 @@ location / &#123;
 ]]></content>
   </entry>
   <entry>
-    <title>4-10类设计技巧</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/4-10%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<ol>
-<li>保证数据私有 ，不要破坏封装性，</li>
-<li>初始化数据（设置默认值）</li>
-<li>不在类中过多使用基本类型，</li>
-<li>不是所有域都需要独立的访问器和更改器</li>
-<li>分解职责过多的类</li>
-</ol>
-<p>5.1 类、超类和子类</p>
+    <title>运算符</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/1-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<li>算术运算符: +，-，*，&#x2F;，%，++，– </li>
+<li>赋值运算符 &#x3D;  +&#x3D;，-&#x3D;，*&#x3D;，&#x2F;&#x3D;  </li>
+<li>关系运算符: &gt;，&lt;，&gt;&#x3D;，&lt;&#x3D;，&#x3D;&#x3D;，!&#x3D;  </li>
+<li>逻辑运算符: &amp;&amp;，||，! </li>
+<li>位运算符: &amp;，|，^（异或，相同为0不同为1） ，~ ， &gt;&gt;，&lt;&lt;，&gt;&gt;&gt; (了解！！！) </li>
+<li>条件运算符 ？：</li>
+</ul>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>类型转换的方向<br>低——————————————————&gt;高<br>  byte —&gt; short,char—&gt;int —&gt;long—&gt;float —&gt;double</p>
 ]]></content>
   </entry>
   <entry>
@@ -1084,44 +1461,17 @@ invokeAll缺点：若第一个任务耗时时很多，需要等待<br>ExecutorCo
       </tags>
   </entry>
   <entry>
-    <title>6-1接口</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-1%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<ul>
-<li>允许接口中定义静态方法</li>
-<li>允许接口的方法定义默认实现，用default标记<ol>
-<li>解决接口扩展问题</li>
-<li>定义接口方法时提供空实现，在实现多方法的接口时，只需实现自己关注的方法，可以不实现有默认实现的方法</li>
+    <title>4-10类设计技巧</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/4-10%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<ol>
+<li>保证数据私有 ，不要破坏封装性，</li>
+<li>初始化数据（设置默认值）</li>
+<li>不在类中过多使用基本类型，</li>
+<li>不是所有域都需要独立的访问器和更改器</li>
+<li>分解职责过多的类</li>
 </ol>
-</li>
-</ul>
-<h3 id="为什么不将-Comparable-直接设计成抽象类"><a href="#为什么不将-Comparable-直接设计成抽象类" class="headerlink" title="为什么不将 Comparable 直接设计成抽象类"></a>为什么不将 Comparable 直接设计成抽象类</h3><p>因java不支持多继承，而接口可以实现多个。</p>
-<h3 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h3><ul>
-<li>超类优先</li>
-<li>接口冲突，指定实现</li>
-</ul>
-<pre><code>interface intf1&#123;
-    default String getName()&#123;
-        return &quot;PersonName&quot;;
-    &#125;
-&#125;
-
-interface intf2&#123;
-   default String getName()&#123;
-        return &quot;Named&quot;;
-    &#125;
-&#125;
-
-class c1 implements intf1,intf2&#123;
-    @Override
-    public String getName() &#123;
-        return intf1.super.getName();//指定intf1的默认实现
-    &#125;
-&#125;```
-</code></pre>
+<p>5.1 类、超类和子类</p>
 ]]></content>
-      <tags>
-        <tag>JAVA</tag>
-      </tags>
   </entry>
   <entry>
     <title>6-3lambda表达式</title>
@@ -1164,6 +1514,46 @@ class c1 implements intf1,intf2&#123;
 <h3 id="再谈Comparator"><a href="#再谈Comparator" class="headerlink" title="再谈Comparator"></a>再谈Comparator</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Arrays.sort(arr, Comparator.comparing(Person::getName, Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName, Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
 <p>排序规则：<br>根据Name长度倒序，长度大在前<br>根据lName长度倒序，长度大在前，为空在最后。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>6-1接口</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-1%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<ul>
+<li>允许接口中定义静态方法</li>
+<li>允许接口的方法定义默认实现，用default标记<ol>
+<li>解决接口扩展问题</li>
+<li>定义接口方法时提供空实现，在实现多方法的接口时，只需实现自己关注的方法，可以不实现有默认实现的方法</li>
+</ol>
+</li>
+</ul>
+<h3 id="为什么不将-Comparable-直接设计成抽象类"><a href="#为什么不将-Comparable-直接设计成抽象类" class="headerlink" title="为什么不将 Comparable 直接设计成抽象类"></a>为什么不将 Comparable 直接设计成抽象类</h3><p>因java不支持多继承，而接口可以实现多个。</p>
+<h3 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h3><ul>
+<li>超类优先</li>
+<li>接口冲突，指定实现</li>
+</ul>
+<pre><code>interface intf1&#123;
+    default String getName()&#123;
+        return &quot;PersonName&quot;;
+    &#125;
+&#125;
+
+interface intf2&#123;
+   default String getName()&#123;
+        return &quot;Named&quot;;
+    &#125;
+&#125;
+
+class c1 implements intf1,intf2&#123;
+    @Override
+    public String getName() &#123;
+        return intf1.super.getName();//指定intf1的默认实现
+    &#125;
+&#125;```
+</code></pre>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+      </tags>
   </entry>
   <entry>
     <title>6-4内部类</title>
@@ -1270,6 +1660,73 @@ class c1 implements intf1,intf2&#123;
       <tags>
         <tag>JAVA</tag>
         <tag>泛型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Stream库</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/</url>
+    <content><![CDATA[<p>使用步骤</p>
+<ul>
+<li>创建 </li>
+<li>转换为其他流的操作</li>
+<li>终止操作，产生结果（执行之前的惰性操作）<span id="more"></span>
+ {todo} ???<br> <code>list.stream().parallel()</code>、 <code>list.parallelStream()</code>啥区别？</li>
+</ul>
+<h1 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h1><p>Stream.of() 创建给定值的流<br>Stream.empty() 创建不包含元素的流<br>Stream.generate() 调用给定函数创建无限流<br>Stream.iterate() 根据种子和函数创建无限流<br>Pattern.compile(“”).splitAsStream() 创建由正则表达式界定的流<br>Arrays.stream(arr, 0, 1) 创建包含数组指定部分的流<br>Files.line() 创建包含指定文件中行的流</p>
+<h1 id="filter、map和flatMap"><a href="#filter、map和flatMap" class="headerlink" title="filter、map和flatMap"></a>filter、map和flatMap</h1><p>filter 创建流，元素满足断言条件<br>map 创建流，将所有元素应用给定函数<br>flatMap  创建流，将指定函数应用于当前流中所有元素所产生的结果连接到一起而获得，（这里的每个结果都是一个流），如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Stream.of(&quot;1&quot;).flatMap(x -&gt; &#123;</span><br><span class="line">            return Stream.of(x, x);</span><br><span class="line">        &#125;).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<h1 id="抽取子流和连接流"><a href="#抽取子流和连接流" class="headerlink" title="抽取子流和连接流"></a>抽取子流和连接流</h1><p><code>stream.limit</code><br><code>stream.skip</code><br><code>Stream.concat</code> 连接两个流</p>
+<h1 id="其他的流转换"><a href="#其他的流转换" class="headerlink" title="其他的流转换"></a>其他的流转换</h1><p><code>distinct</code><br><code>sorted</code><br><code>peek(Consumer)</code> 获取每个元素时应用consumer，用于调试时可调用断点方法;count不会触发peek。</p>
+<h1 id="简单约简"><a href="#简单约简" class="headerlink" title="简单约简"></a>简单约简</h1><p>终结操作：</p>
+<ul>
+<li><code>min</code></li>
+<li><code>max</code></li>
+<li><code>findFirst</code> 与filter配合使用</li>
+<li><code>findAny</code> 并行流与filter配合使用</li>
+<li><code>anyMatch</code> 是否存在匹配，存在则返回true</li>
+<li><code>allMatch</code> 全部匹配返回true</li>
+<li><code>noneMatch</code> 没有匹配返回true</li>
+</ul>
+<h1 id="Optinonal类型"><a href="#Optinonal类型" class="headerlink" title="Optinonal类型"></a>Optinonal类型</h1><p>一种对象包装器<br>orElse(defaultVal)  如空提供默认值<br>orElseGet(Supplier)   如空执行表达式获取默认值<br>orElseThrow(Exception)   如空抛出异常</p>
+<p>ifPresent(Consumer)<br>map(Function)</p>
+<h2 id="不适合使用Optional值的方式"><a href="#不适合使用Optional值的方式" class="headerlink" title="不适合使用Optional值的方式"></a>不适合使用Optional值的方式</h2><ol>
+<li><code>optionalVal.get()</code> 在值不存在时抛出异常</li>
+<li>&#96;&#96;optionalVal.get().isPresent().get().someMethod();<code> 没有以下方式容易处理</code>if(value !&#x3D;null ) value.someMethod()&#96;</li>
+</ol>
+<h2 id="创建Optional值"><a href="#创建Optional值" class="headerlink" title="创建Optional值"></a>创建Optional值</h2><p><code>Optional.of(val)</code><br><code>Optional.empty()</code><br><code>Optional.ofNullable(val)</code> 若val为空则返回 <code>Optional.empty()</code></p>
+<h2 id="flatMap构建Optional值的函数"><a href="#flatMap构建Optional值的函数" class="headerlink" title="flatMap构建Optional值的函数"></a>flatMap构建Optional值的函数</h2><p>方法f返回值是Optional<T><br>T对象有返回值是Optional<T>的方法g<br>使用如下方法连续调用：<code>s.f().flatMap(T::g)</code></p>
+<h1 id="收集结果"><a href="#收集结果" class="headerlink" title="收集结果"></a>收集结果</h1><h2 id="遍历："><a href="#遍历：" class="headerlink" title="遍历："></a>遍历：</h2><ul>
+<li>foreach 在并行流上以任意顺序遍历元素</li>
+<li>foreachOrdered 按流中的顺序处理元素，但会丧失并行处理的部分甚至全部优势</li>
+</ul>
+<h2 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h2><p><code>toArray()</code> 返回<code>Object[]</code><br><code>ToArray(String::new)</code> 返回String数组.其他类型类似</p>
+<h2 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h2><p><code>stream.collect(Collectors.toList())</code><br><code>stream.collect(Collectors.toSet())</code><br><code>stream.collect(Collectors.toCollection(TreeSet::new))</code> &#x2F;&#x2F;指定结果类型<code>TreeSet</code><br><code>stream.collect(Collectors.join())</code><br><code>stream.collect(Collectors.join(&quot;,&quot;))</code></p>
+<p>统计</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IntSummaryStatistics statistics = Arrays.asList(&quot;1&quot;, &quot;132&quot;, &quot;333&quot;, &quot;434&quot;).stream().collect(Collectors.summarizingInt(String::length));</span><br><span class="line">System.out.println(&quot;average:&quot; + Statistics.getAverage());</span><br><span class="line">System.out.println(Statistics.getMax());</span><br></pre></td></tr></table></figure>
+
+<h1 id="收集结果到映射表"><a href="#收集结果到映射表" class="headerlink" title="收集结果到映射表"></a>收集结果到映射表</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Person person = new Person(&quot;1&quot;, &quot;11&quot;);</span><br><span class="line">        Person person2 = new Person(&quot;2&quot;, &quot;22&quot;);</span><br><span class="line">        Person person3 = new Person(&quot;3&quot;, &quot;33&quot;);</span><br><span class="line">        Person person23 = new Person(&quot;23&quot;, &quot;23&quot;);</span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Person::getlName)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity())).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person, person2, person3, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity(), (existingVal, newVal) -&gt; &#123;</span><br><span class="line">                    return existingVal;</span><br><span class="line">                &#125;)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Collections::singleton, (a, b) -&gt; &#123;</span><br><span class="line">                    Set&lt;Person&gt; set = new HashSet&lt;&gt;(a);</span><br><span class="line">                    set.addAll(b);</span><br><span class="line">                    return set;</span><br><span class="line">                &#125;, TreeMap::new)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="群组和分区"><a href="#群组和分区" class="headerlink" title="群组和分区"></a>群组和分区</h1><ul>
+<li><code>Collectors.groupingBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName));</span><br><span class="line">map.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></li>
+<li><code>Collectors.partitionBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.partitioningBy(x -&gt; x.getName().length() &gt; 1));</span><br><span class="line">collect.get(true).forEach(System.out::println);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="下游收集器"><a href="#下游收集器" class="headerlink" title="下游收集器"></a>下游收集器</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Long&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));</span><br><span class="line">        collect.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Integer&gt; collect12 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(Person::getAge)));</span><br><span class="line">        collect12.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        person3_.setAge(10);</span><br><span class="line">        Map&lt;String, Optional&lt;Person&gt;&gt; collect13 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.maxBy(Comparator.comparingInt(Person::getAge))));</span><br><span class="line">        collect13.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Optional&lt;String&gt;&gt; collect14 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName,</span><br><span class="line">                                Collectors.maxBy(Comparator.comparing(String::length)))));</span><br><span class="line"></span><br><span class="line">        collect14.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect15 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.toSet())));</span><br><span class="line">        collect15.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect16 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(x -&gt; &#123;</span><br><span class="line">                            return x.getlName() + &quot;-x&quot;;</span><br><span class="line">                        &#125;, Collectors.toSet())));</span><br><span class="line">        collect16.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">         Map&lt;String, IntSummaryStatistics&gt; collect17 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summarizingInt(Person::getAge)));</span><br><span class="line">        collect17.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y.getAverage() + &quot;,&quot; + y.getSum());</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; collect18 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.reducing(&quot;###&quot;,</span><br><span class="line">                                Person::getlName,</span><br><span class="line">                                (sum, item) -&gt; &#123;</span><br><span class="line">//                                    System.out.println(&quot;===s:&quot; + s + &quot;  t:&quot; + t);</span><br><span class="line">                                    return sum.length() == 0 ? item : sum + &quot;,&quot; + item;</span><br><span class="line">                                &#125;)));</span><br><span class="line">        collect18.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">Map&lt;String, String&gt; collect19 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.joining(&quot;;&quot;))));</span><br><span class="line">        collect19.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="约简操作"><a href="#约简操作" class="headerlink" title="约简操作"></a>约简操作</h1><p><code>reduce</code><br>{todo}???</p>
+<h1 id="基本类型流"><a href="#基本类型流" class="headerlink" title="基本类型流"></a>基本类型流</h1><p><code>IntStream</code>  存储<code>short char byte boolean</code><br><code>LongStream</code><br><code>DoubleStream</code> 存储 <code>double float</code><br>不使用包装器(区别<code>Stream&lt;Integer&gt;</code>等)</p>
+<p>转换为对象流 <code>IntStream.range(0,5).boxed()</code> </p>
+<p>相关库<br>Random.ints()<br>Random.doubles()<br>Random.longs()</p>
+<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1><p>调用<code>unordered</code>方法表示对于排序不感兴趣，可提高<code>distinct</code>性能（相同值任选其一，不必排序）<br>也可提高limit的性能（实际实验室并没有提高，反而降低了）{todo}???</p>
+<p><code>Collectors.groupByConcurrent</code>使用共享的并发映射表，值的顺序不会与流中的顺序相同。<br>如下：</p>
+<p>并行流正常工作的条件：</p>
+<ul>
+<li>数据都在内存中。等待数据加载是低效的</li>
+<li>流应该被高效分成若干个字部分。数组或平衡二叉树支撑的流可以很好得工作，但Stream.Iterate返回的结果不行</li>
+<li>流操作的工作量应有较大规模。工作负载不大，并行流无异议。</li>
+<li>流操作不应阻塞<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static List&lt;String&gt; getSomeWords() &#123;</span><br><span class="line">        Character[] characters = new Character[]&#123;&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;, &#x27;i&#x27;, &#x27;j&#x27;, &#x27;k&#x27;, &#x27;l&#x27;, &#x27;m&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;p&#x27;, &#x27;q&#x27;, &#x27;r&#x27;, &#x27;s&#x27;, &#x27;t&#x27;, &#x27;u&#x27;, &#x27;v&#x27;, &#x27;w&#x27;, &#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;&#125;;</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        int[] wordsLengthArr = r.ints(100, 0, 20).toArray();</span><br><span class="line">        int wordsCount = wordsLengthArr.length;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; words = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; wordsCount; i++) &#123;</span><br><span class="line">            int wordLength = wordsLengthArr[i];</span><br><span class="line">            int[] wordCharRandom = r.ints(wordLength, 0, 25).toArray();//单词的每个字母下标</span><br><span class="line">            Character[] word = new Character[wordLength];</span><br><span class="line"></span><br><span class="line">            for (int j = 0; j &lt; wordLength; j++) &#123;</span><br><span class="line">                word[j] = characters[wordCharRandom[j]];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            String s = Arrays.stream(word).map(String::valueOf).collect(Collectors.joining());</span><br><span class="line">            words.add(s);</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">        return words;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));//每次结果相同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));//每次结果不同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Stream</tag>
       </tags>
   </entry>
   <entry>
@@ -1390,7 +1847,7 @@ class c1 implements intf1,intf2&#123;
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="排序与混排"><a href="#排序与混排" class="headerlink" title="排序与混排"></a>排序与混排</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Arrays.sort(arr,Comparator.comparing(Person::getName,Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName,Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
 
 <p>可以使用归并排序对链表进行高效的排序，Java程序设计语言不是这样实现的，而是将元素转人数组进行排序，再复制回列表。</p>
-<p>混排：<code>Collections.shuffle(list);</code></p>
+<p>混排&#x2F;打乱顺序：<code>Collections.shuffle(list);</code></p>
 <h3 id="二分查找-BinarySearch"><a href="#二分查找-BinarySearch" class="headerlink" title="二分查找 BinarySearch"></a>二分查找 BinarySearch</h3><p>前提条件：数组、数据有序、实现List接口</p>
 <h3 id="简单算法"><a href="#简单算法" class="headerlink" title="简单算法"></a>简单算法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">min</span><br><span class="line">max</span><br><span class="line">copy</span><br><span class="line">fill</span><br><span class="line">addall</span><br><span class="line">replaceAll</span><br><span class="line">indexOfSubList</span><br><span class="line">1astlndexOfSubList</span><br><span class="line">swap 交换给定偏移量的两个元素</span><br><span class="line">reverse</span><br><span class="line">rotate  将索引i的条目移动到位置（i+d）% size()</span><br><span class="line">static int frequency(Col1ection&lt;?&gt;c,Object o) 返回c中与对象o相同的元素个数</span><br><span class="line">boolean disjoint(Collection&lt;?&gt;cl,Col1ection&lt;?&gt;c2) 如果两个集合没有共同的元素，则返回true</span><br></pre></td></tr></table></figure>
 <h3 id="批操作"><a href="#批操作" class="headerlink" title="批操作"></a>批操作</h3><p>retainAll 交集</p>
@@ -1482,64 +1939,6 @@ class c1 implements intf1,intf2&#123;
 <h5 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h5><p>数组：Arrary.toString()</p>
 <h5 id="ArraryList-trimTosize"><a href="#ArraryList-trimTosize" class="headerlink" title="ArraryList.trimTosize()"></a>ArraryList.trimTosize()</h5><p>确认数组列表的大小不再发生变化，就可以调用 trimToSize方法,将<br>存储区域的大小调整为当前元素数量所需要的存储空间数目。垃圾回收器将回收多余的存储<br>空间。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Stream库</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/</url>
-    <content><![CDATA[<p>使用步骤</p>
-<ul>
-<li>创建 </li>
-<li>转换为其他流的操作</li>
-<li>终止操作，产生结果（执行之前的惰性操作）<span id="more"></span>
- {todo} ???<br> <code>list.stream().parallel()</code>、 <code>list.parallelStream()</code>啥区别？</li>
-</ul>
-<h1 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h1><p>Stream.of() 创建给定值的流<br>Stream.empty() 创建不包含元素的流<br>Stream.generate() 调用给定函数创建无限流<br>Stream.iterate() 根据种子和函数创建无限流<br>Pattern.compile(“”).splitAsStream() 创建由正则表达式界定的流<br>Arrays.stream(arr, 0, 1) 创建包含数组指定部分的流<br>Files.line() 创建包含指定文件中行的流</p>
-<h1 id="filter、map和flatMap"><a href="#filter、map和flatMap" class="headerlink" title="filter、map和flatMap"></a>filter、map和flatMap</h1><p>filter 创建流，元素满足断言条件<br>map 创建流，将所有元素应用给定函数<br>flatMap  创建流，将指定函数应用于当前流中所有元素所产生的结果连接到一起而获得，（这里的每个结果都是一个流），如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Stream.of(&quot;1&quot;).flatMap(x -&gt; &#123;</span><br><span class="line">            return Stream.of(x, x);</span><br><span class="line">        &#125;).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
-<h1 id="抽取子流和连接流"><a href="#抽取子流和连接流" class="headerlink" title="抽取子流和连接流"></a>抽取子流和连接流</h1><p><code>stream.limit</code><br><code>stream.skip</code><br><code>Stream.concat</code> 连接两个流</p>
-<h1 id="其他的流转换"><a href="#其他的流转换" class="headerlink" title="其他的流转换"></a>其他的流转换</h1><p><code>distinct</code><br><code>sorted</code><br><code>peek(Consumer)</code> 获取每个元素时应用consumer，用于调试时可调用断点方法;count不会触发peek。</p>
-<h1 id="简单约简"><a href="#简单约简" class="headerlink" title="简单约简"></a>简单约简</h1><p>终结操作：</p>
-<ul>
-<li><code>min</code></li>
-<li><code>max</code></li>
-<li><code>findFirst</code> 与filter配合使用</li>
-<li><code>findAny</code> 并行流与filter配合使用</li>
-<li><code>anyMatch</code> 是否存在匹配，存在则返回true</li>
-<li><code>allMatch</code> 全部匹配返回true</li>
-<li><code>noneMatch</code> 没有匹配返回true</li>
-</ul>
-<h1 id="Optinonal类型"><a href="#Optinonal类型" class="headerlink" title="Optinonal类型"></a>Optinonal类型</h1><p>一种对象包装器<br>orElse(defaultVal)  如空提供默认值<br>orElseGet(Supplier)   如空执行表达式获取默认值<br>orElseThrow(Exception)   如空抛出异常</p>
-<p>ifPresent(Consumer)<br>map(Function)</p>
-<h2 id="不适合使用Optional值的方式"><a href="#不适合使用Optional值的方式" class="headerlink" title="不适合使用Optional值的方式"></a>不适合使用Optional值的方式</h2><ol>
-<li><code>optionalVal.get()</code> 在值不存在时抛出异常</li>
-<li>&#96;&#96;optionalVal.get().isPresent().get().someMethod();<code> 没有以下方式容易处理</code>if(value !&#x3D;null ) value.someMethod()&#96;</li>
-</ol>
-<h2 id="创建Optional值"><a href="#创建Optional值" class="headerlink" title="创建Optional值"></a>创建Optional值</h2><p><code>Optional.of(val)</code><br><code>Optional.empty()</code><br><code>Optional.ofNullable(val)</code> 若val为空则返回 <code>Optional.empty()</code></p>
-<h2 id="flatMap构建Optional值的函数"><a href="#flatMap构建Optional值的函数" class="headerlink" title="flatMap构建Optional值的函数"></a>flatMap构建Optional值的函数</h2><p>方法f返回值是Optional<T><br>T对象有返回值是Optional<T>的方法g<br>使用如下方法连续调用：<code>s.f().flatMap(T::g)</code></p>
-<h1 id="收集结果"><a href="#收集结果" class="headerlink" title="收集结果"></a>收集结果</h1><h2 id="遍历："><a href="#遍历：" class="headerlink" title="遍历："></a>遍历：</h2><ul>
-<li>foreach 在并行流上以任意顺序遍历元素</li>
-<li>foreachOrdered 按流中的顺序处理元素，但会丧失并行处理的部分甚至全部优势</li>
-</ul>
-<h2 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h2><p><code>toArray()</code> 返回<code>Object[]</code><br><code>ToArray(String::new)</code> 返回String数组.其他类型类似</p>
-<h2 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h2><p><code>stream.collect(Collectors.toList())</code><br><code>stream.collect(Collectors.toSet())</code><br><code>stream.collect(Collectors.toCollection(TreeSet::new))</code> &#x2F;&#x2F;指定结果类型<code>TreeSet</code><br><code>stream.collect(Collectors.join())</code><br><code>stream.collect(Collectors.join(&quot;,&quot;))</code></p>
-<p>统计</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IntSummaryStatistics statistics = Arrays.asList(&quot;1&quot;, &quot;132&quot;, &quot;333&quot;, &quot;434&quot;).stream().collect(Collectors.summarizingInt(String::length));</span><br><span class="line">System.out.println(&quot;average:&quot; + Statistics.getAverage());</span><br><span class="line">System.out.println(Statistics.getMax());</span><br></pre></td></tr></table></figure>
-
-<h1 id="收集结果到映射表"><a href="#收集结果到映射表" class="headerlink" title="收集结果到映射表"></a>收集结果到映射表</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Person person = new Person(&quot;1&quot;, &quot;11&quot;);</span><br><span class="line">        Person person2 = new Person(&quot;2&quot;, &quot;22&quot;);</span><br><span class="line">        Person person3 = new Person(&quot;3&quot;, &quot;33&quot;);</span><br><span class="line">        Person person23 = new Person(&quot;23&quot;, &quot;23&quot;);</span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Person::getlName)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity())).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person, person2, person3, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity(), (existingVal, newVal) -&gt; &#123;</span><br><span class="line">                    return existingVal;</span><br><span class="line">                &#125;)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Collections::singleton, (a, b) -&gt; &#123;</span><br><span class="line">                    Set&lt;Person&gt; set = new HashSet&lt;&gt;(a);</span><br><span class="line">                    set.addAll(b);</span><br><span class="line">                    return set;</span><br><span class="line">                &#125;, TreeMap::new)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure>
-<h1 id="群组和分区"><a href="#群组和分区" class="headerlink" title="群组和分区"></a>群组和分区</h1><ul>
-<li><code>Collectors.groupingBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName));</span><br><span class="line">map.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></li>
-<li><code>Collectors.partitionBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.partitioningBy(x -&gt; x.getName().length() &gt; 1));</span><br><span class="line">collect.get(true).forEach(System.out::println);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="下游收集器"><a href="#下游收集器" class="headerlink" title="下游收集器"></a>下游收集器</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Long&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));</span><br><span class="line">        collect.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Integer&gt; collect12 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(Person::getAge)));</span><br><span class="line">        collect12.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        person3_.setAge(10);</span><br><span class="line">        Map&lt;String, Optional&lt;Person&gt;&gt; collect13 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.maxBy(Comparator.comparingInt(Person::getAge))));</span><br><span class="line">        collect13.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Optional&lt;String&gt;&gt; collect14 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName,</span><br><span class="line">                                Collectors.maxBy(Comparator.comparing(String::length)))));</span><br><span class="line"></span><br><span class="line">        collect14.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect15 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.toSet())));</span><br><span class="line">        collect15.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect16 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(x -&gt; &#123;</span><br><span class="line">                            return x.getlName() + &quot;-x&quot;;</span><br><span class="line">                        &#125;, Collectors.toSet())));</span><br><span class="line">        collect16.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">         Map&lt;String, IntSummaryStatistics&gt; collect17 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summarizingInt(Person::getAge)));</span><br><span class="line">        collect17.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y.getAverage() + &quot;,&quot; + y.getSum());</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; collect18 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.reducing(&quot;###&quot;,</span><br><span class="line">                                Person::getlName,</span><br><span class="line">                                (sum, item) -&gt; &#123;</span><br><span class="line">//                                    System.out.println(&quot;===s:&quot; + s + &quot;  t:&quot; + t);</span><br><span class="line">                                    return sum.length() == 0 ? item : sum + &quot;,&quot; + item;</span><br><span class="line">                                &#125;)));</span><br><span class="line">        collect18.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">Map&lt;String, String&gt; collect19 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.joining(&quot;;&quot;))));</span><br><span class="line">        collect19.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
-
-<h1 id="约简操作"><a href="#约简操作" class="headerlink" title="约简操作"></a>约简操作</h1><p><code>reduce</code><br>{todo}???</p>
-<h1 id="基本类型流"><a href="#基本类型流" class="headerlink" title="基本类型流"></a>基本类型流</h1><p><code>IntStream</code>  存储<code>short char byte boolean</code><br><code>LongStream</code><br><code>DoubleStream</code> 存储 <code>double float</code><br>不使用包装器(区别<code>Stream&lt;Integer&gt;</code>等)</p>
-<p>转换为对象流 <code>IntStream.range(0,5).boxed()</code> </p>
-<p>相关库<br>Random.ints()<br>Random.doubles()<br>Random.longs()</p>
-<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1>]]></content>
-      <tags>
-        <tag>Stream</tag>
-      </tags>
   </entry>
   <entry>
     <title>反射</title>

@@ -140,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-20 22:01:43" itemprop="dateModified" datetime="2024-05-20T22:01:43+08:00">2024-05-20</time>
+      <time title="Modified: 2024-05-29 16:48:37" itemprop="dateModified" datetime="2024-05-29T16:48:37+08:00">2024-05-29</time>
     </span>
 
   
@@ -345,7 +345,7 @@
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="排序与混排"><a href="#排序与混排" class="headerlink" title="排序与混排"></a>排序与混排</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(arr,Comparator.comparing(Person::getName,Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName,Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
 
 <p>可以使用归并排序对链表进行高效的排序，Java程序设计语言不是这样实现的，而是将元素转人数组进行排序，再复制回列表。</p>
-<p>混排：<code>Collections.shuffle(list);</code></p>
+<p>混排&#x2F;打乱顺序：<code>Collections.shuffle(list);</code></p>
 <h3 id="二分查找-BinarySearch"><a href="#二分查找-BinarySearch" class="headerlink" title="二分查找 BinarySearch"></a>二分查找 BinarySearch</h3><p>前提条件：数组、数据有序、实现List接口</p>
 <h3 id="简单算法"><a href="#简单算法" class="headerlink" title="简单算法"></a>简单算法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">min</span><br><span class="line">max</span><br><span class="line">copy</span><br><span class="line">fill</span><br><span class="line">addall</span><br><span class="line">replaceAll</span><br><span class="line">indexOfSubList</span><br><span class="line">1astlndexOfSubList</span><br><span class="line">swap 交换给定偏移量的两个元素</span><br><span class="line">reverse</span><br><span class="line">rotate  将索引i的条目移动到位置（i+d）% size()</span><br><span class="line">static int frequency(Col1ection&lt;?&gt;c,Object o) 返回c中与对象o相同的元素个数</span><br><span class="line">boolean disjoint(Collection&lt;?&gt;cl,Col1ection&lt;?&gt;c2) 如果两个集合没有共同的元素，则返回true</span><br></pre></td></tr></table></figure>
 <h3 id="批操作"><a href="#批操作" class="headerlink" title="批操作"></a>批操作</h3><p>retainAll 交集</p>

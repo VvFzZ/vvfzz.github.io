@@ -140,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-28 23:31:58" itemprop="dateModified" datetime="2024-05-28T23:31:58+08:00">2024-05-28</time>
+      <time title="Modified: 2024-05-29 22:51:53" itemprop="dateModified" datetime="2024-05-29T22:51:53+08:00">2024-05-29</time>
     </span>
 
   
@@ -279,7 +279,16 @@
 <h1 id="基本类型流"><a href="#基本类型流" class="headerlink" title="基本类型流"></a>基本类型流</h1><p><code>IntStream</code>  存储<code>short char byte boolean</code><br><code>LongStream</code><br><code>DoubleStream</code> 存储 <code>double float</code><br>不使用包装器(区别<code>Stream&lt;Integer&gt;</code>等)</p>
 <p>转换为对象流 <code>IntStream.range(0,5).boxed()</code> </p>
 <p>相关库<br>Random.ints()<br>Random.doubles()<br>Random.longs()</p>
-<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1>
+<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1><p>调用<code>unordered</code>方法表示对于排序不感兴趣，可提高<code>distinct</code>性能（相同值任选其一，不必排序）<br>也可提高limit的性能（实际实验室并没有提高，反而降低了）{todo}???</p>
+<p><code>Collectors.groupByConcurrent</code>使用共享的并发映射表，值的顺序不会与流中的顺序相同。<br>如下：</p>
+<p>并行流正常工作的条件：</p>
+<ul>
+<li>数据都在内存中。等待数据加载是低效的</li>
+<li>流应该被高效分成若干个字部分。数组或平衡二叉树支撑的流可以很好得工作，但Stream.Iterate返回的结果不行</li>
+<li>流操作的工作量应有较大规模。工作负载不大，并行流无异议。</li>
+<li>流操作不应阻塞<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">private static List&lt;String&gt; getSomeWords() &#123;</span><br><span class="line">        Character[] characters = new Character[]&#123;&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;, &#x27;i&#x27;, &#x27;j&#x27;, &#x27;k&#x27;, &#x27;l&#x27;, &#x27;m&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;p&#x27;, &#x27;q&#x27;, &#x27;r&#x27;, &#x27;s&#x27;, &#x27;t&#x27;, &#x27;u&#x27;, &#x27;v&#x27;, &#x27;w&#x27;, &#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;&#125;;</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        int[] wordsLengthArr = r.ints(100, 0, 20).toArray();</span><br><span class="line">        int wordsCount = wordsLengthArr.length;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; words = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; wordsCount; i++) &#123;</span><br><span class="line">            int wordLength = wordsLengthArr[i];</span><br><span class="line">            int[] wordCharRandom = r.ints(wordLength, 0, 25).toArray();//单词的每个字母下标</span><br><span class="line">            Character[] word = new Character[wordLength];</span><br><span class="line"></span><br><span class="line">            for (int j = 0; j &lt; wordLength; j++) &#123;</span><br><span class="line">                word[j] = characters[wordCharRandom[j]];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            String s = Arrays.stream(word).map(String::valueOf).collect(Collectors.joining());</span><br><span class="line">            words.add(s);</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">        return words;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));//每次结果相同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));//每次结果不同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));</span><br></pre></td></tr></table></figure></li>
+</ul>
+
     </div>
 
     

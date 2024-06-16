@@ -140,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-26 10:39:34" itemprop="dateModified" datetime="2024-05-26T10:39:34+08:00">2024-05-26</time>
+      <time title="Modified: 2024-06-13 16:58:37" itemprop="dateModified" datetime="2024-06-13T16:58:37+08:00">2024-06-13</time>
     </span>
 
   
@@ -245,20 +245,42 @@
 <li>商业版OpenResty</li>
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><p>解压后的文件说明</p>
+<ul>
+<li>auto <ul>
+<li>cc 用于编译</li>
+<li>lib lib库</li>
+<li>os 对操作系统的判断</li>
+<li>type</li>
+</ul>
+</li>
+<li>CHANGE 特性</li>
+<li>conf 示例文件</li>
+<li>configure 脚本，编译前准备工作</li>
+<li>contrib </li>
+<li>LICENSE</li>
+<li>man nginx帮助文件</li>
+<li>src 源码</li>
+</ul>
+</li>
 <li><p><code>./configure</code> 配置和准备软件包以进行编译和安装</p>
 <ul>
-<li>参数说明<ul>
+<li>参数说明 (帮助命令<code>./configure --help|more</code>)<ul>
 <li>指定 –prefix 目录 ，其他目录会在此目录下新建相应目录</li>
 <li>–with-*_module  、 –without-*_module 指定使用或不使用哪些模块</li>
 <li>–with-* 编译时需指定的特殊参数</li>
+<li>–add-module&#x3D;第三方模块路径</li>
 </ul>
 </li>
-<li>生成objs目录</li>
+<li>生成objs目录  <ol>
+<li>ngx_modules.c 包含的模块</li>
+</ol>
+</li>
 </ul>
 </li>
 <li><p><code>make</code> 编译 </p>
 <ul>
-<li>新安装可用make install</li>
+<li>新安装可用make install </li>
 <li>升级版本 make后拷贝文件(文件在objs目录)到已安装目录</li>
 </ul>
 </li>
@@ -330,7 +352,7 @@
 </ol>
 </li>
 </ul>
-<h1 id="配置静态资源服务器"><a href="#配置静态资源服务器" class="headerlink" title="配置静态资源服务器"></a>配置静态资源服务器</h1><h2 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h2><p>location &#x2F;statics&#x2F; {<br>    alias statics;&#x2F;&#x2F;静态文件根目录  不使用root，root会带入rul路径<br>    autoindex on; &#x2F;&#x2F;开启目录浏览<br>    set $limit_rate 1k; &#x2F;&#x2F;每秒传输1k字节到浏览器；多用户高并发时限制响应流量，防止大文件传输影响其他文件访问<br>}</p>
+<h1 id="配置静态资源服务器"><a href="#配置静态资源服务器" class="headerlink" title="配置静态资源服务器"></a>配置静态资源服务器</h1><h2 id="配置location"><a href="#配置location" class="headerlink" title="配置location"></a>配置location</h2><p>location &#x2F;statics&#x2F; {<br>    alias statics;&#x2F;&#x2F;静态文件根目录  不使用root，root会带入url路径<br>    autoindex on; &#x2F;&#x2F;开启目录浏览<br>    set $limit_rate 1k; &#x2F;&#x2F;每秒传输1k字节到浏览器；多用户高并发时限制响应流量，防止大文件传输影响其他文件访问<br>}</p>
 <h2 id="配置gzip"><a href="#配置gzip" class="headerlink" title="配置gzip"></a>配置gzip</h2><p>gzip on;<br>gzip_min_length 1;&#x2F;&#x2F;1个字节时不压缩（一个字节一个tcp报文可以直接发送，再进行压缩没有意义）<br>gzip_comp_level 2; &#x2F;&#x2F;压缩级别<br>gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;javascript application&#x2F;x-httpd-php image&#x2F;jpeg image&#x2F;gif image&#x2F;png application&#x2F;vnd.ms-fontobject font&#x2F;ttf font&#x2F;opentype font&#x2F;x-woff image&#x2F;svg+xml; &#x2F;&#x2F; 压缩包没必要再压缩</p>
 <p>access日志<br>定义格式</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    log_format main &#x27;$remote_addr - $remote_user [$time_local]&#x27;  &#x27; &quot;$request&quot; $status $body_bytes_sent &#x27; &#x27; &quot;$http_referer&quot; &quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; &#x27;;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        access_log logs/access.log main;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
