@@ -18,54 +18,88 @@
   <entry>
     <title>旅行</title>
     <url>/%E6%97%85%E8%A1%8C/</url>
-    <content><![CDATA[<h1 id="四川"><a href="#四川" class="headerlink" title="四川"></a>四川</h1><p>九寨沟<br>四姑娘山<br>峨眉山<br>三星堆<br>稻城亚丁<br>都江堰</p>
-<p>若尔盖<br>熊猫基地  早上去，熊猫下午休息<br>泸沽湖</p>
-<p>乐山大佛<br>青城山 远<br>太古里</p>
-<h1 id="南京"><a href="#南京" class="headerlink" title="南京"></a>南京</h1><h2 id="交通"><a href="#交通" class="headerlink" title="交通"></a>交通</h2><h3 id="保定-南京"><a href="#保定-南京" class="headerlink" title="保定-南京"></a>保定-南京</h3><ul>
+    <content><![CDATA[<h1 id="四川"><a href="#四川" class="headerlink" title="四川"></a>四川</h1><ul>
+<li><p>九寨沟</p>
+</li>
+<li><p>四姑娘山</p>
+</li>
+<li><p>峨眉山</p>
+</li>
+<li><p>三星堆</p>
+</li>
+<li><p>稻城亚丁</p>
+</li>
+<li><p>都江堰</p>
+</li>
+<li><p>若尔盖</p>
+</li>
+<li><p>熊猫基地  早上去，熊猫下午休息</p>
+</li>
+<li><p>泸沽湖</p>
+</li>
+<li><p>乐山大佛</p>
+</li>
+<li><p>青城山 远</p>
+</li>
+<li><p>太古里</p>
+</li>
+</ul>
+<h1 id="南京-√"><a href="#南京-√" class="headerlink" title="南京 √"></a>南京 √</h1><h2 id="交通"><a href="#交通" class="headerlink" title="交通"></a>交通</h2><h3 id="保定-南京"><a href="#保定-南京" class="headerlink" title="保定-南京"></a>保定-南京</h3><ul>
 <li>保定-石家庄-南京<ol>
 <li>保定-石家庄</li>
-<li>石家庄-南京 k374 20:13 - 10:40</li>
+<li>石家庄-南京</li>
 </ol>
 </li>
 </ul>
 <h2 id="景点"><a href="#景点" class="headerlink" title="景点"></a>景点</h2><ul>
-<li>南京博物院 梧桐大道 音乐台 中山陵 </li>
-<li>秦淮河 夫子庙 老门东</li>
-<li>南京大屠杀纪念馆<br><img src="南京.png  "></img></li>
+<li>南京博物院 梧桐大道 音乐台 中山陵   √</li>
+<li>秦淮河 夫子庙 老门东  √</li>
+<li>南京大屠杀纪念馆 √<br><img src="南京.png  "></img></li>
 </ul>
-<h1 id="扬州"><a href="#扬州" class="headerlink" title="扬州"></a><del>扬州</del></h1><p><del>瘦西湖</del><br><del>个园</del></p>
-<p><del>扬州炒饭</del></p>
-<h1 id="镇江"><a href="#镇江" class="headerlink" title="镇江"></a><del>镇江</del></h1><p><del>北固楼 何处望神州，满眼风光北固楼</del><br><del>甘露寺 刘备招亲</del><br><del>西津渡 古街</del><br><del>金山寺 白娘子</del></p>
-<h1 id="常州"><a href="#常州" class="headerlink" title="常州"></a><del>常州</del></h1><h1 id="苏州"><a href="#苏州" class="headerlink" title="苏州"></a>苏州</h1><h2 id="交通-1"><a href="#交通-1" class="headerlink" title="交通"></a>交通</h2><h3 id="南京-苏州"><a href="#南京-苏州" class="headerlink" title="南京-苏州"></a>南京-苏州</h3><p>火车？</p>
-<h2 id="景点-1"><a href="#景点-1" class="headerlink" title="景点"></a>景点</h2><ul>
+<h1 id="扬州"><a href="#扬州" class="headerlink" title="扬州"></a>扬州</h1><ul>
+<li>瘦西湖</li>
+<li>个园</li>
+</ul>
+<h2 id="美食"><a href="#美食" class="headerlink" title="美食"></a>美食</h2><ul>
+<li>扬州炒饭</li>
+</ul>
+<h1 id="镇江"><a href="#镇江" class="headerlink" title="镇江"></a>镇江</h1><ul>
+<li>北固楼 何处望神州，满眼风光北固楼</li>
+<li>甘露寺 刘备招亲</li>
+<li>西津渡 古街</li>
+<li>金山寺 白娘子</li>
+</ul>
+<h1 id="常州"><a href="#常州" class="headerlink" title="常州"></a>常州</h1><h1 id="苏州-√"><a href="#苏州-√" class="headerlink" title="苏州 √"></a>苏州 √</h1><h2 id="交通-1"><a href="#交通-1" class="headerlink" title="交通"></a>交通</h2><h3 id="南京-苏州"><a href="#南京-苏州" class="headerlink" title="南京-苏州"></a>南京-苏州</h3><h2 id="景点-1"><a href="#景点-1" class="headerlink" title="景点"></a>景点</h2><ul>
 <li><p>苏州博物馆</p>
 </li>
-<li><p><del>拙政园</del></p>
+<li><p>拙政园 √</p>
 </li>
-<li><p>平江路</p>
+<li><p>平江路 √</p>
 </li>
 <li><p>双塔市集</p>
 </li>
-<li><p><del>山塘</del></p>
+<li><p>山塘 √</p>
 </li>
-<li><p><del>留园</del></p>
+<li><p>留园</p>
 </li>
-<li><p><del>寒山寺</del></p>
+<li><p>寒山寺</p>
 </li>
 </ul>
 <p><img src="苏州.png"></img></p>
-<h1 id="上海"><a href="#上海" class="headerlink" title="上海"></a><del>上海</del></h1><h1 id="嘉兴"><a href="#嘉兴" class="headerlink" title="嘉兴"></a>嘉兴</h1><h2 id="交通-2"><a href="#交通-2" class="headerlink" title="交通"></a>交通</h2><h3 id="苏州-嘉兴（西塘）"><a href="#苏州-嘉兴（西塘）" class="headerlink" title="苏州-嘉兴（西塘）"></a>苏州-嘉兴（西塘）</h3><ul>
-<li>汽车 2h46m</li>
+<h1 id="上海"><a href="#上海" class="headerlink" title="上海"></a>上海</h1><h1 id="嘉兴"><a href="#嘉兴" class="headerlink" title="嘉兴"></a>嘉兴</h1><h2 id="交通-2"><a href="#交通-2" class="headerlink" title="交通"></a>交通</h2><h3 id="苏州-嘉兴（西塘）"><a href="#苏州-嘉兴（西塘）" class="headerlink" title="苏州-嘉兴（西塘）"></a>苏州-嘉兴（西塘）</h3><ul>
+<li>汽车 </li>
 <li>火车 绕道上海太远</li>
 </ul>
 <h2 id="景点-2"><a href="#景点-2" class="headerlink" title="景点"></a>景点</h2><ul>
-<li>西塘 （8点前5点后免费） 、南浔（免费） <del>乌镇</del></li>
+<li>西塘 （8点前5点后免费） 、南浔（免费） 乌镇</li>
 </ul>
 <h1 id="杭州"><a href="#杭州" class="headerlink" title="杭州"></a>杭州</h1><h2 id="交通-3"><a href="#交通-3" class="headerlink" title="交通"></a>交通</h2><h3 id="嘉兴-西塘-杭州"><a href="#嘉兴-西塘-杭州" class="headerlink" title="嘉兴(西塘)-杭州"></a>嘉兴(西塘)-杭州</h3><p>西塘 - 嘉善站<br>嘉善 - 杭州 火车</p>
 <h2 id="景点-3"><a href="#景点-3" class="headerlink" title="景点"></a>景点</h2><ul>
 <li><p>西湖（龙翔桥地铁下车） 划船 （摇橹船，公交船）<br><img src="西湖.png"></img></p>
 </li>
-<li><p>南宋御街<br><del>灵隐寺</del></p>
+<li><p>南宋御街</p>
+</li>
+<li><p>灵隐寺</p>
 </li>
 </ul>
 <h1 id="绍兴"><a href="#绍兴" class="headerlink" title="绍兴"></a>绍兴</h1><h2 id="交通-4"><a href="#交通-4" class="headerlink" title="交通"></a>交通</h2><h3 id="杭州-绍兴"><a href="#杭州-绍兴" class="headerlink" title="杭州-绍兴"></a>杭州-绍兴</h3><p>火车&#x2F;汽车</p>
@@ -73,10 +107,10 @@
 <li>书圣故里</li>
 <li>鲁迅故里<br><img src="绍兴.png"></img></li>
 </ul>
-<h2 id="美食"><a href="#美食" class="headerlink" title="美食"></a>美食</h2><ul>
+<h2 id="美食-1"><a href="#美食-1" class="headerlink" title="美食"></a>美食</h2><ul>
 <li>黄酒棒冰</li>
 </ul>
-<h1 id="千岛湖"><a href="#千岛湖" class="headerlink" title="千岛湖"></a><del>千岛湖</del></h1><h1 id="黄山"><a href="#黄山" class="headerlink" title="黄山"></a>黄山</h1><h2 id="交通-5"><a href="#交通-5" class="headerlink" title="交通"></a>交通</h2><h3 id="绍兴-黄山"><a href="#绍兴-黄山" class="headerlink" title="绍兴-黄山"></a>绍兴-黄山</h3><p>绍兴北站 - 黄山北站 - 乘大巴 到景区</p>
+<h1 id="千岛湖"><a href="#千岛湖" class="headerlink" title="千岛湖"></a>千岛湖</h1><h1 id="黄山"><a href="#黄山" class="headerlink" title="黄山"></a>黄山</h1><h2 id="交通-5"><a href="#交通-5" class="headerlink" title="交通"></a>交通</h2><h3 id="绍兴-黄山"><a href="#绍兴-黄山" class="headerlink" title="绍兴-黄山"></a>绍兴-黄山</h3><p>绍兴北站 - 黄山北站 - 乘大巴 到景区</p>
 ]]></content>
       <tags>
         <tag>旅行</tag>
@@ -716,7 +750,20 @@ realpath是软连接，指向first文件夹
 
 <p>index模块先于autoindex模块执行，所以有时访问目录会返回目录下的index页面</p>
 <h2 id="autoindex"><a href="#autoindex" class="headerlink" title="autoindex"></a>autoindex</h2><p>可通过<code>--without-http_autoindex_module</code>禁用autoindex<br><img src="autoindex指令.png" /></p>
-]]></content>
+<h1 id="提升多个小文件性能的concat模块"><a href="#提升多个小文件性能的concat模块" class="headerlink" title="提升多个小文件性能的concat模块"></a>提升多个小文件性能的concat模块</h1><h1 id="access日志的详细用法"><a href="#access日志的详细用法" class="headerlink" title="access日志的详细用法"></a>access日志的详细用法</h1><h2 id="日志配置"><a href="#日志配置" class="headerlink" title="日志配置"></a>日志配置</h2><img src="配置日志文件路径.png">
+buffer 减少磁头旋转，减少寻址时间
+
+<h2 id="日志文件包含变量时的优化"><a href="#日志文件包含变量时的优化" class="headerlink" title="日志文件包含变量时的优化"></a>日志文件包含变量时的优化</h2><img src="日志文件包含变量时的优化.png">
+
+<h1 id="HTTP过滤模块的调用流程"><a href="#HTTP过滤模块的调用流程" class="headerlink" title="HTTP过滤模块的调用流程"></a>HTTP过滤模块的调用流程</h1><p>content模块之后，log模块之前</p>
+<h1 id="用过滤模块更改响应中的字符串：sub模块"><a href="#用过滤模块更改响应中的字符串：sub模块" class="headerlink" title="用过滤模块更改响应中的字符串：sub模块"></a>用过滤模块更改响应中的字符串：sub模块</h1><h1 id="用过滤模块在http响应的前后添加内容：addition模块"><a href="#用过滤模块在http响应的前后添加内容：addition模块" class="headerlink" title="用过滤模块在http响应的前后添加内容：addition模块"></a>用过滤模块在http响应的前后添加内容：addition模块</h1><h1 id="使用变量防盗链的referer模块"><a href="#使用变量防盗链的referer模块" class="headerlink" title="使用变量防盗链的referer模块"></a>使用变量防盗链的referer模块</h1><img src="referer模块指令.png">
+
+<img src="valid_referers指令.png">
+经过反向代理或防火墙等可能出现有referer头没有值的情况
+
+<img src="invalid_referer示例.png">
+
+<h1 id="使用变量实现防盗链功能实践：secure-link模块"><a href="#使用变量实现防盗链功能实践：secure-link模块" class="headerlink" title="使用变量实现防盗链功能实践：secure_link模块"></a>使用变量实现防盗链功能实践：secure_link模块</h1><h1 id="为复杂的业务生成新的变量：map模块"><a href="#为复杂的业务生成新的变量：map模块" class="headerlink" title="为复杂的业务生成新的变量：map模块"></a>为复杂的业务生成新的变量：map模块</h1><h1 id="通过变量指定少量用户实现AB测试：split-client模块"><a href="#通过变量指定少量用户实现AB测试：split-client模块" class="headerlink" title="通过变量指定少量用户实现AB测试：split_client模块"></a>通过变量指定少量用户实现AB测试：split_client模块</h1><h1 id="根据IP地址范围的匹配生成新变量：geo模块"><a href="#根据IP地址范围的匹配生成新变量：geo模块" class="headerlink" title="根据IP地址范围的匹配生成新变量：geo模块"></a>根据IP地址范围的匹配生成新变量：geo模块</h1>]]></content>
       <tags>
         <tag>Nginx</tag>
       </tags>
@@ -855,9 +902,9 @@ realpath是软连接，指向first文件夹
 <ol>
 <li>解决什么问题</li>
 <li>应用场景</li>
-<li>如何权衡，恰当应用于项目</li>
+<li>如何权衡，恰当应用于项目<span id="more"></span>
+高质量代码长什么样？</li>
 </ol>
-<p>高质量代码长什么样？</p>
 <p>为什么用这种设计原则、思想或模式？解决什么编程问题？有哪些应用场景？如何权衡、恰当的在项目中应用？</p>
 <p>操作系统、组成原理、编译原理等计算机基础知识在开发中用不上，很难转换成开发“生产力”。但是，它能潜移默化地，间接地提高技术理解。</p>
 <p>为什么学习设计模式？</p>
@@ -1229,20 +1276,6 @@ realpath是软连接，指向first文件夹
       </tags>
   </entry>
   <entry>
-    <title>递归</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/1-3%E9%80%92%E5%BD%92/</url>
-    <content><![CDATA[<p>直接或间接调用自身的方法</p>
-<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ul>
-<li>结束条件</li>
-<li>递归体</li>
-</ul>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
-<li>栈溢出</li>
-<li>重复计算</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>运算符</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/1-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
     <content><![CDATA[<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
@@ -1254,6 +1287,20 @@ realpath是软连接，指向first文件夹
 <li>条件运算符 ？：</li>
 </ul>
 <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>类型转换的方向<br>低——————————————————&gt;高<br>  byte —&gt; short,char—&gt;int —&gt;long—&gt;float —&gt;double</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>递归</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/1-3%E9%80%92%E5%BD%92/</url>
+    <content><![CDATA[<p>直接或间接调用自身的方法</p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ul>
+<li>结束条件</li>
+<li>递归体</li>
+</ul>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li>栈溢出</li>
+<li>重复计算</li>
+</ul>
 ]]></content>
   </entry>
   <entry>
@@ -1474,6 +1521,46 @@ invokeAll缺点：若第一个任务耗时时很多，需要等待<br>ExecutorCo
 ]]></content>
   </entry>
   <entry>
+    <title>6-1接口</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-1%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<ul>
+<li>允许接口中定义静态方法</li>
+<li>允许接口的方法定义默认实现，用default标记<ol>
+<li>解决接口扩展问题</li>
+<li>定义接口方法时提供空实现，在实现多方法的接口时，只需实现自己关注的方法，可以不实现有默认实现的方法</li>
+</ol>
+</li>
+</ul>
+<h3 id="为什么不将-Comparable-直接设计成抽象类"><a href="#为什么不将-Comparable-直接设计成抽象类" class="headerlink" title="为什么不将 Comparable 直接设计成抽象类"></a>为什么不将 Comparable 直接设计成抽象类</h3><p>因java不支持多继承，而接口可以实现多个。</p>
+<h3 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h3><ul>
+<li>超类优先</li>
+<li>接口冲突，指定实现</li>
+</ul>
+<pre><code>interface intf1&#123;
+    default String getName()&#123;
+        return &quot;PersonName&quot;;
+    &#125;
+&#125;
+
+interface intf2&#123;
+   default String getName()&#123;
+        return &quot;Named&quot;;
+    &#125;
+&#125;
+
+class c1 implements intf1,intf2&#123;
+    @Override
+    public String getName() &#123;
+        return intf1.super.getName();//指定intf1的默认实现
+    &#125;
+&#125;```
+</code></pre>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6-3lambda表达式</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<h3 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h3><p>对于只有一个抽象方法的接口， 需要这种接口的对象时，就可以提供一个 lambda表达式。这种接口称为函数式接口 （ functional interface )。</p>
@@ -1514,46 +1601,6 @@ invokeAll缺点：若第一个任务耗时时很多，需要等待<br>ExecutorCo
 <h3 id="再谈Comparator"><a href="#再谈Comparator" class="headerlink" title="再谈Comparator"></a>再谈Comparator</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Arrays.sort(arr, Comparator.comparing(Person::getName, Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName, Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
 <p>排序规则：<br>根据Name长度倒序，长度大在前<br>根据lName长度倒序，长度大在前，为空在最后。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>6-1接口</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-1%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<ul>
-<li>允许接口中定义静态方法</li>
-<li>允许接口的方法定义默认实现，用default标记<ol>
-<li>解决接口扩展问题</li>
-<li>定义接口方法时提供空实现，在实现多方法的接口时，只需实现自己关注的方法，可以不实现有默认实现的方法</li>
-</ol>
-</li>
-</ul>
-<h3 id="为什么不将-Comparable-直接设计成抽象类"><a href="#为什么不将-Comparable-直接设计成抽象类" class="headerlink" title="为什么不将 Comparable 直接设计成抽象类"></a>为什么不将 Comparable 直接设计成抽象类</h3><p>因java不支持多继承，而接口可以实现多个。</p>
-<h3 id="解决默认方法冲突"><a href="#解决默认方法冲突" class="headerlink" title="解决默认方法冲突"></a>解决默认方法冲突</h3><ul>
-<li>超类优先</li>
-<li>接口冲突，指定实现</li>
-</ul>
-<pre><code>interface intf1&#123;
-    default String getName()&#123;
-        return &quot;PersonName&quot;;
-    &#125;
-&#125;
-
-interface intf2&#123;
-   default String getName()&#123;
-        return &quot;Named&quot;;
-    &#125;
-&#125;
-
-class c1 implements intf1,intf2&#123;
-    @Override
-    public String getName() &#123;
-        return intf1.super.getName();//指定intf1的默认实现
-    &#125;
-&#125;```
-</code></pre>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-      </tags>
   </entry>
   <entry>
     <title>6-4内部类</title>
@@ -1663,70 +1710,33 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
-    <title>Stream库</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/</url>
-    <content><![CDATA[<p>使用步骤</p>
-<ul>
-<li>创建 </li>
-<li>转换为其他流的操作</li>
-<li>终止操作，产生结果（执行之前的惰性操作）<span id="more"></span>
- {todo} ???<br> <code>list.stream().parallel()</code>、 <code>list.parallelStream()</code>啥区别？</li>
-</ul>
-<h1 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h1><p>Stream.of() 创建给定值的流<br>Stream.empty() 创建不包含元素的流<br>Stream.generate() 调用给定函数创建无限流<br>Stream.iterate() 根据种子和函数创建无限流<br>Pattern.compile(“”).splitAsStream() 创建由正则表达式界定的流<br>Arrays.stream(arr, 0, 1) 创建包含数组指定部分的流<br>Files.line() 创建包含指定文件中行的流</p>
-<h1 id="filter、map和flatMap"><a href="#filter、map和flatMap" class="headerlink" title="filter、map和flatMap"></a>filter、map和flatMap</h1><p>filter 创建流，元素满足断言条件<br>map 创建流，将所有元素应用给定函数<br>flatMap  创建流，将指定函数应用于当前流中所有元素所产生的结果连接到一起而获得，（这里的每个结果都是一个流），如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Stream.of(&quot;1&quot;).flatMap(x -&gt; &#123;</span><br><span class="line">            return Stream.of(x, x);</span><br><span class="line">        &#125;).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
-<h1 id="抽取子流和连接流"><a href="#抽取子流和连接流" class="headerlink" title="抽取子流和连接流"></a>抽取子流和连接流</h1><p><code>stream.limit</code><br><code>stream.skip</code><br><code>Stream.concat</code> 连接两个流</p>
-<h1 id="其他的流转换"><a href="#其他的流转换" class="headerlink" title="其他的流转换"></a>其他的流转换</h1><p><code>distinct</code><br><code>sorted</code><br><code>peek(Consumer)</code> 获取每个元素时应用consumer，用于调试时可调用断点方法;count不会触发peek。</p>
-<h1 id="简单约简"><a href="#简单约简" class="headerlink" title="简单约简"></a>简单约简</h1><p>终结操作：</p>
-<ul>
-<li><code>min</code></li>
-<li><code>max</code></li>
-<li><code>findFirst</code> 与filter配合使用</li>
-<li><code>findAny</code> 并行流与filter配合使用</li>
-<li><code>anyMatch</code> 是否存在匹配，存在则返回true</li>
-<li><code>allMatch</code> 全部匹配返回true</li>
-<li><code>noneMatch</code> 没有匹配返回true</li>
-</ul>
-<h1 id="Optinonal类型"><a href="#Optinonal类型" class="headerlink" title="Optinonal类型"></a>Optinonal类型</h1><p>一种对象包装器<br>orElse(defaultVal)  如空提供默认值<br>orElseGet(Supplier)   如空执行表达式获取默认值<br>orElseThrow(Exception)   如空抛出异常</p>
-<p>ifPresent(Consumer)<br>map(Function)</p>
-<h2 id="不适合使用Optional值的方式"><a href="#不适合使用Optional值的方式" class="headerlink" title="不适合使用Optional值的方式"></a>不适合使用Optional值的方式</h2><ol>
-<li><code>optionalVal.get()</code> 在值不存在时抛出异常</li>
-<li>&#96;&#96;optionalVal.get().isPresent().get().someMethod();<code> 没有以下方式容易处理</code>if(value !&#x3D;null ) value.someMethod()&#96;</li>
-</ol>
-<h2 id="创建Optional值"><a href="#创建Optional值" class="headerlink" title="创建Optional值"></a>创建Optional值</h2><p><code>Optional.of(val)</code><br><code>Optional.empty()</code><br><code>Optional.ofNullable(val)</code> 若val为空则返回 <code>Optional.empty()</code></p>
-<h2 id="flatMap构建Optional值的函数"><a href="#flatMap构建Optional值的函数" class="headerlink" title="flatMap构建Optional值的函数"></a>flatMap构建Optional值的函数</h2><p>方法f返回值是Optional<T><br>T对象有返回值是Optional<T>的方法g<br>使用如下方法连续调用：<code>s.f().flatMap(T::g)</code></p>
-<h1 id="收集结果"><a href="#收集结果" class="headerlink" title="收集结果"></a>收集结果</h1><h2 id="遍历："><a href="#遍历：" class="headerlink" title="遍历："></a>遍历：</h2><ul>
-<li>foreach 在并行流上以任意顺序遍历元素</li>
-<li>foreachOrdered 按流中的顺序处理元素，但会丧失并行处理的部分甚至全部优势</li>
-</ul>
-<h2 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h2><p><code>toArray()</code> 返回<code>Object[]</code><br><code>ToArray(String::new)</code> 返回String数组.其他类型类似</p>
-<h2 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h2><p><code>stream.collect(Collectors.toList())</code><br><code>stream.collect(Collectors.toSet())</code><br><code>stream.collect(Collectors.toCollection(TreeSet::new))</code> &#x2F;&#x2F;指定结果类型<code>TreeSet</code><br><code>stream.collect(Collectors.join())</code><br><code>stream.collect(Collectors.join(&quot;,&quot;))</code></p>
-<p>统计</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IntSummaryStatistics statistics = Arrays.asList(&quot;1&quot;, &quot;132&quot;, &quot;333&quot;, &quot;434&quot;).stream().collect(Collectors.summarizingInt(String::length));</span><br><span class="line">System.out.println(&quot;average:&quot; + Statistics.getAverage());</span><br><span class="line">System.out.println(Statistics.getMax());</span><br></pre></td></tr></table></figure>
+    <title>IO</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/IO/</url>
+    <content><![CDATA[<h1 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h1><h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String fileName = &quot;d:&quot; + File.separator + &quot;b.txt&quot;;</span><br><span class="line">File f1 = new File(fileName);</span><br><span class="line">File f2 = new File(fileName);</span><br><span class="line">System.out.println(f1 == f2); // false  比较引用</span><br><span class="line">System.out.println(f1.equals(f2)); // true 比较文件路径</span><br></pre></td></tr></table></figure>
+<h1 id="InputStream、OutputStream、Reader、Writer"><a href="#InputStream、OutputStream、Reader、Writer" class="headerlink" title="InputStream、OutputStream、Reader、Writer"></a>InputStream、OutputStream、Reader、Writer</h1><p>字节流：InputStream、OutputStream<br>字符流（处理文本）：Reader、Writer</p>
+<p>节点流：可单独处理数据<br>处理流：依赖其他流处理数据</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文本文件a.txt内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12</span><br><span class="line">34</span><br></pre></td></tr></table></figure>
+<p>读取a.txt内容时每次读取三个字符输出不正确</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">char[] buffer = new char[3];</span><br><span class="line">int len;</span><br><span class="line">while ((len = fileReader.read(buffer, 0, buffer.length)) &gt; -1) &#123;</span><br><span class="line">    System.out.println(new String(buffer, 0, len) + &quot;:&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="InputStreamReader、OutputStreamWriter"><a href="#InputStreamReader、OutputStreamWriter" class="headerlink" title="InputStreamReader、OutputStreamWriter"></a>InputStreamReader、OutputStreamWriter</h1><p>转换流：转换字节流和字符流</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void IOStreamRW() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;a.txt&quot;;</span><br><span class="line">        String newFileName = &quot;d:&quot; + File.separator + &quot;new.txt&quot;;</span><br><span class="line">        FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">        //InputStreamReader isr = new InputStreamReader(fis);</span><br><span class="line">        InputStreamReader isr = new InputStreamReader(fis, &quot;GBK&quot;);//默认utf-8  windows记事本显示ANSI表示使用系统编码（我的电脑是GBK）</span><br><span class="line">        BufferedReader br = new BufferedReader(isr);</span><br><span class="line"></span><br><span class="line">        FileOutputStream fos = new FileOutputStream(newFileName);</span><br><span class="line">        OutputStreamWriter osw = new OutputStreamWriter(fos, &quot;utf-8&quot;);</span><br><span class="line">        BufferedWriter bw = new BufferedWriter(osw);</span><br><span class="line"></span><br><span class="line">        int r;</span><br><span class="line">        char[] chars = new char[1024];</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 1</span><br><span class="line">         */</span><br><span class="line">        //while ((r = isr.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">        //    osw.write(chars, 0, r);</span><br><span class="line">        //&#125;</span><br><span class="line">        //osw.close();</span><br><span class="line">        //isr.close();</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 2 bufferedReader、bufferedWriter</span><br><span class="line">         */</span><br><span class="line">        while ((r = br.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">            bw.write(chars, 0, r);</span><br><span class="line">        &#125;</span><br><span class="line">        bw.close();</span><br><span class="line">        br.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="收集结果到映射表"><a href="#收集结果到映射表" class="headerlink" title="收集结果到映射表"></a>收集结果到映射表</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Person person = new Person(&quot;1&quot;, &quot;11&quot;);</span><br><span class="line">        Person person2 = new Person(&quot;2&quot;, &quot;22&quot;);</span><br><span class="line">        Person person3 = new Person(&quot;3&quot;, &quot;33&quot;);</span><br><span class="line">        Person person23 = new Person(&quot;23&quot;, &quot;23&quot;);</span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Person::getlName)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity())).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person, person2, person3, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity(), (existingVal, newVal) -&gt; &#123;</span><br><span class="line">                    return existingVal;</span><br><span class="line">                &#125;)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Collections::singleton, (a, b) -&gt; &#123;</span><br><span class="line">                    Set&lt;Person&gt; set = new HashSet&lt;&gt;(a);</span><br><span class="line">                    set.addAll(b);</span><br><span class="line">                    return set;</span><br><span class="line">                &#125;, TreeMap::new)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure>
-<h1 id="群组和分区"><a href="#群组和分区" class="headerlink" title="群组和分区"></a>群组和分区</h1><ul>
-<li><code>Collectors.groupingBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName));</span><br><span class="line">map.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></li>
-<li><code>Collectors.partitionBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.partitioningBy(x -&gt; x.getName().length() &gt; 1));</span><br><span class="line">collect.get(true).forEach(System.out::println);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="下游收集器"><a href="#下游收集器" class="headerlink" title="下游收集器"></a>下游收集器</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Long&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));</span><br><span class="line">        collect.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Integer&gt; collect12 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(Person::getAge)));</span><br><span class="line">        collect12.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        person3_.setAge(10);</span><br><span class="line">        Map&lt;String, Optional&lt;Person&gt;&gt; collect13 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.maxBy(Comparator.comparingInt(Person::getAge))));</span><br><span class="line">        collect13.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Optional&lt;String&gt;&gt; collect14 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName,</span><br><span class="line">                                Collectors.maxBy(Comparator.comparing(String::length)))));</span><br><span class="line"></span><br><span class="line">        collect14.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect15 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.toSet())));</span><br><span class="line">        collect15.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect16 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(x -&gt; &#123;</span><br><span class="line">                            return x.getlName() + &quot;-x&quot;;</span><br><span class="line">                        &#125;, Collectors.toSet())));</span><br><span class="line">        collect16.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">         Map&lt;String, IntSummaryStatistics&gt; collect17 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summarizingInt(Person::getAge)));</span><br><span class="line">        collect17.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y.getAverage() + &quot;,&quot; + y.getSum());</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; collect18 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.reducing(&quot;###&quot;,</span><br><span class="line">                                Person::getlName,</span><br><span class="line">                                (sum, item) -&gt; &#123;</span><br><span class="line">//                                    System.out.println(&quot;===s:&quot; + s + &quot;  t:&quot; + t);</span><br><span class="line">                                    return sum.length() == 0 ? item : sum + &quot;,&quot; + item;</span><br><span class="line">                                &#125;)));</span><br><span class="line">        collect18.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">Map&lt;String, String&gt; collect19 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.joining(&quot;;&quot;))));</span><br><span class="line">        collect19.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="DataInputStream、DataOutputStream"><a href="#DataInputStream、DataOutputStream" class="headerlink" title="DataInputStream、DataOutputStream"></a>DataInputStream、DataOutputStream</h1><p>数据流：处理基本数据类型和字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void DataIOputStream() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;s.txt&quot;;</span><br><span class="line">        File file = new File(fileName);</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(file);</span><br><span class="line">        DataOutputStream dos = new DataOutputStream(fos);</span><br><span class="line">        dos.writeUTF(&quot;你好哈哈&quot;);</span><br><span class="line">        dos.writeInt(10);</span><br><span class="line">        dos.writeBoolean(true);</span><br><span class="line">        dos.writeDouble(1.98);</span><br><span class="line">        dos.writeUTF(&quot;你好嘻嘻&quot;);</span><br><span class="line"></span><br><span class="line">        FileInputStream fis = new FileInputStream(file);</span><br><span class="line">        DataInputStream dis = new DataInputStream(fis);</span><br><span class="line">        //按顺序读取</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">        System.out.println(dis.readInt());</span><br><span class="line">        System.out.println(dis.readBoolean());</span><br><span class="line">        System.out.println(dis.readDouble());</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="约简操作"><a href="#约简操作" class="headerlink" title="约简操作"></a>约简操作</h1><p><code>reduce</code><br>{todo}???</p>
-<h1 id="基本类型流"><a href="#基本类型流" class="headerlink" title="基本类型流"></a>基本类型流</h1><p><code>IntStream</code>  存储<code>short char byte boolean</code><br><code>LongStream</code><br><code>DoubleStream</code> 存储 <code>double float</code><br>不使用包装器(区别<code>Stream&lt;Integer&gt;</code>等)</p>
-<p>转换为对象流 <code>IntStream.range(0,5).boxed()</code> </p>
-<p>相关库<br>Random.ints()<br>Random.doubles()<br>Random.longs()</p>
-<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1><p>调用<code>unordered</code>方法表示对于排序不感兴趣，可提高<code>distinct</code>性能（相同值任选其一，不必排序）<br>也可提高limit的性能（实际实验室并没有提高，反而降低了）{todo}???</p>
-<p><code>Collectors.groupByConcurrent</code>使用共享的并发映射表，值的顺序不会与流中的顺序相同。<br>如下：</p>
-<p>并行流正常工作的条件：</p>
-<ul>
-<li>数据都在内存中。等待数据加载是低效的</li>
-<li>流应该被高效分成若干个字部分。数组或平衡二叉树支撑的流可以很好得工作，但Stream.Iterate返回的结果不行</li>
-<li>流操作的工作量应有较大规模。工作负载不大，并行流无异议。</li>
-<li>流操作不应阻塞<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static List&lt;String&gt; getSomeWords() &#123;</span><br><span class="line">        Character[] characters = new Character[]&#123;&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;, &#x27;i&#x27;, &#x27;j&#x27;, &#x27;k&#x27;, &#x27;l&#x27;, &#x27;m&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;p&#x27;, &#x27;q&#x27;, &#x27;r&#x27;, &#x27;s&#x27;, &#x27;t&#x27;, &#x27;u&#x27;, &#x27;v&#x27;, &#x27;w&#x27;, &#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;&#125;;</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        int[] wordsLengthArr = r.ints(100, 0, 20).toArray();</span><br><span class="line">        int wordsCount = wordsLengthArr.length;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; words = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; wordsCount; i++) &#123;</span><br><span class="line">            int wordLength = wordsLengthArr[i];</span><br><span class="line">            int[] wordCharRandom = r.ints(wordLength, 0, 25).toArray();//单词的每个字母下标</span><br><span class="line">            Character[] word = new Character[wordLength];</span><br><span class="line"></span><br><span class="line">            for (int j = 0; j &lt; wordLength; j++) &#123;</span><br><span class="line">                word[j] = characters[wordCharRandom[j]];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            String s = Arrays.stream(word).map(String::valueOf).collect(Collectors.joining());</span><br><span class="line">            words.add(s);</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">        return words;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));//每次结果相同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));//每次结果不同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));</span><br></pre></td></tr></table></figure></li>
-</ul>
+<h1 id="ObjectOutputStream、ObjectInputStream"><a href="#ObjectOutputStream、ObjectInputStream" class="headerlink" title="ObjectOutputStream、ObjectInputStream"></a>ObjectOutputStream、ObjectInputStream</h1><p>对象流做序列化反序列化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public  static void ObjectIOputStream() throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;ois.txt&quot;;</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));</span><br><span class="line">        oos.writeObject(new Person(1, &quot;vvf&quot;));</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(ois.readObject());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>声明serialVersionUID 说明版本兼容性问题（默认会自动生成，修改类时会发生变化）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person implements Serializable&#123;</span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 643382323274886977L;</span><br><span class="line"></span><br><span class="line">    public Person(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int age;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //@Override</span><br><span class="line">    //public String toString() &#123;</span><br><span class="line">    //    return &quot;Person&#123;&quot; +</span><br><span class="line">    //            &quot;age=&quot; + age +</span><br><span class="line">    //            &quot;, name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">    //            &#x27;&#125;&#x27;;</span><br><span class="line">    //&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>transient</code> 修饰不可序列化的属性<br>静态属性也不会被序列化</p>
+<h1 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h1><p>分段读取文件</p>
 ]]></content>
       <tags>
-        <tag>Stream</tag>
+        <tag>JAVA</tag>
+        <tag>IO流</tag>
       </tags>
   </entry>
   <entry>
@@ -1870,6 +1880,73 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
+    <title>Stream库</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/</url>
+    <content><![CDATA[<p>使用步骤</p>
+<ul>
+<li>创建 </li>
+<li>转换为其他流的操作</li>
+<li>终止操作，产生结果（执行之前的惰性操作）<span id="more"></span>
+ {todo} ???<br> <code>list.stream().parallel()</code>、 <code>list.parallelStream()</code>啥区别？</li>
+</ul>
+<h1 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h1><p>Stream.of() 创建给定值的流<br>Stream.empty() 创建不包含元素的流<br>Stream.generate() 调用给定函数创建无限流<br>Stream.iterate() 根据种子和函数创建无限流<br>Pattern.compile(“”).splitAsStream() 创建由正则表达式界定的流<br>Arrays.stream(arr, 0, 1) 创建包含数组指定部分的流<br>Files.line() 创建包含指定文件中行的流</p>
+<h1 id="filter、map和flatMap"><a href="#filter、map和flatMap" class="headerlink" title="filter、map和flatMap"></a>filter、map和flatMap</h1><p>filter 创建流，元素满足断言条件<br>map 创建流，将所有元素应用给定函数<br>flatMap  创建流，将指定函数应用于当前流中所有元素所产生的结果连接到一起而获得，（这里的每个结果都是一个流），如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Stream.of(&quot;1&quot;).flatMap(x -&gt; &#123;</span><br><span class="line">            return Stream.of(x, x);</span><br><span class="line">        &#125;).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<h1 id="抽取子流和连接流"><a href="#抽取子流和连接流" class="headerlink" title="抽取子流和连接流"></a>抽取子流和连接流</h1><p><code>stream.limit</code><br><code>stream.skip</code><br><code>Stream.concat</code> 连接两个流</p>
+<h1 id="其他的流转换"><a href="#其他的流转换" class="headerlink" title="其他的流转换"></a>其他的流转换</h1><p><code>distinct</code><br><code>sorted</code><br><code>peek(Consumer)</code> 获取每个元素时应用consumer，用于调试时可调用断点方法;count不会触发peek。</p>
+<h1 id="简单约简"><a href="#简单约简" class="headerlink" title="简单约简"></a>简单约简</h1><p>终结操作：</p>
+<ul>
+<li><code>min</code></li>
+<li><code>max</code></li>
+<li><code>findFirst</code> 与filter配合使用</li>
+<li><code>findAny</code> 并行流与filter配合使用</li>
+<li><code>anyMatch</code> 是否存在匹配，存在则返回true</li>
+<li><code>allMatch</code> 全部匹配返回true</li>
+<li><code>noneMatch</code> 没有匹配返回true</li>
+</ul>
+<h1 id="Optinonal类型"><a href="#Optinonal类型" class="headerlink" title="Optinonal类型"></a>Optinonal类型</h1><p>一种对象包装器<br>orElse(defaultVal)  如空提供默认值<br>orElseGet(Supplier)   如空执行表达式获取默认值<br>orElseThrow(Exception)   如空抛出异常</p>
+<p>ifPresent(Consumer)<br>map(Function)</p>
+<h2 id="不适合使用Optional值的方式"><a href="#不适合使用Optional值的方式" class="headerlink" title="不适合使用Optional值的方式"></a>不适合使用Optional值的方式</h2><ol>
+<li><code>optionalVal.get()</code> 在值不存在时抛出异常</li>
+<li>&#96;&#96;optionalVal.get().isPresent().get().someMethod();<code> 没有以下方式容易处理</code>if(value !&#x3D;null ) value.someMethod()&#96;</li>
+</ol>
+<h2 id="创建Optional值"><a href="#创建Optional值" class="headerlink" title="创建Optional值"></a>创建Optional值</h2><p><code>Optional.of(val)</code><br><code>Optional.empty()</code><br><code>Optional.ofNullable(val)</code> 若val为空则返回 <code>Optional.empty()</code></p>
+<h2 id="flatMap构建Optional值的函数"><a href="#flatMap构建Optional值的函数" class="headerlink" title="flatMap构建Optional值的函数"></a>flatMap构建Optional值的函数</h2><p>方法f返回值是Optional<T><br>T对象有返回值是Optional<T>的方法g<br>使用如下方法连续调用：<code>s.f().flatMap(T::g)</code></p>
+<h1 id="收集结果"><a href="#收集结果" class="headerlink" title="收集结果"></a>收集结果</h1><h2 id="遍历："><a href="#遍历：" class="headerlink" title="遍历："></a>遍历：</h2><ul>
+<li>foreach 在并行流上以任意顺序遍历元素</li>
+<li>foreachOrdered 按流中的顺序处理元素，但会丧失并行处理的部分甚至全部优势</li>
+</ul>
+<h2 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h2><p><code>toArray()</code> 返回<code>Object[]</code><br><code>ToArray(String::new)</code> 返回String数组.其他类型类似</p>
+<h2 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h2><p><code>stream.collect(Collectors.toList())</code><br><code>stream.collect(Collectors.toSet())</code><br><code>stream.collect(Collectors.toCollection(TreeSet::new))</code> &#x2F;&#x2F;指定结果类型<code>TreeSet</code><br><code>stream.collect(Collectors.join())</code><br><code>stream.collect(Collectors.join(&quot;,&quot;))</code></p>
+<p>统计</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IntSummaryStatistics statistics = Arrays.asList(&quot;1&quot;, &quot;132&quot;, &quot;333&quot;, &quot;434&quot;).stream().collect(Collectors.summarizingInt(String::length));</span><br><span class="line">System.out.println(&quot;average:&quot; + Statistics.getAverage());</span><br><span class="line">System.out.println(Statistics.getMax());</span><br></pre></td></tr></table></figure>
+
+<h1 id="收集结果到映射表"><a href="#收集结果到映射表" class="headerlink" title="收集结果到映射表"></a>收集结果到映射表</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Person person = new Person(&quot;1&quot;, &quot;11&quot;);</span><br><span class="line">        Person person2 = new Person(&quot;2&quot;, &quot;22&quot;);</span><br><span class="line">        Person person3 = new Person(&quot;3&quot;, &quot;33&quot;);</span><br><span class="line">        Person person23 = new Person(&quot;23&quot;, &quot;23&quot;);</span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Person::getlName)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person2, person, person3).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity())).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person, person2, person3, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Function.identity(), (existingVal, newVal) -&gt; &#123;</span><br><span class="line">                    return existingVal;</span><br><span class="line">                &#125;)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">        Arrays.asList(person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.toMap(Person::getName, Collections::singleton, (a, b) -&gt; &#123;</span><br><span class="line">                    Set&lt;Person&gt; set = new HashSet&lt;&gt;(a);</span><br><span class="line">                    set.addAll(b);</span><br><span class="line">                    return set;</span><br><span class="line">                &#125;, TreeMap::new)).forEach((x, y) -&gt; &#123;</span><br><span class="line">                    System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="群组和分区"><a href="#群组和分区" class="headerlink" title="群组和分区"></a>群组和分区</h1><ul>
+<li><code>Collectors.groupingBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName));</span><br><span class="line">map.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></li>
+<li><code>Collectors.partitionBy</code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.partitioningBy(x -&gt; x.getName().length() &gt; 1));</span><br><span class="line">collect.get(true).forEach(System.out::println);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="下游收集器"><a href="#下游收集器" class="headerlink" title="下游收集器"></a>下游收集器</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Long&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));</span><br><span class="line">        collect.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Integer&gt; collect12 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(Person::getAge)));</span><br><span class="line">        collect12.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        person3_.setAge(10);</span><br><span class="line">        Map&lt;String, Optional&lt;Person&gt;&gt; collect13 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.maxBy(Comparator.comparingInt(Person::getAge))));</span><br><span class="line">        collect13.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Optional&lt;String&gt;&gt; collect14 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName,</span><br><span class="line">                                Collectors.maxBy(Comparator.comparing(String::length)))));</span><br><span class="line"></span><br><span class="line">        collect14.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect15 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.toSet())));</span><br><span class="line">        collect15.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Set&lt;String&gt;&gt; collect16 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(x -&gt; &#123;</span><br><span class="line">                            return x.getlName() + &quot;-x&quot;;</span><br><span class="line">                        &#125;, Collectors.toSet())));</span><br><span class="line">        collect16.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">         Map&lt;String, IntSummaryStatistics&gt; collect17 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName, Collectors.summarizingInt(Person::getAge)));</span><br><span class="line">        collect17.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(x + &quot;:&quot; + y.getAverage() + &quot;,&quot; + y.getSum());</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; collect18 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.reducing(&quot;###&quot;,</span><br><span class="line">                                Person::getlName,</span><br><span class="line">                                (sum, item) -&gt; &#123;</span><br><span class="line">//                                    System.out.println(&quot;===s:&quot; + s + &quot;  t:&quot; + t);</span><br><span class="line">                                    return sum.length() == 0 ? item : sum + &quot;,&quot; + item;</span><br><span class="line">                                &#125;)));</span><br><span class="line">        collect18.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">Map&lt;String, String&gt; collect19 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Person::getName,</span><br><span class="line">                        Collectors.mapping(Person::getlName, Collectors.joining(&quot;;&quot;))));</span><br><span class="line">        collect19.forEach((x, y) -&gt; &#123;</span><br><span class="line">            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="约简操作"><a href="#约简操作" class="headerlink" title="约简操作"></a>约简操作</h1><p><code>reduce</code><br>{todo}???</p>
+<h1 id="基本类型流"><a href="#基本类型流" class="headerlink" title="基本类型流"></a>基本类型流</h1><p><code>IntStream</code>  存储<code>short char byte boolean</code><br><code>LongStream</code><br><code>DoubleStream</code> 存储 <code>double float</code><br>不使用包装器(区别<code>Stream&lt;Integer&gt;</code>等)</p>
+<p>转换为对象流 <code>IntStream.range(0,5).boxed()</code> </p>
+<p>相关库<br>Random.ints()<br>Random.doubles()<br>Random.longs()</p>
+<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1><p>调用<code>unordered</code>方法表示对于排序不感兴趣，可提高<code>distinct</code>性能（相同值任选其一，不必排序）<br>也可提高limit的性能（实际实验室并没有提高，反而降低了）{todo}???</p>
+<p><code>Collectors.groupByConcurrent</code>使用共享的并发映射表，值的顺序不会与流中的顺序相同。<br>如下：</p>
+<p>并行流正常工作的条件：</p>
+<ul>
+<li>数据都在内存中。等待数据加载是低效的</li>
+<li>流应该被高效分成若干个字部分。数组或平衡二叉树支撑的流可以很好得工作，但Stream.Iterate返回的结果不行</li>
+<li>流操作的工作量应有较大规模。工作负载不大，并行流无异议。</li>
+<li>流操作不应阻塞<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static List&lt;String&gt; getSomeWords() &#123;</span><br><span class="line">        Character[] characters = new Character[]&#123;&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;, &#x27;h&#x27;, &#x27;i&#x27;, &#x27;j&#x27;, &#x27;k&#x27;, &#x27;l&#x27;, &#x27;m&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;p&#x27;, &#x27;q&#x27;, &#x27;r&#x27;, &#x27;s&#x27;, &#x27;t&#x27;, &#x27;u&#x27;, &#x27;v&#x27;, &#x27;w&#x27;, &#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;&#125;;</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        int[] wordsLengthArr = r.ints(100, 0, 20).toArray();</span><br><span class="line">        int wordsCount = wordsLengthArr.length;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; words = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; wordsCount; i++) &#123;</span><br><span class="line">            int wordLength = wordsLengthArr[i];</span><br><span class="line">            int[] wordCharRandom = r.ints(wordLength, 0, 25).toArray();//单词的每个字母下标</span><br><span class="line">            Character[] word = new Character[wordLength];</span><br><span class="line"></span><br><span class="line">            for (int j = 0; j &lt; wordLength; j++) &#123;</span><br><span class="line">                word[j] = characters[wordCharRandom[j]];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            String s = Arrays.stream(word).map(String::valueOf).collect(Collectors.joining());</span><br><span class="line">            words.add(s);</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">        return words;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));//每次结果相同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));//每次结果不同</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));</span><br><span class="line">        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Stream</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>其他</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/%E5%85%B6%E4%BB%96/</url>
     <content><![CDATA[<h5 id="System-exit-n-n-的值对程序运行的作用"><a href="#System-exit-n-n-的值对程序运行的作用" class="headerlink" title="System.exit(n)n 的值对程序运行的作用"></a>System.exit(n)n 的值对程序运行的作用</h5><p>退出标识，根据不同标识可触发不同操作</p>
@@ -1977,6 +2054,28 @@ class c1 implements intf1,intf2&#123;
 ]]></content>
       <tags>
         <tag>枚举</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql</title>
+    <url>/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/mysql/</url>
+    <content><![CDATA[<h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><ol>
+<li>开源</li>
+<li>跨平台</li>
+<li>轻量级</li>
+<li>成本低</li>
+</ol>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1>]]></content>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>synchronizied</title>
+    <url>/JAVA/m/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91/synchronized/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>synchronizied</tag>
       </tags>
   </entry>
 </search>
