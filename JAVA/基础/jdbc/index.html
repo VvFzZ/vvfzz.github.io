@@ -140,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-24 15:37:03" itemprop="dateModified" datetime="2024-06-24T15:37:03+08:00">2024-06-24</time>
+      <time title="Modified: 2024-07-10 15:22:22" itemprop="dateModified" datetime="2024-07-10T15:22:22+08:00">2024-07-10</time>
     </span>
 
   
@@ -229,7 +229,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h1><h2 id="手动加载驱动"><a href="#手动加载驱动" class="headerlink" title="手动加载驱动"></a>手动加载驱动</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Driver driver = new Driver();</span><br><span class="line">//DriverManager.registerDriver(driver);</span><br></pre></td></tr></table></figure>
+        <ul>
+<li>加载驱动</li>
+<li>相关类</li>
+<li>预编译参数化</li>
+<li>批处理</li>
+<li>事务</li>
+<li>连接池<span id="more"></span></li>
+</ul>
+<h1 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h1><h2 id="手动加载驱动"><a href="#手动加载驱动" class="headerlink" title="手动加载驱动"></a>手动加载驱动</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Driver driver = new Driver();</span><br><span class="line">//DriverManager.registerDriver(driver);</span><br></pre></td></tr></table></figure>
 <h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span><br></pre></td></tr></table></figure>
 <h2 id="自动加载（SPI机制加载）"><a href="#自动加载（SPI机制加载）" class="headerlink" title="自动加载（SPI机制加载）"></a>自动加载（SPI机制加载）</h2><p>mysql-connector-java.jar中 meta-info&#x2F;services&#x2F;java.sql.Driver文件说明了驱动类型<br>不是所有mysql版本都支持</p>
 <h1 id="相关类"><a href="#相关类" class="headerlink" title="相关类"></a>相关类</h1><ul>

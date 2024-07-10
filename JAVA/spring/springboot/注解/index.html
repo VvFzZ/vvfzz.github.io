@@ -127,7 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">元注解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">自定义注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConditionalOn"><span class="nav-number">2.2.</span> <span class="nav-text">@ConditionalOn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FunctionalInterface"><span class="nav-number">2.3.</span> <span class="nav-text">@FunctionalInterface</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">元注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">自定义注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConditionalOn"><span class="nav-number">2.2.</span> <span class="nav-text">@ConditionalOn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FunctionalInterface"><span class="nav-number">2.3.</span> <span class="nav-text">@FunctionalInterface</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -140,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -187,7 +187,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="注解 | VvfzZ">
-      <meta itemprop="description" content="注解">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-07-08 08:36:25" itemprop="dateModified" datetime="2024-07-08T08:36:25+08:00">2024-07-08</time>
+      <time title="Modified: 2024-07-10 15:18:21" itemprop="dateModified" datetime="2024-07-10T15:18:21+08:00">2024-07-10</time>
     </span>
 
   
@@ -222,7 +222,6 @@
     </span>
 </div>
 
-            <div class="post-description">注解</div>
         </div>
       </header>
 
@@ -230,7 +229,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
+        <ul>
+<li>元注解</li>
+<li>自定义注解</li>
+<li>@ConditionalOn</li>
+<li>@FunctionalInterface</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
 <ul>
 <li><p>@Target 描述注解的适用范围</p>
 </li>
@@ -247,7 +254,7 @@
 <li><p>@Inherited 说明子类可继承父类的该注解</p>
 </li>
 </ul>
-<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="ConditionalOn"><a href="#ConditionalOn" class="headerlink" title="@ConditionalOn"></a>@ConditionalOn</h2><p>???？？？</p>
 <h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface MyIntf1 &#123;</span><br><span class="line">    MyIntf1 DEFAULT = (sss) -&gt; &#123;</span><br><span class="line">        return new MyImp1(sss);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    MyImp1 create12(String s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyImp1 implements MyIntf1 &#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public MyImp1 create12(String s) &#123;</span><br><span class="line">        return new MyImp1(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MyImp1(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;MyImp1&#123;&quot; +</span><br><span class="line">                &quot;name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">MyIntf1 myImp1 = MyIntf1.DEFAULT.create12(&quot;hello vvf&quot;);</span><br></pre></td></tr></table></figure>
@@ -258,6 +265,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag"># 注解</a>
+          </div>
 
         
 
@@ -268,8 +278,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/JAVA/%E5%9F%BA%E7%A1%80/%E6%B3%A8%E8%A7%A3/" rel="next" title="注解">
-                  注解 <i class="fa fa-chevron-right"></i>
+                <a href="/JAVA/spring/springboot/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" rel="next" title="配置文件">
+                  配置文件 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

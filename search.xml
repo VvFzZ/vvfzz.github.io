@@ -815,6 +815,20 @@ buffer 减少磁头旋转，减少寻址时间
 ]]></content>
   </entry>
   <entry>
+    <title>开篇词</title>
+    <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E7%AF%87%E8%AF%8D/</url>
+    <content><![CDATA[<p>思考：</p>
+<ol>
+<li>解决什么问题</li>
+<li>应用场景</li>
+<li>如何权衡，恰当应用于项目</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTPS</title>
     <url>/%E7%BD%91%E7%BB%9C/HTTPS/</url>
     <content><![CDATA[<h1 id="图解HTTPS"><a href="#图解HTTPS" class="headerlink" title="图解HTTPS"></a>图解HTTPS</h1><ol>
@@ -897,20 +911,6 @@ buffer 减少磁头旋转，减少寻址时间
 <p>最后，就用「会话密钥」加解密 HTTP 请求和响应了。</p>
 <h1 id="RSA-算法的缺陷"><a href="#RSA-算法的缺陷" class="headerlink" title="RSA 算法的缺陷"></a>RSA 算法的缺陷</h1><p>巨人的肩膀:<br><a href="https://mp.weixin.qq.com/s/U9SRLE7jZTB6lUZ6c8gTKg">https://mp.weixin.qq.com/s/U9SRLE7jZTB6lUZ6c8gTKg</a> 几幅图，拿下 HTTPS<br><a href="https://www.cnblogs.com/xiaolincoding/p/14318338.html">https://www.cnblogs.com/xiaolincoding/p/14318338.html</a> 图解ECDHE秘钥交换算法</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>开篇词</title>
-    <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E7%AF%87%E8%AF%8D/</url>
-    <content><![CDATA[<p>思考：</p>
-<ol>
-<li>解决什么问题</li>
-<li>应用场景</li>
-<li>如何权衡，恰当应用于项目</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
   </entry>
   <entry>
     <title>设计模式之美</title>
@@ -1338,6 +1338,19 @@ buffer 减少磁头旋转，减少寻址时间
 ]]></content>
   </entry>
   <entry>
+    <title>4-10类设计技巧</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/4-10%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<ol>
+<li>保证数据私有 ，不要破坏封装性，</li>
+<li>初始化数据（设置默认值）</li>
+<li>不在类中过多使用基本类型，</li>
+<li>不是所有域都需要独立的访问器和更改器</li>
+<li>分解职责过多的类</li>
+</ol>
+<p>5.1 类、超类和子类</p>
+]]></content>
+  </entry>
+  <entry>
     <title>14并发</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/14%E5%B9%B6%E5%8F%91/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Runnable</span><br><span class="line">&#123;</span><br><span class="line">    void run()；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Runnable r =（）-&gt;&#123; task code &#125;;</span><br><span class="line">Thread t=new Thread(r);</span><br><span class="line">t.start();//直接调用run方法不会启动新线程</span><br></pre></td></tr></table></figure>
@@ -1542,19 +1555,6 @@ invokeAll缺点：若第一个任务耗时时很多，需要等待<br>ExecutorCo
       </tags>
   </entry>
   <entry>
-    <title>4-10类设计技巧</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/4-10%E7%B1%BB%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<ol>
-<li>保证数据私有 ，不要破坏封装性，</li>
-<li>初始化数据（设置默认值）</li>
-<li>不在类中过多使用基本类型，</li>
-<li>不是所有域都需要独立的访问器和更改器</li>
-<li>分解职责过多的类</li>
-</ol>
-<p>5.1 类、超类和子类</p>
-]]></content>
-  </entry>
-  <entry>
     <title>6-1接口</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/6-1%E6%8E%A5%E5%8F%A3/</url>
     <content><![CDATA[<ul>
@@ -1592,28 +1592,6 @@ class c1 implements intf1,intf2&#123;
 ]]></content>
       <tags>
         <tag>JAVA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>6-4内部类</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-4%E5%86%85%E9%83%A8%E7%B1%BB/</url>
-    <content><![CDATA[<h1 id="内部类的特殊语法规则"><a href="#内部类的特殊语法规则" class="headerlink" title="内部类的特殊语法规则"></a>内部类的特殊语法规则</h1><p>可直接访问外部类的域</p>
-<h2 id="访问域"><a href="#访问域" class="headerlink" title="访问域"></a>访问域</h2><p>OuterClass.this.name   (name是外部类的域名)</p>
-<h2 id="构造一个对象"><a href="#构造一个对象" class="headerlink" title="构造一个对象"></a>构造一个对象</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">TalkingClock jabberer = new Ta1kingClock(1000, true);</span><br><span class="line">TalkingOock.TiiePrinter listener = jabberer.new TimePrinterO；</span><br></pre></td></tr></table></figure>
-
-<h2 id="内部类是否有用、必要和安全"><a href="#内部类是否有用、必要和安全" class="headerlink" title="内部类是否有用、必要和安全"></a>内部类是否有用、必要和安全</h2><h2 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h2><p>局部类不能用 public 或 private 访问说明符进行声明。它的作用域被限定在声明这个局部类的块中</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start</span><br><span class="line">&#123;</span><br><span class="line">    class TiiePrinter inpleients ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerforaed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            Systei.out.println(</span><br><span class="line">                    &quot;At the tone, the tine is &quot; + new DateO)；</span><br><span class="line">            if (beep) Toolkit.getDefaul tToolki10•beep():</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ActionListener listener = new TimePrinter();</span><br><span class="line">    Timer t = new Timer(interva1, listener);</span><br><span class="line">    t.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start(int interval, boolean beep)</span><br><span class="line">&#123;</span><br><span class="line">    ActionListener listener = new ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerformed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(&quot;At the tone, the time is &quot; + new Date)；</span><br><span class="line">            if (beep) Toolkit.getDefaultToolkit().beep();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;；</span><br><span class="line">    Timer t = new Timer(interval, listener);</span><br><span class="line">    t.start0；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>创建一个实现ActionListener接口的对象 需要实现的方法actionPerformed定义在大括号内</p>
-<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>为了把一个类隐藏在另外一个类的内部，不需要内部类引用外围类对象。内部类声明为 static, 以便取消产生的引用。</p>
-<ul>
-<li>静态内部类的对象除了没有对生成它的外围类对象的引用特权外， 与其他内部类完全一样。</li>
-<li>静态内部类可以有静态域和方法。</li>
-<li>声明在接口中的内部类自动成为 static 和 public 类</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>内部类</tag>
       </tags>
   </entry>
   <entry>
@@ -1657,6 +1635,28 @@ class c1 implements intf1,intf2&#123;
 <h3 id="再谈Comparator"><a href="#再谈Comparator" class="headerlink" title="再谈Comparator"></a>再谈Comparator</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Arrays.sort(arr, Comparator.comparing(Person::getName, Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName, Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
 <p>排序规则：<br>根据Name长度倒序，长度大在前<br>根据lName长度倒序，长度大在前，为空在最后。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>6-4内部类</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-4%E5%86%85%E9%83%A8%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="内部类的特殊语法规则"><a href="#内部类的特殊语法规则" class="headerlink" title="内部类的特殊语法规则"></a>内部类的特殊语法规则</h1><p>可直接访问外部类的域</p>
+<h2 id="访问域"><a href="#访问域" class="headerlink" title="访问域"></a>访问域</h2><p>OuterClass.this.name   (name是外部类的域名)</p>
+<h2 id="构造一个对象"><a href="#构造一个对象" class="headerlink" title="构造一个对象"></a>构造一个对象</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">TalkingClock jabberer = new Ta1kingClock(1000, true);</span><br><span class="line">TalkingOock.TiiePrinter listener = jabberer.new TimePrinterO；</span><br></pre></td></tr></table></figure>
+
+<h2 id="内部类是否有用、必要和安全"><a href="#内部类是否有用、必要和安全" class="headerlink" title="内部类是否有用、必要和安全"></a>内部类是否有用、必要和安全</h2><h2 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h2><p>局部类不能用 public 或 private 访问说明符进行声明。它的作用域被限定在声明这个局部类的块中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start</span><br><span class="line">&#123;</span><br><span class="line">    class TiiePrinter inpleients ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerforaed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            Systei.out.println(</span><br><span class="line">                    &quot;At the tone, the tine is &quot; + new DateO)；</span><br><span class="line">            if (beep) Toolkit.getDefaul tToolki10•beep():</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ActionListener listener = new TimePrinter();</span><br><span class="line">    Timer t = new Timer(interva1, listener);</span><br><span class="line">    t.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start(int interval, boolean beep)</span><br><span class="line">&#123;</span><br><span class="line">    ActionListener listener = new ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerformed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(&quot;At the tone, the time is &quot; + new Date)；</span><br><span class="line">            if (beep) Toolkit.getDefaultToolkit().beep();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;；</span><br><span class="line">    Timer t = new Timer(interval, listener);</span><br><span class="line">    t.start0；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个实现ActionListener接口的对象 需要实现的方法actionPerformed定义在大括号内</p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>为了把一个类隐藏在另外一个类的内部，不需要内部类引用外围类对象。内部类声明为 static, 以便取消产生的引用。</p>
+<ul>
+<li>静态内部类的对象除了没有对生成它的外围类对象的引用特权外， 与其他内部类完全一样。</li>
+<li>静态内部类可以有静态域和方法。</li>
+<li>声明在接口中的内部类自动成为 static 和 public 类</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>内部类</tag>
+      </tags>
   </entry>
   <entry>
     <title>6-5代理</title>
@@ -1741,6 +1741,36 @@ class c1 implements intf1,intf2&#123;
       <tags>
         <tag>JAVA</tag>
         <tag>泛型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IO</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/IO/</url>
+    <content><![CDATA[<h1 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h1><h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String fileName = &quot;d:&quot; + File.separator + &quot;b.txt&quot;;</span><br><span class="line">File f1 = new File(fileName);</span><br><span class="line">File f2 = new File(fileName);</span><br><span class="line">System.out.println(f1 == f2); // false  比较引用</span><br><span class="line">System.out.println(f1.equals(f2)); // true 比较文件路径</span><br></pre></td></tr></table></figure>
+<h1 id="InputStream、OutputStream、Reader、Writer"><a href="#InputStream、OutputStream、Reader、Writer" class="headerlink" title="InputStream、OutputStream、Reader、Writer"></a>InputStream、OutputStream、Reader、Writer</h1><p>字节流：InputStream、OutputStream<br>字符流（处理文本）：Reader、Writer</p>
+<p>节点流：可单独处理数据<br>处理流：依赖其他流处理数据</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文本文件a.txt内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12</span><br><span class="line">34</span><br></pre></td></tr></table></figure>
+<p>读取a.txt内容时每次读取三个字符输出不正确</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">char[] buffer = new char[3];</span><br><span class="line">int len;</span><br><span class="line">while ((len = fileReader.read(buffer, 0, buffer.length)) &gt; -1) &#123;</span><br><span class="line">    System.out.println(new String(buffer, 0, len) + &quot;:&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="InputStreamReader、OutputStreamWriter"><a href="#InputStreamReader、OutputStreamWriter" class="headerlink" title="InputStreamReader、OutputStreamWriter"></a>InputStreamReader、OutputStreamWriter</h1><p>转换流：转换字节流和字符流</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void IOStreamRW() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;a.txt&quot;;</span><br><span class="line">        String newFileName = &quot;d:&quot; + File.separator + &quot;new.txt&quot;;</span><br><span class="line">        FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">        //InputStreamReader isr = new InputStreamReader(fis);</span><br><span class="line">        InputStreamReader isr = new InputStreamReader(fis, &quot;GBK&quot;);//默认utf-8  windows记事本显示ANSI表示使用系统编码（我的电脑是GBK）</span><br><span class="line">        BufferedReader br = new BufferedReader(isr);</span><br><span class="line"></span><br><span class="line">        FileOutputStream fos = new FileOutputStream(newFileName);</span><br><span class="line">        OutputStreamWriter osw = new OutputStreamWriter(fos, &quot;utf-8&quot;);</span><br><span class="line">        BufferedWriter bw = new BufferedWriter(osw);</span><br><span class="line"></span><br><span class="line">        int r;</span><br><span class="line">        char[] chars = new char[1024];</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 1</span><br><span class="line">         */</span><br><span class="line">        //while ((r = isr.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">        //    osw.write(chars, 0, r);</span><br><span class="line">        //&#125;</span><br><span class="line">        //osw.close();</span><br><span class="line">        //isr.close();</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 2 bufferedReader、bufferedWriter</span><br><span class="line">         */</span><br><span class="line">        while ((r = br.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">            bw.write(chars, 0, r);</span><br><span class="line">        &#125;</span><br><span class="line">        bw.close();</span><br><span class="line">        br.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="DataInputStream、DataOutputStream"><a href="#DataInputStream、DataOutputStream" class="headerlink" title="DataInputStream、DataOutputStream"></a>DataInputStream、DataOutputStream</h1><p>数据流：处理基本数据类型和字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void DataIOputStream() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;s.txt&quot;;</span><br><span class="line">        File file = new File(fileName);</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(file);</span><br><span class="line">        DataOutputStream dos = new DataOutputStream(fos);</span><br><span class="line">        dos.writeUTF(&quot;你好哈哈&quot;);</span><br><span class="line">        dos.writeInt(10);</span><br><span class="line">        dos.writeBoolean(true);</span><br><span class="line">        dos.writeDouble(1.98);</span><br><span class="line">        dos.writeUTF(&quot;你好嘻嘻&quot;);</span><br><span class="line"></span><br><span class="line">        FileInputStream fis = new FileInputStream(file);</span><br><span class="line">        DataInputStream dis = new DataInputStream(fis);</span><br><span class="line">        //按顺序读取</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">        System.out.println(dis.readInt());</span><br><span class="line">        System.out.println(dis.readBoolean());</span><br><span class="line">        System.out.println(dis.readDouble());</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ObjectOutputStream、ObjectInputStream"><a href="#ObjectOutputStream、ObjectInputStream" class="headerlink" title="ObjectOutputStream、ObjectInputStream"></a>ObjectOutputStream、ObjectInputStream</h1><p>对象流做序列化反序列化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public  static void ObjectIOputStream() throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;ois.txt&quot;;</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));</span><br><span class="line">        oos.writeObject(new Person(1, &quot;vvf&quot;));</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(ois.readObject());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>声明serialVersionUID 说明版本兼容性问题（默认会自动生成，修改类时会发生变化）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person implements Serializable&#123;</span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 643382323274886977L;</span><br><span class="line"></span><br><span class="line">    public Person(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int age;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //@Override</span><br><span class="line">    //public String toString() &#123;</span><br><span class="line">    //    return &quot;Person&#123;&quot; +</span><br><span class="line">    //            &quot;age=&quot; + age +</span><br><span class="line">    //            &quot;, name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">    //            &#x27;&#125;&#x27;;</span><br><span class="line">    //&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>transient</code> 修饰不可序列化的属性<br>静态属性也不会被序列化</p>
+<h1 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h1><p>分段读取文件</p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>IO流</tag>
       </tags>
   </entry>
   <entry>
@@ -1884,36 +1914,6 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
-    <title>IO</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/IO/</url>
-    <content><![CDATA[<h1 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h1><h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String fileName = &quot;d:&quot; + File.separator + &quot;b.txt&quot;;</span><br><span class="line">File f1 = new File(fileName);</span><br><span class="line">File f2 = new File(fileName);</span><br><span class="line">System.out.println(f1 == f2); // false  比较引用</span><br><span class="line">System.out.println(f1.equals(f2)); // true 比较文件路径</span><br></pre></td></tr></table></figure>
-<h1 id="InputStream、OutputStream、Reader、Writer"><a href="#InputStream、OutputStream、Reader、Writer" class="headerlink" title="InputStream、OutputStream、Reader、Writer"></a>InputStream、OutputStream、Reader、Writer</h1><p>字节流：InputStream、OutputStream<br>字符流（处理文本）：Reader、Writer</p>
-<p>节点流：可单独处理数据<br>处理流：依赖其他流处理数据</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文本文件a.txt内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12</span><br><span class="line">34</span><br></pre></td></tr></table></figure>
-<p>读取a.txt内容时每次读取三个字符输出不正确</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">char[] buffer = new char[3];</span><br><span class="line">int len;</span><br><span class="line">while ((len = fileReader.read(buffer, 0, buffer.length)) &gt; -1) &#123;</span><br><span class="line">    System.out.println(new String(buffer, 0, len) + &quot;:&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="InputStreamReader、OutputStreamWriter"><a href="#InputStreamReader、OutputStreamWriter" class="headerlink" title="InputStreamReader、OutputStreamWriter"></a>InputStreamReader、OutputStreamWriter</h1><p>转换流：转换字节流和字符流</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void IOStreamRW() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;a.txt&quot;;</span><br><span class="line">        String newFileName = &quot;d:&quot; + File.separator + &quot;new.txt&quot;;</span><br><span class="line">        FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">        //InputStreamReader isr = new InputStreamReader(fis);</span><br><span class="line">        InputStreamReader isr = new InputStreamReader(fis, &quot;GBK&quot;);//默认utf-8  windows记事本显示ANSI表示使用系统编码（我的电脑是GBK）</span><br><span class="line">        BufferedReader br = new BufferedReader(isr);</span><br><span class="line"></span><br><span class="line">        FileOutputStream fos = new FileOutputStream(newFileName);</span><br><span class="line">        OutputStreamWriter osw = new OutputStreamWriter(fos, &quot;utf-8&quot;);</span><br><span class="line">        BufferedWriter bw = new BufferedWriter(osw);</span><br><span class="line"></span><br><span class="line">        int r;</span><br><span class="line">        char[] chars = new char[1024];</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 1</span><br><span class="line">         */</span><br><span class="line">        //while ((r = isr.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">        //    osw.write(chars, 0, r);</span><br><span class="line">        //&#125;</span><br><span class="line">        //osw.close();</span><br><span class="line">        //isr.close();</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 2 bufferedReader、bufferedWriter</span><br><span class="line">         */</span><br><span class="line">        while ((r = br.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">            bw.write(chars, 0, r);</span><br><span class="line">        &#125;</span><br><span class="line">        bw.close();</span><br><span class="line">        br.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="DataInputStream、DataOutputStream"><a href="#DataInputStream、DataOutputStream" class="headerlink" title="DataInputStream、DataOutputStream"></a>DataInputStream、DataOutputStream</h1><p>数据流：处理基本数据类型和字符串</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void DataIOputStream() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;s.txt&quot;;</span><br><span class="line">        File file = new File(fileName);</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(file);</span><br><span class="line">        DataOutputStream dos = new DataOutputStream(fos);</span><br><span class="line">        dos.writeUTF(&quot;你好哈哈&quot;);</span><br><span class="line">        dos.writeInt(10);</span><br><span class="line">        dos.writeBoolean(true);</span><br><span class="line">        dos.writeDouble(1.98);</span><br><span class="line">        dos.writeUTF(&quot;你好嘻嘻&quot;);</span><br><span class="line"></span><br><span class="line">        FileInputStream fis = new FileInputStream(file);</span><br><span class="line">        DataInputStream dis = new DataInputStream(fis);</span><br><span class="line">        //按顺序读取</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">        System.out.println(dis.readInt());</span><br><span class="line">        System.out.println(dis.readBoolean());</span><br><span class="line">        System.out.println(dis.readDouble());</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="ObjectOutputStream、ObjectInputStream"><a href="#ObjectOutputStream、ObjectInputStream" class="headerlink" title="ObjectOutputStream、ObjectInputStream"></a>ObjectOutputStream、ObjectInputStream</h1><p>对象流做序列化反序列化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public  static void ObjectIOputStream() throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;ois.txt&quot;;</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));</span><br><span class="line">        oos.writeObject(new Person(1, &quot;vvf&quot;));</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(ois.readObject());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>声明serialVersionUID 说明版本兼容性问题（默认会自动生成，修改类时会发生变化）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person implements Serializable&#123;</span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 643382323274886977L;</span><br><span class="line"></span><br><span class="line">    public Person(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int age;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //@Override</span><br><span class="line">    //public String toString() &#123;</span><br><span class="line">    //    return &quot;Person&#123;&quot; +</span><br><span class="line">    //            &quot;age=&quot; + age +</span><br><span class="line">    //            &quot;, name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">    //            &#x27;&#125;&#x27;;</span><br><span class="line">    //&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>transient</code> 修饰不可序列化的属性<br>静态属性也不会被序列化</p>
-<h1 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h1><p>分段读取文件</p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>IO流</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Stream库</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/</url>
     <content><![CDATA[<p>使用步骤</p>
@@ -1983,7 +1983,15 @@ class c1 implements intf1,intf2&#123;
   <entry>
     <title>jdbc</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/jdbc/</url>
-    <content><![CDATA[<h1 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h1><h2 id="手动加载驱动"><a href="#手动加载驱动" class="headerlink" title="手动加载驱动"></a>手动加载驱动</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//Driver driver = new Driver();</span><br><span class="line">//DriverManager.registerDriver(driver);</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<ul>
+<li>加载驱动</li>
+<li>相关类</li>
+<li>预编译参数化</li>
+<li>批处理</li>
+<li>事务</li>
+<li>连接池<span id="more"></span></li>
+</ul>
+<h1 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h1><h2 id="手动加载驱动"><a href="#手动加载驱动" class="headerlink" title="手动加载驱动"></a>手动加载驱动</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//Driver driver = new Driver();</span><br><span class="line">//DriverManager.registerDriver(driver);</span><br></pre></td></tr></table></figure>
 <h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span><br></pre></td></tr></table></figure>
 <h2 id="自动加载（SPI机制加载）"><a href="#自动加载（SPI机制加载）" class="headerlink" title="自动加载（SPI机制加载）"></a>自动加载（SPI机制加载）</h2><p>mysql-connector-java.jar中 meta-info&#x2F;services&#x2F;java.sql.Driver文件说明了驱动类型<br>不是所有mysql版本都支持</p>
 <h1 id="相关类"><a href="#相关类" class="headerlink" title="相关类"></a>相关类</h1><ul>
@@ -2140,30 +2148,13 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
-    <title>注解</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
-<ul>
-<li>@Target 描述注解的适用范围</li>
-<li>@Retention 表示需要在什么级别保存该注释信息，描述注解的生命周期 Source &lt; Class &lt; Runtime</li>
-<li>@Document 说明该注解被包含在javadoc中</li>
-<li>@Inherited 说明子类可继承父类的该注解</li>
-</ul>
-<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>注解</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql</title>
     <url>/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/mysql/</url>
     <content><![CDATA[<h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><ol>
 <li>开源</li>
 <li>跨平台</li>
 <li>轻量级</li>
-<li>成本低</li>
+<li>成本低<span id="more"></span></li>
 </ol>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>登录命令： mysql -hlocalhost -uroot -proot<br>显示数据库：show databases<br>使用某一数据库：use db_name<br>展示表：show tables<br>退出：quit ，exit ，\q<br>设置密码不过期：alter user‘root‘@’localhost’ identified by ‘root’password expire never;<br>设置密码加密规则： alter user ‘root‘@’localhost’ identified with mysql_native_password by ‘root’</p>
 <h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>.</p>
@@ -2600,8 +2591,19 @@ class c1 implements intf1,intf2&#123;
   <entry>
     <title>springboot</title>
     <url>/JAVA/spring/springboot/springboot/</url>
-    <content><![CDATA[<span id="more"></span>
-
+    <content><![CDATA[<ul>
+<li>springboot 整合servlet</li>
+<li>静态文件处理</li>
+<li>springMVC扩展 </li>
+<li>thymeleaf</li>
+<li>国际化</li>
+<li>整合jdbc</li>
+<li>整合druid</li>
+<li>配置多数据源</li>
+<li>spring集成mybatis</li>
+<li>表单接收方式</li>
+<li>源码解析<span id="more"></span></li>
+</ul>
 <p>springboot 优点</p>
 <ul>
 <li>快速启动程序</li>
@@ -2761,7 +2763,15 @@ ApplicationFailedEvent
   <entry>
     <title>注解</title>
     <url>/JAVA/spring/springboot/%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
+    <content><![CDATA[<ul>
+<li>元注解</li>
+<li>自定义注解</li>
+<li>@ConditionalOn</li>
+<li>@FunctionalInterface</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
 <ul>
 <li><p>@Target 描述注解的适用范围</p>
 </li>
@@ -2778,10 +2788,13 @@ ApplicationFailedEvent
 <li><p>@Inherited 说明子类可继承父类的该注解</p>
 </li>
 </ul>
-<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="ConditionalOn"><a href="#ConditionalOn" class="headerlink" title="@ConditionalOn"></a>@ConditionalOn</h2><p>???？？？</p>
 <h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface MyIntf1 &#123;</span><br><span class="line">    MyIntf1 DEFAULT = (sss) -&gt; &#123;</span><br><span class="line">        return new MyImp1(sss);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    MyImp1 create12(String s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyImp1 implements MyIntf1 &#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public MyImp1 create12(String s) &#123;</span><br><span class="line">        return new MyImp1(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MyImp1(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;MyImp1&#123;&quot; +</span><br><span class="line">                &quot;name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">MyIntf1 myImp1 = MyIntf1.DEFAULT.create12(&quot;hello vvf&quot;);</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>注解</tag>
+      </tags>
   </entry>
   <entry>
     <title>配置文件</title>
