@@ -10,6 +10,9 @@
     <title>markdown</title>
     <url>/markdown/</url>
     <content><![CDATA[<p><strong>加粗1</strong>  <strong>加粗2</strong><br><em>斜体</em><br><del>删除线</del><br><u>下划线</u><br>下标<sub>1</sub><br>上标<sup>1</sup><br><small>小号字体1</small> <small><small>小号字体2</small></small><br><big>大号字体1</big> <big><big>大号字体2</big></big><br>111<code>行内代码高亮</code>111<br><mark>高亮</mark><br>图片1:<img src="/"><br>图片2：<img src="1.png" width="10px" height="10px"></p>
+<blockquote>
+<p><em><a href="https://markdown.com.cn/basic-syntax/emphasis.html">官方教程</a></em></p>
+</blockquote>
 ]]></content>
       <tags>
         <tag>markdown</tag>
@@ -124,6 +127,9 @@
 <li><a href="/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/" title="民谣">民谣</a></li>
 </ol>
 ]]></content>
+      <tags>
+        <tag>音乐</tag>
+      </tags>
   </entry>
   <entry>
     <title>0-1学习路径</title>
@@ -220,6 +226,8 @@
 <h1 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h1><p>ifconfig -a 查询ip地址</p>
 <h1 id="安装apt"><a href="#安装apt" class="headerlink" title="安装apt"></a>安装apt</h1><p>sudo yum install epel-release<br>sudo yum install apt</p>
 <h1 id="host文件位置"><a href="#host文件位置" class="headerlink" title="host文件位置"></a>host文件位置</h1><p>&#x2F;etc&#x2F;hosts</p>
+<h1 id="java-jar"><a href="#java-jar" class="headerlink" title="java -jar"></a>java -jar</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="启动springboot项目-提示无主清单文件"><a href="#启动springboot项目-提示无主清单文件" class="headerlink" title="启动springboot项目 提示无主清单文件"></a>启动springboot项目 提示无主清单文件</h3><p>新增pom配置，重新打包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;spring-boot.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;mainClass&gt;com.vvf.learn.msbspringboot.Application&lt;/mainClass&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;repackage&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;repackage&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>linux常用命令</tag>
@@ -798,6 +806,15 @@ buffer 减少磁头旋转，减少寻址时间
       </tags>
   </entry>
   <entry>
+    <title>金枝玉叶</title>
+    <url>/%E7%BB%BF%E6%A4%8D/%E9%87%91%E6%9E%9D%E7%8E%89%E5%8F%B6/</url>
+    <content><![CDATA[<h1 id="土壤"><a href="#土壤" class="headerlink" title="土壤"></a>土壤</h1><p>两份草炭土和粗砂的混合土</p>
+<h1 id="施肥"><a href="#施肥" class="headerlink" title="施肥"></a>施肥</h1><p>生长季节两周施一次氮肥为主的稀薄肥水，保持盆土湿润</p>
+<h1 id="浇水"><a href="#浇水" class="headerlink" title="浇水"></a>浇水</h1><p>浇透，不积水<br>夏季常向叶片喷水<br>冬季保持10~16°C，减少浇水，盆土略干燥</p>
+<h1 id="习性"><a href="#习性" class="headerlink" title="习性"></a>习性</h1><p>耐干旱，半阴，不耐涝</p>
+]]></content>
+  </entry>
+  <entry>
     <title>HTTPS</title>
     <url>/%E7%BD%91%E7%BB%9C/HTTPS/</url>
     <content><![CDATA[<h1 id="图解HTTPS"><a href="#图解HTTPS" class="headerlink" title="图解HTTPS"></a>图解HTTPS</h1><ol>
@@ -1051,21 +1068,6 @@ buffer 减少磁头旋转，减少寻址时间
       </tags>
   </entry>
   <entry>
-    <title>VivaLaVida</title>
-    <url>/%E9%9F%B3%E4%B9%90/VivaLaVida/</url>
-    <content><![CDATA[<iframe src="//player.bilibili.com/player.html?aid=13622752&bvid=BV1Fx411n7bX&cid=22293606&p=1&muted=0&autoplay=0&t=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" > </iframe>]]></content>
-  </entry>
-  <entry>
-    <title>民谣</title>
-    <url>/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/</url>
-    <content><![CDATA[<h1 id="热河"><a href="#热河" class="headerlink" title="热河"></a>热河</h1><iframe width="560" height="315" src="https://www.youtube.com/embed/K2QE-FRAP0o?si=numZREXREMKuJ_Vk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-]]></content>
-      <tags>
-        <tag>音乐</tag>
-        <tag>民谣</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MeasuringPersonalGrowth</title>
     <url>/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/MeasuringPersonalGrowth/</url>
     <content><![CDATA[<h1 id="Measuring-personal-growth"><a href="#Measuring-personal-growth" class="headerlink" title="Measuring personal growth"></a><a href="https://huyenchip.com/2024/04/17/personal-growth.html">Measuring personal growth</a></h1><h2 id="Rate-of-change"><a href="#Rate-of-change" class="headerlink" title="Rate of change"></a>Rate of change</h2><p>Every 3-6 years, become a different person</p>
@@ -1219,9 +1221,41 @@ buffer 减少磁头旋转，减少寻址时间
 ]]></content>
   </entry>
   <entry>
+    <title>VivaLaVida</title>
+    <url>/%E9%9F%B3%E4%B9%90/VivaLaVida/</url>
+    <content><![CDATA[<iframe src="//player.bilibili.com/player.html?aid=13622752&bvid=BV1Fx411n7bX&cid=22293606&p=1&muted=0&autoplay=0&t=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" > </iframe>]]></content>
+  </entry>
+  <entry>
+    <title>民谣</title>
+    <url>/%E9%9F%B3%E4%B9%90/%E6%B0%91%E8%B0%A3/</url>
+    <content><![CDATA[<h1 id="热河"><a href="#热河" class="headerlink" title="热河"></a>热河</h1><iframe width="560" height="315" src="https://www.youtube.com/embed/K2QE-FRAP0o?si=numZREXREMKuJ_Vk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+]]></content>
+      <tags>
+        <tag>音乐</tag>
+        <tag>民谣</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>流行音乐</title>
+    <url>/%E9%9F%B3%E4%B9%90/%E6%B5%81%E8%A1%8C%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[<p><a href="https://y.qq.com/n/ryqq/mv/001isno81yOJPd">若是月亮还没来</a>*</p>
+]]></content>
+      <tags>
+        <tag>音乐</tag>
+        <tag>流行音乐</tag>
+        <tag>音乐-治愈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安装Tomcat</title>
     <url>/JAVA/Tomcat/%E5%AE%89%E8%A3%85Tomcat/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>maven</title>
+    <url>/JAVA/maven/maven/</url>
+    <content><![CDATA[<h1 id="POM"><a href="#POM" class="headerlink" title="POM"></a>POM</h1><h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><p>？？？</p>
+]]></content>
   </entry>
   <entry>
     <title>1.1数据类型</title>
@@ -1561,6 +1595,28 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
+    <title>6-4内部类</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-4%E5%86%85%E9%83%A8%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="内部类的特殊语法规则"><a href="#内部类的特殊语法规则" class="headerlink" title="内部类的特殊语法规则"></a>内部类的特殊语法规则</h1><p>可直接访问外部类的域</p>
+<h2 id="访问域"><a href="#访问域" class="headerlink" title="访问域"></a>访问域</h2><p>OuterClass.this.name   (name是外部类的域名)</p>
+<h2 id="构造一个对象"><a href="#构造一个对象" class="headerlink" title="构造一个对象"></a>构造一个对象</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">TalkingClock jabberer = new Ta1kingClock(1000, true);</span><br><span class="line">TalkingOock.TiiePrinter listener = jabberer.new TimePrinterO；</span><br></pre></td></tr></table></figure>
+
+<h2 id="内部类是否有用、必要和安全"><a href="#内部类是否有用、必要和安全" class="headerlink" title="内部类是否有用、必要和安全"></a>内部类是否有用、必要和安全</h2><h2 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h2><p>局部类不能用 public 或 private 访问说明符进行声明。它的作用域被限定在声明这个局部类的块中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start</span><br><span class="line">&#123;</span><br><span class="line">    class TiiePrinter inpleients ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerforaed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            Systei.out.println(</span><br><span class="line">                    &quot;At the tone, the tine is &quot; + new DateO)；</span><br><span class="line">            if (beep) Toolkit.getDefaul tToolki10•beep():</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ActionListener listener = new TimePrinter();</span><br><span class="line">    Timer t = new Timer(interva1, listener);</span><br><span class="line">    t.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start(int interval, boolean beep)</span><br><span class="line">&#123;</span><br><span class="line">    ActionListener listener = new ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerformed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(&quot;At the tone, the time is &quot; + new Date)；</span><br><span class="line">            if (beep) Toolkit.getDefaultToolkit().beep();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;；</span><br><span class="line">    Timer t = new Timer(interval, listener);</span><br><span class="line">    t.start0；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个实现ActionListener接口的对象 需要实现的方法actionPerformed定义在大括号内</p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>为了把一个类隐藏在另外一个类的内部，不需要内部类引用外围类对象。内部类声明为 static, 以便取消产生的引用。</p>
+<ul>
+<li>静态内部类的对象除了没有对生成它的外围类对象的引用特权外， 与其他内部类完全一样。</li>
+<li>静态内部类可以有静态域和方法。</li>
+<li>声明在接口中的内部类自动成为 static 和 public 类</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>内部类</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6-3lambda表达式</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/6-3lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<h3 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h3><p>对于只有一个抽象方法的接口， 需要这种接口的对象时，就可以提供一个 lambda表达式。这种接口称为函数式接口 （ functional interface )。</p>
@@ -1601,28 +1657,6 @@ class c1 implements intf1,intf2&#123;
 <h3 id="再谈Comparator"><a href="#再谈Comparator" class="headerlink" title="再谈Comparator"></a>再谈Comparator</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Arrays.sort(arr, Comparator.comparing(Person::getName, Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName, Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));</span><br></pre></td></tr></table></figure>
 <p>排序规则：<br>根据Name长度倒序，长度大在前<br>根据lName长度倒序，长度大在前，为空在最后。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>6-4内部类</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/6-4%E5%86%85%E9%83%A8%E7%B1%BB/</url>
-    <content><![CDATA[<h1 id="内部类的特殊语法规则"><a href="#内部类的特殊语法规则" class="headerlink" title="内部类的特殊语法规则"></a>内部类的特殊语法规则</h1><p>可直接访问外部类的域</p>
-<h2 id="访问域"><a href="#访问域" class="headerlink" title="访问域"></a>访问域</h2><p>OuterClass.this.name   (name是外部类的域名)</p>
-<h2 id="构造一个对象"><a href="#构造一个对象" class="headerlink" title="构造一个对象"></a>构造一个对象</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">TalkingClock jabberer = new Ta1kingClock(1000, true);</span><br><span class="line">TalkingOock.TiiePrinter listener = jabberer.new TimePrinterO；</span><br></pre></td></tr></table></figure>
-
-<h2 id="内部类是否有用、必要和安全"><a href="#内部类是否有用、必要和安全" class="headerlink" title="内部类是否有用、必要和安全"></a>内部类是否有用、必要和安全</h2><h2 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h2><p>局部类不能用 public 或 private 访问说明符进行声明。它的作用域被限定在声明这个局部类的块中</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start</span><br><span class="line">&#123;</span><br><span class="line">    class TiiePrinter inpleients ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerforaed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            Systei.out.println(</span><br><span class="line">                    &quot;At the tone, the tine is &quot; + new DateO)；</span><br><span class="line">            if (beep) Toolkit.getDefaul tToolki10•beep():</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ActionListener listener = new TimePrinter();</span><br><span class="line">    Timer t = new Timer(interva1, listener);</span><br><span class="line">    t.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void start(int interval, boolean beep)</span><br><span class="line">&#123;</span><br><span class="line">    ActionListener listener = new ActionListener</span><br><span class="line">    &#123;</span><br><span class="line">        public void actionPerformed(ActionEvent event)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(&quot;At the tone, the time is &quot; + new Date)；</span><br><span class="line">            if (beep) Toolkit.getDefaultToolkit().beep();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;；</span><br><span class="line">    Timer t = new Timer(interval, listener);</span><br><span class="line">    t.start0；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>创建一个实现ActionListener接口的对象 需要实现的方法actionPerformed定义在大括号内</p>
-<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>为了把一个类隐藏在另外一个类的内部，不需要内部类引用外围类对象。内部类声明为 static, 以便取消产生的引用。</p>
-<ul>
-<li>静态内部类的对象除了没有对生成它的外围类对象的引用特权外， 与其他内部类完全一样。</li>
-<li>静态内部类可以有静态域和方法。</li>
-<li>声明在接口中的内部类自动成为 static 和 public 类</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>内部类</tag>
-      </tags>
   </entry>
   <entry>
     <title>6-5代理</title>
@@ -1707,36 +1741,6 @@ class c1 implements intf1,intf2&#123;
       <tags>
         <tag>JAVA</tag>
         <tag>泛型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IO</title>
-    <url>/JAVA/%E5%9F%BA%E7%A1%80/IO/</url>
-    <content><![CDATA[<h1 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h1><h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String fileName = &quot;d:&quot; + File.separator + &quot;b.txt&quot;;</span><br><span class="line">File f1 = new File(fileName);</span><br><span class="line">File f2 = new File(fileName);</span><br><span class="line">System.out.println(f1 == f2); // false  比较引用</span><br><span class="line">System.out.println(f1.equals(f2)); // true 比较文件路径</span><br></pre></td></tr></table></figure>
-<h1 id="InputStream、OutputStream、Reader、Writer"><a href="#InputStream、OutputStream、Reader、Writer" class="headerlink" title="InputStream、OutputStream、Reader、Writer"></a>InputStream、OutputStream、Reader、Writer</h1><p>字节流：InputStream、OutputStream<br>字符流（处理文本）：Reader、Writer</p>
-<p>节点流：可单独处理数据<br>处理流：依赖其他流处理数据</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文本文件a.txt内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12</span><br><span class="line">34</span><br></pre></td></tr></table></figure>
-<p>读取a.txt内容时每次读取三个字符输出不正确</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">char[] buffer = new char[3];</span><br><span class="line">int len;</span><br><span class="line">while ((len = fileReader.read(buffer, 0, buffer.length)) &gt; -1) &#123;</span><br><span class="line">    System.out.println(new String(buffer, 0, len) + &quot;:&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="InputStreamReader、OutputStreamWriter"><a href="#InputStreamReader、OutputStreamWriter" class="headerlink" title="InputStreamReader、OutputStreamWriter"></a>InputStreamReader、OutputStreamWriter</h1><p>转换流：转换字节流和字符流</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void IOStreamRW() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;a.txt&quot;;</span><br><span class="line">        String newFileName = &quot;d:&quot; + File.separator + &quot;new.txt&quot;;</span><br><span class="line">        FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">        //InputStreamReader isr = new InputStreamReader(fis);</span><br><span class="line">        InputStreamReader isr = new InputStreamReader(fis, &quot;GBK&quot;);//默认utf-8  windows记事本显示ANSI表示使用系统编码（我的电脑是GBK）</span><br><span class="line">        BufferedReader br = new BufferedReader(isr);</span><br><span class="line"></span><br><span class="line">        FileOutputStream fos = new FileOutputStream(newFileName);</span><br><span class="line">        OutputStreamWriter osw = new OutputStreamWriter(fos, &quot;utf-8&quot;);</span><br><span class="line">        BufferedWriter bw = new BufferedWriter(osw);</span><br><span class="line"></span><br><span class="line">        int r;</span><br><span class="line">        char[] chars = new char[1024];</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 1</span><br><span class="line">         */</span><br><span class="line">        //while ((r = isr.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">        //    osw.write(chars, 0, r);</span><br><span class="line">        //&#125;</span><br><span class="line">        //osw.close();</span><br><span class="line">        //isr.close();</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 2 bufferedReader、bufferedWriter</span><br><span class="line">         */</span><br><span class="line">        while ((r = br.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">            bw.write(chars, 0, r);</span><br><span class="line">        &#125;</span><br><span class="line">        bw.close();</span><br><span class="line">        br.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="DataInputStream、DataOutputStream"><a href="#DataInputStream、DataOutputStream" class="headerlink" title="DataInputStream、DataOutputStream"></a>DataInputStream、DataOutputStream</h1><p>数据流：处理基本数据类型和字符串</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void DataIOputStream() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;s.txt&quot;;</span><br><span class="line">        File file = new File(fileName);</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(file);</span><br><span class="line">        DataOutputStream dos = new DataOutputStream(fos);</span><br><span class="line">        dos.writeUTF(&quot;你好哈哈&quot;);</span><br><span class="line">        dos.writeInt(10);</span><br><span class="line">        dos.writeBoolean(true);</span><br><span class="line">        dos.writeDouble(1.98);</span><br><span class="line">        dos.writeUTF(&quot;你好嘻嘻&quot;);</span><br><span class="line"></span><br><span class="line">        FileInputStream fis = new FileInputStream(file);</span><br><span class="line">        DataInputStream dis = new DataInputStream(fis);</span><br><span class="line">        //按顺序读取</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">        System.out.println(dis.readInt());</span><br><span class="line">        System.out.println(dis.readBoolean());</span><br><span class="line">        System.out.println(dis.readDouble());</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="ObjectOutputStream、ObjectInputStream"><a href="#ObjectOutputStream、ObjectInputStream" class="headerlink" title="ObjectOutputStream、ObjectInputStream"></a>ObjectOutputStream、ObjectInputStream</h1><p>对象流做序列化反序列化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public  static void ObjectIOputStream() throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;ois.txt&quot;;</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));</span><br><span class="line">        oos.writeObject(new Person(1, &quot;vvf&quot;));</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(ois.readObject());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>声明serialVersionUID 说明版本兼容性问题（默认会自动生成，修改类时会发生变化）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person implements Serializable&#123;</span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 643382323274886977L;</span><br><span class="line"></span><br><span class="line">    public Person(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int age;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //@Override</span><br><span class="line">    //public String toString() &#123;</span><br><span class="line">    //    return &quot;Person&#123;&quot; +</span><br><span class="line">    //            &quot;age=&quot; + age +</span><br><span class="line">    //            &quot;, name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">    //            &#x27;&#125;&#x27;;</span><br><span class="line">    //&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>transient</code> 修饰不可序列化的属性<br>静态属性也不会被序列化</p>
-<h1 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h1><p>分段读取文件</p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>IO流</tag>
       </tags>
   </entry>
   <entry>
@@ -1880,6 +1884,36 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
+    <title>IO</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/IO/</url>
+    <content><![CDATA[<h1 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h1><h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String fileName = &quot;d:&quot; + File.separator + &quot;b.txt&quot;;</span><br><span class="line">File f1 = new File(fileName);</span><br><span class="line">File f2 = new File(fileName);</span><br><span class="line">System.out.println(f1 == f2); // false  比较引用</span><br><span class="line">System.out.println(f1.equals(f2)); // true 比较文件路径</span><br></pre></td></tr></table></figure>
+<h1 id="InputStream、OutputStream、Reader、Writer"><a href="#InputStream、OutputStream、Reader、Writer" class="headerlink" title="InputStream、OutputStream、Reader、Writer"></a>InputStream、OutputStream、Reader、Writer</h1><p>字节流：InputStream、OutputStream<br>字符流（处理文本）：Reader、Writer</p>
+<p>节点流：可单独处理数据<br>处理流：依赖其他流处理数据</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文本文件a.txt内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12</span><br><span class="line">34</span><br></pre></td></tr></table></figure>
+<p>读取a.txt内容时每次读取三个字符输出不正确</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">char[] buffer = new char[3];</span><br><span class="line">int len;</span><br><span class="line">while ((len = fileReader.read(buffer, 0, buffer.length)) &gt; -1) &#123;</span><br><span class="line">    System.out.println(new String(buffer, 0, len) + &quot;:&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="InputStreamReader、OutputStreamWriter"><a href="#InputStreamReader、OutputStreamWriter" class="headerlink" title="InputStreamReader、OutputStreamWriter"></a>InputStreamReader、OutputStreamWriter</h1><p>转换流：转换字节流和字符流</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void IOStreamRW() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;a.txt&quot;;</span><br><span class="line">        String newFileName = &quot;d:&quot; + File.separator + &quot;new.txt&quot;;</span><br><span class="line">        FileInputStream fis = new FileInputStream(fileName);</span><br><span class="line">        //InputStreamReader isr = new InputStreamReader(fis);</span><br><span class="line">        InputStreamReader isr = new InputStreamReader(fis, &quot;GBK&quot;);//默认utf-8  windows记事本显示ANSI表示使用系统编码（我的电脑是GBK）</span><br><span class="line">        BufferedReader br = new BufferedReader(isr);</span><br><span class="line"></span><br><span class="line">        FileOutputStream fos = new FileOutputStream(newFileName);</span><br><span class="line">        OutputStreamWriter osw = new OutputStreamWriter(fos, &quot;utf-8&quot;);</span><br><span class="line">        BufferedWriter bw = new BufferedWriter(osw);</span><br><span class="line"></span><br><span class="line">        int r;</span><br><span class="line">        char[] chars = new char[1024];</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 1</span><br><span class="line">         */</span><br><span class="line">        //while ((r = isr.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">        //    osw.write(chars, 0, r);</span><br><span class="line">        //&#125;</span><br><span class="line">        //osw.close();</span><br><span class="line">        //isr.close();</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 2 bufferedReader、bufferedWriter</span><br><span class="line">         */</span><br><span class="line">        while ((r = br.read(chars, 0, chars.length)) &gt; -1) &#123;</span><br><span class="line">            bw.write(chars, 0, r);</span><br><span class="line">        &#125;</span><br><span class="line">        bw.close();</span><br><span class="line">        br.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="DataInputStream、DataOutputStream"><a href="#DataInputStream、DataOutputStream" class="headerlink" title="DataInputStream、DataOutputStream"></a>DataInputStream、DataOutputStream</h1><p>数据流：处理基本数据类型和字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void DataIOputStream() throws IOException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;s.txt&quot;;</span><br><span class="line">        File file = new File(fileName);</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(file);</span><br><span class="line">        DataOutputStream dos = new DataOutputStream(fos);</span><br><span class="line">        dos.writeUTF(&quot;你好哈哈&quot;);</span><br><span class="line">        dos.writeInt(10);</span><br><span class="line">        dos.writeBoolean(true);</span><br><span class="line">        dos.writeDouble(1.98);</span><br><span class="line">        dos.writeUTF(&quot;你好嘻嘻&quot;);</span><br><span class="line"></span><br><span class="line">        FileInputStream fis = new FileInputStream(file);</span><br><span class="line">        DataInputStream dis = new DataInputStream(fis);</span><br><span class="line">        //按顺序读取</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">        System.out.println(dis.readInt());</span><br><span class="line">        System.out.println(dis.readBoolean());</span><br><span class="line">        System.out.println(dis.readDouble());</span><br><span class="line">        System.out.println(dis.readUTF());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ObjectOutputStream、ObjectInputStream"><a href="#ObjectOutputStream、ObjectInputStream" class="headerlink" title="ObjectOutputStream、ObjectInputStream"></a>ObjectOutputStream、ObjectInputStream</h1><p>对象流做序列化反序列化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public  static void ObjectIOputStream() throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        String fileName = &quot;d:&quot; + File.separator + &quot;ois.txt&quot;;</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));</span><br><span class="line">        oos.writeObject(new Person(1, &quot;vvf&quot;));</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(ois.readObject());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>声明serialVersionUID 说明版本兼容性问题（默认会自动生成，修改类时会发生变化）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person implements Serializable&#123;</span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 643382323274886977L;</span><br><span class="line"></span><br><span class="line">    public Person(int age, String name) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int age;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //@Override</span><br><span class="line">    //public String toString() &#123;</span><br><span class="line">    //    return &quot;Person&#123;&quot; +</span><br><span class="line">    //            &quot;age=&quot; + age +</span><br><span class="line">    //            &quot;, name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">    //            &#x27;&#125;&#x27;;</span><br><span class="line">    //&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>transient</code> 修饰不可序列化的属性<br>静态属性也不会被序列化</p>
+<h1 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h1><p>分段读取文件</p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>IO流</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Stream库</title>
     <url>/JAVA/%E5%9F%BA%E7%A1%80/Stream%E5%BA%93/</url>
     <content><![CDATA[<p>使用步骤</p>
@@ -1944,6 +1978,55 @@ class c1 implements intf1,intf2&#123;
 ]]></content>
       <tags>
         <tag>Stream</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jdbc</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/jdbc/</url>
+    <content><![CDATA[<h1 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h1><h2 id="手动加载驱动"><a href="#手动加载驱动" class="headerlink" title="手动加载驱动"></a>手动加载驱动</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//Driver driver = new Driver();</span><br><span class="line">//DriverManager.registerDriver(driver);</span><br></pre></td></tr></table></figure>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="自动加载（SPI机制加载）"><a href="#自动加载（SPI机制加载）" class="headerlink" title="自动加载（SPI机制加载）"></a>自动加载（SPI机制加载）</h2><p>mysql-connector-java.jar中 meta-info&#x2F;services&#x2F;java.sql.Driver文件说明了驱动类型<br>不是所有mysql版本都支持</p>
+<h1 id="相关类"><a href="#相关类" class="headerlink" title="相关类"></a>相关类</h1><ul>
+<li>Driver</li>
+<li>DriverManager</li>
+<li>Connection</li>
+<li>Statement</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 加载驱动 DriverManager.registerDriver(new Driver());</span><br><span class="line">2. 获取连接connection = DriverManager.getConnection(url, &quot;root&quot;, &quot;root&quot;);</span><br><span class="line">3. 获取statement = connection.createStatement();</span><br><span class="line">4. 执行statement.execute...</span><br></pre></td></tr></table></figure>
+<h1 id="预编译参数化"><a href="#预编译参数化" class="headerlink" title="预编译参数化"></a>预编译参数化</h1><h2 id="防止sql注入"><a href="#防止sql注入" class="headerlink" title="防止sql注入"></a>防止sql注入</h2><p>预编译后，会将参数中单引号转义，达到防止注入的目的</p>
+<p>在获取statement时提供sql语句模版 进行预编译，执行前提供参数，再根据具体参数执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(&quot;select * from v_user where name = ? &quot;);</span><br><span class="line">preparedStatement.setString(1, &quot;vvf&quot;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h2><p>缓存预编译结果<br>如若sql只执行一次不会提升性能，还会占用缓存</p>
+<h2 id="开启设置"><a href="#开启设置" class="headerlink" title="开启设置"></a>开启设置</h2><p>jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;db？……&amp;useServerPrepStmts&#x3D;true&amp;cachePrepStmts&#x3D;true</p>
+<h1 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h1><h2 id="开启设置-1"><a href="#开启设置-1" class="headerlink" title="开启设置"></a>开启设置</h2><p>&amp;rewriteBatchedStatements&#x3D;true</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">preparedStatement = connection.prepareStatement(&quot;insert into v_user values(?,?,?,?,?)&quot;);</span><br><span class="line"></span><br><span class="line">            for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">                int id = i + 2;</span><br><span class="line">                preparedStatement.setInt(1, id);</span><br><span class="line">                preparedStatement.setString(2, &quot;v&quot; + id);</span><br><span class="line">                preparedStatement.setInt(3, id % 2);</span><br><span class="line">                preparedStatement.setInt(4, id % 100);</span><br><span class="line">                preparedStatement.setDate(5,new Date(System.currentTimeMillis()));</span><br><span class="line">                preparedStatement.addBatch(); // addBatch</span><br><span class="line"></span><br><span class="line">                //if (i % 100 == 0) &#123;</span><br><span class="line">                //    preparedStatement.executeBatch();</span><br><span class="line">                //    preparedStatement.clearBatch();// 清除缓存</span><br><span class="line">                //&#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            preparedStatement.executeBatch(); // exec</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>一批sql语句过多造成内存再用过大，可将其分为多批处理</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">                int id = i + 2;</span><br><span class="line">                preparedStatement.setInt(1, id);</span><br><span class="line">                preparedStatement.setString(2, &quot;v&quot; + id);</span><br><span class="line">                preparedStatement.setInt(3, id % 2);</span><br><span class="line">                preparedStatement.setInt(4, id % 100);</span><br><span class="line">                preparedStatement.setDate(5,new Date(System.currentTimeMillis()));                </span><br><span class="line"></span><br><span class="line">                if (i % 100 == 0) &#123;</span><br><span class="line">                    preparedStatement.executeBatch();</span><br><span class="line">                    preparedStatement.clearBatch();// 清除缓存</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            preparedStatement.executeBatch();</span><br><span class="line">            preparedStatement.clearBatch();</span><br></pre></td></tr></table></figure>
+
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>默认自动提交事务<br>设置手动提交：<code> connection.setAutoCommit(false);</code></p>
+<p>catch块执行回滚: <code>connection.rollback();</code><br>finally执行提交：<code>connection.commit();</code></p>
+<h2 id="回滚点"><a href="#回滚点" class="headerlink" title="回滚点"></a>回滚点</h2><p>设置：<code>connection.setSavepoint()</code><br>回滚：<code>connection.rollback(savepoint);</code></p>
+<h1 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h1><h2 id="开源的连接池"><a href="#开源的连接池" class="headerlink" title="开源的连接池"></a>开源的连接池</h2><ul>
+<li>c3p0</li>
+<li>dbcp</li>
+<li>druid</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>JDBC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>log4</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/log4/</url>
+    <content><![CDATA[<h1 id="配置文件及说明"><a href="#配置文件及说明" class="headerlink" title="配置文件及说明"></a>配置文件及说明</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Global logging configuration</span><br><span class="line"># 设置日志输出级别以及输出目的地，可以设置多个输出目的地，开发环境下，日志级别要设置成DEBUG或者ERROR</span><br><span class="line"># 前面写日志级别，逗号后面写输出目的地：我自己下面设置的目的地相对应，以逗号分开</span><br><span class="line"># log4j.rootLogger = [level],appenderName1,appenderName2,…</span><br><span class="line">log4j.rootLogger=DEBUG,CONSOLE,LOGFILE</span><br><span class="line"></span><br><span class="line">#### 控制台输出 ####</span><br><span class="line">log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender</span><br><span class="line"># 输出到控制台</span><br><span class="line">log4j.appender.CONSOLE.Target = System.out</span><br><span class="line"># 指定控制台输出日志级别</span><br><span class="line">log4j.appender.CONSOLE.Threshold = DEBUG</span><br><span class="line"># 默认值是 true, 表示是否立即输出</span><br><span class="line">log4j.appender.CONSOLE.ImmediateFlush = true</span><br><span class="line"># 设置编码方式</span><br><span class="line">log4j.appender.CONSOLE.Encoding = UTF-8</span><br><span class="line"># 日志输出布局</span><br><span class="line">log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout</span><br><span class="line"># 如果日志输出布局为PatternLayout 自定义级别，需要使用ConversionPattern指定输出格式</span><br><span class="line">log4j.appender.CONSOLE.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss&#125; %5p (%c:%L) - %m%n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 输出错误信息到文件 ####</span><br><span class="line">log4j.appender.LOGFILE=org.apache.log4j.FileAppender</span><br><span class="line"># 指定输出文件路径</span><br><span class="line">#log4j.appender.LOGFILE.File =F://Intellij idea/logs/error.log</span><br><span class="line">log4j.appender.LOGFILE.File =log4j1.log</span><br><span class="line"></span><br><span class="line">#日志输出到文件，默认为true</span><br><span class="line">log4j.appender.LOGFILE.Append = true</span><br><span class="line"># 指定输出日志级别</span><br><span class="line">log4j.appender.LOGFILE.Threshold = ERROR</span><br><span class="line"># 是否立即输出，默认值是 true,</span><br><span class="line">log4j.appender.LOGFILE.ImmediateFlush = true</span><br><span class="line"># 设置编码方式</span><br><span class="line">log4j.appender.LOGFILE.Encoding = UTF-8</span><br><span class="line"># 日志输出布局</span><br><span class="line">log4j.appender.LOGFILE.layout = org.apache.log4j.PatternLayout</span><br><span class="line"># 如果日志输出布局为PatternLayout 自定义级别，需要使用ConversionPattern指定输出格式</span><br><span class="line">log4j.appender.LOGFILE.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br><span class="line"></span><br><span class="line"># ConversionPattern 格式说明</span><br><span class="line">#%d: 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125;，输出类似：2011-10-18 22:10:28,921</span><br><span class="line">#%r: 输出自应用启动到输出该log信息耗费的毫秒数</span><br><span class="line">#%c: 输出日志信息所属的类目，通常就是所在类的全名</span><br><span class="line">#%t: 输出产生该日志事件的线程名</span><br><span class="line">#%l: 输出日志事件的发生位置，相当于%C.%M(%F:%L)的组合,包括类目名、发生的线程，以及在代码中的行数。</span><br><span class="line">#%x: 输出和当前线程相关联的NDC(嵌套诊断环境),尤其用到像java servlets这样的多客户多线程的应用中。</span><br><span class="line">#%%: 输出一个&quot;%&quot;字符</span><br><span class="line">#%F: 输出日志消息产生时所在的文件名称</span><br><span class="line">#%L: 输出代码中的行号</span><br><span class="line">#%m: 输出代码中指定的消息,产生的日志具体信息</span><br><span class="line">#%n: 输出一个回车换行符，Windows平台为&quot;\r\n&quot;，Unix平台为&quot;\n&quot;输出日志信息换行</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>log4</tag>
       </tags>
   </entry>
   <entry>
@@ -2015,7 +2098,7 @@ class c1 implements intf1,intf2&#123;
 </ul>
 <h5 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h5><p>数组：Arrary.toString()</p>
 <h5 id="ArraryList-trimTosize"><a href="#ArraryList-trimTosize" class="headerlink" title="ArraryList.trimTosize()"></a>ArraryList.trimTosize()</h5><p>确认数组列表的大小不再发生变化，就可以调用 trimToSize方法,将<br>存储区域的大小调整为当前元素数量所需要的存储空间数目。垃圾回收器将回收多余的存储<br>空间。</p>
-]]></content>
+<h5 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">public class JDBCPropertiesUtil &#123;</span><br><span class="line">    String path;</span><br><span class="line">    Properties properties;</span><br><span class="line"></span><br><span class="line">    //HashMap propertiesMap;</span><br><span class="line"></span><br><span class="line">    public JDBCPropertiesUtil(String path) &#123;</span><br><span class="line">        this.path = path;</span><br><span class="line">        this.load();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void load() &#123;</span><br><span class="line">        this.properties = new Properties();</span><br><span class="line">        InputStream stream = this.getClass().getResourceAsStream(this.path);</span><br><span class="line">        try &#123;</span><br><span class="line">            properties.load(stream);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getProperty(String key) &#123;</span><br><span class="line">        String property = this.properties.getProperty(key);</span><br><span class="line">        return property;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>反射</title>
@@ -2028,10 +2111,10 @@ class c1 implements intf1,intf2&#123;
 </ul>
 <h3 id="反射分析类的能力"><a href="#反射分析类的能力" class="headerlink" title="反射分析类的能力"></a>反射分析类的能力</h3><p>java.lang.reflect 包中有三个类 Field、 Method 和 Constructor 分别用于描述类的域、 方法和构造器</p>
 <h3 id="运行时分析对象"><a href="#运行时分析对象" class="headerlink" title="运行时分析对象"></a>运行时分析对象</h3><ul>
-<li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor<br>类的公共超类。</li>
+<li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor类的公共超类。</li>
 </ul>
 <p>优点：易于编写通用性代码<br>缺点：编译时不容易发现问题，运行时易出错。</p>
-<h3 id="泛型类型的继承规则"><a href="#泛型类型的继承规则" class="headerlink" title="泛型类型的继承规则"></a>泛型类型的继承规则</h3><p>S extends T , Pair<S> 与 Pair<T>没有什么联系</p>
+<h3 id="泛型类型的继承规则"><a href="#泛型类型的继承规则" class="headerlink" title="泛型类型的继承规则"></a>泛型类型的继承规则</h3><p>S extends T 但 Pair&lt;S&gt; 与 Pair&lt;T&gt;没有什么联系，如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ArrayList&lt;Parent1&gt; aa = new ArrayList&lt;Sun2&gt;(); // ERROR</span><br><span class="line">Parent1[] aaaa = new Sun2[1]; // TRUE</span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -2057,6 +2140,23 @@ class c1 implements intf1,intf2&#123;
       </tags>
   </entry>
   <entry>
+    <title>注解</title>
+    <url>/JAVA/%E5%9F%BA%E7%A1%80/%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<span id="more"></span>
+<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
+<ul>
+<li>@Target 描述注解的适用范围</li>
+<li>@Retention 表示需要在什么级别保存该注释信息，描述注解的生命周期 Source &lt; Class &lt; Runtime</li>
+<li>@Document 说明该注解被包含在javadoc中</li>
+<li>@Inherited 说明子类可继承父类的该注解</li>
+</ul>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>注解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql</title>
     <url>/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/mysql/</url>
     <content><![CDATA[<h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><ol>
@@ -2065,7 +2165,426 @@ class c1 implements intf1,intf2&#123;
 <li>轻量级</li>
 <li>成本低</li>
 </ol>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1>]]></content>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>登录命令： mysql -hlocalhost -uroot -proot<br>显示数据库：show databases<br>使用某一数据库：use db_name<br>展示表：show tables<br>退出：quit ，exit ，\q<br>设置密码不过期：alter user‘root‘@’localhost’ identified by ‘root’password expire never;<br>设置密码加密规则： alter user ‘root‘@’localhost’ identified with mysql_native_password by ‘root’</p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>.</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h2><ul>
+<li>TINYINT  1 Bytes (-128，127)	(0，255)</li>
+<li>SMALLINT 2 Bytes	(-32 768，32 767)	(0，65 535)</li>
+<li>MEDIUMINT 3 Bytes	(-8 388 608，8 388 607)	(0，16 777 215)</li>
+<li>INT&#x2F;INTEGER 4 Bytes	(-2 147 483 648，2 147 483 647)	(0，4 294 967 295)</li>
+<li>BIGINT 8 Bytes</li>
+<li>FLOAT	4 Bytes</li>
+<li>DOUBLE	8 Bytes</li>
+<li>DECIMAL</li>
+</ul>
+<h2 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h2><p>类型	大小( bytes)	范围	格式	用途</p>
+<ul>
+<li>DATE	3	1000-01-01&#x2F;9999-12-31	YYYY-MM-DD	日期值</li>
+<li>TIME	3	‘-838:59:59’&#x2F;‘838:59:59’	HH:MM:SS	时间值或持续时间</li>
+<li>YEAR	1	1901&#x2F;2155	YYYY	年份值</li>
+<li>DATETIME	8	‘1000-01-01 00:00:00’ 到 ‘9999-12-31 23:59:59’	YYYY-MM-DD hh:mm:ss	混合日期和时间值</li>
+<li>TIMESTAMP	4	‘1970-01-01 00:00:01’ UTC 到 ‘2038-01-19 03:14:07’ UTC结束时间是第 2147483647 秒，北京时间 2038-1-19 11:14:07，格林尼治时间 2038年1月19日 凌晨 03:14:07 YYYY-MM-DD hh:mm:ss	混合日期和时间值，时间戳</li>
+</ul>
+<p>查询当前时间：<code>select now(),sysdate(),CURRENT_DATE();</code></p>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><ul>
+<li>CHAR	0-255 bytes	定长字符串</li>
+<li>VARCHAR	0-65535 bytes	变长字符串</li>
+<li>TINYBLOB	0-255 bytes	不超过 255 个字符的二进制字符串</li>
+<li>TINYTEXT	0-255 bytes	短文本字符串</li>
+<li>BLOB	0-65 535 bytes	二进制形式的长文本数据</li>
+<li>TEXT	0-65 535 bytes	长文本数据</li>
+<li>MEDIUMBLOB	0-16 777 215 bytes	二进制形式的中等长度文本数据</li>
+<li>MEDIUMTEXT	0-16 777 215 bytes	中等长度文本数据</li>
+<li>LONGBLOB	0-4 294 967 295 bytes	二进制形式的极大文本数据</li>
+<li>LONGTEXT	0-4 294 967 295 bytes	极大文本数据</li>
+</ul>
+<h2 id="枚举与集合类型（Enumeration-and-Set-Types）"><a href="#枚举与集合类型（Enumeration-and-Set-Types）" class="headerlink" title="枚举与集合类型（Enumeration and Set Types）"></a>枚举与集合类型（Enumeration and Set Types）</h2><ul>
+<li>ENUM: 枚举类型，用于存储单一值，可以选择一个预定义的集合。</li>
+<li>SET: 集合类型，用于存储多个值，可以选择多个预定义的集合。</li>
+</ul>
+<h2 id="空间数据类型（Spatial-Data-Types）"><a href="#空间数据类型（Spatial-Data-Types）" class="headerlink" title="空间数据类型（Spatial Data Types）"></a>空间数据类型（Spatial Data Types）</h2><p>GEOMETRY, POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, GEOMETRYCOLLECTION: 用于存储空间数据（地理信息、几何图形等）。</p>
+<h1 id="三范式"><a href="#三范式" class="headerlink" title="三范式"></a>三范式</h1><ul>
+<li>列原子性</li>
+<li>数据与联合主键完全相关性</li>
+<li>数据和主键直接相关性</li>
+</ul>
+<h1 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h1><ul>
+<li><p>增加列<br>alter table table_name add column column_name first; &#x2F;&#x2F; 增加一列，放在最前面<br>alter table table_name add column column_name after id;&#x2F;&#x2F;增加一列放在id列后</p>
+</li>
+<li><p>删除列<br>alter table table_name drop column_name;</p>
+</li>
+<li><p>修改列<br>alter table table_name modify  column_name type; 只修改类型<br>alter table table_name change old_column_name new_column_name type; 修改列明和类型</p>
+</li>
+<li><p>复制表</p>
+<ol>
+<li>create table new_table as select * from old_table;</li>
+<li>不复制数据 create table new_table as select * from old_table where 1&#x3D;2; &#x2F;&#x2F;创建表后新加的约束没有复制到新表</li>
+<li>create table new_table as select name,add from old_table where age &lt; 20;</li>
+</ol>
+</li>
+<li><p>truncate table_anme 删除数据，（删除表然后新建表）</p>
+</li>
+</ul>
+<p>查看表详细信息 desc table_name；</p>
+<h1 id="完整性约束"><a href="#完整性约束" class="headerlink" title="完整性约束"></a>完整性约束</h1><ul>
+<li>PRIMARY KEY 主键<br>alter table table_name add primary key(column_name)</li>
+<li>NOT NULL 非空 </li>
+<li>UNIQUE 唯一<br>alter table user add [constraint name] unique (columen_name)<br>alter table drop index index_name</li>
+<li>CHECK 检查</li>
+<li>DEFAULT 默认值</li>
+<li>AUTO_INCREMENT 自增<br>添加自增 alter table 【数据库名.】表名称 modify 字段名 数据类型 auto_increment;<br>取消自增 alter table 【数据库名.】表名称 modify 字段名 数据类型;</li>
+<li>FOREIGN KEY 外键<br>alter table talbe_name add constraint  fk_name foreign key(column_name) reference table_name(column_name)<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#列级约束</span><br><span class="line">create table us(</span><br><span class="line">    no int(6) primary key auto_index,</span><br><span class="line">    anme varchar(5) not null,</span><br><span class="line">    sex char(1) default &#x27;男&#x27; check(sex = &#x27;男 || sex=&#x27;女&#x27;)，</span><br><span class="line">    age int(3) check(age&gt;18 and age &lt;30),</span><br><span class="line">    email varchar(15) unique</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#表级约束</span><br><span class="line">create table us(</span><br><span class="line">    no int(6) auto_increment,</span><br><span class="line">    anme varchar(5) not null,</span><br><span class="line">    sex char(1) default &#x27;男&#x27; )，</span><br><span class="line">    age int(3) ,</span><br><span class="line">    email varchar(15),</span><br><span class="line">    class_name varchar(15),</span><br><span class="line">    constraint primary_key primary key(no),</span><br><span class="line">    constraint check_sex check(sex=&#x27;男&#x27; || sex = &#x27;女&#x27;),</span><br><span class="line">    constraint unique_email unique(email),</span><br><span class="line">    constraint fk_class_name foreign key(class_name) reference class(name)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><ul>
+<li>ASCII(s)	返回字符串 s 的第一个字符的 ASCII 码。	<br>返回 CustomerName 字段第一个字母的 ASCII 码：</li>
+</ul>
+<p>SELECT ASCII(CustomerName) AS NumCodeOfFirstChar<br>FROM Customers;</p>
+<ul>
+<li>CHAR_LENGTH(s)	返回字符串 s 的字符数	<br>返回字符串 RUNOOB 的字符数</li>
+</ul>
+<p>SELECT CHAR_LENGTH(“RUNOOB”) AS LengthOfString;</p>
+<ul>
+<li>CHARACTER_LENGTH(s)	返回字符串 s 的字符数，等同于 CHAR_LENGTH(s)	<br>返回字符串 RUNOOB 的字符数</li>
+</ul>
+<p>SELECT CHARACTER_LENGTH(“RUNOOB”) AS LengthOfString;</p>
+<ul>
+<li>CONCAT(s1,s2…sn)	字符串 s1,s2 等多个字符串合并为一个字符串	<br>合并多个字符串</li>
+</ul>
+<p>SELECT CONCAT(“SQL “, “Runoob “, “Gooogle “, “Facebook”) AS ConcatenatedString;</p>
+<ul>
+<li>CONCAT_WS(x, s1,s2…sn)	同 CONCAT(s1,s2,…) 函数，但是每个字符串之间要加上 x，x 可以是分隔符	<br>合并多个字符串，并添加分隔符：</li>
+</ul>
+<p>SELECT CONCAT_WS(“-“, “SQL”, “Tutorial”, “is”, “fun!”)AS ConcatenatedString;</p>
+<ul>
+<li>FIELD(s,s1,s2…)	返回第一个字符串 s 在字符串列表(s1,s2…)中的位置	<br>返回字符串 c 在列表值中的位置：</li>
+</ul>
+<p>SELECT FIELD(“c”, “a”, “b”, “c”, “d”, “e”);</p>
+<ul>
+<li>FIND_IN_SET(s1,s2)	返回在字符串s2中与s1匹配的字符串的位置	<br>返回字符串 c 在指定字符串中的位置：</li>
+</ul>
+<p>SELECT FIND_IN_SET(“c”, “a,b,c,d,e”);</p>
+<ul>
+<li>FORMAT(x,n)	函数可以将数字 x 进行格式化 “#,###.##”, 将 x 保留到小数点后 n 位，最后一位四舍五入。	<br>格式化数字 “#,###.##” 形式：</li>
+</ul>
+<p>SELECT FORMAT(250500.5634, 2);     – 输出 250,500.56</p>
+<ul>
+<li>INSERT(s1,x,len,s2)	字符串 s2 替换 s1 的 x 位置开始长度为 len 的字符串	<br>从字符串第一个位置开始的 6 个字符替换为 runoob：</li>
+</ul>
+<p>SELECT INSERT(“google.com”, 1, 6, “runoob”);  – 输出：runoob.com</p>
+<ul>
+<li>LOCATE(s1,s)	从字符串 s 中获取 s1 的开始位置	<br>获取 b 在字符串 abc 中的位置：</li>
+</ul>
+<p>SELECT LOCATE(‘st’,’myteststring’);  – 5<br>返回字符串 abc 中 b 的位置：</p>
+<p>SELECT LOCATE(‘b’, ‘abc’) – 2</p>
+<ul>
+<li>LCASE(s)	将字符串 s 的所有字母变成小写字母	<br>字符串 RUNOOB 转换为小写：</li>
+</ul>
+<p>SELECT LCASE(‘RUNOOB’) – runoob</p>
+<ul>
+<li>LEFT(s,n)	返回字符串 s 的前 n 个字符	<br>返回字符串 runoob 中的前两个字符：</li>
+</ul>
+<p>SELECT LEFT(‘runoob’,2) – ru</p>
+<ul>
+<li>LOWER(s)	将字符串 s 的所有字母变成小写字母	<br>字符串 RUNOOB 转换为小写：</li>
+</ul>
+<p>SELECT LOWER(‘RUNOOB’) – runoob</p>
+<ul>
+<li>LPAD(s1,len,s2)	在字符串 s1 的开始处填充字符串 s2，使字符串长度达到 len	<br>将字符串 xx 填充到 abc 字符串的开始处：</li>
+</ul>
+<p>SELECT LPAD(‘abc’,5,’xx’) – xxabc</p>
+<ul>
+<li>LTRIM(s)	去掉字符串 s 开始处的空格	<br>去掉字符串 RUNOOB开始处的空格：</li>
+</ul>
+<p>SELECT LTRIM(“    RUNOOB”) AS LeftTrimmedString;– RUNOOB</p>
+<ul>
+<li>MID(s,n,len)	从字符串 s 的 n 位置截取长度为 len 的子字符串，同 SUBSTRING(s,n,len)	<br>从字符串 RUNOOB 中的第 2 个位置截取 3个 字符：</li>
+</ul>
+<p>SELECT MID(“RUNOOB”, 2, 3) AS ExtractString; – UNO</p>
+<ul>
+<li>POSITION(s1 IN s)	从字符串 s 中获取 s1 的开始位置	<br>返回字符串 abc 中 b 的位置：</li>
+</ul>
+<p>SELECT POSITION(‘b’ in ‘abc’) – 2</p>
+<ul>
+<li>REPEAT(s,n)	将字符串 s 重复 n 次	<br>将字符串 runoob 重复三次：</li>
+</ul>
+<p>SELECT REPEAT(‘runoob’,3) – runoobrunoobrunoob</p>
+<ul>
+<li>REPLACE(s,s1,s2)	将字符串 s2 替代字符串 s 中的字符串 s1	<br>将字符串 abc 中的字符 a 替换为字符 x：</li>
+</ul>
+<p>SELECT REPLACE(‘abc’,’a’,’x’) –xbc</p>
+<ul>
+<li>REVERSE(s)	将字符串s的顺序反过来	<br>将字符串 abc 的顺序反过来：</li>
+</ul>
+<p>SELECT REVERSE(‘abc’) – cba</p>
+<ul>
+<li>RIGHT(s,n)	返回字符串 s 的后 n 个字符	<br>返回字符串 runoob 的后两个字符：</li>
+</ul>
+<p>SELECT RIGHT(‘runoob’,2) – ob</p>
+<ul>
+<li>RPAD(s1,len,s2)	在字符串 s1 的结尾处添加字符串 s2，使字符串的长度达到 len	<br>将字符串 xx 填充到 abc 字符串的结尾处：</li>
+</ul>
+<p>SELECT RPAD(‘abc’,5,’xx’) – abcxx</p>
+<ul>
+<li>RTRIM(s)	去掉字符串 s 结尾处的空格	<br>去掉字符串 RUNOOB 的末尾空格：</li>
+</ul>
+<p>SELECT RTRIM(“RUNOOB     “) AS RightTrimmedString;   – RUNOOB</p>
+<ul>
+<li>SPACE(n)	返回 n 个空格	<br>返回 10 个空格：</li>
+</ul>
+<p>SELECT SPACE(10);</p>
+<ul>
+<li>STRCMP(s1,s2)	比较字符串 s1 和 s2，如果 s1 与 s2 相等返回 0 ，如果 s1&gt;s2 返回 1，如果 s1&lt;s2 返回 -1	<br>比较字符串：</li>
+</ul>
+<p>SELECT STRCMP(“runoob”, “runoob”);  – 0</p>
+<ul>
+<li>SUBSTR(s, start, length)	从字符串 s 的 start 位置截取长度为 length 的子字符串	<br>从字符串 RUNOOB 中的第 2 个位置截取 3个 字符：</li>
+</ul>
+<p>SELECT SUBSTR(“RUNOOB”, 2, 3) AS ExtractString; – UNO</p>
+<ul>
+<li>SUBSTRING(s, start, length)	从字符串 s 的 start 位置截取长度为 length 的子字符串，等同于 SUBSTR(s, start, length)	<br>从字符串 RUNOOB 中的第 2 个位置截取 3个 字符：</li>
+</ul>
+<p>SELECT SUBSTRING(“RUNOOB”, 2, 3) AS ExtractString; – UNO</p>
+<ul>
+<li>SUBSTRING_INDEX(s, delimiter, number)	返回从字符串 s 的第 number 个出现的分隔符 delimiter 之后的子串。<br>如果 number 是正数，返回第 number 个字符左边的字符串。<br>如果 number 是负数，返回第(number 的绝对值(从右边数))个字符右边的字符串。	<br>SELECT SUBSTRING_INDEX(‘a<em>b’,’</em>‘,1) – a<br>SELECT SUBSTRING_INDEX(‘a<em>b’,’</em>‘,-1)    – b<br>SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(‘a<em>b</em>c<em>d</em>e’,’<em>‘,3),’</em>‘,-1)    – c</li>
+<li>TRIM(s)	去掉字符串 s 开始和结尾处的空格	<br>去掉字符串 RUNOOB 的首尾空格：</li>
+</ul>
+<p>SELECT TRIM(‘    RUNOOB    ‘) AS TrimmedString;</p>
+<ul>
+<li>UCASE(s)	将字符串转换为大写	<br>将字符串 runoob 转换为大写：</li>
+</ul>
+<p>SELECT UCASE(“runoob”); – RUNOOB</p>
+<ul>
+<li>UPPER(s)	将字符串转换为大写	<br>将字符串 runoob 转换为大写：</li>
+</ul>
+<p>SELECT UPPER(“runoob”); – RUNOOB</p>
+<h2 id="数字函数"><a href="#数字函数" class="headerlink" title="数字函数"></a>数字函数</h2><ul>
+<li>ABS(x)	返回 x 的绝对值　　	<br>返回 -1 的绝对值：</li>
+</ul>
+<p>SELECT ABS(-1) – 返回1</p>
+<ul>
+<li>ACOS(x)	求 x 的反余弦值（单位为弧度），x 为一个数值	<br>SELECT ACOS(0.25);</li>
+<li>ASIN(x)	求反正弦值（单位为弧度），x 为一个数值	<br>SELECT ASIN(0.25);</li>
+<li>ATAN(x)	求反正切值（单位为弧度），x 为一个数值	<br>SELECT ATAN(2.5);</li>
+<li>ATAN2(n, m)	求反正切值（单位为弧度）	<br>SELECT ATAN2(-0.8, 2);</li>
+<li>AVG(expression)	返回一个表达式的平均值，expression 是一个字段	<br>返回 Products 表中Price 字段的平均值：</li>
+</ul>
+<p>SELECT AVG(Price) AS AveragePrice FROM Products;</p>
+<ul>
+<li>CEIL(x)	返回大于或等于 x 的最小整数　	<br>SELECT CEIL(1.5) – 返回2</li>
+<li>CEILING(x)	返回大于或等于 x 的最小整数　	<br>SELECT CEILING(1.5); – 返回2</li>
+<li>COS(x)	求余弦值(参数是弧度)	<br>SELECT COS(2);</li>
+<li>COT(x)	求余切值(参数是弧度)	<br>SELECT COT(6);</li>
+<li>COUNT(expression)	返回查询的记录总数，expression 参数是一个字段或者 * 号	<br>返回 Products 表中 products 字段总共有多少条记录：</li>
+</ul>
+<p>SELECT COUNT(ProductID) AS NumberOfProducts FROM Products;</p>
+<ul>
+<li>DEGREES(x)	将弧度转换为角度　　	<br>SELECT DEGREES(3.1415926535898) – 180</li>
+<li>n DIV m	整除，n 为被除数，m 为除数	<br>计算 10 除于 5：</li>
+</ul>
+<p>SELECT 10 DIV 5;  – 2</p>
+<ul>
+<li>EXP(x)	返回 e 的 x 次方　　	<br>计算 e 的三次方：</li>
+</ul>
+<p>SELECT EXP(3) – 20.085536923188</p>
+<ul>
+<li>FLOOR(x)	返回小于或等于 x 的最大整数　　	<br>小于或等于 1.5 的整数：</li>
+</ul>
+<p>SELECT FLOOR(1.5) – 返回1</p>
+<ul>
+<li>GREATEST(expr1, expr2, expr3, …)	返回列表中的最大值	<br>返回以下数字列表中的最大值：</li>
+</ul>
+<p>SELECT GREATEST(3, 12, 34, 8, 25); – 34<br>返回以下字符串列表中的最大值：</p>
+<p>SELECT GREATEST(“Google”, “Runoob”, “Apple”);   – Runoob</p>
+<ul>
+<li>LEAST(expr1, expr2, expr3, …)	返回列表中的最小值	<br>返回以下数字列表中的最小值：</li>
+</ul>
+<p>SELECT LEAST(3, 12, 34, 8, 25); – 3<br>返回以下字符串列表中的最小值：</p>
+<p>SELECT LEAST(“Google”, “Runoob”, “Apple”);   – Apple</p>
+<ul>
+<li>LN	返回数字的自然对数，以 e 为底。	<br>返回 2 的自然对数：</li>
+</ul>
+<p>SELECT LN(2);  – 0.6931471805599453</p>
+<ul>
+<li>LOG(x) 或 LOG(base, x)	返回自然对数(以 e 为底的对数)，如果带有 base 参数，则 base 为指定带底数。　　	<br>SELECT LOG(20.085536923188) – 3<br>SELECT LOG(2, 4); – 2</li>
+<li>LOG10(x)	返回以 10 为底的对数　　	<br>SELECT LOG10(100) – 2</li>
+<li>LOG2(x)	返回以 2 为底的对数	<br>返回以 2 为底 6 的对数：</li>
+</ul>
+<p>SELECT LOG2(6);  – 2.584962500721156</p>
+<ul>
+<li>MAX(expression)	返回字段 expression 中的最大值	<br>返回数据表 Products 中字段 Price 的最大值：</li>
+</ul>
+<p>SELECT MAX(Price) AS LargestPrice FROM Products;</p>
+<ul>
+<li>MIN(expression)	返回字段 expression 中的最小值	<br>返回数据表 Products 中字段 Price 的最小值：</li>
+</ul>
+<p>SELECT MIN(Price) AS MinPrice FROM Products;</p>
+<ul>
+<li>MOD(x,y)	返回 x 除以 y 以后的余数　	<br>5 除于 2 的余数：</li>
+</ul>
+<p>SELECT MOD(5,2) – 1</p>
+<ul>
+<li>PI()	返回圆周率(3.141593）　　	<br>SELECT PI() –3.141593</li>
+<li>POW(x,y)	返回 x 的 y 次方　	<br>2 的 3 次方：</li>
+</ul>
+<p>SELECT POW(2,3) – 8</p>
+<ul>
+<li>POWER(x,y)	返回 x 的 y 次方　	<br>2 的 3 次方：</li>
+</ul>
+<p>SELECT POWER(2,3) – 8</p>
+<ul>
+<li>RADIANS(x)	将角度转换为弧度　　	<br>180 度转换为弧度：</li>
+</ul>
+<p>SELECT RADIANS(180) – 3.1415926535898</p>
+<ul>
+<li>RAND()	返回 0 到 1 的随机数　　	<br>SELECT RAND() –0.93099315644334</li>
+<li>ROUND(x [,y])	返回离 x 最近的整数，可选参数 y 表示要四舍五入的小数位数，如果省略，则返回整数。	<br>SELECT ROUND(1.23456) –1</li>
+</ul>
+<p>SELECT ROUND(345.156, 2) – 345.16</p>
+<ul>
+<li>SIGN(x)	返回 x 的符号，x 是负数、0、正数分别返回 -1、0 和 1　	<br>SELECT SIGN(-10) – (-1)</li>
+<li>IN(x)	求正弦值(参数是弧度)　　	<br>SELECT SIN(RADIANS(30)) – 0.5</li>
+<li>SQRT(x)	返回x的平方根　　	<br>25 的平方根：</li>
+</ul>
+<p>SELECT SQRT(25) – 5</p>
+<ul>
+<li>SUM(expression)	返回指定字段的总和	<br>计算 OrderDetails 表中字段 Quantity 的总和：</li>
+</ul>
+<p>SELECT SUM(Quantity) AS TotalItemsOrdered FROM OrderDetails;</p>
+<ul>
+<li>TAN(x)	求正切值(参数是弧度)	<br>SELECT TAN(1.75);  – -5.52037992250933</li>
+<li>TRUNCATE(x,y)	返回数值 x 保留到小数点后 y 位的值（与 ROUND 最大的区别是不会进行四舍五入）	<br>SELECT TRUNCATE(1.23456,3) – 1.234</li>
+</ul>
+<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><ul>
+<li>ADDDATE(d,n)	计算起始日期 d 加上 n 天的日期	<br>SELECT ADDDATE(“2017-06-15”, INTERVAL 10 DAY);<br>-&gt;2017-06-25</li>
+<li>ADDTIME(t,n)	n 是一个时间表达式，时间 t 加上时间表达式 n	<br>加 5 秒：</li>
+</ul>
+<p>SELECT ADDTIME(‘2011-11-11 11:11:11’, 5);<br>-&gt;2011-11-11 11:11:16 (秒)<br>添加 2 小时, 10 分钟, 5 秒:</p>
+<p>SELECT ADDTIME(“2020-06-15 09:34:21”, “2:10:5”);<br>-&gt; 2020-06-15 11:44:26</p>
+<ul>
+<li>CURDATE()	返回当前日期	<br>SELECT CURDATE();<br>-&gt; 2018-09-19</li>
+<li>CURRENT_DATE()	返回当前日期	<br>SELECT CURRENT_DATE();<br>-&gt; 2018-09-19</li>
+<li>CURRENT_TIME	返回当前时间	<br>SELECT CURRENT_TIME();<br>-&gt; 19:59:02</li>
+<li>CURRENT_TIMESTAMP()	返回当前日期和时间	<br>SELECT CURRENT_TIMESTAMP()<br>-&gt; 2018-09-19 20:57:43</li>
+<li>CURTIME()	返回当前时间	<br>SELECT CURTIME();<br>-&gt; 19:59:02</li>
+<li>DATE()	从日期或日期时间表达式中提取日期值	<br>SELECT DATE(“2017-06-15”);<br>-&gt; 2017-06-15</li>
+<li>DATEDIFF(d1,d2)	计算日期 d1-&gt;d2 之间相隔的天数	<br>SELECT DATEDIFF(‘2001-01-01’,’2001-02-02’)<br>-&gt; -32</li>
+<li>DATE_ADD(d，INTERVAL expr type)	计算起始日期 d 加上一个时间段后的日期，type 值可以是：<br>MICROSECOND<br>SECOND<br>MINUTE<br>HOUR<br>DAY<br>WEEK<br>MONTH<br>QUARTER<br>YEAR<br>SECOND_MICROSECOND<br>MINUTE_MICROSECOND<br>MINUTE_SECOND<br>HOUR_MICROSECOND<br>HOUR_SECOND<br>HOUR_MINUTE<br>DAY_MICROSECOND<br>DAY_SECOND<br>DAY_MINUTE<br>DAY_HOUR<br>YEAR_MONTH<br>SELECT DATE_ADD(“2017-06-15”, INTERVAL 10 DAY);<br>-&gt; 2017-06-25</li>
+</ul>
+<p>SELECT DATE_ADD(“2017-06-15 09:34:21”, INTERVAL 15 MINUTE);<br>-&gt; 2017-06-15 09:49:21</p>
+<p>SELECT DATE_ADD(“2017-06-15 09:34:21”, INTERVAL -3 HOUR);<br>-&gt;2017-06-15 06:34:21</p>
+<p>SELECT DATE_ADD(“2017-06-15 09:34:21”, INTERVAL -3 MONTH);<br>-&gt;2017-03-15 09:34:21</p>
+<ul>
+<li>DATE_FORMAT(d,f)	按表达式 f的要求显示日期 d	<br>SELECT DATE_FORMAT(‘2011-11-11 11:11:11’,’%Y-%m-%d %r’)<br>-&gt; 2011-11-11 11:11:11 AM</li>
+<li>DATE_SUB(date,INTERVAL expr type)	函数从日期减去指定的时间间隔。	<br>Orders 表中 OrderDate 字段减去 2 天：</li>
+</ul>
+<p>SELECT OrderId,DATE_SUB(OrderDate,INTERVAL 2 DAY) AS OrderPayDate<br>FROM Orders</p>
+<ul>
+<li>DAY(d)	返回日期值 d 的日期部分	<br>SELECT DAY(“2017-06-15”);<br>-&gt; 15</li>
+<li>DAYNAME(d)	返回日期 d 是星期几，如 Monday,Tuesday	<br>SELECT DAYNAME(‘2011-11-11 11:11:11’)<br>-&gt;Friday</li>
+<li>DAYOFMONTH(d)	计算日期 d 是本月的第几天	<br>SELECT DAYOFMONTH(‘2011-11-11 11:11:11’)<br>-&gt;11</li>
+<li>DAYOFWEEK(d)	日期 d 今天是星期几，1 星期日，2 星期一，以此类推	<br>SELECT DAYOFWEEK(‘2011-11-11 11:11:11’)<br>-&gt;6</li>
+<li>DAYOFYEAR(d)	计算日期 d 是本年的第几天	<br>SELECT DAYOFYEAR(‘2011-11-11 11:11:11’)<br>-&gt;315</li>
+<li>EXTRACT(type FROM d)	从日期 d 中获取指定的值，type 指定返回的值。<br>type可取值为：<br>MICROSECOND<br>SECOND<br>MINUTE<br>HOUR<br>DAY<br>WEEK<br>MONTH<br>QUARTER<br>YEAR<br>SECOND_MICROSECOND<br>MINUTE_MICROSECOND<br>MINUTE_SECOND<br>HOUR_MICROSECOND<br>HOUR_SECOND<br>HOUR_MINUTE<br>DAY_MICROSECOND<br>DAY_SECOND<br>DAY_MINUTE<br>DAY_HOUR<br>YEAR_MONTH<br>SELECT EXTRACT(MINUTE FROM ‘2011-11-11 11:11:11’)<br>-&gt; 11</li>
+<li>FROM_DAYS(n)	计算从 0000 年 1 月 1 日开始 n 天后的日期	<br>SELECT FROM_DAYS(1111)<br>-&gt; 0003-01-16</li>
+<li>HOUR(t)	返回 t 中的小时值	<br>SELECT HOUR(‘1:2:3’)<br>-&gt; 1</li>
+<li>LAST_DAY(d)	返回给给定日期的那一月份的最后一天	<br>SELECT LAST_DAY(“2017-06-20”);<br>-&gt; 2017-06-30</li>
+<li>LOCALTIME()	返回当前日期和时间	<br>SELECT LOCALTIME()<br>-&gt; 2018-09-19 20:57:43</li>
+<li>LOCALTIMESTAMP()	返回当前日期和时间	<br>SELECT LOCALTIMESTAMP()<br>-&gt; 2018-09-19 20:57:43</li>
+<li>MAKEDATE(year, day-of-year)	基于给定参数年份 year 和所在年中的天数序号 day-of-year 返回一个日期	<br>SELECT MAKEDATE(2017, 3);<br>-&gt; 2017-01-03</li>
+<li>MAKETIME(hour, minute, second)	组合时间，参数分别为小时、分钟、秒	<br>SELECT MAKETIME(11, 35, 4);<br>-&gt; 11:35:04</li>
+<li>MICROSECOND(date)	返回日期参数所对应的微秒数	<br>SELECT MICROSECOND(“2017-06-20 09:34:00.000023”);<br>-&gt; 23</li>
+<li>MINUTE(t)	返回 t 中的分钟值	<br>SELECT MINUTE(‘1:2:3’)<br>-&gt; 2</li>
+<li>MONTHNAME(d)	返回日期当中的月份名称，如 November	<br>SELECT MONTHNAME(‘2011-11-11 11:11:11’)<br>-&gt; November</li>
+<li>MONTH(d)	返回日期d中的月份值，1 到 12	<br>SELECT MONTH(‘2011-11-11 11:11:11’)<br>-&gt;11</li>
+<li>NOW()	返回当前日期和时间	<br>SELECT NOW()<br>-&gt; 2018-09-19 20:57:43</li>
+<li>PERIOD_ADD(period, number)	为 年-月 组合日期添加一个时段	<br>SELECT PERIOD_ADD(201703, 5);<br>-&gt; 201708</li>
+<li>PERIOD_DIFF(period1, period2)	返回两个时段之间的月份差值	<br>SELECT PERIOD_DIFF(201710, 201703);<br>-&gt; 7</li>
+<li>QUARTER(d)	返回日期d是第几季节，返回 1 到 4	<br>SELECT QUARTER(‘2011-11-11 11:11:11’)<br>-&gt; 4</li>
+<li>SECOND(t)	返回 t 中的秒钟值	<br>SELECT SECOND(‘1:2:3’)<br>-&gt; 3</li>
+<li>SEC_TO_TIME(s)	将以秒为单位的时间 s 转换为时分秒的格式	<br>SELECT SEC_TO_TIME(4320)<br>-&gt; 01:12:00</li>
+<li>STR_TO_DATE(string, format_mask)	将字符串转变为日期	<br>SELECT STR_TO_DATE(“August 10 2017”, “%M %d %Y”);<br>-&gt; 2017-08-10</li>
+<li>SUBDATE(d,n)	日期 d 减去 n 天后的日期	<br>SELECT SUBDATE(‘2011-11-11 11:11:11’, 1)<br>-&gt;2011-11-10 11:11:11 (默认是天)</li>
+<li>SUBTIME(t,n)	时间 t 减去 n 秒的时间	<br>SELECT SUBTIME(‘2011-11-11 11:11:11’, 5)<br>-&gt;2011-11-11 11:11:06 (秒)</li>
+<li>SYSDATE()	返回当前日期和时间	<br>SELECT SYSDATE()<br>-&gt; 2018-09-19 20:57:43</li>
+<li>TIME(expression)	提取传入表达式的时间部分	<br>SELECT TIME(“19:30:10”);<br>-&gt; 19:30:10</li>
+<li>TIME_FORMAT(t,f)	按表达式 f 的要求显示时间 t	<br>SELECT TIME_FORMAT(‘11:11:11’,’%r’)<br>11:11:11 AM</li>
+<li>TIME_TO_SEC(t)	将时间 t 转换为秒	<br>SELECT TIME_TO_SEC(‘1:12:00’)<br>-&gt; 4320</li>
+<li>TIMEDIFF(time1, time2)	计算时间差值	<br>mysql&gt; SELECT TIMEDIFF(“13:10:11”, “13:10:10”);<br>-&gt; 00:00:01<br>mysql&gt; SELECT TIMEDIFF(‘2000:01:01 00:00:00’,<br>  -&gt;                 ‘2000:01:01 00:00:00.000001’);<br>  -&gt; ‘-00:00:00.000001’</li>
+</ul>
+<p>mysql&gt; SELECT TIMEDIFF(‘2008-12-31 23:59:59.000001’,<br>    -&gt;                 ‘2008-12-30 01:01:01.000002’);<br>        -&gt; ‘46:58:57.999999’</p>
+<ul>
+<li>TIMESTAMP(expression, interval)	单个参数时，函数返回日期或日期时间表达式；有2个参数时，将参数加和	<br>mysql&gt; SELECT TIMESTAMP(“2017-07-23”,  “13:10:11”);<br>-&gt; 2017-07-23 13:10:11<br>mysql&gt; SELECT TIMESTAMP(‘2003-12-31’);<br>  -&gt; ‘2003-12-31 00:00:00’</li>
+</ul>
+<p>mysql&gt; SELECT TIMESTAMP(‘2003-12-31 12:00:00’,’12:00:00’);<br>        -&gt; ‘2004-01-01 00:00:00’</p>
+<ul>
+<li>TIMESTAMPDIFF(unit,datetime_expr1,datetime_expr2)	计算时间差，返回 datetime_expr2 − datetime_expr1 的时间差	<br>mysql&gt; SELECT TIMESTAMPDIFF(DAY,’2003-02-01’,’2003-05-01’);   &#x2F;&#x2F; 计算两个时间相隔多少天<br>  -&gt; 89</li>
+</ul>
+<p>mysql&gt; SELECT TIMESTAMPDIFF(MONTH,’2003-02-01’,’2003-05-01’);   &#x2F;&#x2F; 计算两个时间相隔多少月<br>        -&gt; 3<br>mysql&gt; SELECT TIMESTAMPDIFF(YEAR,’2002-05-01’,’2001-01-01’);    &#x2F;&#x2F; 计算两个时间相隔多少年<br>        -&gt; -1<br>mysql&gt; SELECT TIMESTAMPDIFF(MINUTE,’2003-02-01’,’2003-05-01 12:05:55’);  &#x2F;&#x2F; 计算两个时间相隔多少分钟<br>        -&gt; 128885</p>
+<ul>
+<li>TO_DAYS(d)	计算日期 d 距离 0000 年 1 月 1 日的天数	<br>SELECT TO_DAYS(‘0001-01-01 01:01:01’)<br>-&gt; 366</li>
+<li>WEEK(d)	计算日期 d 是本年的第几个星期，范围是 0 到 53	<br>SELECT WEEK(‘2011-11-11 11:11:11’)<br>-&gt; 45</li>
+<li>WEEKDAY(d)	日期 d 是星期几，0 表示星期一，1 表示星期二	<br>SELECT WEEKDAY(“2017-06-15”);<br>-&gt; 3</li>
+<li>WEEKOFYEAR(d)	计算日期 d 是本年的第几个星期，范围是 0 到 53	<br>SELECT WEEKOFYEAR(‘2011-11-11 11:11:11’)<br>-&gt; 45</li>
+<li>YEAR(d)	返回年份	<br>SELECT YEAR(“2017-06-15”);<br>-&gt; 2017</li>
+<li>YEARWEEK(date, mode)	返回年份及第几周（0到53），mode 中 0 表示周天，1表示周一，以此类推	<br>SELECT YEARWEEK(“2017-06-15”);<br>-&gt; 201724</li>
+</ul>
+<h2 id="高级函数"><a href="#高级函数" class="headerlink" title="高级函数"></a>高级函数</h2><ul>
+<li>BIN(x)	返回 x 的二进制编码，x 为十进制数	<br>15 的 2 进制编码:</li>
+</ul>
+<p>SELECT BIN(15); – 1111</p>
+<ul>
+<li>BINARY(s)	将字符串 s 转换为二进制字符串	<br>SELECT BINARY “RUNOOB”;<br>-&gt; RUNOOB</li>
+<li>CASE expression<br>  WHEN condition1 THEN result1<br>  WHEN condition2 THEN result2<br> …<br>  WHEN conditionN THEN resultN<br>  ELSE result<br>END	CASE 表示函数开始，END 表示函数结束。如果 condition1 成立，则返回 result1, 如果 condition2 成立，则返回 result2，当全部不成立则返回 result，而当有一个成立之后，后面的就不执行了。	<br>SELECT CASE<br>　　WHEN 1 &gt; 0<br>　　THEN ‘1 &gt; 0’<br>　　WHEN 2 &gt; 0<br>　　THEN ‘2 &gt; 0’<br>　　ELSE ‘3 &gt; 0’<br>　　END<br>-&gt;1 &gt; 0</li>
+<li>CAST(x AS type)	转换数据类型	<br>字符串日期转换为日期：</li>
+</ul>
+<p>SELECT CAST(“2017-08-29” AS DATE);<br>-&gt; 2017-08-29</p>
+<ul>
+<li>COALESCE(expr1, expr2, …., expr_n)	返回参数中的第一个非空表达式（从左向右）	<br>SELECT COALESCE(NULL, NULL, NULL, ‘runoob.com’, NULL, ‘google.com’);<br>-&gt; runoob.com</li>
+<li>CONNECTION_ID()	返回唯一的连接 ID	<br>SELECT CONNECTION_ID();<br>-&gt; 4292835</li>
+<li>CONV(x,f1,f2)	返回 f1 进制数变成 f2 进制数	<br>SELECT CONV(15, 10, 2);<br>-&gt; 1111</li>
+<li>CONVERT(s USING cs)	函数将字符串 s 的字符集变成 cs	<br>SELECT CHARSET(‘ABC’)<br>-&gt;utf-8</li>
+</ul>
+<p>SELECT CHARSET(CONVERT(‘ABC’ USING gbk))<br>-&gt;gbk</p>
+<ul>
+<li>CURRENT_USER()	返回当前用户	<br>SELECT CURRENT_USER();<br>-&gt; guest@%</li>
+<li>DATABASE()	返回当前数据库名	<br>SELECT DATABASE();<br>-&gt; runoob</li>
+<li>IF(expr,v1,v2)	如果表达式 expr 成立，返回结果 v1；否则，返回结果 v2。	<br>SELECT IF(1 &gt; 0,’正确’,’错误’)<br>-&gt;正确</li>
+<li>IFNULL(v1,v2)	如果 v1 的值不为 NULL，则返回 v1，否则返回 v2。	<br>SELECT IFNULL(null,’Hello Word’)<br>-&gt;Hello Word</li>
+<li>ISNULL(expression)	判断表达式是否为 NULL	<br>SELECT ISNULL(NULL);<br>-&gt;1</li>
+<li>LAST_INSERT_ID()	返回最近生成的 AUTO_INCREMENT 值	<br>SELECT LAST_INSERT_ID();<br>-&gt;6</li>
+<li>NULLIF(expr1, expr2)	比较两个字符串，如果字符串 expr1 与 expr2 相等 返回 NULL，否则返回 expr1	<br>SELECT NULLIF(25, 25);<br>-&gt;</li>
+<li>SESSION_USER()	返回当前用户	<br>SELECT SESSION_USER();<br>-&gt; guest@%</li>
+<li>SYSTEM_USER()	返回当前用户	<br>SELECT SYSTEM_USER();<br>-&gt; guest@%</li>
+<li>USER()	返回当前用户	<br>SELECT USER();<br>-&gt; guest@%</li>
+<li>VERSION()	返回数据库的版本号	<br>SELECT VERSION()<br>-&gt; 5.6.34</li>
+</ul>
+<h1 id="多行函数"><a href="#多行函数" class="headerlink" title="多行函数"></a>多行函数</h1><p>min max avg sum count<br>count(column_name) 不包含为空的行<br>count(*)：包含为空的行</p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p><code>start transaction</code><br><code>rollback</code><br><code>commit</code></p>
+<h2 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h2><ol>
+<li>脏读</li>
+<li>不可重复读</li>
+<li>幻读</li>
+</ol>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>一个事务读到另一个事务修改了但未提交的数据</p>
+<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>同一个数据在一个事务中，不同时间读到不同的值</p>
+<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>事务1读取多条记录，事务2插入几条记录，事务1在查询发现多了几条记录。</p>
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><ol>
+<li>READ UNCOMMITED</li>
+<li>READ COMMITED </li>
+<li>REPEATBLE READ （default)</li>
+<li>SERIALIZABLE</li>
+</ol>
+<p>查询当前隔离级别<br>select @@transaction_isolation;<br>修改当前会话隔离级别<br>set session transaction isolation level read uncommitted</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>数据库中只存放视图的定义，没有存放数据，数据存放在原来的表中</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>简化操作，不需关注表结构<br>数据保护</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><p>&#x2F;&#x2F; 新建<br>create view view_name as<br>select * from t1<br>&#x2F;&#x2F; 新建 若已存在替换<br>create or replace view view_name as<br>select * from t1<br>where t1.id &lt;3<br>with check option &#x2F;&#x2F; 向视图插入时检查where条件</p>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>每次改动只能涉及一个表，若条件字段与修改字段不在一张表修改失败</p>
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>create<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create procedure proc1(in name varchar(10) ,out num int)</span><br><span class="line">begin</span><br><span class="line">    if name is null or name=&#x27;&#x27; then</span><br><span class="line">        select * from t1;</span><br><span class="line">    else</span><br><span class="line">        select * from t1 where tname = name;</span><br><span class="line">    end if</span><br><span class="line">    select found_rows() into num;</span><br><span class="line">end</span><br></pre></td></tr></table></figure></li>
+<li>调用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">call proc1(null)</span><br><span class="line">call proc1(&#x27;vvf1&#x27;)</span><br></pre></td></tr></table></figure></li>
+<li>删除<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop procedure proc1;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
       <tags>
         <tag>mysql</tag>
       </tags>
@@ -2076,6 +2595,233 @@ class c1 implements intf1,intf2&#123;
     <content><![CDATA[]]></content>
       <tags>
         <tag>synchronizied</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>springboot</title>
+    <url>/JAVA/spring/springboot/springboot/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<p>springboot 优点</p>
+<ul>
+<li>快速启动程序</li>
+<li>开箱即用 提供默认配置，提供各种框架方便集成</li>
+<li>内嵌容器</li>
+<li>摒弃xml</li>
+</ul>
+<ol>
+<li><a href="/JAVA/spring/springboot/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" title="配置文件">配置文件</a></li>
+</ol>
+<h1 id="springboot-整合servlet"><a href="#springboot-整合servlet" class="headerlink" title="springboot 整合servlet"></a>springboot 整合servlet</h1><p>热部署工具devtools，JReble</p>
+<h2 id="servlet、Filter、Listner"><a href="#servlet、Filter、Listner" class="headerlink" title="servlet、Filter、Listner"></a>servlet、Filter、Listner</h2><h1 id="静态文件处理"><a href="#静态文件处理" class="headerlink" title="静态文件处理"></a>静态文件处理</h1><h2 id="WebMvcAutoConfiguration处理静态资源文件"><a href="#WebMvcAutoConfiguration处理静态资源文件" class="headerlink" title="WebMvcAutoConfiguration处理静态资源文件"></a>WebMvcAutoConfiguration处理静态资源文件</h2><h3 id="addResourceHandlers方法"><a href="#addResourceHandlers方法" class="headerlink" title="addResourceHandlers方法"></a>addResourceHandlers方法</h3><ul>
+<li>判断spring.web.resources.add-mappings 是否启用默认静态资源配置</li>
+<li>处理webjars<br><a href="https://www.webjars.org/">引入webjars</a></li>
+<li>处理resources.properties配置的静态目录<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;classpath:/META-INF/resources/&quot;, </span><br><span class="line">&quot;classpath:/resources/&quot;, </span><br><span class="line">&quot;classpath:/static/&quot;, </span><br><span class="line">&quot;classpath:/public/&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="欢迎页面处理"><a href="#欢迎页面处理" class="headerlink" title="欢迎页面处理"></a>欢迎页面处理</h2><p><code>EnableWebMvcConfiguration.welcomePageHandlerMapping</code></p>
+<h1 id="springMVC扩展"><a href="#springMVC扩展" class="headerlink" title="springMVC扩展"></a>springMVC扩展</h1><p>自定义WebMvcConfigurer类，可自定义<br>interceptors, formatters, view controllers等。自定义WebMvcConfigurer使用@Configuration 不用@EnableWebMvc注解。</p>
+<h2 id="整合servlet"><a href="#整合servlet" class="headerlink" title="整合servlet"></a>整合servlet</h2><ul>
+<li>ServletRegistrationBean方式</li>
+<li>@WebServlet方式<br>两种方式同时配置，ServletRegistrationBean方式优先级高</li>
+</ul>
+<h3 id="ServletRegistrationBean方式"><a href="#ServletRegistrationBean方式" class="headerlink" title="ServletRegistrationBean方式"></a>ServletRegistrationBean方式</h3><h4 id="定义Servlet"><a href="#定义Servlet" class="headerlink" title="定义Servlet"></a>定义Servlet</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class MyServlet extends HttpServlet &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        System.out.println(&quot;MyServlet doGet is functioning&quot;);</span><br><span class="line">        super.doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="注册bean"><a href="#注册bean" class="headerlink" title="注册bean"></a>注册bean</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MyServletConfiguration &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ServletRegistrationBean&lt;MyServlet&gt; getServletRegistrationBean() &#123;</span><br><span class="line">        ServletRegistrationBean&lt;MyServlet&gt; bean = new ServletRegistrationBean&lt;&gt;(new MyServlet(), &quot;/s2&quot;);</span><br><span class="line">        //ServletRegistrationBean&lt;MyServlet&gt; bean = new ServletRegistrationBean&lt;&gt;(new MyServlet());</span><br><span class="line">        bean.setLoadOnStartup(1);</span><br><span class="line">        return bean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WebServlet方式"><a href="#WebServlet方式" class="headerlink" title="WebServlet方式"></a>WebServlet方式</h3><h4 id="定义Servlet-1"><a href="#定义Servlet-1" class="headerlink" title="定义Servlet"></a>定义Servlet</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@WebServlet(name = &quot;myServlet&quot;, urlPatterns = &quot;/srv&quot;, loadOnStartup = 1)</span><br><span class="line">public class MyServlet extends HttpServlet &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        System.out.println(&quot;MyServlet doGet is functioning&quot;);</span><br><span class="line">        super.doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="配置扫描"><a href="#配置扫描" class="headerlink" title="配置扫描"></a>配置扫描</h4><p>启动类配置注解：@ServletComponentScan</p>
+<h2 id="视图解析器"><a href="#视图解析器" class="headerlink" title="视图解析器"></a>视图解析器</h2><p><code>WebMvcAutoConfigurationAdapter.viewResolver</code>方法注册<code>ContentNegotiatingViewResolver</code><br><code>resolveViewName()</code>解析视图 </p>
+<h2 id="视图控制器"><a href="#视图控制器" class="headerlink" title="视图控制器"></a>视图控制器</h2><h3 id="新增视图控制器"><a href="#新增视图控制器" class="headerlink" title="新增视图控制器"></a>新增视图控制器</h3><p>???</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MyMvcConfigure implements WebMvcConfigurer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void addViewControllers(ViewControllerRegistry registry) &#123;</span><br><span class="line">        WebMvcConfigurer.super.addViewControllers(registry);</span><br><span class="line">        registry.addViewController(&quot;/vvf&quot;).setViewName(&quot;welcome&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="添加视图文件"><a href="#添加视图文件" class="headerlink" title="添加视图文件"></a>添加视图文件</h3><p>添加文件resources&#x2F;templates&#x2F;wecome.html</p>
+<p>注意事项：添加模版引擎依赖如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="thymeleaf"><a href="#thymeleaf" class="headerlink" title="thymeleaf"></a>thymeleaf</h1><h2 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class ThymeleafController &#123;</span><br><span class="line">    @RequestMapping(&quot;hellothymeleaf&quot;)</span><br><span class="line">    public String hello(/*Model model*/ ModelMap map, HttpSession session) &#123;</span><br><span class="line">        session.setAttribute(&quot;name&quot;, &quot;vvf&quot;);</span><br><span class="line">        //model.addAttribute(&quot;name&quot;, &quot;vvf&quot;);</span><br><span class="line">        map.put(&quot;thText&quot;, &quot;加粗文本&lt;b&gt;加粗&lt;/b&gt;&quot;);</span><br><span class="line">        map.put(&quot;thUText&quot;, &quot;加粗文本&lt;b&gt;加粗&lt;/b&quot;);</span><br><span class="line">        map.put(&quot;thValue&quot;, &quot; input value is thValue&quot;);</span><br><span class="line">        map.put(&quot;thEach&quot;, Arrays.asList(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;));</span><br><span class="line">        map.put(&quot;thIfEmpty&quot;, &quot;&quot;);</span><br><span class="line">        map.put(&quot;thIfNotEmpty&quot;, &quot;hello&quot;);</span><br><span class="line">        map.put(&quot;thPerson&quot;, new Person(&quot;vvf&quot;, 31, &quot;男&quot;));</span><br><span class="line"></span><br><span class="line">        return &quot;helloThymeleaf&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;hello2&quot;)</span><br><span class="line">    public String hello2() &#123;</span><br><span class="line">        return &quot;hello2&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="view"><a href="#view" class="headerlink" title="view"></a>view</h2><p>注意事项：引入 <code>xmln:th:=&quot;http://thymeleaf.org&quot;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot; xmln:th:=&quot;http://thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!--表达式语法--&gt;</span><br><span class="line">&lt;!--&lt;p th:text=&quot;$&#123;name&#125;&quot;&gt;&lt;/p&gt;--&gt;</span><br><span class="line">thText：&lt;p th:text=&quot;$&#123;thText&#125;&quot;&gt;&lt;/p&gt;</span><br><span class="line">thUText：&lt;p th:utext=&quot;$&#123;thUText&#125;&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; th:value=&quot;$&#123;thValue&#125;&quot;&gt;</span><br><span class="line">&lt;div th:each=&quot;message:$&#123;thEach&#125;&quot;&gt;</span><br><span class="line">    &lt;p th:text=&quot;$&#123;message&#125;&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p th:text=&quot;$&#123;message&#125;&quot; th:each=&quot;message:$&#123;thEach&#125;&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;p th:text=&quot;$&#123;thIfEmpty&#125;&quot; th:if=&quot;$&#123;not #strings.isEmpty(thIfEmpty)&#125;&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p th:text=&quot;$&#123;thIfNotEmpty&#125;&quot; th:if=&quot;$&#123;not #strings.isEmpty(thIfNotEmpty)&#125;&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;div th:object=&quot;$&#123;thPerson&#125;&quot;&gt;</span><br><span class="line">    &lt;p&gt;name:&lt;span th:text=&quot;*&#123;name&#125;&quot;&gt;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;age:&lt;span th:text=&quot;*&#123;age&#125;&quot;&gt;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;gender:&lt;span th:text=&quot;*&#123;gender&#125;&quot;&gt;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div&gt;</span><br><span class="line">    session:&lt;span th:text=&quot;$&#123;session.name&#125;&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h1><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ol>
+<li><p>application.properties<br>spring.messages.basename: i18n&#x2F;login</p>
+</li>
+<li><p>resource 文件夹下新建配置文件</p>
+<ul>
+<li>&#x2F;i18n&#x2F;login.properties 添加配置，例如：login.username&#x3D;hello</li>
+<li>&#x2F;i18n&#x2F;login_zh_CN.properties 添加配置，例如：login.username&#x3D;飞飞</li>
+<li>&#x2F;i18n&#x2F;login_en_US.properties 添加配置，例如：login.username&#x3D;vvf<br><img src="/JAVA/spring/springboot/springboot/%E5%9B%BD%E9%99%85%E5%8C%96%E9%85%8D%E7%BD%AE.png"></li>
+</ul>
+</li>
+<li><p>自定义LocalResolver</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MyMvcConfigure implements WebMvcConfigurer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void addViewControllers(ViewControllerRegistry registry) &#123;</span><br><span class="line">        WebMvcConfigurer.super.addViewControllers(registry);</span><br><span class="line">        registry.addViewController(&quot;/vvf&quot;).setViewName(&quot;welcome&quot;);</span><br><span class="line">        registry.addViewController(&quot;/out&quot;).setViewName(&quot;out&quot;);</span><br><span class="line">        registry.addViewController(&quot;/login&quot;).setViewName(&quot;login&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public LocaleResolver localeResolver() &#123;</span><br><span class="line">        return new NativeLocaleResolver();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class NativeLocaleResolver implements LocaleResolver &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public Locale resolveLocale(HttpServletRequest request) &#123;</span><br><span class="line">            String languge = request.getParameter(&quot;languge&quot;);</span><br><span class="line">            Locale locale = Locale.getDefault();</span><br><span class="line">            if (!StringUtils.isEmpty(languge)) &#123;</span><br><span class="line">                String[] split = languge.split(&quot;_&quot;);</span><br><span class="line">                locale = new Locale(split[0], split[1]);</span><br><span class="line">            &#125;</span><br><span class="line">            return locale;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="view-1"><a href="#view-1" class="headerlink" title="view"></a>view</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html xmln:th:=&quot;http://thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;login&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;span th:text=&quot;#&#123;login.username&#125;&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;a th:href=&quot;@&#123;/login(languge=&#x27;zh_CN&#x27;)&#125;&quot;&gt;中文&lt;/a&gt;</span><br><span class="line">&lt;a th:href=&quot;@&#123;/login(languge=&#x27;en_US&#x27;)&#125;&quot;&gt;英文&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="整合jdbc"><a href="#整合jdbc" class="headerlink" title="整合jdbc"></a>整合jdbc</h1><h2 id="配置数据源"><a href="#配置数据源" class="headerlink" title="配置数据源"></a>配置数据源</h2><p>application.yaml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://127.0.0.1:3306/vvf?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai</span><br><span class="line">#    type: com.alibaba.druid.pool.DruidDataSource # 使用druid需引入依赖，默认使用jdbc</span><br></pre></td></tr></table></figure>
+<h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootTest</span><br><span class="line">class ApplicationTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void contextLoads() throws SQLException &#123;</span><br><span class="line">        Connection connection = dataSource.getConnection();</span><br><span class="line">        System.out.println(connection);</span><br><span class="line">        System.out.println(connection.getCatalog());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用JdbcTemplate"><a href="#使用JdbcTemplate" class="headerlink" title="使用JdbcTemplate"></a>使用JdbcTemplate</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class TestJDBCController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    JdbcTemplate template;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;getAll&quot;)</span><br><span class="line">    public String getAll() &#123;</span><br><span class="line">        String sql = &quot;select * from v_user&quot;;</span><br><span class="line">        List&lt;Map&lt;String, Object&gt;&gt; maps = template.queryForList(sql);</span><br><span class="line">        maps.stream().forEach(x -&gt; &#123;</span><br><span class="line">            x.forEach((y, z) -&gt; &#123;</span><br><span class="line">                System.out.println(&quot;key:&quot; + y + &quot; value:&quot; + z);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        return JSONObject.toJSONString(maps);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;addOne&quot;)</span><br><span class="line">    public int insert() &#123;</span><br><span class="line">        String sql = &quot;insert into v_user (name,sex,aget,birth_day) values(?,?,?,?)&quot;;</span><br><span class="line">        int r = template.update(sql, &quot;vvf&quot;, &quot;3&quot;, 31, &quot;2021-01-01&quot;);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;deleteOne&quot;)</span><br><span class="line">    public int delete() &#123;</span><br><span class="line">        String sql = &quot;delete from v_user where id=?&quot;;</span><br><span class="line">        int r = template.update(sql, 4);</span><br><span class="line">        return r;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;update/&#123;id&#125;&quot;)</span><br><span class="line">    public int update(@PathVariable(&quot;id&quot;) int id) &#123;</span><br><span class="line">        String sql = &quot;update v_user set c1 = ? where id =?&quot;;</span><br><span class="line">        int r = template.update(sql, &quot;changedC1&quot;, id);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="整合druid"><a href="#整合druid" class="headerlink" title="整合druid"></a>整合druid</h1><p><a href="https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">中文文档</a></p>
+<p>Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。</p>
+<h2 id="添加-Configuration配置类"><a href="#添加-Configuration配置类" class="headerlink" title="添加@Configuration配置类"></a>添加@Configuration配置类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class DruidConfig &#123;</span><br><span class="line">    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)</span><br><span class="line">    @Bean</span><br><span class="line">    public DataSource druidDataSource() &#123;</span><br><span class="line">        return new DruidDataSource();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 监控配置</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public ServletRegistrationBean druidServletRegistrationBean() &#123;</span><br><span class="line">        ServletRegistrationBean&lt;Servlet&gt; servletServletRegistrationBean = new ServletRegistrationBean&lt;&gt;(new StatViewServlet(), &quot;/druid/*&quot;);</span><br><span class="line">        Map&lt;String, String&gt; initParams = new HashMap&lt;&gt;();</span><br><span class="line">        initParams.put(&quot;loginUsername&quot;, &quot;root&quot;); //监控页面账号</span><br><span class="line">        initParams.put(&quot;loginPassword&quot;, &quot;root&quot;); //监控页面密码</span><br><span class="line">        //initParams.put(&quot;allow&quot;, &quot;localhost&quot;);//只有本机可以访问</span><br><span class="line">        initParams.put(&quot;allow&quot;, &quot;&quot;);//空格或者空表示所有人可以访问</span><br><span class="line">        //initParams.put(&quot;msb&quot;, &quot;192.168.1.20&quot;);// 进制此ip访问  参数：名称 ， ip</span><br><span class="line">        servletServletRegistrationBean.setInitParameters(initParams);</span><br><span class="line">        return servletServletRegistrationBean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 配置Druid监控之web的监控filter</span><br><span class="line">     * 用于配置Web和Druid数据源之间的管理关联监控统计</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public FilterRegistrationBean webStatFilter() &#123;</span><br><span class="line">        FilterRegistrationBean bean = new FilterRegistrationBean();</span><br><span class="line">        bean.setFilter(new WebStatFilter());</span><br><span class="line">        Map&lt;String, String&gt; initParams = new HashMap&lt;&gt;();</span><br><span class="line">        initParams.put(&quot;exclusions&quot;, &quot;*.js,*.css,/druid/*&quot;);</span><br><span class="line">        bean.setInitParameters(initParams);</span><br><span class="line"></span><br><span class="line">        bean.setUrlPatterns(Arrays.asList(&quot;/*&quot;));</span><br><span class="line">        return bean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件-1"><a href="#配置文件-1" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://127.0.0.1:3306/vvf?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai</span><br><span class="line">    type: com.alibaba.druid.pool.DruidDataSource # 需引入依赖</span><br><span class="line">    # 配置初始化大小、最小、最大</span><br><span class="line">    initialSize: 1</span><br><span class="line">    minIdle: 10</span><br><span class="line">    maxActive: 100</span><br><span class="line">    maxWait: 6000 #配置获取连接等待超时的时间</span><br><span class="line">    timeBetweenEvictionRunsMillis: 60000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒</span><br><span class="line">#    配置一个连接在池中最小生存的时间，单位是毫秒</span><br><span class="line">    minEvictableIdleTimeMillis: 600000</span><br><span class="line">#    maxEvictableIdleTimeMillis: 900000</span><br><span class="line">    validationQuery: select 1</span><br><span class="line">    testWhileIdle: true</span><br><span class="line">    testOnBorrow: false</span><br><span class="line">    testOnReturn: false</span><br><span class="line">    poolPreparedStatements: true</span><br><span class="line">    maxOpenPreparedStatements: 20</span><br><span class="line">    asyncInit: true</span><br><span class="line">    filters: stat #配置监控统计拦截的filters</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试配置"><a href="#测试配置" class="headerlink" title="测试配置"></a>测试配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@SpringBootTest</span><br><span class="line">class ApplicationTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void contextLoads() throws SQLException &#123;</span><br><span class="line">        Connection connection = dataSource.getConnection();</span><br><span class="line">        System.out.println(connection);</span><br><span class="line">        System.out.println(connection.getCatalog());</span><br><span class="line">        DruidDataSource druidDataSource = (DruidDataSource) dataSource;</span><br><span class="line">        System.out.println(&quot;getMaxIdle:&quot; + druidDataSource.getMaxIdle());</span><br><span class="line">        System.out.println(&quot;getMaxActive:&quot; + druidDataSource.getMaxActive());</span><br><span class="line">        System.out.println(&quot;getTimeBetweenEvictionRunsMillis:&quot; + druidDataSource.getTimeBetweenEvictionRunsMillis());</span><br><span class="line">        System.out.println(&quot;getMinEvictableIdleTimeMillis:&quot; + druidDataSource.getMinEvictableIdleTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="监控页面"><a href="#监控页面" class="headerlink" title="监控页面"></a>监控页面</h2><p><a href="http://localhost:8080/druid/">http://localhost:8080/druid/</a></p>
+<h1 id="配置多数据源"><a href="#配置多数据源" class="headerlink" title="配置多数据源"></a>配置多数据源</h1><p>？？？???</p>
+<h1 id="spring集成mybatis"><a href="#spring集成mybatis" class="headerlink" title="spring集成mybatis"></a>spring集成mybatis</h1><h2 id="pom-1"><a href="#pom-1" class="headerlink" title="pom"></a>pom</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.2.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="application-yaml"><a href="#application-yaml" class="headerlink" title="application.yaml"></a>application.yaml</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://127.0.0.1:3306/vvf?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai</span><br><span class="line">#    type: com.alibaba.druid.pool.DruidDataSource # 使用druid需引入依赖，默认使用jdbc</span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  type-aliases-package: com.vvf.msbspringbootmybatis.testmybatis.entity</span><br></pre></td></tr></table></figure>
+<h2 id="mapper类"><a href="#mapper类" class="headerlink" title="mapper类"></a>mapper类</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">@Repository</span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;User&gt; getAll();</span><br><span class="line"></span><br><span class="line">    int add(User user);</span><br><span class="line"></span><br><span class="line">    int delete(int id);</span><br><span class="line"></span><br><span class="line">    int update(User user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="mapper配置文件"><a href="#mapper配置文件" class="headerlink" title="mapper配置文件"></a>mapper配置文件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace=&quot;com.vvf.msbspringbootmybatis.testmybatis.mapper.UserMapper&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id=&quot;getAll&quot; resultType=&quot;map&quot;&gt;</span><br><span class="line">        select * from v_user</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;insert id=&quot;add&quot; parameterType=&quot;User&quot;&gt;</span><br><span class="line">        insert into v_user (name,aget)values (#&#123;name&#125;,#&#123;age&#125;)</span><br><span class="line">    &lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">    &lt;delete id=&quot;delete&quot; parameterType=&quot;int&quot;&gt;</span><br><span class="line">        delete from v_user where id=#&#123;id&#125;</span><br><span class="line">    &lt;/delete&gt;</span><br><span class="line"></span><br><span class="line">    &lt;update id=&quot;update&quot; parameterType=&quot;User&quot;&gt;</span><br><span class="line">        update v_user set name=#&#123;name&#125; where id=#&#123;id&#125;</span><br><span class="line">    &lt;/update&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="controller、model"><a href="#controller、model" class="headerlink" title="controller、model"></a>controller、model</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class UserController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/getAll&quot;)</span><br><span class="line">    public String getAll() &#123;</span><br><span class="line">        System.out.println(&quot;getAll&quot;);</span><br><span class="line">        List&lt;User&gt; r = userMapper.getAll();</span><br><span class="line">        return JSONObject.toJSONString(r);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;add&quot;)</span><br><span class="line">    public int add() &#123;</span><br><span class="line">        System.out.println(&quot;add one&quot;);</span><br><span class="line">        User u = new User();</span><br><span class="line">        u.setName(&quot;vvfs1&quot;);</span><br><span class="line">        u.setAge(100);</span><br><span class="line">        int r = userMapper.add(u);</span><br><span class="line">        System.out.println(&quot;add result:&quot; + r);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;delete&quot;)</span><br><span class="line">    public int delete() &#123;</span><br><span class="line">        System.out.println(&quot;delete one&quot;);</span><br><span class="line">        int r = userMapper.delete(6);</span><br><span class="line">        System.out.println(&quot;delete result:&quot; + r);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;update&quot;)</span><br><span class="line">    public int update() &#123;</span><br><span class="line">        System.out.println(&quot;update one&quot;);</span><br><span class="line">        User u = new User();</span><br><span class="line">        u.setName(&quot;vvfs3&quot;);</span><br><span class="line">        u.setId(1);</span><br><span class="line">        int r = userMapper.update(u);</span><br><span class="line">        System.out.println(&quot;update result:&quot; + r);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class User &#123;</span><br><span class="line">    String name;</span><br><span class="line">    Integer age;</span><br><span class="line">    Integer id;</span><br><span class="line"></span><br><span class="line">    public User(String name, Integer age, Integer id) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(Integer age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Integer id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="使用注解的方式"><a href="#使用注解的方式" class="headerlink" title="使用注解的方式"></a>使用注解的方式</h2><ul>
+<li>删除application.yaml中mapper-locations配置</li>
+<li>删除mapper.xml</li>
+<li>删除@Mappers注解</li>
+<li>添加@MapperScan(“package”) &#x2F;&#x2F; 自动注入包下所有接口</li>
+</ul>
+<h1 id="表单接收方式"><a href="#表单接收方式" class="headerlink" title="表单接收方式"></a>表单接收方式</h1><h2 id="PathVariable"><a href="#PathVariable" class="headerlink" title="PathVariable"></a>PathVariable</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   @GetMapping(value = &quot;/hello/&#123;id&#125;&quot;)</span><br><span class="line">    public String hello(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">        return &quot;ID:&quot; + id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实体对象接受"><a href="#实体对象接受" class="headerlink" title="实体对象接受"></a>实体对象接受</h2><h3 id="json数据"><a href="#json数据" class="headerlink" title="json数据"></a>json数据</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@PostMapping(value = &quot;/user&quot;)</span><br><span class="line">public User saveUser2(@RequestBody User user) &#123;</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="普通实体对象"><a href="#普通实体对象" class="headerlink" title="普通实体对象"></a>普通实体对象</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@PostMapping(value = &quot;/user&quot;)</span><br><span class="line">public User saveUser2(User user) &#123;</span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参数名取值"><a href="#参数名取值" class="headerlink" title="参数名取值"></a>参数名取值</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@PostMapping(value = &quot;/post&quot;)</span><br><span class="line">public String post(@RequestParam(name = &quot;name&quot;) String name,</span><br><span class="line">                   @RequestParam(name = &quot;age&quot;) Integer age) &#123;</span><br><span class="line">    String content = String.format(&quot;name = %s,age = %d&quot;, name, age);</span><br><span class="line">    return content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><h3 id="配置文件-2"><a href="#配置文件-2" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring.http.multipart.maxFileSize=200MB</span><br><span class="line">spring.http.multipart.maxRequestSize=200MB</span><br><span class="line"></span><br><span class="line">spring.servlet.multipart.max-request-size = 200MB</span><br><span class="line">spring.servlet.multipart.max-file-size = 200MB</span><br></pre></td></tr></table></figure>
+<h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;fileUploadController&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">		上传文件：&lt;input type=&quot;file&quot; name=&quot;filename&quot;/&gt;&lt;br/&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot;/&gt;</span><br><span class="line">	&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="controller-1"><a href="#controller-1" class="headerlink" title="controller"></a>controller</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RequestMapping(&quot;/fileUploadController&quot;)</span><br><span class="line">public String fileUpload(MultipartFile filename) throws Exception&#123;</span><br><span class="line">	System.out.println(filename.getOriginalFilename());</span><br><span class="line">	filename.transferTo(new File(&quot;e:/&quot;+filename.getOriginalFilename()));</span><br><span class="line">	return &quot;ok&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="springboot的启动过程"><a href="#springboot的启动过程" class="headerlink" title="springboot的启动过程"></a>springboot的启动过程</h2><h2 id="自动装配原理"><a href="#自动装配原理" class="headerlink" title="自动装配原理"></a>自动装配原理</h2><h3 id="conditional"><a href="#conditional" class="headerlink" title="conditional"></a>conditional</h3><h1 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h1><h2 id="启动-run方法"><a href="#启动-run方法" class="headerlink" title="启动(run方法)"></a>启动(run方法)</h2><h3 id="new-SpringApplication"><a href="#new-SpringApplication" class="headerlink" title="new SpringApplication()"></a>new SpringApplication()</h3><ul>
+<li>获取 webApplicationType</li>
+<li>读取配置 META-INF&#x2F;spring.factories <ul>
+<li>文件位置 spring-boot包、spring-boot-autoconfigure包</li>
+</ul>
+</li>
+<li>初始化ApplicationContextInitializer类型实例</li>
+<li>初始化ApplicationListener类型实例</li>
+<li>获取启动主类</li>
+</ul>
+<h3 id="run"><a href="#run" class="headerlink" title="run"></a>run</h3><ul>
+<li>设置java.awt.headless&#x3D;true 无显示模式</li>
+<li>获取SpringApplicationRunListener （EventPublishingRunListener）</li>
+<li>EventPublishingRunListener 启动相关ApplicationStartingEvent事件</li>
+<li>new DefaultApplicationArguments(args); （构造方法）解析命令行参数</li>
+<li>prepareEnvironment(listeners, bootstrapContext, applicationArguments);<ul>
+<li>解析解析servletConfigInitParams、servletContextInitParams、jndiProperties、systemProperties、systemEnvironment<ul>
+<li>根据webApplicationType类型，创建new ApplicationServletEnvironment() </li>
+<li>创建ApplicationServletEnvironment实例时 StandardServletEnvironment 解析servletConfigInitParams、servletContextInitParams、jndiProperties； StandardEnvironment解析systemProperties、systemEnvironment<ul>
+<li>(ApplicationServletEnvironment extens StandardServletEnvironment extens  StandardEnvironment extens AbstractEnvironment  AbstractEnvironment 构造方法调用customizePropertySources())</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>configureEnvironment 解析命令行参数、解析profile(空方法？)</li>
+<li>listeners.environmentPrepared 筛选支持ApplicationEnvironmentPreparedEvent事件的listners执行listner对应的onApplicationEvent方法<ul>
+<li>EnvironmentPostProcessorApplicationListener 获取ConfigDataEnvironmentPostProcessor ,YamlPropertySourceLoader解析.yaml&#x2F;.yml配置文件(PropertiesPropertySourceLoader解析 .properties&#x2F;.xml配置文件)</li>
+<li>2.4之前版本使用configFileApplicationListner 处理配置文件</li>
+</ul>
+</li>
+<li>加载banner 配置：<br>  <code>spring:banner:location:banner.txt;  spring:banner:image:location:banner.png;</code></li>
+<li>创建上下文对象<br>  createApplicationContext <ol>
+<li>读取ApplicationContextFactory类型的listner，根据webApplicationType筛选listner</li>
+<li>创建的AnnotationConfigServletWebServerApplicationContext，包含reader、scaner<ul>
+<li>reader: bean注册，包含condition判断</li>
+<li>scaner: 包扫描，扫描@Controller、@Service等</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>准备上下文对象<br>  prepareContext（注入[初始化]属性值）<ul>
+<li>applyInitializers():应用所有初始化器（创建application对象时，读取的spring.factories配置的ApplicationContextInitializer）<br>  initializer的作用：注册listner和postprocess  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Initializers</span><br><span class="line">org.springframework.context.ApplicationContextInitializer=\</span><br><span class="line">org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer,\</span><br><span class="line">org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener</span><br><span class="line">Application Context Initializers</span><br><span class="line">org.springframework.context.ApplicationContextInitializer=\</span><br><span class="line">org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer,\</span><br><span class="line">org.springframework.boot.context.ContextIdApplicationContextInitializer,\</span><br><span class="line">org.springframework.boot.context.config.DelegatingApplicationContextInitializer,\</span><br><span class="line">org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer,\</span><br><span class="line">org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer</span><br></pre></td></tr></table></figure></li>
+<li>listeners.contextPrepared(context); 获取支持ApplicationContextInitializedEvent事件的listners[spring.factories文件中 key为org.springframework.context.ApplicationListener]并执行</li>
+<li>context.addBeanFactoryPostProcessor(new PropertySourceOrderingBeanFactoryPostProcessor(context));</li>
+<li>load ，注册Application对象</li>
+<li>listeners.contextLoaded(context);<ul>
+<li>获取支持ApplicationPreparedEvent事件的listner，执行onApplicationEvent方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="spring事件机制"><a href="#spring事件机制" class="headerlink" title="spring事件机制"></a>spring事件机制</h1><h2 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h2><img src="SpringApplicationEvent.png">
+ApplicationStartingEvent
+ApplicationEnvironmentPreparedEvent 
+ApplicationPreparedEvent
+ApplicationContextInitializedEvent
+ApplicationReadyEvent 
+ApplicationStartedEvent 
+ApplicationFailedEvent 
+
+<h2 id="监听器listner"><a href="#监听器listner" class="headerlink" title="监听器listner"></a>监听器listner</h2><p>定义在spring-boot.jar,spring-boot-autoconfigure.jar 的&#x2F;META-INF&#x2F;spring.factories文件中</p>
+<p>一个listner可支持多种事件类型</p>
+]]></content>
+      <tags>
+        <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>注解</title>
+    <url>/JAVA/spring/springboot/%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>注解其他注解<br>java.lang.annotation包中四个标准meta-annotation：</p>
+<ul>
+<li><p>@Target 描述注解的适用范围</p>
+</li>
+<li><p>@Retention 表示需要在什么级别保存该注释信息，描述注解的生命周期 Source &lt; Class &lt; Runtime</p>
+<ol>
+<li>RetentionPolicy.SOURCE：注解只保留在源文件，当Java文件编译成 .class 文件的时候，被其标注的注解被遗弃；</li>
+<li>RetentionPolicy.CLASS：注解被保留到class文件中，但jvm加载 .class 文件时候，被其标注的注解会被遗弃，这是默认的生命周期；</li>
+<li>RetentionPolicy.RUNTIME：注解不仅被保留到 .class 文件中，jvm 加载 .class 文件之后，被其标注的注解仍然存在，所以这个时候才可能通过反射机制读取注解的信息，而前两个生命周期中，通过反射机制读取不到注解信息的；</li>
+</ol>
+<p>  对应的生命周期：Java源文件(.java文件) —&gt; .class文件 —&gt; 内存中的字节码</p>
+</li>
+<li><p>@Document 说明该注解被包含在javadoc中</p>
+</li>
+<li><p>@Inherited 说明子类可继承父类的该注解</p>
+</li>
+</ul>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Target(&#123;ElementType.FIELD, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">public @interface myannotation &#123;</span><br><span class="line">    String attr() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Ps1 &#123;</span><br><span class="line">    @myannotation(attr = &quot;my_annotation&quot;)</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ConditionalOn"><a href="#ConditionalOn" class="headerlink" title="@ConditionalOn"></a>@ConditionalOn</h2><p>???？？？</p>
+<h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface MyIntf1 &#123;</span><br><span class="line">    MyIntf1 DEFAULT = (sss) -&gt; &#123;</span><br><span class="line">        return new MyImp1(sss);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    MyImp1 create12(String s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyImp1 implements MyIntf1 &#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public MyImp1 create12(String s) &#123;</span><br><span class="line">        return new MyImp1(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MyImp1(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;MyImp1&#123;&quot; +</span><br><span class="line">                &quot;name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">MyIntf1 myImp1 = MyIntf1.DEFAULT.create12(&quot;hello vvf&quot;);</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>配置文件</title>
+    <url>/JAVA/spring/springboot/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><h2 id="application-yaml"><a href="#application-yaml" class="headerlink" title="application.yaml"></a>application.yaml</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">person:</span><br><span class="line">  lastname: VV</span><br><span class="line">  name: vvf$&#123;person.lastname&#125;</span><br><span class="line">  sex: 1</span><br><span class="line">  habits:</span><br><span class="line">    - ball</span><br><span class="line">    - aaaa</span><br><span class="line">  secret: $&#123;random.value&#125;</span><br><span class="line">  number: $&#123;random.int&#125;</span><br><span class="line">  bigNum: $&#123;random.long&#125;</span><br><span class="line">  uuid: $&#123;random.uuid&#125;</span><br><span class="line">  less10: $&#123;random.int(10)&#125;</span><br><span class="line">  range: $&#123;random.int[1024,65525]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注入属性"><a href="#注入属性" class="headerlink" title="注入属性"></a>注入属性</h3><p>解析配置文件到自定义类的两种方式：</p>
+<ul>
+<li>使用@ConfigurationProperties</li>
+<li>使用@Value</li>
+</ul>
+<h4 id="ConfigurationProperties"><a href="#ConfigurationProperties" class="headerlink" title="@ConfigurationProperties"></a>@ConfigurationProperties</h4><h5 id="实体类Person"><a href="#实体类Person" class="headerlink" title="实体类Person"></a>实体类Person</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@ConfigurationProperties(prefix = &quot;person&quot;)</span><br><span class="line">@Component</span><br><span class="line">public class Person &#123;</span><br><span class="line">    String name;</span><br><span class="line">    Integer sex;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; habits;</span><br><span class="line"></span><br><span class="line">    public List&lt;String&gt; getHabits() &#123;</span><br><span class="line">        return habits;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setHabits(List&lt;String&gt; habits) &#123;</span><br><span class="line">        this.habits = habits;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;Person&#123;&quot; +</span><br><span class="line">                &quot;name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &quot;, sex=&quot; + sex +</span><br><span class="line">                &quot;, habits=&quot; + habits +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getSex() &#123;</span><br><span class="line">        return sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSex(Integer sex) &#123;</span><br><span class="line">        this.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-Value"><a href="#使用-Value" class="headerlink" title="使用@Value"></a>使用@Value</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Person2 &#123;</span><br><span class="line">    @Value(&quot;$&#123;person.name&#125;&quot;)</span><br><span class="line">    String name;</span><br><span class="line">    @Value(&quot;$&#123;person.sex&#125;&quot;)</span><br><span class="line">    Integer sex;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;Person&#123;&quot; +</span><br><span class="line">                &quot;name=&#x27;&quot; + name + &#x27;\&#x27;&#x27; +</span><br><span class="line">                &quot;, sex=&quot; + sex +</span><br><span class="line">                &#x27;&#125;&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getSex() &#123;</span><br><span class="line">        return sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSex(Integer sex) &#123;</span><br><span class="line">        this.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@SpringBootTest</span><br><span class="line">class ApplicationTests &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    Person p;</span><br><span class="line">    @Autowired</span><br><span class="line">    Person2 p2;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void contextLoads() &#123;</span><br><span class="line">        System.out.println(p);</span><br><span class="line">        System.out.println(p2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="对比-ConfigurationProperties-和-Value"><a href="#对比-ConfigurationProperties-和-Value" class="headerlink" title="对比@ConfigurationProperties 和 @Value"></a>对比@ConfigurationProperties 和 @Value</h4><p><img src="/JAVA/spring/springboot/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/Configuration%E5%92%8CValue%E5%AF%B9%E6%AF%94.png"></p>
+<h3 id="使用表达式"><a href="#使用表达式" class="headerlink" title="使用表达式"></a>使用表达式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Value(&quot;#&#123;10+1&#125;&quot;)</span><br><span class="line">Integer age;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JSR303数据校验"><a href="#JSR303数据校验" class="headerlink" title="JSR303数据校验"></a>JSR303数据校验</h3><h4 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.validation&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;validation-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.0.1.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">// 给validation-api提供实现</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;6.0.1.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类添加注解-Validated"><a href="#类添加注解-Validated" class="headerlink" title="类添加注解@Validated"></a>类添加注解@Validated</h4><h4 id="字段添加注解-Email等具体验证"><a href="#字段添加注解-Email等具体验证" class="headerlink" title="字段添加注解@Email等具体验证"></a>字段添加注解@Email等具体验证</h4><p>注意字段要有getter、setter方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@ConfigurationProperties(prefix = &quot;person&quot;)</span><br><span class="line">@Component</span><br><span class="line">@Validated</span><br><span class="line">public class Person &#123;</span><br><span class="line">    String name;</span><br><span class="line">    Integer sex;</span><br><span class="line">    @Email</span><br><span class="line">    String email;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h3><h3 id="使用随机数"><a href="#使用随机数" class="headerlink" title="使用随机数"></a>使用随机数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Value(&quot;$&#123;person.number&#125;&quot;)</span><br><span class="line">Integer number;</span><br><span class="line">//@Value(&quot;$&#123;person.&#125;&quot;)</span><br><span class="line">@Value(&quot;$&#123;person.secret&#125;&quot;)</span><br><span class="line">String secret;</span><br><span class="line">@Value(&quot;$&#123;person.bigNum&#125;&quot;)</span><br><span class="line">Long bigNum;</span><br><span class="line">@Value(&quot;$&#123;person.uuid&#125;&quot;)</span><br><span class="line">String uuid;</span><br><span class="line"></span><br><span class="line">@Value(&quot;$&#123;person.less10&#125;&quot;)</span><br><span class="line">Integer less10;</span><br><span class="line"></span><br><span class="line">@Value(&quot;$&#123;person.range&#125;&quot;)</span><br><span class="line">Integer range;</span><br></pre></td></tr></table></figure>
+<h3 id="多环境配置-1"><a href="#多环境配置-1" class="headerlink" title="多环境配置"></a>多环境配置</h3><h4 id="分文件多环境配置"><a href="#分文件多环境配置" class="headerlink" title="分文件多环境配置"></a>分文件多环境配置</h4><p>resources文件夹下配置多个文件<br>application-dev.ymal<br>application-test.ymal<br>application-prod.ymal<br>application.ymal</p>
+<p>在application.ymal中配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    active: dev # 启用application-dev.ymal</span><br></pre></td></tr></table></figure>
+<h4 id="单一文件多环境配置"><a href="#单一文件多环境配置" class="headerlink" title="单一文件多环境配置"></a>单一文件多环境配置</h4><ul>
+<li>不同配置使用—分隔</li>
+<li><code>active</code> 标志启用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  profiles: dev</span><br><span class="line">server:</span><br><span class="line">  port: 8091</span><br><span class="line">--- </span><br><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    active: test # 启用test配置</span><br><span class="line">server:</span><br><span class="line">  port: 8092</span><br><span class="line">---</span><br><span class="line">spring:</span><br><span class="line">  profiles: prod</span><br><span class="line">server:</span><br><span class="line">  port: 8093</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置文件位置优先级"><a href="#配置文件位置优先级" class="headerlink" title="配置文件位置优先级"></a>配置文件位置优先级</h2><ul>
+<li>file :.&#x2F;config&#x2F;</li>
+<li>file :.&#x2F;</li>
+<li>classpath:&#x2F;config&#x2F;</li>
+<li>classpath:&#x2F;<br>classpath:resource文件夹</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>springboot</tag>
       </tags>
   </entry>
 </search>

@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-04-30 14:34:12" itemprop="dateModified" datetime="2024-04-30T14:34:12+08:00">2024-04-30</time>
+      <time title="Modified: 2024-06-23 10:43:12" itemprop="dateModified" datetime="2024-06-23T10:43:12+08:00">2024-06-23</time>
     </span>
 
   
@@ -238,10 +238,10 @@
 </ul>
 <h3 id="反射分析类的能力"><a href="#反射分析类的能力" class="headerlink" title="反射分析类的能力"></a>反射分析类的能力</h3><p>java.lang.reflect 包中有三个类 Field、 Method 和 Constructor 分别用于描述类的域、 方法和构造器</p>
 <h3 id="运行时分析对象"><a href="#运行时分析对象" class="headerlink" title="运行时分析对象"></a>运行时分析对象</h3><ul>
-<li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor<br>类的公共超类。</li>
+<li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor类的公共超类。</li>
 </ul>
 <p>优点：易于编写通用性代码<br>缺点：编译时不容易发现问题，运行时易出错。</p>
-<h3 id="泛型类型的继承规则"><a href="#泛型类型的继承规则" class="headerlink" title="泛型类型的继承规则"></a>泛型类型的继承规则</h3><p>S extends T , Pair<S> 与 Pair<T>没有什么联系</p>
+<h3 id="泛型类型的继承规则"><a href="#泛型类型的继承规则" class="headerlink" title="泛型类型的继承规则"></a>泛型类型的继承规则</h3><p>S extends T 但 Pair&lt;S&gt; 与 Pair&lt;T&gt;没有什么联系，如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Parent1&gt; aa = new ArrayList&lt;Sun2&gt;(); // ERROR</span><br><span class="line">Parent1[] aaaa = new Sun2[1]; // TRUE</span><br></pre></td></tr></table></figure>
 
 
