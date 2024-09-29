@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/3%E4%BD%BF%E7%94%A8Dubbo%E5%8F%91%E5%B8%83%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/3%E4%BD%BF%E7%94%A8Dubbo%E5%8F%91%E5%B8%83%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/","path":"JAVA/Java实战特训营/4分布式服务/3使用Dubbo发布分布式服务/","title":"3使用Dubbo发布分布式服务"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>3使用Dubbo发布分布式服务 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E5%85%A5Dubbo%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">引入Dubbo框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E6%A1%86%E6%9E%B6RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Dubbo框架RPC架构演进过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E4%B8%AD%E7%9A%84RPC%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.</span> <span class="nav-text">Dubbo中的RPC元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E5%BC%80%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">Dubbo开发方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XML"><span class="nav-number">1.3.1.</span> <span class="nav-text">XML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.2.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">1.3.3.</span> <span class="nav-text">API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">服务发布机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B%EF%BC%88RPC%E6%9E%B6%E6%9E%84%E9%80%9A%E7%94%A8%E7%9A%84%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">服务发布流程（RPC架构通用的发布流程）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%EF%BC%88%E7%89%B9%E6%80%A7%E5%8A%9F%E8%83%BD%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Dubbo服务发布核心技术（特性功能）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">上下文信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.2.</span> <span class="nav-text">多版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text">隐式参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89Dubbo%E6%9C%8D%E5%8A%A1%EF%BC%88%E6%B2%A1%E6%9C%89%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">定义Dubbo服务（没有实现）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">3.3.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%BA%A6%E5%AE%9A"><span class="nav-number">3.4.</span> <span class="nav-text">服务约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8Cdubbo%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.5.</span> <span class="nav-text">注册dubbo服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/3%E4%BD%BF%E7%94%A8Dubbo%E5%8F%91%E5%B8%83%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="3使用Dubbo发布分布式服务 | VvfzZ">
+      <meta itemprop="description" content="3使用Dubbo发布分布式服务">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3使用Dubbo发布分布式服务
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-19 21:21:00" itemprop="dateCreated datePublished" datetime="2024-09-19T21:21:00+08:00">2024-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-29 23:28:49" itemprop="dateModified" datetime="2024-09-29T23:28:49+08:00">2024-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">3使用Dubbo发布分布式服务</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="引入Dubbo框架"><a href="#引入Dubbo框架" class="headerlink" title="引入Dubbo框架"></a>引入Dubbo框架</h1><p>定义：高性能透明化RPC架构实现方案，提供SOA服务治理方案<br>（实现了RPC基础功能组件，也实现了非功能性组件）</p>
+<p>基本架构<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/3%E4%BD%BF%E7%94%A8Dubbo%E5%8F%91%E5%B8%83%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/1-Dubbo%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="Dubbo框架RPC架构演进过程"><a href="#Dubbo框架RPC架构演进过程" class="headerlink" title="Dubbo框架RPC架构演进过程"></a>Dubbo框架RPC架构演进过程</h2><p>RPC架构演进过程：<br>一对一远程访问基础组件 -&gt; 远程访问本地化组件 -&gt; 集群访问和复杂均衡组件 -&gt; 服务治理和监控组件</p>
+<p>Dubbo框架演进过程：（基于RPC架构开发的分布式服务框架）<br>Protocol核心层，RPC基础组件 -&gt; Proxy封装透明化代理 -&gt; Cluster支持负载均衡和集群容错 -&gt; Remoting实现Dubbo协议 -&gt; Register完成服务治理、Monitor完成服务监控</p>
+<h2 id="Dubbo中的RPC元素"><a href="#Dubbo中的RPC元素" class="headerlink" title="Dubbo中的RPC元素"></a>Dubbo中的RPC元素</h2><p>协议 ： Dubbo  RMI  Hessian<br>传输 ： Netty Mina Grizzly<br>调用（动态代理） ： jdk javassist<br>序列化 ： Hessian Dubbo Json Java</p>
+<h2 id="Dubbo开发方式"><a href="#Dubbo开发方式" class="headerlink" title="Dubbo开发方式"></a>Dubbo开发方式</h2><ul>
+<li>XML<br>优点：服务框架对业务代码零侵入、扩展和修改方便、配置信息修改实时生效<br>缺点：配置繁琐，相对较重</li>
+<li>注解<br>优点：服务框架对业务代码零侵入、扩展和修改方便<br>缺点:修改配置需要重新编译代码</li>
+<li>API<br>优点：底层api调用深入理解框架实现<br>缺点：对业务代码侵入性强、容易与某种具体服务框架绑定、修改之后需要重新编译代码</li>
+</ul>
+<h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dubbo:service/&gt;：用于发布服务</span><br><span class="line">&lt;dubbo:reference/&gt;：用于引用服务</span><br><span class="line">&lt;dubbo:protocol/&gt; ：用于指定传输协议</span><br><span class="line">&lt;dubbo:application/&gt; ：用于指定应用程序</span><br><span class="line">&lt;dubbo:registry/&gt;：用于指定注册中心</span><br></pre></td></tr></table></figure>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@EnableDubbo：启用Dubbo</span><br><span class="line">@DubboService：服务发布</span><br><span class="line">@DubboReference：服务引用</span><br></pre></td></tr></table></figure>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DubboBootstrap：启动Dubbo</span><br><span class="line">ServiceConfig：服务发布配置</span><br><span class="line">ReferenceConfig：服务引用配置</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务发布机制"><a href="#服务发布机制" class="headerlink" title="服务发布机制"></a>服务发布机制</h1><h2 id="服务发布流程（RPC架构通用的发布流程）"><a href="#服务发布流程（RPC架构通用的发布流程）" class="headerlink" title="服务发布流程（RPC架构通用的发布流程）"></a>服务发布流程（RPC架构通用的发布流程）</h2><p>发布启动器：获取服务列表和配置信息、将本地类封装成代理对象(具体怎么做的呢？)<br>动态代理：创建服务发布类？？？???(具体怎么做的呢？)<br>发布管理器：将服务发布成指定协议<br>协议服务器：创建协议服务器，启动监听（暴露端口给外部）<br>注册中心：<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/3%E4%BD%BF%E7%94%A8Dubbo%E5%8F%91%E5%B8%83%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/1-Dubbo-%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E6%97%B6%E5%BA%8F%E5%9B%BE.png"></p>
+<h2 id="Dubbo服务发布核心技术（特性功能）"><a href="#Dubbo服务发布核心技术（特性功能）" class="headerlink" title="Dubbo服务发布核心技术（特性功能）"></a>Dubbo服务发布核心技术（特性功能）</h2><h3 id="上下文信息"><a href="#上下文信息" class="headerlink" title="上下文信息"></a>上下文信息</h3><p>RpcContext ThreadLocal的临时状态记录器(线程安全的)<br>存放当前调用过程中所需的环境信息上下文(请求地址、请求参数、响应时间等)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class UserServiceImpl implements UserService &#123;</span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User getUserByUserName(String userName) &#123;</span><br><span class="line">        logger.info(&quot;getUserByUserName: &quot; + userName + &quot;, request from consumer: &quot; +RpcContext.getContext().getRemoteAddress());</span><br><span class="line">        return new User(...);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多版本"><a href="#多版本" class="headerlink" title="多版本"></a>多版本</h3><p>一个服务接口多个实现，通过版本号管理（例如分阶段服务接口升级，新老服务同时提供服务）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class UserServiceImpl1 implements UserService &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public User getUserByUserName(String userName) &#123;</span><br><span class="line">         return new User(...);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class UserServiceImpl2 implements UserService &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public User getUserByUserName(String userName) &#123;</span><br><span class="line">         return new User(...);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!--发布版本1.0.0服务--&gt;</span><br><span class="line">&lt;bean id=&quot;userService&quot; class=&quot;com.dubbo.demo.provider.UserServiceImpl1&quot;/&gt;</span><br><span class="line">&lt;dubbo:service interface=&quot;com.dubbo.demo.UserService&quot; ref=&quot;userService&quot; version=&quot;1.0.0&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--发布版本2.0.0服务--&gt;</span><br><span class="line">&lt;bean id=&quot;userService&quot; class=&quot;com.dubbo.demo.provider.UserServiceImpl2&quot;/&gt;</span><br><span class="line">&lt;dubbo:service interface=&quot;com.dubbo.demo.UserService&quot; ref=&quot;userService&quot; version=&quot;2.0.0&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--分别引用版本1.0.0和版本2.0.0服务--&gt;</span><br><span class="line">&lt;dubbo:reference id=&quot;userService&quot; interface=&quot;com.dubbo.demo.UserService&quot; version=&quot;1.0.0&quot;/&gt;</span><br><span class="line">&lt;dubbo:reference id=&quot;userService&quot;interface=&quot;com.dubbo.demo.UserService&quot; version=&quot;2.0.0&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="隐式参数"><a href="#隐式参数" class="headerlink" title="隐式参数"></a>隐式参数</h3><p>传递新参数，但无法改变方法签名时</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RpcContext.getContext().setAttachment(&quot;parameter&quot;, &quot;tianyalan&quot;);</span><br><span class="line"></span><br><span class="line">String value = RpcContext.getContext().getAttachment(&quot;parameter&quot;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="定义Dubbo服务（没有实现）"><a href="#定义Dubbo服务（没有实现）" class="headerlink" title="定义Dubbo服务（没有实现）"></a>定义Dubbo服务（没有实现）</h2><p>领域对象：业务数据的抽象<br>服务定义：针对领域对象需暴露的操作</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dubbo:</span><br><span class="line">  protocol:</span><br><span class="line">    name: dubbo #dubbo协议</span><br><span class="line">    port: -1</span><br><span class="line">  registry: # 注册中心</span><br><span class="line">    address: zookeeper://127.0.0.1:2181</span><br><span class="line">    file: D:/dubbo/customer-service/cache</span><br><span class="line">  scan:</span><br><span class="line">    base-packages: org.geekbang.projects.cs #扫描dubbo服务</span><br><span class="line">customer:</span><br><span class="line">  service:</span><br><span class="line">    version: 1.0.0</span><br></pre></td></tr></table></figure>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;dubbo-dependencies-zookeeper&lt;/artifactId&gt;</span><br><span class="line">    &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--替换curator默认版本，确保和Zookeeper服务器兼容--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;curator-framework&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.2.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="服务约定"><a href="#服务约定" class="headerlink" title="服务约定"></a>服务约定</h2><p>任何dubbo服务都需设计两个工程<br>definition 服务定义代码<br>provider 服务提供代码（服务实现）</p>
+<h2 id="注册dubbo服务"><a href="#注册dubbo服务" class="headerlink" title="注册dubbo服务"></a>注册dubbo服务</h2><p>@DubboService(version &#x3D; “${integration.service.version}”)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@DubboService(version = &quot;$&#123;integration.service.version&#125;&quot;)</span><br><span class="line">public class CustomerStaffIntegrationServiceImpl implements CustomerStaffIntegrationService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    CustomerStaffEndpoint customerStaffEndpoint;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;PlatformCustomerStaff&gt; fetchCustomerStaffs(OutsourcingSystemDTO outsourcingSystemDTO) &#123;</span><br><span class="line"></span><br><span class="line">        return customerStaffEndpoint.fetchCustomerStaffs(outsourcingSystemDTO);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>针对服务发布，Dubbo提供了哪些功能特性？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/" rel="prev" title="2RPC架构">
+                  <i class="fa fa-chevron-left"></i> 2RPC架构
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/4Zookeeper%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90/" rel="next" title="4Zookeeper服务发布和订阅机制解析">
+                  4Zookeeper服务发布和订阅机制解析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

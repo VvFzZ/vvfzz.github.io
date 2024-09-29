@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/linux/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/index/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/linux/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/index/","path":"linux/linux命令学习/index/","title":"linux命令学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux命令学习 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bash-shell%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">bash shell定义变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#man"><span class="nav-number">2.</span> <span class="nav-text">man</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%91%BD%E4%BB%A4-%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">内部命令&#x2F;外部命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">linux文件系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">配置虚拟机网络服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E7%BD%91%E5%8D%A1%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">找到网卡位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE"><span class="nav-number">5.2.</span> <span class="nav-text">配置协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vi"><span class="nav-number">6.</span> <span class="nav-text">vi</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.</span> <span class="nav-text">编辑模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.2.</span> <span class="nav-text">输入模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AB%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.3.</span> <span class="nav-text">末行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%9C%AB%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.3.1.</span> <span class="nav-text">进入末行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%A1%8C%E5%8F%B7"><span class="nav-number">6.3.2.</span> <span class="nav-text">设置行号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-number">6.3.3.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">6.3.4.</span> <span class="nav-text">执行命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2"><span class="nav-number">6.3.5.</span> <span class="nav-text">查找替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">6.3.6.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6"><span class="nav-number">6.3.7.</span> <span class="nav-text">复制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">文本操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6"><span class="nav-number">7.1.</span> <span class="nav-text">查看文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="nav-number">7.2.</span> <span class="nav-text">管道符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cd%E7%AD%89%E5%91%BD%E4%BB%A4"><span class="nav-number">7.3.</span> <span class="nav-text">cd等命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">文件系统相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sed%E8%A1%8C%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">8.1.</span> <span class="nav-text">sed行编辑器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/linux/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux命令学习 | VvfzZ">
+      <meta itemprop="description" content="linux命令学习-msb">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux命令学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-28 10:50:57" itemprop="dateCreated datePublished" datetime="2024-08-28T10:50:57+08:00">2024-08-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-03 20:11:06" itemprop="dateModified" datetime="2024-09-03T20:11:06+08:00">2024-09-03</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">linux命令学习-msb</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>echo $$ 打印当前进程Id</p>
+<h1 id="bash-shell定义变量"><a href="#bash-shell定义变量" class="headerlink" title="bash shell定义变量"></a>bash shell定义变量</h1><p>普通变量<code>a=1</code><br>数组 定义：<code>arr=(1 2 3)</code>  取值：<code>echo $&#123;arr[0]&#125;</code></p>
+<h1 id="man"><a href="#man" class="headerlink" title="man"></a>man</h1><p>查看帮助文档<br><code>man ipconfig</code>,回车一行一行加载，空格一页页加载，q退出<br>内部命令用help<br>外部命令用man</p>
+<h1 id="内部命令-外部命令"><a href="#内部命令-外部命令" class="headerlink" title="内部命令&#x2F;外部命令"></a>内部命令&#x2F;外部命令</h1><p>定义：shell自带的命令<br>shell是一个程序（软件）常用bash shell，使用bash shell操作系统<br>type查看是否是内部命令<br>file查看文件类型（ELF是二进制文件）<br>whereis 查找文件<br>find &#x2F; -name *.txt 查找文件<br>cat查看文件<br>外部命令先找到可执行文件（PATH中查找）再执行。</p>
+<h1 id="linux文件系统"><a href="#linux文件系统" class="headerlink" title="linux文件系统"></a>linux文件系统</h1><p>bin 可执行命令（用户命令）<br>sbin 管理相关命令<br>boot 系统启动相关文件，如内核，initrd，以及grub（booloader）<br>dev 设备文件（鼠标键盘）<br>home 用户的家目录 （直接使用cd命令进入该目录）<br>root 管理员的家目录（直接使用cd命令进入该目录）<br>lib 库文件（操作系统或第三方软件的库文件）<br>media 挂载点目录，移动设备<br>mnt 挂载点目录，临时的文件系统<br>opt 可选目录，第三方程序安装目录<br>proc 伪文件系统，内核映射文件 如：echo $$ 输出当前bash shell进程Id，可进入&#x2F;proc&#x2F;id 查看bash shell相关的映射文件，bash shell 进程关闭此文件夹会删除。<br>sys 伪文件系统，跟硬件设备相关的属性映射文件<br>tmp 临时文件 ，&#x2F;var&#x2F;tmp<br>var 可变化文件（日志，要处理的数据）</p>
+<h1 id="配置虚拟机网络服务"><a href="#配置虚拟机网络服务" class="headerlink" title="配置虚拟机网络服务"></a>配置虚拟机网络服务</h1><h2 id="找到网卡位置"><a href="#找到网卡位置" class="headerlink" title="找到网卡位置"></a>找到网卡位置</h2><p>cd &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts<br>vim ifcfg-eth0 （第0个网卡）</p>
+<h2 id="配置协议"><a href="#配置协议" class="headerlink" title="配置协议"></a>配置协议</h2><p>删除网卡物理地址和uuid（方便后期克隆虚拟机，不至于多虚拟机有相同物理地址出现网络问题）</p>
+<p>配置IPADDR NETMASK（掩码） GATWAY DNS1 DNS2</p>
+<p>重启网络服务 service newwork restart</p>
+<p>ping测试</p>
+<h1 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h1><h2 id="编辑模式"><a href="#编辑模式" class="headerlink" title="编辑模式"></a>编辑模式</h2><p>vi进入编辑模式 i进出输入模式<br>vi +5 file 打开文件并定位第5行 （vi + file 定位到末尾）<br>gg文件第一行<br>G文件末尾 3G第三行<br>ctrl f,b 翻页<br>x删除字符（向前） 3x删除3个字符<br>r替换<br>dd删除行<br>dw删除单词<br>yw 复制单词<br>yy复制行<br>p粘贴 P在光标上方粘贴<br>u撤销<br>ctrl r 恢复<br>.重复上一步</p>
+<h2 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h2><p>i 在光标后<br>a 光标前<br>A 行位<br>o 下一行<br>O 上一行</p>
+<h2 id="末行模式"><a href="#末行模式" class="headerlink" title="末行模式"></a>末行模式</h2><h3 id="进入末行模式"><a href="#进入末行模式" class="headerlink" title="进入末行模式"></a>进入末行模式</h3><p>：进入末行模式（:!wq 强行保存退出，shift z z 等同于:wq）</p>
+<h3 id="设置行号"><a href="#设置行号" class="headerlink" title="设置行号"></a>设置行号</h3><p>:set nu 显示行号（set number，set nonu）<br>:set readonly 设置只读模式</p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>:&#x2F;word  按n键一个一个查找word位置 N向上查找</p>
+<h3 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h3><p>:!ls -l &#x2F;  编辑模式下执行ls命令</p>
+<h3 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h3><p>:s&#x2F;word1&#x2F;word2 替换光标所在行的word1成word2（替换一个）<br>:s&#x2F;word1&#x2F;word2&#x2F;g 替换所有<br>:s&#x2F;word1&#x2F;word2&#x2F;gi 替换所有不区分大小写<br>:.,+2s&#x2F;word1&#x2F;word2&#x2F;gi 替换当前行及向下两行(.代表光标所在行，+2代表下两行)<br>:12s&#x2F;word1&#x2F;word2&#x2F;gi 替换12行<br>:%s&#x2F;word1&#x2F;word2&#x2F;gi 全局替换 （:0,$s&#x2F;word1&#x2F;word2&#x2F;gi）</p>
+<p>&#x2F;是分隔符可以用@ # 替代</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>:0,$d删除0到最后一行（删除所有）<br>:.,2d删除当前行和下两行（共3行）<br>:3,5d删除3到5行<br>:$-1d删除倒数第2行</p>
+<h3 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h3><p>:1,3y复制1到3行，（0,$y 复制全部） </p>
+<h1 id="文本操作命令"><a href="#文本操作命令" class="headerlink" title="文本操作命令"></a>文本操作命令</h1><h2 id="查看文件"><a href="#查看文件" class="headerlink" title="查看文件"></a>查看文件</h2><p>cat  查看文件内容  (cat file1 file2 打印出file1 file2的内容)<br>more 分页显示内容 (more file1 显示一屏内容，空格显示下一屏，enter显示下一行，回看只能通过滑轮)<br>less file （空格下一页，b上一页，enter下一行） 存储在缓存中，大文件不适用，大文件使用more，回看用滚轮。<br>head file -5 打印前5行 默认10行<br>tail file -5 打印末尾5行 默认10行<br>tail -f 实时滚动显示末尾</p>
+<h2 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h2><p>xargs 从输入流中构建命令，打印&#x2F;下的文件，echo “&#x2F;“ |xargs ls -l<br>xargs 接受echo 输出的&#x2F; 拼接到ls -l后面<br>取文件第5行数据：head -5 file|tail -1</p>
+<h2 id="cd等命令"><a href="#cd等命令" class="headerlink" title="cd等命令"></a>cd等命令</h2><p>pwd 显示目录<br>cd 回到家目录</p>
+<p>mkdir dic 创建文件夹, -p 级联创建，上级不存在时<br>mkdir a&#x2F;b1 a&#x2F;b2 a&#x2F;b3 在a下创建三个文件夹 (mkdir a&#x2F;b{1,2,3})<br>touch file 创建file文件，写入”123”  echo “123” &gt;&gt; file（touch也可以统一access，modify，change三个时间）<br>cp 拷贝 ，拷贝目录（包含里面内容）：cp -r a s 拷贝a文件夹到s文件夹<br>mv 移动&#x2F;修改名称</p>
+<h1 id="文件系统相关命令"><a href="#文件系统相关命令" class="headerlink" title="文件系统相关命令"></a>文件系统相关命令</h1><p>df 查看磁盘信息 df -h(磁盘分区情况)<br>du 文件系统情况 df -h dic dic目录下子目录的文件情况<br>ls </p>
+<ul>
+<li>-a 显示全部，包括隐藏文件</li>
+<li>-l 以长列表显示<br>ll 显示信息显示（-i显示文件号）</li>
+<li>显示内容解释<ul>
+<li>第一个字符：-代表普通文件，d代表文件夹，l代表软连接（类似快捷方式），b块设备文件，c字符设备文件；p命令管道文件，s套接字文件</li>
+<li>9位：三个一组，分别是创建者权限，所在组权限，其他人权限；r读w写执x行权限，</li>
+<li>.分隔符，</li>
+<li>文件硬链接数</li>
+<li>属主（创建者）名</li>
+<li>属主所在组</li>
+<li>文件大小（字节）</li>
+<li>时间戳（最后一次修改）</li>
+</ul>
+</li>
+</ul>
+<p>ln 硬链接（-s 软连接）<br>ln file1 file2 （file1本身存在，file2是硬链接创建的，file2的内容与file1相同，若修改file1，file2内容同步改变，删除file1，file2仍保留）<br>ln file1 file2 （file1本身存在，file2是软链接创建的，删除file1，则file2无法查看）</p>
+<p>state 查看文件详细信息 比ll更详细<br>access访问时间<br>change代表文件元数据修改时间（比如权限）<br>modify代表文件内容修改时间<br>touch 统一时间，会改变以上三个时间成当前时间，</p>
+<p>chmod o+w file 给其他人写权限</p>
+<h2 id="sed行编辑器"><a href="#sed行编辑器" class="headerlink" title="sed行编辑器"></a>sed行编辑器</h2><p>以行为单位进行处理，可将数据替换，新增，删除，选取等</p>
+<p>file内容<br>哈哈<br>123tttint:</p>
+<p>sed “s&#x2F;8&#x2F;3&#x2F;“ file</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%88%9B%E4%B8%9A/%E8%BD%BB%E5%B7%A5%E4%B8%9A/%E7%BA%BA%E7%BB%87%E4%B8%9A/%E7%BA%BA%E7%BA%B1%E5%AD%A6/" rel="prev" title="纺纱学">
+                  <i class="fa fa-chevron-left"></i> 纺纱学
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A7%88/%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A7%88/" rel="next" title="Java实战特训营-1.0项目概览">
+                  Java实战特训营-1.0项目概览 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<hr>
+<h2 id="title-反射date-2024-04-22-10-07-38tags-反射-JAVAdescription-获取Class、反射分析类的能力、运行时分析对象"><a href="#title-反射date-2024-04-22-10-07-38tags-反射-JAVAdescription-获取Class、反射分析类的能力、运行时分析对象" class="headerlink" title="title: 反射date: 2024-04-22 10:07:38tags:    - 反射    - JAVAdescription: 获取Class、反射分析类的能力、运行时分析对象"></a>title: 反射<br>date: 2024-04-22 10:07:38<br>tags:<br>    - 反射<br>    - JAVA<br>description: 获取Class、反射分析类的能力、运行时分析对象</h2><p>运行时分析任意的对象。</p>
+<h3 id="获取Class"><a href="#获取Class" class="headerlink" title="获取Class"></a>获取Class</h3><ul>
+<li><code>String dassName = &quot;java.util .Random&quot;;    Class cl = Class.forName(dassName);</code></li>
+<li>getClass方法</li>
+<li><code>Class dl = Random.class; Gass cl 2 = int.class;Class cl 3 = Doublet.class;</code></li>
+</ul>
+<h3 id="反射分析类的能力"><a href="#反射分析类的能力" class="headerlink" title="反射分析类的能力"></a>反射分析类的能力</h3><p>java.lang.reflect 包中有三个类 Field、 Method 和 Constructor 分别用于描述类的域、 方法和构造器</p>
+<h3 id="运行时分析对象"><a href="#运行时分析对象" class="headerlink" title="运行时分析对象"></a>运行时分析对象</h3><ul>
+<li>setAccessible方法 访问私有域，setAccessible是AccessibleObject 类中的一个方法，它是 Field、 Method 和 Constructor类的公共超类。</li>
+</ul>
+<p>优点：易于编写通用性代码<br>缺点：编译时不容易发现问题，运行时易出错。</p>
+<h3 id="泛型类型的继承规则"><a href="#泛型类型的继承规则" class="headerlink" title="泛型类型的继承规则"></a>泛型类型的继承规则</h3><p>S extends T 但 Pair&lt;S&gt; 与 Pair&lt;T&gt;没有什么联系，如下：</p>
+<pre><code>ArrayList&lt;Parent1&gt; aa = new ArrayList&lt;Sun2&gt;(); // ERROR
+Parent1[] aaaa = new Sun2[1]; // TRUE
+</code></pre>
+<h3 id="springboot使用反射"><a href="#springboot使用反射" class="headerlink" title="springboot使用反射"></a>springboot使用反射</h3><h4 id="ReflectionEnvironmentPostProcessorsFactory-getEnvironmentPostProcessors"><a href="#ReflectionEnvironmentPostProcessorsFactory-getEnvironmentPostProcessors" class="headerlink" title="ReflectionEnvironmentPostProcessorsFactory.getEnvironmentPostProcessors()"></a><code>ReflectionEnvironmentPostProcessorsFactory.getEnvironmentPostProcessors()</code></h4><p>准备环境，创建PostProcessor类<br>使用Instantiator<EnvironmentPostProcessor>对象利用反射创建PostProcessor实例</p>

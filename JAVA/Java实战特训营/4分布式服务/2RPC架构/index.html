@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/","path":"JAVA/Java实战特训营/4分布式服务/2RPC架构/","title":"2RPC架构"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2RPC架构 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RPC%E6%9E%B6%E6%9E%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">RPC架构基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B"><span class="nav-number">1.1.</span> <span class="nav-text">架构演进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B-%E8%87%AA%E5%AE%9A%E4%B9%89RPC%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">示例-自定义RPC架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Protocol"><span class="nav-number">1.2.1.</span> <span class="nav-text">Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">1.2.2.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Server"><span class="nav-number">1.2.3.</span> <span class="nav-text">Server</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#serviceImpl"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">serviceImpl</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client"><span class="nav-number">1.2.4.</span> <span class="nav-text">Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.5.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-1"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-1"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">Client</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6-%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1"><span class="nav-number">2.</span> <span class="nav-text">核心组件-网络通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">网络连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">IO模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E5%A1%9EI-O-bio"><span class="nav-number">2.2.1.</span> <span class="nav-text">阻塞I&#x2F;O  bio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9EI-O-nio"><span class="nav-number">2.2.2.</span> <span class="nav-text">非阻塞I&#x2F;O nio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">I&#x2F;O多路复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%A9%B1%E5%8A%A8I-O"><span class="nav-number">2.2.4.</span> <span class="nav-text">信号驱动I&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5I-O-aio"><span class="nav-number">2.2.5.</span> <span class="nav-text">异步I&#x2F;O aio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-number">2.2.6.</span> <span class="nav-text">对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6-%E5%BA%8F%E5%88%97%E5%8C%96%C2%B7"><span class="nav-number">3.</span> <span class="nav-text">核心组件-序列化·</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E8%AF%AD%E8%A8%80"><span class="nav-number">3.2.</span> <span class="nav-text">跨语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">3.3.</span> <span class="nav-text">性能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6-%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.</span> <span class="nav-text">核心组件-传输协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.1.</span> <span class="nav-text">自定义协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dubbo%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.1.1.</span> <span class="nav-text">Dubbo协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">核心组件-远程调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%9F%BA%E6%9C%AC%E6%96%B9%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">服务调用基本方式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2RPC架构 | VvfzZ">
+      <meta itemprop="description" content="2RPC架构">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2RPC架构
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-19 21:20:55" itemprop="dateCreated datePublished" datetime="2024-09-19T21:20:55+08:00">2024-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-29 23:28:47" itemprop="dateModified" datetime="2024-09-29T23:28:47+08:00">2024-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">2RPC架构</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>RPC架构的基本结构</li>
+<li>核心组件<br>也是RPC架构提供的基础功能</li>
+<li>网络通信</li>
+<li>传输协议</li>
+<li>远程调用</li>
+<li>序列化<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84.png"></li>
+</ul>
+<h1 id="RPC架构基本结构"><a href="#RPC架构基本结构" class="headerlink" title="RPC架构基本结构"></a>RPC架构基本结构</h1><p>Remote Process Call远程过程调用<br>分布式系统基础功能组件：传输协议，网络通信，服务调用，序列化<br>一切分布式系统的基础</p>
+<h2 id="架构演进"><a href="#架构演进" class="headerlink" title="架构演进"></a>架构演进</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B1.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B2.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B3.png"></p>
+<ul>
+<li>客户端组件-职责<br>RPCClient 负责导入远程接口的代理类<br>RPCProxy 透明化调用，调用远程接口的代理实现<br>RPCCaller 负责编码，序列化反序列化和发送请求到服务端并等待结果<br>RPCConnector 负责网络通信，维持链接通道和发送数据到服务端</li>
+<li>服务端组件-职责<br>RPCServer<br>RPCInvoker 调用服务端接口具体实现并返回结果<br>RPCProcessor 控制调用过程，包括管理调用线程池<br>RPCAcceptor 接受客户端请求并返回结果（转发，包装结果返回）</li>
+<li>通用组件-职责<br>RPCProtocol 负责协议编码解码<br>RPCChannel 数据传输通道</li>
+</ul>
+<h2 id="示例-自定义RPC架构"><a href="#示例-自定义RPC架构" class="headerlink" title="示例-自定义RPC架构"></a>示例-自定义RPC架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-Demo.png"></p>
+<h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.rpc.protocol;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">public class Protocl implements Serializable &#123;</span><br><span class="line">    private String interfaceName;</span><br><span class="line">    String methodName;</span><br><span class="line">    Class[]paramsTypes;</span><br><span class="line">    Object[]parameters;</span><br><span class="line"></span><br><span class="line">    public Protocl() &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Protocl(String interfaceName, String methodName, Class[] paramsTypes, Object[] parameters) &#123;</span><br><span class="line">        this.interfaceName = interfaceName;</span><br><span class="line">        this.methodName = methodName;</span><br><span class="line">        this.paramsTypes = paramsTypes;</span><br><span class="line">        this.parameters = parameters;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getInterfaceName() &#123;</span><br><span class="line">        return interfaceName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setInterfaceName(String interfaceName) &#123;</span><br><span class="line">        this.interfaceName = interfaceName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getMethodName() &#123;</span><br><span class="line">        return methodName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMethodName(String methodName) &#123;</span><br><span class="line">        this.methodName = methodName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Class[] getParamsTypes() &#123;</span><br><span class="line">        return paramsTypes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setParamsTypes(Class[] paramsTypes) &#123;</span><br><span class="line">        this.paramsTypes = paramsTypes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object[] getParameters() &#123;</span><br><span class="line">        return parameters;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setParameters(Object[] parameters) &#123;</span><br><span class="line">        this.parameters = parameters;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface UserService &#123;</span><br><span class="line">    public String getUserNameByCode(String userCode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.rpc.server;</span><br><span class="line"></span><br><span class="line">import com.vvf.springboot1.demos.rpc.protocol.Protocl;</span><br><span class="line">import jdk.internal.org.objectweb.asm.TypeReference;</span><br><span class="line">import org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import javax.naming.ldap.SortKey;</span><br><span class="line">import java.io.IOError;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line">import java.net.ServerSocket;</span><br><span class="line">import java.net.Socket;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.concurrent.ExecutorService;</span><br><span class="line">import java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line">public class RpcServer &#123;</span><br><span class="line">    private int threadSize = 10;</span><br><span class="line">    private ExecutorService threadPool;</span><br><span class="line">    private Map&lt;String, Object&gt; servicePool;</span><br><span class="line">    private int port = 9901;</span><br><span class="line"></span><br><span class="line">    public int getThreadSize() &#123;</span><br><span class="line">        return threadSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setThreadSize(int threadSize) &#123;</span><br><span class="line">        this.threadSize = threadSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ExecutorService getThreadPool() &#123;</span><br><span class="line">        return threadPool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setThreadPool(ExecutorService threadPool) &#123;</span><br><span class="line">        this.threadPool = threadPool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Map&lt;String, Object&gt; getServicePool() &#123;</span><br><span class="line">        return servicePool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setServicePool(Map&lt;String, Object&gt; servicePool) &#123;</span><br><span class="line">        this.servicePool = servicePool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getPort() &#123;</span><br><span class="line">        return port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPort(int port) &#123;</span><br><span class="line">        this.port = port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public RpcServer() &#123;</span><br><span class="line">        super();</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            threadPool = Executors.newFixedThreadPool(this.threadSize);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public RpcServer(int threadSize, int port) &#123;</span><br><span class="line">        this.threadSize = threadSize;</span><br><span class="line">        this.port = port;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            threadPool = Executors.newFixedThreadPool(this.threadSize);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public RpcServer(Map&lt;String, Object&gt; servicePool, int threadSize, int port) &#123;</span><br><span class="line">        this.threadSize = threadSize;</span><br><span class="line">        this.port = port;</span><br><span class="line">        this.servicePool = servicePool;</span><br><span class="line">        synchronized (this) &#123;</span><br><span class="line">            threadPool = Executors.newFixedThreadPool(this.threadSize);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 1.实现Socket监听:RpcAcceptor</span><br><span class="line">     * @throws IOException</span><br><span class="line">     */</span><br><span class="line">    public void service() throws IOException &#123;</span><br><span class="line">        ServerSocket serverSocket = new ServerSocket(this.port);</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            Socket receiveSocket = serverSocket.accept();</span><br><span class="line">            final Socket socket = receiveSocket;</span><br><span class="line"></span><br><span class="line">            //执行请求</span><br><span class="line">            threadPool.execute(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        //处理请求</span><br><span class="line">                        process(socket);</span><br><span class="line">                        socket.close();</span><br><span class="line">                    &#125; catch (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *处理请求：RpcProcessor`</span><br><span class="line">     */</span><br><span class="line">    private void process(Socket receiveSocke) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException &#123;</span><br><span class="line">        ObjectInputStream objectInputStream = new ObjectInputStream(receiveSocke.getInputStream());</span><br><span class="line">        Protocl transportMessage = (Protocl) objectInputStream.readObject();</span><br><span class="line">        //调用服务</span><br><span class="line">        Object result = call(transportMessage);</span><br><span class="line">        ObjectOutputStream objectOutputStream = new ObjectOutputStream(receiveSocke.getOutputStream());</span><br><span class="line">        objectOutputStream.writeObject(result);</span><br><span class="line">        objectOutputStream.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 3.执行方法调用，RpcInvoker</span><br><span class="line">     */</span><br><span class="line">    private Object call(Protocl protocl) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        if (servicePool == null) &#123;</span><br><span class="line">            synchronized (this) &#123;</span><br><span class="line">                servicePool = new HashMap&lt;&gt;();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String interfaceName = protocl.getInterfaceName();</span><br><span class="line">        Object service = servicePool.get(interfaceName);</span><br><span class="line">        Class&lt;?&gt; serviceClass = Class.forName(interfaceName);</span><br><span class="line"></span><br><span class="line">        if (service == null) &#123;</span><br><span class="line">            synchronized (this) &#123;</span><br><span class="line">                service = serviceClass.newInstance();</span><br><span class="line">                servicePool.put(interfaceName, service);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Method method = serviceClass.getMethod(protocl.getMethodName(), protocl.getParamsTypes());</span><br><span class="line"></span><br><span class="line">        Object result = method.invoke(service, protocl.getParameters());</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="serviceImpl"><a href="#serviceImpl" class="headerlink" title="serviceImpl"></a>serviceImpl</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.rpc.service.impl;</span><br><span class="line"></span><br><span class="line">import com.vvf.springboot1.demos.rpc.service.UserService;</span><br><span class="line"></span><br><span class="line">public class UserServiceImpl implements UserService &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String getUserNameByCode(String userCode) &#123;</span><br><span class="line">        return &quot;hello:&quot; + userCode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.rpc.client;</span><br><span class="line"></span><br><span class="line">import com.vvf.springboot1.demos.rpc.protocol.Protocl;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line">import java.net.Socket;</span><br><span class="line">import java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line">public class RpcClient &#123;</span><br><span class="line">    private String serverAddress;</span><br><span class="line">    private int serverPort;</span><br><span class="line"></span><br><span class="line">    public RpcClient(String serverAddress, int serverPort) &#123;</span><br><span class="line">        this.serverAddress = serverAddress;</span><br><span class="line">        this.serverPort = serverPort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Object sendAndRecevie(Protocl protocl) &#123;</span><br><span class="line">        Object result = null;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            Socket socket = new Socket(this.serverAddress, this.serverPort);</span><br><span class="line">            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());</span><br><span class="line">            objectOutputStream.writeObject(protocl);</span><br><span class="line"></span><br><span class="line">            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());</span><br><span class="line">            result = objectInputStream.readObject();</span><br><span class="line">        &#125; catch (UnknownHostException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="Server-1"><a href="#Server-1" class="headerlink" title="Server"></a>Server</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.rpc.server;</span><br><span class="line"></span><br><span class="line">import com.vvf.springboot1.demos.rpc.server.RpcServer;</span><br><span class="line">import com.vvf.springboot1.demos.rpc.service.impl.UserServiceImpl;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class ServerTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; servicePool = new HashMap&lt;&gt;();</span><br><span class="line">        servicePool.put(&quot;com.vvf.springboot1.demos.rpc.service.UserService&quot;, new UserServiceImpl());</span><br><span class="line"></span><br><span class="line">        RpcServer server = new RpcServer(servicePool, 4, 9001);</span><br><span class="line">        try &#123;</span><br><span class="line">            server.service();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Client-1"><a href="#Client-1" class="headerlink" title="Client"></a>Client</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.rpc.client;</span><br><span class="line"></span><br><span class="line">import com.vvf.springboot1.demos.rpc.client.RpcClient;</span><br><span class="line">import com.vvf.springboot1.demos.rpc.protocol.Protocl;</span><br><span class="line"></span><br><span class="line">public class ClientTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String serverAddress = &quot;127.0.0.1&quot;;</span><br><span class="line">        int serverPort = 9001;</span><br><span class="line">        RpcClient client = new RpcClient(serverAddress, serverPort);</span><br><span class="line">        Object result = client.sendAndRecevie(buildProtocol(&quot;vvf1&quot;));</span><br><span class="line">        System.out.println(result);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static Protocl buildProtocol(String userCode) &#123;</span><br><span class="line">        String interfaceName = &quot;com.vvf.springboot1.demos.rpc.service.UserService&quot;;</span><br><span class="line">        Class[] paramsTypes = &#123;String.class&#125;;</span><br><span class="line">        Object[] parameters = &#123;userCode&#125;;</span><br><span class="line">        String methodName = &quot;getUserNameByCode&quot;;</span><br><span class="line"></span><br><span class="line">        Protocl transportMessage = new Protocl(interfaceName, methodName, paramsTypes, parameters);</span><br><span class="line">        return transportMessage;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="核心组件-网络通信"><a href="#核心组件-网络通信" class="headerlink" title="核心组件-网络通信"></a>核心组件-网络通信</h1><h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><ul>
+<li>长连接<br>TCP链接建立后，可以连续发送多个数据包。<br>节省资源，时延小（节省重复创建链接的时间和资源消耗）<br>相对复杂，需管理心跳以维持链接状态<br>RPC框架一般选择长连接，倾向于高性能</li>
+<li>短连接<br>TCP链接建立后，数据包传输完成后关闭<br>结构简单</li>
+</ul>
+<h2 id="IO模型"><a href="#IO模型" class="headerlink" title="IO模型"></a>IO模型</h2><ul>
+<li>bio</li>
+<li>nio</li>
+<li>I&#x2F;O多路复用</li>
+<li>信号驱动I&#x2F;O</li>
+<li>异步I&#x2F;O aio</li>
+</ul>
+<h3 id="阻塞I-O-bio"><a href="#阻塞I-O-bio" class="headerlink" title="阻塞I&#x2F;O  bio"></a>阻塞I&#x2F;O  bio</h3><p>单线程只能同时处理一个链接，（客户端断开才能处理下一个，全流程阻塞）<br>accept 等待客户端请求时阻塞，<br>read 阻塞等待客户端发送数据从网卡写入到内核缓冲区，再由内核缓冲区拷贝到用户态，<br>网卡将数据写入到内核缓冲区后发出中断命令，修改socket文件描述符为就绪态<br>把内核缓冲区数据拷贝到用户态<br>read 返回数据继续处理（解除阻塞）</p>
+<h3 id="非阻塞I-O-nio"><a href="#非阻塞I-O-nio" class="headerlink" title="非阻塞I&#x2F;O nio"></a>非阻塞I&#x2F;O nio</h3><p>接收请求时不阻塞，执行时阻塞</p>
+<p>单线程保持多链接，但数据从内核缓冲区拷贝到用户态时阻塞。<br>线程检查多个链接是否有数据，<br>当网卡将用户数据拷贝到内核缓冲区时（socket文件描述符变为就绪态），此时read函数检测到数据<br>read 阻塞，等待内核缓冲区拷贝数据到用户态<br>返回数据解除阻塞，继续处理数据。<br><em>read就是将内核缓冲区就绪数据读取到用户态。</em><br><em>网卡将数据拷贝到内核缓冲区时，发出系统中断命令，修改socket文件描述符为就绪态，read此时阻塞读取数据</em></p>
+<h3 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I&#x2F;O多路复用"></a>I&#x2F;O多路复用</h3><p>selector多路复用器<br>channel</p>
+<h3 id="信号驱动I-O"><a href="#信号驱动I-O" class="headerlink" title="信号驱动I&#x2F;O"></a>信号驱动I&#x2F;O</h3><h3 id="异步I-O-aio"><a href="#异步I-O-aio" class="headerlink" title="异步I&#x2F;O aio"></a>异步I&#x2F;O aio</h3><p>非阻塞</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-NIO.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-BIO.png"></p>
+<p>NIO模型依赖于操作系统的I&#x2F;O多路复用技术，如select、poll、epoll模型</p>
+<p>问题：NIO BIO AIO区别？select、poll、epoll区别？</p>
+<p>为什么选择linux系统？<br>linux windows底层线程模型不同，windows某些操作无法完成，某些方面表现不如linux。</p>
+<h1 id="核心组件-序列化·"><a href="#核心组件-序列化·" class="headerlink" title="核心组件-序列化·"></a>核心组件-序列化·</h1><p>序列化：对象 -&gt; 字节数组（用于网络传输，持久化等）<br>反序列化：把网络或磁盘读取的字节数组 -&gt; 对象</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><ul>
+<li>文本类<br>XML JSON</li>
+<li>二进制类<br>Protocol Buffer、Thrift</li>
+</ul>
+<h2 id="跨语言"><a href="#跨语言" class="headerlink" title="跨语言"></a>跨语言</h2><p>常见的跨语言支持序列化工具：Hession、Protocol Buffer、Thrift、Avro</p>
+<ul>
+<li>支持数据结构种类<br>是否支持泛型和Map&#x2F;List （C语言无Map&#x2F;List）</li>
+<li>接口开发友好性<br>是否需要中间语言，Protocol Buffer需要.proto文件、Thrift需要.thrift中间语言</li>
+</ul>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E5%BA%8F%E5%88%97%E5%8C%96-%E6%80%A7%E8%83%BD.png"><br>protobuf 序列化后小适合网络传输<br>fastjson 速度快</p>
+<blockquote>
+<p>java序列化工具对比：<a target="_blank" rel="noopener" href="https://github.com/eishay/jvm-serializers">https://github.com/eishay/jvm-serializers</a></p>
+</blockquote>
+<h1 id="核心组件-传输协议"><a href="#核心组件-传输协议" class="headerlink" title="核心组件-传输协议"></a>核心组件-传输协议</h1><ul>
+<li><p>HTTP<br>http协议通用性强，使用于各种场景，相对对于特定场景特定需求会复杂，扩展性也不好(对于需要的扩展性不支持)</p>
+</li>
+<li><p>TCP</p>
+</li>
+<li><p>自定义协议</p>
+</li>
+</ul>
+<h2 id="自定义协议"><a href="#自定义协议" class="headerlink" title="自定义协议"></a>自定义协议</h2><p>性能与扩展性</p>
+<ul>
+<li>自定义协议的通信模型和消息定义（自定义传输对象消息头消息体）</li>
+<li>支持点对点长连接通信</li>
+<li>使用NIO模型进行异步通信</li>
+<li>提供可扩展的编解码框架，支持多种序列化方式</li>
+</ul>
+<p>在已有协议基础上做扩展</p>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE%E6%B6%88%E6%81%AF.png"></p>
+<h3 id="Dubbo协议"><a href="#Dubbo协议" class="headerlink" title="Dubbo协议"></a>Dubbo协议</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE-Dubbo%E5%8D%8F%E8%AE%AE.png"><br>通过自定义消息头，根据消息头标志位做定制化开发，优化性能</p>
+<h1 id="核心组件-远程调用"><a href="#核心组件-远程调用" class="headerlink" title="核心组件-远程调用"></a>核心组件-远程调用</h1><h2 id="服务调用基本方式"><a href="#服务调用基本方式" class="headerlink" title="服务调用基本方式"></a>服务调用基本方式</h2><ul>
+<li>同步</li>
+<li>异步</li>
+<li>并行调用</li>
+<li>泛化调用<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%9F%BA%E6%9C%AC%E6%96%B9%E5%BC%8F.png"><br>实心箭头代表同步</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E6%89%A9%E5%B1%95%E6%96%B9%E5%BC%8F.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RPC/" rel="tag"># RPC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/" rel="prev" title="1分布式服务体系">
+                  <i class="fa fa-chevron-left"></i> 1分布式服务体系
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/3%E4%BD%BF%E7%94%A8Dubbo%E5%8F%91%E5%B8%83%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/" rel="next" title="3使用Dubbo发布分布式服务">
+                  3使用Dubbo发布分布式服务 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

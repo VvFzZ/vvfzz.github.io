@@ -1,0 +1,385 @@
+<hr>
+<h2 id="title-2RPC架构description-2RPC架构date-2024-09-19-21-20-55tags-RPC"><a href="#title-2RPC架构description-2RPC架构date-2024-09-19-21-20-55tags-RPC" class="headerlink" title="title: 2RPC架构description: 2RPC架构date: 2024-09-19 21:20:55tags: RPC"></a>title: 2RPC架构<br>description: 2RPC架构<br>date: 2024-09-19 21:20:55<br>tags: RPC</h2><ul>
+<li>RPC架构的基本结构</li>
+<li>核心组件<br>也是RPC架构提供的基础功能</li>
+<li>网络通信</li>
+<li>传输协议</li>
+<li>远程调用</li>
+<li>序列化<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84.png"></li>
+</ul>
+<h1 id="RPC架构基本结构"><a href="#RPC架构基本结构" class="headerlink" title="RPC架构基本结构"></a>RPC架构基本结构</h1><p>Remote Process Call远程过程调用<br>分布式系统基础功能组件：传输协议，网络通信，服务调用，序列化<br>一切分布式系统的基础</p>
+<h2 id="架构演进"><a href="#架构演进" class="headerlink" title="架构演进"></a>架构演进</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B1.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B2.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B3.png"></p>
+<ul>
+<li>客户端组件-职责<br>RPCClient 负责导入远程接口的代理类<br>RPCProxy 透明化调用，调用远程接口的代理实现<br>RPCCaller 负责编码，序列化反序列化和发送请求到服务端并等待结果<br>RPCConnector 负责网络通信，维持链接通道和发送数据到服务端</li>
+<li>服务端组件-职责<br>RPCServer<br>RPCInvoker 调用服务端接口具体实现并返回结果<br>RPCProcessor 控制调用过程，包括管理调用线程池<br>RPCAcceptor 接受客户端请求并返回结果（转发，包装结果返回）</li>
+<li>通用组件-职责<br>RPCProtocol 负责协议编码解码<br>RPCChannel 数据传输通道</li>
+</ul>
+<h2 id="示例-自定义RPC架构"><a href="#示例-自定义RPC架构" class="headerlink" title="示例-自定义RPC架构"></a>示例-自定义RPC架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-Demo.png"></p>
+<h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><pre><code>package com.vvf.springboot1.demos.rpc.protocol;
+
+import java.io.Serializable;
+
+public class Protocl implements Serializable {
+    private String interfaceName;
+    String methodName;
+    Class[]paramsTypes;
+    Object[]parameters;
+
+    public Protocl() {
+        super();
+    }
+
+    public Protocl(String interfaceName, String methodName, Class[] paramsTypes, Object[] parameters) {
+        this.interfaceName = interfaceName;
+        this.methodName = methodName;
+        this.paramsTypes = paramsTypes;
+        this.parameters = parameters;
+    }
+
+    public String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public Class[] getParamsTypes() {
+        return paramsTypes;
+    }
+
+    public void setParamsTypes(Class[] paramsTypes) {
+        this.paramsTypes = paramsTypes;
+    }
+
+    public Object[] getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Object[] parameters) {
+        this.parameters = parameters;
+    }
+}
+</code></pre>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><pre><code>public interface UserService {
+    public String getUserNameByCode(String userCode);
+}
+</code></pre>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><pre><code>package com.vvf.springboot1.demos.rpc.server;
+
+import com.vvf.springboot1.demos.rpc.protocol.Protocl;
+import jdk.internal.org.objectweb.asm.TypeReference;
+import org.aspectj.lang.ProceedingJoinPoint;
+
+
+import javax.naming.ldap.SortKey;
+import java.io.IOError;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class RpcServer {
+    private int threadSize = 10;
+    private ExecutorService threadPool;
+    private Map&lt;String, Object&gt; servicePool;
+    private int port = 9901;
+
+    public int getThreadSize() {
+        return threadSize;
+    }
+
+    public void setThreadSize(int threadSize) {
+        this.threadSize = threadSize;
+    }
+
+    public ExecutorService getThreadPool() {
+        return threadPool;
+    }
+
+    public void setThreadPool(ExecutorService threadPool) {
+        this.threadPool = threadPool;
+    }
+
+    public Map&lt;String, Object&gt; getServicePool() {
+        return servicePool;
+    }
+
+    public void setServicePool(Map&lt;String, Object&gt; servicePool) {
+        this.servicePool = servicePool;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public RpcServer() {
+        super();
+        synchronized (this) {
+            threadPool = Executors.newFixedThreadPool(this.threadSize);
+        }
+    }
+
+    public RpcServer(int threadSize, int port) {
+        this.threadSize = threadSize;
+        this.port = port;
+        synchronized (this) {
+            threadPool = Executors.newFixedThreadPool(this.threadSize);
+        }
+    }
+
+    public RpcServer(Map&lt;String, Object&gt; servicePool, int threadSize, int port) {
+        this.threadSize = threadSize;
+        this.port = port;
+        this.servicePool = servicePool;
+        synchronized (this) {
+            threadPool = Executors.newFixedThreadPool(this.threadSize);
+        }
+    }
+
+    /**
+     * 1.实现Socket监听:RpcAcceptor
+     * @throws IOException
+     */
+    public void service() throws IOException {
+        ServerSocket serverSocket = new ServerSocket(this.port);
+        while (true) {
+            Socket receiveSocket = serverSocket.accept();
+            final Socket socket = receiveSocket;
+
+            //执行请求
+            threadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //处理请求
+                        process(socket);
+                        socket.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     *处理请求：RpcProcessor`
+     */
+    private void process(Socket receiveSocke) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(receiveSocke.getInputStream());
+        Protocl transportMessage = (Protocl) objectInputStream.readObject();
+        //调用服务
+        Object result = call(transportMessage);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(receiveSocke.getOutputStream());
+        objectOutputStream.writeObject(result);
+        objectOutputStream.close();
+    }
+
+    /**
+     * 3.执行方法调用，RpcInvoker
+     */
+    private Object call(Protocl protocl) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        if (servicePool == null) {
+            synchronized (this) {
+                servicePool = new HashMap&lt;&gt;();
+            }
+        }
+
+        String interfaceName = protocl.getInterfaceName();
+        Object service = servicePool.get(interfaceName);
+        Class&lt;?&gt; serviceClass = Class.forName(interfaceName);
+
+        if (service == null) {
+            synchronized (this) {
+                service = serviceClass.newInstance();
+                servicePool.put(interfaceName, service);
+            }
+        }
+
+        Method method = serviceClass.getMethod(protocl.getMethodName(), protocl.getParamsTypes());
+
+        Object result = method.invoke(service, protocl.getParameters());
+        return result;
+    }
+}
+</code></pre>
+<h4 id="serviceImpl"><a href="#serviceImpl" class="headerlink" title="serviceImpl"></a>serviceImpl</h4><pre><code>package com.vvf.springboot1.demos.rpc.service.impl;
+
+import com.vvf.springboot1.demos.rpc.service.UserService;
+
+public class UserServiceImpl implements UserService {
+    @Override
+    public String getUserNameByCode(String userCode) {
+        return &quot;hello:&quot; + userCode;
+    }
+}
+</code></pre>
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><pre><code>package com.vvf.springboot1.demos.rpc.client;
+
+import com.vvf.springboot1.demos.rpc.protocol.Protocl;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class RpcClient {
+    private String serverAddress;
+    private int serverPort;
+
+    public RpcClient(String serverAddress, int serverPort) {
+        this.serverAddress = serverAddress;
+        this.serverPort = serverPort;
+    }
+
+    public Object sendAndRecevie(Protocl protocl) {
+        Object result = null;
+
+        try {
+            Socket socket = new Socket(this.serverAddress, this.serverPort);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream.writeObject(protocl);
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            result = objectInputStream.readObject();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+}
+</code></pre>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="Server-1"><a href="#Server-1" class="headerlink" title="Server"></a>Server</h4><pre><code>package com.vvf.rpc.server;
+
+import com.vvf.springboot1.demos.rpc.server.RpcServer;
+import com.vvf.springboot1.demos.rpc.service.impl.UserServiceImpl;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ServerTest {
+    public static void main(String[] args) {
+        Map&lt;String, Object&gt; servicePool = new HashMap&lt;&gt;();
+        servicePool.put(&quot;com.vvf.springboot1.demos.rpc.service.UserService&quot;, new UserServiceImpl());
+
+        RpcServer server = new RpcServer(servicePool, 4, 9001);
+        try {
+            server.service();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h4 id="Client-1"><a href="#Client-1" class="headerlink" title="Client"></a>Client</h4><pre><code>package com.vvf.rpc.client;
+
+import com.vvf.springboot1.demos.rpc.client.RpcClient;
+import com.vvf.springboot1.demos.rpc.protocol.Protocl;
+
+public class ClientTest {
+    public static void main(String[] args) {
+        String serverAddress = &quot;127.0.0.1&quot;;
+        int serverPort = 9001;
+        RpcClient client = new RpcClient(serverAddress, serverPort);
+        Object result = client.sendAndRecevie(buildProtocol(&quot;vvf1&quot;));
+        System.out.println(result);
+
+
+    }
+
+    private static Protocl buildProtocol(String userCode) {
+        String interfaceName = &quot;com.vvf.springboot1.demos.rpc.service.UserService&quot;;
+        Class[] paramsTypes = {String.class};
+        Object[] parameters = {userCode};
+        String methodName = &quot;getUserNameByCode&quot;;
+
+        Protocl transportMessage = new Protocl(interfaceName, methodName, paramsTypes, parameters);
+        return transportMessage;
+    }
+}
+</code></pre>
+<h1 id="核心组件-网络通信"><a href="#核心组件-网络通信" class="headerlink" title="核心组件-网络通信"></a>核心组件-网络通信</h1><h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><ul>
+<li>长连接<br>TCP链接建立后，可以连续发送多个数据包。<br>节省资源，时延小（节省重复创建链接的时间和资源消耗）<br>相对复杂，需管理心跳以维持链接状态<br>RPC框架一般选择长连接，倾向于高性能</li>
+<li>短连接<br>TCP链接建立后，数据包传输完成后关闭<br>结构简单</li>
+</ul>
+<h2 id="IO模型"><a href="#IO模型" class="headerlink" title="IO模型"></a>IO模型</h2><ul>
+<li>bio</li>
+<li>nio</li>
+<li>I&#x2F;O多路复用</li>
+<li>信号驱动I&#x2F;O</li>
+<li>异步I&#x2F;O aio</li>
+</ul>
+<h3 id="阻塞I-O-bio"><a href="#阻塞I-O-bio" class="headerlink" title="阻塞I&#x2F;O  bio"></a>阻塞I&#x2F;O  bio</h3><p>单线程只能同时处理一个链接，（客户端断开才能处理下一个，全流程阻塞）<br>accept 等待客户端请求时阻塞，<br>read 阻塞等待客户端发送数据从网卡写入到内核缓冲区，再由内核缓冲区拷贝到用户态，<br>网卡将数据写入到内核缓冲区后发出中断命令，修改socket文件描述符为就绪态<br>把内核缓冲区数据拷贝到用户态<br>read 返回数据继续处理（解除阻塞）</p>
+<h3 id="非阻塞I-O-nio"><a href="#非阻塞I-O-nio" class="headerlink" title="非阻塞I&#x2F;O nio"></a>非阻塞I&#x2F;O nio</h3><p>接收请求时不阻塞，执行时阻塞</p>
+<p>单线程保持多链接，但数据从内核缓冲区拷贝到用户态时阻塞。<br>线程检查多个链接是否有数据，<br>当网卡将用户数据拷贝到内核缓冲区时（socket文件描述符变为就绪态），此时read函数检测到数据<br>read 阻塞，等待内核缓冲区拷贝数据到用户态<br>返回数据解除阻塞，继续处理数据。<br><em>read就是将内核缓冲区就绪数据读取到用户态。</em><br><em>网卡将数据拷贝到内核缓冲区时，发出系统中断命令，修改socket文件描述符为就绪态，read此时阻塞读取数据</em></p>
+<h3 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I&#x2F;O多路复用"></a>I&#x2F;O多路复用</h3><p>selector多路复用器<br>channel</p>
+<h3 id="信号驱动I-O"><a href="#信号驱动I-O" class="headerlink" title="信号驱动I&#x2F;O"></a>信号驱动I&#x2F;O</h3><h3 id="异步I-O-aio"><a href="#异步I-O-aio" class="headerlink" title="异步I&#x2F;O aio"></a>异步I&#x2F;O aio</h3><p>非阻塞</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E5%B8%B8%E8%A7%81IO%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-NIO.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-BIO.png"></p>
+<p>NIO模型依赖于操作系统的I&#x2F;O多路复用技术，如select、poll、epoll模型</p>
+<p>问题：NIO BIO AIO区别？select、poll、epoll区别？</p>
+<p>为什么选择linux系统？<br>linux windows底层线程模型不同，windows某些操作无法完成，某些方面表现不如linux。</p>
+<h1 id="核心组件-序列化·"><a href="#核心组件-序列化·" class="headerlink" title="核心组件-序列化·"></a>核心组件-序列化·</h1><p>序列化：对象 -&gt; 字节数组（用于网络传输，持久化等）<br>反序列化：把网络或磁盘读取的字节数组 -&gt; 对象</p>
+<h2 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h2><ul>
+<li>文本类<br>XML JSON</li>
+<li>二进制类<br>Protocol Buffer、Thrift</li>
+</ul>
+<h2 id="跨语言"><a href="#跨语言" class="headerlink" title="跨语言"></a>跨语言</h2><p>常见的跨语言支持序列化工具：Hession、Protocol Buffer、Thrift、Avro</p>
+<ul>
+<li>支持数据结构种类<br>是否支持泛型和Map&#x2F;List （C语言无Map&#x2F;List）</li>
+<li>接口开发友好性<br>是否需要中间语言，Protocol Buffer需要.proto文件、Thrift需要.thrift中间语言</li>
+</ul>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E5%BA%8F%E5%88%97%E5%8C%96-%E6%80%A7%E8%83%BD.png"><br>protobuf 序列化后小适合网络传输<br>fastjson 速度快</p>
+<blockquote>
+<p>java序列化工具对比：<a href="https://github.com/eishay/jvm-serializers">https://github.com/eishay/jvm-serializers</a></p>
+</blockquote>
+<h1 id="核心组件-传输协议"><a href="#核心组件-传输协议" class="headerlink" title="核心组件-传输协议"></a>核心组件-传输协议</h1><ul>
+<li><p>HTTP<br>http协议通用性强，使用于各种场景，相对对于特定场景特定需求会复杂，扩展性也不好(对于需要的扩展性不支持)</p>
+</li>
+<li><p>TCP</p>
+</li>
+<li><p>自定义协议</p>
+</li>
+</ul>
+<h2 id="自定义协议"><a href="#自定义协议" class="headerlink" title="自定义协议"></a>自定义协议</h2><p>性能与扩展性</p>
+<ul>
+<li>自定义协议的通信模型和消息定义（自定义传输对象消息头消息体）</li>
+<li>支持点对点长连接通信</li>
+<li>使用NIO模型进行异步通信</li>
+<li>提供可扩展的编解码框架，支持多种序列化方式</li>
+</ul>
+<p>在已有协议基础上做扩展</p>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE%E6%B6%88%E6%81%AF.png"></p>
+<h3 id="Dubbo协议"><a href="#Dubbo协议" class="headerlink" title="Dubbo协议"></a>Dubbo协议</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE-Dubbo%E5%8D%8F%E8%AE%AE.png"><br>通过自定义消息头，根据消息头标志位做定制化开发，优化性能</p>
+<h1 id="核心组件-远程调用"><a href="#核心组件-远程调用" class="headerlink" title="核心组件-远程调用"></a>核心组件-远程调用</h1><h2 id="服务调用基本方式"><a href="#服务调用基本方式" class="headerlink" title="服务调用基本方式"></a>服务调用基本方式</h2><ul>
+<li>同步</li>
+<li>异步</li>
+<li>并行调用</li>
+<li>泛化调用<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%9F%BA%E6%9C%AC%E6%96%B9%E5%BC%8F.png"><br>实心箭头代表同步</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/2RPC%E6%9E%B6%E6%9E%84/1-RPC%E6%9E%B6%E6%9E%84-%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E6%89%A9%E5%B1%95%E6%96%B9%E5%BC%8F.png"></p>

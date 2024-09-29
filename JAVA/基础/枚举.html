@@ -1,0 +1,17 @@
+<hr>
+<h2 id="title-枚举date-2024-04-22-09-52-42tags-枚举description-…"><a href="#title-枚举date-2024-04-22-09-52-42tags-枚举description-…" class="headerlink" title="title: 枚举date: 2024-04-22 09:52:42tags: 枚举description: …"></a>title: 枚举<br>date: 2024-04-22 09:52:42<br>tags: 枚举<br>description: …</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><pre><code>enum Size { SMALL, MEDIUM, LARGE, EXTRA.LARCE };
+
+public enum Size
+{
+    SMALLfS&quot;), MEDIUMC&#39;M&quot;), LARGEfL&quot;), EXTRA_LARGE(&quot;XL&quot;);
+    private String abbreviation;
+    private Size(String abbreviation) { this,abbreviation = abbreviation; }
+    public String getAbbreviation() { return abbreviation; }
+}
+</code></pre>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ol>
+<li>int ordinal ( )<br>返回枚举常量在 enum 声明中的位置，位置从 0 开始计数。</li>
+<li>int compareTo( E other )<br>枚举常量出现在 Other 之前， 则返回一个负值；如果 this&#x3D;other，则返回 0; 否则，<br>返回正值。</li>
+<li>static Enum valueOf(Cl ass enumClass , String name )</li>
+<li>String toString( ) 返回枚举常量名</li>
+</ol>

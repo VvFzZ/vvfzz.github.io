@@ -1,0 +1,44 @@
+<hr>
+<h2 id="title-5xxljob高级特性和执行原理解析description-xxljob高级特性和执行原理解析date-2024-09-12-16-02-18tags"><a href="#title-5xxljob高级特性和执行原理解析description-xxljob高级特性和执行原理解析date-2024-09-12-16-02-18tags" class="headerlink" title="title: 5xxljob高级特性和执行原理解析description: xxljob高级特性和执行原理解析date: 2024-09-12 16:02:18tags:"></a>title: 5xxljob高级特性和执行原理解析<br>description: xxljob高级特性和执行原理解析<br>date: 2024-09-12 16:02:18<br>tags:</h2><p>任务调度机制的设计方法<br>xxl-job的基本工作原理</p>
+<h1 id="任务调度的设计方法"><a href="#任务调度的设计方法" class="headerlink" title="任务调度的设计方法"></a>任务调度的设计方法</h1><h2 id="任务调度的核心问题"><a href="#任务调度的核心问题" class="headerlink" title="任务调度的核心问题"></a>任务调度的核心问题</h2><ul>
+<li>任务调度过程和业务代码解耦</li>
+<li>确保集群环境下多个相同实例不会重复多次执行一个调度任务</li>
+<li>如何确定哪个服务实例执行调度任务</li>
+<li>如果一个调度任务短时间内重复出发，应该怎么办</li>
+<li>调度任务执行失败了，怎么办</li>
+</ul>
+<h1 id="xxl-job调度和执行机制"><a href="#xxl-job调度和执行机制" class="headerlink" title="xxl-job调度和执行机制"></a>xxl-job调度和执行机制</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>分层架构 3层</p>
+<ul>
+<li>调度中心（服务端）</li>
+<li>服务实例（客户端）</li>
+<li>任务（客户端）<br>客户端 启动 心跳 保活<br>服务端 探针</li>
+</ul>
+<h2 id="任务调度方案"><a href="#任务调度方案" class="headerlink" title="任务调度方案"></a>任务调度方案</h2><ul>
+<li>线程启动，sleep，到时启动<br>开启线程，线程sleep资源浪费(一个任务一个线程)</li>
+<li>守护线程循环扫描任务数据<br>长任务阻塞（n个任务一个线程）</li>
+<li>调度线程+线程池</li>
+</ul>
+<h2 id="xxl如何实现任务调度"><a href="#xxl如何实现任务调度" class="headerlink" title="xxl如何实现任务调度"></a>xxl如何实现任务调度</h2><p>时间轮结构+任务调度</p>
+<h3 id="时间轮"><a href="#时间轮" class="headerlink" title="时间轮"></a>时间轮</h3><p>将时间映射到环形结构，环形结构分刻度（槽位），每个槽位代表一个时间间隔（秒&#x2F;毫秒）</p>
+<blockquote>
+<p>将时间划分为一系列环形槽位，每个槽位代表一个时间间隔（秒&#x2F;毫秒）</p>
+</blockquote>
+<h3 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h3><p>调度线程将待执行任务放置到任务下次出发对应的槽位，时间轮处理线程ringThread即可消费这些任务。</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>任务调度线程每秒查询 当前时间至其后五秒内待处理任务</p>
+<ul>
+<li>已超时5s的任务<br>根据调度过期策略执行（忽略&#x2F;立即执行一次）</li>
+<li>过期小于5s的任务<br>立即执行一次，并判断下次出发时间在5s内，则将其放入时间轮，等待下次出发</li>
+<li>未到出发时间的任务<br>放入时间轮等待处理</li>
+</ul>
+<h2 id="一致性问题"><a href="#一致性问题" class="headerlink" title="一致性问题"></a>一致性问题</h2><p>数据库排他锁，保证多服务实例只一个实例执行</p>
+<h2 id="调用路由策略"><a href="#调用路由策略" class="headerlink" title="调用路由策略"></a>调用路由策略</h2><p>第一个<br>随机<br>一致性Hash<br>LRU<br>…</p>
+<h2 id="阻塞处理策略"><a href="#阻塞处理策略" class="headerlink" title="阻塞处理策略"></a>阻塞处理策略</h2><p>同一个实例中同一个任务，短时间内重复提交，导致阻塞。</p>
+<ul>
+<li>单机串行，导致任务阻塞越来越多</li>
+<li>丢弃后续调度，丢弃重复任务（推荐）</li>
+<li>覆盖之前调度，终止运行中的任务，运行本地调度（不推荐）</li>
+</ul>
+<h2 id="容错策略-Failover"><a href="#容错策略-Failover" class="headerlink" title="容错策略 Failover"></a>容错策略 Failover</h2><p>超时<br>重试<br>故障转移（只能在调度阶段）</p>
+<h2 id="xxl-job任务调度整体流程"><a href="#xxl-job任务调度整体流程" class="headerlink" title="xxl-job任务调度整体流程"></a>xxl-job任务调度整体流程</h2><blockquote>
+<p><a href="https://iling.me/blog/posts/development-and-principles-of-xxl-job/#%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E7%BA%BF%E7%A8%8B">https://iling.me/blog/posts/development-and-principles-of-xxl-job/#%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E7%BA%BF%E7%A8%8B</a><br><a href="https://developer.baidu.com/article/details/3257612">https://developer.baidu.com/article/details/3257612</a></p>
+</blockquote>

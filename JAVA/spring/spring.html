@@ -1,0 +1,6 @@
+<hr>
+<h2 id="title-springdate-2024-07-21-21-07-15tags-description-spring"><a href="#title-springdate-2024-07-21-21-07-15tags-description-spring" class="headerlink" title="title: springdate: 2024-07-21 21:07:15tags:description: spring"></a>title: spring<br>date: 2024-07-21 21:07:15<br>tags:<br>description: spring</h2><p>PostProcessor<br>    - BeanFactoryPostProcessor 修改BeanDefinition信息<br>    - BeanPostProcessor 修改Bean信息<br>BeanFactory<br>    ignoreDependencyType<br>    ignoreDependencyInterface<br>创建实例(实例化+初始化)：<br>构造方法 -&gt; 设置属性 -&gt; setAware属性 -&gt; BeanFactory.Before -&gt; init-method -&gt; BeanFactory.After</p>
+<p>Aware接口作用<br>需要其他Bean对象时可实现此接口，获取其他容器对象</p>
+<p>xml、json、yaml、properties文件<br>BeanDefinitionReader（定义读取规范，方便扩展）<br>BeanDefinition<br>BeanFactory-&gt;反射创建对象<br>    - 实例化<br>    - 初始化<br>        - 设置属性<br>        - 设置aware属性<br>        - BeanFactoryPostProcessor.before<br>        - ini-method<br>        - BeanFactoryPostProcessor.after</p>
+<p>BeanFactory<br>FactoryBean<br>Aware<br>BeanDefinition<br>BeanDefinitionReader<br>BeanFactoryPostProcessor<br>BeanPostProcessor<br>Environment</p>
+<p>BeanFactory与FactoryBean的区别：BeanFactory遵循spring对象的声明周期；FactoryBean通过getObject对象获取具体对象，创建过程由用户控制。</p>

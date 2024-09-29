@@ -1,0 +1,54 @@
+<hr>
+<h2 id="title-Java实战特训营-2-2基于SpringData实现数据访问date-2024-09-07-09-22-40tags-description-基于SpringData实现数据访问"><a href="#title-Java实战特训营-2-2基于SpringData实现数据访问date-2024-09-07-09-22-40tags-description-基于SpringData实现数据访问" class="headerlink" title="title: Java实战特训营-2.2基于SpringData实现数据访问date: 2024-09-07 09:22:40tags:description: 基于SpringData实现数据访问"></a>title: Java实战特训营-2.2基于SpringData实现数据访问<br>date: 2024-09-07 09:22:40<br>tags:<br>description: 基于SpringData实现数据访问</h2><h1 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h1><h2 id="Repository架构模式"><a href="#Repository架构模式" class="headerlink" title="Repository架构模式"></a>Repository架构模式</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-Reporsitory%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F.png"><br>Spring Data JPA更多关注Repository架构模式的实现，关注业务模型和数据对象间的映射<br>领域对象，不是纯粹的数据库数据存储对象（技术数据），面向业务的对象。</p>
+<h3 id="SpringData"><a href="#SpringData" class="headerlink" title="SpringData"></a>SpringData</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-Reporsitory%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F-SpringData2.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-Reporsitory%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F-SpringData1.png"></p>
+<h2 id="Spring-Data-JPA"><a href="#Spring-Data-JPA" class="headerlink" title="Spring Data JPA"></a>Spring Data JPA</h2><p>JPA有一套接口规范，类似JDBC</p>
+<h3 id="JPA规范"><a href="#JPA规范" class="headerlink" title="JPA规范"></a>JPA规范</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-SpringData-JPA%E8%A7%84%E8%8C%83.png"></p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><ul>
+<li>@Query</li>
+<li>方法名衍生查询</li>
+<li>QueryByExample</li>
+<li>Specification机制</li>
+</ul>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>依赖和配置</p>
+<pre><code>      &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/customer_hangzhou?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8
+    username: root
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+</code></pre>
+<h1 id="N-1问题"><a href="#N-1问题" class="headerlink" title="N + 1问题"></a>N + 1问题</h1><h2 id="JoinFetch解决"><a href="#JoinFetch解决" class="headerlink" title="JoinFetch解决"></a>JoinFetch解决</h2><p>特定场景可用，如下第二个方法，要先查出所有在做条件判断In<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-JoinFech.png"></p>
+<h3 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-JoinFech-2.png"></p>
+<h1 id="数据访问优化策略"><a href="#数据访问优化策略" class="headerlink" title="数据访问优化策略"></a>数据访问优化策略</h1><ul>
+<li>优化Fetch Size 和连接池配置</li>
+<li>使用批处理和选择合适的提交模式</li>
+<li>通过统计找到数据访问瓶颈</li>
+<li>使用延迟加载数据库访问</li>
+<li>使用多级缓存提升数据访问性能</li>
+</ul>
+<h2 id="Fetch-Size"><a href="#Fetch-Size" class="headerlink" title="Fetch Size"></a>Fetch Size</h2><p>指定一次从数据库检索的行数，合理设置大小，可减低网络通信次数带来性能提升。<br>不可硬编码，确保其可配置，根据不同环境，JVM堆内存大小配置。<br>配置过大，可能导致内存不足（大量请求同时获取数据时）</p>
+<h2 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BC%98%E5%8C%96.png"></p>
+<ul>
+<li>连接池大小<br>一般偏大设置，但过大会导致性能下降，根据实际用户并发量进行性能测试结果设置。</li>
+<li>检查连接泄露 默认配置</li>
+<li>验证链接 默认配置</li>
+</ul>
+<p><em>多系统访问同一个数据库时，根据应用本身的属性考虑如何分配连接</em>。</p>
+<h2 id="使用批处理和选择合适的提交模式"><a href="#使用批处理和选择合适的提交模式" class="headerlink" title="使用批处理和选择合适的提交模式"></a>使用批处理和选择合适的提交模式</h2><p>数据库驱动程序在每个sql操作后向数据库发送一个提交请求，引起一个网络调用。</p>
+<p>每次提交需将事务更改写入数据库，涉及耗时的磁盘IO。<br>可以把自动提交关闭，但有些应用为确保数据完整性不可关闭。<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4.png"></p>
+<h2 id="使用统计和延迟加载机制"><a href="#使用统计和延迟加载机制" class="headerlink" title="使用统计和延迟加载机制"></a>使用统计和延迟加载机制</h2><p>延迟加载关联数据<br>统计数据，分析原始数据，找到系统瓶颈<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E7%BB%9F%E8%AE%A1%E5%92%8C%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD.png"></p>
+<h2 id="多级缓存提升数据访问性能"><a href="#多级缓存提升数据访问性能" class="headerlink" title="多级缓存提升数据访问性能"></a>多级缓存提升数据访问性能</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98.png"> </p>
+<h3 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-mybatis.png"></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="spring-data-jpa-h2"><a href="#spring-data-jpa-h2" class="headerlink" title="spring data jpa &amp; h2"></a>spring data jpa &amp; h2</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-h2.png"></p>
+<h2 id="其他解决方式"><a href="#其他解决方式" class="headerlink" title="其他解决方式"></a>其他解决方式</h2><ul>
+<li>EntityGraph</li>
+</ul>

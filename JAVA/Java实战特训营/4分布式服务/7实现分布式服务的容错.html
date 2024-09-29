@@ -1,0 +1,62 @@
+<hr>
+<h2 id="title-7实现分布式服务的容错description-7实现分布式服务的容错date-2024-09-19-21-21-21tags"><a href="#title-7实现分布式服务的容错description-7实现分布式服务的容错date-2024-09-19-21-21-21tags" class="headerlink" title="title: 7实现分布式服务的容错description: 7实现分布式服务的容错date: 2024-09-19 21:21:21tags:"></a>title: 7实现分布式服务的容错<br>description: 7实现分布式服务的容错<br>date: 2024-09-19 21:21:21<br>tags:</h2><p>容错是一个全面而复杂话题<br>dubbo提供了部分容错能力支持<br>专门针对容错的框架：sentinel、Hystrix</p>
+<h1 id="服务容错的基本概念"><a href="#服务容错的基本概念" class="headerlink" title="服务容错的基本概念"></a>服务容错的基本概念</h1><h2 id="访问失败原因"><a href="#访问失败原因" class="headerlink" title="访问失败原因"></a>访问失败原因</h2><ul>
+<li>分布式固有特性<br>网络异常</li>
+<li>自身服务失败<br>bug</li>
+<li>服务依赖失败<br>雪崩效应 b因a不可用，重试耗尽资源也死掉，其他服务也相应挂掉。</li>
+</ul>
+<h2 id="应对策略"><a href="#应对策略" class="headerlink" title="应对策略"></a>应对策略</h2><ul>
+<li>超时时间<br>服务未能在这个时间内响应，将回复一个失败消息</li>
+<li>重试<br>降低网络瞬态异常造成通信问题，可以使用重试机制<br>可设置重试次数、指数级重试（1,3,5秒重试）</li>
+</ul>
+<p>Dubbo中的解决方案</p>
+<ul>
+<li>集群容错<br>满足冗余条件（多实例），根据容错策略选择实例</li>
+<li>服务降级<br>服务分级管理，必要时关闭不重要服务，给重要服务节省资源<br>伪装与存根</li>
+</ul>
+<h1 id="Dubbo集群容错"><a href="#Dubbo集群容错" class="headerlink" title="Dubbo集群容错"></a>Dubbo集群容错</h1><h2 id="容错机制"><a href="#容错机制" class="headerlink" title="容错机制"></a>容错机制</h2><ul>
+<li>Failover<br>失败转移 需设置转移上限</li>
+<li>Failfast<br>抛异常返回调用发起服务，考虑性能资源消耗，某些允许失败的场景可使用，节省资源</li>
+<li>Failsafe<br>失败记录日志</li>
+<li>Failback<br>定时重试</li>
+<li>Forking</li>
+<li>Broadcast</li>
+</ul>
+<h2 id="Dubbo集群容错策略使用方法"><a href="#Dubbo集群容错策略使用方法" class="headerlink" title="Dubbo集群容错策略使用方法"></a>Dubbo集群容错策略使用方法</h2><pre><code>&lt;dubbo:reference id=&quot;userService&quot; check=&quot;false&quot; interface=&quot;....UserService&quot; 	loadbalance=&quot;roundrobin&quot; cluster=&quot;failover&quot; retries=&quot;2&quot;/&gt;
+</code></pre>
+<p>默认开启</p>
+<h1 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h1><ul>
+<li><p>本地伪装<br>当某服务提供者全部挂掉后，客户端不抛出异常，而是通过Mock数据返回失败<br>Mock类在服务消费者端配置（远程服务调用失败）</p>
+</li>
+<li><p>本地存根<br>服务的提供方也有在本地执行部分逻辑的场景(例如原先校验参数)，从而间接实现服务容错<br>Stub类在服务提供者端配置（还未调用服务）</p>
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>本地伪装</p>
+<pre><code>//服务提供者模拟服务超时失败
+public class UserServiceImpl implements UserService {
+    @Override
+    public User getUserByUserName(String userName) {
+        try {
+            Thread.sleep(5000);//模拟服务端响应超时
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return new User(...);
+    }
+}
+
+//服务消费者实现和配置Mock类
+public class UserServiceMock implements UserService {
+    @Override
+    public User getUserByUserName(String userName) {
+        //降级实现
+        return new User(1L, &quot;mock_username&quot;, &quot;mock_password&quot;);
+    }
+}
+</code></pre>
+<pre><code>&lt;dubbo:reference id=&quot;userService&quot; check=&quot;false&quot;   
+ interface=&quot;...UserService&quot; mock=&quot;....mock.UserServiceMock&quot;/&gt;
+</code></pre>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Dubbo提供了两种服务降级方案，各有什么特性？</p>
+<h1 id="答疑"><a href="#答疑" class="headerlink" title="答疑"></a>答疑</h1>

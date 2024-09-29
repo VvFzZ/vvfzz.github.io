@@ -1,0 +1,161 @@
+<hr>
+<h2 id="title-Java实战特训营-2-6SpringBoot测试解决方案和实践date-2024-09-07-09-23-09tags-description-SpringBoot测试解决方案和实践"><a href="#title-Java实战特训营-2-6SpringBoot测试解决方案和实践date-2024-09-07-09-23-09tags-description-SpringBoot测试解决方案和实践" class="headerlink" title="title: Java实战特训营-2.6SpringBoot测试解决方案和实践date: 2024-09-07 09:23:09tags:description: SpringBoot测试解决方案和实践"></a>title: Java实战特训营-2.6SpringBoot测试解决方案和实践<br>date: 2024-09-07 09:23:09<br>tags:<br>description: SpringBoot测试解决方案和实践</h2><h1 id="测试的类型和实施策略"><a href="#测试的类型和实施策略" class="headerlink" title="测试的类型和实施策略"></a>测试的类型和实施策略</h1><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB.png"><br>单元测试：类级别<br>集成测试：组件级别，模块间、服务间<br>端到端测试：服务级别，业务流程开展的测试，覆盖多服务（关注服务之间数据和状态传递）</p>
+<h1 id="Spring-Boot测试方案和流程"><a href="#Spring-Boot测试方案和流程" class="headerlink" title="Spring Boot测试方案和流程"></a>Spring Boot测试方案和流程</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-SpringBoot%E6%B5%8B%E8%AF%95%E4%BE%9D%E8%B5%96.png"></p>
+<h2 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h2><h3 id="SpringBootTest"><a href="#SpringBootTest" class="headerlink" title="@SpringBootTest"></a>@SpringBootTest</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-@SpringBootTest.png"></p>
+<h3 id="ExtendWith"><a href="#ExtendWith" class="headerlink" title="@ExtendWith"></a>@ExtendWith</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-@ExtendWith.png"><br>如果只想启用Spring环境进行简单测试，不想启用Spring Boot环境，可以配置扩展为：SpringExtension。</p>
+<h3 id="执行测试用例"><a href="#执行测试用例" class="headerlink" title="执行测试用例"></a>执行测试用例</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B.png"></p>
+<h1 id="数据访问层测试"><a href="#数据访问层测试" class="headerlink" title="数据访问层测试"></a>数据访问层测试</h1><h2 id="MybatisPlusTest注解"><a href="#MybatisPlusTest注解" class="headerlink" title="@MybatisPlusTest注解"></a>@MybatisPlusTest注解</h2><p>基于mybatis-plus框架，只验证数据访问层能力，不启动容器和controller层。<br>没有使用@SpringBootTest注解，不验证spring容器能力<br>前提：</p>
+<ul>
+<li>mybatis-plus-boot-starter-test</li>
+<li>在Test&#x2F;resource&#x2F;application.yaml中配置配置数据源</li>
+</ul>
+<pre><code>@ExtendWith(SpringExtension.class)
+@MybatisPlusTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) //使用配置的数据源（Test/resource/application.yaml中配置）
+public class CustomerStaffTests {
+
+    @Autowired
+    private CustomerStaffMapper customerStaffMapper;
+
+    @Test
+    public void testQueryCustomerStaffById() {
+        CustomerStaff customerStaff = customerStaffMapper.selectById(1L);
+
+        assertNotNull(customerStaff);
+        assertNotNull(customerStaff.getNickname().equals(&quot;tianyalan&quot;));
+    }
+}
+</code></pre>
+<h2 id="DataJpaTest注解"><a href="#DataJpaTest注解" class="headerlink" title="@DataJpaTest注解"></a>@DataJpaTest注解</h2><pre><code>@ExtendWith(SpringExtension.class)
+@DataJpaTest
+@AutoConfigureTestDatabase //自动配置内存数据库，需配置内存数据库依赖(如h2)
+public class CustomerStaffRepositoryTests {
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
+    private HangzhouCustomerStaffRepository customerStaffRepository;
+
+    @Test
+    public void testCustomerStaffCreationAndQuery() {
+        HangzhouCustomerStaff customerStaff = new HangzhouCustomerStaff();
+        customerStaff.setIsDeleted(false);
+        customerStaff.setCreatedAt(new Date());
+        customerStaff.setUpdatedAt(new Date());
+        customerStaff.setNickname(&quot;tianyalan&quot;);
+        customerStaff.setGender(&quot;MALE&quot;);
+
+        this.entityManager.persist(customerStaff);
+
+        List&lt;HangzhouCustomerStaff&gt; result = customerStaffRepository.findByIsDeletedFalse();
+
+        assertThat(result).isNotNull();
+        assertThat(result.size()).isEqualTo(1);
+    }
+}
+</code></pre>
+<h1 id="业务逻辑层测试"><a href="#业务逻辑层测试" class="headerlink" title="业务逻辑层测试"></a>业务逻辑层测试</h1><h2 id="测试配置"><a href="#测试配置" class="headerlink" title="测试配置"></a>测试配置</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-%E6%B5%8B%E8%AF%95%E9%85%8D%E7%BD%AE.png"></p>
+<h2 id="测试Service层"><a href="#测试Service层" class="headerlink" title="测试Service层"></a>测试Service层</h2><ul>
+<li>@MockBean</li>
+<li>Mockito框架</li>
+</ul>
+<pre><code>import org.geekbang.projects.cs.entity.staff.CustomerStaff;
+import org.geekbang.projects.cs.mapper.CustomerStaffMapper;
+import org.geekbang.projects.cs.service.ICustomerStaffService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class CustomerStaffServiceTests {
+
+    @MockBean
+    private CustomerStaffMapper customerStaffMapper;
+
+    @Autowired
+    private ICustomerStaffService customerStaffService;
+
+    @Test
+    public void testFindCustomerStaffById() {
+
+        Long staffId = 1L;
+
+        CustomerStaff customerStaff = new CustomerStaff();
+        customerStaff.setId(staffId);
+        customerStaff.setNickname(&quot;tianyalan&quot;);
+        customerStaff.setIsDeleted(false);
+
+        //模拟返回一个假想的customerStaff
+        Mockito.when(customerStaffMapper.selectById(staffId)).thenReturn(customerStaff);
+
+        CustomerStaff actual = customerStaffService.findCustomerStaffById(staffId);
+
+        assertThat(actual).isNotNull();
+        assertThat(actual.getId()).isEqualTo(staffId);
+    }
+
+}
+</code></pre>
+<p>也可mock其他Service层</p>
+<h1 id="测试Web-API层"><a href="#测试Web-API层" class="headerlink" title="测试Web API层"></a>测试Web API层</h1><ul>
+<li>TestRestTemplate</li>
+<li>@WebMvcTest注解</li>
+<li>@AutoConfigureMockMvc</li>
+</ul>
+<pre><code>
+import org.geekbang.projects.cs.entity.staff.CustomerStaff;
+import org.geekbang.projects.cs.service.ICustomerStaffService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
+public class CustomerStaffControllerTestsWithAutoConfigureMockMvc {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private ICustomerStaffService customerStaffService;
+
+    @Test
+    public void testFindCustomerStaffById() throws Exception {
+
+        Long staffId = 1L;
+
+        CustomerStaff customerStaff = new CustomerStaff();
+        customerStaff.setId(staffId);
+        customerStaff.setNickname(&quot;tianyalan&quot;);
+        customerStaff.setIsDeleted(false);
+
+        given(customerStaffService.findCustomerStaffById(staffId)).willReturn(customerStaff);
+
+        mvc.perform(get(&quot;/customerStaffs/&quot; + staffId).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+}
+</code></pre>

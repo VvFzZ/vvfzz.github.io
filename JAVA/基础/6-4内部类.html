@@ -1,0 +1,44 @@
+<hr>
+<h2 id="title-6-4内部类date-2024-04-26-15-58-59tags-内部类description-局部内部类、匿名内部类、静态内部类"><a href="#title-6-4内部类date-2024-04-26-15-58-59tags-内部类description-局部内部类、匿名内部类、静态内部类" class="headerlink" title="title: 6-4内部类date: 2024-04-26 15:58:59tags: 内部类description: 局部内部类、匿名内部类、静态内部类"></a>title: 6-4内部类<br>date: 2024-04-26 15:58:59<br>tags: 内部类<br>description: 局部内部类、匿名内部类、静态内部类</h2><h1 id="内部类的特殊语法规则"><a href="#内部类的特殊语法规则" class="headerlink" title="内部类的特殊语法规则"></a>内部类的特殊语法规则</h1><p>可直接访问外部类的域</p>
+<h2 id="访问域"><a href="#访问域" class="headerlink" title="访问域"></a>访问域</h2><p>OuterClass.this.name   (name是外部类的域名)</p>
+<h2 id="构造一个对象"><a href="#构造一个对象" class="headerlink" title="构造一个对象"></a>构造一个对象</h2><pre><code>TalkingClock jabberer = new Ta1kingClock(1000, true);
+TalkingOock.TiiePrinter listener = jabberer.new TimePrinterO；
+</code></pre>
+<h2 id="内部类是否有用、必要和安全"><a href="#内部类是否有用、必要和安全" class="headerlink" title="内部类是否有用、必要和安全"></a>内部类是否有用、必要和安全</h2><h2 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h2><p>局部类不能用 public 或 private 访问说明符进行声明。它的作用域被限定在声明这个局部类的块中</p>
+<pre><code>    public void start
+    {
+        class TiiePrinter inpleients ActionListener
+        {
+            public void actionPerforaed(ActionEvent event)
+            {
+                Systei.out.println(
+                        &quot;At the tone, the tine is &quot; + new DateO)；
+                if (beep) Toolkit.getDefaul tToolki10•beep():
+            }
+        }
+        ActionListener listener = new TimePrinter();
+        Timer t = new Timer(interva1, listener);
+        t.start();
+    }
+</code></pre>
+<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><pre><code>    public void start(int interval, boolean beep)
+    {
+        ActionListener listener = new ActionListener
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println(&quot;At the tone, the time is &quot; + new Date)；
+                if (beep) Toolkit.getDefaultToolkit().beep();
+            }
+        }；
+        Timer t = new Timer(interval, listener);
+        t.start0；
+    }
+</code></pre>
+<p>创建一个实现ActionListener接口的对象 需要实现的方法actionPerformed定义在大括号内</p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>为了把一个类隐藏在另外一个类的内部，不需要内部类引用外围类对象。内部类声明为 static, 以便取消产生的引用。</p>
+<ul>
+<li>静态内部类的对象除了没有对生成它的外围类对象的引用特权外， 与其他内部类完全一样。</li>
+<li>静态内部类可以有静态域和方法。</li>
+<li>声明在接口中的内部类自动成为 static 和 public 类</li>
+</ul>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/","path":"JAVA/Java实战特训营/单体架构案例分析实现/5基于MyBatis实现数据访问/","title":"5基于MyBatis实现数据访问"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>5基于MyBatis实现数据访问 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%92%8C%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">Mybatis整体架构和核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">ORM执行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">MyBatis整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">MyBatis核心对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">核心对象的生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis%E5%92%8CSpring%E6%95%B4%E5%90%88%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">MyBatis和Spring整合方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis%E5%92%8CSpring%EF%BC%88MyBatis-Spring%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Mybatis和Spring（MyBatis-Spring框架）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlSession"><span class="nav-number">2.1.2.</span> <span class="nav-text">SqlSession</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapper"><span class="nav-number">2.1.3.</span> <span class="nav-text">Mapper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis%E5%92%8CSpringBoot%EF%BC%88Spring-Boot-MyBatis%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Mybatis和SpringBoot（Spring Boot MyBatis框架）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.1.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89mapper%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">定义mapper接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%89%AB%E6%8F%8Fmapper"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">配置扫描mapper</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Boot%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">Spring Boot配置体系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Profile"><span class="nav-number">3.2.</span> <span class="nav-text">Profile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="5基于MyBatis实现数据访问 | VvfzZ">
+      <meta itemprop="description" content="基于MyBatis实现数据访问">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          5基于MyBatis实现数据访问
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-09-05 10:22:57 / Modified: 21:36:07" itemprop="dateCreated datePublished" datetime="2024-09-05T10:22:57+08:00">2024-09-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">基于MyBatis实现数据访问</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5.png"></p>
+<h1 id="Mybatis整体架构和核心组件"><a href="#Mybatis整体架构和核心组件" class="headerlink" title="Mybatis整体架构和核心组件"></a>Mybatis整体架构和核心组件</h1><h2 id="ORM执行流程"><a href="#ORM执行流程" class="headerlink" title="ORM执行流程"></a>ORM执行流程</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-ORM%E6%A1%86%E6%9E%B6%E6%89%A7%E8%A1%8CSQL%E6%B5%81%E7%A8%8B.png"><br>外观层：不需要关注复杂的事务实现原理，只是拿来用<br>映射层：生成sql语句（sql语句转换成statement，参数赋值到sql语句）</p>
+<h2 id="MyBatis整体架构"><a href="#MyBatis整体架构" class="headerlink" title="MyBatis整体架构"></a>MyBatis整体架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="MyBatis核心对象"><a href="#MyBatis核心对象" class="headerlink" title="MyBatis核心对象"></a>MyBatis核心对象</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1.png"></p>
+<h3 id="核心对象的生命周期"><a href="#核心对象的生命周期" class="headerlink" title="核心对象的生命周期"></a>核心对象的生命周期</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1-%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.png"></p>
+<h1 id="MyBatis和Spring整合方式"><a href="#MyBatis和Spring整合方式" class="headerlink" title="MyBatis和Spring整合方式"></a>MyBatis和Spring整合方式</h1><p>原生MyBatis过于底层，一般和Spring结合起来使用，类似SrpingJDBC封装JDBC。Mybatis-Spring封装了SqlSessionFactory、SqlSession、mapper底层处理过程。</p>
+<h2 id="Mybatis和Spring（MyBatis-Spring框架）"><a href="#Mybatis和Spring（MyBatis-Spring框架）" class="headerlink" title="Mybatis和Spring（MyBatis-Spring框架）"></a>Mybatis和Spring（MyBatis-Spring框架）</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpring-%E5%90%AF%E5%8A%A8.png"></p>
+<h3 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>SqlSession Template、SqlSession DaoSupport<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpring-SqlSession.png"></p>
+<h3 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpring-Mapper.png"></p>
+<h2 id="Mybatis和SpringBoot（Spring-Boot-MyBatis框架）"><a href="#Mybatis和SpringBoot（Spring-Boot-MyBatis框架）" class="headerlink" title="Mybatis和SpringBoot（Spring Boot MyBatis框架）"></a>Mybatis和SpringBoot（Spring Boot MyBatis框架）</h2><p>进一步封装，完整的Spring自动配置体系，简单的定义注解+Mapper接口+方法+sql语句即可实现。<br>从重配置的代码实现转换成重代码实现（重：重量级）<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpringBoot.png"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.2.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="定义mapper接口"><a href="#定义mapper接口" class="headerlink" title="定义mapper接口"></a>定义mapper接口</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface MybatisCustomerStaffMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Select(&quot;select * from customer_staff where id=#&#123;starffId&#125;&quot;)</span><br><span class="line">    public CustomerStaff findCustomerById(Long staffId);</span><br><span class="line"></span><br><span class="line">    @Insert(&quot;insert into customer_staff()(group_id,nickname,account_id)&quot; +</span><br><span class="line">            &quot;values(#&#123;groupId&#125;,#&#123;nickname&#125;,#&#123;accountId&#125;)&quot;)</span><br><span class="line">    @Options(useGeneratedKeys = true,keyProperty = &quot;id&quot;)</span><br><span class="line">    void createCustomerStaff(CustomerStaff customerStaff);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置扫描mapper"><a href="#配置扫描mapper" class="headerlink" title="配置扫描mapper"></a>配置扫描mapper</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@MapperScan(&quot;org.geekbang.projects.cs.mapper&quot;)</span><br><span class="line">public class Application &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>注意Mybatis配置扫描类没有*号（spring配置常用*）</p>
+<h1 id="Spring-Boot配置体系"><a href="#Spring-Boot配置体系" class="headerlink" title="Spring Boot配置体系"></a>Spring Boot配置体系</h1><p>约定优于配置的思想贯彻者</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-SpringBoot%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png"></p>
+<h2 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-SpringBoot%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB-Profile.png"></p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>相比原生MyBatis ，MyBatis-Spring和Spring Boot MyBatis分别作了哪些封装？<br>原生MyBatis 提供DataSource、SqlSessionFactory、SqlSession、Mapper等基础组件</p>
+<ul>
+<li><p>MyBatis-Spring 封装了重复使用MyBatis基础组件操作数据的过程，通过配置简化编码。</p>
+</li>
+<li><p>Spring Boot MyBatis 基于Spring Boot自动化配置将配置文件简化，从重配置过渡到重编码实现</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/4JDBCTemplate%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/" rel="prev" title="JDBCTemplate实现原理剖析">
+                  <i class="fa fa-chevron-left"></i> JDBCTemplate实现原理剖析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/" rel="next" title="6Mybatis和Spring集成原理剖析">
+                  6Mybatis和Spring集成原理剖析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

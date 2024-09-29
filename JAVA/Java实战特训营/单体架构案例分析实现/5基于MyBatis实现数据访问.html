@@ -1,0 +1,43 @@
+<hr>
+<h2 id="title-5基于MyBatis实现数据访问date-2024-09-05-10-22-57tags-description-基于MyBatis实现数据访问"><a href="#title-5基于MyBatis实现数据访问date-2024-09-05-10-22-57tags-description-基于MyBatis实现数据访问" class="headerlink" title="title: 5基于MyBatis实现数据访问date: 2024-09-05 10:22:57tags:description: 基于MyBatis实现数据访问"></a>title: 5基于MyBatis实现数据访问<br>date: 2024-09-05 10:22:57<br>tags:<br>description: 基于MyBatis实现数据访问</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5.png"></p>
+<h1 id="Mybatis整体架构和核心组件"><a href="#Mybatis整体架构和核心组件" class="headerlink" title="Mybatis整体架构和核心组件"></a>Mybatis整体架构和核心组件</h1><h2 id="ORM执行流程"><a href="#ORM执行流程" class="headerlink" title="ORM执行流程"></a>ORM执行流程</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-ORM%E6%A1%86%E6%9E%B6%E6%89%A7%E8%A1%8CSQL%E6%B5%81%E7%A8%8B.png"><br>外观层：不需要关注复杂的事务实现原理，只是拿来用<br>映射层：生成sql语句（sql语句转换成statement，参数赋值到sql语句）</p>
+<h2 id="MyBatis整体架构"><a href="#MyBatis整体架构" class="headerlink" title="MyBatis整体架构"></a>MyBatis整体架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="MyBatis核心对象"><a href="#MyBatis核心对象" class="headerlink" title="MyBatis核心对象"></a>MyBatis核心对象</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1.png"></p>
+<h3 id="核心对象的生命周期"><a href="#核心对象的生命周期" class="headerlink" title="核心对象的生命周期"></a>核心对象的生命周期</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1-%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.png"></p>
+<h1 id="MyBatis和Spring整合方式"><a href="#MyBatis和Spring整合方式" class="headerlink" title="MyBatis和Spring整合方式"></a>MyBatis和Spring整合方式</h1><p>原生MyBatis过于底层，一般和Spring结合起来使用，类似SrpingJDBC封装JDBC。Mybatis-Spring封装了SqlSessionFactory、SqlSession、mapper底层处理过程。</p>
+<h2 id="Mybatis和Spring（MyBatis-Spring框架）"><a href="#Mybatis和Spring（MyBatis-Spring框架）" class="headerlink" title="Mybatis和Spring（MyBatis-Spring框架）"></a>Mybatis和Spring（MyBatis-Spring框架）</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpring-%E5%90%AF%E5%8A%A8.png"></p>
+<h3 id="SqlSession"><a href="#SqlSession" class="headerlink" title="SqlSession"></a>SqlSession</h3><p>SqlSession Template、SqlSession DaoSupport<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpring-SqlSession.png"></p>
+<h3 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpring-Mapper.png"></p>
+<h2 id="Mybatis和SpringBoot（Spring-Boot-MyBatis框架）"><a href="#Mybatis和SpringBoot（Spring-Boot-MyBatis框架）" class="headerlink" title="Mybatis和SpringBoot（Spring Boot MyBatis框架）"></a>Mybatis和SpringBoot（Spring Boot MyBatis框架）</h2><p>进一步封装，完整的Spring自动配置体系，简单的定义注解+Mapper接口+方法+sql语句即可实现。<br>从重配置的代码实现转换成重代码实现（重：重量级）<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-Mybatis%E5%92%8CSpringBoot.png"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h4><pre><code>&lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h4 id="定义mapper接口"><a href="#定义mapper接口" class="headerlink" title="定义mapper接口"></a>定义mapper接口</h4><pre><code>@Mapper
+public interface MybatisCustomerStaffMapper {
+
+    @Select(&quot;select * from customer_staff where id=#{starffId}&quot;)
+    public CustomerStaff findCustomerById(Long staffId);
+
+    @Insert(&quot;insert into customer_staff()(group_id,nickname,account_id)&quot; +
+            &quot;values(#{groupId},#{nickname},#{accountId})&quot;)
+    @Options(useGeneratedKeys = true,keyProperty = &quot;id&quot;)
+    void createCustomerStaff(CustomerStaff customerStaff);
+}
+</code></pre>
+<h4 id="配置扫描mapper"><a href="#配置扫描mapper" class="headerlink" title="配置扫描mapper"></a>配置扫描mapper</h4><pre><code>@MapperScan(&quot;org.geekbang.projects.cs.mapper&quot;)
+public class Application {}
+</code></pre>
+<p>注意Mybatis配置扫描类没有*号（spring配置常用*）</p>
+<h1 id="Spring-Boot配置体系"><a href="#Spring-Boot配置体系" class="headerlink" title="Spring Boot配置体系"></a>Spring Boot配置体系</h1><p>约定优于配置的思想贯彻者</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-SpringBoot%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png"></p>
+<h2 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/5%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/5-SpringBoot%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB-Profile.png"></p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>相比原生MyBatis ，MyBatis-Spring和Spring Boot MyBatis分别作了哪些封装？<br>原生MyBatis 提供DataSource、SqlSessionFactory、SqlSession、Mapper等基础组件</p>
+<ul>
+<li><p>MyBatis-Spring 封装了重复使用MyBatis基础组件操作数据的过程，通过配置简化编码。</p>
+</li>
+<li><p>Spring Boot MyBatis 基于Spring Boot自动化配置将配置文件简化，从重配置过渡到重编码实现</p>
+</li>
+</ul>

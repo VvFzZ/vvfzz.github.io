@@ -1,0 +1,217 @@
+<hr>
+<h2 id="title-Java实战特训营-2-1使用Mybatis-Plus对数据访问进行扩展date-2024-09-07-09-18-13tags-description-使用Mybatis-Plus对数据访问进行扩展"><a href="#title-Java实战特训营-2-1使用Mybatis-Plus对数据访问进行扩展date-2024-09-07-09-18-13tags-description-使用Mybatis-Plus对数据访问进行扩展" class="headerlink" title="title: Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展date: 2024-09-07 09:18:13tags:description: 使用Mybatis-Plus对数据访问进行扩展"></a>title: Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展<br>date: 2024-09-07 09:18:13<br>tags:<br>description: 使用Mybatis-Plus对数据访问进行扩展</h2><h1 id="MyBatis-Plus开发模式"><a href="#MyBatis-Plus开发模式" class="headerlink" title="MyBatis-Plus开发模式"></a>MyBatis-Plus开发模式</h1><h2 id="为什么开发MyBatis-Plus"><a href="#为什么开发MyBatis-Plus" class="headerlink" title="为什么开发MyBatis-Plus"></a>为什么开发MyBatis-Plus</h2><p>MyBatis的缺点</p>
+<ul>
+<li>自动化程度不高，需要写SQL语句操作业务数据</li>
+<li>对字段名称的识别校验不友好，易出错不好排查</li>
+<li>通过XML配置映射字段和属性，影响开发效率<br>MyBatis-Plus的特点</li>
+<li>不使用SQL，少量代码即可实现CRUD</li>
+<li>支持Lambda，字段强校验</li>
+<li>内置代码生成器，自动生成各层框架代码</li>
+<li>内置分页，性能分析，全局拦截插件</li>
+</ul>
+<h2 id="MyBtisPlus-ActiveRecord模式"><a href="#MyBtisPlus-ActiveRecord模式" class="headerlink" title="MyBtisPlus-ActiveRecord模式"></a>MyBtisPlus-ActiveRecord模式</h2><p>一般不使用，而是分层model和mapper，service分开<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-ActiveRecord%E6%A8%A1%E5%BC%8F.png"></p>
+<h2 id="MyBatisPlus-整体架构"><a href="#MyBatisPlus-整体架构" class="headerlink" title="MyBatisPlus-整体架构"></a>MyBatisPlus-整体架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E6%9F%A5%E8%AF%A2.png"></p>
+<h2 id="Id生成策略"><a href="#Id生成策略" class="headerlink" title="Id生成策略"></a>Id生成策略</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-Id%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5.png"></p>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E5%88%86%E9%A1%B5.png"></p>
+<h2 id="逻辑删除"><a href="#逻辑删除" class="headerlink" title="逻辑删除"></a>逻辑删除</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4.png"></p>
+<h1 id="客服系统案例演进"><a href="#客服系统案例演进" class="headerlink" title="客服系统案例演进"></a>客服系统案例演进</h1><h2 id="升级策略"><a href="#升级策略" class="headerlink" title="升级策略"></a>升级策略</h2><p>由Mybatis 升级成Mybatis-Plus相关改造点<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E5%8D%87%E7%BA%A7%E7%AD%96%E7%95%A5.png"></p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code> &lt;dependency&gt;
+            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-plus-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+            &lt;artifactId&gt;dynamic-datasource-spring-boot-starter&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>
+spring:
+  application:
+    name: customer-service
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  datasource:
+    dynamic:
+      primary: master
+      druid:
+        initial-size: 3
+        min-idle: 3
+        max-active: 40
+        max-wait: 60000
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/customer_system?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai
+          username: root
+          password: root
+mybatis-plus:
+  mapper-locations: classpath:mapperXml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 逻辑删除字段名
+      logic-delete-field: is_deleted
+      # 逻辑删除字面值：未删除为0
+      logic-not-delete-value: 0
+      # 逻辑删除字面值：删除为1
+      logic-delete-value: 1
+</code></pre>
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><pre><code>@TableName(&quot;customer_staff&quot;)
+public class CustomerStaff implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 主键
+     */
+    @TableId(value = &quot;id&quot;, type = IdType.AUTO)
+    private Long id;
+
+
+    private String name;
+
+        /**
+     * 是否删除，1=删除,0=未删除
+     */
+    @TableLogic
+    private Boolean isDeleted;
+}
+</code></pre>
+<h3 id="mapper"><a href="#mapper" class="headerlink" title="mapper"></a>mapper</h3><pre><code>public interface CustomerStaffMapper extends BaseMapper&lt;CustomerStaff&gt; {
+
+    default CustomerStaff findCustomerStaffByPhoneNumber(String phoneNumber) {
+
+        LambdaQueryWrapper&lt;CustomerStaff&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+        queryWrapper.eq(CustomerStaff::getPhone, phoneNumber);
+        queryWrapper.eq(CustomerStaff::getIsDeleted, false);
+
+        return selectOne(queryWrapper);
+    }
+
+
+
+}
+</code></pre>
+<h3 id="service"><a href="#service" class="headerlink" title="service"></a>service</h3><pre><code>public class CustomerStaffServiceImpl extends ServiceImpl&lt;CustomerStaffMapper, CustomerStaff&gt; implements ICustomerStaffService {
+    public List&lt;CustomerStaff&gt; findCustomerStaffs() {
+        LambdaQueryWrapper&lt;CustomerStaff&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+        return baseMapper.selectList(queryWrapper);
+    }
+  public PageObject&lt;CustomerStaff&gt; findCustomerStaffs(Long pageSize, Long pageIndex) {
+
+        return getCustomerStaffPageObject(null, pageSize, pageIndex);
+    }
+    
+    private PageObject&lt;CustomerStaff&gt; getCustomerStaffPageObject(String staffName, Long pageSize, Long pageIndex) {
+        LambdaQueryWrapper&lt;CustomerStaff&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+//        queryWrapper.eq(CustomerStaff::getIsDeleted, false);
+
+        if(!Objects.isNull(staffName)) {
+            queryWrapper.like(CustomerStaff::getStaffName, staffName);
+        }
+        queryWrapper.orderByDesc(CustomerStaff::getCreateTime);
+
+        IPage&lt;CustomerStaff&gt; page = new Page&lt;&gt;(pageIndex, pageSize);
+        IPage&lt;CustomerStaff&gt; pagedResult = baseMapper.selectPage(page, queryWrapper);
+
+        PageObject&lt;CustomerStaff&gt; pagedObject = new PageObject&lt;CustomerStaff&gt;();
+        pagedObject.buildPage(pagedResult.getRecords(), pagedResult.getTotal(), pagedResult.getCurrent(), pagedResult.getSize());
+
+        return pagedObject;
+    }
+    @Override
+    public Boolean deleteCustomerStaffById(Long staffId) {
+
+        //通过更新操作实现逻辑删除
+//        CustomerStaff customerStaff = new CustomerStaff();
+//        customerStaff.setId(staffId);
+//        customerStaff.setIsDeleted(true);
+//
+//        return updateById(customerStaff);
+
+        //通过逻辑删除为来进行逻辑删除
+        return this.removeById(staffId);
+    }
+}
+</code></pre>
+<h3 id="分页配置类"><a href="#分页配置类" class="headerlink" title="分页配置类"></a>分页配置类</h3><pre><code>@Configuration
+public class MybatisPlusConfig {
+
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+        //1 创建MybatisPlusInterceptor拦截器对象
+        MybatisPlusInterceptor mpInterceptor=new MybatisPlusInterceptor();
+        //2 添加分页拦截器
+        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        return mpInterceptor;
+    }
+}
+</code></pre>
+<h1 id="MyBatis-Plus-SQL执行流程"><a href="#MyBatis-Plus-SQL执行流程" class="headerlink" title="MyBatis-Plus SQL执行流程"></a>MyBatis-Plus SQL执行流程</h1><h2 id="MyBatisMapper获取流程"><a href="#MyBatisMapper获取流程" class="headerlink" title="MyBatisMapper获取流程"></a>MyBatisMapper获取流程</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisMapper%E8%8E%B7%E5%8F%96%E6%B5%81%E7%A8%8B.png"><br>代码流程<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisMapper%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B.png"><br>最终通过创建了一个代理类MapperProxy,<br>代理对象MapperProxy内部创建MapperMethod实例通过SqlSession进一步完成sql执行操作<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisMapper%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.png"></p>
+<h3 id="MapperMethod"><a href="#MapperMethod" class="headerlink" title="MapperMethod"></a>MapperMethod</h3><p>内部使用SqlSession</p>
+<h4 id="SqlSession获取过程"><a href="#SqlSession获取过程" class="headerlink" title="SqlSession获取过程"></a>SqlSession获取过程</h4><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-SqlSession%E8%8E%B7%E5%8F%96%E6%B5%81%E7%A8%8B.png"></p>
+<h5 id="SqlSession执行流程"><a href="#SqlSession执行流程" class="headerlink" title="SqlSession执行流程"></a>SqlSession执行流程</h5><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-SqlSession%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png"></p>
+<ul>
+<li>MappedStatement sql语句封装对象</li>
+<li>Executor 执行器<ul>
+<li>BaseExecutor 一级缓存</li>
+<li>CachingExecutor 二级缓存</li>
+</ul>
+</li>
+</ul>
+<p>Executor继承关系图</p>
+<blockquote>
+<p><a href="https://docs.qq.com/flowchart/DRUhkS1V6YmVZb1ZZ">https://docs.qq.com/flowchart/DRUhkS1V6YmVZb1ZZ</a></p>
+</blockquote>
+<p>二级缓存建议关闭。</p>
+<pre><code>mybatis:
+  configuration:
+    cache-enabled: false
+    local-cache-scope: session
+</code></pre>
+<p>使用二级缓存的异常场景：两个线程都有自己的二级、一级缓存，线程1更新操作并清空二级缓存，此时线程2可能查找到一级缓存的脏数据。</p>
+<p>读源码时的疑问<br>BaseExecutor为什么先put一个枚举值，再执行查询，再删除k&#x2F;v，再缓存查询结果呢？如下代码</p>
+<pre><code>  private &lt;E&gt; List&lt;E&gt; queryFromDatabase(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
+    List&lt;E&gt; list;
+    localCache.putObject(key, EXECUTION_PLACEHOLDER);
+    try {
+      list = doQuery(ms, parameter, rowBounds, resultHandler, boundSql);
+    } finally {
+      localCache.removeObject(key);
+    }
+    localCache.putObject(key, list);
+    if (ms.getStatementType() == StatementType.CALLABLE) {
+      localOutputParameterCache.putObject(key, parameter);
+    }
+    return list;
+  }
+</code></pre>
+<h2 id="执行流程总结"><a href="#执行流程总结" class="headerlink" title="执行流程总结"></a>执行流程总结</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatis%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.png"><br>处理流程总结：</p>
+<ul>
+<li>SqlSessionFactoryBean用来生成SqlSessionFactory</li>
+<li>MapperFactoryBean初始化时会生成一个线程安全的SqlSession对象。<ul>
+<li>MapperFactoryBean继承自SqlSessionDaoSupport,SqlSessionDaoSupport包含SqlSessionTemplate对象，SqlSessionTemplate包含一个SqlSessionProxy对象SqlSessionProxy创建时会保存到ThreadLocal中以保证线程安全。</li>
+<li>SqlSessionTemplate(SqlSession)初始化代理对象时，调用openSessionFromDataSource方法，初始化excutor，开启事务，返回SqlSession对象</li>
+</ul>
+</li>
+<li>SqlSession.getMapper()时获取到的是mapper代理对象<ul>
+<li>configuration.getMapper(SqlSession);</li>
+</ul>
+</li>
+<li>MapperProxy包含一个MapperMethod类，用来执行sql语句。</li>
+<li>MapperMethod内部通过SqlSession执行SQL语句。</li>
+<li>SqlSession通过Executor对象执行</li>
+<li>Executor分为BaseExcutor和CachingExcutor</li>
+<li>Executor内部使用 StatementHandler、ResultHandler执行sql语句，处理结果</li>
+</ul>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li><p>为什么Mapper层的接口没有实现类却能完成SQL执行等一系列操作？JDK代理模式，MapperProxyFactory创建代理类MapperProxy，MapperProxy代理MapperMethod类，MapperMethod类通过SqlSession等参数构建执行sql</p>
+</li>
+<li><p>MyBatisPlus在Mybatis基础上添加了哪些增强功能？</p>
+</li>
+</ul>

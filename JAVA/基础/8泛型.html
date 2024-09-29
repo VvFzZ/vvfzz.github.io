@@ -1,0 +1,117 @@
+<hr>
+<h2 id="title-8泛型date-2024-04-28-16-58-53tags-泛型-JAVAdescription-定义泛型类、泛型方法"><a href="#title-8泛型date-2024-04-28-16-58-53tags-泛型-JAVAdescription-定义泛型类、泛型方法" class="headerlink" title="title: 8泛型date: 2024-04-28 16:58:53tags:    - 泛型    - JAVAdescription: 定义泛型类、泛型方法"></a>title: 8泛型<br>date: 2024-04-28 16:58:53<br>tags:<br>    - 泛型<br>    - JAVA<br>description: 定义泛型类、泛型方法</h2><h2 id="定义泛型类"><a href="#定义泛型类" class="headerlink" title="定义泛型类"></a>定义泛型类</h2><pre><code>public class Pair&lt;T&gt;
+{
+    private T first;
+    private T second;
+    public Pair() { first = null ; second = null ; }
+    public Pairf(T first, T second) { this,
+    first = first; this.second = second; }
+    public T getFirstO { return first; }
+    public T getSecondO { return second; }
+    public void setFirst(T newValue) { first = newValue; }
+    public void setSecond(T newValue) { second = newValue; }
+}
+</code></pre>
+<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><pre><code>class ArrayAlg
+{
+    public static &lt;T&gt; T getMiddle(T... a)
+    {
+        return a[a.length / 2];
+    }
+}
+
+String middle = ArrayAlg.&lt;String&gt;getMiddle(&quot;john&quot;, &quot;Q&quot;, &quot;Public&quot;);
+
+String middle = ArrayAlg.getHiddle(&quot;john&quot;, &quot;Q&quot;, &quot;Public&quot;); //可以省略 &lt;String&gt; 类型参数
+</code></pre>
+<p><code>double middle = ArrayAlg.getMiddle(3.14, 1729, 0);</code><br>编译器将会自动打包参数为 1 个Double 和 2 个 Integer 对象，而后寻找这些类的共同超类型。事实上；找到 2 个这样的超类型：Number 和 Comparable 接口，其本身也是一个泛型类型。在这种情况下，可以采取的补救措施是将所有的参数写为 double 值。</p>
+<h2 id="类型变量的限定"><a href="#类型变量的限定" class="headerlink" title="类型变量的限定"></a>类型变量的限定</h2><p>类在前，接口在后<br>T extends Comparable &amp; Serializable</p>
+<h2 id="泛型代码与虚拟机"><a href="#泛型代码与虚拟机" class="headerlink" title="泛型代码与虚拟机"></a>泛型代码与虚拟机</h2><h3 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h3><h3 id="翻译泛型表达式"><a href="#翻译泛型表达式" class="headerlink" title="翻译泛型表达式"></a>翻译泛型表达式</h3><h3 id="翻译泛型方法"><a href="#翻译泛型方法" class="headerlink" title="翻译泛型方法"></a>翻译泛型方法</h3><h3 id="调用遗留代码"><a href="#调用遗留代码" class="headerlink" title="调用遗留代码"></a>调用遗留代码</h3><h2 id="约束与局限性"><a href="#约束与局限性" class="headerlink" title="约束与局限性"></a>约束与局限性</h2><h3 id="不能使用基本类型实例化类型参数"><a href="#不能使用基本类型实例化类型参数" class="headerlink" title="不能使用基本类型实例化类型参数"></a>不能使用基本类型实例化类型参数</h3><p>没有 Pair<double>, 只 有 Pair<Double><br>原因是类型擦除。擦除之后，Pair类含有Object类型的域，而Object不能存储 double值。原因：与 Java 语言中基本类型的独立状态相一致。</p>
+<h3 id="运行时类型查询只适用于原始类型"><a href="#运行时类型查询只适用于原始类型" class="headerlink" title="运行时类型查询只适用于原始类型"></a>运行时类型查询只适用于原始类型</h3><p>只会检查类型是否是Pair不会检查泛型，如下示例</p>
+<pre><code>if (a instanceof Pair&lt;String&gt;) //Error
+Pair&lt;String&gt; p = (Pair&lt;String&gt;) a; // Warning-can only test that a is a Pair
+</code></pre>
+<pre><code>List&lt;String&gt; stringList = Arrays.asList(&quot;1&quot;, &quot;2&quot;);
+List&lt;Integer&gt; integerList = Arrays.asList(1, 2);
+System.out.println(stringList.getClass()==integerList.getClass()); // true  两次调用 getClass 都将返回 Pair.class
+</code></pre>
+<h3 id="不能创建参数化类型的数组"><a href="#不能创建参数化类型的数组" class="headerlink" title="不能创建参数化类型的数组"></a>不能创建参数化类型的数组</h3><p><code>Pair&lt;String&gt;[] table = new Pair&lt;String&gt;[10]; // Error</code></p>
+<p>可以声明类型为 <code>Pair&lt;String&gt;[]</code>的变量 但不能用<code>new Pair&lt;String&gt;[10]</code>初始化这个变量<br>如果需要收集参数化类型对象， 只有一种安全而有效的方法：使用 ArrayList:ArrayList&lt;Pair<String>&gt;</p>
+<h3 id="不能实例化类型变置"><a href="#不能实例化类型变置" class="headerlink" title="不能实例化类型变置"></a>不能实例化类型变置</h3><p><code>public Pair() { first = new T(); second = new T(); } // Error</code><br>解决办法：提供一个构造器表达式，通过反射调用 Clasmewlnstance 方法来构造泛型对象</p>
+<pre><code>public static &lt;T&gt; Pair&lt;T&gt; makePair(Class&lt;T&gt; cl)
+{
+    try { return new Pair&lt;&gt;(d.newInstance(). cl.newInstance())；}
+    catch (Exception ex) { return null; }
+}
+
+Pair&lt;String&gt; p = Pair.makePair(String.class);
+</code></pre>
+<h3 id="不能构造泛型数组"><a href="#不能构造泛型数组" class="headerlink" title="不能构造泛型数组"></a>不能构造泛型数组</h3><p><code>T[] arr = new T[10];// ERROR </code><br>解决办法：</p>
+<pre><code>class MyClass&lt;T&gt; {
+    T[] list1;
+
+    //泛型数组1
+    public void init(IntFunction&lt;T[]&gt; func, int count) {
+        T[] m = func.apply(count);
+        list1 = m;
+    }
+
+    /// 泛型数组2
+    ArrayList&lt;T&gt; list2 = new ArrayList&lt;&gt;();
+}
+
+MyClass&lt;String&gt; mc = new MyClass&lt;&gt;();
+mc.init(String[]::new, 10);
+</code></pre>
+<h3 id="泛型类的静态上下文中类型变量无效"><a href="#泛型类的静态上下文中类型变量无效" class="headerlink" title="泛型类的静态上下文中类型变量无效"></a>泛型类的静态上下文中类型变量无效</h3><p>以下代码无效。<br>禁止使用带有类型变量的静态域和方法</p>
+<pre><code>    public class Singleton&lt;T&gt;
+    {
+        private static T singlelnstance; // Error
+        public static T getSinglelnstance() // Error
+        {
+            if (singleinstance == null) construct new instance of T
+            return singlelnstance;
+        }
+    }
+</code></pre>
+<h3 id="不能抛出或捕获泛型类的实例"><a href="#不能抛出或捕获泛型类的实例" class="headerlink" title="不能抛出或捕获泛型类的实例"></a>不能抛出或捕获泛型类的实例</h3><p>泛型类型不可扩展 Exception，throwable</p>
+<pre><code>    public class Problem&lt;T&gt; extends Exception { // ERROR
+        /* . . . */
+    }
+</code></pre>
+<p>catch 子句中不能使用类型变量</p>
+<pre><code> try {}
+ catch (T e) // Error can &#39;t catch type variable
+ {}
+</code></pre>
+<h3 id="可以消除对受查异常的检查"><a href="#可以消除对受查异常的检查" class="headerlink" title="可以消除对受查异常的检查"></a>可以消除对受查异常的检查</h3><pre><code>ArrayList&lt;Parent1&gt; aa = new ArrayList&lt;Sun2&gt;();// ERROR
+Parent1[] aaaa = new Sun2[1]; // OK
+</code></pre>
+<h2 id="继承规则"><a href="#继承规则" class="headerlink" title="继承规则"></a>继承规则</h2><p>无论 S 与 T 有什么联系,通常,Pair&lt;S&gt;与Pair&lt;T&gt;没有什么关系<br><img src="/JAVA/%E5%9F%BA%E7%A1%80/8%E6%B3%9B%E5%9E%8B/8-1.png"></p>
+<h2 id="通配符类型"><a href="#通配符类型" class="headerlink" title="通配符类型"></a>通配符类型</h2><h3 id="通配符概念"><a href="#通配符概念" class="headerlink" title="通配符概念"></a>通配符概念</h3><p><code>Pair&lt;? extends Employee〉</code></p>
+<pre><code>        Pair&lt;PParent&gt; pair = new Pair&lt;&gt;(new PSun(), new PSun());  // OK
+        Pair&lt;PSun&gt; pair2 = new Pair&lt;&gt;(new PSun(), new PSun());  // OK
+        pair = pair2;  // ERROR
+
+        Pair&lt;? extends PParent&gt; pairs = pair2; // OK
+        pairs= pair; // OK
+        pairs.setFirst(new PParent()); // compile-time ERROR ,编译器只知道需要Employee的子类型，但不知道具体类型,拒绝传递任何特定的类型,？不能用来匹配
+</code></pre>
+<h3 id="通配符的超类型限定"><a href="#通配符的超类型限定" class="headerlink" title="通配符的超类型限定"></a>通配符的超类型限定</h3><p>指定一个超类型限定（supertypebound）：<code>? super Manager</code></p>
+<p>限定符包含自己</p>
+<p>超类限定符 ？supper  getter方法受限<br>子类限定符 ？extends setter方法受限</p>
+<h3 id="无限定通配符"><a href="#无限定通配符" class="headerlink" title="无限定通配符"></a>无限定通配符</h3><p>例如，Pair<?>
+类型 Pair<?> 有以下方法：（伪代码）<br><code>? getFi rst()</code><br><code>void setFirst⑺</code></p>
+<p>getFirst 的返回值只能赋给一个 Object。setFirst 方法不能被调用， 甚至不能用 Object 调用。可以调用set(null)</p>
+<p>用途例如：</p>
+<pre><code>public static boolean hasNulls(Pair&lt;?&gt; p)
+{
+    return p.getFirstO = null || p.getSecondO =null;
+}
+
+//转换成泛型方法
+public static &lt;T&gt; boolean hasNulls(Pair&lt;T&gt; p)
+</code></pre>
+<p>上例中 通配符的版本可读性更强</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>怎么理解：<mark>Pair&lt;?&gt; 和 Pair 本质的不同在于： 可以用任意 Object 对象调用原始 Pair 类的 setObject方法。</mark></p>
+<h2 id="反射和泛型"><a href="#反射和泛型" class="headerlink" title="反射和泛型"></a>反射和泛型</h2><p>反射允许你在运行时分析任意的对象。如果对象是泛型类的实例，关于泛型类型参数则得不到太多信息，因为它们会被擦除。</p>

@@ -1,0 +1,79 @@
+<hr>
+<h2 id="title-jdbcdate-2024-06-22-15-59-32tags-JAVA-JDBCdescription"><a href="#title-jdbcdate-2024-06-22-15-59-32tags-JAVA-JDBCdescription" class="headerlink" title="title: jdbcdate: 2024-06-22 15:59:32tags:    - JAVA    - JDBCdescription: "></a>title: jdbc<br>date: 2024-06-22 15:59:32<br>tags:<br>    - JAVA<br>    - JDBC<br>description: </h2><ul>
+<li>加载驱动</li>
+<li>相关类</li>
+<li>预编译参数化</li>
+<li>批处理</li>
+<li>事务</li>
+<li>连接池<!--more--></li>
+</ul>
+<h1 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h1><h2 id="手动加载驱动"><a href="#手动加载驱动" class="headerlink" title="手动加载驱动"></a>手动加载驱动</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><pre><code>//Driver driver = new Driver();
+//DriverManager.registerDriver(driver);
+</code></pre>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><pre><code>Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+</code></pre>
+<h2 id="自动加载（SPI机制加载）"><a href="#自动加载（SPI机制加载）" class="headerlink" title="自动加载（SPI机制加载）"></a>自动加载（SPI机制加载）</h2><p>mysql-connector-java.jar中 meta-info&#x2F;services&#x2F;java.sql.Driver文件说明了驱动类型<br>不是所有mysql版本都支持</p>
+<h1 id="相关类"><a href="#相关类" class="headerlink" title="相关类"></a>相关类</h1><ul>
+<li>Driver</li>
+<li>DriverManager</li>
+<li>Connection</li>
+<li>Statement</li>
+</ul>
+<pre><code>1. 加载驱动 DriverManager.registerDriver(new Driver());
+2. 获取连接connection = DriverManager.getConnection(url, &quot;root&quot;, &quot;root&quot;);
+3. 获取statement = connection.createStatement();
+4. 执行statement.execute...
+</code></pre>
+<h1 id="预编译参数化"><a href="#预编译参数化" class="headerlink" title="预编译参数化"></a>预编译参数化</h1><h2 id="防止sql注入"><a href="#防止sql注入" class="headerlink" title="防止sql注入"></a>防止sql注入</h2><p>预编译后，会将参数中单引号转义，达到防止注入的目的</p>
+<p>在获取statement时提供sql语句模版 进行预编译，执行前提供参数，再根据具体参数执行。</p>
+<pre><code>preparedStatement = connection.prepareStatement(&quot;select * from v_user where name = ? &quot;);
+preparedStatement.setString(1, &quot;vvf&quot;);
+</code></pre>
+<h2 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h2><p>缓存预编译结果<br>如若sql只执行一次不会提升性能，还会占用缓存</p>
+<h2 id="开启设置"><a href="#开启设置" class="headerlink" title="开启设置"></a>开启设置</h2><p>jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;db？……&amp;useServerPrepStmts&#x3D;true&amp;cachePrepStmts&#x3D;true</p>
+<h1 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h1><h2 id="开启设置-1"><a href="#开启设置-1" class="headerlink" title="开启设置"></a>开启设置</h2><p>&amp;rewriteBatchedStatements&#x3D;true</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>preparedStatement = connection.prepareStatement(&quot;insert into v_user values(?,?,?,?,?)&quot;);
+
+            for (int i = 0; i &lt; 1000; i++) {
+                int id = i + 2;
+                preparedStatement.setInt(1, id);
+                preparedStatement.setString(2, &quot;v&quot; + id);
+                preparedStatement.setInt(3, id % 2);
+                preparedStatement.setInt(4, id % 100);
+                preparedStatement.setDate(5,new Date(System.currentTimeMillis()));
+                preparedStatement.addBatch(); // addBatch
+
+                //if (i % 100 == 0) {
+                //    preparedStatement.executeBatch();
+                //    preparedStatement.clearBatch();// 清除缓存
+                //}
+            }
+
+            preparedStatement.executeBatch(); // exec
+</code></pre>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>一批sql语句过多造成内存再用过大，可将其分为多批处理</p>
+<pre><code>for (int i = 0; i &lt; 1000; i++) {
+                int id = i + 2;
+                preparedStatement.setInt(1, id);
+                preparedStatement.setString(2, &quot;v&quot; + id);
+                preparedStatement.setInt(3, id % 2);
+                preparedStatement.setInt(4, id % 100);
+                preparedStatement.setDate(5,new Date(System.currentTimeMillis()));                
+
+                if (i % 100 == 0) {
+                    preparedStatement.executeBatch();
+                    preparedStatement.clearBatch();// 清除缓存
+                }
+            }
+
+            preparedStatement.executeBatch();
+            preparedStatement.clearBatch();
+</code></pre>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>默认自动提交事务<br>设置手动提交：<code> connection.setAutoCommit(false);</code></p>
+<p>catch块执行回滚: <code>connection.rollback();</code><br>finally执行提交：<code>connection.commit();</code></p>
+<h2 id="回滚点"><a href="#回滚点" class="headerlink" title="回滚点"></a>回滚点</h2><p>设置：<code>connection.setSavepoint()</code><br>回滚：<code>connection.rollback(savepoint);</code></p>
+<h1 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h1><h2 id="开源的连接池"><a href="#开源的连接池" class="headerlink" title="开源的连接池"></a>开源的连接池</h2><ul>
+<li>c3p0</li>
+<li>dbcp</li>
+<li>druid</li>
+</ul>

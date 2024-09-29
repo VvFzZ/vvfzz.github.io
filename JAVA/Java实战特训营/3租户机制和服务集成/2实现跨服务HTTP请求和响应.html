@@ -1,0 +1,42 @@
+<hr>
+<h2 id="title-2实现跨服务HTTP请求和响应description-实现跨服务HTTP请求和响应date-2024-09-12-16-01-21tags"><a href="#title-2实现跨服务HTTP请求和响应description-实现跨服务HTTP请求和响应date-2024-09-12-16-01-21tags" class="headerlink" title="title: 2实现跨服务HTTP请求和响应description: 实现跨服务HTTP请求和响应date: 2024-09-12 16:01:21tags:"></a>title: 2实现跨服务HTTP请求和响应<br>description: 实现跨服务HTTP请求和响应<br>date: 2024-09-12 16:01:21<br>tags:</h2><h1 id="RestTemplate使用方法"><a href="#RestTemplate使用方法" class="headerlink" title="RestTemplate使用方法"></a>RestTemplate使用方法</h1><h2 id="请求过程"><a href="#请求过程" class="headerlink" title="请求过程"></a>请求过程</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-RestTemplate-%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B.png"></p>
+<h3 id="创建RestTemplate"><a href="#创建RestTemplate" class="headerlink" title="创建RestTemplate"></a>创建RestTemplate</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-RestTemplate-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1.png"></p>
+<h4 id="方法介绍"><a href="#方法介绍" class="headerlink" title="方法介绍"></a>方法介绍</h4><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-RestTemplate-%E6%96%B9%E6%B3%95.png"></p>
+<h4 id="指定消息转换器"><a href="#指定消息转换器" class="headerlink" title="指定消息转换器"></a>指定消息转换器</h4><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-RestTemplate-%E6%8C%87%E5%AE%9A%E6%B6%88%E6%81%AF%E8%BD%AC%E6%8D%A2%E5%99%A8.png"></p>
+<h4 id="设置拦截器"><a href="#设置拦截器" class="headerlink" title="设置拦截器"></a>设置拦截器</h4><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-RestTemplate-%E8%AE%BE%E7%BD%AE%E6%8B%A6%E6%88%AA%E5%99%A8.png"></p>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-RestTemplate-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png"></p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>//注入RestTemplate
+    @Bean
+    public RestTemplate restTemplate() {
+        //注入RestTemplate
+        return new RestTemplate();
+    }
+    
+@Component
+public class OutsourcingSystemClient {
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    public List&lt;CustomerStaff&gt; getCustomerStaffs(OutsourcingSystem outsourcingSystem) {
+
+        //通过RestTemplate发起远程调用
+        ResponseEntity&lt;Result&gt; result = restTemplate.exchange(
+                outsourcingSystem.getSystemUrl(),
+                HttpMethod.GET,
+                null,
+                Result.class
+        );
+
+        List&lt;CustomerStaff&gt; customerStaffs = (List&lt;CustomerStaff&gt;)result.getBody().getData();
+
+        return customerStaffs;
+    }
+}
+</code></pre>
+<h1 id="WebClient使用方法"><a href="#WebClient使用方法" class="headerlink" title="WebClient使用方法"></a>WebClient使用方法</h1><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-WebClient-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1.png"></p>
+<h2 id="设置url和请求参数"><a href="#设置url和请求参数" class="headerlink" title="设置url和请求参数"></a>设置url和请求参数</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-WebClient-url%E5%92%8C%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0.png"> </p>
+<h2 id="访问服务"><a href="#访问服务" class="headerlink" title="访问服务"></a>访问服务</h2><h3 id="url参数"><a href="#url参数" class="headerlink" title="url参数"></a>url参数</h3><p>exchange方法返回结果包含响应码等信息<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-WebClient-%E6%89%A7%E8%A1%8C%E8%AE%BF%E9%97%AE.png"></p>
+<h3 id="请求体参数"><a href="#请求体参数" class="headerlink" title="请求体参数"></a>请求体参数</h3><p>普通参数对象使用syncbody方法<br>响应式流对象Mono对象使用body方法<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-WebClient-%E6%89%A7%E8%A1%8C%E8%AE%BF%E9%97%AE2.png"></p>
+<h2 id="拦截请求"><a href="#拦截请求" class="headerlink" title="拦截请求"></a>拦截请求</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-WebClient-%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA.png"><br>管道过滤器模式</p>
+<h2 id="异常处理-1"><a href="#异常处理-1" class="headerlink" title="异常处理"></a>异常处理</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/3%E7%A7%9F%E6%88%B7%E6%9C%BA%E5%88%B6%E5%92%8C%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/2%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%9C%8D%E5%8A%A1HTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/2-WebClient-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png"></p>

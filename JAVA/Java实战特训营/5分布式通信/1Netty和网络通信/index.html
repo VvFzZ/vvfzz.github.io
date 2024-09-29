@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/1Netty%E5%92%8C%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/1Netty%E5%92%8C%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/","path":"JAVA/Java实战特训营/5分布式通信/1Netty和网络通信/","title":"1Netty和网络通信"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>1Netty和网络通信 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Netty框架简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">NIO的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">Netty的解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#netty%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.</span> <span class="nav-text">netty逻辑架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">功能特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%A7%A3%E7%A0%81"><span class="nav-number">1.4.1.</span> <span class="nav-text">编解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85"><span class="nav-number">1.4.2.</span> <span class="nav-text">粘包拆包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.4.3.</span> <span class="nav-text">多协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">1.4.4.</span> <span class="nav-text">可靠性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8Netty%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">启动Netty客户端和服务端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0Netty%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1"><span class="nav-number">3.</span> <span class="nav-text">实现Netty客户端和服务端双向通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">双向通信流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E5%88%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">客户端发送数据到服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%BB%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.2.</span> <span class="nav-text">服务端读取客户端数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.1.3.</span> <span class="nav-text">服务端返回数据到客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%BB%E5%8F%96%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.4.</span> <span class="nav-text">客户端读取服务端数据</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/1Netty%E5%92%8C%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="1Netty和网络通信 | VvfzZ">
+      <meta itemprop="description" content="1Netty和网络通信">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1Netty和网络通信
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-28 21:34:05" itemprop="dateCreated datePublished" datetime="2024-09-28T21:34:05+08:00">2024-09-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-29 23:05:56" itemprop="dateModified" datetime="2024-09-29T23:05:56+08:00">2024-09-29</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">1Netty和网络通信</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Netty框架简介"><a href="#Netty框架简介" class="headerlink" title="Netty框架简介"></a>Netty框架简介</h1><h2 id="NIO的问题"><a href="#NIO的问题" class="headerlink" title="NIO的问题"></a>NIO的问题</h2><ul>
+<li>编程模型复杂，对开发人员不友好</li>
+<li>功能支持不够，简单的拆包操作都需要手工实现</li>
+<li>底层基于操作系统的Epoll实现，存在线程空轮询bug</li>
+<li>维护成本较高，容易出现开发上的漏洞</li>
+</ul>
+<h2 id="Netty的解决方案"><a href="#Netty的解决方案" class="headerlink" title="Netty的解决方案"></a>Netty的解决方案</h2><ul>
+<li>高效API<br>内置一组辅助类，简化开发难度</li>
+<li>多协议支持<br>TCP、UDP、自定义协议</li>
+<li>内置编解码<br>Java序列化、ProtoBuf等</li>
+<li>Listenter机制<br>异步操作集成监听器回调</li>
+<li>管道-过滤器<br>可插拔、高扩展架构</li>
+</ul>
+<h2 id="netty逻辑架构"><a href="#netty逻辑架构" class="headerlink" title="netty逻辑架构"></a>netty逻辑架构</h2><ul>
+<li><p>服务编排层<br>负责组装各类服务，它是 Netty 的核心处理链，用以实现网络事件的动态编排和有序传播<br>ChannelPipeline<br>ChannelHandler<br>ChannelHandlerContext</p>
+</li>
+<li><p>事件调度层<br>通过 Reactor 模型对各类事件进行聚合处理，通过 Selector 主循环线程集成多种事件<br>EventLoopGroup<br>EventLoop</p>
+</li>
+<li><p>网络通信层<br>执行网络I&#x2F;O操作，并触发各种网络事件，这些网络事件会分发给事件调度层进行处理<br>BootStrap<br>ServerBootStrap<br>Channel</p>
+</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/1Netty%E5%92%8C%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/1-Netty-%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h2><ul>
+<li>编解码</li>
+<li>粘包拆包</li>
+<li>多协议</li>
+<li>可靠性</li>
+</ul>
+<h3 id="编解码"><a href="#编解码" class="headerlink" title="编解码"></a>编解码</h3><ul>
+<li>编码解码器(Codec)<br>MessageToMessageCodec<br>ByteToMessageCodec</li>
+<li>编码器(Encoder)<br>MessageToByteEncoder<br>MessageToMessageEncoder</li>
+<li>解码器(Decoder)<br>ByteToMessageDecoder<br>MessageToMessageDecoder</li>
+</ul>
+<h3 id="粘包拆包"><a href="#粘包拆包" class="headerlink" title="粘包拆包"></a>粘包拆包</h3><p>为什么会出现粘包拆包，TCP是流式无边界协议<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/1Netty%E5%92%8C%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/1-Netty-%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85.png"></p>
+<ul>
+<li>FixedLengthFrameDecoder<br>基于固定长度划分业务包</li>
+<li>LengthFieldBasedFrameDecoder<br>使用特定协议头划分业务包</li>
+<li>LineBasedFrameDecoder<br>基于换行符划分业务包</li>
+<li>DelimiterBasedFrameDecoder<br>使用自定义的分隔符划分业务包</li>
+</ul>
+<h3 id="多协议"><a href="#多协议" class="headerlink" title="多协议"></a>多协议</h3><ul>
+<li>HTTP</li>
+<li>FTP</li>
+<li>SSH</li>
+<li>TCP</li>
+<li>UDP</li>
+<li>自定义</li>
+</ul>
+<h3 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h3><ul>
+<li>超时控制<br>异步连接超时配置 ChannelConfig 配置超时时间</li>
+<li>心跳检测<br>IdleStateHandler</li>
+<li>流量整形<br>自定义流量处理器 AbstractTrafficShapingHandler</li>
+</ul>
+<h1 id="启动Netty客户端和服务端"><a href="#启动Netty客户端和服务端" class="headerlink" title="启动Netty客户端和服务端"></a>启动Netty客户端和服务端</h1><h1 id="实现Netty客户端和服务端双向通信"><a href="#实现Netty客户端和服务端双向通信" class="headerlink" title="实现Netty客户端和服务端双向通信"></a>实现Netty客户端和服务端双向通信</h1><h2 id="双向通信流程"><a href="#双向通信流程" class="headerlink" title="双向通信流程"></a>双向通信流程</h2><p>客户端发送数据到服务端，服务端读取客户端数据<br>服务端返回数据到客户端，客户端读取服务端数据</p>
+<h3 id="客户端发送数据到服务端"><a href="#客户端发送数据到服务端" class="headerlink" title="客户端发送数据到服务端"></a>客户端发送数据到服务端</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class NettyClientHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void channelActive(ChannelHandlerContext ctx) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;客户端与服务端链接成功&quot;);</span><br><span class="line"></span><br><span class="line">//准备数据</span><br><span class="line">ByteBuf byteBuf = ctx.alloc().buffer();</span><br><span class="line">byte[] bytes = &quot;你好，我是郑天民&quot;.getBytes(StandardCharsets.UTF_8);</span><br><span class="line">byteBuf.writeBytes(bytes);</span><br><span class="line"></span><br><span class="line">//写入数据</span><br><span class="line">ctx.channel().writeAndFlush(byteBuf);</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端读取客户端数据"><a href="#服务端读取客户端数据" class="headerlink" title="服务端读取客户端数据"></a>服务端读取客户端数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class NettyServerHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;服务端收到来自客户端消息&quot;);</span><br><span class="line"></span><br><span class="line">        //转换收到的消息内容</span><br><span class="line">        ByteBuf byteBuf = (ByteBuf) msg;</span><br><span class="line"></span><br><span class="line">        //在客户端输出接收到的消息内容</span><br><span class="line">        System.out.println(&quot;收到客户端端数据：&quot; + byteBuf.toString(StandardCharsets.UTF_8));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端返回数据到客户端"><a href="#服务端返回数据到客户端" class="headerlink" title="服务端返回数据到客户端"></a>服务端返回数据到客户端</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class NettyServerHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;服务端收到来自客户端消息&quot;);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">//向客户端输出内容        </span><br><span class="line">ByteBuf byteBufToClient = ctx.alloc().buffer();</span><br><span class="line">byte[] bytes = &quot;你好，我是服务端：&quot;.getBytes(StandardCharsets.UTF_8);</span><br><span class="line">byteBufToClient.writeBytes(bytes);</span><br><span class="line">ctx.channel().writeAndFlush(byteBufToClient);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="客户端读取服务端数据"><a href="#客户端读取服务端数据" class="headerlink" title="客户端读取服务端数据"></a>客户端读取服务端数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class NettyClientHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line"></span><br><span class="line">   public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line">        logger.info(&quot;客户端读取服务端数据&quot;);</span><br><span class="line"></span><br><span class="line">        //转换接收到的消息内容</span><br><span class="line">        ByteBuf byteBuf = (ByteBuf) msg;</span><br><span class="line"></span><br><span class="line">        //在服务端输出接收到的消息内容</span><br><span class="line">        System.out.println(&quot;收到服务端数据：&quot; + byteBuf.toString(StandardCharsets.UTF_8));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%9F%BA%E7%A1%80/IO%E6%A8%A1%E5%9E%8B/" rel="prev" title="IO模型">
+                  <i class="fa fa-chevron-left"></i> IO模型
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/2%E4%BD%BF%E7%94%A8Netty%E5%AE%9E%E7%8E%B0IM%E7%B3%BB%E7%BB%9F/" rel="next" title="2使用Netty实现IM系统">
+                  2使用Netty实现IM系统 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

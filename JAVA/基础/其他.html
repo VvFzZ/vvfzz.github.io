@@ -1,0 +1,149 @@
+<hr>
+<h2 id="title-其他date-2024-04-20-10-51-58tags-description-…"><a href="#title-其他date-2024-04-20-10-51-58tags-description-…" class="headerlink" title="title: 其他date: 2024-04-20 10:51:58tags:description: …"></a>title: 其他<br>date: 2024-04-20 10:51:58<br>tags:<br>description: …</h2><h5 id="System-exit-n-n-的值对程序运行的作用"><a href="#System-exit-n-n-的值对程序运行的作用" class="headerlink" title="System.exit(n)n 的值对程序运行的作用"></a>System.exit(n)n 的值对程序运行的作用</h5><p>退出标识，根据不同标识可触发不同操作</p>
+<p>为什么类内部声明私有属性，但提供公开的getter，setter方法？</p>
+<ol>
+<li>可以改变getter，setter方法的实现，不影响其他代码</li>
+<li>setter方法可做数据检查</li>
+</ol>
+<h5 id="使用静态方法的场景"><a href="#使用静态方法的场景" class="headerlink" title="使用静态方法的场景"></a>使用静态方法的场景</h5><ol>
+<li>方法不访问对象状态，方法需要的参数都是通过显示参数提供</li>
+<li>方法只需要访问类的静态域</li>
+</ol>
+<h5 id="方法参数使用情况"><a href="#方法参数使用情况" class="headerlink" title="方法参数使用情况"></a>方法参数使用情况</h5><ol>
+<li>方法不能修改基本数据类型的参数</li>
+<li>方法可以改变一个对象参数的状态</li>
+<li>方法不能让对象参数引用一个新对象</li>
+</ol>
+<h5 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h5><p>在构造函数前执行</p>
+<h5 id="java析构方法finalize"><a href="#java析构方法finalize" class="headerlink" title="java析构方法finalize"></a>java析构方法finalize</h5><ul>
+<li>java不支持，但可自己添加finalize方法。</li>
+<li>在垃圾回收前调用，但调用时机不确定（所以不要依赖他释放资源）</li>
+<li>System.mnFinalizersOnExit(true) 的方法能够确保 finalizer 方法在 Java 关<br>闭前被调用，但不安全，不鼓励使用。替代方案：Runtime.addShutdownHook 添加关闭钩；手动调用close方法关闭</li>
+</ul>
+<h5 id="javadoc使用方法？？？"><a href="#javadoc使用方法？？？" class="headerlink" title="javadoc使用方法？？？"></a>javadoc使用方法？？？</h5><p>…  </p>
+<h5 id="final"><a href="#final" class="headerlink" title="final"></a>final</h5><p>将方法或类声明为final的意义：确保它们不会在子类中改变语义<br>final 修饰域（字段） 赋值后不可修改<br>final 修饰方法 子类不可重写<br>final 修饰类 子类不可重写父类方法</p>
+<p>内联：如果一个方法没有被覆盖并且很短， 编译器就能够对它进行优化处理（编译时优化）， 这个过程为称为内联<br>( inlining )。例如，内联调用 e.getName( ) 将被替换为访问 e.name 域。</p>
+<h5 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h5><p>重载父类方法时，返回值应是父类返回值或其子类</p>
+<h5 id="比较相等"><a href="#比较相等" class="headerlink" title="比较相等"></a>比较相等</h5><h6 id=""><a href="#" class="headerlink" title="&#x3D;&#x3D;"></a>&#x3D;&#x3D;</h6><ul>
+<li>比较对象为基本数据类型时，比较的是数据的大小</li>
+<li>比较对象为引用类型时，比较的是引用类型中存放的地址</li>
+</ul>
+<h6 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h6><ul>
+<li>object 类 使用 &#x3D;&#x3D; 实现，比较引用相同则返回true    </li>
+<li>String Integer Date file 此四个类java实现时覆盖了Object类的实现，其他没有覆盖的类使用Object类实现<ol>
+<li>String 值相同则相同（内部实现：先比较引用，相同返回true；再比较字符，相同则返回true）Integer 值相同则相同</li>
+<li>Integer 值相同则相同</li>
+</ol>
+</li>
+</ul>
+<h6 id="Integer-特殊说明"><a href="#Integer-特殊说明" class="headerlink" title="Integer 特殊说明"></a>Integer 特殊说明</h6><pre><code>Integer n1=128;
+Integer n2=128;
+System.out.print(&quot;n1==n2:&quot;);
+System.out.println(n1==n2);//false
+System.out.print(&quot;n1.equals(n2):&quot;);
+System.out.println(n1.equals(n2));//true
+
+Integer n3=127;
+Integer n4=127;
+System.out.print(&quot;n3==n4:&quot;);
+System.out.println(n3==n4);//true
+</code></pre>
+<p>Integer包装类型中存在自动装箱的情况，<br>当数据范围在-128～127之间时，创建的对象会在方法区的常量池中开辟空间（可复用），<br>数据超出范围就会在堆区中开辟空间，<br>由于指向不同对象所以n1&#x3D;&#x3D;n2判等的结果为false，n3与n4指向常量池同一地址所以判等结果为true。</p>
+<h6 id="Objects-equals-a-b"><a href="#Objects-equals-a-b" class="headerlink" title="Objects.equals(a,b)"></a>Objects.equals(a,b)</h6><ul>
+<li>两个参数都是null 返回true</li>
+</ul>
+<p>实现：</p>
+<pre><code>public static boolean equals(Object a, Object b) {
+    return (a == b) || (a != null &amp;&amp; a.equals(b));
+}
+</code></pre>
+<h6 id="编写一个完美的-equals-方法的建议："><a href="#编写一个完美的-equals-方法的建议：" class="headerlink" title="编写一个完美的 equals 方法的建议："></a>编写一个完美的 equals 方法的建议：</h6><ol>
+<li>显式参数命名为 otherObject, 稍后需要将它转换成另一个叫做 other 的变量。</li>
+<li>检测 this 与 otherObject 是否引用同一个对象：<code>if (this = otherObject) return true;</code></li>
+<li>检测 otherObject 是否为 null, 如 果 为 null, 返 回 false。<code>if (otherObject = null) return false;</code></li>
+<li>比较 this 与 otherObject 是否属于同一个类。如果 equals 的语义在每个子类中有所改<br>变，就使用 getClass 检测：<code>if (getClass() != otherObject.getCIassO) return false;</code>如果所有的子类都拥有统一的语义，就使用 instanceof 检测：<code>if (!(otherObject instanceof ClassName)) return false;</code></li>
+<li>将 otherObject 转换为相应的类类型变量：<code>ClassName other = (ClassName) otherObject</code></li>
+<li>对所有需要比较的域进行比较了。使用&#x3D;比较基本类型域，使用 equals 比<br>较对象域。如果所有的域都匹配， 就返回 true; 否 则 返 回 false</li>
+</ol>
+<pre><code>return fieldl == other.field
+&amp;&amp; Objects.equa1s(fie1d2, other.field2)
+&amp;&amp; ...;
+</code></pre>
+<p><i>实现equals时的常见错误：</i><br>以下代码声明了一个新equals 没有覆盖object类的equals<br><code>©Override public boolean equals(Object other)</code></p>
+<pre><code>public class Employee
+{
+    public boolean equals(Employee other) //
+    {
+        return other != null
+        &amp;&amp; getClassO == other.getClass0
+        &amp;&amp; Objects.equals(name , other.name)
+        &amp;&amp; salary— other,sal ary
+        &amp;&amp; Objects.equals(hireDay, other.hireDay)
+    }
+}
+</code></pre>
+<h5 id="hashcode"><a href="#hashcode" class="headerlink" title="hashcode"></a>hashcode</h5><ul>
+<li>返回一个整形数值（可负数）</li>
+<li>合理组合字段的散列码（以便不同对象的散列码均匀分布）<br>例如：</li>
+</ul>
+<pre><code>public class Employee{
+    public int hashCode(){
+        return 7 * name.hashCode0
+            + 11 * new Double(salary).hashCode0
+            + 13 * hireDay.hashCode();
+    }
+}
+
+
+//更好的方法1 ：使用null 安全的方法 Objects.hashCode。
+public int hashCode(){
+    return 7 * Objects.hashCode(name)
+        + 11 * Double.hashCode(salary)
+        + 13 * Objects.hashCode(hireDay);
+}
+
+//更好的方法2 ：
+public int hashCodeO
+{
+return Objects.hash(name, salary, hireDay);
+}
+
+其他数组散列码：Arrays.hashCode
+</code></pre>
+<ul>
+<li>Equals 与 hashCode 的定义必须一致：如果 x.equals(y) 返回 true, 那么 x.hashCode( ) 就必须与 y.hashCode( ) 具有相同的值。例如， 如果用定义的 Employee.equals 比较雇员的ID，那么 hashCode 方法就需要散列 ID，而不是雇员的姓名或存储地址。</li>
+</ul>
+<h5 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h5><p>数组：Arrary.toString()</p>
+<h5 id="ArraryList-trimTosize"><a href="#ArraryList-trimTosize" class="headerlink" title="ArraryList.trimTosize()"></a>ArraryList.trimTosize()</h5><p>确认数组列表的大小不再发生变化，就可以调用 trimToSize方法,将<br>存储区域的大小调整为当前元素数量所需要的存储空间数目。垃圾回收器将回收多余的存储<br>空间。</p>
+<h5 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h5><pre><code>
+public class JDBCPropertiesUtil {
+    String path;
+    Properties properties;
+
+    //HashMap propertiesMap;
+
+    public JDBCPropertiesUtil(String path) {
+        this.path = path;
+        this.load();
+    }
+
+    private void load() {
+        this.properties = new Properties();
+        InputStream stream = this.getClass().getResourceAsStream(this.path);
+        try {
+            properties.load(stream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getProperty(String key) {
+        String property = this.properties.getProperty(key);
+        return property;
+    }
+
+}
+</code></pre>
+<h5 id="isAssignableFrom"><a href="#isAssignableFrom" class="headerlink" title="isAssignableFrom"></a>isAssignableFrom</h5><p><code>ClassA.isAssignableFrom(ClassB)==true</code>  B继承或实现A</p>
+<h5 id="Java内省Introspector"><a href="#Java内省Introspector" class="headerlink" title="Java内省Introspector"></a>Java内省Introspector</h5><p><a href="https://fangshixiang.blog.csdn.net/article/details/95907073?spm=1001.2101.3001.6650.17&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&utm_relevant_index=20">https://fangshixiang.blog.csdn.net/article/details/95907073?spm=1001.2101.3001.6650.17&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&amp;utm_relevant_index=20</a></p>
+<h5 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h5><h5 id="x"><a href="#x" class="headerlink" title="x"></a>x</h5>

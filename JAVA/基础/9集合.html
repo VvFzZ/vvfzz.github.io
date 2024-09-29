@@ -1,0 +1,254 @@
+<hr>
+<h2 id="title-9集合date-2024-05-05-19-52-04tags-集合description-集合框架、具体集合、映射、视图与包装器、算法、遗留集合"><a href="#title-9集合date-2024-05-05-19-52-04tags-集合description-集合框架、具体集合、映射、视图与包装器、算法、遗留集合" class="headerlink" title="title: 9集合date: 2024-05-05 19:52:04tags: 集合description: 集合框架、具体集合、映射、视图与包装器、算法、遗留集合"></a>title: 9集合<br>date: 2024-05-05 19:52:04<br>tags: 集合<br>description: 集合框架、具体集合、映射、视图与包装器、算法、遗留集合</h2><h2 id="Java集合框架"><a href="#Java集合框架" class="headerlink" title="Java集合框架"></a>Java集合框架</h2><ul>
+<li>集合框架的基本设计</li>
+<li>使用方法</li>
+<li>争议设计的考虑</li>
+</ul>
+<h3 id="集合的接口与实现分离"><a href="#集合的接口与实现分离" class="headerlink" title="集合的接口与实现分离"></a>集合的接口与实现分离</h3><h4 id="队列最简单接口"><a href="#队列最简单接口" class="headerlink" title="队列最简单接口"></a>队列最简单接口</h4><pre><code>public interface Queue&lt;E&gt; //a simplified form of the  interface in the standard library
+{
+    void add(Eelement);
+    E remove();
+    int size()；
+}
+</code></pre>
+<h4 id="两种实现："><a href="#两种实现：" class="headerlink" title="两种实现："></a>两种实现：</h4><ul>
+<li>循环数组 （顺序实现）  比链表更高效，数组容量有限</li>
+<li>链表</li>
+</ul>
+<h4 id="实现自己的队列"><a href="#实现自己的队列" class="headerlink" title="实现自己的队列"></a>实现自己的队列</h4><p>以Abstract开头的类，专门为类库实现者设计，如实现自己的队列时扩展AbstractQueue比实现Queue接口轻松</p>
+<h3 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h3><p>集合类的基本接口</p>
+<pre><code>publicinterfaceCollection&lt;b
+{
+    //两个基本方法
+    booleanadd(Eelement);
+    Iterator&lt;E&gt;iteratorQ；
+    ...
+}
+</code></pre>
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><h4 id="iterator-接口"><a href="#iterator-接口" class="headerlink" title="iterator 接口"></a>iterator 接口</h4><p>包含四个方法</p>
+<pre><code>publicinterfaceIterator&lt;E&gt;
+{
+    E next();
+    boolean hasNextO;
+    void remove0;
+    default void forEachRemaining(Consumer&lt;? super E&gt; action);
+}
+</code></pre>
+<p>要删除指定位置上的元素，需要越过这个元素，即：调用remove方法前必须调用next，否则异常。</p>
+<h4 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h4><p>foreach 需实现Iterable接口</p>
+<pre><code>public interface Iterable&lt;E&gt;
+{
+    Iterator&lt;E&gt;iteratorO;
+}
+</code></pre>
+<h4 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h4><p>Iterator接口的next和hasNext方法与Enumeration接口的nextElement和hasMoreElements方法的作用一样。<br>引入Enumeration原因：Java集合类库的设计者不喜欢累赘的方法名，引入了较短方法名的新接口。</p>
+<h3 id="框架集合中的接口"><a href="#框架集合中的接口" class="headerlink" title="框架集合中的接口"></a>框架集合中的接口</h3><img src="9-1.png" width="650px" height="450px">
+
+<p>两个基本接口：Collection 、Map</p>
+<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><p>有序集合(按插入顺序有序)</p>
+<pre><code>public interface List&lt;E&gt; extends Collection&lt;E&gt;{
+    E get(int index); //随机访问 get
+    E set(int index, E element); //随机访问set
+    ListIterator&lt;E&gt; listIterator(); //向前的指针迭代器
+    ...
+}
+</code></pre>
+<p>两种实现方式：</p>
+<ul>
+<li>数组实现，支持高效随机访问</li>
+<li>链表实现，高效插入删除</li>
+</ul>
+<p>标记接口RandomAccess 检查是否支持高效的随机访问：<code>if(cinstanceofRandomAccess)</code></p>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>Set接口等同与Collect接口<br>set不允许新增重复元素，适当定义equals方法，包含相同元素则两个集相等（与顺序无关）<br>hashcode方法保证相同元素两个集的散列码相同</p>
+<p>为什么还要建立一个单独的接口呢？<br>从概念上讲，并不是所有集合都是集。建立一个Set接口可以让程序员编写只接受集的方法。</p>
+<h4 id="SortedSet和SortedMap"><a href="#SortedSet和SortedMap" class="headerlink" title="SortedSet和SortedMap"></a>SortedSet和SortedMap</h4><p>需提供用于排序的比较器对象，定义了可以得到集合子集视图的方法</p>
+<h4 id="NavigableSet和NavigableMap"><a href="#NavigableSet和NavigableMap" class="headerlink" title="NavigableSet和NavigableMap"></a>NavigableSet和NavigableMap</h4><p>包含一些用于搜索和遍历有序集和映射的方法（理想情况下，这些方法本应当直接包含在SortedSet和SortedMap接口中。）TreeSet和TreeMap类实现了这些接口。</p>
+<h2 id="具体集合"><a href="#具体集合" class="headerlink" title="具体集合"></a>具体集合</h2><p><code>ArrayList  extends AbstractList&lt;E&gt; implements List&lt;E&gt;, RandomAccess</code>,一种可以动态增长和缩减的索引序列</p>
+<p><code>LinkedList extends AbstractSequentialList&lt;E&gt; implements List&lt;E&gt;, Deque&lt;E&gt;</code>一种可以在任何位置进行高效地插人和删除操作的有序序列</p>
+<p><code>ArrayQueue extends AbstractList&lt;T&gt;</code> 没有实现 Queue接口<br><code>ArrayDeque extends AbstractCollection&lt;E&gt; implements Deque&lt;E&gt;</code> 一种用循环数组实现的双端队列<br><code>PriorityQueue extends AbstractQueue&lt;E&gt;</code>,一种允许高效删除最小元素的集合</p>
+<p><code>HashSet extends AbstractSet&lt;E&gt; implements Set&lt;E&gt;</code>,一种没有重复元素的无序集合<br><code>TreeSet extends AbstractSet&lt;E&gt;  implements NavigableSet&lt;E&gt;</code>,—种有序集<br><code>EnumSet ,abstract class EnumSet&lt;E extends Enum&lt;E&gt;&gt; extends AbstractSet&lt;E&gt;</code>一种包含枚举类型值的集<br><code>LinkedHashSet extends HashSet&lt;E&gt; implements Set&lt;E&gt;</code>,一种可以记住元素插人次序的集</p>
+<p><code>HashMap</code>一种存储键&#x2F;值关联的数据结构<br><code>TreeMap</code>—种键值有序排列的映射表<br><code>EnumMap</code>一种键值属于枚举类型的映射表<br><code>LinkedHashMap</code>一种可以记住键&#x2F;值项添加次序的映射表<br><code>WeakHashMap</code>一种其值无用武之地后可以被垃圾回收器回收的映射表<br><code>IdentityHashMap</code>种用&#x3D;而不是用equals比较键值的映射表</p>
+<br>
+<img src="9-2.png" width="750px" height="450px">
+<img src="9-3.png" width="650px" height="450px">
+
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>在Java程序设计语言中，所有链表实际上都是双向链接的(doublylinked)</p>
+<h4 id="Listlterator"><a href="#Listlterator" class="headerlink" title="Listlterator"></a>Listlterator</h4><p>向有序集合中间插入元素时需使用此接口的add方法<br>无序集合无须在中间插入，插入尾部即可，所以Iterator接口没有add方法</p>
+<pre><code>interface ListIterator&lt;E&gt; extends Iterator&lt;E&gt;
+{
+    void add(Eelement);
+    E previous();//向前
+    ...
+}
+</code></pre>
+<p>争议的方法</p>
+<pre><code>LinkedList&lt;String&gt; list=... ; 
+list.get(n); //从头遍历链表 
+</code></pre>
+<p>以下代码效率极低，避免使用</p>
+<pre><code>for(int i=0;i&lt;list.size()；i++)
+{
+    list.get(i);//每次査找一个元素都要从列表的头部重新开始搜索
+}
+</code></pre>
+<h3 id="数组列表"><a href="#数组列表" class="headerlink" title="数组列表"></a>数组列表</h3><p>为什么要用ArrayList取代Vector呢？<br>Vector类的所有方法都是同步的。如果由一个线程访问Vector,代码要在同步操作上耗费大量的时间。</p>
+<h3 id="散列集-HashSet"><a href="#散列集-HashSet" class="headerlink" title="散列集 HashSet"></a>散列集 HashSet</h3><p>通过hashcode快速查找对象</p>
+<p>java实现</p>
+<ul>
+<li>链表数组（每个列表称为桶bucket，hashcode取余即为桶号）</li>
+<li>JavaSE8中，桶满时会从链表变为平衡二叉树。</li>
+</ul>
+<p>性能</p>
+<ul>
+<li>确定数据个数时，初始化桶数，减少冲突与rehash</li>
+<li>装填因子决定rehash时机，默认0.75，即超过75%位置填入元素时扩容rehash</li>
+</ul>
+<h3 id="树集-TreeSet"><a href="#树集-TreeSet" class="headerlink" title="树集 TreeSet"></a>树集 TreeSet</h3><p>有序集合（排序用树结构完成，目前使用红黑树实现）</p>
+<p>使用条件：元素实现Comparable接口或提供Comparator</p>
+<p>性能：将元素添加到树中比添加到散列表中慢</p>
+<p>JavaSE6起，TreeSet类实现了NavigableSet接口。这个接口增加了几个便于定位元素以及反向遍历的方法。</p>
+<h3 id="队列与双端队列"><a href="#队列与双端队列" class="headerlink" title="队列与双端队列"></a>队列与双端队列</h3><p>JavaSE6中引人Deque接口<br>ArrayDeque、LinkedList实现此接口</p>
+<h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><p>调用remove方法，总会获得当前优先级队列中最小的元素。但优先级队列并没有对所有的元素进行排序，而是使用堆结构实现。<br>对树执行添加（add)和删除（remore)操作，可以让最小的元素移动到根，而不必花费时间对元素进行排序。</p>
+<p>使用条件：实现Comparable接口或提供Comparator<br>应用：任务调度（任务优先级由1为最高，任务随机添加到队列中，启动新任务时，将优先级最高的任务从队列删除）。</p>
+<h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><pre><code>// 获取
+hashMap.get(key)
+hashMap.getOrDefault(key，defaultval)
+//设置
+hashMap.put(key, value);//设置已存在的key覆盖原值
+hashMap.putIfAbsent(key, value);
+
+//遍历
+hashMap.forEach((x, y) -&gt; {
+    System.out.println(&quot;key:&quot; + x + &quot; value:&quot; + y);
+});
+</code></pre>
+<h3 id="更新映射项"><a href="#更新映射项" class="headerlink" title="更新映射项"></a>更新映射项</h3><p>put<br>putlfAbsent<br>merge<br>compute<br>computeIfPresent<br>computeIfAbsent<br>replaceAl1</p>
+<p>例如：统计单词数量<br><code>counts.put(word,counts.get(word)+1);</code> &#x2F;&#x2F;异常，找不到单词时返回null。<br>改进1：<code>counts.put(word,counts.getOrDefault(word,0)+1);</code><br>改进2：<code>counts.merge(word,1,Integer::sum);</code> merge(key,val,BiFunction) 原值存在将1和原值求和设置为新值；原值不存在，将1设置为新值</p>
+<h3 id="映射视图"><a href="#映射视图" class="headerlink" title="映射视图"></a>映射视图</h3><ul>
+<li>键集 <code>Set&lt;K&gt;keySet()</code> keySet不是HashSet或TreeSet，而是实现了Set接口的另外某个类的对象</li>
+<li>值集合（不是一个集）<code>Collection&lt;V&gt;values()</code></li>
+<li>键&#x2F;值对集。<code>Set&lt;Map.Entry&lt;K,V»entrySet()</code></li>
+</ul>
+<h3 id="弱散列映射"><a href="#弱散列映射" class="headerlink" title="弱散列映射"></a>弱散列映射</h3><p>WeakHashMap 使用弱引用（weakreferences)保存键 与垃圾回收器协同工作一起删除键&#x2F;值对</p>
+<p>垃圾回收器发现对象只由WeakReference引用，将对象的弱引用放人队列。WeakHashMap周期性检查队列，删除对应的条目。</p>
+<h3 id="链接散列集与映射"><a href="#链接散列集与映射" class="headerlink" title="链接散列集与映射"></a>链接散列集与映射</h3><p><code>LinkedHashMapcK,V&gt;(initialCapacity,loadFactor,true)</code>每次调用get或put,受到影响的条目将从当前的位置删除，并放到条目链表的尾部</p>
+<p><code>protected boolean removeEldestEntry(Entry eldest)</code>每当方法返回true时，就添加一个新条目，从而导致删除eldest条目。<br>下例：缓存可以存放100个元素</p>
+<pre><code>Map&lt;String, String&gt; cache = new LinkedHashMap(128, 0.75F, true) {
+    @Override
+    protected boolean removeEldestEntry(Entry eldest) {
+        return size() &gt; 100;
+    }
+};
+</code></pre>
+<h3 id="枚举集与映射-EnumSet-EnumMap"><a href="#枚举集与映射-EnumSet-EnumMap" class="headerlink" title="枚举集与映射 EnumSet EnumMap"></a>枚举集与映射 EnumSet EnumMap</h3><h4 id="EnumSet"><a href="#EnumSet" class="headerlink" title="EnumSet"></a>EnumSet</h4><p>枚举类型元素集的高效实现</p>
+<p>初始化</p>
+<pre><code>enum Corlor {RED,BLUE,BLACK,WHITE}
+EnumSet&lt;Corlor&gt; enumSet = EnumSet.allOf(Corlor.class);
+        
+EnumSet&lt;Corlor&gt; enumSet = EnumSet.noneOf(Corlor.class);
+enumSet.add(Corlor.BLUE);
+        
+EnumSet&lt;Corlor&gt; enumSet = EnumSet.range(Corlor.RED,Corlor.BLACK);
+EnumSet&lt;Corlor&gt; enumSet = EnumSet.of(Corlor.RED, Corlor.WHITE);
+</code></pre>
+<h4 id="EnumMap"><a href="#EnumMap" class="headerlink" title="EnumMap"></a>EnumMap</h4><p><code>EnumMap&lt;Corlor, PParent&gt; enumMap = new EnumMap&lt;&gt;(Corlor.class);</code></p>
+<h3 id="标识散列映射-IdentityHashMap"><a href="#标识散列映射-IdentityHashMap" class="headerlink" title="标识散列映射 IdentityHashMap"></a>标识散列映射 IdentityHashMap</h3><p>键的散列值不是用hashCode函数计算的，而是System.identityHashCode</p>
+<p>两个对象进行比较时，IdentityHashMap类使用&#x3D;&#x3D;,而不使用equals。因此，不同的键对象，内容相同，也被视为是不同的对象。在实现对象遍历算法（如对象串行化）时，可以用来跟踪每个对象的遍历状况。</p>
+<h2 id="视图与包装器"><a href="#视图与包装器" class="headerlink" title="视图与包装器"></a>视图与包装器</h2><p>视图只是包装了接口而不是实际的集合对象，所以只能访问接口中定义的方法。</p>
+<h3 id="轻量级集合包装器-Arrays-asList-、Col1ections-nCopies-、Collections-singleton"><a href="#轻量级集合包装器-Arrays-asList-、Col1ections-nCopies-、Collections-singleton" class="headerlink" title="轻量级集合包装器 Arrays.asList 、Col1ections.nCopies 、Collections.singleton"></a>轻量级集合包装器 <code>Arrays.asList 、Col1ections.nCopies 、Collections.singleton</code></h3><h4 id="Arrays-asList"><a href="#Arrays-asList" class="headerlink" title="Arrays.asList"></a><code>Arrays.asList</code></h4><pre><code>List&lt;String&gt; list = Arrays.asList(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;);
+list.set(0, &quot;11&quot;); // OK
+list.add(&quot;add new one&quot;);// UnsupportedOperationException
+</code></pre>
+<p><code>Arrays.asList</code>返回的对象不是ArrayList。它是一个视图对象，带有访问底层数组的get和set方法。改变数组大小的所有方法（例如，与迭代器相关的add和remove方法）都会抛出一个UnsupportedOperationException异常。</p>
+<h4 id="Col1ections-nCopies"><a href="#Col1ections-nCopies" class="headerlink" title="Col1ections.nCopies"></a><code>Col1ections.nCopies</code></h4><p><code>Col1ections.nCopies(n,anObject)</code>返回一个实现了List接口的不可修改的对象</p>
+<pre><code>list = Collections.nCopies(10, &quot;0&quot;);
+list.add( &quot;1&quot;);//UnsupportedOperationException
+list.set(0, &quot;1&quot;);//UnsupportedOperationException
+</code></pre>
+<pre><code>Set&lt;String&gt; set1 = Collections.singleton(&quot;1&quot;);
+Collections.singletonMap(&quot;key&quot;, &quot;val&quot;)
+Collections.emptyList();
+</code></pre>
+<h3 id="子范围"><a href="#子范围" class="headerlink" title="子范围"></a>子范围</h3><p>List</p>
+<pre><code>list = Stream.of(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;).collect(Collectors.toList());
+list.add(&quot;added&quot;);
+List&lt;String&gt; listRange = list.subList(1, 3);//截取下标1到2的元素（不包含右边界）
+System.out.println(listRange);//[2, 3]
+listRange.clear();
+System.out.println(listRange); //[]
+System.out.println(list);//[1, 4, 5, 6, 7, 8, 9, added]
+</code></pre>
+<p>SortedSet</p>
+<pre><code>SortedSet&lt;E&gt; subSet(E from,E to)
+SortedSet&lt;E&gt; headSet(E to)
+SortedSet&lt;E&gt; tailSet(E from)
+</code></pre>
+<p>SortedMap</p>
+<pre><code>SortedMap&lt;K,V&gt; subMap(K from,K to)
+SortedMap&lt;K,V&gt; headMap(K to)
+SortedMap&lt;K,V&gt; tailMap(K from)
+</code></pre>
+<p>NavigableSet</p>
+<pre><code>//可指定是否包括边界
+NavigableSet&lt;E&gt;subSet(E from,boolean fromlnclusive,E to,boolean tolnclusive)
+NavigableSet&lt;E&gt;headSet(E to,boolean tolnclusive)
+Navigab1eSet&lt;E&gt;tailSet(E from,boolean fromlnclusive)
+</code></pre>
+<h3 id="不可修改的视图"><a href="#不可修改的视图" class="headerlink" title="不可修改的视图"></a>不可修改的视图</h3><pre><code>Collections.unmodifiableCollection
+Collections.unmodifiableList
+Collections.unmodifiableSet
+Collections.unmodifiableSortedSet
+Collections.unmodifiableNavigableSet
+Collections.unmodifiableMap
+Collections.unmodifiableSortedMap
+Collections.unmodifiableNavigableMap
+</code></pre>
+<p>不可修改视图并不是集合本身不可修改。仍然可以通过集合的原始引用（在这里是staff)对集合进行修改。</p>
+<p><em>unmodifiableCollection方法（与本节稍后讨论的synchronizedCollection和checked Collection方法一样）将返回一个集合，它的equals方法不调用底层集合的equals方法。相反，它继承了Object类的equals方法，这个方法只是检测两个对象是否是同一个对象。如果将集或列表转换成集合，就再也无法检测其内容是否相同了。视图就是以这种方式运行的，因为内容是否相等的检测在分层结构的这一层上没有定义妥当。视图将以同样的方式处理hashCode方法。然而，unmodifiableSet类和unmodifiableList类却使用底层集合的equals方法和hashCode方法。</em>？？？</p>
+<h3 id="同步视图"><a href="#同步视图" class="headerlink" title="同步视图"></a>同步视图</h3><p>类库的设计者使用视图机制来确保常规集合的线程安全,而不是实现线程安全的集合类。<br>例如：<code>Collections.synchronizedMap(newHashMap&lt;String,Employee&gt;0)；</code></p>
+<h3 id="受查视图"><a href="#受查视图" class="headerlink" title="受查视图"></a>受查视图</h3><pre><code>        ArrayList&lt;String&gt; arrayStrList = new ArrayList&lt;String&gt;() {{
+            add(&quot;1&quot;);
+            add(&quot;2&quot;);
+            add(&quot;3&quot;);
+        }};
+        ArrayList arrayList = arrayStrList;
+        arrayList.add(new PParent());//添加数据成功，取出数据类型转换异常
+        List list1 = Collections.checkedList(arrayStrList, String.class);
+        list1.add(new PParent());//添加数据就异常
+</code></pre>
+<p><em>受查视图受限于虚拟机可以运行的运行时检查。例如，对于ArrayList&lt;Pair<String>,由于虚拟机有一个单独的“原始”Pair类，所以，无法阻止插入Pair<Date>。</em></p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="排序与混排"><a href="#排序与混排" class="headerlink" title="排序与混排"></a>排序与混排</h3><pre><code>Arrays.sort(arr,Comparator.comparing(Person::getName,Comparator.comparingInt(String::length).reversed()).thenComparing(Person::getlName,Comparator.nullsLast(Comparator.comparingInt(String::length).reversed())));
+</code></pre>
+<p>可以使用归并排序对链表进行高效的排序，Java程序设计语言不是这样实现的，而是将元素转人数组进行排序，再复制回列表。</p>
+<p>混排&#x2F;打乱顺序：<code>Collections.shuffle(list);</code></p>
+<h3 id="二分查找-BinarySearch"><a href="#二分查找-BinarySearch" class="headerlink" title="二分查找 BinarySearch"></a>二分查找 BinarySearch</h3><p>前提条件：数组、数据有序、实现List接口</p>
+<h3 id="简单算法"><a href="#简单算法" class="headerlink" title="简单算法"></a>简单算法</h3><pre><code>min
+max
+copy
+fill
+addall
+replaceAll
+indexOfSubList
+1astlndexOfSubList
+swap 交换给定偏移量的两个元素
+reverse
+rotate  将索引i的条目移动到位置（i+d）% size()
+static int frequency(Col1ection&lt;?&gt;c,Object o) 返回c中与对象o相同的元素个数
+boolean disjoint(Collection&lt;?&gt;cl,Col1ection&lt;?&gt;c2) 如果两个集合没有共同的元素，则返回true
+</code></pre>
+<h3 id="批操作"><a href="#批操作" class="headerlink" title="批操作"></a>批操作</h3><p>retainAll 交集</p>
+<h3 id="集合与数组的转换"><a href="#集合与数组的转换" class="headerlink" title="集合与数组的转换"></a>集合与数组的转换</h3><pre><code>List&lt;String&gt; list3 = Arrays.asList(&quot;1,&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;);
+HashSet&lt;String&gt; set1 = new HashSet&lt;&gt;(list3);
+String[] arrStr = set1.toArray(new String[set1.size()]);
+</code></pre>
+<h2 id="遗留的集合"><a href="#遗留的集合" class="headerlink" title="遗留的集合"></a>遗留的集合</h2><p><img src="/JAVA/%E5%9F%BA%E7%A1%80/9%E9%9B%86%E5%90%88/9-3.png"></p>
+<h3 id="Hashtable类"><a href="#Hashtable类" class="headerlink" title="Hashtable类"></a>Hashtable类</h3><p>Hashtable、Vector 方法也是同步的</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><p>遗留集合使用Enumeration接口对元素序列进行遍历</p>
+<h3 id="属性映射"><a href="#属性映射" class="headerlink" title="属性映射"></a>属性映射</h3><p>Java平台类称为Propertie，通常用于程序的特殊配置选项<br>3个特性</p>
+<ul>
+<li>键与值都是字符串。</li>
+<li>表可以保存到一个文件中，也可以从文件中加载。</li>
+<li>使用一个默认的辅助表。</li>
+</ul>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>Stack类扩展为Vector类<br>Statck可以在非栈顶插入元素</p>
+<h3 id="位集"><a href="#位集" class="headerlink" title="位集"></a>位集</h3><p>BitSet</p>

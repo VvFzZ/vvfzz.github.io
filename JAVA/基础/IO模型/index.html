@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/%E5%9F%BA%E7%A1%80/IO%E6%A8%A1%E5%9E%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/%E5%9F%BA%E7%A1%80/IO%E6%A8%A1%E5%9E%8B/","path":"JAVA/基础/IO模型/","title":"IO模型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>IO模型 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bio"><span class="nav-number">1.</span> <span class="nav-text">bio</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">性能问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nio"><span class="nav-number">2.</span> <span class="nav-text">nio</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%86%E5%B8%A6%E6%9D%A5%E9%97%AE%E9%A2%98%EF%BC%8C%E6%AF%8F%E6%AC%A1%E9%9C%80%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89%E5%B7%B2%E5%BB%BA%E7%AB%8B%E7%9A%84%E9%93%BE%E6%8E%A5%EF%BC%8C%E6%9F%A5%E8%AF%A2%E5%86%85%E6%A0%B8%E7%8A%B6%E6%80%81%EF%BC%8C%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%88%B0%E4%BA%86%E3%80%82%E9%AB%98%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%A4%A7%E9%87%8F%E8%BF%9E%E6%8E%A5%E9%9C%80%E9%81%8D%E5%8E%86%E6%80%A7%E8%83%BD%E4%BD%8E%E4%B8%94%E8%8B%A5%E4%B8%8D%E5%8F%91%E6%B6%88%E6%81%AF%EF%BC%8C%E4%BC%9A%E5%85%85%E6%96%A5%E5%A4%A7%E9%87%8F%E6%97%A0%E7%94%A8%E6%A3%80%E6%9F%A5%EF%BC%88%E8%AE%BF%E9%97%AE%E5%86%85%E6%A0%B8%E6%80%81%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">但带来问题，每次需遍历所有已建立的链接，查询内核状态，是否有数据接收到了。高并发，大量连接需遍历性能低且若不发消息，会充斥大量无用检查（访问内核态）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">多路复用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BIO"><span class="nav-number">4.1.</span> <span class="nav-text">BIO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#server"><span class="nav-number">4.1.1.</span> <span class="nav-text">server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client"><span class="nav-number">4.1.2.</span> <span class="nav-text">Client</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO"><span class="nav-number">4.2.</span> <span class="nav-text">NIO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Server"><span class="nav-number">4.2.1.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">Client</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">IO多路复用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Server-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-2"><span class="nav-number">4.3.2.</span> <span class="nav-text">Client</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%9F%BA%E7%A1%80/IO%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="IO模型 | VvfzZ">
+      <meta itemprop="description" content="IO模型">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IO模型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-09-23 09:57:39 / Modified: 19:51:11" itemprop="dateCreated datePublished" datetime="2024-09-23T09:57:39+08:00">2024-09-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">IO模型</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>bio</li>
+<li>nio</li>
+<li>nio多路复用</li>
+<li>信号io</li>
+<li>aio</li>
+</ul>
+<p><em>io模型主要区别：什么时候阻塞，阻塞时间多长。</em><br><em>io的瓶颈：线程创建销毁开销，内核态用户态交换数据开销。</em></p>
+<p>nio多路复用，单线程通过多路复用器selector批量处理链接事件，selector批量检查链接内核数据状态。<br>两阶段进行。select()阻塞（检查就绪状态），检查到就绪态连接，阻塞处理数据。</p>
+<h1 id="bio"><a href="#bio" class="headerlink" title="bio"></a>bio</h1><p><img src="/JAVA/%E5%9F%BA%E7%A1%80/IO%E6%A8%A1%E5%9E%8B/BIO.png"></p>
+<p>bio单线程只能处理一个连接（从连接建立到关闭只能处理这一个连接），全链路阻塞，性能低。两次阻塞，accept等待连接阻塞，read读取数据阻塞</p>
+<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><ul>
+<li>当个线程只能同时处理一个连接，全链路阻塞，高并发，大量线程创建销毁性能低</li>
+<li>read函数，两次进程切换。其一建立连接后，执行read函数会等待客户端数据写入内核缓冲区时放弃运行；其二，网卡将数据写入内核缓冲区，发出系统中断命令 唤醒进程</li>
+</ul>
+<h1 id="nio"><a href="#nio" class="headerlink" title="nio"></a>nio</h1><p>解决单线程只能处理一个连接问题<br>且不再全链路阻塞，当网卡将数据拷贝到内核缓冲区后才阻塞read方法</p>
+<h2 id="但带来问题，每次需遍历所有已建立的链接，查询内核状态，是否有数据接收到了。高并发，大量连接需遍历性能低且若不发消息，会充斥大量无用检查（访问内核态）"><a href="#但带来问题，每次需遍历所有已建立的链接，查询内核状态，是否有数据接收到了。高并发，大量连接需遍历性能低且若不发消息，会充斥大量无用检查（访问内核态）" class="headerlink" title="但带来问题，每次需遍历所有已建立的链接，查询内核状态，是否有数据接收到了。高并发，大量连接需遍历性能低且若不发消息，会充斥大量无用检查（访问内核态）"></a>但带来问题，每次需遍历所有已建立的链接，查询内核状态，是否有数据接收到了。<br>高并发，大量连接需遍历性能低<br>且若不发消息，会充斥大量无用检查（访问内核态）</h2><p>nio单线程处理多连接，内核缓冲区数据拷贝到socket数据接受队列时阻塞，数据到达用户缓冲区时解除阻塞。<br>问题1.高并发且长链接时，每次需要遍历全部链接是否有数据，与内核交换数据多性能低。<br>问题2.客户端发送一次数据，一次阻塞引起两次cpu进程切换影响性能。<br><img src="/JAVA/%E5%9F%BA%E7%A1%80/IO%E6%A8%A1%E5%9E%8B/NIO.png"></p>
+<h1 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h1><p>使用selecotor多路复用器，批量检查连接事件状态，减少与内核数据交换次数</p>
+<p>网卡收到客户端数据，执行中断程序，包含6个操作</p>
+<ol>
+<li>DMA拷贝技术，网卡数据拷贝到内存缓冲区</li>
+<li>修改文件描述符为就绪态</li>
+<li>把内核缓冲区数据拷贝到channel数据接收队列</li>
+<li>修改内核态的文件描述符信息（修改为就绪态），返回给用户态</li>
+<li>唤醒进程等待队列中的进程a，进程a进入CPU运行队列（进程a在select方法调用且没有连接有数据时让出CPU运行队列，进入阻塞）</li>
+</ol>
+<h1 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h1><h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><h3 id="server"><a href="#server" class="headerlink" title="server"></a>server</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.bio;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.ServerSocket;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">public class BioServer &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        single();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static void single() throws IOException &#123;</span><br><span class="line">        ServerSocket serverSocket = new ServerSocket(9002);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        while (true) &#123;</span><br><span class="line">            Socket s = serverSocket.accept();</span><br><span class="line">            System.out.println(&quot;客户端发起连接&quot;);</span><br><span class="line">            StringBuilder sb = new StringBuilder();</span><br><span class="line">            byte[] buffer = new byte[128];</span><br><span class="line">            int len = 0;</span><br><span class="line"></span><br><span class="line">            while ((len = s.getInputStream().read(buffer, 0, buffer.length)) &gt; 0) &#123;</span><br><span class="line">                String str = new String(buffer, 0, len);</span><br><span class="line">                sb.append(str);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(sb.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static void muilt() throws IOException &#123;</span><br><span class="line">        ServerSocket serverSocket = new ServerSocket(9002);</span><br><span class="line"></span><br><span class="line">        Runnable runnable = new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                while (true) &#123;</span><br><span class="line">                    Socket s = null;</span><br><span class="line">                    long pid = Thread.currentThread().getId();</span><br><span class="line">                    try &#123;</span><br><span class="line">                        System.out.println(pid + &quot;启动监听&quot;);</span><br><span class="line">                        s = serverSocket.accept();</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        throw new RuntimeException(e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(pid + &quot;客户端发起连接&quot;);</span><br><span class="line">                    StringBuilder sb = new StringBuilder();</span><br><span class="line">                    byte[] buffer = new byte[128];</span><br><span class="line">                    int len = 0;</span><br><span class="line"></span><br><span class="line">                    while (true) &#123;</span><br><span class="line">                        try &#123;</span><br><span class="line">                            if (!((len = s.getInputStream().read(buffer, 0, buffer.length)) &gt; 0)) break;</span><br><span class="line">                        &#125; catch (IOException e) &#123;</span><br><span class="line">                            throw new RuntimeException(e);</span><br><span class="line">                        &#125;</span><br><span class="line">                        String str = new String(buffer, 0, len);</span><br><span class="line">                        sb.append(str);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    System.out.println(sb.toString());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            new Thread(runnable).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.bio;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.OutputStream;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">public class BioClient &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        Socket socket = new Socket(&quot;127.0.0.1&quot;, 9002);</span><br><span class="line">        OutputStream outputStream = socket.getOutputStream();</span><br><span class="line">        outputStream.write(&quot;client1&quot;.getBytes());</span><br><span class="line">        socket.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.nio;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.InetSocketAddress;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line">import java.nio.channels.ServerSocketChannel;</span><br><span class="line">import java.nio.channels.SocketChannel;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class NioServer &#123;</span><br><span class="line">    static List&lt;SocketChannel&gt; channelList = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException, InterruptedException &#123;</span><br><span class="line">        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">        serverSocketChannel.socket().bind(new InetSocketAddress(9001));</span><br><span class="line"></span><br><span class="line">        serverSocketChannel.configureBlocking(false);</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;服务器启动&quot;);</span><br><span class="line"></span><br><span class="line">        while (true) &#123;</span><br><span class="line">            //System.out.println(&quot;check accept&quot;);</span><br><span class="line">            SocketChannel socketChannel = serverSocketChannel.accept();//有客户端连接则不为空（即使没发送数据也不为空）</span><br><span class="line"></span><br><span class="line">            if (socketChannel != null) &#123;</span><br><span class="line">                System.out.println(&quot;有客户端连接&quot;);</span><br><span class="line">                socketChannel.configureBlocking(false);</span><br><span class="line">                channelList.add(socketChannel);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Iterator iterator = channelList.iterator();//迭代已建立的连接</span><br><span class="line"></span><br><span class="line">            while (iterator.hasNext()) &#123;//若连接有数据传输则处理数据</span><br><span class="line">                SocketChannel s = (SocketChannel) iterator.next();</span><br><span class="line"></span><br><span class="line">                ByteBuffer buffer = ByteBuffer.allocate(128);</span><br><span class="line"></span><br><span class="line">                int len = s.read(buffer);</span><br><span class="line"></span><br><span class="line">                if (len &gt; 0) &#123;</span><br><span class="line">                    String msg = new String(buffer.array(), 0, len);</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + &quot;客户端消息：&quot; + msg);</span><br><span class="line">                    Thread.sleep(20 * 1000);</span><br><span class="line">                    if (msg.equals(&quot;q&quot;)) &#123;</span><br><span class="line">                        iterator.remove();</span><br><span class="line">                        System.out.println(&quot;已退出&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Client-1"><a href="#Client-1" class="headerlink" title="Client"></a>Client</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.nio;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.OutputStream;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">public class NioClient &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        Socket socket = new Socket(&quot;127.0.0.1&quot;, 9001);</span><br><span class="line">        OutputStream outputStream = socket.getOutputStream();</span><br><span class="line">        outputStream.write(&quot;client1&quot;.getBytes());</span><br><span class="line">        socket.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><h3 id="Server-1"><a href="#Server-1" class="headerlink" title="Server"></a>Server</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.nio.selector;</span><br><span class="line"></span><br><span class="line">import com.sun.java.swing.plaf.windows.WindowsRadioButtonMenuItemUI;</span><br><span class="line">import org.apache.ibatis.annotations.SelectKey;</span><br><span class="line">import org.apache.tomcat.util.net.WriteBuffer;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.InetSocketAddress;</span><br><span class="line">import java.net.Socket;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line">import java.nio.channels.SelectionKey;</span><br><span class="line">import java.nio.channels.Selector;</span><br><span class="line">import java.nio.channels.ServerSocketChannel;</span><br><span class="line">import java.nio.channels.SocketChannel;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Set;</span><br><span class="line"></span><br><span class="line">public class NioSelectorServer &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">        serverSocketChannel.socket().bind(new InetSocketAddress(9001));</span><br><span class="line"></span><br><span class="line">        serverSocketChannel.configureBlocking(false);</span><br><span class="line"></span><br><span class="line">        Selector selector = Selector.open();</span><br><span class="line">        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);//注册到连接事件</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;服务器启动&quot;);</span><br><span class="line"></span><br><span class="line">        while (true) &#123;</span><br><span class="line">            int selected = selector.select();//查询通道中的就绪状态,返回就绪channel个数</span><br><span class="line">            System.out.println(&quot;接收到请求:&quot; + selected);</span><br><span class="line">            Set&lt;SelectionKey&gt; selectionKeys = selector.selectedKeys();</span><br><span class="line">            Iterator&lt;SelectionKey&gt; iterator = selectionKeys.iterator();</span><br><span class="line">            ByteBuffer buffer = ByteBuffer.allocate(128);</span><br><span class="line">            //若连接有数据传输则处理数据</span><br><span class="line">            while (iterator.hasNext()) &#123;</span><br><span class="line"></span><br><span class="line">                SelectionKey key = iterator.next();</span><br><span class="line"></span><br><span class="line">                if (key.isAcceptable()) &#123;</span><br><span class="line">                    ServerSocketChannel channel = (ServerSocketChannel) key.channel();</span><br><span class="line">                    SocketChannel socketChannel = channel.accept();</span><br><span class="line">                    socketChannel.configureBlocking(false);</span><br><span class="line">                    //注册读事件</span><br><span class="line">                    SelectionKey selKey = socketChannel.register(selector, SelectionKey.OP_READ);</span><br><span class="line">                    System.out.println(&quot;客户端连接&quot;);</span><br><span class="line">                &#125; else if (key.isReadable()) &#123;</span><br><span class="line">                    SocketChannel channel = (SocketChannel) key.channel();</span><br><span class="line">                    buffer.clear();</span><br><span class="line">                    int len = channel.read(buffer);</span><br><span class="line"></span><br><span class="line">                    buffer.flip();</span><br><span class="line">                    if (buffer.hasRemaining()) &#123;</span><br><span class="line">                        String str = new String(buffer.array(), 0, len);</span><br><span class="line">                        System.out.println(&quot;客户端消息：&quot; + str);</span><br><span class="line">                    &#125;</span><br><span class="line">                    channel.register(selector, SelectionKey.OP_WRITE);</span><br><span class="line">                &#125; else if (key.isWritable()) &#123;</span><br><span class="line"></span><br><span class="line">                    buffer.clear();</span><br><span class="line">                    buffer.put(&quot;hello client I am server&quot;.getBytes());</span><br><span class="line">                    buffer.flip();</span><br><span class="line">                    SocketChannel channel = (SocketChannel) key.channel();</span><br><span class="line">                    channel.write(buffer);</span><br><span class="line">                    channel.register(selector, SelectionKey.OP_READ);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                iterator.remove();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Client-2"><a href="#Client-2" class="headerlink" title="Client"></a>Client</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.vvf.springboot1.demos.nio.selector;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.io.OutputStream;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">public class NioSelectClient &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        Socket socket = new Socket(&quot;127.0.0.1&quot;, 9001);</span><br><span class="line">        InputStream is = socket.getInputStream();</span><br><span class="line">        OutputStream os = socket.getOutputStream();</span><br><span class="line"></span><br><span class="line">        // 先向服务端发送数据</span><br><span class="line">        os.write(&quot;Hello, Server!\0&quot;.getBytes());</span><br><span class="line">        //os.write(&quot;0&quot;.getBytes());</span><br><span class="line"></span><br><span class="line">        // 读取服务端发来的数据</span><br><span class="line">        int b;</span><br><span class="line">        while ((b = is.read()) != 0) &#123;</span><br><span class="line">            System.out.print((char) b);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        socket.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" rel="tag"># IO模型</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/4%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1/7%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AE%B9%E9%94%99/" rel="prev" title="7实现分布式服务的容错">
+                  <i class="fa fa-chevron-left"></i> 7实现分布式服务的容错
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/1Netty%E5%92%8C%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" rel="next" title="1Netty和网络通信">
+                  1Netty和网络通信 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

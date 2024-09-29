@@ -1,0 +1,23 @@
+<hr>
+<h2 id="title-6-5代理date-2024-04-26-22-09-42tags-代理description-Proxy-newProxyInstance、InvocationHandler"><a href="#title-6-5代理date-2024-04-26-22-09-42tags-代理description-Proxy-newProxyInstance、InvocationHandler" class="headerlink" title="title: 6-5代理date: 2024-04-26 22:09:42tags: 代理description: Proxy.newProxyInstance、InvocationHandler"></a>title: 6-5代理<br>date: 2024-04-26 22:09:42<br>tags: 代理<br>description: Proxy.newProxyInstance、InvocationHandler</h2><pre><code>// 定义调用处理器
+class IntegerTraceHandler implements InvocationHandler {
+    private Integer target;
+
+    public IntegerTraceHandler(Integer target) {
+        this.target = target;
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println(&quot;target:&quot; + target);
+        return method.invoke(target, args);
+    }
+}
+
+public static void main(String[] args){
+        Integer i = 10;
+        InvocationHandler handler = new IntegerTraceHandler(i);
+        Object proxy = Proxy.newProxyInstance(null, new Class[]{Comparable.class}, handler);
+        proxy.equals(1); // proxy调用IntegerTraceHandler的invoke方法
+}
+</code></pre>

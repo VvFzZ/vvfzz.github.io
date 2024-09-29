@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/","path":"JAVA/Java实战特训营/2系统扩展测试监控/1使用Mybatis-Plus对数据访问进行扩展/","title":"Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis-Plus%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">MyBatis-Plus开发模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BC%80%E5%8F%91MyBatis-Plus"><span class="nav-number">1.1.</span> <span class="nav-text">为什么开发MyBatis-Plus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBtisPlus-ActiveRecord%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">MyBtisPlus-ActiveRecord模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatisPlus-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.</span> <span class="nav-text">MyBatisPlus-整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Id%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.5.</span> <span class="nav-text">Id生成策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">1.6.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4"><span class="nav-number">1.7.</span> <span class="nav-text">逻辑删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%A2%E6%9C%8D%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B%E6%BC%94%E8%BF%9B"><span class="nav-number">2.</span> <span class="nav-text">客服系统案例演进</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7%E7%AD%96%E7%95%A5"><span class="nav-number">2.1.</span> <span class="nav-text">升级策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#model"><span class="nav-number">2.1.3.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapper"><span class="nav-number">2.1.4.</span> <span class="nav-text">mapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#service"><span class="nav-number">2.1.5.</span> <span class="nav-text">service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">2.1.6.</span> <span class="nav-text">分页配置类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis-Plus-SQL%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">MyBatis-Plus SQL执行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatisMapper%E8%8E%B7%E5%8F%96%E6%B5%81%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">MyBatisMapper获取流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MapperMethod"><span class="nav-number">3.1.1.</span> <span class="nav-text">MapperMethod</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SqlSession%E8%8E%B7%E5%8F%96%E8%BF%87%E7%A8%8B"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">SqlSession获取过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SqlSession%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.1.1.1.1.</span> <span class="nav-text">SqlSession执行流程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="nav-number">3.2.</span> <span class="nav-text">执行流程总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展 | VvfzZ">
+      <meta itemprop="description" content="使用Mybatis-Plus对数据访问进行扩展">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-07 09:18:13" itemprop="dateCreated datePublished" datetime="2024-09-07T09:18:13+08:00">2024-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-10 10:39:17" itemprop="dateModified" datetime="2024-09-10T10:39:17+08:00">2024-09-10</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">使用Mybatis-Plus对数据访问进行扩展</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="MyBatis-Plus开发模式"><a href="#MyBatis-Plus开发模式" class="headerlink" title="MyBatis-Plus开发模式"></a>MyBatis-Plus开发模式</h1><h2 id="为什么开发MyBatis-Plus"><a href="#为什么开发MyBatis-Plus" class="headerlink" title="为什么开发MyBatis-Plus"></a>为什么开发MyBatis-Plus</h2><p>MyBatis的缺点</p>
+<ul>
+<li>自动化程度不高，需要写SQL语句操作业务数据</li>
+<li>对字段名称的识别校验不友好，易出错不好排查</li>
+<li>通过XML配置映射字段和属性，影响开发效率<br>MyBatis-Plus的特点</li>
+<li>不使用SQL，少量代码即可实现CRUD</li>
+<li>支持Lambda，字段强校验</li>
+<li>内置代码生成器，自动生成各层框架代码</li>
+<li>内置分页，性能分析，全局拦截插件</li>
+</ul>
+<h2 id="MyBtisPlus-ActiveRecord模式"><a href="#MyBtisPlus-ActiveRecord模式" class="headerlink" title="MyBtisPlus-ActiveRecord模式"></a>MyBtisPlus-ActiveRecord模式</h2><p>一般不使用，而是分层model和mapper，service分开<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-ActiveRecord%E6%A8%A1%E5%BC%8F.png"></p>
+<h2 id="MyBatisPlus-整体架构"><a href="#MyBatisPlus-整体架构" class="headerlink" title="MyBatisPlus-整体架构"></a>MyBatisPlus-整体架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E6%9F%A5%E8%AF%A2.png"></p>
+<h2 id="Id生成策略"><a href="#Id生成策略" class="headerlink" title="Id生成策略"></a>Id生成策略</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-Id%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5.png"></p>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E5%88%86%E9%A1%B5.png"></p>
+<h2 id="逻辑删除"><a href="#逻辑删除" class="headerlink" title="逻辑删除"></a>逻辑删除</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4.png"></p>
+<h1 id="客服系统案例演进"><a href="#客服系统案例演进" class="headerlink" title="客服系统案例演进"></a>客服系统案例演进</h1><h2 id="升级策略"><a href="#升级策略" class="headerlink" title="升级策略"></a>升级策略</h2><p>由Mybatis 升级成Mybatis-Plus相关改造点<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisPlus-%E5%8D%87%E7%BA%A7%E7%AD%96%E7%95%A5.png"></p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mybatis-plus-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;dynamic-datasource-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: customer-service</span><br><span class="line">  jackson:</span><br><span class="line">    date-format: yyyy-MM-dd HH:mm:ss</span><br><span class="line">    time-zone: Asia/Shanghai</span><br><span class="line">  datasource:</span><br><span class="line">    dynamic:</span><br><span class="line">      primary: master</span><br><span class="line">      druid:</span><br><span class="line">        initial-size: 3</span><br><span class="line">        min-idle: 3</span><br><span class="line">        max-active: 40</span><br><span class="line">        max-wait: 60000</span><br><span class="line">      datasource:</span><br><span class="line">        master:</span><br><span class="line">          driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">          url: jdbc:mysql://127.0.0.1:3306/customer_system?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</span><br><span class="line">          username: root</span><br><span class="line">          password: root</span><br><span class="line">mybatis-plus:</span><br><span class="line">  mapper-locations: classpath:mapperXml/*.xml</span><br><span class="line">  configuration:</span><br><span class="line">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span><br><span class="line">  global-config:</span><br><span class="line">    db-config:</span><br><span class="line">      # 逻辑删除字段名</span><br><span class="line">      logic-delete-field: is_deleted</span><br><span class="line">      # 逻辑删除字面值：未删除为0</span><br><span class="line">      logic-not-delete-value: 0</span><br><span class="line">      # 逻辑删除字面值：删除为1</span><br><span class="line">      logic-delete-value: 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@TableName(&quot;customer_staff&quot;)</span><br><span class="line">public class CustomerStaff implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 主键</span><br><span class="line">     */</span><br><span class="line">    @TableId(value = &quot;id&quot;, type = IdType.AUTO)</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">     * 是否删除，1=删除,0=未删除</span><br><span class="line">     */</span><br><span class="line">    @TableLogic</span><br><span class="line">    private Boolean isDeleted;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="mapper"><a href="#mapper" class="headerlink" title="mapper"></a>mapper</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public interface CustomerStaffMapper extends BaseMapper&lt;CustomerStaff&gt; &#123;</span><br><span class="line"></span><br><span class="line">    default CustomerStaff findCustomerStaffByPhoneNumber(String phoneNumber) &#123;</span><br><span class="line"></span><br><span class="line">        LambdaQueryWrapper&lt;CustomerStaff&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();</span><br><span class="line">        queryWrapper.eq(CustomerStaff::getPhone, phoneNumber);</span><br><span class="line">        queryWrapper.eq(CustomerStaff::getIsDeleted, false);</span><br><span class="line"></span><br><span class="line">        return selectOne(queryWrapper);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="service"><a href="#service" class="headerlink" title="service"></a>service</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class CustomerStaffServiceImpl extends ServiceImpl&lt;CustomerStaffMapper, CustomerStaff&gt; implements ICustomerStaffService &#123;</span><br><span class="line">    public List&lt;CustomerStaff&gt; findCustomerStaffs() &#123;</span><br><span class="line">        LambdaQueryWrapper&lt;CustomerStaff&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();</span><br><span class="line">        return baseMapper.selectList(queryWrapper);</span><br><span class="line">    &#125;</span><br><span class="line">  public PageObject&lt;CustomerStaff&gt; findCustomerStaffs(Long pageSize, Long pageIndex) &#123;</span><br><span class="line"></span><br><span class="line">        return getCustomerStaffPageObject(null, pageSize, pageIndex);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private PageObject&lt;CustomerStaff&gt; getCustomerStaffPageObject(String staffName, Long pageSize, Long pageIndex) &#123;</span><br><span class="line">        LambdaQueryWrapper&lt;CustomerStaff&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();</span><br><span class="line">//        queryWrapper.eq(CustomerStaff::getIsDeleted, false);</span><br><span class="line"></span><br><span class="line">        if(!Objects.isNull(staffName)) &#123;</span><br><span class="line">            queryWrapper.like(CustomerStaff::getStaffName, staffName);</span><br><span class="line">        &#125;</span><br><span class="line">        queryWrapper.orderByDesc(CustomerStaff::getCreateTime);</span><br><span class="line"></span><br><span class="line">        IPage&lt;CustomerStaff&gt; page = new Page&lt;&gt;(pageIndex, pageSize);</span><br><span class="line">        IPage&lt;CustomerStaff&gt; pagedResult = baseMapper.selectPage(page, queryWrapper);</span><br><span class="line"></span><br><span class="line">        PageObject&lt;CustomerStaff&gt; pagedObject = new PageObject&lt;CustomerStaff&gt;();</span><br><span class="line">        pagedObject.buildPage(pagedResult.getRecords(), pagedResult.getTotal(), pagedResult.getCurrent(), pagedResult.getSize());</span><br><span class="line"></span><br><span class="line">        return pagedObject;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Boolean deleteCustomerStaffById(Long staffId) &#123;</span><br><span class="line"></span><br><span class="line">        //通过更新操作实现逻辑删除</span><br><span class="line">//        CustomerStaff customerStaff = new CustomerStaff();</span><br><span class="line">//        customerStaff.setId(staffId);</span><br><span class="line">//        customerStaff.setIsDeleted(true);</span><br><span class="line">//</span><br><span class="line">//        return updateById(customerStaff);</span><br><span class="line"></span><br><span class="line">        //通过逻辑删除为来进行逻辑删除</span><br><span class="line">        return this.removeById(staffId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分页配置类"><a href="#分页配置类" class="headerlink" title="分页配置类"></a>分页配置类</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MybatisPlusConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public MybatisPlusInterceptor mybatisPlusInterceptor()&#123;</span><br><span class="line">        //1 创建MybatisPlusInterceptor拦截器对象</span><br><span class="line">        MybatisPlusInterceptor mpInterceptor=new MybatisPlusInterceptor();</span><br><span class="line">        //2 添加分页拦截器</span><br><span class="line">        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());</span><br><span class="line">        return mpInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="MyBatis-Plus-SQL执行流程"><a href="#MyBatis-Plus-SQL执行流程" class="headerlink" title="MyBatis-Plus SQL执行流程"></a>MyBatis-Plus SQL执行流程</h1><h2 id="MyBatisMapper获取流程"><a href="#MyBatisMapper获取流程" class="headerlink" title="MyBatisMapper获取流程"></a>MyBatisMapper获取流程</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisMapper%E8%8E%B7%E5%8F%96%E6%B5%81%E7%A8%8B.png"><br>代码流程<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisMapper%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B.png"><br>最终通过创建了一个代理类MapperProxy,<br>代理对象MapperProxy内部创建MapperMethod实例通过SqlSession进一步完成sql执行操作<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatisMapper%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F.png"></p>
+<h3 id="MapperMethod"><a href="#MapperMethod" class="headerlink" title="MapperMethod"></a>MapperMethod</h3><p>内部使用SqlSession</p>
+<h4 id="SqlSession获取过程"><a href="#SqlSession获取过程" class="headerlink" title="SqlSession获取过程"></a>SqlSession获取过程</h4><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-SqlSession%E8%8E%B7%E5%8F%96%E6%B5%81%E7%A8%8B.png"></p>
+<h5 id="SqlSession执行流程"><a href="#SqlSession执行流程" class="headerlink" title="SqlSession执行流程"></a>SqlSession执行流程</h5><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-SqlSession%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png"></p>
+<ul>
+<li>MappedStatement sql语句封装对象</li>
+<li>Executor 执行器<ul>
+<li>BaseExecutor 一级缓存</li>
+<li>CachingExecutor 二级缓存</li>
+</ul>
+</li>
+</ul>
+<p>Executor继承关系图</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.qq.com/flowchart/DRUhkS1V6YmVZb1ZZ">https://docs.qq.com/flowchart/DRUhkS1V6YmVZb1ZZ</a></p>
+</blockquote>
+<p>二级缓存建议关闭。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    cache-enabled: false</span><br><span class="line">    local-cache-scope: session</span><br></pre></td></tr></table></figure>
+<p>使用二级缓存的异常场景：两个线程都有自己的二级、一级缓存，线程1更新操作并清空二级缓存，此时线程2可能查找到一级缓存的脏数据。</p>
+<p>读源码时的疑问<br>BaseExecutor为什么先put一个枚举值，再执行查询，再删除k&#x2F;v，再缓存查询结果呢？如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private &lt;E&gt; List&lt;E&gt; queryFromDatabase(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException &#123;</span><br><span class="line">  List&lt;E&gt; list;</span><br><span class="line">  localCache.putObject(key, EXECUTION_PLACEHOLDER);</span><br><span class="line">  try &#123;</span><br><span class="line">    list = doQuery(ms, parameter, rowBounds, resultHandler, boundSql);</span><br><span class="line">  &#125; finally &#123;</span><br><span class="line">    localCache.removeObject(key);</span><br><span class="line">  &#125;</span><br><span class="line">  localCache.putObject(key, list);</span><br><span class="line">  if (ms.getStatementType() == StatementType.CALLABLE) &#123;</span><br><span class="line">    localOutputParameterCache.putObject(key, parameter);</span><br><span class="line">  &#125;</span><br><span class="line">  return list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行流程总结"><a href="#执行流程总结" class="headerlink" title="执行流程总结"></a>执行流程总结</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/1-MyBatis%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.png"><br>处理流程总结：</p>
+<ul>
+<li>SqlSessionFactoryBean用来生成SqlSessionFactory</li>
+<li>MapperFactoryBean初始化时会生成一个线程安全的SqlSession对象。<ul>
+<li>MapperFactoryBean继承自SqlSessionDaoSupport,SqlSessionDaoSupport包含SqlSessionTemplate对象，SqlSessionTemplate包含一个SqlSessionProxy对象SqlSessionProxy创建时会保存到ThreadLocal中以保证线程安全。</li>
+<li>SqlSessionTemplate(SqlSession)初始化代理对象时，调用openSessionFromDataSource方法，初始化excutor，开启事务，返回SqlSession对象</li>
+</ul>
+</li>
+<li>SqlSession.getMapper()时获取到的是mapper代理对象<ul>
+<li>configuration.getMapper(SqlSession);</li>
+</ul>
+</li>
+<li>MapperProxy包含一个MapperMethod类，用来执行sql语句。</li>
+<li>MapperMethod内部通过SqlSession执行SQL语句。</li>
+<li>SqlSession通过Executor对象执行</li>
+<li>Executor分为BaseExcutor和CachingExcutor</li>
+<li>Executor内部使用 StatementHandler、ResultHandler执行sql语句，处理结果</li>
+</ul>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li><p>为什么Mapper层的接口没有实现类却能完成SQL执行等一系列操作？JDK代理模式，MapperProxyFactory创建代理类MapperProxy，MapperProxy代理MapperMethod类，MapperMethod类通过SqlSession等参数构建执行sql</p>
+</li>
+<li><p>MyBatisPlus在Mybatis基础上添加了哪些增强功能？</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/2%E5%AF%B9WebAPI%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="prev" title="2对WebAPI进行性能优化">
+                  <i class="fa fa-chevron-left"></i> 2对WebAPI进行性能优化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/" rel="next" title="Java实战特训营-2.2基于SpringData实现数据访问">
+                  Java实战特训营-2.2基于SpringData实现数据访问 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

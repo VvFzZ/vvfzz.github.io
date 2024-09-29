@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/","path":"JAVA/Java实战特训营/2系统扩展测试监控/2基于SpringData实现数据访问/","title":"Java实战特训营-2.2基于SpringData实现数据访问"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java实战特训营-2.2基于SpringData实现数据访问 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Data"><span class="nav-number">1.</span> <span class="nav-text">Spring Data</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Repository%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">Repository架构模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringData"><span class="nav-number">1.1.1.</span> <span class="nav-text">SpringData</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Data-JPA"><span class="nav-number">1.2.</span> <span class="nav-text">Spring Data JPA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JPA%E8%A7%84%E8%8C%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">JPA规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.2.2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text">应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#N-1%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">N + 1问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JoinFetch%E8%A7%A3%E5%86%B3"><span class="nav-number">2.1.</span> <span class="nav-text">JoinFetch解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">2.1.1.</span> <span class="nav-text">优缺点分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">数据访问优化策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch-Size"><span class="nav-number">3.1.</span> <span class="nav-text">Fetch Size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">3.2.</span> <span class="nav-text">连接池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E6%8F%90%E4%BA%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">使用批处理和选择合适的提交模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%92%8C%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">3.4.</span> <span class="nav-text">使用统计和延迟加载机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E6%80%A7%E8%83%BD"><span class="nav-number">3.5.</span> <span class="nav-text">多级缓存提升数据访问性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mybatis"><span class="nav-number">3.5.1.</span> <span class="nav-text">mybatis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-data-jpa-h2"><span class="nav-number">4.1.</span> <span class="nav-text">spring data jpa &amp; h2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">其他解决方式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java实战特训营-2.2基于SpringData实现数据访问 | VvfzZ">
+      <meta itemprop="description" content="基于SpringData实现数据访问">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java实战特训营-2.2基于SpringData实现数据访问
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-07 09:22:40" itemprop="dateCreated datePublished" datetime="2024-09-07T09:22:40+08:00">2024-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-09 21:49:42" itemprop="dateModified" datetime="2024-09-09T21:49:42+08:00">2024-09-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">基于SpringData实现数据访问</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h1><h2 id="Repository架构模式"><a href="#Repository架构模式" class="headerlink" title="Repository架构模式"></a>Repository架构模式</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-Reporsitory%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F.png"><br>Spring Data JPA更多关注Repository架构模式的实现，关注业务模型和数据对象间的映射<br>领域对象，不是纯粹的数据库数据存储对象（技术数据），面向业务的对象。</p>
+<h3 id="SpringData"><a href="#SpringData" class="headerlink" title="SpringData"></a>SpringData</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-Reporsitory%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F-SpringData2.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-Reporsitory%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F-SpringData1.png"></p>
+<h2 id="Spring-Data-JPA"><a href="#Spring-Data-JPA" class="headerlink" title="Spring Data JPA"></a>Spring Data JPA</h2><p>JPA有一套接口规范，类似JDBC</p>
+<h3 id="JPA规范"><a href="#JPA规范" class="headerlink" title="JPA规范"></a>JPA规范</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-SpringData-JPA%E8%A7%84%E8%8C%83.png"></p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><ul>
+<li>@Query</li>
+<li>方法名衍生查询</li>
+<li>QueryByExample</li>
+<li>Specification机制</li>
+</ul>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>依赖和配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">      &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://localhost:3306/customer_hangzhou?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">  jpa:</span><br><span class="line">    properties:</span><br><span class="line">      hibernate:</span><br><span class="line">        dialect: org.hibernate.dialect.MySQLDialect</span><br></pre></td></tr></table></figure>
+<h1 id="N-1问题"><a href="#N-1问题" class="headerlink" title="N + 1问题"></a>N + 1问题</h1><h2 id="JoinFetch解决"><a href="#JoinFetch解决" class="headerlink" title="JoinFetch解决"></a>JoinFetch解决</h2><p>特定场景可用，如下第二个方法，要先查出所有在做条件判断In<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-JoinFech.png"></p>
+<h3 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-JoinFech-2.png"></p>
+<h1 id="数据访问优化策略"><a href="#数据访问优化策略" class="headerlink" title="数据访问优化策略"></a>数据访问优化策略</h1><ul>
+<li>优化Fetch Size 和连接池配置</li>
+<li>使用批处理和选择合适的提交模式</li>
+<li>通过统计找到数据访问瓶颈</li>
+<li>使用延迟加载数据库访问</li>
+<li>使用多级缓存提升数据访问性能</li>
+</ul>
+<h2 id="Fetch-Size"><a href="#Fetch-Size" class="headerlink" title="Fetch Size"></a>Fetch Size</h2><p>指定一次从数据库检索的行数，合理设置大小，可减低网络通信次数带来性能提升。<br>不可硬编码，确保其可配置，根据不同环境，JVM堆内存大小配置。<br>配置过大，可能导致内存不足（大量请求同时获取数据时）</p>
+<h2 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BC%98%E5%8C%96.png"></p>
+<ul>
+<li>连接池大小<br>一般偏大设置，但过大会导致性能下降，根据实际用户并发量进行性能测试结果设置。</li>
+<li>检查连接泄露 默认配置</li>
+<li>验证链接 默认配置</li>
+</ul>
+<p><em>多系统访问同一个数据库时，根据应用本身的属性考虑如何分配连接</em>。</p>
+<h2 id="使用批处理和选择合适的提交模式"><a href="#使用批处理和选择合适的提交模式" class="headerlink" title="使用批处理和选择合适的提交模式"></a>使用批处理和选择合适的提交模式</h2><p>数据库驱动程序在每个sql操作后向数据库发送一个提交请求，引起一个网络调用。</p>
+<p>每次提交需将事务更改写入数据库，涉及耗时的磁盘IO。<br>可以把自动提交关闭，但有些应用为确保数据完整性不可关闭。<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4.png"></p>
+<h2 id="使用统计和延迟加载机制"><a href="#使用统计和延迟加载机制" class="headerlink" title="使用统计和延迟加载机制"></a>使用统计和延迟加载机制</h2><p>延迟加载关联数据<br>统计数据，分析原始数据，找到系统瓶颈<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E7%BB%9F%E8%AE%A1%E5%92%8C%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD.png"></p>
+<h2 id="多级缓存提升数据访问性能"><a href="#多级缓存提升数据访问性能" class="headerlink" title="多级缓存提升数据访问性能"></a>多级缓存提升数据访问性能</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98.png"> </p>
+<h3 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-mybatis.png"></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="spring-data-jpa-h2"><a href="#spring-data-jpa-h2" class="headerlink" title="spring data jpa &amp; h2"></a>spring data jpa &amp; h2</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/2%E5%9F%BA%E4%BA%8ESpringData%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/2-h2.png"></p>
+<h2 id="其他解决方式"><a href="#其他解决方式" class="headerlink" title="其他解决方式"></a>其他解决方式</h2><ul>
+<li>EntityGraph</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/1%E4%BD%BF%E7%94%A8Mybatis-Plus%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" rel="prev" title="Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展">
+                  <i class="fa fa-chevron-left"></i> Java实战特训营-2.1使用Mybatis-Plus对数据访问进行扩展
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/3%E4%BD%BF%E7%94%A8HATEOAS%E6%9E%84%E5%BB%BA%E8%87%AA%E8%A7%A3%E9%87%8AWebAPI/" rel="next" title="Java实战特训营-2.3使用HATEOAS构建自解释WebAPI">
+                  Java实战特训营-2.3使用HATEOAS构建自解释WebAPI <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

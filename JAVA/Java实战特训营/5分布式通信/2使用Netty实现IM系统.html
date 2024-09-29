@@ -1,0 +1,78 @@
+<hr>
+<h2 id="title-2使用Netty实现IM系统description-2使用Netty实现IM系统date-2024-09-28-21-34-08tags"><a href="#title-2使用Netty实现IM系统description-2使用Netty实现IM系统date-2024-09-28-21-34-08tags" class="headerlink" title="title: 2使用Netty实现IM系统description: 2使用Netty实现IM系统date: 2024-09-28 21:34:08tags:"></a>title: 2使用Netty实现IM系统<br>description: 2使用Netty实现IM系统<br>date: 2024-09-28 21:34:08<br>tags:</h2><h1 id="IM系统简介"><a href="#IM系统简介" class="headerlink" title="IM系统简介"></a>IM系统简介</h1><p>IM（Instant Messaging，即时通讯）又叫做实时通信</p>
+<ul>
+<li>单聊</li>
+<li>群聊</li>
+</ul>
+<h2 id="IM和Netty-客户端实现逻辑"><a href="#IM和Netty-客户端实现逻辑" class="headerlink" title="IM和Netty - 客户端实现逻辑"></a>IM和Netty - 客户端实现逻辑</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/2%E4%BD%BF%E7%94%A8Netty%E5%AE%9E%E7%8E%B0IM%E7%B3%BB%E7%BB%9F/2-IM%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91.png"></p>
+<h2 id="IM和Netty-服务端实现逻辑"><a href="#IM和Netty-服务端实现逻辑" class="headerlink" title="IM和Netty - 服务端实现逻辑"></a>IM和Netty - 服务端实现逻辑</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/2%E4%BD%BF%E7%94%A8Netty%E5%AE%9E%E7%8E%B0IM%E7%B3%BB%E7%BB%9F/2-IM%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91.png"></p>
+<h1 id="Pipeline与ChannelHandler"><a href="#Pipeline与ChannelHandler" class="headerlink" title="Pipeline与ChannelHandler"></a>Pipeline与ChannelHandler</h1><h2 id="Netty中的管道-过滤器"><a href="#Netty中的管道-过滤器" class="headerlink" title="Netty中的管道-过滤器"></a>Netty中的管道-过滤器</h2><p>Channel+ChannelPipeline+ChannelHandlerContext<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/2%E4%BD%BF%E7%94%A8Netty%E5%AE%9E%E7%8E%B0IM%E7%B3%BB%E7%BB%9F/2-Netty%E4%B8%AD%E7%9A%84%E7%AE%A1%E9%81%93-%E8%BF%87%E6%BB%A4%E5%99%A8.png"></p>
+<h2 id="ChannelHandler"><a href="#ChannelHandler" class="headerlink" title="ChannelHandler"></a>ChannelHandler</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/2%E4%BD%BF%E7%94%A8Netty%E5%AE%9E%E7%8E%B0IM%E7%B3%BB%E7%BB%9F/2-ChannelHandler.png"></p>
+<h2 id="Netty内置ChannelHandlerAdapter"><a href="#Netty内置ChannelHandlerAdapter" class="headerlink" title="Netty内置ChannelHandlerAdapter"></a>Netty内置ChannelHandlerAdapter</h2><h3 id="MessageToByteEncoder"><a href="#MessageToByteEncoder" class="headerlink" title="MessageToByteEncoder"></a>MessageToByteEncoder</h3><pre><code>public abstract class MessageToByteEncoder&lt;I&gt; extends ChannelOutboundHandlerAdapter { 
+
+protected abstract void encode(ChannelHandlerContext ctx, I msg, ByteBuf byteBuf) throws 	Exception;
+}
+
+public class PacketEncoder extends MessageToByteEncoder&lt;MyMessage&gt; {
+
+    @Override
+    protected void encode(ChannelHandlerContext ctx, MyMessage message, ByteBuf byteBuf) 			throws Exception {
+
+        //完成自定义编码
+        ByteBuf byteBuf = ...
+    }
+}
+</code></pre>
+<h3 id="ByteToMessageDecoder"><a href="#ByteToMessageDecoder" class="headerlink" title="ByteToMessageDecoder"></a>ByteToMessageDecoder</h3><pre><code>public abstract class ByteToMessageDecoder extends ChannelInboundHandlerAdapter {
+
+protected abstract void decode(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out) throws 	Exception;
+}
+
+public class PacketDecoder extends ByteToMessageDecoder {
+
+    @Override
+    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List list) 			throws Exception {
+
+        //完成自定义解码
+        MyMessage message = ...;
+        list.add(message);
+    }
+}
+</code></pre>
+<h3 id="SimpleChannelInboundHandler"><a href="#SimpleChannelInboundHandler" class="headerlink" title="SimpleChannelInboundHandler"></a>SimpleChannelInboundHandler</h3><pre><code>public abstract class SimpleChannelInboundHandler&lt;I&gt; extends ChannelInboundHandlerAdapter {
+
+protected abstract void channelRead0(ChannelHandlerContext ctx, I msg) throws Exception;
+}
+
+public class LoginResponseHandler extends SimpleChannelInboundHandler&lt;MyMessage&gt; {
+
+  @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MyMessage message) 		throws Exception {
+        //针对MyMessage处理登录逻辑
+    }
+}
+</code></pre>
+<h3 id="AuthenticationHandler"><a href="#AuthenticationHandler" class="headerlink" title="AuthenticationHandler"></a>AuthenticationHandler</h3><pre><code>public class AuthenticationHandler extends ChannelInboundHandlerAdapter {
+
+@Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        //如果认证通过则继续执行，否则直接断开连接        
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        //打印日志
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        //执行下线
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        //异常时断开连接
+    }
+}
+</code></pre>
+<h1 id="IM单聊的原理与实现"><a href="#IM单聊的原理与实现" class="headerlink" title="IM单聊的原理与实现"></a>IM单聊的原理与实现</h1><h2 id="设计通信协议"><a href="#设计通信协议" class="headerlink" title="设计通信协议"></a>设计通信协议</h2><p><em>为了实现定制化和扩展性，通常都需要定义一套私有协议，例如Dubbo框架</em><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/2%E4%BD%BF%E7%94%A8Netty%E5%AE%9E%E7%8E%B0IM%E7%B3%BB%E7%BB%9F/2-IM%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png"></p>

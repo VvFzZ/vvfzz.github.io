@@ -1,0 +1,89 @@
+<hr>
+<h2 id="title-6Mybatis和Spring集成原理剖析date-2024-09-05-10-23-48tags-description-Mybatis和Spring集成原理剖析"><a href="#title-6Mybatis和Spring集成原理剖析date-2024-09-05-10-23-48tags-description-Mybatis和Spring集成原理剖析" class="headerlink" title="title: 6Mybatis和Spring集成原理剖析date: 2024-09-05 10:23:48tags:description: Mybatis和Spring集成原理剖析"></a>title: 6Mybatis和Spring集成原理剖析<br>date: 2024-09-05 10:23:48<br>tags:<br>description: Mybatis和Spring集成原理剖析</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6.png"></p>
+<h1 id="Spring启动扩展点"><a href="#Spring启动扩展点" class="headerlink" title="Spring启动扩展点"></a>Spring启动扩展点</h1><p>Spring如何做到与Dubbo，Mybatis等无缝集成？<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-%E6%A1%86%E6%9E%B6%E9%9B%86%E6%88%90%E6%95%88%E6%9E%9C.png"></p>
+<h2 id="集成Spring框架"><a href="#集成Spring框架" class="headerlink" title="集成Spring框架"></a>集成Spring框架</h2><ul>
+<li>扩展点<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-%E6%89%A9%E5%B1%95%E7%82%B9.png"></li>
+</ul>
+<h3 id="InitializingBean"><a href="#InitializingBean" class="headerlink" title="InitializingBean"></a>InitializingBean</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-InitializingBean.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-InitializingBean2.png"></p>
+<pre><code>public class User implements InitializingBean, BeanNameAware {
+
+    private String name;
+
+    private Integer age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+
+    @PostConstruct
+    public void postC() {
+        System.out.println(&quot;user PostConstruct&quot;);
+    }
+
+    public User() {
+        System.out.println(&quot;user ctor&quot;);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println(&quot;user initializingBean afterPropertiesSet&quot;);
+    }
+
+
+    public void init() {
+        System.out.println(&quot;user init&quot;);
+    }
+
+
+    @Override
+    public void setBeanName(String name) {
+        System.out.println(&quot;set BeanName:&quot; + name);
+    }
+}
+
+@Configuration
+public class BeanConfig {
+
+    @Bean(initMethod = &quot;init&quot;)
+    public User user() {
+        return new User();
+    }
+}
+</code></pre>
+<p>输出结果：<br>user ctor<br>set BeanName:user<br>user PostConstruct<br>user initializingBean afterPropertiesSet<br>user init</p>
+<h3 id="Aware"><a href="#Aware" class="headerlink" title="Aware"></a>Aware</h3><ul>
+<li>ApplicatinoContextAware</li>
+<li>BeanNameAware</li>
+<li>ApplicationEventPublisherAware<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-Aware.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-Aware1.png"></li>
+</ul>
+<h3 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h3><ul>
+<li>复杂对象创建</li>
+<li>对象以来Spring生命周期某个时间点（和生命周期其他扩展接口一起使用）<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-FactoryBean.png"></li>
+</ul>
+<h3 id="ApplicationListener"><a href="#ApplicationListener" class="headerlink" title="ApplicationListener"></a>ApplicationListener</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-ApplicationListener.png"></p>
+<p>Spring框架事件处理核心类<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-ApplicationListener-Spring%E6%A1%86%E6%9E%B6%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%A0%B8%E5%BF%83%E7%B1%BB.png"></p>
+<h1 id="MyBatis-Spring集成过程"><a href="#MyBatis-Spring集成过程" class="headerlink" title="MyBatis-Spring集成过程"></a>MyBatis-Spring集成过程</h1><h2 id="SqlSessionFactoryBean类结构"><a href="#SqlSessionFactoryBean类结构" class="headerlink" title="SqlSessionFactoryBean类结构"></a>SqlSessionFactoryBean类结构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionFactoryBean.png"></p>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionFactoryBean2.png"></p>
+<h2 id="MapperFactoryBean"><a href="#MapperFactoryBean" class="headerlink" title="MapperFactoryBean"></a>MapperFactoryBean</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-MapperFactoryBean.png"></p>
+<h2 id="SqlSessionDaoSupport"><a href="#SqlSessionDaoSupport" class="headerlink" title="SqlSessionDaoSupport"></a>SqlSessionDaoSupport</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-MapperFactoryBean-SqlSessionDaoSupport.png"></p>
+<h1 id="SqlSessionTemplate线程安全"><a href="#SqlSessionTemplate线程安全" class="headerlink" title="SqlSessionTemplate线程安全"></a>SqlSessionTemplate线程安全</h1><p>线程不安全导致的问题？<br>SqlSession包含一个独立数据库连接Connection对象线程不安全，多线程共享SqlSession可能导致数据混乱，事务冲突。SqlSession还包含一级缓存，多线程共享可能导致数据不一致（A线程插入数据中途，B线程查询结果并缓存）。</p>
+<p>Mybatis 的 SqlSession线程不安全，Spring集成如何保证安全？<br>SqlSessionDaoSupport类 构建了一个SqlSession 的代理对象。SqlSessionDaoSupport类 包含SqlSessionTemplate对象，SqlSessionTemplate对象包含SqlSession的代理对象，创建代理对象时将其放在ThreadLocal中，保证线程安全。</p>
+<h2 id="SqlSessionTemplate的定位"><a href="#SqlSessionTemplate的定位" class="headerlink" title="SqlSessionTemplate的定位"></a>SqlSessionTemplate的定位</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionTemplate%E7%9A%84%E5%AE%9A%E4%BD%8D.png"></p>
+<h2 id="SqlSessionTemplate初始化"><a href="#SqlSessionTemplate初始化" class="headerlink" title="SqlSessionTemplate初始化"></a>SqlSessionTemplate初始化</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionTemplate%E5%88%9D%E5%A7%8B%E5%8C%96.png"></p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionTemplate%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.png"> </p>
+<h2 id="SqlSessionHolder"><a href="#SqlSessionHolder" class="headerlink" title="SqlSessionHolder"></a>SqlSessionHolder</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionTemplate-SqlSessionHolder.png"></p>
+<h2 id="TransactionSynchronizationManager"><a href="#TransactionSynchronizationManager" class="headerlink" title="TransactionSynchronizationManager"></a>TransactionSynchronizationManager</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/6Mybatis%E5%92%8CSpring%E9%9B%86%E6%88%90%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/6-SqlSessionTemplate-TransactionSynchronizationManager.png"> </p>
+<p>Spring 事件有哪些，如何扩展？</p>

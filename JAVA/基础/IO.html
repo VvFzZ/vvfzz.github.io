@@ -1,0 +1,132 @@
+<hr>
+<h2 id="title-IOdate-2024-06-18-16-49-42tags-JAVA-IO流description-JAVA-IO基础类"><a href="#title-IOdate-2024-06-18-16-49-42tags-JAVA-IO流description-JAVA-IO基础类" class="headerlink" title="title: IOdate: 2024-06-18 16:49:42tags:    - JAVA    - IO流description: JAVA IO基础类"></a>title: IO<br>date: 2024-06-18 16:49:42<br>tags:<br>    - JAVA<br>    - IO流<br>description: JAVA IO基础类</h2><h1 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h1><h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><pre><code>String fileName = &quot;d:&quot; + File.separator + &quot;b.txt&quot;;
+File f1 = new File(fileName);
+File f2 = new File(fileName);
+System.out.println(f1 == f2); // false  比较引用
+System.out.println(f1.equals(f2)); // true 比较文件路径
+</code></pre>
+<h1 id="InputStream、OutputStream、Reader、Writer"><a href="#InputStream、OutputStream、Reader、Writer" class="headerlink" title="InputStream、OutputStream、Reader、Writer"></a>InputStream、OutputStream、Reader、Writer</h1><p>字节流：InputStream、OutputStream<br>字符流（处理文本）：Reader、Writer</p>
+<p>节点流：可单独处理数据<br>处理流：依赖其他流处理数据</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文本文件a.txt内容如下：</p>
+<pre><code>12
+34
+</code></pre>
+<p>读取a.txt内容时每次读取三个字符输出不正确</p>
+<pre><code>char[] buffer = new char[3];
+int len;
+while ((len = fileReader.read(buffer, 0, buffer.length)) &gt; -1) {
+    System.out.println(new String(buffer, 0, len) + &quot;:&quot;);
+}
+</code></pre>
+<h1 id="InputStreamReader、OutputStreamWriter"><a href="#InputStreamReader、OutputStreamWriter" class="headerlink" title="InputStreamReader、OutputStreamWriter"></a>InputStreamReader、OutputStreamWriter</h1><p>转换流：转换字节流和字符流</p>
+<pre><code>public static void IOStreamRW() throws IOException {
+        String fileName = &quot;d:&quot; + File.separator + &quot;a.txt&quot;;
+        String newFileName = &quot;d:&quot; + File.separator + &quot;new.txt&quot;;
+        FileInputStream fis = new FileInputStream(fileName);
+        //InputStreamReader isr = new InputStreamReader(fis);
+        InputStreamReader isr = new InputStreamReader(fis, &quot;GBK&quot;);//默认utf-8  windows记事本显示ANSI表示使用系统编码（我的电脑是GBK）
+        BufferedReader br = new BufferedReader(isr);
+
+        FileOutputStream fos = new FileOutputStream(newFileName);
+        OutputStreamWriter osw = new OutputStreamWriter(fos, &quot;utf-8&quot;);
+        BufferedWriter bw = new BufferedWriter(osw);
+
+        int r;
+        char[] chars = new char[1024];
+
+        /**
+         * 1
+         */
+        //while ((r = isr.read(chars, 0, chars.length)) &gt; -1) {
+        //    osw.write(chars, 0, r);
+        //}
+        //osw.close();
+        //isr.close();
+
+        /**
+         * 2 bufferedReader、bufferedWriter
+         */
+        while ((r = br.read(chars, 0, chars.length)) &gt; -1) {
+            bw.write(chars, 0, r);
+        }
+        bw.close();
+        br.close();
+
+    }
+</code></pre>
+<h1 id="DataInputStream、DataOutputStream"><a href="#DataInputStream、DataOutputStream" class="headerlink" title="DataInputStream、DataOutputStream"></a>DataInputStream、DataOutputStream</h1><p>数据流：处理基本数据类型和字符串</p>
+<pre><code>public static void DataIOputStream() throws IOException {
+        String fileName = &quot;d:&quot; + File.separator + &quot;s.txt&quot;;
+        File file = new File(fileName);
+        FileOutputStream fos = new FileOutputStream(file);
+        DataOutputStream dos = new DataOutputStream(fos);
+        dos.writeUTF(&quot;你好哈哈&quot;);
+        dos.writeInt(10);
+        dos.writeBoolean(true);
+        dos.writeDouble(1.98);
+        dos.writeUTF(&quot;你好嘻嘻&quot;);
+
+        FileInputStream fis = new FileInputStream(file);
+        DataInputStream dis = new DataInputStream(fis);
+        //按顺序读取
+        System.out.println(dis.readUTF());
+        System.out.println(dis.readInt());
+        System.out.println(dis.readBoolean());
+        System.out.println(dis.readDouble());
+        System.out.println(dis.readUTF());
+    }
+</code></pre>
+<h1 id="ObjectOutputStream、ObjectInputStream"><a href="#ObjectOutputStream、ObjectInputStream" class="headerlink" title="ObjectOutputStream、ObjectInputStream"></a>ObjectOutputStream、ObjectInputStream</h1><p>对象流做序列化反序列化</p>
+<pre><code>public  static void ObjectIOputStream() throws IOException, ClassNotFoundException {
+        String fileName = &quot;d:&quot; + File.separator + &quot;ois.txt&quot;;
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+        oos.writeObject(new Person(1, &quot;vvf&quot;));
+        oos.close();
+
+        System.out.println(ois.readObject());
+    }
+
+</code></pre>
+<p>声明serialVersionUID 说明版本兼容性问题（默认会自动生成，修改类时会发生变化）</p>
+<pre><code>class Person implements Serializable{
+    public Person() {
+    }
+
+    private static final long serialVersionUID = 643382323274886977L;
+
+    public Person(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    int age;
+    String name;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //@Override
+    //public String toString() {
+    //    return &quot;Person{&quot; +
+    //            &quot;age=&quot; + age +
+    //            &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+    //            &#39;}&#39;;
+    //}
+}
+</code></pre>
+<p><code>transient</code> 修饰不可序列化的属性<br>静态属性也不会被序列化</p>
+<h1 id="RandomAccessFile"><a href="#RandomAccessFile" class="headerlink" title="RandomAccessFile"></a>RandomAccessFile</h1><p>分段读取文件</p>

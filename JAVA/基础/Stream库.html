@@ -1,0 +1,204 @@
+<hr>
+<h2 id="title-Stream库date-2024-05-23-08-35-07tags-Streamdescription"><a href="#title-Stream库date-2024-05-23-08-35-07tags-Streamdescription" class="headerlink" title="title: Stream库date: 2024-05-23 08:35:07tags: Streamdescription:"></a>title: Stream库<br>date: 2024-05-23 08:35:07<br>tags: Stream<br>description:</h2><p>使用步骤</p>
+<ul>
+<li>创建 </li>
+<li>转换为其他流的操作</li>
+<li>终止操作，产生结果（执行之前的惰性操作）<!--more-->
+ {todo} ???<br> <code>list.stream().parallel()</code>、 <code>list.parallelStream()</code>啥区别？</li>
+</ul>
+<h1 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h1><p>Stream.of() 创建给定值的流<br>Stream.empty() 创建不包含元素的流<br>Stream.generate() 调用给定函数创建无限流<br>Stream.iterate() 根据种子和函数创建无限流<br>Pattern.compile(“”).splitAsStream() 创建由正则表达式界定的流<br>Arrays.stream(arr, 0, 1) 创建包含数组指定部分的流<br>Files.line() 创建包含指定文件中行的流</p>
+<h1 id="filter、map和flatMap"><a href="#filter、map和flatMap" class="headerlink" title="filter、map和flatMap"></a>filter、map和flatMap</h1><p>filter 创建流，元素满足断言条件<br>map 创建流，将所有元素应用给定函数<br>flatMap  创建流，将指定函数应用于当前流中所有元素所产生的结果连接到一起而获得，（这里的每个结果都是一个流），如下：</p>
+<pre><code>Stream.of(&quot;1&quot;).flatMap(x -&gt; {
+            return Stream.of(x, x);
+        }).forEach(System.out::println);
+</code></pre>
+<h1 id="抽取子流和连接流"><a href="#抽取子流和连接流" class="headerlink" title="抽取子流和连接流"></a>抽取子流和连接流</h1><p><code>stream.limit</code><br><code>stream.skip</code><br><code>Stream.concat</code> 连接两个流</p>
+<h1 id="其他的流转换"><a href="#其他的流转换" class="headerlink" title="其他的流转换"></a>其他的流转换</h1><p><code>distinct</code><br><code>sorted</code><br><code>peek(Consumer)</code> 获取每个元素时应用consumer，用于调试时可调用断点方法;count不会触发peek。</p>
+<h1 id="简单约简"><a href="#简单约简" class="headerlink" title="简单约简"></a>简单约简</h1><p>终结操作：</p>
+<ul>
+<li><code>min</code></li>
+<li><code>max</code></li>
+<li><code>findFirst</code> 与filter配合使用</li>
+<li><code>findAny</code> 并行流与filter配合使用</li>
+<li><code>anyMatch</code> 是否存在匹配，存在则返回true</li>
+<li><code>allMatch</code> 全部匹配返回true</li>
+<li><code>noneMatch</code> 没有匹配返回true</li>
+</ul>
+<h1 id="Optinonal类型"><a href="#Optinonal类型" class="headerlink" title="Optinonal类型"></a>Optinonal类型</h1><p>一种对象包装器<br>orElse(defaultVal)  如空提供默认值<br>orElseGet(Supplier)   如空执行表达式获取默认值<br>orElseThrow(Exception)   如空抛出异常</p>
+<p>ifPresent(Consumer)<br>map(Function)</p>
+<h2 id="不适合使用Optional值的方式"><a href="#不适合使用Optional值的方式" class="headerlink" title="不适合使用Optional值的方式"></a>不适合使用Optional值的方式</h2><ol>
+<li><code>optionalVal.get()</code> 在值不存在时抛出异常</li>
+<li>&#96;&#96;optionalVal.get().isPresent().get().someMethod();<code> 没有以下方式容易处理</code>if(value !&#x3D;null ) value.someMethod()&#96;</li>
+</ol>
+<h2 id="创建Optional值"><a href="#创建Optional值" class="headerlink" title="创建Optional值"></a>创建Optional值</h2><p><code>Optional.of(val)</code><br><code>Optional.empty()</code><br><code>Optional.ofNullable(val)</code> 若val为空则返回 <code>Optional.empty()</code></p>
+<h2 id="flatMap构建Optional值的函数"><a href="#flatMap构建Optional值的函数" class="headerlink" title="flatMap构建Optional值的函数"></a>flatMap构建Optional值的函数</h2><p>方法f返回值是Optional<T><br>T对象有返回值是Optional<T>的方法g<br>使用如下方法连续调用：<code>s.f().flatMap(T::g)</code></p>
+<h1 id="收集结果"><a href="#收集结果" class="headerlink" title="收集结果"></a>收集结果</h1><h2 id="遍历："><a href="#遍历：" class="headerlink" title="遍历："></a>遍历：</h2><ul>
+<li>foreach 在并行流上以任意顺序遍历元素</li>
+<li>foreachOrdered 按流中的顺序处理元素，但会丧失并行处理的部分甚至全部优势</li>
+</ul>
+<h2 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h2><p><code>toArray()</code> 返回<code>Object[]</code><br><code>ToArray(String::new)</code> 返回String数组.其他类型类似</p>
+<h2 id="collect"><a href="#collect" class="headerlink" title="collect"></a>collect</h2><p><code>stream.collect(Collectors.toList())</code><br><code>stream.collect(Collectors.toSet())</code><br><code>stream.collect(Collectors.toCollection(TreeSet::new))</code> &#x2F;&#x2F;指定结果类型<code>TreeSet</code><br><code>stream.collect(Collectors.join())</code><br><code>stream.collect(Collectors.join(&quot;,&quot;))</code></p>
+<p>统计</p>
+<pre><code>IntSummaryStatistics statistics = Arrays.asList(&quot;1&quot;, &quot;132&quot;, &quot;333&quot;, &quot;434&quot;).stream().collect(Collectors.summarizingInt(String::length));
+System.out.println(&quot;average:&quot; + Statistics.getAverage());
+System.out.println(Statistics.getMax());
+</code></pre>
+<h1 id="收集结果到映射表"><a href="#收集结果到映射表" class="headerlink" title="收集结果到映射表"></a>收集结果到映射表</h1><pre><code>Person person = new Person(&quot;1&quot;, &quot;11&quot;);
+        Person person2 = new Person(&quot;2&quot;, &quot;22&quot;);
+        Person person3 = new Person(&quot;3&quot;, &quot;33&quot;);
+        Person person23 = new Person(&quot;23&quot;, &quot;23&quot;);
+        Arrays.asList(person2, person, person3).stream()
+                .collect(Collectors.toMap(Person::getName, Person::getlName)).forEach((x, y) -&gt; {
+                    System.out.println(x + &quot;:&quot; + y);
+                });
+
+        Arrays.asList(person2, person, person3).stream()
+                .collect(Collectors.toMap(Person::getName, Function.identity())).forEach((x, y) -&gt; {
+                    System.out.println(x + &quot;:&quot; + y);
+                });
+
+        Arrays.asList(person, person2, person3, person23).stream()
+                .collect(Collectors.toMap(Person::getName, Function.identity(), (existingVal, newVal) -&gt; {
+                    return existingVal;
+                })).forEach((x, y) -&gt; {
+                    System.out.println(x + &quot;:&quot; + y);
+                });
+
+        Arrays.asList(person3, person2, person, person23).stream()
+                .collect(Collectors.toMap(Person::getName, Collections::singleton, (a, b) -&gt; {
+                    Set&lt;Person&gt; set = new HashSet&lt;&gt;(a);
+                    set.addAll(b);
+                    return set;
+                }, TreeMap::new)).forEach((x, y) -&gt; {
+                    System.out.println(x + &quot;:&quot; + y);
+                });
+</code></pre>
+<h1 id="群组和分区"><a href="#群组和分区" class="headerlink" title="群组和分区"></a>群组和分区</h1><ul>
+<li><code>Collectors.groupingBy</code></li>
+</ul>
+<pre><code>Map&lt;String, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName));
+map.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+</code></pre>
+<ul>
+<li><code>Collectors.partitionBy</code></li>
+</ul>
+<pre><code>Map&lt;Boolean, List&lt;Person&gt;&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.partitioningBy(x -&gt; x.getName().length() &gt; 1));
+collect.get(true).forEach(System.out::println);
+</code></pre>
+<h1 id="下游收集器"><a href="#下游收集器" class="headerlink" title="下游收集器"></a>下游收集器</h1><pre><code>Map&lt;String, Long&gt; collect = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
+        collect.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+
+        Map&lt;String, Integer&gt; collect12 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(Person::getAge)));
+        collect12.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+
+
+        person3_.setAge(10);
+        Map&lt;String, Optional&lt;Person&gt;&gt; collect13 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName, Collectors.maxBy(Comparator.comparingInt(Person::getAge))));
+        collect13.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+
+        Map&lt;String, Optional&lt;String&gt;&gt; collect14 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName,
+                        Collectors.mapping(Person::getlName,
+                                Collectors.maxBy(Comparator.comparing(String::length)))));
+
+        collect14.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+
+        Map&lt;String, Set&lt;String&gt;&gt; collect15 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName,
+                        Collectors.mapping(Person::getlName, Collectors.toSet())));
+        collect15.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+
+        Map&lt;String, Set&lt;String&gt;&gt; collect16 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName,
+                        Collectors.mapping(x -&gt; {
+                            return x.getlName() + &quot;-x&quot;;
+                        }, Collectors.toSet())));
+        collect16.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y);
+        });
+
+         Map&lt;String, IntSummaryStatistics&gt; collect17 = Arrays.asList(person1, person3_, person3, person2, person, person23).stream()
+                .collect(Collectors.groupingBy(Person::getName, Collectors.summarizingInt(Person::getAge)));
+        collect17.forEach((x, y) -&gt; {
+            System.out.println(x + &quot;:&quot; + y.getAverage() + &quot;,&quot; + y.getSum());
+        });
+
+
+        Map&lt;String, String&gt; collect18 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()
+                .collect(Collectors.groupingBy(Person::getName,
+                        Collectors.reducing(&quot;###&quot;,
+                                Person::getlName,
+                                (sum, item) -&gt; {
+//                                    System.out.println(&quot;===s:&quot; + s + &quot;  t:&quot; + t);
+                                    return sum.length() == 0 ? item : sum + &quot;,&quot; + item;
+                                })));
+        collect18.forEach((x, y) -&gt; {
+            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);
+        });
+
+Map&lt;String, String&gt; collect19 = Arrays.asList(person, person1, person2, person23, person3, person3_).stream()
+                .collect(Collectors.groupingBy(Person::getName,
+                        Collectors.mapping(Person::getlName, Collectors.joining(&quot;;&quot;))));
+        collect19.forEach((x, y) -&gt; {
+            System.out.println(&quot;x:&quot; + x + &quot;  y:&quot; + y);
+        });
+</code></pre>
+<h1 id="约简操作"><a href="#约简操作" class="headerlink" title="约简操作"></a>约简操作</h1><p><code>reduce</code><br>{todo}???</p>
+<h1 id="基本类型流"><a href="#基本类型流" class="headerlink" title="基本类型流"></a>基本类型流</h1><p><code>IntStream</code>  存储<code>short char byte boolean</code><br><code>LongStream</code><br><code>DoubleStream</code> 存储 <code>double float</code><br>不使用包装器(区别<code>Stream&lt;Integer&gt;</code>等)</p>
+<p>转换为对象流 <code>IntStream.range(0,5).boxed()</code> </p>
+<p>相关库<br>Random.ints()<br>Random.doubles()<br>Random.longs()</p>
+<h1 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h1><p>调用<code>unordered</code>方法表示对于排序不感兴趣，可提高<code>distinct</code>性能（相同值任选其一，不必排序）<br>也可提高limit的性能（实际实验室并没有提高，反而降低了）{todo}???</p>
+<p><code>Collectors.groupByConcurrent</code>使用共享的并发映射表，值的顺序不会与流中的顺序相同。<br>如下：</p>
+<p>并行流正常工作的条件：</p>
+<ul>
+<li>数据都在内存中。等待数据加载是低效的</li>
+<li>流应该被高效分成若干个字部分。数组或平衡二叉树支撑的流可以很好得工作，但Stream.Iterate返回的结果不行</li>
+<li>流操作的工作量应有较大规模。工作负载不大，并行流无异议。</li>
+<li>流操作不应阻塞</li>
+</ul>
+<pre><code>private static List&lt;String&gt; getSomeWords() {
+        Character[] characters = new Character[]{&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;, &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;, &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;};
+        Random r = new Random();
+        int[] wordsLengthArr = r.ints(100, 0, 20).toArray();
+        int wordsCount = wordsLengthArr.length;
+
+        List&lt;String&gt; words = new ArrayList&lt;&gt;();
+
+        for (int i = 0; i &lt; wordsCount; i++) {
+            int wordLength = wordsLengthArr[i];
+            int[] wordCharRandom = r.ints(wordLength, 0, 25).toArray();//单词的每个字母下标
+            Character[] word = new Character[wordLength];
+
+            for (int j = 0; j &lt; wordLength; j++) {
+                word[j] = characters[wordCharRandom[j]];
+            }
+
+            String s = Arrays.stream(word).map(String::valueOf).collect(Collectors.joining());
+            words.add(s);
+            System.out.println(s);
+        }
+        return words;
+    }
+
+        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));//每次结果相同
+        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));//每次结果不同
+        System.out.println(words.parallelStream().collect(Collectors.groupingBy(String::length)));
+        System.out.println(words.parallelStream().collect(Collectors.groupingByConcurrent(String::length)));
+</code></pre>

@@ -1,0 +1,68 @@
+<hr>
+<h2 id="title-1-1SpringBoot开发WebAPIdate-2024-09-05-10-27-43tags-description-SpringBoot开发WebAPI"><a href="#title-1-1SpringBoot开发WebAPIdate-2024-09-05-10-27-43tags-description-SpringBoot开发WebAPI" class="headerlink" title="title: 1.1SpringBoot开发WebAPIdate: 2024-09-05 10:27:43tags:description: SpringBoot开发WebAPI"></a>title: 1.1SpringBoot开发WebAPI<br>date: 2024-09-05 10:27:43<br>tags:<br>description: SpringBoot开发WebAPI</h2><h1 id="使用Spring-Boot开发Web-API"><a href="#使用Spring-Boot开发Web-API" class="headerlink" title="使用Spring Boot开发Web API"></a>使用Spring Boot开发Web API</h1><h2 id="Maven功能特性和最佳实践"><a href="#Maven功能特性和最佳实践" class="headerlink" title="Maven功能特性和最佳实践"></a>Maven功能特性和最佳实践</h2><blockquote>
+<p><a href="https://docs.qq.com/mind/DRU5LdHZlU01SZkZr?subId=BB08J2&mode=mind">https://docs.qq.com/mind/DRU5LdHZlU01SZkZr?subId=BB08J2&amp;mode=mind</a></p>
+</blockquote>
+<h3 id="Maven的作用"><a href="#Maven的作用" class="headerlink" title="Maven的作用"></a>Maven的作用</h3><ul>
+<li>自动化构建工具    <ul>
+<li>完整的构建生命周期</li>
+<li>标准化构建过程</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>依赖管理</li>
+<li>仓库（中央仓库）</li>
+</ul>
+</li>
+</ul>
+<h3 id="坐标与依赖"><a href="#坐标与依赖" class="headerlink" title="坐标与依赖"></a>坐标与依赖</h3><img src="1.1-maven-坐标与依赖.png">
+
+<h3 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h3><img src="1.1-maven-依赖管理.png">
+
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><h4 id="建立专用的依赖管理工程"><a href="#建立专用的依赖管理工程" class="headerlink" title="建立专用的依赖管理工程"></a>建立专用的依赖管理工程</h4><p>该工程中只有一个pom文件</p>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0/1SpringBoot%E5%BC%80%E5%8F%91WebAPI/1.1-maven-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B51.png"></p>
+<h4 id="灵活使用属性变量"><a href="#灵活使用属性变量" class="headerlink" title="灵活使用属性变量"></a>灵活使用属性变量</h4><img src="1.1-maven-最佳实践2.png">
+
+<h4 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h4><img src="1.1-maven-最佳实践3.png">
+
+<h2 id="代码工程1-0"><a href="#代码工程1-0" class="headerlink" title="代码工程1.0"></a>代码工程1.0</h2><img src="1.1-代码-工程结构.png">
+
+<h3 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h3><img src="1.1-代码-约定.png">
+
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><pre><code>@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class MyTest {
+    String name;
+    String addr;
+}
+</code></pre>
+<h3 id="AOP-日志框架"><a href="#AOP-日志框架" class="headerlink" title="AOP+日志框架"></a>AOP+日志框架</h3><p>slf4j MDC<br><img src="1.1-代码-日志.png"></p>
+<h3 id="Controller技术组件"><a href="#Controller技术组件" class="headerlink" title="Controller技术组件"></a>Controller技术组件</h3><pre><code>@RestController
+@RequestMapping(&quot;/customerStaffs&quot;)
+public class CustomerStaffController {
+    @PostMapping(&quot;/&quot;)
+    public Result&lt;Long&gt; addCustomerStaff(@RequestBody AddCustomerStaffReqVO addCustomerStaffReqVO) {...}
+
+    @GetMapping(&quot;/{staffId}&quot;)
+    public Result&lt;CustomerStaffRespVO&gt; findCustomerStaffById(@PathVariable(&quot;staffId&quot;) Long staffId) {...}
+}
+</code></pre>
+<h3 id="mapstruct"><a href="#mapstruct" class="headerlink" title="mapstruct"></a>mapstruct</h3><pre><code>@Mapper
+public interface CustomerStaffConverter {
+
+    CustomerStaffConverter INSTANCE = Mappers.getMapper(CustomerStaffConverter.class);
+
+    //VO-&gt;Entity
+    CustomerStaff convertCreateReq(AddCustomerStaffReqVO addCustomerStaffReqVO);
+    CustomerStaff convertUpdateReq(UpdateCustomerStaffReqVO updateCustomerStaffReqVO);
+
+    //Entity-&gt;VO
+    CustomerStaffRespVO convertResp(CustomerStaff entity);
+    List&lt;CustomerStaffRespVO&gt; convertListResp(List&lt;CustomerStaff&gt; entities);
+}
+</code></pre>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>多级代码工程中，如何有效管理对第三方组件的依赖关系？<br>建立独立的依赖工程，利用maven提供的手段依赖排除、归类、范围进行管理</li>
+</ul>
