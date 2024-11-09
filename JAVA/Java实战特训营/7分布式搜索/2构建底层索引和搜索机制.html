@@ -1,0 +1,39 @@
+<hr>
+<h2 id="title-2构建底层索引和搜索机制description-2构建底层索引和搜索机制date-2024-10-11-09-50-07tags"><a href="#title-2构建底层索引和搜索机制description-2构建底层索引和搜索机制date-2024-10-11-09-50-07tags" class="headerlink" title="title: 2构建底层索引和搜索机制description: 2构建底层索引和搜索机制date: 2024-10-11 09:50:07tags:"></a>title: 2构建底层索引和搜索机制<br>description: 2构建底层索引和搜索机制<br>date: 2024-10-11 09:50:07<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>理解搜索底层的执行过程和原理</li>
+<li>掌握lucene构建索引和执行搜索的实现方法</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>lucene构建索引</li>
+<li>lucene执行搜索</li>
+<li>lucene分析过程</li>
+</ul>
+<h1 id="lucene构建索引"><a href="#lucene构建索引" class="headerlink" title="lucene构建索引"></a>lucene构建索引</h1><p>lucene核心</p>
+<ol>
+<li>构建索引<ul>
+<li>文档分析</li>
+<li>索引构建</li>
+</ul>
+</li>
+<li>索引搜索<ul>
+<li>建立搜索（构建搜索条件[模式pattern：单词&#x2F;多次，结果评分规则]）</li>
+<li>执行搜索</li>
+</ul>
+</li>
+</ol>
+<h2 id="索引构建过程"><a href="#索引构建过程" class="headerlink" title="索引构建过程"></a>索引构建过程</h2><p>索引存放目录Directory<br>创建Document<br>初始化Field<br>初始化分析器 Analyzer<br>IndexWriter创建更新索引</p>
+<h3 id="segment"><a href="#segment" class="headerlink" title="segment"></a>segment</h3><p><strong>索引性能差如何优化？</strong><br>setMergeFactor<br>segment中的文档数达到一定数量时合并<br>批处理文档索引时（如新建索引）设置较大值索引较快<br>间歇性追加文档索引时设置较小值，每次合并占用内存少</p>
+<p>setMaxMergeDocs<br>segment最大合并文档(Document)数<br>值较小,建立索引的速度就较慢<br>值较大,建立索引的速度就较快,&gt;10适合批量建立索引</p>
+<h1 id="lucene执行搜索"><a href="#lucene执行搜索" class="headerlink" title="lucene执行搜索"></a>lucene执行搜索</h1><p>初始化分析器Analizer<br>确定要查询的域名fields_name<br>根据Analyzer fields_name 初始化QueryParser<br>QueryParser将搜索文本转换为Query对象<br>构建IndexSearcher（new IndexSearcher(DirectoryReader.open(FSDirectory))<br>IndexSearcher对象查询Query</p>
+<h1 id="lucene分析过程"><a href="#lucene分析过程" class="headerlink" title="lucene分析过程"></a>lucene分析过程</h1><p>创建索引、搜索索引时执行分析<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/2%E6%9E%84%E5%BB%BA%E5%BA%95%E5%B1%82%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%9C%BA%E5%88%B6/2-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%97%B6%E7%9A%84%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B.png"></p>
+<p>分析是将Field(域)文本转换为Term(项)的过程<br>分析生成的基本单元为Token。</p>
+<p>不同领域文本有不同特性，不同分析器分析不同领域的文本。</p>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p>分词信息<br>结构：文本值+元数据（各种偏移量）<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/2%E6%9E%84%E5%BB%BA%E5%BA%95%E5%B1%82%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%9C%BA%E5%88%B6/2-Token.png"></p>
+<p>TermAttribute 词汇单元对应的文本<br>PositionincrementAttribute 位置增量<br>OffsetAttribute 起始字符和终止字符的偏移量<br>TypeAttribute 词汇单元类型<br>FlagsAttribute 自定义标志位<br>PayloadAttribute 词汇单元的有效负载</p>
+<h3 id="内置分析器"><a href="#内置分析器" class="headerlink" title="内置分析器"></a>内置分析器</h3><p>WhitespaceAnalyzer通过空格分隔文本<br>SimpleAnalyzer非字母分隔文本<br>StopAnalyzer去掉常用单词<br>StandardAnalyzer最复杂的核心分析器</p>
+<p>“The quick brown fox jumped over the lazy dog”<br>WhitespaceAnalyzer:<br>[The][quick][brown][fox][jumped] [over][the][lazy][dog]<br>SimpleAnalyzer:<br>[the][quick][brown][fox][jumped][over][the] [lazy][dog]<br>StopAnalyzer:<br>[quick] [brown][fox][jumped][over] [lazy] [dog]<br>StandardAnalyzer:<br>[quick][brown][fox][jumped][over] [lazy][dog]</p>
+<p>“xY&amp;z Corporation <a href="mailto:&#x2d;&#120;&#x79;&#122;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x2d;&#120;&#x79;&#122;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a>‘<br>WhitespaceAnalyzer:<br>[xY&amp;z][Corporation][-][<a href="mailto:&#x78;&#x79;&#x7a;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;">&#x78;&#x79;&#x7a;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;</a>]<br>SimpleAnalyzer:<br>[xy][z][Corporation][xyz][example] [com]<br>StopAnalyzer:<br>[xy][z][corporation][xyz][example] [com]<br>StandardAnalyzer:<br>[xy&amp;z][Corporation][<a href="mailto:&#120;&#x79;&#122;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#120;&#x79;&#122;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a>]</p>
+<p>分析器的执行效果与词库相关</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>文本内容如何转换为索引？</p>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/","path":"JAVA/Java实战特训营/11微服务技术组件/1使用Nacos实现集中式配置管理/","title":"1使用Nacos实现集中式配置管理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>1使用Nacos实现集中式配置管理 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">配置中心模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E7%9A%84%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">Nacos作为配置中心的功能特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataId"><span class="nav-number">2.1.</span> <span class="nav-text">DataId</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E9%9A%94%E7%A6%BB"><span class="nav-number">2.2.</span> <span class="nav-text">配置信息隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-number">2.3.</span> <span class="nav-text">配置共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83"><span class="nav-number">2.4.</span> <span class="nav-text">配置灰度发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-number">2.5.</span> <span class="nav-text">配置热更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.5.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%95%BF%E8%BD%AE%E8%AE%AD%EF%BC%9F%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">什么是长轮训？实现机制？实现方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E5%85%B7%E4%BD%93%E5%9C%BA%E6%99%AF%EF%BC%8C%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8ENacos%E5%90%88%E7%90%86%E7%BB%84%E7%BB%87%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%9A%84%E7%BB%8F%E9%AA%8C%E5%92%8C%E6%95%99%E8%AE%AD%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="1使用Nacos实现集中式配置管理 | VvfzZ">
+      <meta itemprop="description" content="1使用Nacos实现集中式配置管理">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1使用Nacos实现集中式配置管理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-11-02 16:46:06 / Modified: 22:06:27" itemprop="dateCreated datePublished" datetime="2024-11-02T16:46:06+08:00">2024-11-02</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">1使用Nacos实现集中式配置管理</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>配置中心基本模型</li>
+<li>Nacos作为配置中心的功能特性</li>
+</ul>
+<h1 id="配置中心模型"><a href="#配置中心模型" class="headerlink" title="配置中心模型"></a>配置中心模型</h1><p><strong>配置中心基本概念</strong><br>应对多服务、多环境、集群化提供集中式管理<br>需考虑隔离性、一致性、安全性、易管理</p>
+<p><strong>配置中心组成结构</strong><br>客户端：嵌入微服务<br>配置服务器：与客户端配置交互<br>配置仓库：存放配置信息</p>
+<p><strong>相关工具</strong><br>Etcd<br>Consul<br>Nacos<br>Disconf<br>Apollo<br>Diamond<br>Spring Cloud config</p>
+<p><strong>配置中心关键技术</strong></p>
+<ul>
+<li>变更通知机制<br>长轮训<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/1-%E9%95%BF%E8%BD%AE%E8%AE%AD%E6%9C%BA%E5%88%B6.png"></li>
+</ul>
+<h1 id="Nacos作为配置中心的功能特性"><a href="#Nacos作为配置中心的功能特性" class="headerlink" title="Nacos作为配置中心的功能特性"></a>Nacos作为配置中心的功能特性</h1><h2 id="DataId"><a href="#DataId" class="headerlink" title="DataId"></a>DataId</h2><p>配置中心的Datald等同于注册中心的Service，所有关于注册中心的分级模型都适用于配置中心</p>
+<p>资源分级：Namespace -&gt; Group -&gt; Service&#x2F;DataId<br><strong>DataId命名规则</strong><br>可以采用自定义的命名规则推荐命名规则:<br><code>$&#123;prefix&#125;-$&#123;spring.profile.active&#125;.$&#123;file-extension&#125;</code></p>
+<ul>
+<li><p>prefix<br>默认为所属服务配置spring.application.name的值，也可以通过配置项spring.cloud.nacos.config.prefix进行设置</p>
+</li>
+<li><p>spring.profiles.active<br>为当前环境对应的Profile。注意:当 spring.profiles.active为空时，对应的连接符-也将不存在，Datald的拼接格式变成 ${prefix}.${file-extension}</p>
+</li>
+<li><p>file-exetension<br>为配置内容的数据格式，可以通过配置项spring.cloud.nacos.config.file-extension来配置，推荐使用yaml格式</p>
+</li>
+<li><p>配置文件格式<br>.yml+.properties </p>
+</li>
+<li><p>配置文件加载顺序<br>bootstrap.yml先加载，application.yml后加载</p>
+</li>
+<li><p>配置文件内容组织<br>bootstrap.yml:系统级别参数配置，一般不会变动<br>application.yml:用来定义应用级别的参数配置</p>
+</li>
+<li><p>配置文件格式一致性<br>配置文件的后缀必须与Datald的后缀保持一致，<br>如:本地使用.yml则Nacos中配置文件必须也应该是.yml</p>
+</li>
+</ul>
+<h2 id="配置信息隔离"><a href="#配置信息隔离" class="headerlink" title="配置信息隔离"></a>配置信息隔离</h2><p>非生产环境 Profile区分环境<br>生产环境 使用独立的Nacos</p>
+<h2 id="配置共享"><a href="#配置共享" class="headerlink" title="配置共享"></a>配置共享</h2><p>抽取共用配置单独进行维护,避免重复创建和管理<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/1-%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E7%A4%BA%E4%BE%8B.png"><br><strong>shared-configs</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> application:</span><br><span class="line">  name: demo-service</span><br><span class="line"> cloud:</span><br><span class="line">  nacos:</span><br><span class="line">   config:</span><br><span class="line">    server-addr: local:8848</span><br><span class="line">    namespace: dev</span><br><span class="line">    group: demo_group</span><br><span class="line">    ...</span><br><span class="line">    shared-configs[3]: #shared-configs数组 </span><br><span class="line">     #不能设置自定义的Group，只能为DEFAULT_GROUP</span><br><span class="line">     data-id: mysql.yaml </span><br><span class="line">     refresh: true  #默认true</span><br></pre></td></tr></table></figure>
+<p><strong>extension-configs</strong><br>覆盖共享配置项时可使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> application:</span><br><span class="line">name: demo-service</span><br><span class="line"> cloud:</span><br><span class="line">  nacos:</span><br><span class="line">   config:</span><br><span class="line">   server-addr: local:8848</span><br><span class="line">   namespace:dev</span><br><span class="line">   group:emo_group</span><br><span class="line">   ...</span><br><span class="line">   shared-configs[3]:</span><br><span class="line">    data-id: mysql.yaml</span><br><span class="line">    refresh: true</span><br><span class="line">   ...</span><br><span class="line">   extension-configs[3]: # 覆盖共享datald的属性可以使用</span><br><span class="line">    data-id: mysql.yaml</span><br><span class="line">    group: demo #必须指定Group</span><br><span class="line">    refresh: true</span><br></pre></td></tr></table></figure>
+<p><strong>优先级</strong></p>
+<ul>
+<li>不同种类配置优先级<br>主配置 &gt; 扩展配置(extension-configs) &gt; 共享配置(shared-configs)</li>
+<li>同种类配置优先级<br>数组元素对应的下标越大，优先级越高，如:extension-config[2] &gt; extension-configs[1]<blockquote>
+<p>extension-configs[0]</p>
+</blockquote>
+</li>
+<li>不同环境配置优先级<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/1-%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E4%BC%98%E5%85%88%E7%BA%A7.png"></li>
+</ul>
+<h2 id="配置灰度发布"><a href="#配置灰度发布" class="headerlink" title="配置灰度发布"></a>配置灰度发布</h2><p>让配置先在部分实例生效，如果效果理想全量发布到所有实例，如果效果不理想就可以放弃当前的发布内容。<br>如:<br>对于影响大的配置，可先在一个或者多个实例生效，观察一段时间没问题再全量发布;<br>对于一些需要调优的配置参数，可以通过灰度发布功能来实现A&#x2F;B测试。</p>
+<h2 id="配置热更新"><a href="#配置热更新" class="headerlink" title="配置热更新"></a>配置热更新</h2><ul>
+<li><p>无法热更新<br>影响应用运行状态的配置<br>例如:数据库连接配置<br>需要重新创建数据库连接<br>会影响Spring Bean的自动装载</p>
+</li>
+<li><p>可以热更新<br>业务运行所需的数据<br>例如:用户默认密码<br>直接修改配置数据<br>只修改配置数据本本身</p>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p><strong>@Value</strong><br>使用<code>@Refreshscope</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#自定义配置性cs.customer.point = 10</span><br><span class="line">@Component</span><br><span class="line">@Refreshscope</span><br><span class="line">public class Customconfig &#123;</span><br><span class="line">@Value(&quot;$&#123;cs.customer.point&#125;&quot;)</span><br><span class="line">    private int point;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>@ConfigurationProperties</strong><br>自动支持热更新，不需代码改造</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><ol>
+<li>新建<code>bootstrap.ymal</code><br>需引入依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-startebootstrap&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: customer-task</span><br><span class="line">  profiles:</span><br><span class="line">    active: @spring.profiles.active@</span><br><span class="line">  cloud:</span><br><span class="line">    nacos:</span><br><span class="line">      config:</span><br><span class="line">        server-addr: @spring.cloud.nacos.config.server-addr@</span><br><span class="line">        file-extension: yml</span><br><span class="line">        refresh-enabled: true</span><br><span class="line">      discovery:</span><br><span class="line">        server-addr: @spring.cloud.nacos.discovery.server-addr@</span><br><span class="line">  main:</span><br><span class="line">    allow-bean-definition-overriding: true</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在nacos创建配置文件<br>DataId规则：applicationName-profile.extension</li>
+</ol>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="什么是长轮训？实现机制？实现方式？"><a href="#什么是长轮训？实现机制？实现方式？" class="headerlink" title="什么是长轮训？实现机制？实现方式？"></a>什么是长轮训？实现机制？实现方式？</h2><h2 id="结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？"><a href="#结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？" class="headerlink" title="结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？"></a>结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/" rel="prev" title="5SpringCloudLoadBalancer负载均衡架构解析">
+                  <i class="fa fa-chevron-left"></i> 5SpringCloudLoadBalancer负载均衡架构解析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/" rel="next" title="2Nacos核心技术解析">
+                  2Nacos核心技术解析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

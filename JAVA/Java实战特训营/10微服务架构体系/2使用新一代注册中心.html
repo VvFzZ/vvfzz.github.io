@@ -1,0 +1,64 @@
+<hr>
+<h2 id="title-2使用新一代注册中心description-2使用新一代注册中心date-2024-10-30-14-48-49tags"><a href="#title-2使用新一代注册中心description-2使用新一代注册中心date-2024-10-30-14-48-49tags" class="headerlink" title="title: 2使用新一代注册中心description: 2使用新一代注册中心date: 2024-10-30 14:48:49tags:"></a>title: 2使用新一代注册中心<br>description: 2使用新一代注册中心<br>date: 2024-10-30 14:48:49<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>nacos的基本概念</li>
+<li>nacos的架构</li>
+<li>nacos注册中心的功能特性</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>nacos架构</li>
+<li>nacos注册中心功能特性</li>
+</ul>
+<h1 id="nacos架构"><a href="#nacos架构" class="headerlink" title="nacos架构"></a>nacos架构</h1><h2 id="注册中心回顾"><a href="#注册中心回顾" class="headerlink" title="注册中心回顾"></a>注册中心回顾</h2><p><strong>注册中心基本模型</strong><br>三大角色：服务提供者、服务消费者、注册中心<br>两大操作：注册、订阅<br>关键技术：（变更）通知<br><strong>变更通知机制</strong><br>服务轮训机制：定时器拉取<br>服务监听机制：被动监听（通过通知、回调实现信息更新）<br><strong>注册中心和服务路由</strong><br>客户端通过注册中心获取服务端实例，并基于负载均衡算法实现服务路由</p>
+<h2 id="nacos概述"><a href="#nacos概述" class="headerlink" title="nacos概述"></a>nacos概述</h2><p><strong>优点&#x2F;特性</strong><br>易用、稳定、实时（信息变更）、规模（大规模应用场景）<br>简单的数据模型和标准API<br>高可用99.9%</p>
+<p><strong>架构模型</strong><br>分层模型<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/2%E4%BD%BF%E7%94%A8%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/2-nacos%E6%9E%B6%E6%9E%84.png"><br><strong>部署和运行</strong></p>
+<ul>
+<li>单机部署</li>
+<li>集群部署</li>
+</ul>
+<ol>
+<li><p>下载部署包</p>
+</li>
+<li><p>集群配置<br>Cluster.conf</p>
+</li>
+</ol>
+<pre><code>127.0.0.1:8848
+127.0.0.1:8850
+127.0.0.1:8852
+</code></pre>
+<ol start="3">
+<li>实例端口配置<br>application.properties 配置端口  server.port&#x3D;</li>
+<li>nacos数据库<br>初始化nacos数据库（nacos-mysql.sql）</li>
+</ol>
+<p>application.properties配置mysql<br>5. 启动<br>启动 \bin\ 目录下启动： startup.cmd -m cluster(m：启动模式，默认集群)<br>6. 易错点</p>
+<ul>
+<li><p>Nacos 启动报错[db-load-error]load jdbc.properties error<br>原因application.properties中db.num&#x3D;1没有指定</p>
+</li>
+<li><p>Address already in use: bind<br>原因:因为Nacos 2.0以后需要使用多个端口,会占用两个连续端口:${server.port}和 ${server.port}+1，所以端口设置上不要使用连续端口</p>
+</li>
+<li><p>有代理模式(推荐方案)<br>server-addr:<a href="http://www.nacos-server.com/">www.nacos-server.com</a><br>无代理模式，修改ip端口需修改配置<br>server-addr:127.0.0.1:8848,127.0.0.1:8850,127.0.0.1:8852</p>
+</li>
+</ul>
+<h1 id="nacos注册中心功能特性"><a href="#nacos注册中心功能特性" class="headerlink" title="nacos注册中心功能特性"></a>nacos注册中心功能特性</h1><h2 id="分级模型"><a href="#分级模型" class="headerlink" title="分级模型"></a>分级模型</h2><p>三级模型<br>服务-&gt;集群-&gt;实例<br>集群中有多个实例<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/2%E4%BD%BF%E7%94%A8%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/2-ncaos%E5%88%86%E7%BA%A7%E6%A8%A1%E5%9E%8B-3.png"></p>
+<h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><p>默认集群 DEFAULT</p>
+<p>配置集群名称<br>cluster-name:hangzhou</p>
+<p>集群特性</p>
+<ul>
+<li>通过负载均衡算法实现同集群服务<br>优先调用，减少网络开销（集群内实例优先）</li>
+<li>通过元数据实现定制化控制<br>根据配置数据定制化处理</li>
+</ul>
+<h3 id="nacos资源隔离"><a href="#nacos资源隔离" class="headerlink" title="nacos资源隔离"></a>nacos资源隔离</h3><p>分级合理管理资源、不同namespace不可直接访问，不同group之间不可直接访问<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/2%E4%BD%BF%E7%94%A8%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/2-%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB.png"></p>
+<h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>默认为空<br>公共命名空间:public</p>
+<p><strong>隔离方案</strong></p>
+<ul>
+<li>逻辑隔离，命名空间机制</li>
+<li>物理隔离，不同的nacos环境地址</li>
+</ul>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>分组默认:DEFAULT GROUP<br>应用:同一个环境内，不同业务场景可以指定不同的分组<br>例如支付分组、物流分组<br>设置分组group:MY GROUP</p>
+<h2 id="完整分级模型"><a href="#完整分级模型" class="headerlink" title="完整分级模型"></a>完整分级模型</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/2%E4%BD%BF%E7%94%A8%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/2-ncaos%E5%88%86%E7%BA%A7%E6%A8%A1%E5%9E%8B-5.png"></p>
+<h2 id="服务路由"><a href="#服务路由" class="headerlink" title="服务路由"></a>服务路由</h2><h3 id="保护阈值"><a href="#保护阈值" class="headerlink" title="保护阈值"></a>保护阈值</h3><p>Nacos控制台可以设置实例的权重值，0~1之间，服务级别配置<br>比例值:当前服务健康实例数&#x2F;当前服务总实例数<br>作用:当比例值&lt;保护阈值时，Nacos会把该服务所有的实例信息(健康+不健康)全部提供给消费者，尽管会有失败响应，但能避免雪崩效应</p>
+<h3 id="权重"><a href="#权重" class="headerlink" title="权重"></a>权重</h3><p>Nacos控制台可以设置实例的权重值，0~1之间，实例级别配置<br>同集群内的多个实例，权重越高被访问的频率越高，权重设置为0则完全不会被访问<br>作用:确保性能好的机器承担更多的用户请求</p>
+<h3 id="就近访问"><a href="#就近访问" class="headerlink" title="就近访问"></a>就近访问</h3><p>优先选择同集群服务实例列表，本地集群找不到服务实例才会去其它集群寻找，并且会报警告<br>确定了可用实例列表后，再采用随机负载均衡挑选实例<br>使用NacosRule进行配置:com.alibaba.cloud.nacos.ribbon.NacosRule</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>配置</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>nacos整体架构可以分几个级别？为什么这样分级？</p>

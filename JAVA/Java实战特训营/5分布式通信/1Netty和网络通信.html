@@ -15,7 +15,7 @@
 <h2 id="netty逻辑架构"><a href="#netty逻辑架构" class="headerlink" title="netty逻辑架构"></a>netty逻辑架构</h2><ul>
 <li><p>服务编排层<br>负责组装各类服务，它是 Netty 的核心处理链，用以实现网络事件的动态编排和有序传播<br>ChannelPipeline<br>ChannelHandler<br>ChannelHandlerContext</p>
 </li>
-<li><p>事件调度层<br>通过 Reactor 模型对各类事件进行聚合处理，通过 Selector 主循环线程集成多种事件<br>EventLoopGroup<br>EventLoop</p>
+<li><p>事件调度层<br>通过 Reactor 模型对各类事件进行聚合处理，通过Selector 主循环线程集成多种事件<br>EventLoopGroup<br>EventLoop</p>
 </li>
 <li><p>网络通信层<br>执行网络I&#x2F;O操作，并触发各种网络事件，这些网络事件会分发给事件调度层进行处理<br>BootStrap<br>ServerBootStrap<br>Channel</p>
 </li>

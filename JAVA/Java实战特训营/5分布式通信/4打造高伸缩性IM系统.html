@@ -1,2 +1,28 @@
 <hr>
-<h2 id="title-4打造高伸缩性IM系统description-4打造高伸缩性IM系统date-2024-09-28-21-34-27tags"><a href="#title-4打造高伸缩性IM系统description-4打造高伸缩性IM系统date-2024-09-28-21-34-27tags" class="headerlink" title="title: 4打造高伸缩性IM系统description: 4打造高伸缩性IM系统date: 2024-09-28 21:34:27tags:"></a>title: 4打造高伸缩性IM系统<br>description: 4打造高伸缩性IM系统<br>date: 2024-09-28 21:34:27<br>tags:</h2>
+<h2 id="title-4打造高伸缩性IM系统description-4打造高伸缩性IM系统date-2024-09-28-21-34-27tags"><a href="#title-4打造高伸缩性IM系统description-4打造高伸缩性IM系统date-2024-09-28-21-34-27tags" class="headerlink" title="title: 4打造高伸缩性IM系统description: 4打造高伸缩性IM系统date: 2024-09-28 21:34:27tags:"></a>title: 4打造高伸缩性IM系统<br>description: 4打造高伸缩性IM系统<br>date: 2024-09-28 21:34:27<br>tags:</h2><ul>
+<li><p>IM系统伸缩性设计方案</p>
+</li>
+<li><p>IM系统伸缩性实现技术<br>技术选型（第三方框架分析）</p>
+</li>
+<li><p>教学目标<br>系统伸缩性的设计方法<br>分布式IM系统的常见实现方案</p>
+</li>
+</ul>
+<h1 id="IM系统伸缩性设计方案"><a href="#IM系统伸缩性设计方案" class="headerlink" title="IM系统伸缩性设计方案"></a>IM系统伸缩性设计方案</h1><ul>
+<li>IM服务器集群：动态伸缩<ul>
+<li>服务端<ul>
+<li>自动剔除服务器</li>
+<li>动态新增服务器</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>获取某台服务器、建立长连接</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="扩展方案-路由层"><a href="#扩展方案-路由层" class="headerlink" title="扩展方案-路由层"></a>扩展方案-路由层</h2><p>路由层：维护客户端登录状态、请求转发<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/4%E6%89%93%E9%80%A0%E9%AB%98%E4%BC%B8%E7%BC%A9%E6%80%A7IM%E7%B3%BB%E7%BB%9F/4-%E9%AB%98%E6%80%A7%E8%83%BDIM%E7%B3%BB%E7%BB%9F-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"></p>
+<h1 id="IM系统伸缩性实现技术"><a href="#IM系统伸缩性实现技术" class="headerlink" title="IM系统伸缩性实现技术"></a>IM系统伸缩性实现技术</h1><ul>
+<li>服务端使用注册中心</li>
+<li>路由层（HTTP无状态服务）<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/4%E6%89%93%E9%80%A0%E9%AB%98%E4%BC%B8%E7%BC%A9%E6%80%A7IM%E7%B3%BB%E7%BB%9F/4-%E9%AB%98%E6%80%A7%E8%83%BDIM%E7%B3%BB%E7%BB%9F-%E6%89%A9%E5%B1%95%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/5%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1/4%E6%89%93%E9%80%A0%E9%AB%98%E4%BC%B8%E7%BC%A9%E6%80%A7IM%E7%B3%BB%E7%BB%9F/4-%E9%AB%98%E6%80%A7%E8%83%BDIM%E7%B3%BB%E7%BB%9F-%E6%89%A9%E5%B1%95%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88-%E4%BA%A4%E4%BA%92%E6%B5%81%E7%A8%8B.png"></li>
+</ul>

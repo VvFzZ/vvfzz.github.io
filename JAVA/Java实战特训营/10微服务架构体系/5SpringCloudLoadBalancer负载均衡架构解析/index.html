@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/","path":"JAVA/Java实战特训营/10微服务架构体系/5SpringCloudLoadBalancer负载均衡架构解析/","title":"5SpringCloudLoadBalancer负载均衡架构解析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>5SpringCloudLoadBalancer负载均衡架构解析 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LoadBalancerClient"><span class="nav-number">1.</span> <span class="nav-text">LoadBalancerClient</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoadBalancerClient-1"><span class="nav-number">1.1.</span> <span class="nav-text">LoadBalancerClient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactiveLoadBalancer"><span class="nav-number">1.2.</span> <span class="nav-text">ReactiveLoadBalancer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RestTemplate%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.</span> <span class="nav-text">RestTemplate与负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoadBalanced%E6%A0%B8%E5%BF%83%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">@LoadBalanced核心类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LoadBalanced%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.1.1.</span> <span class="nav-text">LoadBalanced注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LoadBalancerAutoConfiguration"><span class="nav-number">2.1.2.</span> <span class="nav-text">LoadBalancerAutoConfiguration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LoadBalancerInterceptorConfig"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">LoadBalancerInterceptorConfig</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#loadBalancerInterceptor"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">loadBalancerInterceptor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%BA%E5%88%B6"><span class="nav-number">2.2.</span> <span class="nav-text">自定义负载均衡机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">3.</span> <span class="nav-text">Feign与负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultFeignLoadBalancerConfiguration"><span class="nav-number">3.1.</span> <span class="nav-text">DefaultFeignLoadBalancerConfiguration</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="5SpringCloudLoadBalancer负载均衡架构解析 | VvfzZ">
+      <meta itemprop="description" content="5SpringCloudLoadBalancer负载均衡架构解析">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          5SpringCloudLoadBalancer负载均衡架构解析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-10-30 14:49:11" itemprop="dateCreated datePublished" datetime="2024-10-30T14:49:11+08:00">2024-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-02 22:10:08" itemprop="dateModified" datetime="2024-11-02T22:10:08+08:00">2024-11-02</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">5SpringCloudLoadBalancer负载均衡架构解析</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>客户端负载均衡的设计方法和策略</li>
+<li>Spring Cloud LoadBalancer的抽象和实现原理</li>
+</ul>
+<p>负载均衡是一种基础设施类技术组件，往往和服务发现机制结合使用</p>
+<p>目录</p>
+<ul>
+<li>LoadBalancerClient</li>
+<li>RestTemplate与负载均衡</li>
+<li>Feign与负载均衡</li>
+</ul>
+<h1 id="LoadBalancerClient"><a href="#LoadBalancerClient" class="headerlink" title="LoadBalancerClient"></a>LoadBalancerClient</h1><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/5-SpringCloudLoadBalancer%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.png"></p>
+<h2 id="LoadBalancerClient-1"><a href="#LoadBalancerClient-1" class="headerlink" title="LoadBalancerClient"></a>LoadBalancerClient</h2><p><code>LoadBalancerClient</code>接口<br><code>BlockingLoadBalancerClient</code>类的<br>choose获取负载均衡器实例，获取服务实例<br>execute执行请求</p>
+<h2 id="ReactiveLoadBalancer"><a href="#ReactiveLoadBalancer" class="headerlink" title="ReactiveLoadBalancer"></a>ReactiveLoadBalancer</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/5-ReactiveLoadBalancer.png"><br><code>RandomLoadBalancer</code> 框架实现的随机负载均衡器<br><code>LoadBalancerClientFactory</code> 获取负载均衡器LoadBalancerClient<br><code>LoadBalancerRequestFactory</code> 封装并发起请求</p>
+<h1 id="RestTemplate与负载均衡"><a href="#RestTemplate与负载均衡" class="headerlink" title="RestTemplate与负载均衡"></a>RestTemplate与负载均衡</h1><h2 id="LoadBalanced核心类"><a href="#LoadBalanced核心类" class="headerlink" title="@LoadBalanced核心类"></a>@LoadBalanced核心类</h2><p><img src="/5-@LoadBalanced%E6%A0%B8%E5%BF%83%E7%B1%BB.png"></p>
+<h3 id="LoadBalanced注解"><a href="#LoadBalanced注解" class="headerlink" title="LoadBalanced注解"></a><code>LoadBalanced</code>注解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//自动具备负载均衡机制</span><br><span class="line">@LoadBalancedaBean</span><br><span class="line">public RestTemplate getRestTemplate()&#123;</span><br><span class="line">    return new RestTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123; ElementType,FIELD, ElementType,PARAMETER, ElementType.METHOD &#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">@Qualifier</span><br><span class="line">public @interface LoadBalanced &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="LoadBalancerAutoConfiguration"><a href="#LoadBalancerAutoConfiguration" class="headerlink" title="LoadBalancerAutoConfiguration"></a><code>LoadBalancerAutoConfiguration</code></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@confiquration(proxvBeanMethods = false)</span><br><span class="line">@Conditional0nClass(RestTemplate.class)</span><br><span class="line">@Conditional0nBean(LoadBalancerClient.class)@EnableConfigurationProperties(LoadBalancerClientsProperties.class)public class LoadBalancerAutoConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    @LoadBalanced</span><br><span class="line">    @Autowired(required = false)</span><br><span class="line">    private List&lt;RestTemplate&gt; restTemplates = Collections.emptyList();</span><br><span class="line">    @Autowired(required = false)</span><br><span class="line">    private List&lt;LoadBalancerRequestTransformer&gt; transformers = Collections.emptyList()；</span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public LoadBalancerRequestfactory loadBalancerRequestfactory(LoadBalancerClient loadBalancerClient) &#123;</span><br><span class="line">        return new LoadBalancerRequestFactory(loadBalancerClient, this.transformers);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="LoadBalancerInterceptorConfig"><a href="#LoadBalancerInterceptorConfig" class="headerlink" title="LoadBalancerInterceptorConfig"></a><code>LoadBalancerInterceptorConfig</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Configuration(</span><br><span class="line">        proxyBeanMethods = false</span><br><span class="line">    )</span><br><span class="line">    @Conditional(&#123;RetryMissingOrDisabledCondition.class&#125;)</span><br><span class="line">    static class LoadBalancerInterceptorConfig &#123;</span><br><span class="line">        LoadBalancerInterceptorConfig() &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Bean</span><br><span class="line">        public LoadBalancerInterceptor loadBalancerInterceptor(LoadBalancerClient loadBalancerClient, LoadBalancerRequestFactory requestFactory) &#123;</span><br><span class="line">            return new LoadBalancerInterceptor(loadBalancerClient, requestFactory);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Bean</span><br><span class="line">        @ConditionalOnMissingBean</span><br><span class="line">        public RestTemplateCustomizer restTemplateCustomizer(final LoadBalancerInterceptor loadBalancerInterceptor) &#123;</span><br><span class="line">            return (restTemplate) -&gt; &#123;</span><br><span class="line">                List&lt;ClientHttpRequestInterceptor&gt; list = new ArrayList(restTemplate.getInterceptors());</span><br><span class="line">                list.add(loadBalancerInterceptor);</span><br><span class="line">                restTemplate.setInterceptors(list);//添加拦截</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="loadBalancerInterceptor"><a href="#loadBalancerInterceptor" class="headerlink" title="loadBalancerInterceptor"></a><code>loadBalancerInterceptor</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class LoadBalancerInterceptor implements ClientHttpRequestInterceptor &#123;</span><br><span class="line">    private LoadBalancerClient loadBalancer;</span><br><span class="line">    private LoadBalancerRequestFactory requestFactory;</span><br><span class="line"></span><br><span class="line">    public LoadBalancerInterceptor(LoadBalancerClient loadBalancer, LoadBalancerRequestFactory requestFactory) &#123;</span><br><span class="line">        this.loadBalancer = loadBalancer;</span><br><span class="line">        this.requestFactory = requestFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public LoadBalancerInterceptor(LoadBalancerClient loadBalancer) &#123;</span><br><span class="line">        this(loadBalancer, new LoadBalancerRequestFactory(loadBalancer));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, final ClientHttpRequestExecution execution) throws IOException &#123;</span><br><span class="line">        URI originalUri = request.getURI();</span><br><span class="line">        String serviceName = originalUri.getHost();</span><br><span class="line">        Assert.state(serviceName != null, &quot;Request URI does not contain a valid hostname: &quot; + originalUri);</span><br><span class="line">        return (ClientHttpResponse)this.loadBalancer.execute(serviceName, this.requestFactory.createRequest(request, body, execution));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>BlockingLoadBalancerClientAutoconfiguration</code>中注入<code>loadBalancer</code></p>
+<h2 id="自定义负载均衡机制"><a href="#自定义负载均衡机制" class="headerlink" title="自定义负载均衡机制"></a>自定义负载均衡机制</h2><ul>
+<li>定义@MyLoadBalanced注解</li>
+<li>实现MyLoadBalancerAutoConfiguration配置类</li>
+<li>实现MyLoadBalancerInterceptor</li>
+<li>在RestTemplate上使用@MyLoadBalanced注解</li>
+</ul>
+<p><strong>为什么在RestTemplate添加@Loadbalanced注解就能实现负载均衡?</strong><br>添加RestTemplate的拦截器，拦截器使用LoadBalancerClient实现负载均衡</p>
+<h1 id="Feign与负载均衡"><a href="#Feign与负载均衡" class="headerlink" title="Feign与负载均衡"></a>Feign与负载均衡</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@ConditionalOnClass(Feign.class)</span><br><span class="line">@ConditionalOnBean(&#123; LoadBalancerctient,class, LoadBalancerclientFactory.class &#125;)</span><br><span class="line">@AutoConfigureBefore(FeignAutoConfiguration.class)@AutoConfigureAfter(&#123;BlockingLoadBalancerclientAutoConfiguration.class,LoadBalancerAutoconfiquration.class&#125;)@EnableConfigurationProperties(FeignHttpclientProperties.class)</span><br><span class="line">@Configuration(proxyBeanMethods =false)</span><br><span class="line">@Import(&#123; HttpClientFeignLoadBalancerConfiguration.class,OkHttpFeignLoadBalancerConfiguration.class，HttpClient5FeignLoadBalancerConfiguration.class,DefaultFeignLoadBalancerConfiguration.class&#125;)</span><br><span class="line">public class FeignLoadBalancerAutoConfiguration&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="DefaultFeignLoadBalancerConfiguration"><a href="#DefaultFeignLoadBalancerConfiguration" class="headerlink" title="DefaultFeignLoadBalancerConfiguration"></a>DefaultFeignLoadBalancerConfiguration</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Configuration(proxyBeanMethods =false)@EnableConfigurationProperties(LoadBalancerclientsProperties.class)class DefaultFeignLoadBalancerConfigurationf</span><br><span class="line">aBeanaConditionalOnMissingBean@Conditional(0nRetryNotEnabledcondition.class)public client feignclient(LoadBalancerclient loadBalancerclientLoadBalancerClientFactory loadBalancerclientFactory)&#123;return new FeignBlockingLoadBalancerclient(new client,Default(null, null), loadBalancerclient,</span><br><span class="line">loadBalancerClientFactory);</span><br></pre></td></tr></table></figure>
+
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p><strong>这几个注解的用法</strong>？<br>@ConditionOnClass(RestTemplate.class)<br>@ConditionOnBean(LoadBalancerClient.class)<br>@EnableConfigurationProperties(LoadBalancerClientsProperties.class)</p>
+<p>@AutoConfiqureAfter(LoadBalancerAutoConfiquration.class)<br>BlockingLoadBalancerClientAutoconfiguration</p>
+<p><strong>ClientHttpRequestInterceptor</strong><br><strong>Hint机制</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/4%E4%BD%BF%E7%94%A8SpringCloudLoadBalancer%E9%87%8D%E6%9E%84%E6%9C%8D%E5%8A%A1%E5%9C%A8%E5%9D%87%E8%A1%A1/" rel="prev" title="4使用SpringCloudLoadBalancer重构服务在均衡">
+                  <i class="fa fa-chevron-left"></i> 4使用SpringCloudLoadBalancer重构服务在均衡
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/" rel="next" title="1使用Nacos实现集中式配置管理">
+                  1使用Nacos实现集中式配置管理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

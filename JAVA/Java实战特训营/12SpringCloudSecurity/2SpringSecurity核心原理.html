@@ -1,0 +1,102 @@
+<hr>
+<h2 id="title-2SpringSecurity核心原理description-2SpringSecurity核心原理date-2024-11-07-21-23-46tags"><a href="#title-2SpringSecurity核心原理description-2SpringSecurity核心原理date-2024-11-07-21-23-46tags" class="headerlink" title="title: 2SpringSecurity核心原理description: 2SpringSecurity核心原理date: 2024-11-07 21:23:46tags:"></a>title: 2SpringSecurity核心原理<br>description: 2SpringSecurity核心原理<br>date: 2024-11-07 21:23:46<br>tags:</h2><p>引入pom文件，做基本配置就能做到认证授权的原理</p>
+<p>学习目标</p>
+<ul>
+<li>pring security用户认证的抽象过程和实现方法</li>
+<li>pring security授权的设计思想和实现原理</li>
+<li>pring security过滤器的运行机制</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>用户和认证</li>
+<li>过滤器机制</li>
+<li>授权流程</li>
+</ul>
+<h1 id="用户和认证"><a href="#用户和认证" class="headerlink" title="用户和认证"></a>用户和认证</h1><h2 id="Spring-Security中的用户对象"><a href="#Spring-Security中的用户对象" class="headerlink" title="Spring Security中的用户对象"></a>Spring Security中的用户对象</h2><ul>
+<li>UserDetails 描述Spring Security中的用户</li>
+<li>GrantedAuthority 定义用户所能执行的操作权限</li>
+<li>UserDetailsService 定义对UserDetails的查询操作</li>
+<li>UserDetailsManager 扩展UserDetailsService，添加新增和修改用户功能</li>
+</ul>
+<p>UserDetailsService、UserDetailsManager接口读写分离设计，<em>读写分离设计有什么意义呢？</em></p>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/12SpringCloudSecurity/2SpringSecurity%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/2-SpringSecurity%E4%B8%AD%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png"></p>
+<h2 id="Spring-Security中的认证对象"><a href="#Spring-Security中的认证对象" class="headerlink" title="Spring Security中的认证对象"></a>Spring Security中的认证对象</h2><p><code>Authentication</code><br><code>AuthenticationProvider</code><br><code>AuthenticationManager</code></p>
+<pre><code>public interface Authentication extends Principal, Serializable { 
+    
+}
+</code></pre>
+<p><strong>AuthenticationManager应用示例</strong></p>
+<pre><code>public class UsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+throws AuthenticationException {
+…
+String username = obtainUsername(request);
+String password = obtainPassword(request);
+…
+UsernamePasswordAuthenticationToken authRequest = new
+UsernamePasswordAuthenticationToken(username, password);
+setDetails(request, authRequest);
+return this.getAuthenticationManager().authenticate(authRequest);
+}
+…
+}
+</code></pre>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/12SpringCloudSecurity/2SpringSecurity%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/2-SpringSecurity%E4%B8%AD%E8%AE%A4%E8%AF%81%E7%9B%B8%E5%85%B3%E7%B1%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png"></p>
+<h1 id="Spring-Security过滤器机制"><a href="#Spring-Security过滤器机制" class="headerlink" title="Spring Security过滤器机制"></a>Spring Security过滤器机制</h1><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/12SpringCloudSecurity/2SpringSecurity%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/%E9%9B%86%E6%88%90Filter%E7%9A%84%E8%AE%A4%E8%AF%81%E7%9B%B8%E5%85%B3%E7%B1%BB%E7%BB%93%E6%9E%84.png"></p>
+<h2 id="自定义过滤器"><a href="#自定义过滤器" class="headerlink" title="自定义过滤器"></a>自定义过滤器</h2><pre><code>public class LoggingFilter implements Filter {
+    private final Logger logger = Logger.getLogger
+    (AuthenticationLoggingFilter.class.getName());
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String uniqueRequestId = httpRequest.getHeader(&quot;UniqueRequestId&quot;);
+        logger.info(&quot;成功对请求进行了认证：&quot; + uniqueRequestId);
+        filterChain.doFilter(request, response);
+    }
+}
+</code></pre>
+<pre><code>public class RequestValidationFilter implements Filter {
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        String requestId = httpRequest.getHeader(&quot;SecurityFlag&quot;);
+        if (requestId == null || requestId.isBlank()) {
+            httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        filterChain.doFilter(request, response);
+    }
+}
+</code></pre>
+<h2 id="过滤器的顺序"><a href="#过滤器的顺序" class="headerlink" title="过滤器的顺序"></a>过滤器的顺序</h2><pre><code>@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http.addFilterBefore( new RequestValidationFilter(),BasicAuthenticationFilter.class)
+    .addFilterAfter(new LoggingFilter(),BasicAuthenticationFilter.class)
+    .authorizeRequests()
+    .anyRequest()
+    .permitAll();
+}
+</code></pre>
+<h2 id="Spring-Security授权流程"><a href="#Spring-Security授权流程" class="headerlink" title="Spring Security授权流程"></a>Spring Security授权流程</h2><p><strong>拦截请求</strong></p>
+<pre><code>public abstract class AbstractSecurityInterceptor {
+protected InterceptorStatusToken beforeInvocation(Object object) {
+…
+//获取代表权限的ConfigAttribute对象，配置的权限信息 
+Collection&lt;ConfigAttribute&gt; attributes = this.obtainSecurityMetadataSource()
+.getAttributes(object);
+…
+//获取认证信息
+Authentication authenticated = authenticateIfRequired();
+try {
+    //执行授权
+this.accessDecisionManager.decide(authenticated, object, attributes);
+}
+catch (AccessDeniedException accessDeniedException) {
+…
+}
+…
+}
+}
+</code></pre>

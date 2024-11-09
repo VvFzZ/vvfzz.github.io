@@ -1,0 +1,114 @@
+<hr>
+<h2 id="title-5SpringCloudLoadBalancer负载均衡架构解析description-5SpringCloudLoadBalancer负载均衡架构解析date-2024-10-30-14-49-11tags"><a href="#title-5SpringCloudLoadBalancer负载均衡架构解析description-5SpringCloudLoadBalancer负载均衡架构解析date-2024-10-30-14-49-11tags" class="headerlink" title="title: 5SpringCloudLoadBalancer负载均衡架构解析description: 5SpringCloudLoadBalancer负载均衡架构解析date: 2024-10-30 14:49:11tags:"></a>title: 5SpringCloudLoadBalancer负载均衡架构解析<br>description: 5SpringCloudLoadBalancer负载均衡架构解析<br>date: 2024-10-30 14:49:11<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>客户端负载均衡的设计方法和策略</li>
+<li>Spring Cloud LoadBalancer的抽象和实现原理</li>
+</ul>
+<p>负载均衡是一种基础设施类技术组件，往往和服务发现机制结合使用</p>
+<p>目录</p>
+<ul>
+<li>LoadBalancerClient</li>
+<li>RestTemplate与负载均衡</li>
+<li>Feign与负载均衡</li>
+</ul>
+<h1 id="LoadBalancerClient"><a href="#LoadBalancerClient" class="headerlink" title="LoadBalancerClient"></a>LoadBalancerClient</h1><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/5-SpringCloudLoadBalancer%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.png"></p>
+<h2 id="LoadBalancerClient-1"><a href="#LoadBalancerClient-1" class="headerlink" title="LoadBalancerClient"></a>LoadBalancerClient</h2><p><code>LoadBalancerClient</code>接口<br><code>BlockingLoadBalancerClient</code>类的<br>choose获取负载均衡器实例，获取服务实例<br>execute执行请求</p>
+<h2 id="ReactiveLoadBalancer"><a href="#ReactiveLoadBalancer" class="headerlink" title="ReactiveLoadBalancer"></a>ReactiveLoadBalancer</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/5SpringCloudLoadBalancer%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/5-ReactiveLoadBalancer.png"><br><code>RandomLoadBalancer</code> 框架实现的随机负载均衡器<br><code>LoadBalancerClientFactory</code> 获取负载均衡器LoadBalancerClient<br><code>LoadBalancerRequestFactory</code> 封装并发起请求</p>
+<h1 id="RestTemplate与负载均衡"><a href="#RestTemplate与负载均衡" class="headerlink" title="RestTemplate与负载均衡"></a>RestTemplate与负载均衡</h1><h2 id="LoadBalanced核心类"><a href="#LoadBalanced核心类" class="headerlink" title="@LoadBalanced核心类"></a>@LoadBalanced核心类</h2><p><img src="/5-@LoadBalanced%E6%A0%B8%E5%BF%83%E7%B1%BB.png"></p>
+<h3 id="LoadBalanced注解"><a href="#LoadBalanced注解" class="headerlink" title="LoadBalanced注解"></a><code>LoadBalanced</code>注解</h3><pre><code>//自动具备负载均衡机制
+@LoadBalancedaBean
+public RestTemplate getRestTemplate(){
+    return new RestTemplate();
+}
+</code></pre>
+<pre><code>@Target({ ElementType,FIELD, ElementType,PARAMETER, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Qualifier
+public @interface LoadBalanced {}
+</code></pre>
+<h3 id="LoadBalancerAutoConfiguration"><a href="#LoadBalancerAutoConfiguration" class="headerlink" title="LoadBalancerAutoConfiguration"></a><code>LoadBalancerAutoConfiguration</code></h3><pre><code>@confiquration(proxvBeanMethods = false)
+@Conditional0nClass(RestTemplate.class)
+@Conditional0nBean(LoadBalancerClient.class)@EnableConfigurationProperties(LoadBalancerClientsProperties.class)public class LoadBalancerAutoConfiguration {
+
+    @LoadBalanced
+    @Autowired(required = false)
+    private List&lt;RestTemplate&gt; restTemplates = Collections.emptyList();
+    @Autowired(required = false)
+    private List&lt;LoadBalancerRequestTransformer&gt; transformers = Collections.emptyList()；
+    @Bean
+    @ConditionalOnMissingBean
+    public LoadBalancerRequestfactory loadBalancerRequestfactory(LoadBalancerClient loadBalancerClient) {
+        return new LoadBalancerRequestFactory(loadBalancerClient, this.transformers);
+    }
+}
+</code></pre>
+<h4 id="LoadBalancerInterceptorConfig"><a href="#LoadBalancerInterceptorConfig" class="headerlink" title="LoadBalancerInterceptorConfig"></a><code>LoadBalancerInterceptorConfig</code></h4><pre><code>@Configuration(
+        proxyBeanMethods = false
+    )
+    @Conditional({RetryMissingOrDisabledCondition.class})
+    static class LoadBalancerInterceptorConfig {
+        LoadBalancerInterceptorConfig() {
+        }
+
+        @Bean
+        public LoadBalancerInterceptor loadBalancerInterceptor(LoadBalancerClient loadBalancerClient, LoadBalancerRequestFactory requestFactory) {
+            return new LoadBalancerInterceptor(loadBalancerClient, requestFactory);
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public RestTemplateCustomizer restTemplateCustomizer(final LoadBalancerInterceptor loadBalancerInterceptor) {
+            return (restTemplate) -&gt; {
+                List&lt;ClientHttpRequestInterceptor&gt; list = new ArrayList(restTemplate.getInterceptors());
+                list.add(loadBalancerInterceptor);
+                restTemplate.setInterceptors(list);//添加拦截
+            };
+        }
+    }
+</code></pre>
+<h4 id="loadBalancerInterceptor"><a href="#loadBalancerInterceptor" class="headerlink" title="loadBalancerInterceptor"></a><code>loadBalancerInterceptor</code></h4><pre><code>public class LoadBalancerInterceptor implements ClientHttpRequestInterceptor {
+    private LoadBalancerClient loadBalancer;
+    private LoadBalancerRequestFactory requestFactory;
+
+    public LoadBalancerInterceptor(LoadBalancerClient loadBalancer, LoadBalancerRequestFactory requestFactory) {
+        this.loadBalancer = loadBalancer;
+        this.requestFactory = requestFactory;
+    }
+
+    public LoadBalancerInterceptor(LoadBalancerClient loadBalancer) {
+        this(loadBalancer, new LoadBalancerRequestFactory(loadBalancer));
+    }
+
+    public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, final ClientHttpRequestExecution execution) throws IOException {
+        URI originalUri = request.getURI();
+        String serviceName = originalUri.getHost();
+        Assert.state(serviceName != null, &quot;Request URI does not contain a valid hostname: &quot; + originalUri);
+        return (ClientHttpResponse)this.loadBalancer.execute(serviceName, this.requestFactory.createRequest(request, body, execution));
+    }
+}
+</code></pre>
+<p><code>BlockingLoadBalancerClientAutoconfiguration</code>中注入<code>loadBalancer</code></p>
+<h2 id="自定义负载均衡机制"><a href="#自定义负载均衡机制" class="headerlink" title="自定义负载均衡机制"></a>自定义负载均衡机制</h2><ul>
+<li>定义@MyLoadBalanced注解</li>
+<li>实现MyLoadBalancerAutoConfiguration配置类</li>
+<li>实现MyLoadBalancerInterceptor</li>
+<li>在RestTemplate上使用@MyLoadBalanced注解</li>
+</ul>
+<p><strong>为什么在RestTemplate添加@Loadbalanced注解就能实现负载均衡?</strong><br>添加RestTemplate的拦截器，拦截器使用LoadBalancerClient实现负载均衡</p>
+<h1 id="Feign与负载均衡"><a href="#Feign与负载均衡" class="headerlink" title="Feign与负载均衡"></a>Feign与负载均衡</h1><pre><code>@ConditionalOnClass(Feign.class)
+@ConditionalOnBean({ LoadBalancerctient,class, LoadBalancerclientFactory.class })
+@AutoConfigureBefore(FeignAutoConfiguration.class)@AutoConfigureAfter({BlockingLoadBalancerclientAutoConfiguration.class,LoadBalancerAutoconfiquration.class})@EnableConfigurationProperties(FeignHttpclientProperties.class)
+@Configuration(proxyBeanMethods =false)
+@Import({ HttpClientFeignLoadBalancerConfiguration.class,OkHttpFeignLoadBalancerConfiguration.class，HttpClient5FeignLoadBalancerConfiguration.class,DefaultFeignLoadBalancerConfiguration.class})
+public class FeignLoadBalancerAutoConfiguration{
+}
+</code></pre>
+<h2 id="DefaultFeignLoadBalancerConfiguration"><a href="#DefaultFeignLoadBalancerConfiguration" class="headerlink" title="DefaultFeignLoadBalancerConfiguration"></a>DefaultFeignLoadBalancerConfiguration</h2><pre><code>@Configuration(proxyBeanMethods =false)@EnableConfigurationProperties(LoadBalancerclientsProperties.class)class DefaultFeignLoadBalancerConfigurationf
+aBeanaConditionalOnMissingBean@Conditional(0nRetryNotEnabledcondition.class)public client feignclient(LoadBalancerclient loadBalancerclientLoadBalancerClientFactory loadBalancerclientFactory){return new FeignBlockingLoadBalancerclient(new client,Default(null, null), loadBalancerclient,
+loadBalancerClientFactory);
+</code></pre>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p><strong>这几个注解的用法</strong>？<br>@ConditionOnClass(RestTemplate.class)<br>@ConditionOnBean(LoadBalancerClient.class)<br>@EnableConfigurationProperties(LoadBalancerClientsProperties.class)</p>
+<p>@AutoConfiqureAfter(LoadBalancerAutoConfiquration.class)<br>BlockingLoadBalancerClientAutoconfiguration</p>
+<p><strong>ClientHttpRequestInterceptor</strong><br><strong>Hint机制</strong></p>

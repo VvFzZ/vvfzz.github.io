@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/","path":"JAVA/Java实战特训营/7分布式搜索/3打造企业级搜索词库管理体系/","title":"3打造企业级搜索词库管理体系"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>3打造企业级搜索词库管理体系 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%8D%E5%BA%93%E6%9E%84%E5%BB%BA%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">词库构建策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IK-Analyzer"><span class="nav-number">1.1.</span> <span class="nav-text">IK Analyzer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96IK"><span class="nav-number">1.1.1.</span> <span class="nav-text">初始化IK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%BA%93"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">自定义词库</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%8D%E5%BA%93%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">词库热更新机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E6%96%B0%E5%A2%9E"><span class="nav-number">2.1.</span> <span class="nav-text">只新增</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%89%A9%E5%B1%95%E8%AF%8D%E5%BA%93%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.1.</span> <span class="nav-text">远程扩展词库接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8C%E6%AD%A5"><span class="nav-number">2.1.2.</span> <span class="nav-text">数据库同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9"><span class="nav-number">2.2.</span> <span class="nav-text">增删改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="3打造企业级搜索词库管理体系 | VvfzZ">
+      <meta itemprop="description" content="3打造企业级搜索词库管理体系">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3打造企业级搜索词库管理体系
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-10-11 09:50:26" itemprop="dateCreated datePublished" datetime="2024-10-11T09:50:26+08:00">2024-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-10-13 18:11:10" itemprop="dateModified" datetime="2024-10-13T18:11:10+08:00">2024-10-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">3打造企业级搜索词库管理体系</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>构建词库的方法</li>
+<li>掌握Elastic Stack的词库集成机制和功能</li>
+</ul>
+<p>词库的完备性影响搜索结果，影响用户体验</p>
+<p>目录</p>
+<ul>
+<li>词库构建策略</li>
+<li>词库热更新机制</li>
+</ul>
+<p> 如何评估构建的搜索系统的能力？</p>
+<h1 id="词库构建策略"><a href="#词库构建策略" class="headerlink" title="词库构建策略"></a>词库构建策略</h1><ul>
+<li>IK Analyzer<br>提供ik_max_word和ik smart两种分词策略</li>
+<li>HanLP Analyzer<br>属于HanLP工具包，支持多种分词算法</li>
+</ul>
+<h2 id="IK-Analyzer"><a href="#IK-Analyzer" class="headerlink" title="IK Analyzer"></a>IK Analyzer</h2><p>ik_max_word：切分粒度细<br>ik smart：切分粒度粗</p>
+<p>elastic search版本与analysis-ik版本需一致</p>
+<h3 id="初始化IK"><a href="#初始化IK" class="headerlink" title="初始化IK"></a>初始化IK</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/infinilabs/analysis-ik/releases/tag/v7.9.3">https://github.com/infinilabs/analysis-ik/releases/tag/v7.9.3</a><br>把IK Analyzer文件拷贝到elastic search&#x2F;plugins&#x2F;ik文件夹</p>
+</blockquote>
+<p>config文件夹：词库，IKAnalyzer.cfg配置词库<br>elasticsearch head ,es服务器管理可视化工具<br>kibana Kibana 可视化工具 可搜索和查看存储在 Elasticsearch索引中的数据并与之交互<br>开发过程中验证分词效果</p>
+<h4 id="自定义词库"><a href="#自定义词库" class="headerlink" title="自定义词库"></a>自定义词库</h4><ol>
+<li>config文件夹新建词库文件 *.dic，写入关键词</li>
+<li>添加配置<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/3-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%BA%93%E9%85%8D%E7%BD%AE.png"></li>
+<li>重启服务</li>
+</ol>
+<h1 id="词库热更新机制"><a href="#词库热更新机制" class="headerlink" title="词库热更新机制"></a>词库热更新机制</h1><p>动态数据变更场景都需要考虑热更新能力<br>实时更新分析器和索引</p>
+<ul>
+<li>只新增<br>如敏感词</li>
+<li>增删改<br>如专业词</li>
+</ul>
+<h2 id="只新增"><a href="#只新增" class="headerlink" title="只新增"></a>只新增</h2><p>方案：远程扩展词库接口实现方案</p>
+<ol>
+<li>运营后台修改词库</li>
+<li>IK分词器定时合并主词库<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/2-%E7%83%AD%E6%9B%B4%E6%96%B0-%E8%BF%9C%E7%A8%8B%E6%89%A9%E5%B1%95%E8%AF%8D%E5%BA%93%E6%8E%A5%E5%8F%A3.png"></li>
+</ol>
+<h3 id="远程扩展词库接口"><a href="#远程扩展词库接口" class="headerlink" title="远程扩展词库接口"></a>远程扩展词库接口</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/2-%E7%83%AD%E6%9B%B4%E6%96%B0-%E8%BF%9C%E7%A8%8B%E6%89%A9%E5%B1%95%E8%AF%8D%E5%BA%93%E6%8E%A5%E5%8F%A3-%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80.png"></p>
+<ol>
+<li>开发查询接口<br>查询数据库中是否有新词</li>
+<li>配置远程接口</li>
+</ol>
+<h3 id="数据库同步"><a href="#数据库同步" class="headerlink" title="数据库同步"></a>数据库同步</h3><p>使用云es服务不可修改es源码，此方案不可用<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/3%E6%89%93%E9%80%A0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%90%9C%E7%B4%A2%E8%AF%8D%E5%BA%93%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/2-%E7%83%AD%E6%9B%B4%E6%96%B0-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8C%E6%AD%A5.png"><br>思路：修改IK源码，Dictionary加载时启动线程定时获取数据库新增字典，并更新到词库（调用Dictionary的addWords方法添加）</p>
+<h2 id="增删改"><a href="#增删改" class="headerlink" title="增删改"></a>增删改</h2><p>新增 IK的Dictionary.addWords方法<br>删除 IK的Dictionary.disableWords方法<br>更新 删除+更新</p>
+<p>注：需添加数据库配置文件jdbc.properties,数据库驱动包mysql-connector-java.jar</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>基于IK分词器，如果向实现词库热更新有哪几种实现方式？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/2%E6%9E%84%E5%BB%BA%E5%BA%95%E5%B1%82%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%9C%BA%E5%88%B6/" rel="prev" title="2构建底层索引和搜索机制">
+                  <i class="fa fa-chevron-left"></i> 2构建底层索引和搜索机制
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/4%E4%BD%BF%E7%94%A8ElasticSearch%E6%9E%84%E5%BB%BA%E6%90%9C%E7%B4%A2%E6%9C%8D%E5%8A%A1/" rel="next" title="4使用ElasticSearch构建搜索服务">
+                  4使用ElasticSearch构建搜索服务 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

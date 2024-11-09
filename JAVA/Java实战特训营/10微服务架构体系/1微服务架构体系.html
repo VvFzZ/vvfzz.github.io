@@ -1,0 +1,62 @@
+<hr>
+<h2 id="title-1微服务架构体系description-1微服务架构体系date-2024-10-30-14-48-18tags"><a href="#title-1微服务架构体系description-1微服务架构体系date-2024-10-30-14-48-18tags" class="headerlink" title="title: 1微服务架构体系description: 1微服务架构体系date: 2024-10-30 14:48:18tags:"></a>title: 1微服务架构体系<br>description: 1微服务架构体系<br>date: 2024-10-30 14:48:18<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>微服务架构设计思想和方法</li>
+<li>微服务架构核心技术组件</li>
+</ul>
+<p>分布式架构升级微服务架构，需要技术与业务做综合性思考</p>
+<p>目录</p>
+<ul>
+<li>微服务架构基本概念</li>
+<li>微服务架构核心技术组件</li>
+</ul>
+<h1 id="微服务架构基本概念"><a href="#微服务架构基本概念" class="headerlink" title="微服务架构基本概念"></a>微服务架构基本概念</h1><p>与分布式架构相比，服务量大，动态性强，边界清晰灵活<br>并不是引入springcloud就是微服务架构<br>微服务不是一个纯技术概念</p>
+<h2 id="三要素"><a href="#三要素" class="headerlink" title="三要素"></a>三要素</h2><ul>
+<li>技术体系<br>服务通信<br>服务治理<br>服务路由<br>服务容错<br>服务监控<br>服务安全<br>服务配置<br>服务网关</li>
+<li>业务建模</li>
+<li>研发过程<br>跨职能团队，围绕业务组建团队</li>
+</ul>
+<h2 id="微服务的扩展性"><a href="#微服务的扩展性" class="headerlink" title="微服务的扩展性"></a>微服务的扩展性</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/1%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/1AKF%E6%89%A9%E5%B1%95%E7%AB%8B%E6%96%B9%E4%BD%93.png"></p>
+<p><strong>微服务的核心</strong><br>业务和数据</p>
+<h2 id="业务边界"><a href="#业务边界" class="headerlink" title="业务边界"></a>业务边界</h2><p>领域驱动设计（DDD）<br>子域聚合和界限上下文：<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/1%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/1%E5%AD%90%E5%9F%9F%E8%81%9A%E5%90%88%E5%92%8C%E7%95%8C%E9%99%90%E4%B8%8A%E4%B8%8B%E6%96%87.png"></p>
+<h2 id="数据管理"><a href="#数据管理" class="headerlink" title="数据管理"></a>数据管理</h2><p>业务与数据分离，数据不仅包含关系型数据库还来自搜索引擎，消息系统；</p>
+<h2 id="数据管理策略"><a href="#数据管理策略" class="headerlink" title="数据管理策略"></a>数据管理策略</h2><p>CQRS模式（查询和命令分离）</p>
+<h2 id="事务管理策略"><a href="#事务管理策略" class="headerlink" title="事务管理策略"></a>事务管理策略</h2><p>跨服务事务处理</p>
+<ul>
+<li>强一致性</li>
+<li>弱一致性</li>
+</ul>
+<h2 id="微服务与遗留系统"><a href="#微服务与遗留系统" class="headerlink" title="微服务与遗留系统"></a>微服务与遗留系统</h2><p>绞杀者模式、修缮者模式</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/2401_83062316/article/details/140609010">https://blog.csdn.net/2401_83062316/article/details/140609010</a></p>
+</blockquote>
+<h1 id="微服务架构核心技术组件"><a href="#微服务架构核心技术组件" class="headerlink" title="微服务架构核心技术组件"></a>微服务架构核心技术组件</h1><h2 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h2><p>技术要点</p>
+<ul>
+<li>网络连接模式</li>
+<li>io模型</li>
+<li>服务调用方式<br>同步&#x2F;异步</li>
+</ul>
+<p>分布式架构使用RPC协议，微服务倾向于使用HTTP。</p>
+<h2 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h2><p>注册中心（服务注册、发现）</p>
+<h2 id="服务路由"><a href="#服务路由" class="headerlink" title="服务路由"></a>服务路由</h2><p>注册中心集成负载均衡</p>
+<p>esb、netty RMI</p>
+<h2 id="服务容错"><a href="#服务容错" class="headerlink" title="服务容错"></a>服务容错</h2><p>集群容错策略<br>服务隔离机制<br>服务限流机制<br>服务熔断机制</p>
+<h2 id="服务配置"><a href="#服务配置" class="headerlink" title="服务配置"></a>服务配置</h2><p>注册中心集成配置中心</p>
+<h2 id="服务网关"><a href="#服务网关" class="headerlink" title="服务网关"></a>服务网关</h2><p>Gateway，做非业务性功能<br>请求监控<br>安全管理<br>路由规则<br>日志记录<br>访问控制<br>服务适配</p>
+<h2 id="服务安全"><a href="#服务安全" class="headerlink" title="服务安全"></a>服务安全</h2><p>基于Token机制的服务安全结构</p>
+<h2 id="服务监控"><a href="#服务监控" class="headerlink" title="服务监控"></a>服务监控</h2><p>服务跟踪机制核心功能：<br>数据埋点<br>指标采集<br>调用关系<br>性能分析</p>
+<p>ELK 、Skywalking</p>
+<h2 id="Spring-Cloud-Alibaba"><a href="#Spring-Cloud-Alibaba" class="headerlink" title="Spring Cloud Alibaba"></a>Spring Cloud Alibaba</h2><p>Spring Cloud</p>
+<ul>
+<li>服务路由:Spring Cloud LoadBalancer</li>
+<li>服务事件:Spring Cloud Steam</li>
+<li>链路跟踪:Spring Cloud Sleuth</li>
+<li>服务安全:Spring Cloud Security</li>
+<li>服务网关:Spring Cloud Gateway</li>
+</ul>
+<p>Spring Cloud</p>
+<ul>
+<li>服务治理:Nacos</li>
+<li>服务配置:Nacos</li>
+<li>服务容错:Sentinel</li>
+</ul>

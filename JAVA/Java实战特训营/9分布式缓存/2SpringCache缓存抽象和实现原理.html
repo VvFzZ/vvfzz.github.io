@@ -1,0 +1,32 @@
+<hr>
+<h2 id="title-2SpringCache缓存抽象和实现原理description-2SpringCache缓存抽象和实现原理date-2024-10-19-15-26-07tags"><a href="#title-2SpringCache缓存抽象和实现原理description-2SpringCache缓存抽象和实现原理date-2024-10-19-15-26-07tags" class="headerlink" title="title: 2SpringCache缓存抽象和实现原理description: 2SpringCache缓存抽象和实现原理date: 2024-10-19 15:26:07tags:"></a>title: 2SpringCache缓存抽象和实现原理<br>description: 2SpringCache缓存抽象和实现原理<br>date: 2024-10-19 15:26:07<br>tags:</h2><p>集成缓存工具</p>
+<ul>
+<li>理解Spring对缓存的抽象过程和实现原理</li>
+<li>掌握SpringCache使用方法</li>
+</ul>
+<p>掌握分布式缓存的基础是理解缓存的组成结构和抽象过程</p>
+<p>目录</p>
+<ul>
+<li>Spring缓存的抽象和使用过程</li>
+<li>Spring缓存实现原理</li>
+</ul>
+<h1 id="Spring缓存的抽象和使用过程"><a href="#Spring缓存的抽象和使用过程" class="headerlink" title="Spring缓存的抽象和使用过程"></a>Spring缓存的抽象和使用过程</h1><p>Spring Cache组件的核心优势：<br>设计并实现了抽象层，提供统一的缓存API<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/9%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/2SpringCache%E7%BC%93%E5%AD%98%E6%8A%BD%E8%B1%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/2-springCache%E7%BB%9F%E4%B8%80API.png"></p>
+<h2 id="缓存抽象"><a href="#缓存抽象" class="headerlink" title="缓存抽象"></a>缓存抽象</h2><ul>
+<li>缓存注解，自动启用缓存机制</li>
+<li>缓存配置</li>
+</ul>
+<h3 id="缓存注解"><a href="#缓存注解" class="headerlink" title="缓存注解"></a>缓存注解</h3><p>通过配置集成缓存工具（Redis、Guava、Hazelcast、EhCache、Caffeine）或自定义缓存</p>
+<p><strong>@Cacheable</strong><br>condition&#x3D;”# id%2&#x3D;&#x3D;0”  id模2为0时才缓存</p>
+<p><strong>@CachePut</strong><br>替换<br><strong>@CacheEvict</strong><br>删除<br><strong>@Caching</strong><br>符合注解</p>
+<p><strong>自定义缓存注解</strong><br>id和name都可作为缓存键，可根据id或name更新缓存</p>
+<p><strong>缓存键</strong><br>自定义缓存键</p>
+<p>默认键</p>
+<h3 id="缓存配置"><a href="#缓存配置" class="headerlink" title="缓存配置"></a>缓存配置</h3><p><strong>CacheManager</strong><br>配置类注解@EnableCaching启动SpringCache功能</p>
+<p>EhCache配置示例</p>
+<pre><code>
+</code></pre>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>SpringSecurity 认证缓存 </p>
+<h1 id="Spring缓存实现原理？？？"><a href="#Spring缓存实现原理？？？" class="headerlink" title="Spring缓存实现原理？？？???"></a>Spring缓存实现原理？？？???</h1><p><strong>Cache</strong></p>
+<p><strong>CachManager</strong><br>多平台适配<br>不同的Manager实现，管理内存的方式不同</p>
+<p><strong>@EnableCaching</strong></p>
+<p><strong>CacheInterceptor</strong><br> Autoconfig类中的CachInterceptor<br> execute方法，生成key，获取缓存对象，<br>何时执行的？</p>

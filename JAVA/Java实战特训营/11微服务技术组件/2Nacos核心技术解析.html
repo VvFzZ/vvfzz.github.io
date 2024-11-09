@@ -1,0 +1,154 @@
+<hr>
+<h2 id="title-2Nacos核心技术解析description-2Nacos核心技术解析date-2024-11-02-16-46-19tags"><a href="#title-2Nacos核心技术解析description-2Nacos核心技术解析date-2024-11-02-16-46-19tags" class="headerlink" title="title: 2Nacos核心技术解析description: 2Nacos核心技术解析date: 2024-11-02 16:46:19tags:"></a>title: 2Nacos核心技术解析<br>description: 2Nacos核心技术解析<br>date: 2024-11-02 16:46:19<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>Nacos设计思想和亮点</li>
+<li>作为注册中心和配置中心的核心技术组件</li>
+</ul>
+<p><strong>分析框架的关注点</strong></p>
+<ul>
+<li>设计思想<br>注册中心，配置中心的设计思想</li>
+<li>基本流程</li>
+<li>核心组件</li>
+<li>通用机制</li>
+</ul>
+<h1 id="服务注册、发现、健康检查机制"><a href="#服务注册、发现、健康检查机制" class="headerlink" title="服务注册、发现、健康检查机制"></a>服务注册、发现、健康检查机制</h1><ul>
+<li>注册中心<br>服务注册、发现、健康检查</li>
+<li>配置中心<br>配置热更新</li>
+</ul>
+<h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><h3 id="客户端流程"><a href="#客户端流程" class="headerlink" title="客户端流程"></a>客户端流程</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B5%81%E7%A8%8B.png"><br><strong>NamingService</strong></p>
+<pre><code>public class NacosNamingService implements NamingService{
+    @Override
+    public void registerInstance(String serviceName, String groupName, Instance instance) {
+        //验证正确性、获取分组
+        NamingUtils.checkInstanceIsLegal(instance);
+        String groupedserviceName = NamingUtils.getGroupedName(serviceName, groupName);
+        //如果是永久节点，则启动心跳
+        if (instance.isEphemeral()){
+            BeatInfo beatInfo = beatReactor,buildBeatInfo(groupedServiceName, instance);
+            beatReactor,addBeatInfo(groupedServiceName,beatInfo);
+        }
+
+        //通过代理实现服务注册
+        serverProxy,registerService(groupedServiceName,groupName, instance);
+
+        @Override
+        public void deregisterInstance(String serviceName, String groupName, Instance instance){
+            if (instance.isEphemeral()){
+                beatReactor,removeBeatInfo(NamingUtils.getGroupedName(serviceName, groupName),instance.getIp(),instance.getPort());
+        }
+        serverProxy,deregisterService(NamingUtils.getGroupedName(serviceName, groupName), instance);
+        }
+    }
+}
+</code></pre>
+<p><strong>NameingProxy</strong></p>
+<pre><code>public class NamingProxy {
+    private final NacosRestTemplate nacosRestTemplate =NamingHttpClientManager.getInstance().getNacosRestTemplate();
+
+    public void registerService(String serviceName, String groupName, Instance instance){
+        final Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;(16);params.put(CommonParams,NAMESPACE ID, namespaceId);
+        ...
+        params.put(&quot;metadata&quot;, JacksonUtils.toJson(instance.getMetadata()));    
+        //封装请求，发起HTTP远程调用
+        regApi(utilAndComs.nacosUrlInstance, params, HttpMethod.PosT);
+    }
+}
+HttpRestResult&lt;String&gt; restResult = nacosRestTemplate,exchangeForm(url, header, Query.newInstance().initParams(params), body, method, string.class);
+</code></pre>
+<h3 id="服务端流程"><a href="#服务端流程" class="headerlink" title="服务端流程"></a>服务端流程</h3><ul>
+<li>服务端存储</li>
+<li>集群同步</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B5%81%E7%A8%8B.png"></p>
+<p><code>ServiceManager</code><br><code>ConsistencyService</code></p>
+<ul>
+<li>PersistentConsistencyService<ul>
+<li>RaftConsistencyServicelmpl</li>
+</ul>
+</li>
+<li>DelegateConsistencyServicelmpl </li>
+<li>EphemeralConsistencyService<ul>
+<li>DistroConsistencyServicelmpl</li>
+</ul>
+</li>
+</ul>
+<p><strong>设计亮点</strong></p>
+<ul>
+<li>服务存储<br>双层Map结构:注册中心主流存储方式<br>服务端缓存:提高服务实例获取性能</li>
+<li>集群同步<br>集群同步机制:通过事件在各个集群之间异步传递变更实例信息，解耦也更利于扩展</li>
+</ul>
+<h2 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h2><h3 id="客户端流程-1"><a href="#客户端流程-1" class="headerlink" title="客户端流程"></a>客户端流程</h3><ul>
+<li>客户端缓存</li>
+<li>定时同步<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0-%E5%AE%A2%E6%88%B7%E7%AB%AF.png"></li>
+</ul>
+<h3 id="服务端流程-1"><a href="#服务端流程-1" class="headerlink" title="服务端流程"></a>服务端流程</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0-%E6%9C%8D%E5%8A%A1%E7%AB%AF.png"><br>服务端会保存客户端列表，主动推送服务变更</p>
+<h3 id="设计亮点"><a href="#设计亮点" class="headerlink" title="设计亮点"></a>设计亮点</h3><ul>
+<li>客户端<br>客户端缓存:优先从本地缓存中获取服务信息<code>Map&lt;String,Servicelnfo&gt;servicelnfoMap</code><br>定时任务:维护定时任务从服务端获取服务实例信息，并同步本地缓存服务订阅:具备服务订阅机制，可以获取来自服务端的异步推送</li>
+<li>服务端<br>异步推送:开启一个UDP推送服务，将服务实例变更信息推送给客户端</li>
+</ul>
+<h2 id="健康检查"><a href="#健康检查" class="headerlink" title="健康检查"></a>健康检查</h2><ul>
+<li>客户端上报</li>
+<li>服务端探测</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5.png"></p>
+<h3 id="Nacos健康检查"><a href="#Nacos健康检查" class="headerlink" title="Nacos健康检查"></a>Nacos健康检查</h3><ul>
+<li>临时实例（临时结点）<br>临时存在于注册中心中，会与注册中心保持心跳，注册中心会在一段时间没有收到来自客户端的心跳后将实例设置为不健康，然后在一段时间后进行剔除</li>
+<li>永久实例（永久节点）<br>会永久的存在于注册中心，且有可能并不知道注册中心存在，不会主动向注册中心上报心跳</li>
+</ul>
+<h4 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h4><p>Nacos客户端会维护一个定时任务，每隔5秒发送一次心跳请求<br>Nacos服务端在15秒内如果没有收到客户端的心跳请求，会将该实例设置为不健康<br>Nacos服务端在30秒内没有收到心跳，会将这个临时实例摘除</p>
+<pre><code>spring:
+ cloud:
+  nacos:
+   discovery:
+    server-addr:127.0.0.1:8848
+    heart-beat-interval:5000
+    heart-beat-timeout:15000
+    ip-delete-timeout: 30000
+</code></pre>
+<p>客户端启动心跳任务<br>服务端定时检查，若状态异常推送异常状态(主动推送)<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5-%E4%B8%B4%E6%97%B6%E7%BB%93%E7%82%B9.png"></p>
+<h4 id="永久节点"><a href="#永久节点" class="headerlink" title="永久节点"></a>永久节点</h4><p>采用服务端主动健康检测方式<br>周期为2000+5000毫秒内的随机数<br><em>检测异常后只会标记为不健康，不会删除</em></p>
+<p>三种探测方式</p>
+<ul>
+<li>TCP探测</li>
+<li>MySQL探测</li>
+<li>HTTP探测</li>
+</ul>
+<h1 id="配置热更新机制"><a href="#配置热更新机制" class="headerlink" title="配置热更新机制"></a>配置热更新机制</h1><ul>
+<li>推模式<br>时效性好，但复杂度高<br>长连接，服务端和客户端消耗更多资源维持连接</li>
+<li>拉模式<br>实现简单，但时效性差<br>重复请求服务器压力过大</li>
+<li>长轮训<br>客户端发起HTTP请求（短连接），在服务端等待特定时间，若配置有变化立即返回，若无变化等待时间结束后返回，返回后立即重新发起连接。</li>
+</ul>
+<p><strong>长轮训优点</strong><br>不会频繁轮训，也不需要维护心跳，兼顾时效与复杂度</p>
+<ul>
+<li>低延时<br>客户端发起长轮询，服务端感知到数据发生变更后，能立刻返回响应给客户端</li>
+<li>轻资源<br>客户端发起长轮询，如果数据没有发生变更服务端会hold住此次客户端的请求，不会消耗太多服务端资源</li>
+</ul>
+<p><strong>客户端核心组件</strong></p>
+<ol>
+<li>初始化NacosConfigService</li>
+<li>初始化ClientWorker</li>
+<li>初始化线程池每10ms执行一次</li>
+<li>执行LongPollingRunnable</li>
+<li>长轮询获取变更的Datald+Group</li>
+</ol>
+<p>NacosConfigService配置服务，封装客户端操作<br>ClientWorker客户端任务，启动和管理定时器线程<br>LongPollingRunnable长轮询线程，触发服务器轮询操作<br>HttpAgent执行HTTP远程调用，设置超时时间为30秒</p>
+<p>没看懂ClientWorker、LongPollingRunnable</p>
+<p><strong>服务端核心组件</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0-%E6%9C%8D%E5%8A%A1%E7%AB%AF.png"></p>
+<p>ConfigController接收来自客户端的长轮询<br>LongPollingService根据目标Datald+Group，启动异步线程执行轮询操作<br>ClientLongPolling长轮询线程，维护请求和响应的对应关系<br>LocalDataChangeEvent配置变更事件，被LongPollingService监听和处理</p>
+<h2 id="AsyncContext"><a href="#AsyncContext" class="headerlink" title="AsyncContext"></a>AsyncContext</h2><pre><code>public class simpleAsyncHelloservlet extends Httpservlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throwsServletException, IOException {
+        //获取该请求对应的AsyncContext
+        AsyncContext asyncContext = request.startAsync();
+        asyncContext.start(()-&gt;{
+            new LongRunningProcess().run();执行异步处理
+            try {
+                asyncContext.getResponse().getWriter().write(&quot;Hello world!&quot;);
+            }catch(I0Exception e){
+                e.printStackTrace();
+            }
+            asyncContext.complete();//执行完毕通知Servlet容器
+        });            
+    }
+}
+</code></pre>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如果让你实现一个自定义的长轮询机制，你会怎么做?</p>

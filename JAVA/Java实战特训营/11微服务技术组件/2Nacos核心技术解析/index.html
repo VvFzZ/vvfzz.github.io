@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/","path":"JAVA/Java实战特训营/11微服务技术组件/2Nacos核心技术解析/","title":"2Nacos核心技术解析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2Nacos核心技术解析 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E3%80%81%E5%8F%91%E7%8E%B0%E3%80%81%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">服务注册、发现、健康检查机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">1.1.</span> <span class="nav-text">服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">客户端流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">服务端流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">服务发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B5%81%E7%A8%8B-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">客户端流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B5%81%E7%A8%8B-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">服务端流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E4%BA%AE%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">设计亮点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5"><span class="nav-number">1.3.</span> <span class="nav-text">健康检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5"><span class="nav-number">1.3.1.</span> <span class="nav-text">Nacos健康检查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">临时节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">永久节点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">配置热更新机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AsyncContext"><span class="nav-number">2.1.</span> <span class="nav-text">AsyncContext</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2Nacos核心技术解析 | VvfzZ">
+      <meta itemprop="description" content="2Nacos核心技术解析">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2Nacos核心技术解析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-02 16:46:19" itemprop="dateCreated datePublished" datetime="2024-11-02T16:46:19+08:00">2024-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-05 22:53:56" itemprop="dateModified" datetime="2024-11-05T22:53:56+08:00">2024-11-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">2Nacos核心技术解析</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>Nacos设计思想和亮点</li>
+<li>作为注册中心和配置中心的核心技术组件</li>
+</ul>
+<p><strong>分析框架的关注点</strong></p>
+<ul>
+<li>设计思想<br>注册中心，配置中心的设计思想</li>
+<li>基本流程</li>
+<li>核心组件</li>
+<li>通用机制</li>
+</ul>
+<h1 id="服务注册、发现、健康检查机制"><a href="#服务注册、发现、健康检查机制" class="headerlink" title="服务注册、发现、健康检查机制"></a>服务注册、发现、健康检查机制</h1><ul>
+<li>注册中心<br>服务注册、发现、健康检查</li>
+<li>配置中心<br>配置热更新</li>
+</ul>
+<h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><h3 id="客户端流程"><a href="#客户端流程" class="headerlink" title="客户端流程"></a>客户端流程</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B5%81%E7%A8%8B.png"><br><strong>NamingService</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class NacosNamingService implements NamingService&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void registerInstance(String serviceName, String groupName, Instance instance) &#123;</span><br><span class="line">        //验证正确性、获取分组</span><br><span class="line">        NamingUtils.checkInstanceIsLegal(instance);</span><br><span class="line">        String groupedserviceName = NamingUtils.getGroupedName(serviceName, groupName);</span><br><span class="line">        //如果是永久节点，则启动心跳</span><br><span class="line">        if (instance.isEphemeral())&#123;</span><br><span class="line">            BeatInfo beatInfo = beatReactor,buildBeatInfo(groupedServiceName, instance);</span><br><span class="line">            beatReactor,addBeatInfo(groupedServiceName,beatInfo);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //通过代理实现服务注册</span><br><span class="line">        serverProxy,registerService(groupedServiceName,groupName, instance);</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void deregisterInstance(String serviceName, String groupName, Instance instance)&#123;</span><br><span class="line">            if (instance.isEphemeral())&#123;</span><br><span class="line">                beatReactor,removeBeatInfo(NamingUtils.getGroupedName(serviceName, groupName),instance.getIp(),instance.getPort());</span><br><span class="line">        &#125;</span><br><span class="line">        serverProxy,deregisterService(NamingUtils.getGroupedName(serviceName, groupName), instance);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>NameingProxy</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class NamingProxy &#123;</span><br><span class="line">    private final NacosRestTemplate nacosRestTemplate =NamingHttpClientManager.getInstance().getNacosRestTemplate();</span><br><span class="line"></span><br><span class="line">    public void registerService(String serviceName, String groupName, Instance instance)&#123;</span><br><span class="line">        final Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;(16);params.put(CommonParams,NAMESPACE ID, namespaceId);</span><br><span class="line">        ...</span><br><span class="line">        params.put(&quot;metadata&quot;, JacksonUtils.toJson(instance.getMetadata()));    </span><br><span class="line">        //封装请求，发起HTTP远程调用</span><br><span class="line">        regApi(utilAndComs.nacosUrlInstance, params, HttpMethod.PosT);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">HttpRestResult&lt;String&gt; restResult = nacosRestTemplate,exchangeForm(url, header, Query.newInstance().initParams(params), body, method, string.class);</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端流程"><a href="#服务端流程" class="headerlink" title="服务端流程"></a>服务端流程</h3><ul>
+<li>服务端存储</li>
+<li>集群同步</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B5%81%E7%A8%8B.png"></p>
+<p><code>ServiceManager</code><br><code>ConsistencyService</code></p>
+<ul>
+<li>PersistentConsistencyService<ul>
+<li>RaftConsistencyServicelmpl</li>
+</ul>
+</li>
+<li>DelegateConsistencyServicelmpl </li>
+<li>EphemeralConsistencyService<ul>
+<li>DistroConsistencyServicelmpl</li>
+</ul>
+</li>
+</ul>
+<p><strong>设计亮点</strong></p>
+<ul>
+<li>服务存储<br>双层Map结构:注册中心主流存储方式<br>服务端缓存:提高服务实例获取性能</li>
+<li>集群同步<br>集群同步机制:通过事件在各个集群之间异步传递变更实例信息，解耦也更利于扩展</li>
+</ul>
+<h2 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h2><h3 id="客户端流程-1"><a href="#客户端流程-1" class="headerlink" title="客户端流程"></a>客户端流程</h3><ul>
+<li>客户端缓存</li>
+<li>定时同步<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0-%E5%AE%A2%E6%88%B7%E7%AB%AF.png"></li>
+</ul>
+<h3 id="服务端流程-1"><a href="#服务端流程-1" class="headerlink" title="服务端流程"></a>服务端流程</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0-%E6%9C%8D%E5%8A%A1%E7%AB%AF.png"><br>服务端会保存客户端列表，主动推送服务变更</p>
+<h3 id="设计亮点"><a href="#设计亮点" class="headerlink" title="设计亮点"></a>设计亮点</h3><ul>
+<li>客户端<br>客户端缓存:优先从本地缓存中获取服务信息<code>Map&lt;String,Servicelnfo&gt;servicelnfoMap</code><br>定时任务:维护定时任务从服务端获取服务实例信息，并同步本地缓存服务订阅:具备服务订阅机制，可以获取来自服务端的异步推送</li>
+<li>服务端<br>异步推送:开启一个UDP推送服务，将服务实例变更信息推送给客户端</li>
+</ul>
+<h2 id="健康检查"><a href="#健康检查" class="headerlink" title="健康检查"></a>健康检查</h2><ul>
+<li>客户端上报</li>
+<li>服务端探测</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5.png"></p>
+<h3 id="Nacos健康检查"><a href="#Nacos健康检查" class="headerlink" title="Nacos健康检查"></a>Nacos健康检查</h3><ul>
+<li>临时实例（临时结点）<br>临时存在于注册中心中，会与注册中心保持心跳，注册中心会在一段时间没有收到来自客户端的心跳后将实例设置为不健康，然后在一段时间后进行剔除</li>
+<li>永久实例（永久节点）<br>会永久的存在于注册中心，且有可能并不知道注册中心存在，不会主动向注册中心上报心跳</li>
+</ul>
+<h4 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h4><p>Nacos客户端会维护一个定时任务，每隔5秒发送一次心跳请求<br>Nacos服务端在15秒内如果没有收到客户端的心跳请求，会将该实例设置为不健康<br>Nacos服务端在30秒内没有收到心跳，会将这个临时实例摘除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> cloud:</span><br><span class="line">  nacos:</span><br><span class="line">   discovery:</span><br><span class="line">    server-addr:127.0.0.1:8848</span><br><span class="line">    heart-beat-interval:5000</span><br><span class="line">    heart-beat-timeout:15000</span><br><span class="line">    ip-delete-timeout: 30000</span><br></pre></td></tr></table></figure>
+
+<p>客户端启动心跳任务<br>服务端定时检查，若状态异常推送异常状态(主动推送)<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5-%E4%B8%B4%E6%97%B6%E7%BB%93%E7%82%B9.png"></p>
+<h4 id="永久节点"><a href="#永久节点" class="headerlink" title="永久节点"></a>永久节点</h4><p>采用服务端主动健康检测方式<br>周期为2000+5000毫秒内的随机数<br><em>检测异常后只会标记为不健康，不会删除</em></p>
+<p>三种探测方式</p>
+<ul>
+<li>TCP探测</li>
+<li>MySQL探测</li>
+<li>HTTP探测</li>
+</ul>
+<h1 id="配置热更新机制"><a href="#配置热更新机制" class="headerlink" title="配置热更新机制"></a>配置热更新机制</h1><ul>
+<li>推模式<br>时效性好，但复杂度高<br>长连接，服务端和客户端消耗更多资源维持连接</li>
+<li>拉模式<br>实现简单，但时效性差<br>重复请求服务器压力过大</li>
+<li>长轮训<br>客户端发起HTTP请求（短连接），在服务端等待特定时间，若配置有变化立即返回，若无变化等待时间结束后返回，返回后立即重新发起连接。</li>
+</ul>
+<p><strong>长轮训优点</strong><br>不会频繁轮训，也不需要维护心跳，兼顾时效与复杂度</p>
+<ul>
+<li>低延时<br>客户端发起长轮询，服务端感知到数据发生变更后，能立刻返回响应给客户端</li>
+<li>轻资源<br>客户端发起长轮询，如果数据没有发生变更服务端会hold住此次客户端的请求，不会消耗太多服务端资源</li>
+</ul>
+<p><strong>客户端核心组件</strong></p>
+<ol>
+<li>初始化NacosConfigService</li>
+<li>初始化ClientWorker</li>
+<li>初始化线程池每10ms执行一次</li>
+<li>执行LongPollingRunnable</li>
+<li>长轮询获取变更的Datald+Group</li>
+</ol>
+<p>NacosConfigService配置服务，封装客户端操作<br>ClientWorker客户端任务，启动和管理定时器线程<br>LongPollingRunnable长轮询线程，触发服务器轮询操作<br>HttpAgent执行HTTP远程调用，设置超时时间为30秒</p>
+<p>没看懂ClientWorker、LongPollingRunnable</p>
+<p><strong>服务端核心组件</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/2Nacos%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/2-Nacos%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0-%E6%9C%8D%E5%8A%A1%E7%AB%AF.png"></p>
+<p>ConfigController接收来自客户端的长轮询<br>LongPollingService根据目标Datald+Group，启动异步线程执行轮询操作<br>ClientLongPolling长轮询线程，维护请求和响应的对应关系<br>LocalDataChangeEvent配置变更事件，被LongPollingService监听和处理</p>
+<h2 id="AsyncContext"><a href="#AsyncContext" class="headerlink" title="AsyncContext"></a>AsyncContext</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class simpleAsyncHelloservlet extends Httpservlet &#123;</span><br><span class="line">    protected void doGet(HttpServletRequest request, HttpServletResponse response) throwsServletException, IOException &#123;</span><br><span class="line">        //获取该请求对应的AsyncContext</span><br><span class="line">        AsyncContext asyncContext = request.startAsync();</span><br><span class="line">        asyncContext.start(()-&gt;&#123;</span><br><span class="line">            new LongRunningProcess().run();执行异步处理</span><br><span class="line">            try &#123;</span><br><span class="line">                asyncContext.getResponse().getWriter().write(&quot;Hello world!&quot;);</span><br><span class="line">            &#125;catch(I0Exception e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            asyncContext.complete();//执行完毕通知Servlet容器</span><br><span class="line">        &#125;);            </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如果让你实现一个自定义的长轮询机制，你会怎么做?</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/" rel="prev" title="1使用Nacos实现集中式配置管理">
+                  <i class="fa fa-chevron-left"></i> 1使用Nacos实现集中式配置管理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/3%E4%BD%BF%E7%94%A8SpringCloudStream%E9%87%8D%E6%9E%84%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/" rel="next" title="3使用SpringCloudStream重构消息通信机制">
+                  3使用SpringCloudStream重构消息通信机制 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

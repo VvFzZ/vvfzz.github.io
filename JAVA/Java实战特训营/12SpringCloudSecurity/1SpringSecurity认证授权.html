@@ -1,0 +1,132 @@
+<hr>
+<h2 id="title-1SpringSecurity认证授权description-1SpringSecurity认证授权date-2024-11-07-21-22-01tags"><a href="#title-1SpringSecurity认证授权description-1SpringSecurity认证授权date-2024-11-07-21-22-01tags" class="headerlink" title="title: 1SpringSecurity认证授权description: 1SpringSecurity认证授权date: 2024-11-07 21:22:01tags:"></a>title: 1SpringSecurity认证授权<br>description: 1SpringSecurity认证授权<br>date: 2024-11-07 21:22:01<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>常见安全性需求</li>
+<li>Spring security解决方案</li>
+<li>基于Spring Security实现认证和授权的方法和实践</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>安全性和Spring Security框架</li>
+<li>用户认证及其实现方法</li>
+<li>访问授权及其实现方法</li>
+</ul>
+<h1 id="安全性和Spring-Security框架"><a href="#安全性和Spring-Security框架" class="headerlink" title="安全性和Spring Security框架"></a>安全性和Spring Security框架</h1><p>用户认证(是谁)<br>权限控制(可以做啥)<br>单点登录<br>用户信息管理<br>跨域支持<br>敏感信息加解密<br>全局安全方法<br>跨站点请求伪造保护</p>
+<p>Spring Security与单体应用：认证、授权</p>
+<p>Spring Security与微服务架构：引入OAuth2协议、授权中心</p>
+<h1 id="用户认证实现方法"><a href="#用户认证实现方法" class="headerlink" title="用户认证实现方法"></a>用户认证实现方法</h1><p>HTTP基础认证比较简单，没有定制的登录页面</p>
+<pre><code>public abstract class WebSecurityConfigurerAdapter implements WebSecurityConfigurer&lt;WebSecurity&gt; {
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic();
+    }
+}
+</code></pre>
+<p>表单认证</p>
+<pre><code>public abstract class WebSecurityConfigurerAdapter implements WebSecurityConfigurer&lt;WebSecurity&gt; {
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin()
+        //定制化登录界面和操作入口
+        .loginPage(&quot;/login.html&quot;)//自定义登录页面
+        .loginProcessingUrl(&quot;/action&quot;)//登录表单提交时的处理地址
+        .defaultSuccessUrl(&quot;/index&quot;);//登录认证成功后的跳转页面
+    }
+}
+</code></pre>
+<h2 id="认证体系"><a href="#认证体系" class="headerlink" title="认证体系"></a>认证体系</h2><ul>
+<li>配置文件</li>
+<li>内存</li>
+<li>JDBC</li>
+<li>LDAP</li>
+<li>自定义</li>
+</ul>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><pre><code>spring:
+ security:
+  user:
+   name: spring
+   password: spring_password
+</code></pre>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><pre><code>@Override
+protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+    builder.inMemoryAuthentication()
+    .withUser(&quot;spring_user&quot;).password(&quot;password1&quot;).authorities(&quot;ROLE_USER&quot;)
+    .and()
+    .withUser(&quot;spring_admin&quot;).password(&quot;password2&quot;).authorities(&quot;ROLE_USER&quot;,&quot;ROLE_ADMIN&quot;);
+}
+@Override
+protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+    builder.inMemoryAuthentication()
+    .withUser(&quot;spring_user&quot;).password(&quot;password1&quot;).roles(&quot;USER&quot;)
+    .and()
+    .withUser(&quot;spring_admin&quot;).password(&quot;password2&quot;).roles(&quot;USER&quot;,&quot;ADMIN&quot;);
+}
+</code></pre>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><pre><code>@Autowired
+DataSource dataSource;
+
+@Override
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.jdbcAuthentication().dataSource(dataSource)
+    .usersByUsernameQuery(&quot;select username, password, enabled from Users where username=?&quot;)
+    .authoritiesByUsernameQuery(&quot;select username, authority from UserAuthorities &quot;&quot;&#39;where username=?&quot;)
+    .passwordEncoder(new BCryptPasswordEncoder());
+}
+</code></pre>
+<p><strong>PasswordEncoder</strong><br>没有解密</p>
+<pre><code>public interface PasswordEncoder {
+    String encode(CharSequence rawPassword);
+    boolean matches(CharSequence rawPassword, String encodedPassword);
+    default boolean upgradeEncoding(String encodedPassword) {
+        return false;
+    }
+}
+
+public class BCryptPasswordEncoder implements PasswordEncoder {
+    public String encode(CharSequence rawPassword) {
+        String salt;
+        if (random != null) {
+            salt = BCrypt.gensalt(version.getVersion(), strength, random);
+        } else {
+            salt = BCrypt.gensalt(version.getVersion(), strength);
+        }
+        return BCrypt.hashpw(rawPassword.toString(), salt);
+    }
+}
+</code></pre>
+<p>自定义</p>
+<pre><code>public class Sha512PasswordEncoder implements PasswordEncoder {
+    @Override
+    public String encode(CharSequence rawPassword) {
+        return hashWithSHA512(rawPassword.toString());
+    }
+    @Override
+    public boolean matches(CharSequence rawPassword, String encodedPassword) {
+        String hashedPassword = encode(rawPassword);
+        return encodedPassword.equals(hashedPassword);
+    }
+    private String hashWithSHA512(String input) {
+        StringBuilder result = new StringBuilder();
+        try {
+            MessageDigest md = MessageDigest.getInstance(&quot;SHA-512&quot;);
+            byte [] digested = md.digest(input.getBytes());
+            for (int i = 0; i &lt; digested.length; i++) {
+                result.append(Integer.toHexString(0xFF &amp; digested[i]));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(&quot;Bad algorithm&quot;);
+        }
+        return result.toString();
+    }
+}
+</code></pre>
+<p><strong>加密通用模块</strong><br>提供解密</p>
+<ul>
+<li>加解密器（Encryptor） </li>
+<li>键生成器（Key Generator）</li>
+</ul>
+<pre><code>String salt = KeyGenerators.string().generateKey();
+String password = &quot;secret&quot;;
+String valueToEncrypt = &quot;HELLO&quot;;
+BytesEncryptor e = Encryptors.standard(password, salt);
+byte [] encrypted = e.encrypt(valueToEncrypt.getBytes());
+byte [] decrypted = e.decrypt(encrypted);
+</code></pre>

@@ -1,0 +1,79 @@
+<hr>
+<h2 id="title-5RocketMQ高级特性description-5RocketMQ高级特性date-2024-10-16-17-07-11tags"><a href="#title-5RocketMQ高级特性description-5RocketMQ高级特性date-2024-10-16-17-07-11tags" class="headerlink" title="title: 5RocketMQ高级特性description: 5RocketMQ高级特性date: 2024-10-16 17:07:11tags:"></a>title: 5RocketMQ高级特性<br>description: 5RocketMQ高级特性<br>date: 2024-10-16 17:07:11<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>消息处理的高级特性</li>
+<li>消息发送和消费的高级开发技巧</li>
+</ul>
+<p>目录 </p>
+<ul>
+<li>事务消息</li>
+<li>延迟消息</li>
+<li>消息过滤</li>
+</ul>
+<h1 id="事务消息"><a href="#事务消息" class="headerlink" title="事务消息"></a>事务消息</h1><table>
+<thead>
+<tr>
+<th>发送方</th>
+<th>接收方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解决本地事务与发送消息原子性</td>
+<td>解决接收消息与本地事务原子性</td>
+</tr>
+<tr>
+<td>保证事务成功，消息发送成功</td>
+<td>保证消息接收成功，事务执行成功</td>
+</tr>
+<tr>
+<td>事务消息完美解决分布式交互过程中可能出现的问题</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>半消息</strong>：broker确认前，消息对消费者不可见<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/5RocketMQ%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/5-%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF.png"></p>
+<h1 id="延迟消息"><a href="#延迟消息" class="headerlink" title="延迟消息"></a>延迟消息</h1><p>消息写入broker后，等待指定时间才可被消费</p>
+<p><strong>使用场景</strong></p>
+<ul>
+<li>订单超时未支付<br>支付超时时延时消息被消费，自动执行取消订单等约逻辑</li>
+<li>各种活动场景<br>延时消息处理活动结束</li>
+</ul>
+<p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/5RocketMQ%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/5-%E5%BB%B6%E6%97%B6%E6%B6%88%E6%81%AF.png"></p>
+<h1 id="消息过滤"><a href="#消息过滤" class="headerlink" title="消息过滤"></a>消息过滤</h1><ul>
+<li>表达式过滤<ul>
+<li>Tag过滤</li>
+<li>SQL过滤</li>
+</ul>
+</li>
+<li>类过滤<ul>
+<li>Filter Server过滤</li>
+</ul>
+</li>
+</ul>
+<h2 id="Tag过滤"><a href="#Tag过滤" class="headerlink" title="Tag过滤"></a>Tag过滤</h2><p>broker、消费者都可过滤tag</p>
+<pre><code>//Tag过滤:消息发送
+String[] tags = new string[]{&quot;TagA&quot;, &quot;TagB&quot;, &quot;Tagc&quot;, &quot;TagD&quot;, &quot;TagE&quot;};
+for(int i=0;i&lt; 10;i++){
+    String tag = tags[i % tags.length];
+    String msg =&quot;hello，这是第&quot;+(i + 1)+“条消息&quot;;
+    Message message = new Message(&quot;FilterMessageTopic&quot;, tag,msg.getBytes(RemotingHelperDEFAULT CHARSET));SendResult sendResult = producer.send(message);
+    System.out.println(sendResult);
+}
+
+//Tag过滤:消息消费
+pushConsumer.subscribe(&quot;FilterMessageTopic&quot;, &quot;TagA | TagC | TagD&quot; );
+</code></pre>
+<h2 id="SQL过滤"><a href="#SQL过滤" class="headerlink" title="SQL过滤"></a>SQL过滤</h2><p>推才可用</p>
+<pre><code>//生效配置
+conf/broker.confenablePropertyFilter=true
+
+
+//SQL过滤:消息发送
+Message msg = new Message(&quot;topic a&quot;,(&quot;test&quot;).getBytes());“40&quot;);
+msg.putUserProperty(&quot;age&quot;msg.putUserProperty(&quot;name&quot;&quot;tianyalan&quot;);producer.send(msg);
+
+
+//SQL过滤:消息消费
+consumer.subscribe(&quot;topic a&quot;, Messageselector,bySql(&quot;age &gt; 35 and name = &#39;tianyalan&#39;&quot;));
+</code></pre>
+<h2 id="Filter-Server过滤"><a href="#Filter-Server过滤" class="headerlink" title="Filter Server过滤"></a>Filter Server过滤</h2><p>在 Broker端运行1个或多个消息过滤服务器(FilterServer),RocketMQ允许消息消费者自定义消息过滤实现类并将其代码上传到 Filter Server 上。<br>消息消费者向 Filter Server拉取消息，Filterserver将消息消费者的拉取命令转发到Broker，然后对返回的消息执行消息过滤逻辑，最终将消息返回给消费端。<br>由于FilterServer与Broker运行在同一台机器上，消息的传输是通过本地回环通信，不会浪费Broker端的网络资源</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>列举你所经历过的可以使用延迟消息来解决的技术问题?</p>

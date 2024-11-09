@@ -1,0 +1,75 @@
+<hr>
+<h2 id="title-5定制化搜索场景设计和实现description-5定制化搜索场景设计和实现date-2024-10-11-09-50-47tags"><a href="#title-5定制化搜索场景设计和实现description-5定制化搜索场景设计和实现date-2024-10-11-09-50-47tags" class="headerlink" title="title: 5定制化搜索场景设计和实现description: 5定制化搜索场景设计和实现date: 2024-10-11 09:50:47tags:"></a>title: 5定制化搜索场景设计和实现<br>description: 5定制化搜索场景设计和实现<br>date: 2024-10-11 09:50:47<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>评分机制的概念和应用扩展</li>
+<li>置顶搜索的设计和实现</li>
+</ul>
+<p>目标</p>
+<ul>
+<li>评分机制</li>
+<li>置顶搜索</li>
+</ul>
+<h1 id="Elastic-Search评分机制"><a href="#Elastic-Search评分机制" class="headerlink" title="Elastic Search评分机制"></a>Elastic Search评分机制</h1><p>搜索本质：计算文档与查询的匹配程度<br>匹配的依据是评分</p>
+<h2 id="相关性原理"><a href="#相关性原理" class="headerlink" title="相关性原理"></a>相关性原理</h2><h3 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h3><p>TF 分词频率 Term Frequence<br>IDF 逆文档频率 Inverse Document Frequency<br>关联度 &#x3D; 词频(TF)与逆文档频率(IDF)的乘积<br>TF&#x3D;某个分词在文章中出现的次数&#x2F;此文档出现次数最多的词的出现次数<br>IDF&#x3D; Log( 文档总数&#x2F;(包含该词的文档数 +1))<br>举例</p>
+<pre><code>示例:考虑一个包含100个单词的文档，其中“天&quot;这个分词出现了10次，那么TF =(10 / 100)= 0.1
+并且假设索引中有1000W份文档数量，其中有1000份文档中出现了“天&quot;这个分词，此时逆文档频率(IDF)计算为IDF = log(10,000,000/1,000)=4最终，TD-IDF计算为 TF*IDF =0.1*4 =0.4
+</code></pre>
+<h3 id="向量空间模型"><a href="#向量空间模型" class="headerlink" title="向量空间模型"></a>向量空间模型</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/7%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2/5%E5%AE%9A%E5%88%B6%E5%8C%96%E6%90%9C%E7%B4%A2%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/5-%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B.png"></p>
+<h2 id="控制评分"><a href="#控制评分" class="headerlink" title="控制评分"></a>控制评分</h2><ul>
+<li>权重 boosting</li>
+<li>自定义评分 function_score</li>
+<li>查询后二次评分 rescore_query</li>
+</ul>
+<h3 id="权重"><a href="#权重" class="headerlink" title="权重"></a>权重</h3><p>Boost的含义：<br>当boost&gt;1时，打分的相关度相对性提升<br>当0&lt;boost&lt;1时，打分的权重相对性降低<br>当boost&lt;0时，贡献负分</p>
+<pre><code>{
+    &quot;query&quot;:{
+        &quot;boosting&quot;:{
+            &quot;positive&quot;:{
+                &quot;term&quot;:{
+                    &quot;content&quot;:{
+                        &quot;value&quot; :&quot;elasticsearch&quot;
+                    }
+                }
+            },
+            &quot;negative&quot;:{
+                &quot;term&quot;:{
+                    &quot;content&quot;:{
+                        &quot;&#39;value&quot;: &quot;solr&quot;
+                    }
+                }
+            },
+            &quot;negative_boost&quot;: 0.2
+        }
+    }
+}
+</code></pre>
+<p>匹配上positive的内容会放到结果集中<br>如果匹配上positive并且也匹配上了negative，那么降低这样的文档score<br>negative_boost:控制降低score的系数</p>
+<h3 id="自定义评分"><a href="#自定义评分" class="headerlink" title="自定义评分"></a>自定义评分</h3><ul>
+<li>script score (最常见)<br>script脚本评分，灵活度最高</li>
+<li>weight<br>字段权重评分</li>
+<li>random_score<br>随机评分</li>
+<li>field_value_factor<br>字段值因子评分</li>
+<li>decay functions<br>gauss&#x2F;linear&#x2F;exp等衰减函数</li>
+</ul>
+<h4 id="script-socre-Plainess脚本"><a href="#script-socre-Plainess脚本" class="headerlink" title="script_socre - Plainess脚本"></a>script_socre - Plainess脚本</h4><p>应用场景：定义最终评分的计算公式</p>
+<ul>
+<li>字段再加工&#x2F;统计输出</li>
+<li>字段之间逻辑运算</li>
+<li>定义特殊过滤条件</li>
+<li>对字段个性化增删改操作</li>
+</ul>
+<pre><code>Script pinnedscript =new Script(&quot;&quot; + keyWord + &quot;&#39;==doc[&#39;name.keyword&#39;].value ? 0:1&quot;)
+ScriptSortBuilder pinnedSort = new ScriptSortBuilder(pinnedscriptScriptSortBuilder.ScriptSortType.NUMBER).order(SortOrder.Asc);
+</code></pre>
+<h1 id="基于Elastic-Search实现置顶搜索"><a href="#基于Elastic-Search实现置顶搜索" class="headerlink" title="基于Elastic Search实现置顶搜索"></a>基于Elastic Search实现置顶搜索</h1><p>置顶搜索场景和需求<br>业务场景:对特定编号(如客服编号等)的业务数据进行置顶<br>核心诉求：可配置、可扩展、可控制有效期</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>创建配置表</li>
+<li>集成置顶搜索</li>
+</ul>
+<pre><code>//1.从数据库中获取置顶搜索配置项PinnedQueryConfig pinnedQueryConfig =...;
+//2，根据配置项内容构建搜索脚本
+Script staffPinnedScript =new Script(...);
+//3.创建ScriptSortBuilderScriptSortBuilder moviePinnedSort = new ScriptSortBuilder(staffPinnedScriptScriptSortBuilder.ScriptSortType.NUMBER).order(SortOrder.Asc);
+//4，整合到SearchSourceBuildersourceBuilder.sort(staffPinnedSort);
+</code></pre>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如果不希望特定的内容出现在搜索结果中，你有什么实现方法?</p>

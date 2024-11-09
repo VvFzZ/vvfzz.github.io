@@ -1,0 +1,143 @@
+<hr>
+<h2 id="title-3使用SpringCloudStream重构消息通信机制description-3使用SpringCloudStream重构消息通信机制date-2024-11-02-16-46-25tags"><a href="#title-3使用SpringCloudStream重构消息通信机制description-3使用SpringCloudStream重构消息通信机制date-2024-11-02-16-46-25tags" class="headerlink" title="title: 3使用SpringCloudStream重构消息通信机制description: 3使用SpringCloudStream重构消息通信机制date: 2024-11-02 16:46:25tags:"></a>title: 3使用SpringCloudStream重构消息通信机制<br>description: 3使用SpringCloudStream重构消息通信机制<br>date: 2024-11-02 16:46:25<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>消息通讯平台化设计思想与结构</li>
+<li>使用Spring Cloud Stream重构消息通信机制</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>Spring Cloud Stream整体架构</li>
+<li>Spring Cloud Stream应用方式</li>
+</ul>
+<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><h2 id="系统集成和消息通信回顾"><a href="#系统集成和消息通信回顾" class="headerlink" title="系统集成和消息通信回顾"></a>系统集成和消息通信回顾</h2><ul>
+<li>企业集成模式解决方案<br>Enterprise Integration Pattern，EIP<br>端点、消息、通道、路由、转换</li>
+<li>RocketMQ架构<br>生产者集群、消费者集群、Broker集群、NameServer集群</li>
+<li>平台化消息通信机制<br>提供一套通用API，整合不同消息中间件（ActiveMQ、RocketMQ、Kafka）</li>
+</ul>
+<p>Spring消息通信技术体系</p>
+<ul>
+<li>Spring Cloud Stream</li>
+<li>Spring Integration</li>
+<li>Spring Messaging</li>
+</ul>
+<h2 id="SpringCloudStream对称架构"><a href="#SpringCloudStream对称架构" class="headerlink" title="SpringCloudStream对称架构"></a>SpringCloudStream对称架构</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/3%E4%BD%BF%E7%94%A8SpringCloudStream%E9%87%8D%E6%9E%84%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6/3-SpringCloudStream%E6%9E%B6%E6%9E%84.png"></p>
+<h2 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h2><h3 id="Source-Sink"><a href="#Source-Sink" class="headerlink" title="Source&#x2F;Sink"></a>Source&#x2F;Sink</h3><pre><code>//生成消息
+public interface Source {
+    String OUTPUT =&quot;output&quot;;
+    @Output(Source.OUTPUT)
+    MessageChannel output();
+}
+//消费消息
+public interface Sink{
+    String INPUT =&quot;input&quot;;
+    @Input(Source.INPUT)
+    SubscribableChannel input();
+}
+</code></pre>
+<h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>自定义</p>
+<pre><code>//定义一个输入通道和两个输出通道
+public interface MyChannel{
+    @Input
+    SubscribableChannel input1();
+    @Output
+    Messagechannel output1();
+    @Output
+    MessageChannel output2();
+}
+</code></pre>
+<h3 id="Binder"><a href="#Binder" class="headerlink" title="Binder"></a>Binder</h3><p>不同消息中间件提供不同的Binder实现</p>
+<ul>
+<li>RabbitMo Binder</li>
+<li>Kafka Binder</li>
+<li>RocketMQBinder</li>
+</ul>
+<h1 id="应用方式"><a href="#应用方式" class="headerlink" title="应用方式"></a>应用方式</h1><h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><pre><code>@Component
+public class StreamProducer {
+    //通过StreamBridge发送消息
+    @Autowired
+    private StreamBridge streamBridge;
+
+    public static String CLUSTER MESSAGE OUTPUT = &quot;cluster-out-0&quot;；//不依赖具体消息中间件实现
+    public void sendEvent(Event event){
+        Message&lt;Event&gt; message = new GenericMessage&lt;&gt;(event);
+        streamBridge,send(CLUSTER MESSAGE OUTPUT, message);
+    }
+}
+
+public final class StreamBridge implements SmartInitializingSingleton {
+    public boolean send(String bindingName, @Nullable String binderName, object data, MimeTypeoutputContentType){
+        if(!(data instanceof Message)){
+            data =MessageBuilder.withPayload(data).build();
+        }
+
+        Messagechannel messagechannel = this.resolveDestination(bindingName,producerProperties,binderName);
+
+        if(data instanceof Message){
+            data =MessageBuilder.fromMessage((Message)data).setHeader(MessageUtils,TARGET PROTOCOL, &quot;streamBridge&quot;).build();
+        }
+
+        Message&lt;byte[]&gt;resultMessage = (Message)((Function)functionToInvoke).apply(data);
+        //底层还是通过MessageChannel发送消息
+        return messageChannel.send(resultMessage);
+    }
+}
+</code></pre>
+<p>配置</p>
+<pre><code>spring:
+ cloud:
+  stream:
+   rocketmq:
+    binder:
+     name-server: localhost:9876 //指定NameServer
+    bindings:
+     cluster-out-0: //Source
+      producer:
+       group: output_0_group //指定生产者组
+   bindings:
+    cluster-out-0:
+     destination: cluster //指定Topic
+</code></pre>
+<h2 id="消费消息"><a href="#消费消息" class="headerlink" title="消费消息"></a>消费消息</h2><pre><code>@Component
+public class StreamConsumer {
+    @Bean
+    public Consumer&lt;Event&gt; consume(){ //函数式
+        return message -{
+            System.out.println(&quot;Received message :+ message);
+        }；
+    }
+}
+</code></pre>
+<p>配置</p>
+<pre><code>spring:
+ cloud:
+  stream:
+   function:
+    definition: cluster
+   rocketmq:
+    binder:
+     name-server:localhost:9876 //NameServer
+   bindings:
+    cluster-in-0: //Sink
+     destination: cluster //Topic
+     group: cluster-group //分组
+</code></pre>
+<h2 id="延迟消息"><a href="#延迟消息" class="headerlink" title="延迟消息"></a>延迟消息</h2><p>RocketMQ特有的延迟队列，会依赖RocketMQ组件，牺牲通用性实现特定功能</p>
+<pre><code>@Component
+public class StreamDelayProducer {
+    @Autowired
+    private StreamBridge streamBridge;
+    public static String CLUSTER_MESSAGE_OUTPUT =&quot;cluster-out-0&quot;;
+
+    public void sendEvent(Event event){
+        Map&lt;String,Object&gt; headers = new HashMap&lt;&gt;();
+        // MessageConst.PROPERTY_DELAY_TIME_LEVEL RocketMQ组件
+        headers.put(MessageConst.PROPERTY_DELAY_TIME_LEVEL, 4);
+        Message&lt;Event&gt; message = new GenericMessage&lt;&gt;(event, headers);
+        streamBridge.send(CLUSTER_MESSAGE_OUTPUT, message);
+    }
+}
+</code></pre>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>引入spring-cloud-starter-stream-rocketmg组件（原有依赖可删除rocketmq-spring-boot-starter，保留不冲突）</p>
+<p>通过StreamBridge发送消息、使用函数式编程方式响应消息</p>
+<p>使用Binder配置控制发布和消费过程</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>你认为使用Spring Cloud stream如何简化了RocketMQ的开发过程?</p>

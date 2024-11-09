@@ -1,0 +1,92 @@
+<hr>
+<h2 id="title-4基于RocketMQ实现消息消费description-4基于RocketMQ实现消息消费date-2024-10-16-17-07-05tags"><a href="#title-4基于RocketMQ实现消息消费description-4基于RocketMQ实现消息消费date-2024-10-16-17-07-05tags" class="headerlink" title="title: 4基于RocketMQ实现消息消费description: 4基于RocketMQ实现消息消费date: 2024-10-16 17:07:05tags:"></a>title: 4基于RocketMQ实现消息消费<br>description: 4基于RocketMQ实现消息消费<br>date: 2024-10-16 17:07:05<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>消息消费方式</li>
+<li>可靠性设计</li>
+</ul>
+<h1 id="RocketMQ消息消费方式"><a href="#RocketMQ消息消费方式" class="headerlink" title="RocketMQ消息消费方式"></a>RocketMQ消息消费方式</h1><ul>
+<li><p>推 push<br>push from topic</p>
+</li>
+<li><p>拉 pull<br>from queue pull</p>
+</li>
+</ul>
+<p><strong>区别</strong></p>
+<ul>
+<li><p>推，实时性高，增加服务端负载；对消费端能力要求高（推太快消费端出现限流问题）</p>
+</li>
+<li><p>拉，主动权在客户端（定时任务拉取），可控性好，PULL的时机很重要，间隔过短则空请求会多浪费资源，隔太长则消息不能及时处理</p>
+</li>
+</ul>
+<h2 id="消费者的实现代码分析"><a href="#消费者的实现代码分析" class="headerlink" title="消费者的实现代码分析"></a>消费者的实现代码分析</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/4%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/4-%E6%B6%88%E8%B4%B9%E8%80%85%E7%B1%BB%E5%9B%BE.png"><br><strong>MQConsumer</strong></p>
+<ul>
+<li><code>sendMessageBack</code>： 如果消费失败，消息会被重新发送到Broker并在一定时间之后再次被消费</li>
+<li><code>fetchSubscribeMessageQueues</code>： 基于Topic从消费者缓存中获取消息队列信息</li>
+</ul>
+<p><code>MQPullConsumer</code><br>抓取消息需要开发自己实现，基于topic获取MessageQueue集合并遍历，针对每一个MessageQueue批量取消息。取消息时记录队列下次取的开始偏移量（偏底层），直到取完该队列切换到下一个。<br><code>pullBlockIfNotFound</code>拉取时，没有消息则阻塞，直到有消息可拉取</p>
+<p><code>MQPushconsumer</code><br>封装轮询过程，注册MessageListener监听器获取消息，唤醒MessageListener的consumeMessage方法进行消费。</p>
+<p>registerMessageListener注册监听器</p>
+<ul>
+<li>MessageListenerConcurrently并发监听器（同时处理）</li>
+<li>MessaqeListenerOrderly顺序监听器（一个一个处理）<br>subscribe订阅主题</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>rocketmq:
+  name-server: 127.0.0.1:9876
+</code></pre>
+<ul>
+<li>添加注解<code>RocketMOMessageListener</code></li>
+<li>实现<code>RocketMoListener&lt;Event&gt;</code>接口</li>
+<li>实现消费方法<code>onMessage</code></li>
+</ul>
+<pre><code>@Component
+@RocketMQMessageListener(consumerGroup = &quot;consumer_group&quot;, topic = &quot;topic&quot;)
+public class ImMessageConsumer implements RocketMQListener&lt;MessageCreatedEvent&gt; {
+
+    @Override
+    public void onMessage(MessageCreatedEvent message) {
+        System.out.println(&quot;Received message : &quot; + message);
+    }
+}
+</code></pre>
+<h1 id="RocketMQ消息可靠性机制"><a href="#RocketMQ消息可靠性机制" class="headerlink" title="RocketMQ消息可靠性机制"></a>RocketMQ消息可靠性机制</h1><p>消息丢失情况</p>
+<ol>
+<li>生产者发送消息到Broker</li>
+<li>Broker内部存储消息到磁盘、主从同步时</li>
+<li>Broker把消息推送给消费者、消费者拉去消息时</li>
+</ol>
+<h2 id="保证可靠性"><a href="#保证可靠性" class="headerlink" title="保证可靠性"></a>保证可靠性</h2><h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><ul>
+<li>单项发送<br>不建议使用（无法判断是否发送成功，不可靠消息发送方式）</li>
+<li>同步发送<br>发送消息后检查返回状态，判断是否持久化成功，如果超时或失败，重试，注意幂等性</li>
+<li>异步发送<br>根据回调函数结果判断是否重试，来保证消息的可靠性，注意幂等性</li>
+</ul>
+<p>重试策略</p>
+<ul>
+<li>同步<br>轮转到下一个Broker重试，最多重试2次</li>
+<li>异步<br>只在当前Broker重试，最多重试2次</li>
+<li>自定义<br>定制化重试逻辑，如存储消息后定时发送到broker</li>
+</ul>
+<h3 id="broker"><a href="#broker" class="headerlink" title="broker"></a>broker</h3><p>丢失场景：刷盘、主从同步</p>
+<h4 id="刷盘"><a href="#刷盘" class="headerlink" title="刷盘"></a>刷盘</h4><ul>
+<li>同步刷盘<br>消息写入内存的 PageCache后，立刻通知刷盘线程刷盘，然后等待刷盘完成，刷盘线程执行完成后唤醒等待的线程，返回消息写成功的状态</li>
+<li>异步刷盘（默认）<br>消息写入到内存的 PageCache就立刻给客户端返回写操作成功，当PageCache中的消息积累到一定的量或定时触发一次写磁盘操作</li>
+</ul>
+<p>优缺点<br>同步刷盘，数据安全保证持久化，但吞吐量不大<br>异步刷盘，吞吐量大性能高，但PageCache中数据可能丢失，不保证数据绝对安全</p>
+<p>吞吐量与安全性权衡</p>
+<h4 id="主从同步"><a href="#主从同步" class="headerlink" title="主从同步"></a>主从同步</h4><ul>
+<li>同步复制(推荐)<br>Master和Slave均写成功后才反馈给客户端写成功状态<br>若Master故障，Slave有全量备份，易恢复，但同步复制会增大数据写入延迟，降低系统吞吐量</li>
+<li>异步复制<br>只要Master写成功，即可反馈给客户端写成功状态<br>系统拥有较低的延迟和较高的吞吐量，但是如果Master出了故障，有些数据因为没有被写入Slave，有可能会丢</li>
+</ul>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>重试策略</p>
+<ul>
+<li>只有返回CONSUME SUCCESS才算消费完成</li>
+<li>返回CONSUME LATER则会按照不同的messageDelayLevel时间进行再次消费，最长时间为2个小时后再次进行消费重试</li>
+<li>如果消费满16次之后还是未能消费成功则不再重试，会将消息发送到死信队列</li>
+<li>通过RocketMQ提供的相关接口从死信队列获取到相应的消息</li>
+</ul>
+<p>死信队列：消息会存放在死信队，不消费会一直存在，也可通过API从死信队取数据消费，不会自动消费。</p>
+<h3 id="可靠性总结"><a href="#可靠性总结" class="headerlink" title="可靠性总结"></a>可靠性总结</h3><ul>
+<li>消息发送方<br>通过不同的重试策略保证了消息的可靠发送</li>
+<li>Broker服务端<br>通过不同的刷盘机制以及主从复制来保证消息的可靠存储</li>
+<li>消息消费方<br>通过至少消费成功一次以及消费重试机制来保证消息的可靠消费</li>
+</ul>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如何选择合适的策略保证RocketMQ消息通信的可靠性？</p>
+<p>能做到不丢消息吗？不丢消息考虑哪些方面，如何选择？</p>

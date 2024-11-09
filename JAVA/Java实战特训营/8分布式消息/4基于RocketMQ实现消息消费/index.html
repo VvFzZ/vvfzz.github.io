@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/4%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/4%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/","path":"JAVA/Java实战特训营/8分布式消息/4基于RocketMQ实现消息消费/","title":"4基于RocketMQ实现消息消费"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>4基于RocketMQ实现消息消费 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RocketMQ%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">RocketMQ消息消费方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">消费者的实现代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RocketMQ%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">RocketMQ消息可靠性机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">保证可靠性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-number">2.1.1.</span> <span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#broker"><span class="nav-number">2.1.2.</span> <span class="nav-text">broker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B7%E7%9B%98"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">刷盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">主从同步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-number">2.1.3.</span> <span class="nav-text">消费者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%80%A7%E6%80%BB%E7%BB%93"><span class="nav-number">2.1.4.</span> <span class="nav-text">可靠性总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/4%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="4基于RocketMQ实现消息消费 | VvfzZ">
+      <meta itemprop="description" content="4基于RocketMQ实现消息消费">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4基于RocketMQ实现消息消费
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-10-16 17:07:05" itemprop="dateCreated datePublished" datetime="2024-10-16T17:07:05+08:00">2024-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-10-31 12:17:12" itemprop="dateModified" datetime="2024-10-31T12:17:12+08:00">2024-10-31</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">4基于RocketMQ实现消息消费</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>消息消费方式</li>
+<li>可靠性设计</li>
+</ul>
+<h1 id="RocketMQ消息消费方式"><a href="#RocketMQ消息消费方式" class="headerlink" title="RocketMQ消息消费方式"></a>RocketMQ消息消费方式</h1><ul>
+<li><p>推 push<br>push from topic</p>
+</li>
+<li><p>拉 pull<br>from queue pull</p>
+</li>
+</ul>
+<p><strong>区别</strong></p>
+<ul>
+<li><p>推，实时性高，增加服务端负载；对消费端能力要求高（推太快消费端出现限流问题）</p>
+</li>
+<li><p>拉，主动权在客户端（定时任务拉取），可控性好，PULL的时机很重要，间隔过短则空请求会多浪费资源，隔太长则消息不能及时处理</p>
+</li>
+</ul>
+<h2 id="消费者的实现代码分析"><a href="#消费者的实现代码分析" class="headerlink" title="消费者的实现代码分析"></a>消费者的实现代码分析</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/4%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9/4-%E6%B6%88%E8%B4%B9%E8%80%85%E7%B1%BB%E5%9B%BE.png"><br><strong>MQConsumer</strong></p>
+<ul>
+<li><code>sendMessageBack</code>： 如果消费失败，消息会被重新发送到Broker并在一定时间之后再次被消费</li>
+<li><code>fetchSubscribeMessageQueues</code>： 基于Topic从消费者缓存中获取消息队列信息</li>
+</ul>
+<p><code>MQPullConsumer</code><br>抓取消息需要开发自己实现，基于topic获取MessageQueue集合并遍历，针对每一个MessageQueue批量取消息。取消息时记录队列下次取的开始偏移量（偏底层），直到取完该队列切换到下一个。<br><code>pullBlockIfNotFound</code>拉取时，没有消息则阻塞，直到有消息可拉取</p>
+<p><code>MQPushconsumer</code><br>封装轮询过程，注册MessageListener监听器获取消息，唤醒MessageListener的consumeMessage方法进行消费。</p>
+<p>registerMessageListener注册监听器</p>
+<ul>
+<li>MessageListenerConcurrently并发监听器（同时处理）</li>
+<li>MessaqeListenerOrderly顺序监听器（一个一个处理）<br>subscribe订阅主题</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rocketmq:</span><br><span class="line">  name-server: 127.0.0.1:9876</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加注解<code>RocketMOMessageListener</code></li>
+<li>实现<code>RocketMoListener&lt;Event&gt;</code>接口</li>
+<li>实现消费方法<code>onMessage</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@RocketMQMessageListener(consumerGroup = &quot;consumer_group&quot;, topic = &quot;topic&quot;)</span><br><span class="line">public class ImMessageConsumer implements RocketMQListener&lt;MessageCreatedEvent&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onMessage(MessageCreatedEvent message) &#123;</span><br><span class="line">        System.out.println(&quot;Received message : &quot; + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="RocketMQ消息可靠性机制"><a href="#RocketMQ消息可靠性机制" class="headerlink" title="RocketMQ消息可靠性机制"></a>RocketMQ消息可靠性机制</h1><p>消息丢失情况</p>
+<ol>
+<li>生产者发送消息到Broker</li>
+<li>Broker内部存储消息到磁盘、主从同步时</li>
+<li>Broker把消息推送给消费者、消费者拉去消息时</li>
+</ol>
+<h2 id="保证可靠性"><a href="#保证可靠性" class="headerlink" title="保证可靠性"></a>保证可靠性</h2><h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><ul>
+<li>单项发送<br>不建议使用（无法判断是否发送成功，不可靠消息发送方式）</li>
+<li>同步发送<br>发送消息后检查返回状态，判断是否持久化成功，如果超时或失败，重试，注意幂等性</li>
+<li>异步发送<br>根据回调函数结果判断是否重试，来保证消息的可靠性，注意幂等性</li>
+</ul>
+<p>重试策略</p>
+<ul>
+<li>同步<br>轮转到下一个Broker重试，最多重试2次</li>
+<li>异步<br>只在当前Broker重试，最多重试2次</li>
+<li>自定义<br>定制化重试逻辑，如存储消息后定时发送到broker</li>
+</ul>
+<h3 id="broker"><a href="#broker" class="headerlink" title="broker"></a>broker</h3><p>丢失场景：刷盘、主从同步</p>
+<h4 id="刷盘"><a href="#刷盘" class="headerlink" title="刷盘"></a>刷盘</h4><ul>
+<li>同步刷盘<br>消息写入内存的 PageCache后，立刻通知刷盘线程刷盘，然后等待刷盘完成，刷盘线程执行完成后唤醒等待的线程，返回消息写成功的状态</li>
+<li>异步刷盘（默认）<br>消息写入到内存的 PageCache就立刻给客户端返回写操作成功，当PageCache中的消息积累到一定的量或定时触发一次写磁盘操作</li>
+</ul>
+<p>优缺点<br>同步刷盘，数据安全保证持久化，但吞吐量不大<br>异步刷盘，吞吐量大性能高，但PageCache中数据可能丢失，不保证数据绝对安全</p>
+<p>吞吐量与安全性权衡</p>
+<h4 id="主从同步"><a href="#主从同步" class="headerlink" title="主从同步"></a>主从同步</h4><ul>
+<li>同步复制(推荐)<br>Master和Slave均写成功后才反馈给客户端写成功状态<br>若Master故障，Slave有全量备份，易恢复，但同步复制会增大数据写入延迟，降低系统吞吐量</li>
+<li>异步复制<br>只要Master写成功，即可反馈给客户端写成功状态<br>系统拥有较低的延迟和较高的吞吐量，但是如果Master出了故障，有些数据因为没有被写入Slave，有可能会丢</li>
+</ul>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>重试策略</p>
+<ul>
+<li>只有返回CONSUME SUCCESS才算消费完成</li>
+<li>返回CONSUME LATER则会按照不同的messageDelayLevel时间进行再次消费，最长时间为2个小时后再次进行消费重试</li>
+<li>如果消费满16次之后还是未能消费成功则不再重试，会将消息发送到死信队列</li>
+<li>通过RocketMQ提供的相关接口从死信队列获取到相应的消息</li>
+</ul>
+<p>死信队列：消息会存放在死信队，不消费会一直存在，也可通过API从死信队取数据消费，不会自动消费。</p>
+<h3 id="可靠性总结"><a href="#可靠性总结" class="headerlink" title="可靠性总结"></a>可靠性总结</h3><ul>
+<li>消息发送方<br>通过不同的重试策略保证了消息的可靠发送</li>
+<li>Broker服务端<br>通过不同的刷盘机制以及主从复制来保证消息的可靠存储</li>
+<li>消息消费方<br>通过至少消费成功一次以及消费重试机制来保证消息的可靠消费</li>
+</ul>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如何选择合适的策略保证RocketMQ消息通信的可靠性？</p>
+<p>能做到不丢消息吗？不丢消息考虑哪些方面，如何选择？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/3%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83/" rel="prev" title="3基于RocketMQ实现消息发布">
+                  <i class="fa fa-chevron-left"></i> 3基于RocketMQ实现消息发布
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/5RocketMQ%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" rel="next" title="5RocketMQ高级特性">
+                  5RocketMQ高级特性 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

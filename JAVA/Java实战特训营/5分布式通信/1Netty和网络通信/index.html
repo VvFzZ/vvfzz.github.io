@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-29 23:05:56" itemprop="dateModified" datetime="2024-09-29T23:05:56+08:00">2024-09-29</time>
+      <time title="Modified: 2024-10-21 15:25:38" itemprop="dateModified" datetime="2024-10-21T15:25:38+08:00">2024-10-21</time>
     </span>
 
   
@@ -246,7 +246,7 @@
 <h2 id="netty逻辑架构"><a href="#netty逻辑架构" class="headerlink" title="netty逻辑架构"></a>netty逻辑架构</h2><ul>
 <li><p>服务编排层<br>负责组装各类服务，它是 Netty 的核心处理链，用以实现网络事件的动态编排和有序传播<br>ChannelPipeline<br>ChannelHandler<br>ChannelHandlerContext</p>
 </li>
-<li><p>事件调度层<br>通过 Reactor 模型对各类事件进行聚合处理，通过 Selector 主循环线程集成多种事件<br>EventLoopGroup<br>EventLoop</p>
+<li><p>事件调度层<br>通过 Reactor 模型对各类事件进行聚合处理，通过Selector 主循环线程集成多种事件<br>EventLoopGroup<br>EventLoop</p>
 </li>
 <li><p>网络通信层<br>执行网络I&#x2F;O操作，并触发各种网络事件，这些网络事件会分发给事件调度层进行处理<br>BootStrap<br>ServerBootStrap<br>Channel</p>
 </li>

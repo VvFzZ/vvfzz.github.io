@@ -82,3 +82,4 @@ class MyImp1 implements MyIntf1 {
 MyIntf1 myImp1 = MyIntf1.DEFAULT.create12(&quot;hello vvf&quot;);
 </code></pre>
 <h2 id="Import"><a href="#Import" class="headerlink" title="@Import"></a>@Import</h2><p>？？？???</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="ConfigurationProperties注解"><a href="#ConfigurationProperties注解" class="headerlink" title="ConfigurationProperties注解"></a>ConfigurationProperties注解</h3><p>@RefreshScope # 热更新<br>@ConfigurationProperties(prefix&#x3D;”elasticsearch.info”){<br>    private String username;<br>    private String password;<br>    private String hostname;<br>    private int port;<br>    private String scheme;<br>}</p>

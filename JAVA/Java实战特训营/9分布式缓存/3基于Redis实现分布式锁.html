@@ -1,0 +1,157 @@
+<hr>
+<h2 id="title-3基于Redis实现分布式锁description-3基于Redis实现分布式锁date-2024-10-19-15-26-36tags"><a href="#title-3基于Redis实现分布式锁description-3基于Redis实现分布式锁date-2024-10-19-15-26-36tags" class="headerlink" title="title: 3基于Redis实现分布式锁description: 3基于Redis实现分布式锁date: 2024-10-19 15:26:36tags:"></a>title: 3基于Redis实现分布式锁<br>description: 3基于Redis实现分布式锁<br>date: 2024-10-19 15:26:36<br>tags:</h2><ul>
+<li>分布式锁概念和实现</li>
+<li>Redisson分布式锁原理</li>
+</ul>
+<h1 id="分布式锁概念和实现"><a href="#分布式锁概念和实现" class="headerlink" title="分布式锁概念和实现"></a>分布式锁概念和实现</h1><p>Distributed Lock<br><strong>应用场景</strong><br>重复操作(?)、并发数据正确</p>
+<p><strong>技术需求</strong></p>
+<ul>
+<li>互斥</li>
+<li>防止死锁<br>设置有效时间，避免无法释放</li>
+<li>性能<br>减少锁等待时间导致大量阻塞，粒度尽量小</li>
+<li>容错<br>保证外部系统正常（不影响业务），客户端加锁解锁过程可控</li>
+</ul>
+<p><strong>Redis实现分布式锁</strong><br>set key value[expiration EX seconds|PX milliseconds][NX|XX]<br>EX 设置键的过期时间为second秒<br>PX 设置键的过期时间为millisecond 毫秒<br>NX 只在键不存在时，才对键进行设置操作。SET key value NX 效果等同于 SETNX key value<br>XX:只在键已经存在时，才对键进行设置操作<br>例:SET resource_name my_random_value NX PX 30000<br>效果:当resource_name这个key不存在时创建这样的key，设值为my_random_value，并设置过期时间30000毫秒</p>
+<p><strong>原子性和Lua脚本</strong><br>Redis服务器会单线程原子性执行Lua脚本</p>
+<p>分布式删除key</p>
+<pre><code>//分布式锁删除一个key
+if redis.call(&quot;get&quot;,KEYS[1])== ARGV[1] then
+    return redis.call(&quot;del&#39;,KEYS[1])
+else
+    return 0
+end
+</code></pre>
+<p>限制访问频率（指定时间最大访问次数）</p>
+<pre><code>//实现一个访问颗率限制功能
+local times=redis.call(&#39;incr&#39;,KEYS[1])
+// 如果是第一次进来，设置一个过期时间
+if times == 1 then
+    redis.call(&#39;expire&#39;,KEYS[1],ARGV[1])
+end
+//如果在指定时间内访问次数大于指定次数，则返回0，表示访问被限制
+if times &gt; tonumber(ARGV[2]) then
+    return 0
+end 
+// 返回1，允许被访问
+return 1
+</code></pre>
+<h2 id="Redission分布式锁"><a href="#Redission分布式锁" class="headerlink" title="Redission分布式锁"></a>Redission分布式锁</h2><p>实现了可重入锁(ReentrantLock)公平锁(FairLock)、联锁(MultiLock)红锁(RedLock)、读写锁(ReadWriteLock)等,还提供许多分布式服务<br>Redisson支持单点模式、主从模式、哨兵模式、集群模式，只是配置的不同。</p>
+<pre><code>public class RedissonLock {
+    private Redisson redisson;
+    //加锁
+    public void lock(string lockName, long leaseTime){
+        RLock rLock = redisson.getLock(lockName);
+        rLock.lock(leaseTime,TimeUnit.SECONDS);
+    }
+    //释放锁
+    public void unlock(string lockName){
+        redisson.getLock(lockName).unlock();
+    }
+    //判断是否加锁
+    public boolean isLock(string lockName){
+        RLock rLock = redisson.getLock(lockName);
+        return rLock.isLocked();
+    }
+    //获取锁
+    public boolean tryLock(String lockName, long leaseTime){
+        RLock rLock =redisson.getLock(lockName);
+        boolean getLock = false;
+        try {
+            getLock = rLock.tryLock(leaseTime, TimeUnit.SECONDS);
+            } catch (InterruptedException e){
+                e.printstackTrace();
+            }
+            return false;
+        return getLock;
+    }
+}
+</code></pre>
+<h2 id="RedisTemplate分布式锁"><a href="#RedisTemplate分布式锁" class="headerlink" title="RedisTemplate分布式锁"></a>RedisTemplate分布式锁</h2><p><strong>高版本</strong></p>
+<pre><code>//加锁
+public boolean setIfNotExists(String key, String value, int seconds){
+    key = getkey(key);
+    return redisTemplate.opsForValue().setIfAbsent(key, value,seconds,TimeUnit.SEcONDs);
+}
+//释放
+public Boolean unlock(string key, string value){
+    key = getKey(key);
+    return redisTemplate.execute(UNLOCK SCRIPT, Collections,singletonList(key), value);
+}
+</code></pre>
+<p><strong>低版本</strong><br>需自己通过脚本实现</p>
+<pre><code>//加锁
+public Boolean lock(String key, String value, int expireseconds){
+    key = getkey(key);
+    return redisTemplate.execute(LocK SCRIPT, Collections,singletonList(key), value, expireseconds);
+}
+//lua脚本，用来设置分布式锁
+private static final string LOCK LUA SCRIPT =
+    &quot;if redis.call(&#39;setNx&#39;,KEYS[1],ARGV[1])then\n&quot; +
+    &quot;   if redis.call(&#39;get&#39;,KEYS[1])==ARGV[1] then\n&quot; +
+    &quot;       return redis.call(&#39;expire&#39;,KEYS[1],ARGV[2])\n&quot; +
+    &quot;   else\n&quot;+
+    &quot;       return 0\n&quot; +
+    &quot;   end\n&quot; +
+    &quot;end\n&quot;;
+private static final RedisScript&lt;Boolean&gt; LOCK SCRIPT = RedisScript.of(LOCK LUA SCRIPT, Boolean.class);
+
+//释放锁
+//lua脚本，用来释放分布式锁
+private static final String UNLOCK LUA SCRIPT =
+    &quot;if redis.call(&#39;get&#39;,KEYS[1])== ARGV[1] then\n&quot; +
+    &quot;   return redis.call(&#39;del&#39;,KEYS[1])\n&quot;
+    &quot;else\n&quot; +
+    &quot;   return 0\n&quot;+
+    &quot;end&quot;;
+private static final RedisScript&lt;Boolean&gt; UNLOCK SCRIPT = RedisScript.Of(UNLOCK LUA SCRIPT,Boolean.class);
+</code></pre>
+<h1 id="Redisson分布式锁原理"><a href="#Redisson分布式锁原理" class="headerlink" title="Redisson分布式锁原理"></a>Redisson分布式锁原理</h1><p>典型的分布式锁实现</p>
+<p><strong>执行流程</strong><br>获取锁-&gt;成功，启动看门狗 、 执行lua脚本</p>
+<p><strong>看门狗WatchDog</strong><br>业务未处理完成时，自动延长锁时间(默认30s)</p>
+<p><strong>RLock接口</strong></p>
+<pre><code>public interface RRLock {
+    //加锁，锁的有效期默认30秒
+    void lock();
+    
+    //获取锁，如果获取成功，则返回true，如果获取失败(即锁已被其他线程获取)，则返回false
+    boolean tryLock();
+    boolean tryLock(long time, TimeUnit unit)throws InterruptedException;
+    
+    //解锁
+    void unlock();
+    
+    //中断锁，表示该锁可以被中断
+    void lockInterruptibly();
+    void lockInterruptibly(long leaseTime, TimeUnit unit);
+    
+    //检验该锁是否被线程使用，如果被使用返回True
+    boolean isLocked();
+</code></pre>
+<p><code>tryLock</code><br><code>tryAquire</code><br><code>tryLockInnerAsync</code><br><code>unlockInnerAsync</code><br>非本线程持有锁返回nil，重入次数减一，若为0则释放锁，若大于0则延长过期时间<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/9%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/3%E5%9F%BA%E4%BA%8ERedis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/RLock%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E7%B1%BB.png"></p>
+<h2 id="异常情况"><a href="#异常情况" class="headerlink" title="异常情况"></a>异常情况</h2><ul>
+<li>客户端长时间内阻塞导致锁失效<br>网络问题或者GC等原因导致长时间阻塞，然后业务程序还没执行完锁就过期</li>
+<li>Redis服务器时钟漂移<br>如果Redis服务器的机器时间发生了向前跳跃，就会导致这个key过早超时失效</li>
+<li>单点实例安全问题<br>Redis主机在同步锁之前宕机那么向其他及其申请锁就会再次得到这把锁</li>
+</ul>
+<p><strong>RedLock</strong></p>
+<pre><code>//获取多个 RLock 对象
+RLock lock1=redissonclient1.getLock(lockkey);
+RLock lock2 = redissonclient2.getLock(lockKey);
+RLock lock3 =redissonclient3.getLock(lockKey);
+//根据多个RLock对象构建
+RedissonRedLockRedissonRedLock redLock = new RedissonRedLock(lock1, lock2, lock3);
+try {
+    //尝试获取锁
+    boolean res = redLock.tryLock(100，10,TimeUnit.SECONDS);
+    if(res){
+        //成功获得锁，在这里处理业务
+    } catch(Exception e){
+        throw new RuntimeException(&quot;aquire lock fail&quot;);
+    }finally{
+        //无论如何，最后都要解锁
+        redLock.unlock();
+    }
+</code></pre>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>getLock tryLock releaseLock</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>列举日常开发中分布式锁应用场景？<br>Zookeeper实现<br>redis实现</p>
+<h1 id="分布式锁常见问题"><a href="#分布式锁常见问题" class="headerlink" title="分布式锁常见问题"></a>分布式锁常见问题</h1>

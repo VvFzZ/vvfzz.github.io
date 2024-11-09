@@ -1,0 +1,64 @@
+<hr>
+<h2 id="title-1ShardingSpheredescription-1ShardingSpheredate-2024-10-07-15-03-05tags"><a href="#title-1ShardingSpheredescription-1ShardingSpheredate-2024-10-07-15-03-05tags" class="headerlink" title="title: 1ShardingSpheredescription: 1ShardingSpheredate: 2024-10-07 15:03:05tags:"></a>title: 1ShardingSphere<br>description: 1ShardingSphere<br>date: 2024-10-07 15:03:05<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>互联网应用中海量数据的处理方法（分库分表是代表性技术方案）</li>
+<li>掌握ShardingSphere的架构与核心组件</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>分库分表理论和解决方案<br>  垂直拆分、水平拆分<br>  分片（服务端分片、客户端分片）</li>
+<li>ShardingSphere简介<br>  ShardingSphere-JDBC、ShardingSphere-Proxy</li>
+<li>JDBC规范与ShardingSphere原理分析<br>ShardingSphere兼容JDBC规范</li>
+</ul>
+<h1 id="分库分表理论和解决方案"><a href="#分库分表理论和解决方案" class="headerlink" title="分库分表理论和解决方案"></a>分库分表理论和解决方案</h1><p>海量数据存储与关系型数据库</p>
+<ul>
+<li>稳定，可靠，事务性</li>
+<li>单表容量有限：mysql单表千万级</li>
+<li>分库分表解决单表瓶颈</li>
+</ul>
+<h2 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h2><h3 id="表现形式"><a href="#表现形式" class="headerlink" title="表现形式"></a>表现形式</h3><h4 id="垂直拆分"><a href="#垂直拆分" class="headerlink" title="垂直拆分"></a>垂直拆分</h4><ul>
+<li>垂直分库<br>将用户、商品、订单存储在不同数据库中</li>
+<li>垂直分表<br>将用户信息表中头像信息拆分单独头像表</li>
+</ul>
+<h4 id="水平拆分"><a href="#水平拆分" class="headerlink" title="水平拆分"></a>水平拆分</h4><p>根据用户Id取模分库分表</p>
+<h5 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h5><ul>
+<li>取模<br>特定字段hash取模</li>
+<li>范围限定<br>按时间等策略路由到目标数据库和表</li>
+<li>预定义</li>
+</ul>
+<h3 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h3><p>主写从读，分库分表通常和读写分离配合实施</p>
+<h3 id="分库分表的挑战"><a href="#分库分表的挑战" class="headerlink" title="分库分表的挑战"></a>分库分表的挑战</h3><ul>
+<li>多数据库高效治理？</li>
+<li>跨节点关联查询</li>
+<li>跨节点分页与排序</li>
+<li>全局唯一主键</li>
+<li>事务一致性</li>
+</ul>
+<h2 id="分库分表解决方案"><a href="#分库分表解决方案" class="headerlink" title="分库分表解决方案"></a>分库分表解决方案</h2><h3 id="数据分片"><a href="#数据分片" class="headerlink" title="数据分片"></a>数据分片</h3><p>分片(Sharding)，分库分表，都是把数据划分成不同数据片，存储在不同对象中，具体分片方式涉及到实现分库分表的不同解决方案</p>
+<ul>
+<li>客户端分片<br>分片规则和逻辑在应用程序端实现。TDDL、ShardingSphere</li>
+<li>服务端分片<br>使用代理服务器，Cobar、Mycat、ShardingSphere</li>
+</ul>
+<h1 id="ShardingSphere简介"><a href="#ShardingSphere简介" class="headerlink" title="ShardingSphere简介"></a>ShardingSphere简介</h1><h2 id="ShardingSphere-JDBC"><a href="#ShardingSphere-JDBC" class="headerlink" title="ShardingSphere-JDBC"></a>ShardingSphere-JDBC</h2><p>轻量级Java框架，在Java的JDBC层提供的额外服务<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/6%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/1ShardingSphere/1-ShardingSphere-JDBC.png"></p>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
+<li>ORM框架<br>JPA、Hibernate、MyBatis等</li>
+<li>数据库连接池<br>DBCP、C3P0、BoneCP、Druid、HikariCP等</li>
+<li>数据库<br>MySOL、Oracle、sOLServer、PostgresQL等</li>
+</ul>
+<h2 id="ShardingSphere-Proxy"><a href="#ShardingSphere-Proxy" class="headerlink" title="ShardingSphere-Proxy"></a>ShardingSphere-Proxy</h2><p>透明化的数据库代理端，通过实现数据库二进制协议，对异构语言提供支持<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/6%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/1ShardingSphere/1-ShardingSphere-Proxy.png"></p>
+<h3 id="兼容性-1"><a href="#兼容性-1" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
+<li>异构语言<br>封装了数据库二进制协议的服务端版本</li>
+<li>数据库<br>MySOL和PostgresOL</li>
+<li>数据库客户端<br>MySQL命令行客户端、MySQLWorkbench、Navicat等</li>
+</ul>
+<h2 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h2><ul>
+<li>数据分片<br>基于底层数据库提供分库分表解决方案，可以水平扩展计算和存储</li>
+<li>分布式事务<br>基于 XA 和 BASE 的混合事务引擎，提供在独立数据库上的分布式事务功能</li>
+<li>读写分离<br>提供灵活的读写流量拆分和读流量负载均衡</li>
+<li>数据迁移<br>提供跨数据源的数据迁移能力，并可支持重分片扩展</li>
+<li>联邦查询<br>提供跨数据源的复杂查询分析能力，实现跨源的数据关联与聚合</li>
+<li>数据加密<br>提供完整、透明、安全、低成本的数据加密解决方案</li>
+<li>影子库<br>支持不同工作负载下的数据隔离，避免测试数据污染生产环境</li>
+</ul>
+<h1 id="JDBC规范与ShardingSphere原理分析"><a href="#JDBC规范与ShardingSphere原理分析" class="headerlink" title="JDBC规范与ShardingSphere原理分析"></a>JDBC规范与ShardingSphere原理分析</h1><p>Sharding-JDBC是如何做到能够完全兼容IDBC规范的？<br>从JDBC核心API进行切入？<br>智能，透明的分片引擎</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>列举分库分表框架，描述异同点？</p>

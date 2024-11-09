@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/","path":"JAVA/Java实战特训营/11微服务技术组件/5使用SpringCloudGateway实现API网关/","title":"5使用SpringCloudGateway实现API网关"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>5使用SpringCloudGateway实现API网关 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">服务网关基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Gateway%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">Spring Cloud Gateway功能特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Gateway%E6%95%B4%E5%90%88%E5%92%8C%E6%89%A9%E5%B1%95"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud Gateway整合和扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89GlobalFiler"><span class="nav-number">3.1.</span> <span class="nav-text">自定义GlobalFiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89GatewayFilter"><span class="nav-number">3.2.</span> <span class="nav-text">自定义GatewayFilter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">内置过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E6%B5%81%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">3.3.1.</span> <span class="nav-text">限流过滤器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95"><span class="nav-number">3.4.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86"><span class="nav-number">3.4.1.</span> <span class="nav-text">日志管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83"><span class="nav-number">3.4.2.</span> <span class="nav-text">灰度发布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="5使用SpringCloudGateway实现API网关 | VvfzZ">
+      <meta itemprop="description" content="5使用SpringCloudGateway实现API网关">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          5使用SpringCloudGateway实现API网关
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-02 16:46:37" itemprop="dateCreated datePublished" datetime="2024-11-02T16:46:37+08:00">2024-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-07 17:22:23" itemprop="dateModified" datetime="2024-11-07T17:22:23+08:00">2024-11-07</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">5使用SpringCloudGateway实现API网关</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>网关的概念</li>
+<li>网关的组成结构</li>
+<li>SpringCloudGateway的功能特性</li>
+<li>SpringCloudGateway使用方式</li>
+</ul>
+<p>微服务架构中实现服务路由和转发的基础组件</p>
+<p>目录</p>
+<ul>
+<li>服务网关基本概念</li>
+<li>Spring Cloud Gateway功能特性</li>
+<li>Spring Cloud Gateway整合和扩展</li>
+</ul>
+<h1 id="服务网关基本概念"><a href="#服务网关基本概念" class="headerlink" title="服务网关基本概念"></a>服务网关基本概念</h1><p><strong>服务网关结构和功能</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-%E7%BD%91%E5%85%B3%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84.png"></p>
+<h1 id="Spring-Cloud-Gateway功能特性"><a href="#Spring-Cloud-Gateway功能特性" class="headerlink" title="Spring Cloud Gateway功能特性"></a>Spring Cloud Gateway功能特性</h1><p><strong>整体架构</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-SpringCloudGateway%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"><br>Filter 过滤<br>Predicate 谓词（判断）<br><strong>技术体系</strong><br>Spring Cloud Gateway的核心功能是对Web请求进行路由和过滤其内部大量依赖于Spring中的响应式Web框架WebFlux<br><strong>执行流程</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png"><br>DispatcherHander:分发请求<br>路由断言:判断路由逻辑<br>路由表:保存服务路由信息<br>过滤器链:执行过滤操作</p>
+<p><strong>配置组件</strong></p>
+<ul>
+<li>Route(路由)<br>网关的基本构建块，由ID、目标URL、谓词集合和过滤器集合定义</li>
+<li>Predicates(谓词或断言)<br>匹配HTTP请求中的所有内容，例如消息头或参数。符合谓词规则才能通过</li>
+<li>Filter(过滤器)<br>对请求过程进行拦截，添加定制化处理机制</li>
+</ul>
+<p><strong>配置路由</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> main:</span><br><span class="line">  web-application-type:reactive # 以响应式方式运行Web应用，防止与MVC冲突</span><br><span class="line"> cloud:</span><br><span class="line">  gateway:</span><br><span class="line">   discovery:</span><br><span class="line">    locator:enabled: true #开启从注册中心动态创建路由的功能，利用服务名进行路由</span><br><span class="line">    lower-case-service-id:true # 用小写的请求路径的服务名匹配服务，默认为false</span><br><span class="line">   routes:</span><br><span class="line">    - id: baiduroute</span><br><span class="line">      uri: https://www.baidu.com</span><br><span class="line">      predicates:</span><br><span class="line">       - Path=/baidu/** # 前缀/baidu/的请求转发到baidu.com</span><br><span class="line">    - id: chat-service</span><br><span class="line">      uri: lb://chat-service # 指定URI ,负载均衡方式访问chat-service服务</span><br><span class="line">      predicates:</span><br><span class="line">       - Path=/chat/** # 指定谓词</span><br><span class="line">      filters:</span><br><span class="line">       - StripPrefix=1 # 去掉部分URL路径：第一段路由</span><br><span class="line">       - PrefixPath=/chats #指定前缀</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看路由</strong><br>添加actuator配置<br>查看路径：<a target="_blank" rel="noopener" href="http://localhost:18080/actuator/gateway/routes">http://localhost:18080/actuator/gateway/routes</a></p>
+<h1 id="Spring-Cloud-Gateway整合和扩展"><a href="#Spring-Cloud-Gateway整合和扩展" class="headerlink" title="Spring Cloud Gateway整合和扩展"></a>Spring Cloud Gateway整合和扩展</h1><p>GatewayFilter + GlobalFilter<br>GatewayFilter通过配置作用于每个路由，<br>GlobalFilter则作用于所有的请求当请求匹配到对应路由时</p>
+<h2 id="自定义GlobalFiler"><a href="#自定义GlobalFiler" class="headerlink" title="自定义GlobalFiler"></a>自定义GlobalFiler</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class JWTAuthFilter implements GlobalFilter &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;</span><br><span class="line">    ServerHttpRequest.Builder builder = exchange.getRequest().mutate();</span><br><span class="line">    builder.header(&quot;Authorization&quot;,&quot;JWTToken&quot;);</span><br><span class="line">    chain.filter(exchange.mutate().request(builder.build()).build());</span><br><span class="line">    return chain.filter(exchange.mutate().request(builder.build()).build());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义GatewayFilter"><a href="#自定义GatewayFilter" class="headerlink" title="自定义GatewayFilter"></a>自定义GatewayFilter</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class PostGatewayFilterFactory extends AbstractGatewayFilterFactory &#123;</span><br><span class="line">  public PostGatewayFilterFactory() &#123;</span><br><span class="line">    super(Config.class);</span><br><span class="line">  &#125;</span><br><span class="line">  public GatewayFilter apply() &#123;</span><br><span class="line">    return apply(o -&gt; &#123;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  @Override</span><br><span class="line">  public GatewayFilter apply(Config config) &#123;</span><br><span class="line">    return (exchange, chain) -&gt; &#123;</span><br><span class="line">      return chain.filter(exchange).then(Mono.fromRunnable(() -&gt; &#123;</span><br><span class="line">        ServerHttpResponse response = exchange.getResponse();</span><br><span class="line">        //添加针对Response的各种处理</span><br><span class="line">      &#125;));</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  public static class Config &#123; //读取路由配置信息</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="内置过滤器"><a href="#内置过滤器" class="headerlink" title="内置过滤器"></a>内置过滤器</h2><h3 id="限流过滤器"><a href="#限流过滤器" class="headerlink" title="限流过滤器"></a>限流过滤器</h3><p>RequestRateLimiterGatewayFilter</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> cloud:</span><br><span class="line">  gateway:</span><br><span class="line">   routes:</span><br><span class="line">    - id: requestratelimiterroute</span><br><span class="line">     uri: lb://testservice</span><br><span class="line">     filters:</span><br><span class="line">      - name: RequestRateLimiter</span><br><span class="line">       args:</span><br><span class="line">        redis-rate-limiter.replenishRate: 50 # 流量速度(每秒请求数)</span><br><span class="line">        redis-rate-limiter.burstCapacity: 100 # 桶大小参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li>异常处理</li>
+<li>日志管理</li>
+<li>灰度发布</li>
+<li>安全控制</li>
+</ul>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class AccessLogFilter implements GlobalFilter, Ordered &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;</span><br><span class="line">    ServerHttpRequest request = exchange.getRequest();</span><br><span class="line">    String requestPath = request.getPath().pathWithinApplication().value();</span><br><span class="line">    Route route = getGatewayRoute(exchange);</span><br><span class="line">    String ipAddress = WebUtils.getServerHttpRequestIpAddress(request);</span><br><span class="line">    GatewayLog gatewayLog = new GatewayLog();</span><br><span class="line">    gatewayLog.setSchema(request.getURI().getScheme());</span><br><span class="line">    gatewayLog.setRequestMethod(request.getMethodValue());</span><br><span class="line">    gatewayLog.setRequestPath(requestPath);</span><br><span class="line">    gatewayLog.setTargetServer(route.getId());</span><br><span class="line">    gatewayLog.setRequestTime(new Date());</span><br><span class="line">    gatewayLog.setIp(ipAddress);</span><br><span class="line">    return writeBLog(exchange, chain, gatewayLog);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="灰度发布"><a href="#灰度发布" class="headerlink" title="灰度发布"></a>灰度发布</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> cloud:</span><br><span class="line">  gateway:</span><br><span class="line">   routes:</span><br><span class="line">    - id: old-customer-service</span><br><span class="line">     uri: lb://old-customer-service</span><br><span class="line">     predicates:</span><br><span class="line">     - Path=/old/**</span><br><span class="line">     #old-customer-service的流量权重</span><br><span class="line">     - Weight=customer-group, 99</span><br><span class="line">    - id: new-customer-service</span><br><span class="line">     uri: lb://new-customer-service</span><br><span class="line">     predicates:</span><br><span class="line">     - Path=/new/**</span><br><span class="line">     #new-customer-service流量权重</span><br><span class="line">     - Weight=customer-group,1</span><br></pre></td></tr></table></figure>
+
+<p>Weight&#x3D;{group}, {weigth} &#x2F;&#x2F;流量按组分流</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如果想要基于Spring Cloud Gateway实现灰度发布，你有什么设计思路?</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/4SpringCloudStream%E5%92%8C%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%95%B4%E5%90%88%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90/" rel="prev" title="4SpringCloudStream和消息中间件整合机制解析">
+                  <i class="fa fa-chevron-left"></i> 4SpringCloudStream和消息中间件整合机制解析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/12SpringCloudSecurity/1SpringSecurity%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83/" rel="next" title="1SpringSecurity认证授权">
+                  1SpringSecurity认证授权 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

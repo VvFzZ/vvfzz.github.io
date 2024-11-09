@@ -1,0 +1,136 @@
+<hr>
+<h2 id="title-5使用SpringCloudGateway实现API网关description-5使用SpringCloudGateway实现API网关date-2024-11-02-16-46-37tags"><a href="#title-5使用SpringCloudGateway实现API网关description-5使用SpringCloudGateway实现API网关date-2024-11-02-16-46-37tags" class="headerlink" title="title: 5使用SpringCloudGateway实现API网关description: 5使用SpringCloudGateway实现API网关date: 2024-11-02 16:46:37tags:"></a>title: 5使用SpringCloudGateway实现API网关<br>description: 5使用SpringCloudGateway实现API网关<br>date: 2024-11-02 16:46:37<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>网关的概念</li>
+<li>网关的组成结构</li>
+<li>SpringCloudGateway的功能特性</li>
+<li>SpringCloudGateway使用方式</li>
+</ul>
+<p>微服务架构中实现服务路由和转发的基础组件</p>
+<p>目录</p>
+<ul>
+<li>服务网关基本概念</li>
+<li>Spring Cloud Gateway功能特性</li>
+<li>Spring Cloud Gateway整合和扩展</li>
+</ul>
+<h1 id="服务网关基本概念"><a href="#服务网关基本概念" class="headerlink" title="服务网关基本概念"></a>服务网关基本概念</h1><p><strong>服务网关结构和功能</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-%E7%BD%91%E5%85%B3%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84.png"></p>
+<h1 id="Spring-Cloud-Gateway功能特性"><a href="#Spring-Cloud-Gateway功能特性" class="headerlink" title="Spring Cloud Gateway功能特性"></a>Spring Cloud Gateway功能特性</h1><p><strong>整体架构</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-SpringCloudGateway%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"><br>Filter 过滤<br>Predicate 谓词（判断）<br><strong>技术体系</strong><br>Spring Cloud Gateway的核心功能是对Web请求进行路由和过滤其内部大量依赖于Spring中的响应式Web框架WebFlux<br><strong>执行流程</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png"><br>DispatcherHander:分发请求<br>路由断言:判断路由逻辑<br>路由表:保存服务路由信息<br>过滤器链:执行过滤操作</p>
+<p><strong>配置组件</strong></p>
+<ul>
+<li>Route(路由)<br>网关的基本构建块，由ID、目标URL、谓词集合和过滤器集合定义</li>
+<li>Predicates(谓词或断言)<br>匹配HTTP请求中的所有内容，例如消息头或参数。符合谓词规则才能通过</li>
+<li>Filter(过滤器)<br>对请求过程进行拦截，添加定制化处理机制</li>
+</ul>
+<p><strong>配置路由</strong></p>
+<pre><code>spring:
+ main:
+  web-application-type:reactive # 以响应式方式运行Web应用，防止与MVC冲突
+ cloud:
+  gateway:
+   discovery:
+    locator:enabled: true #开启从注册中心动态创建路由的功能，利用服务名进行路由
+    lower-case-service-id:true # 用小写的请求路径的服务名匹配服务，默认为false
+   routes:
+    - id: baiduroute
+      uri: https://www.baidu.com
+      predicates:
+       - Path=/baidu/** # 前缀/baidu/的请求转发到baidu.com
+    - id: chat-service
+      uri: lb://chat-service # 指定URI ,负载均衡方式访问chat-service服务
+      predicates:
+       - Path=/chat/** # 指定谓词
+      filters:
+       - StripPrefix=1 # 去掉部分URL路径：第一段路由
+       - PrefixPath=/chats #指定前缀
+</code></pre>
+<p><strong>查看路由</strong><br>添加actuator配置<br>查看路径：<a href="http://localhost:18080/actuator/gateway/routes">http://localhost:18080/actuator/gateway/routes</a></p>
+<h1 id="Spring-Cloud-Gateway整合和扩展"><a href="#Spring-Cloud-Gateway整合和扩展" class="headerlink" title="Spring Cloud Gateway整合和扩展"></a>Spring Cloud Gateway整合和扩展</h1><p>GatewayFilter + GlobalFilter<br>GatewayFilter通过配置作用于每个路由，<br>GlobalFilter则作用于所有的请求当请求匹配到对应路由时</p>
+<h2 id="自定义GlobalFiler"><a href="#自定义GlobalFiler" class="headerlink" title="自定义GlobalFiler"></a>自定义GlobalFiler</h2><pre><code>@Configuration
+public class JWTAuthFilter implements GlobalFilter {
+  @Override
+  public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    ServerHttpRequest.Builder builder = exchange.getRequest().mutate();
+    builder.header(&quot;Authorization&quot;,&quot;JWTToken&quot;);
+    chain.filter(exchange.mutate().request(builder.build()).build());
+    return chain.filter(exchange.mutate().request(builder.build()).build());
+  }
+}
+</code></pre>
+<h2 id="自定义GatewayFilter"><a href="#自定义GatewayFilter" class="headerlink" title="自定义GatewayFilter"></a>自定义GatewayFilter</h2><pre><code>public class PostGatewayFilterFactory extends AbstractGatewayFilterFactory {
+  public PostGatewayFilterFactory() {
+    super(Config.class);
+  }
+  public GatewayFilter apply() {
+    return apply(o -&gt; {
+    });
+  }
+  @Override
+  public GatewayFilter apply(Config config) {
+    return (exchange, chain) -&gt; {
+      return chain.filter(exchange).then(Mono.fromRunnable(() -&gt; {
+        ServerHttpResponse response = exchange.getResponse();
+        //添加针对Response的各种处理
+      }));
+    };
+  }
+  public static class Config { //读取路由配置信息
+  }
+}
+</code></pre>
+<h2 id="内置过滤器"><a href="#内置过滤器" class="headerlink" title="内置过滤器"></a>内置过滤器</h2><h3 id="限流过滤器"><a href="#限流过滤器" class="headerlink" title="限流过滤器"></a>限流过滤器</h3><p>RequestRateLimiterGatewayFilter</p>
+<pre><code>spring:
+ cloud:
+  gateway:
+   routes:
+    - id: requestratelimiterroute
+     uri: lb://testservice
+     filters:
+      - name: RequestRateLimiter
+       args:
+        redis-rate-limiter.replenishRate: 50 # 流量速度(每秒请求数)
+        redis-rate-limiter.burstCapacity: 100 # 桶大小参数
+</code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li>异常处理</li>
+<li>日志管理</li>
+<li>灰度发布</li>
+<li>安全控制</li>
+</ul>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><pre><code>@Component
+public class AccessLogFilter implements GlobalFilter, Ordered {
+  @Override
+  public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    ServerHttpRequest request = exchange.getRequest();
+    String requestPath = request.getPath().pathWithinApplication().value();
+    Route route = getGatewayRoute(exchange);
+    String ipAddress = WebUtils.getServerHttpRequestIpAddress(request);
+    GatewayLog gatewayLog = new GatewayLog();
+    gatewayLog.setSchema(request.getURI().getScheme());
+    gatewayLog.setRequestMethod(request.getMethodValue());
+    gatewayLog.setRequestPath(requestPath);
+    gatewayLog.setTargetServer(route.getId());
+    gatewayLog.setRequestTime(new Date());
+    gatewayLog.setIp(ipAddress);
+    return writeBLog(exchange, chain, gatewayLog);
+  }
+}
+</code></pre>
+<h3 id="灰度发布"><a href="#灰度发布" class="headerlink" title="灰度发布"></a>灰度发布</h3><pre><code>spring:
+ cloud:
+  gateway:
+   routes:
+    - id: old-customer-service
+     uri: lb://old-customer-service
+     predicates:
+     - Path=/old/**
+     #old-customer-service的流量权重
+     - Weight=customer-group, 99
+    - id: new-customer-service
+     uri: lb://new-customer-service
+     predicates:
+     - Path=/new/**
+     #new-customer-service流量权重
+     - Weight=customer-group,1
+</code></pre>
+<p>Weight&#x3D;{group}, {weigth} &#x2F;&#x2F;流量按组分流</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如果想要基于Spring Cloud Gateway实现灰度发布，你有什么设计思路?</p>

@@ -1,0 +1,113 @@
+<hr>
+<h2 id="title-1事件驱动架构和原理description-1事件驱动架构和原理date-2024-10-15-22-47-59tags"><a href="#title-1事件驱动架构和原理description-1事件驱动架构和原理date-2024-10-15-22-47-59tags" class="headerlink" title="title: 1事件驱动架构和原理description: 1事件驱动架构和原理date: 2024-10-15 22:47:59tags:"></a>title: 1事件驱动架构和原理<br>description: 1事件驱动架构和原理<br>date: 2024-10-15 22:47:59<br>tags:</h2><p>事件驱动架构是实现技术组件解耦的基础收手段<br>事件驱动架构核心价值：解耦（不再直接调用目标函数）<br>学习目标</p>
+<ul>
+<li>时间架构驱动基本概念和组成</li>
+<li>spring对事件驱动架构的抽象和实现原理</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>事件驱动架构的组成</li>
+<li>spring事件驱动的应用</li>
+<li>spring事件驱动的实现原理</li>
+</ul>
+<h1 id="事件驱动架构的组成"><a href="#事件驱动架构的组成" class="headerlink" title="事件驱动架构的组成"></a>事件驱动架构的组成</h1><p>事件：业务状态变更动作抽象成一个对象<br>事件驱动架构：如何生成，发布，消费事件的架构<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/1%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/1-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E8%A7%92%E8%89%B2%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/1%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/1-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E7%B1%BB%E5%B1%82%E7%BB%93%E6%9E%84.png"></p>
+<h1 id="spring事件驱动的应用"><a href="#spring事件驱动的应用" class="headerlink" title="spring事件驱动的应用"></a>spring事件驱动的应用</h1><h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><h3 id="发布事件"><a href="#发布事件" class="headerlink" title="发布事件"></a>发布事件</h3><pre><code>    @Autowired
+    private ApplicationEventPublisher publisher;
+    
+      public void testCustomerEvent() {
+
+        CustomerEvent customerEvent = new CustomerEvent();
+        publisher.publishEvent(customerEvent);
+    }
+</code></pre>
+<h3 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h3><pre><code>    @Override
+    @EventListener
+    @Async
+    public void consumEvent(CustomerEvent event) {
+        System.out.println(&quot;CustomerEvent: &quot; + event.getEventContent());
+    }
+</code></pre>
+<h2 id="内置事件监听"><a href="#内置事件监听" class="headerlink" title="内置事件监听"></a>内置事件监听</h2><p>扩展spring事件处理<br>针对spring容器启动、停止以及关闭等生命周期各阶段事件进行订阅,实现对spring的有效监听和处理</p>
+<pre><code>@component
+public class TestApplicationListener implements ApplicationListener&lt;ContextStoppedEvent&gt;{
+    @Override
+    public void onApplicationEvent(ContextStoppedEvent contextStoppedEvent){
+        System.out.println(contextStoppedEvent);
+    }
+}
+</code></pre>
+<p><em>如果是监听 Spring 应用上下文（ApplicationContext）创建之后的事件，可以直接在监听器上使用 @Component 注解即可，否则需要再配置文件中声明配置（如下），因为 ApplicationContext 并未创建，这时的 Bean 是不能被加载的。</em><br>在资源目录中的 META-INF&#x2F;spring.factories 文件中自动注册：</p>
+<pre><code>org.springframework.context.ApplicationListener=\
+cn.javastack.springboot.features.listener.JavastackListener
+</code></pre>
+<h3 id="dubbo集成"><a href="#dubbo集成" class="headerlink" title="dubbo集成"></a>dubbo集成</h3><p>Dubbo框架基于ContextRefreshedEvent事件完成服务发布</p>
+<pre><code>public class ServiceBean&lt;T&gt; extends ServiceConfig&lt;T&gt; implements InitializingBean,DisposableBean,ApplicationContextAware，
+ApplicationListener&lt;ContextRefreshedEvent&gt;, BeanNameAware {
+    ...
+}
+</code></pre>
+<p><em>注：看代码发现ServiceBean没有实现ApplicationListener<ContextRefreshedEvent>？？？???</em></p>
+<h3 id="nacos集成"><a href="#nacos集成" class="headerlink" title="nacos集成"></a>nacos集成</h3><p>Nacos框架基于WebServerlnitializedEvent事件完成服务绑定</p>
+<pre><code>public abstract class AbstractAutoServiceRegistration&lt;R extends Registration&gt;
+ApplicationListener&lt;WebServerInitializedEvent&gt;{
+    ...
+}
+</code></pre>
+<h1 id="spring事件驱动的实现原理"><a href="#spring事件驱动的实现原理" class="headerlink" title="spring事件驱动的实现原理"></a>spring事件驱动的实现原理</h1><p>事件分发器：SimpleApplicationEventMulticaster （实现ApplicationEventMulticaster接口）；事件分发器维护了消费者列表<br>初始化消费者时机：1.AbstractApplicationContext.registListners();2.ApplicationListenerDetector（实现了BeanPostprocessor）<br>触发事件：生命周期不同阶段</p>
+<h2 id="ApplicationEventPublisher"><a href="#ApplicationEventPublisher" class="headerlink" title="ApplicationEventPublisher"></a>ApplicationEventPublisher</h2><pre><code>public abstract class AbstractApplicationcontext {
+public void publishEvent(ApplicationEvent event, Nullable ResolvableType eventType) {
+        getApplicationEventMulticaster().multicastEvent(event, eventType);
+        if(this.parent != hull){
+            this.parent.publishEvent(event);
+    }
+}
+</code></pre>
+<h2 id="ApplicationEventMulticaster（发布器dispatcher）"><a href="#ApplicationEventMulticaster（发布器dispatcher）" class="headerlink" title="ApplicationEventMulticaster（发布器dispatcher）"></a>ApplicationEventMulticaster（发布器dispatcher）</h2><p>ApplicationEventMulticaster相当于观察者模式中的Subject，维护着ApplicationListener列表，并能实现对这些ApplicationListener发送事件<br>(类似disppatcher,不过dispatcher事件和消费者一一对应)</p>
+<pre><code>public interface ApplicationEventMulticaster{
+    void addApplicationListener(ApplicationListener listener);
+    void addApplicationListenerBean(String listenerBeanName);
+    void removeApplicationListener(ApplicationListener listener);
+    void removeApplicationListenerBean(String listenerBeanName);
+    void removeAllListeners();
+    void multicastEvent(ApplicationEvent event);
+}
+</code></pre>
+<h3 id="SimpleApplicationEventMulticaster"><a href="#SimpleApplicationEventMulticaster" class="headerlink" title="SimpleApplicationEventMulticaster"></a>SimpleApplicationEventMulticaster</h3><pre><code>public class SimpleApplicationEventMulticaster {
+public void multicastEvent(final ApplicationEvent event){
+    for (final ApplicationListener listener : getApplicationlisteners(event)){
+        Executor executor = getTaskExecutor();
+        if(executor != null){
+            executor.execute(new Runnable(){
+                public void run(){
+                    listener.onApplicationEvent(event);
+                }
+            });
+        }
+    }
+}
+}
+</code></pre>
+<h2 id="初始化发布器中的消费者"><a href="#初始化发布器中的消费者" class="headerlink" title="初始化发布器中的消费者"></a>初始化发布器中的消费者</h2><h3 id="AbstractApplicationContext初始化ApplicationListner（消费者）"><a href="#AbstractApplicationContext初始化ApplicationListner（消费者）" class="headerlink" title="AbstractApplicationContext初始化ApplicationListner（消费者）"></a>AbstractApplicationContext初始化ApplicationListner（消费者）</h3><pre><code>public abstract class AbstractApplicationContext {
+    public void refresh() throws BeansException, IllegalstateException {
+        synchronized(this.startupShutdownMonitor){
+            try{
+                /注册用来拦截Bean创建的BeanPostProcessorregisterBeanPostProcessors(beanFactory);
+                // 初始化自定义事件广播器initApplicationEventMulticaster();
+                //执行剧新
+                onRefresh();
+                // 注册监听器
+                registerListeners();
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="ApplicationListenerDetector初始化ApplicationListner（消费者）"><a href="#ApplicationListenerDetector初始化ApplicationListner（消费者）" class="headerlink" title="ApplicationListenerDetector初始化ApplicationListner（消费者）"></a>ApplicationListenerDetector初始化ApplicationListner（消费者）</h3><pre><code>class ApplicationListenerDetector implements DestructionAwareBeanPostProcessor
+public Object postProcessAfterInitialization(object bean, String beanName){
+    ...
+    applicationContext,addApplicationListener((ApplicationListener&lt;?&gt;) bean);
+    ...
+}
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>轻量级，非分布式事件驱动框架<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/1%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/1-spring%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E6%80%BB%E7%BB%93.png"></p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>开发过程中，使用Spring事件实现事件驱动架构的具体业务场景有哪些?</p>

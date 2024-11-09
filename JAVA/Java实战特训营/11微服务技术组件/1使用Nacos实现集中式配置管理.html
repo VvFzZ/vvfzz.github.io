@@ -1,0 +1,122 @@
+<hr>
+<h2 id="title-1使用Nacos实现集中式配置管理description-1使用Nacos实现集中式配置管理date-2024-11-02-16-46-06tags"><a href="#title-1使用Nacos实现集中式配置管理description-1使用Nacos实现集中式配置管理date-2024-11-02-16-46-06tags" class="headerlink" title="title: 1使用Nacos实现集中式配置管理description: 1使用Nacos实现集中式配置管理date: 2024-11-02 16:46:06tags:"></a>title: 1使用Nacos实现集中式配置管理<br>description: 1使用Nacos实现集中式配置管理<br>date: 2024-11-02 16:46:06<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>配置中心基本模型</li>
+<li>Nacos作为配置中心的功能特性</li>
+</ul>
+<h1 id="配置中心模型"><a href="#配置中心模型" class="headerlink" title="配置中心模型"></a>配置中心模型</h1><p><strong>配置中心基本概念</strong><br>应对多服务、多环境、集群化提供集中式管理<br>需考虑隔离性、一致性、安全性、易管理</p>
+<p><strong>配置中心组成结构</strong><br>客户端：嵌入微服务<br>配置服务器：与客户端配置交互<br>配置仓库：存放配置信息</p>
+<p><strong>相关工具</strong><br>Etcd<br>Consul<br>Nacos<br>Disconf<br>Apollo<br>Diamond<br>Spring Cloud config</p>
+<p><strong>配置中心关键技术</strong></p>
+<ul>
+<li>变更通知机制<br>长轮训<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/1-%E9%95%BF%E8%BD%AE%E8%AE%AD%E6%9C%BA%E5%88%B6.png"></li>
+</ul>
+<h1 id="Nacos作为配置中心的功能特性"><a href="#Nacos作为配置中心的功能特性" class="headerlink" title="Nacos作为配置中心的功能特性"></a>Nacos作为配置中心的功能特性</h1><h2 id="DataId"><a href="#DataId" class="headerlink" title="DataId"></a>DataId</h2><p>配置中心的Datald等同于注册中心的Service，所有关于注册中心的分级模型都适用于配置中心</p>
+<p>资源分级：Namespace -&gt; Group -&gt; Service&#x2F;DataId<br><strong>DataId命名规则</strong><br>可以采用自定义的命名规则推荐命名规则:<br><code>${prefix}-${spring.profile.active}.${file-extension}</code></p>
+<ul>
+<li><p>prefix<br>默认为所属服务配置spring.application.name的值，也可以通过配置项spring.cloud.nacos.config.prefix进行设置</p>
+</li>
+<li><p>spring.profiles.active<br>为当前环境对应的Profile。注意:当 spring.profiles.active为空时，对应的连接符-也将不存在，Datald的拼接格式变成 ${prefix}.${file-extension}</p>
+</li>
+<li><p>file-exetension<br>为配置内容的数据格式，可以通过配置项spring.cloud.nacos.config.file-extension来配置，推荐使用yaml格式</p>
+</li>
+<li><p>配置文件格式<br>.yml+.properties </p>
+</li>
+<li><p>配置文件加载顺序<br>bootstrap.yml先加载，application.yml后加载</p>
+</li>
+<li><p>配置文件内容组织<br>bootstrap.yml:系统级别参数配置，一般不会变动<br>application.yml:用来定义应用级别的参数配置</p>
+</li>
+<li><p>配置文件格式一致性<br>配置文件的后缀必须与Datald的后缀保持一致，<br>如:本地使用.yml则Nacos中配置文件必须也应该是.yml</p>
+</li>
+</ul>
+<h2 id="配置信息隔离"><a href="#配置信息隔离" class="headerlink" title="配置信息隔离"></a>配置信息隔离</h2><p>非生产环境 Profile区分环境<br>生产环境 使用独立的Nacos</p>
+<h2 id="配置共享"><a href="#配置共享" class="headerlink" title="配置共享"></a>配置共享</h2><p>抽取共用配置单独进行维护,避免重复创建和管理<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/1-%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E7%A4%BA%E4%BE%8B.png"><br><strong>shared-configs</strong></p>
+<pre><code>spring:
+ application:
+  name: demo-service
+ cloud:
+  nacos:
+   config:
+    server-addr: local:8848
+    namespace: dev
+    group: demo_group
+    ...
+    shared-configs[3]: #shared-configs数组 
+     #不能设置自定义的Group，只能为DEFAULT_GROUP
+     data-id: mysql.yaml 
+     refresh: true  #默认true
+</code></pre>
+<p><strong>extension-configs</strong><br>覆盖共享配置项时可使用</p>
+<pre><code>spring:
+ application:
+name: demo-service
+ cloud:
+  nacos:
+   config:
+   server-addr: local:8848
+   namespace:dev
+   group:emo_group
+   ...
+   shared-configs[3]:
+    data-id: mysql.yaml
+    refresh: true
+   ...
+   extension-configs[3]: # 覆盖共享datald的属性可以使用
+    data-id: mysql.yaml
+    group: demo #必须指定Group
+    refresh: true
+</code></pre>
+<p><strong>优先级</strong></p>
+<ul>
+<li>不同种类配置优先级<br>主配置 &gt; 扩展配置(extension-configs) &gt; 共享配置(shared-configs)</li>
+<li>同种类配置优先级<br>数组元素对应的下标越大，优先级越高，如:extension-config[2] &gt; extension-configs[1]<blockquote>
+<p>extension-configs[0]</p>
+</blockquote>
+</li>
+<li>不同环境配置优先级<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/1%E4%BD%BF%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/1-%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E4%BC%98%E5%85%88%E7%BA%A7.png"></li>
+</ul>
+<h2 id="配置灰度发布"><a href="#配置灰度发布" class="headerlink" title="配置灰度发布"></a>配置灰度发布</h2><p>让配置先在部分实例生效，如果效果理想全量发布到所有实例，如果效果不理想就可以放弃当前的发布内容。<br>如:<br>对于影响大的配置，可先在一个或者多个实例生效，观察一段时间没问题再全量发布;<br>对于一些需要调优的配置参数，可以通过灰度发布功能来实现A&#x2F;B测试。</p>
+<h2 id="配置热更新"><a href="#配置热更新" class="headerlink" title="配置热更新"></a>配置热更新</h2><ul>
+<li><p>无法热更新<br>影响应用运行状态的配置<br>例如:数据库连接配置<br>需要重新创建数据库连接<br>会影响Spring Bean的自动装载</p>
+</li>
+<li><p>可以热更新<br>业务运行所需的数据<br>例如:用户默认密码<br>直接修改配置数据<br>只修改配置数据本本身</p>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p><strong>@Value</strong><br>使用<code>@Refreshscope</code></p>
+<pre><code>#自定义配置性cs.customer.point = 10
+@Component
+@Refreshscope
+public class Customconfig {
+@Value(&quot;${cs.customer.point}&quot;)
+    private int point;
+}
+</code></pre>
+<p><strong>@ConfigurationProperties</strong><br>自动支持热更新，不需代码改造</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><ol>
+<li>新建<code>bootstrap.ymal</code><br>需引入依赖</li>
+</ol>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-startebootstrap&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code>spring:
+  application:
+    name: customer-task
+  profiles:
+    active: @spring.profiles.active@
+  cloud:
+    nacos:
+      config:
+        server-addr: @spring.cloud.nacos.config.server-addr@
+        file-extension: yml
+        refresh-enabled: true
+      discovery:
+        server-addr: @spring.cloud.nacos.discovery.server-addr@
+  main:
+    allow-bean-definition-overriding: true
+</code></pre>
+<ol start="2">
+<li>在nacos创建配置文件<br>DataId规则：applicationName-profile.extension</li>
+</ol>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="什么是长轮训？实现机制？实现方式？"><a href="#什么是长轮训？实现机制？实现方式？" class="headerlink" title="什么是长轮训？实现机制？实现方式？"></a>什么是长轮训？实现机制？实现方式？</h2><h2 id="结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？"><a href="#结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？" class="headerlink" title="结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？"></a>结合日常开发中的具体场景，谈谈你对如何基于Nacos合理组织系统配置信息的经验和教训？</h2>

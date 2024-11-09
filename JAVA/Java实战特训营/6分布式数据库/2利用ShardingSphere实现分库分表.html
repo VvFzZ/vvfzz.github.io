@@ -1,0 +1,164 @@
+<hr>
+<h2 id="title-2利用ShardingSphere实现分库分表description-2利用ShardingSphere实现分库分表date-2024-10-07-15-05-15tags"><a href="#title-2利用ShardingSphere实现分库分表description-2利用ShardingSphere实现分库分表date-2024-10-07-15-05-15tags" class="headerlink" title="title: 2利用ShardingSphere实现分库分表description: 2利用ShardingSphere实现分库分表date: 2024-10-07 15:05:15tags:"></a>title: 2利用ShardingSphere实现分库分表<br>description: 2利用ShardingSphere实现分库分表<br>date: 2024-10-07 15:05:15<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>系统集成ShardingSphere的方式</li>
+<li>ShardingSphere配置体系</li>
+<li>ShardingSphere数据分片实现方式</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>集成方式</li>
+<li>配置体系</li>
+<li>数据分片</li>
+</ul>
+<h1 id="集成方式"><a href="#集成方式" class="headerlink" title="集成方式"></a>集成方式</h1><h1 id="配置体系"><a href="#配置体系" class="headerlink" title="配置体系"></a>配置体系</h1><h2 id="行表达式"><a href="#行表达式" class="headerlink" title="行表达式"></a>行表达式</h2><p>主键管理策略：生成策略、配置分片列 </p>
+<h2 id="核心配置"><a href="#核心配置" class="headerlink" title="核心配置"></a>核心配置</h2><h3 id="分片策略-ShardingStrategyConfiguration"><a href="#分片策略-ShardingStrategyConfiguration" class="headerlink" title="分片策略 ShardingStrategyConfiguration"></a>分片策略 ShardingStrategyConfiguration</h3><p>NoneShardingStrategyConfiguration:不分片<br>HintShardingStrategyConfiguration:强制路由分片<br>ComplexShardingStrategyconfiguration:多分片键复杂分片<br>StandardShardingStrategyConfiguration:标准分片</p>
+<h1 id="数据分片"><a href="#数据分片" class="headerlink" title="数据分片"></a>数据分片</h1><h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><ol>
+<li><p>初始化数据源</p>
+</li>
+<li><p>配置分片策略</p>
+</li>
+<li><p>设置绑定表和广播表</p>
+</li>
+<li><p>设置分片规则</p>
+</li>
+</ol>
+<h3 id="初始化数据源"><a href="#初始化数据源" class="headerlink" title="初始化数据源"></a>初始化数据源</h3><pre><code>//yaml配置
+spring:
+    shardingsphere :
+        dataSources:
+            dswrite:!!com.alibaba.druid.pool.DruidDataSource
+                driverClassName: com.mysql.jdbc.Driver
+                url: jdbc:mysql://127.0.0.1:3306/dswrite
+                username: root
+                password: root
+            dsread0:!!com.alibaba.druid.pool.DruidDataSource
+                driverClassName:com.mysql.jdbc.Driver
+                url: jdbc:mysql://127.0.0.1:3306/dsreado
+                username:root
+                password: root
+
+//Properties配置
+spring.shardingsphere.datasource.dswrite.url=jdbc:mysql://127.0.0.1:3306/dswrite
+spring.shardingsphere.datasource.dswrite.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dswrite.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dswrite.username=root
+spring.shardingsphere.datasource.dswrite.password=root
+
+spring.shardingsphere.datasource.dsread0.url=jdbc:mysgl://127.0.0.1:3306/dsread0
+spring.shardingsphere.datasource,dsread0.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dsread0.driver-class-name=com.mysql.idbc.Driver
+spring.shardingsphere.datasource.dsread0.username=root
+spring.shardingsphere.datasource.dsread0.password=root
+</code></pre>
+<h3 id="配置分片策略"><a href="#配置分片策略" class="headerlink" title="配置分片策略"></a>配置分片策略</h3><pre><code>spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-column=user_id
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name=database-inline
+
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression=ds$-&gt;{user_id % 2}
+</code></pre>
+<p><code>default-database-strategy.standard</code> 默认分库策略.标准分片<br><code>sharding-algorithm-name</code>分片算法名：<code>database-inline</code>是自定义的名字<br><code>sharding-column</code>分片键<br><code>algorithm-expression</code>：分片表达式，分片算法<br>分片键user_id与分片表达式中的字段一致</p>
+<h3 id="设置绑定表和广播表"><a href="#设置绑定表和广播表" class="headerlink" title="设置绑定表和广播表"></a>设置绑定表和广播表</h3><ul>
+<li>绑定表<br>指分片规则一致的一组关联的主数据表和子数据表<br>互为绑定表多表关联查询不会做笛卡尔积，提升效率<br>互为绑定表需分片键完全相同</li>
+</ul>
+<pre><code>//设置绑定表spring.shardingsphere.rules.sharding.binding-tables[0]=health_record, health_task
+</code></pre>
+<ul>
+<li>广播表<br>所有分片数据源中都存在的表</li>
+</ul>
+<pre><code>spring.shardingsphere.rules.sharding.broadcast-tables=health_level
+</code></pre>
+<h4 id="举例说明绑定表"><a href="#举例说明绑定表" class="headerlink" title="举例说明绑定表"></a>举例说明绑定表</h4><pre><code>//原始SQL
+SELECT record.remark name FROM health record record JOIN health task task ON record.record_id=task.record_id WHERE record.record_id in (1,2);
+
+//不设置绑定表场景(两张分表 共四张表record0 record1 task0 task1)
+//四次JOIN ：
+//record0 JOIN task0
+//record0 JOIN task1
+//record1 JOIN task0
+//record1 JOIN task1
+
+SELECT record.remark name FROM health record0 record JOIN health task0 task ON record.record_id=task.record_id WHERE record.record_id in (1, 2);
+
+SELECT record.remark name FROM health record0 record JOIN health task1 task ON record.record_id=task.record_id WHERE record.record_id in (1, 2);
+
+SELECT record.remark name FROM health record1 record JOIN health task0 task ON record.record_id=task.record_id WHERE record.record_id in (1, 2);
+
+SELECT record.remark name FROM health record1 record JOIN health task1 task ON record.record_id=task.record_id WHERE record.record_id in (1, 2);
+
+//设置绑定表场景(两张分表 共四张表)
+//设置了绑定表，根据record_id分片，则可明确得知不需要
+join record0 task1 、record1 task0
+
+
+SELECT record.remark name FROM health record0 record JOIN health task0 task ONrecord.record_id=task.record_id WHERE record.record_id in (1, 2);
+SELECT record.remark name FROM health, record1 record JOIN health task1 task ON record.record_id=task.record_id WHERE record.record_id in(1,2)
+</code></pre>
+<h3 id="设置分片规则"><a href="#设置分片规则" class="headerlink" title="设置分片规则"></a>设置分片规则</h3><h4 id="分库规则"><a href="#分库规则" class="headerlink" title="分库规则"></a>分库规则</h4><pre><code>spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-column=patient_id
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name=database-inline
+
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression=ds$-&gt;{patient_id % 2}
+</code></pre>
+<h4 id="分表规则"><a href="#分表规则" class="headerlink" title="分表规则"></a>分表规则</h4><p>&#x2F;&#x2F;未分库</p>
+<pre><code>spring.shardingsphere.rules.sharding.tables.t_consultation.actual-data-nodes=ds.t_consultation$-&gt;{0..2}
+spring.shardingsphere.rules.sharding.tables.t_consultation.table-strategy.standard.sharding-column=consultation_id
+spring.shardingsphere.rules.sharding.tables.t_consultation.table-strategy.standard.sharding-algorithm-name=t_consultation-inline
+
+spring.shardingsphere.rules.sharding.sharding-algorithms.t_consultation-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.t_consultation-inline.props.algorithm-expression=t_consultation$-&gt;{consultation id % 3}
+</code></pre>
+<p><code>ds.t_consultation$-&gt;{0..2}</code> <em>设置表名，ds代表数据源，表分三个t_consultation0，t_consultation1，t_consultation2</em><br><code>spring.shardingsphere.rules.sharding.tables.t_consultation</code> <em>t_consultation 数据库表名</em><br><code>{consultation id % 3}</code>分片算法 需与前面配置表名相对应（<code>ds.t_consultation$-&gt;{0..2}</code>），%3对应分3张表</p>
+<h4 id="分库分表规则"><a href="#分库分表规则" class="headerlink" title="分库分表规则"></a>分库分表规则</h4><pre><code>//设置分库分片键
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-column=patient_id
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name=database-inline
+
+//设置分表表名和分片键
+spring.shardingsphere.rules.sharding.tables.t consultation.actual-data-nodes=ds$-&gt;{2..3}.t_consultation$-&gt;{0..2}
+spring.shardingsphere.rules.sharding.tables.t_consultation.table-strategy.standard.sharding-column=consultation id
+spring.shardingsphere.rules.sharding.tables.t_consultation.table-strategy.standard.sharding-algorithm-name=t_consultation-inline
+
+//设置分库分片算法
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression=ds$-&gt;{patient_id % 2}
+//设置分表分片算法
+spring.shardingsphere.rules.sharding.sharding-algorithms.t_consultation-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.t_consultation-inline.props.algorithm-expression=t_consultation$-&gt;{consultation_id % 3}
+</code></pre>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>分库+分表</p>
+<pre><code>spring.shardingsphere.datasource.names=ds2,ds3
+
+spring.shardingsphere.datasource.ds2.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.ds2.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.ds2.url=jdbc:mysql://127.0.0.1:3306/ds2?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
+spring.shardingsphere.datasource.ds2.username=root
+spring.shardingsphere.datasource.ds2.password=root
+
+spring.shardingsphere.datasource.ds3.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.ds3.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.ds3.url=jdbc:mysql://127.0.0.1:3306/ds3?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
+spring.shardingsphere.datasource.ds3.username=root
+spring.shardingsphere.datasource.ds3.password=root
+
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-column=to_user_id
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name=database-inline
+spring.shardingsphere.rules.sharding.broadcast-tables=im_business_type
+
+
+spring.shardingsphere.rules.sharding.tables.im_message.actual-data-nodes=ds$-&gt;{2..3}.im_message$-&gt;{0..2}
+spring.shardingsphere.rules.sharding.tables.im_message.table-strategy.standard.sharding-column=to_user_id
+spring.shardingsphere.rules.sharding.tables.im_message.table-strategy.standard.sharding-algorithm-name=im_message-inline
+
+spring.shardingsphere.rules.sharding.tables.im_message.key-generate-strategy.column=id
+spring.shardingsphere.rules.sharding.tables.im_message.key-generate-strategy.key-generator-name=snowflake
+
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type=INLINE
+
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression=ds$-&gt;{from_user_id % 2 + 2}
+spring.shardingsphere.rules.sharding.sharding-algorithms.im_message-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.im_message-inline.props.algorithm-expression=im_message$-&gt;{to_user_id % 3}
+
+spring.shardingsphere.rules.sharding.key-generators.snowflake.type=SNOWFLAKE
+
+spring.shardingsphere.props.sql-show=true
+</code></pre>

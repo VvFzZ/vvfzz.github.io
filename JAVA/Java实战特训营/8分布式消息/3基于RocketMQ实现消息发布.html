@@ -1,0 +1,85 @@
+<hr>
+<h2 id="title-3基于RocketMQ实现消息发布description-3基于RocketMQ实现消息发布date-2024-10-16-17-06-59tags"><a href="#title-3基于RocketMQ实现消息发布description-3基于RocketMQ实现消息发布date-2024-10-16-17-06-59tags" class="headerlink" title="title: 3基于RocketMQ实现消息发布description: 3基于RocketMQ实现消息发布date: 2024-10-16 17:06:59tags:"></a>title: 3基于RocketMQ实现消息发布<br>description: 3基于RocketMQ实现消息发布<br>date: 2024-10-16 17:06:59<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>RocketMQ消息抽象</li>
+<li>RocketMQ架构</li>
+<li>RocketMQ发送消息的实现</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>RocketMQ基本概念</li>
+<li>RocketMQ架构</li>
+<li>RocketMQ消息发送方式</li>
+</ul>
+<h1 id="RocketMQ基本概念"><a href="#RocketMQ基本概念" class="headerlink" title="RocketMQ基本概念"></a>RocketMQ基本概念</h1><p><strong>消息</strong><br><strong>主题topic</strong><br>一类消息的集合，包含多条消息，消息只属于一个主题<br>一个生产者可生产多种topic消息<br>一个消费者只订阅和消费一种topic消息<br><strong>队列queue</strong><br>也称为分区，存储消息的物理实体。<br>一个topic中可包含多个queue，队列中存放消息。<br>一个queue中的消息只能被一个消费者消费，不允许同一消费者组中多个消费者同时消费<br><strong>标签tag</strong><br>同一主题下消息的分类<br>同一业务单元的消息，根据不同业务目的在同一主题下设置不同标签。<br>标签能够有效地保是贝持代码的清晰度和连贯性，并优化RocketMQ提供的查询系统。消费者可以根据Tag实现对不同子主题的不同消费逻辑，实现更好的扩展性。<br>Topic是消息的一级分类，Tag是消息的二级分类<br><strong>生产者-生产者组</strong><br>生产者以生产者组形式出现<br>生产者组中的消费者发送相同topic类型的消息。<br>一个生产者组可同时发送不同主题消息<br><strong>消费者-消费者组</strong><br>消息消费者从Broker服务器获取消息并处理。<br>消费者组中的消费者消费相同topic类型消息。<br><strong>Broker</strong><br>存储转发消息，存储消息元数据（消费进度偏移量，主题，队列）。<br>负责接收并存储从生产者发送来的消息，同时为消费者的拉取请求作准备。<br><strong>Name Server</strong><br>Broker管理：管理Broker实例注册，心跳检查Broker是否存活<br>路由信息管理：生产者通过NameServer获取应发送消息到那个broker，消费者通过NameServer获取应从哪个broker拉消息。</p>
+<h2 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h2><ol>
+<li>启动NameServer:NameServer监听端口，等待Broker、生产者、消费者连接，相当于一个路由控制中心</li>
+<li>启动Broker:跟NameServer 保持长连接，定时发送心跳包</li>
+<li>创建Topic:创建Topic时需要指定该Topic要存储在哪些Broker上，也可以在发送消息时自动创建Topic</li>
+<li>发送消息：与NameServer建立长连接，获取topic，与topic队列所在的broker建立长连接，发送消息</li>
+<li>消费消息：与NameServer建立长连接，获取topic，与topic队列所在的broker建立通道，消费消息</li>
+</ol>
+<h1 id="RocketMQ消息发送方式"><a href="#RocketMQ消息发送方式" class="headerlink" title="RocketMQ消息发送方式"></a>RocketMQ消息发送方式</h1><h2 id="普通消息"><a href="#普通消息" class="headerlink" title="普通消息"></a>普通消息</h2><p>分类</p>
+<ul>
+<li>单项消息<br>sendOneway，不关心结果</li>
+<li>同步消息<br>send,阻塞等待结果,可设置超时</li>
+<li>异步消息<br>通过回调，异步通知；</li>
+<li>批量消息<br>同时支持同步&#x2F;异步</li>
+</ul>
+<p>比较</p>
+<table>
+<thead>
+<tr>
+<th>发送方式</th>
+<th>发送性能</th>
+<th>发送反馈</th>
+<th>发送可靠性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单向</td>
+<td>最快</td>
+<td>无</td>
+<td>肯能丢失</td>
+</tr>
+<tr>
+<td>同步</td>
+<td>快</td>
+<td>有</td>
+<td>不会丢失</td>
+</tr>
+<tr>
+<td>异步</td>
+<td>快</td>
+<td>有</td>
+<td>不会丢失</td>
+</tr>
+</tbody></table>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.rocketmq&lt;/groupId&gt;
+    &lt;artifactId&gt;rocketmq-spring-boot-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+rocketmq:
+    producer:
+        group: produ_imcer_group
+    name-server:127.0.0.1:9876
+</code></pre>
+<p>启动NameServer、broker</p>
+<p>验证是否成功 工具：rocketMQ控制台<br>修改端口、nameserverAddr,打包启动</p>
+<pre><code>    @Autowired
+    private RocketMQTemplate template;
+
+    @Override
+    public void saveMessage(ImMessage imMessage) {
+        MessageCreatedEvent event = new MessageCreatedEvent();
+        event.setMessage(Message);
+        event.setType(&quot;ms&quot;);
+        event.setOperation(&quot;CREATE&quot;);
+        template.convertAndSend(&quot;topic&quot;, event);
+    }
+</code></pre>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><ul>
+<li>与netty区别<br>MQ是以消息为媒介的通讯框架，增加了存储转发功能<br>本质也是通讯框架</li>
+<li>当使用RocketMO发送消息时，应该如何选择所发送消息的类型?</li>
+</ul>

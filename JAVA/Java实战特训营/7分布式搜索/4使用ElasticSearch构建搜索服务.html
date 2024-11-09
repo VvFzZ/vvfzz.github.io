@@ -1,0 +1,240 @@
+<hr>
+<h2 id="title-4使用ElasticSearch构建搜索服务description-4使用ElasticSearch构建搜索服务date-2024-10-11-09-50-32tags"><a href="#title-4使用ElasticSearch构建搜索服务description-4使用ElasticSearch构建搜索服务date-2024-10-11-09-50-32tags" class="headerlink" title="title: 4使用ElasticSearch构建搜索服务description: 4使用ElasticSearch构建搜索服务date: 2024-10-11 09:50:32tags:"></a>title: 4使用ElasticSearch构建搜索服务<br>description: 4使用ElasticSearch构建搜索服务<br>date: 2024-10-11 09:50:32<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>理解ES的搜索解决方案和能力</li>
+<li>掌握ES各种搜索类型和使用方式</li>
+</ul>
+<p><em>Elastic search是目前业界最主流的分布式搜索引擎，没有之一</em></p>
+<p>目录</p>
+<ul>
+<li>Elastic Search 索引和文档的操作方式<br>es构建索引（lucene相对底层）</li>
+<li>使用Elastic Search搜索</li>
+</ul>
+<h1 id="Elastic-Search索引和文档的操作方式"><a href="#Elastic-Search索引和文档的操作方式" class="headerlink" title="Elastic Search索引和文档的操作方式"></a>Elastic Search索引和文档的操作方式</h1><h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><h3 id="kibana"><a href="#kibana" class="headerlink" title="kibana"></a>kibana</h3><p>简单，可视化，开发调试方便</p>
+<ul>
+<li>初始化setting</li>
+<li>创建mapping</li>
+</ul>
+<h2 id="同步索引数据"><a href="#同步索引数据" class="headerlink" title="同步索引数据"></a>同步索引数据</h2><ul>
+<li>基于Kibana同步索引数据<br>开发调试使用</li>
+<li>基于Logstash同步索引数据<br>-般场景同步，定时任务执行脚本，控制力很弱（不好改）</li>
+<li>基于客户端API同步索引数据<br>业务系统数据双写</li>
+</ul>
+<h3 id="kibana-1"><a href="#kibana-1" class="headerlink" title="kibana"></a>kibana</h3><h3 id="Logstash"><a href="#Logstash" class="headerlink" title="Logstash"></a>Logstash</h3><p>使用logstash-input-jdbc插件，同步支持jdbc规范的数据源（如mysql）<br>缺点：脚本可能需要处理业务逻辑，边界不清晰</p>
+<ul>
+<li>控制输入</li>
+</ul>
+<pre><code>input {
+    jdbc {
+        # 数据库
+        jdbc_connection_string =&gt;&quot;jdbc:mysql://localhost:3306/customer_system&quot;
+        # 用户名密码
+        jdbc_user =&gt; &quot;root&quot;jdbc password =&gt; &quot;root&quot;
+        # jar包的位置
+        jdbc_driver_library =&gt;&quot;./mysql-connector-java-8.0.28.jar&#39;
+        #mysql的Driver
+        jdbc_driver_class =&gt;&quot;com.mysql.jdbc.Driver&quot;
+        #读取这个
+        sqlstatement_filepath =&gt;&quot;/mysql2es.sql&quot;
+        #每隔10分钟执行一次
+        schedule =&gt;*/10 * * * * 
+        ...
+    }
+}
+output {
+    # index 索引名
+    index =&gt; customer_auto_reply_index
+    # 类似主键，es中id对应数据库的字段
+    document_id =&gt;&quot;%{id}&#39;
+    stdout {
+        codec =&gt; json lines
+    }
+}
+</code></pre>
+<blockquote>
+<p>stdout打印输出</p>
+</blockquote>
+<h3 id="Elastic-Search客户端"><a href="#Elastic-Search客户端" class="headerlink" title="Elastic Search客户端"></a>Elastic Search客户端</h3><ul>
+<li>原生es客户端</li>
+<li>其他-Spring Data ES客户端</li>
+</ul>
+<h4 id="原生es客户端"><a href="#原生es客户端" class="headerlink" title="原生es客户端"></a>原生es客户端</h4><pre><code>&lt;dependency&gt;
+&lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;&lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>配置信息</p>
+<pre><code>elasticsearch:
+    info:
+        username:elastic
+        password: 123456
+        hostname: localhost
+        port:9200
+        scheme: http
+    index:
+        customerAutoReplyIndex:customer auto reply_index
+</code></pre>
+<p>配置类</p>
+<pre><code>@RefreshScope
+@configurationProperties(prefix=&quot;&#39;elasticsearch.info&quot;&quot;)
+public class EsInfoconfig {
+    private String username;
+    private String password;
+    private String hostname;
+    private int port;
+    private String scheme;
+}
+</code></pre>
+<p>客户端类</p>
+<pre><code>public class EsClient {
+    private final EsInfoconfig esInfoConfig;
+    @Bean
+    public RestHighLevelclient restHighLevelclient(){
+        RestClientBuilder builder= RestClient.builder(new HttpHost(esInfoConfig.getHostname(),esInfoConfig.getPort()，esInfoconfig.getscheme()));
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, newUsernamePasswordCredentials(esInfoConfig.getUsername(),esInfoConfig.getPassword()));
+        builder,setHttpclientconfigcallback(f -&gt; f.setDefaultCredentialsProvider(credentialsProvider));return new RestHighLevelclient(builder);
+</code></pre>
+<p>同步数据</p>
+<pre><code>//新增文档
+IndexResponse response = client,index(request, RequestOptions.DEFAULT);
+//批量新增文档
+BulkResponse response = restHighLevelclient,.bulk(request, RequestOptions.DEFAULT);
+//更新文档
+UpdateResponse response = restHighLevelclient.update(request,RequestOptions.DEFAULT);
+//根据查询删除文档
+restHighLevelclient,deleteByQuery(request, RequestOptions.DEFAULT);
+</code></pre>
+<h1 id="利用Elastic-Search执行搜索"><a href="#利用Elastic-Search执行搜索" class="headerlink" title="利用Elastic Search执行搜索"></a>利用Elastic Search执行搜索</h1><h2 id="构建搜索对象"><a href="#构建搜索对象" class="headerlink" title="构建搜索对象"></a>构建搜索对象</h2><p>SearchRequest:搜索对象<br>    SearchSourceBuilder:搜索条件构建器<br>        BoolQueryBuilder:布尔查询构建器，组合多个查询<br>            QueryBuilders:查询构建器列表<br>            XXXBuilder:具体构建器<br>        HighlightBuilder:高亮构建器<br>        from&#x2F;size:分页搜索支持</p>
+<h2 id="创建搜索条件"><a href="#创建搜索条件" class="headerlink" title="创建搜索条件"></a>创建搜索条件</h2><ul>
+<li>Term(项)搜索:不执行分析(不分词)<br>termQuery单字段搜索<br>wildcardQuery通配符搜索<br>fuzzyQuery模糊搜索<br>prefixQuery字符串前缀搜索</li>
+<li>全文搜索:执行分析（对字段进行分词处理，并依次匹配多个字段可以在重点字段上设置权重(boost)）<br>matchQuery单字段匹配搜索<br>multiMatchQuery多字段匹配搜索<br>matchPharseQuery词组匹配搜索</li>
+</ul>
+<h2 id="获取搜索结果"><a href="#获取搜索结果" class="headerlink" title="获取搜索结果"></a>获取搜索结果</h2><pre><code>//1，发起搜素请求并获取结果
+SearchResponse = esclient,search(searchRequest, EsConfig.COMMON_OPTIONS);
+//2，获取匹配的数据
+Searchifits hits = response.getHits();
+//3，解析结果数据并包装成业务对象
+for(SearchHit hit:hits){
+    Map&lt;String,0bject&gt; result = hit.getSourceAsMap();
+}
+</code></pre>
+<h2 id="辅助搜索功能"><a href="#辅助搜索功能" class="headerlink" title="辅助搜索功能"></a>辅助搜索功能</h2><pre><code>SearchRequest searchRequest=..
+SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+searchSourceBuilder.query(new TermQueryBuilder(&quot;city&quot;,&quot;Hangzhou&quot;));
+//指定返回的字段
+searchSourceBuilder,fetchSource(new Stringil{&quot;title&quot;,&quot;city&quot;} , null);
+searchRequest.source(searchSourceBuilder);
+//结果计数
+CountRequest countRequest = new CountRequest(&quot;notel&quot;);countRequest.source(searchSourceBuilder);
+CountResponse countResponse = client.count(countRequest,RequestOptions.DEFAULT);
+//结果分页
+searchSourceBuilder.from(20)searchSourceBuilder.size(10);searchRequest.source(searchSourceBuilder);
+</code></pre>
+<h3 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h3><p>DSL(Domain Specific Language，领域特定语言)查询，是ES提出的基于JSON的搜索方式，在搜素时传入特定的JSON格式数据完成不同需求的搜索，通常可以和Kibana配合使用进行开发和调试。</p>
+<pre><code>//查询全部
+{
+    &quot;query&quot; :{&quot;match_all&quot;:{}}
+}
+
+//分页查询全部
+{
+    &quot;from&quot; :
+    &quot;size&quot;:
+    &quot;query&quot; :{&quot;&#39;match_all&quot;:{}}
+}
+
+//项查询
+{
+    &quot;query&quot;:{
+            &quot;term&quot;:{
+                &quot;title”:“开发”
+                }
+            }
+}
+
+
+//全文多字段匹配查询
+&quot;query&quot;:{
+    &quot;multi match&quot;:{
+        &quot;query&quot; : &quot;Java&quot;
+        &quot;fields&quot; : [&quot;title&quot;,&quot;content&quot;],
+        &quot;minimum_should_match&quot;:&quot;50%&quot;
+    }
+}
+</code></pre>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>配置</p>
+<pre><code># application.yaml
+elasticsearch:
+  info:
+    username: elastic
+    password: changeme
+    hostname: localhost
+    port: 9200
+    scheme: http
+  index:
+    customerAutoReplyIndex: customer_auto_reply_index
+
+# classes
+@Data
+@Component
+@RefreshScope
+@ConfigurationProperties(prefix = &quot;elasticsearch.index&quot;)
+public class EsIndexProerties {
+
+    /**
+     * 客服自动回复索引
+     */
+    private String customerAutoReplyIndex;
+}
+
+@Data
+@Component
+@RefreshScope
+@ConfigurationProperties(prefix = &quot;elasticsearch.info&quot;)
+public class EsInfoConfig {
+
+    private String username;
+
+    private String password;
+
+    private String hostname;
+
+    private int port;
+
+    private String scheme;
+
+}
+</code></pre>
+<p>依赖</p>
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
+            &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
+            &lt;artifactId&gt;elasticsearch-rest-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.elasticsearch&lt;/groupId&gt;
+            &lt;artifactId&gt;elasticsearch&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>客户端</p>
+<pre><code>@Configuration
+@RequiredArgsConstructor
+public class EsClient {
+
+    private final EsInfoConfig esInfoConfig;
+
+    @Bean
+    public RestHighLevelClient restHighLevelClient() {
+        RestClientBuilder builder = RestClient.builder(new HttpHost(esInfoConfig.getHostname(), esInfoConfig.getPort(), esInfoConfig.getScheme()));
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(esInfoConfig.getUsername(), esInfoConfig.getPassword()));
+        builder.setHttpClientConfigCallback(f -&gt; f.setDefaultCredentialsProvider(credentialsProvider));
+
+        return new RestHighLevelClient(builder);
+    }
+}
+</code></pre>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>想搜索和全文搜索的区别？</p>

@@ -1,2 +1,209 @@
 <hr>
-<h2 id="title-3Netty可靠性和性能优化description-3Netty可靠性和性能优化date-2024-09-28-21-34-15tags"><a href="#title-3Netty可靠性和性能优化description-3Netty可靠性和性能优化date-2024-09-28-21-34-15tags" class="headerlink" title="title: 3Netty可靠性和性能优化description: 3Netty可靠性和性能优化date: 2024-09-28 21:34:15tags:"></a>title: 3Netty可靠性和性能优化<br>description: 3Netty可靠性和性能优化<br>date: 2024-09-28 21:34:15<br>tags:</h2>
+<h2 id="title-3Netty可靠性和性能优化description-3Netty可靠性和性能优化date-2024-09-28-21-34-15tags"><a href="#title-3Netty可靠性和性能优化description-3Netty可靠性和性能优化date-2024-09-28-21-34-15tags" class="headerlink" title="title: 3Netty可靠性和性能优化description: 3Netty可靠性和性能优化date: 2024-09-28 21:34:15tags:"></a>title: 3Netty可靠性和性能优化<br>description: 3Netty可靠性和性能优化<br>date: 2024-09-28 21:34:15<br>tags:</h2><ul>
+<li>可靠性分析和实现<ul>
+<li>空闲检测 </li>
+<li>心跳保活</li>
+</ul>
+</li>
+<li>性能优化<ul>
+<li>避免线程阻塞操作</li>
+<li>共享Handler(单例)</li>
+<li>合并编解码器、合并平行Handler</li>
+</ul>
+</li>
+</ul>
+<h1 id="Netty可靠性分析和实现"><a href="#Netty可靠性分析和实现" class="headerlink" title="Netty可靠性分析和实现"></a>Netty可靠性分析和实现</h1><p>网络通信异常不可避免，提升可靠性应尽可能减少异常出现。</p>
+<h2 id="服务端空闲检测"><a href="#服务端空闲检测" class="headerlink" title="服务端空闲检测"></a>服务端空闲检测</h2><p>链接空闲后关闭，避免资源闲置<br>IdleStateHandler</p>
+<pre><code>public class ServerIdleHandler extends IdleStateHandler {
+    private static int HERT_BEAT_TIME = 150;
+
+    public ServerIdleHandler() {
+        super(0, 0, HERT_BEAT_TIME);
+    }
+
+    @Override
+    protected void channelIdle(ChannelHandlerContext ctx, 				IdleStateEvent evt) throws 	Exception {
+        //系统出现问题，关闭连接
+        ctx.channel().close();
+    }
+}
+
+bootstrap.group(boss,worker)
+      .channel(NioServerSocketChannel.class) 
+     .childHandler(new ChannelInitializer&lt;NioSocketChannel&gt;() {
+          @Override
+          protected void initChannel(NioSocketChannel ch) throws Exception {
+ //放在Pipeline的最前面
+              ch.pipeline().addLast(new ServerIdleHandler());
+ ...
+          }
+     });
+</code></pre>
+<h2 id="客户端心跳"><a href="#客户端心跳" class="headerlink" title="客户端心跳"></a>客户端心跳</h2><p>IdleStateHandler</p>
+<h3 id="客户端发送"><a href="#客户端发送" class="headerlink" title="客户端发送"></a>客户端发送</h3><pre><code>public class ClientIdleHandler extends IdleStateHandler {
+
+    private static Logger logger = LoggerFactory.getLogger(ClientIdleHandler.class);
+
+    private static final int HEART_BEAT_TIME = 50;
+
+    public ClientIdleHandler() {
+        super(0, 0, HEART_BEAT_TIME);
+    }
+
+    @Override
+    protected void channelIdle(ChannelHandlerContext ctx, IdleStateEvent evt) throws 				Exception {
+        logger.info(&quot;发送心跳....&quot;);
+        ctx.writeAndFlush(new HeartBeatPacket());
+    }
+}
+</code></pre>
+<h3 id="服务端回复"><a href="#服务端回复" class="headerlink" title="服务端回复"></a>服务端回复</h3><pre><code>public class HeartBeatHandler extends SimpleChannelInboundHandler&lt;HeartBeatPacket&gt; {
+
+    private static Logger logger = LoggerFactory.getLogger(HeartBeatHandler.class);
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, HeartBeatPacket heartBeatPacket) 		throws Exception {
+        logger.info(&quot;收到心跳包：{}&quot;, JSON.toJSONString(heartBeatPacket));
+        ctx.writeAndFlush(heartBeatPacket);
+    }
+}
+</code></pre>
+<h2 id="客户端断线重连"><a href="#客户端断线重连" class="headerlink" title="客户端断线重连"></a>客户端断线重连</h2><p>？？？</p>
+<pre><code>public class ReConnectHandler extends ChannelInboundHandlerAdapter {
+
+    private int retryCount;
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        IdleStateEvent event = (IdleStateEvent)evt;
+        if(event.state() == IdleState.READER_IDLE) {
+            if(++retryCount &gt; 3) {
+                closeAndReconnection(ctx.channel());
+            } else {
+                ctx.writeAndFlush(MyHeartbeat.getHeartbeatPingBuf());
+            }
+        }
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        retryCount=0;
+        super.channelRead(ctx, msg);
+    }
+}
+</code></pre>
+<h1 id="Netty性能优化"><a href="#Netty性能优化" class="headerlink" title="Netty性能优化"></a>Netty性能优化</h1><ul>
+<li><strong>避免线程阻塞操作</strong> 不可处理耗费时间的代码 </li>
+<li>共享Handler</li>
+<li>合并编解码器</li>
+<li>合并平行Handler</li>
+</ul>
+<h2 id="避免线程阻塞操作"><a href="#避免线程阻塞操作" class="headerlink" title="避免线程阻塞操作"></a>避免线程阻塞操作</h2><p>NIO，非阻塞IO但channelRead0是阻塞处理的</p>
+<h3 id="通过线程池进行异步化"><a href="#通过线程池进行异步化" class="headerlink" title="通过线程池进行异步化"></a>通过线程池进行异步化</h3><pre><code>//同步阻塞主线程的耗时操作
+@Override
+protected void channelRead0(ChannelHandlerContext ctx, T msg) throws Exception {
+    //针对消息的业务处理
+    //执行数据库持久化
+    ctx.writeAndFlush(msg);
+    //执行其他业务处理
+}
+
+//异步化
+@Override
+protected void channelRead0(ChannelHandlerContext ctx, T msg) throws Exception {
+    threadPool.submit(new Runable() {
+        //针对消息的业务处理
+        //执行数据库持久化
+        ctx.writeAndFlush(msg);
+        //执行其他业务处理
+    });
+}
+</code></pre>
+<h3 id="消息中间件异步化"><a href="#消息中间件异步化" class="headerlink" title="消息中间件异步化"></a>消息中间件异步化</h3><pre><code>@Override
+protected void channelRead0(ChannelHandlerContext ctx, T msg) throws Exception {
+
+    //创建事件
+    MyEvent event = createEvent(msg);
+        
+    //生成消息对象
+    Message&lt;String&gt; message = MessageBuilder.withPayload(event ).build();
+
+    //发送信息
+    rocketMQTemplate.sendMessage(&quot;event_group&quot;, &quot;topic_chat&quot;, message, null);
+}
+</code></pre>
+<h2 id="共享Handler"><a href="#共享Handler" class="headerlink" title="共享Handler"></a>共享Handler</h2><p>一个Channel新建立时会执行initHandler方法并组装Pipeline<br>对于无状态类，使用单例模式可以节省类的创建成本<br>多channel共享一个handler</p>
+<pre><code>@ChannelHandler.Sharable //设置该Handler为全局共享
+public class MyMessageHandler extends SimpleChannelInboundHandler&lt;MyMessage&gt; {
+
+    private static MyMessageHandler instance = new MyMessageHandler();//单利对象
+
+    public static MyMessageHandler getInstance(){
+        return instance;
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, MyMessage msg) throws Exception {
+        ...
+    }
+}
+</code></pre>
+<h2 id="合并编解码器"><a href="#合并编解码器" class="headerlink" title="合并编解码器"></a>合并编解码器</h2><p>减少依赖对象的创建</p>
+<pre><code>@ChannelHandler.Sharable
+public class PacketCodecHandler extends MessageToMessageCodec&lt;ByteBuf,Packet&gt; {
+
+    private static PacketCodecHandler instance = new PacketCodecHandler();
+
+    public static PacketCodecHandler getInstance(){
+        return instance;
+    }
+
+    protected void encode(ChannelHandlerContext ctx, Packet packet, List&lt;Object&gt; list) throws Exception {
+        ByteBuf byteBuf = ctx.channel().alloc().ioBuffer();
+        PacketCodeC.getInstance().encode(byteBuf,packet);
+        list.add(byteBuf);
+
+    }
+
+    protected void decode(ChannelHandlerContext ctx, ByteBuf buf, List&lt;Object&gt; list) throws Exception {
+        list.add(PacketCodeC.getInstance().decode(buf));
+    }
+}
+</code></pre>
+<h2 id="合并平行Handler"><a href="#合并平行Handler" class="headerlink" title="合并平行Handler"></a>合并平行Handler</h2><p>???合并Handler，减少对象创建过程</p>
+<pre><code>@ChannelHandler.Sharable
+public class ServerHandler extends SimpleChannelInboundHandler&lt;MyMessage&gt; {
+
+    private static ServerHandler instance = new ServerHandler();
+    public static ServerHandler getInstance(){
+        return instance;
+    }
+
+    private static Map&lt;Byte,SimpleChannelInboundHandler&lt;? extends MyMessage&gt;&gt; handlerMap = new 					ConcurrentHashMap&lt;&gt;();
+    static{
+        handlerMap.putIfAbsent(CASE1, Case1Handler.getInstance());
+        handlerMap.putIfAbsent(CASE2, Case2Handler.getInstance());
+        handlerMap.putIfAbsent(CASE3, Case3Handler.getInstance());
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, MyMessage msg) throws Exception {//合并Handler，减少对象创建过程,减少对象创加了吗？
+        SimpleChannelInboundHandler handler = handlerMap.get(msg.getCommand());
+        handler.channelRead(ctx, msg);
+    }
+}
+</code></pre>
+<h2 id="添加日志"><a href="#添加日志" class="headerlink" title="添加日志"></a>添加日志</h2><p>在Netty中，writeAndFlush方法是一个异步操作，调用之后会直接返回</p>
+<pre><code>@Override
+protected void channelRead0(ChannelHandlerContext ctx, T msg) throws Exception {
+Long startTime = System.currentTimeMillis();
+
+//针对消息的业务处理
+//执行数据库持久化
+ctx.writeAndFlush(msg).addListener(future -&gt; {
+   if(future.isDone()) {
+      //执行其他业务处理
+      Long timeConsumed = System.currentTimeMillis() - startTime;	 }
+});
+}
+</code></pre>
