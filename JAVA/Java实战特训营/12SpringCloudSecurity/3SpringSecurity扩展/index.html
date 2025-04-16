@@ -114,7 +114,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -127,6 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%AE%9A%E5%88%B6%E5%8C%96%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">实现定制化用户认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95UserDetails"><span class="nav-number">1.1.</span> <span class="nav-text">扩展UserDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95UserDetailsService"><span class="nav-number">1.2.</span> <span class="nav-text">扩展UserDetailsService</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95AuthenticationProvider"><span class="nav-number">1.3.</span> <span class="nav-text">扩展AuthenticationProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E5%AE%9A%E5%88%B6%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">整合定制化配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AE%A4%E8%AF%81%E7%BC%93%E5%AD%98"><span class="nav-number">2.</span> <span class="nav-text">使用认证缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81%E7%BC%93%E5%AD%98%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">认证缓存定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCacheBasedUserCache"><span class="nav-number">2.1.1.</span> <span class="nav-text">SpringCacheBasedUserCache</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81%E7%BC%93%E5%AD%98%E5%BA%94%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">认证缓存应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%A4%9A%E5%9B%A0%E5%AD%90%E8%AE%A4%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">实现多因子认证</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -139,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -203,6 +204,13 @@
 
       <time title="Created: 2024-11-07 21:23:53" itemprop="dateCreated datePublished" datetime="2024-11-07T21:23:53+08:00">2024-11-07</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-12-12 13:40:57" itemprop="dateModified" datetime="2024-12-12T13:40:57+08:00">2024-12-12</time>
+    </span>
 
   
     <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
@@ -222,7 +230,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>学习目标</p>
+<ul>
+<li>理解扩展Spring Security的常见场景和方法</li>
+<li>掌握自定义用户认证和多因子认证的实现原理和过程</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>实现定制化用户认证</li>
+<li>使用认证缓存</li>
+<li>实现多因子认证</li>
+</ul>
+<h1 id="实现定制化用户认证"><a href="#实现定制化用户认证" class="headerlink" title="实现定制化用户认证"></a>实现定制化用户认证</h1><ol>
+<li>扩展UserDetails</li>
+<li>扩展UserDetailsService</li>
+<li>扩展AuthenticationProvider</li>
+<li>整合定制化配置</li>
+</ol>
+<h2 id="扩展UserDetails"><a href="#扩展UserDetails" class="headerlink" title="扩展UserDetails"></a>扩展UserDetails</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class SpringUser implements UserDetails &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line">private Long id;</span><br><span class="line">private final String username;</span><br><span class="line">private final String password;</span><br><span class="line">private final String phoneNumber;</span><br><span class="line">//省略getter/setter</span><br><span class="line">@Override</span><br><span class="line">public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() &#123;</span><br><span class="line">return Arrays.asList(new SimpleGrantedAuthority(&quot;ROLE_USER&quot;));</span><br><span class="line">&#125;</span><br><span class="line">@Override</span><br><span class="line">public boolean isAccountNonExpired() &#123;</span><br><span class="line">return true;</span><br><span class="line">&#125;</span><br><span class="line">@Override</span><br><span class="line">public boolean isAccountNonLocked() &#123;</span><br><span class="line">return true;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="扩展UserDetailsService"><a href="#扩展UserDetailsService" class="headerlink" title="扩展UserDetailsService"></a>扩展UserDetailsService</h2><p>获取用户信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//通过Spring Data JPA实现数据访问 </span><br><span class="line">public interface SpringUserRepository extends CrudRepository&lt;SpringUser, Long&gt; &#123;</span><br><span class="line">SpringUser findByUsername(String username);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class SpringUserDetailsService implements UserDetailsService &#123;</span><br><span class="line">@Autowired</span><br><span class="line">private SpringUserRepository repository;</span><br><span class="line">@Override</span><br><span class="line">public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;</span><br><span class="line">SpringUser user = repository.findByUsername(username);</span><br><span class="line">if (user != null) &#123;</span><br><span class="line">return user;</span><br><span class="line">&#125;</span><br><span class="line">throw new UsernameNotFoundException( &quot;SpringUser &#x27;&quot; + username + &quot;&#x27; not found&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="扩展AuthenticationProvider"><a href="#扩展AuthenticationProvider" class="headerlink" title="扩展AuthenticationProvider"></a>扩展AuthenticationProvider</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class SpringAuthenticationProvider implements AuthenticationProvider &#123;</span><br><span class="line">@Autowired</span><br><span class="line">private UserDetailsService userDetailsService;</span><br><span class="line">@Autowired</span><br><span class="line">private PasswordEncoder passwordEncoder;</span><br><span class="line">@Override</span><br><span class="line">public Authentication authenticate(Authentication authentication) &#123;</span><br><span class="line">String username = authentication.getName();</span><br><span class="line">String password = authentication.getCredentials().toString();</span><br><span class="line">UserDetails user = userDetailsService.loadUserByUsername(username);</span><br><span class="line">if (passwordEncoder.matches(password, user.getPassword())) &#123;</span><br><span class="line">return new UsernamePasswordAuthenticationToken(username, password, u.getAuthorities());</span><br><span class="line">&#125; else &#123;</span><br><span class="line">throw new BadCredentialsException(&quot;The username or password is wrong!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">@Override</span><br><span class="line">public boolean supports(Class&lt;?&gt; authenticationType) &#123;</span><br><span class="line">return authenticationType.equals(UsernamePasswordAuthenticationToken.class);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="整合定制化配置"><a href="#整合定制化配置" class="headerlink" title="整合定制化配置"></a>整合定制化配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class SpringSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserDetailsService springUserDetailsService;</span><br><span class="line">    @Autowired</span><br><span class="line">    private AuthenticationProvider springAuthenticationProvider;</span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</span><br><span class="line">        auth.userDetailsService(springUserDetailsService)</span><br><span class="line">        .authenticationProvider(springAuthenticationProvider);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用认证缓存"><a href="#使用认证缓存" class="headerlink" title="使用认证缓存"></a>使用认证缓存</h1><h2 id="认证缓存定义"><a href="#认证缓存定义" class="headerlink" title="认证缓存定义"></a>认证缓存定义</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface UserCache &#123;</span><br><span class="line">    //从缓存获取用户信息</span><br><span class="line">    UserDetails getUserFromCache(String username);</span><br><span class="line">    //把用户信息放入缓存中</span><br><span class="line">    void putUserInCache(UserDetails user);</span><br><span class="line">    //从缓存中移除用户信息</span><br><span class="line">    void removeUserFromCache(String username);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserCache子类：</p>
+<ul>
+<li>EhCacheBasedUserCache</li>
+<li>NullUserCache</li>
+<li>SpringCacheBasedUserCache</li>
+</ul>
+<h3 id="SpringCacheBasedUserCache"><a href="#SpringCacheBasedUserCache" class="headerlink" title="SpringCacheBasedUserCache"></a>SpringCacheBasedUserCache</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class SpringCacheBasedUserCache implements UserCache &#123;</span><br><span class="line">private final Cache cache;</span><br><span class="line">public UserDetails getUserFromCache(String username) &#123;</span><br><span class="line">Cache.ValueWrapper element = username != null ? cache.get(username) : null;</span><br><span class="line">if (element == null) &#123;</span><br><span class="line">return null;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">return (UserDetails) element.get();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">public void putUserInCache(UserDetails user) &#123;</span><br><span class="line">cache.put(user.getUsername(), user);</span><br><span class="line">&#125;</span><br><span class="line">public void removeUserFromCache(UserDetails user) &#123;</span><br><span class="line">this.removeUserFromCache(user.getUsername());</span><br><span class="line">&#125;</span><br><span class="line">public void removeUserFromCache(String username) &#123;</span><br><span class="line">cache.evict(username);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="认证缓存应用"><a href="#认证缓存应用" class="headerlink" title="认证缓存应用"></a>认证缓存应用</h2><h1 id="实现多因子认证"><a href="#实现多因子认证" class="headerlink" title="实现多因子认证"></a>实现多因子认证</h1>
     </div>
 
     
@@ -263,7 +302,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

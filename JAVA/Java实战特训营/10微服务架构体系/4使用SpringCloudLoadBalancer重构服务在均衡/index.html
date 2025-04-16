@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-11-02 12:45:35" itemprop="dateModified" datetime="2024-11-02T12:45:35+08:00">2024-11-02</time>
+      <time title="Modified: 2025-04-05 12:02:31" itemprop="dateModified" datetime="2025-04-05T12:02:31+08:00">2025-04-05</time>
     </span>
 
   
@@ -242,7 +242,7 @@
 <li>Spring Cloud LoadBalancer用法</li>
 <li>定制化路由策略</li>
 </ul>
-<h1 id="Spring-Cloud-LoadBalancer用法"><a href="#Spring-Cloud-LoadBalancer用法" class="headerlink" title="Spring Cloud LoadBalancer用法"></a>Spring Cloud LoadBalancer用法</h1><p>有哪些服务？如何选择其中一个？谁来分发？（服务端、客户端）</p>
+<h1 id="Spring-Cloud-LoadBalancer用法"><a href="#Spring-Cloud-LoadBalancer用法" class="headerlink" title="Spring Cloud LoadBalancer用法"></a>Spring Cloud LoadBalancer用法</h1><p>有哪些服务？<br>如何选择其中一个？（负载均衡算法）<br>谁来分发？（服务端分发、客户端分发）</p>
 <h2 id="获取服务列表"><a href="#获取服务列表" class="headerlink" title="获取服务列表"></a>获取服务列表</h2><p><code>DiscoveryClient</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private DiscoveryClient discoveryClient;</span><br><span class="line"></span><br><span class="line">public User getUserByUserName(String userName)&#123;</span><br><span class="line">    List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(&quot;userservice&quot;);</span><br><span class="line"></span><br><span class="line">    if(instances.size()==0) return null;</span><br><span class="line"></span><br><span class="line">    String userserviceUri = String,format(&quot;%s/users/%s&quot;,instances.get(0).getUri().toString()，userName);</span><br><span class="line">    ResponseEntity&lt;User&gt; user =restTemplate.exchange(userserviceUri, HttpMethod.GET, null, User.class, userName);</span><br><span class="line">    return result.getBody();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -258,7 +258,7 @@
 <li>普通轮训</li>
 <li>加权轮询<br><strong>源IP哈希 Source IP Hash</strong>‘</li>
 </ul>
-<p><strong>一致性哈希 Consistent Hash</strong></p>
+<p><strong>一致性哈希 Consistent Hash</strong><br>常用用负载均衡系统和分布式缓存<br>扩容缩容只影响相邻节点<br>虚拟节点解决负载不均</p>
 <h3 id="动态算法"><a href="#动态算法" class="headerlink" title="动态算法"></a>动态算法</h3><p><strong>最少链接算法</strong></p>
 <p><strong>服务调用时延算法</strong></p>
 <h2 id="LoadBalancer注解"><a href="#LoadBalancer注解" class="headerlink" title="@LoadBalancer注解"></a><code>@LoadBalancer</code>注解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//配置负载均衡机制</span><br><span class="line">@LoadBalanced</span><br><span class="line">@Bean</span><br><span class="line">public RestTemplate getRestTemplate()&#123;</span><br><span class="line">    return new RestTemplate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用restTemplate时自动负载</span><br><span class="line">ResponseEntity&lt;UserMapper&gt;restExchange = restTemplate.exchange(&quot;http://userservice/users/&#123;userName&#125;&quot;,HttpMethod.GET,null,UserMapper.class,userName);</span><br></pre></td></tr></table></figure>
@@ -324,7 +324,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -1,5 +1,6 @@
 <hr>
-<h2 id="title-6-5代理date-2024-04-26-22-09-42tags-代理description-Proxy-newProxyInstance、InvocationHandler"><a href="#title-6-5代理date-2024-04-26-22-09-42tags-代理description-Proxy-newProxyInstance、InvocationHandler" class="headerlink" title="title: 6-5代理date: 2024-04-26 22:09:42tags: 代理description: Proxy.newProxyInstance、InvocationHandler"></a>title: 6-5代理<br>date: 2024-04-26 22:09:42<br>tags: 代理<br>description: Proxy.newProxyInstance、InvocationHandler</h2><pre><code>// 定义调用处理器
+<h2 id="title-6-5代理date-2024-04-26-22-09-42tags-代理description-Proxy-newProxyInstance、InvocationHandler"><a href="#title-6-5代理date-2024-04-26-22-09-42tags-代理description-Proxy-newProxyInstance、InvocationHandler" class="headerlink" title="title: 6-5代理date: 2024-04-26 22:09:42tags: 代理description: Proxy.newProxyInstance、InvocationHandler"></a>title: 6-5代理<br>date: 2024-04-26 22:09:42<br>tags: 代理<br>description: Proxy.newProxyInstance、InvocationHandler</h2><h1 id="JDK-动态代理"><a href="#JDK-动态代理" class="headerlink" title="JDK 动态代理"></a>JDK 动态代理</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>ASM字节码操纵框架生成代理类字节码（CGLIB底层也使用ASM）<br>类加载器加载字节码<br>反射生成代理类对象并调用方法</p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><pre><code>// 定义调用处理器
 class IntegerTraceHandler implements InvocationHandler {
     private Integer target;
 

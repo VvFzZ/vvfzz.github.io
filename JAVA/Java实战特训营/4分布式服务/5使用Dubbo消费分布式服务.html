@@ -35,7 +35,7 @@ ClassPathXmlApplicationContext(&quot;spring/dubbo-consumer.xml&quot;);
 </code></pre>
 <h3 id="异步调用"><a href="#异步调用" class="headerlink" title="异步调用"></a>异步调用</h3><p>基于NIO的非阻塞实现并行调用，以CompletableFuture为基础,客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小</p>
 <h3 id="泛化调用"><a href="#泛化调用" class="headerlink" title="泛化调用"></a>泛化调用</h3><p>违反接口契约，慎用</p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><pre><code>dubbo:
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>dubbo:
   protocol:
     name: dubbo
     port: -1
@@ -49,7 +49,7 @@ integration:
   service:
     version: 1.0.0
 </code></pre>
-<h2 id="DubboReference"><a href="#DubboReference" class="headerlink" title="DubboReference"></a>DubboReference</h2><pre><code>@Component
+<h3 id="DubboReference"><a href="#DubboReference" class="headerlink" title="DubboReference"></a>DubboReference</h3><pre><code>@Component
 public class CustomClient {
 
     @DubboReference(version = &quot;${customer.service.version}&quot;)
@@ -61,4 +61,4 @@ public class CustomClient {
     }
 }
 </code></pre>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>针对服务引用，Dubbo提供哪些功能特性？</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>针对服务引用，Dubbo提供哪些功能特性？</p>

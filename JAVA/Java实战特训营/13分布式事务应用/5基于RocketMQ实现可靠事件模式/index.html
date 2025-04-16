@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/5%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/5%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/","path":"JAVA/Java实战特训营/13分布式事务应用/5基于RocketMQ实现可靠事件模式/","title":"5基于RocketMQ实现可靠事件模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>5基于RocketMQ实现可靠事件模式 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">可靠事件模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">技术组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RocketMO%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">RocketMO事务消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-%E5%9F%BA%E4%BA%8ERocketMO%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">实现 - 基于RocketMO实现可靠事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.</span> <span class="nav-text">服务提供者实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.</span> <span class="nav-text">服务消费者实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-number">3.3.1.</span> <span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-number">3.3.2.</span> <span class="nav-text">消费者</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/5%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="5基于RocketMQ实现可靠事件模式 | VvfzZ">
+      <meta itemprop="description" content="5基于RocketMQ实现可靠事件模式">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          5基于RocketMQ实现可靠事件模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-24 15:35:53" itemprop="dateCreated datePublished" datetime="2024-11-24T15:35:53+08:00">2024-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-16 23:13:48" itemprop="dateModified" datetime="2025-04-16T23:13:48+08:00">2025-04-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">5基于RocketMQ实现可靠事件模式</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学习目标</p>
+<ul>
+<li>理解可靠事件模式的结构和原理</li>
+<li>掌握基于RocketMO实现可靠事件模式的方法</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>可靠事件模式</li>
+<li>RocketMO事务消息</li>
+<li>基于RocketMO实现可靠事件</li>
+</ul>
+<h1 id="可靠事件模式"><a href="#可靠事件模式" class="headerlink" title="可靠事件模式"></a>可靠事件模式</h1><p>关键点：保证业务操作和发布消息的原子性（同时成功&#x2F;失败）</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本地更新后消息发布失败<br>消息发布事件成功，中间件推送失败<br>重复消费，幂等性保证</p>
+<h2 id="技术组件"><a href="#技术组件" class="headerlink" title="技术组件"></a>技术组件</h2><ul>
+<li>本地事件表，保存事件<br>业务操作时需要将业务数据和事件保存在同一个本地事务中</li>
+<li>事件确认组件，重发事件<br>事件确认表现为一种定时机制，用于处理事件没有被成功发送的场景</li>
+<li>事件恢复组件，更新事件状态<br>事件恢复组件同样是一种定时机制，根据本地事件表中的事件状态，专门处理状态为已确认但已超时的事件</li>
+</ul>
+<p>异常场景：</p>
+<ol>
+<li>消息队列将支付成功消息返回订单服务时，网络错误，订单服务无法收到支付成功消息，导致订单数据回滚，支付服务数据正常入库。</li>
+<li>消息队列将支付成功消息返回订单服务时，订单服务挂了，导致订单数据库无法提交事务而回滚，支付服务数据正常入库。</li>
+</ol>
+<h1 id="RocketMO事务消息"><a href="#RocketMO事务消息" class="headerlink" title="RocketMO事务消息"></a>RocketMO事务消息</h1><ul>
+<li>消息发送方<br>解决执行本地事务与发送消息的原子性问题<br>保证本地事务执行成功，消息一定发送成功</li>
+<li>消息接收方<br>解决接收消息与本地事务的原子性问题<br>保证接收消息成功后，本地事务一定执行成功</li>
+</ul>
+<p>半消息：broker确认前，消费者看不到</p>
+<p><strong>事务消息发布流程</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/5%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/5-%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B.png"></p>
+<ul>
+<li>发送方发送一个事务消息给Broker，此时这条消息暂时不能被接收方消费，即半消息</li>
+<li>Broker返回发送成功给发送方</li>
+<li>发送方执行本地事务，例如操作数据库</li>
+<li>如果本地事务执行成功，发送commit给Broker，这条消息就可以被接收方消费;如果本地事务执行失败，发送rollback给Broker，RocketMO会删除这条消息</li>
+<li>如果发送方在本地事务过程中，出现服务挂掉，网络闪断或者超时，那Broker将无法收到确认结果</li>
+<li>此时RocketMO将会不停的询问发送方来获取本地事务的执行状态，即事务回查</li>
+<li>根据事务回查的结果来决定Commit或Rollback，这样就保证了消息发送与本地事务同时成功或同时失败</li>
+</ul>
+<h1 id="实现-基于RocketMO实现可靠事件"><a href="#实现-基于RocketMO实现可靠事件" class="headerlink" title="实现 - 基于RocketMO实现可靠事件"></a>实现 - 基于RocketMO实现可靠事件</h1><p><strong>前提</strong><br>创建”事务执行记录表”<br>作用：</p>
+<ol>
+<li>事务回查 </li>
+<li>业务层幂等性控制</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE`ticket_tx_record`(</span><br><span class="line">    tx no`varchar(64)NOT NULL COMMENT&#x27;事务Id&#x27;,</span><br><span class="line">    create time` datetime NOT NULL DEFAULT CURRENT TIMESTAMP COMMENT&#x27;创建时间,</span><br><span class="line">    PRIMARY KEY(&#x27;tx no&#x27;</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&#x27;事务记录表</span><br><span class="line">CREATE TABLE`chat_tx_record`(</span><br><span class="line">    tx no`varchar(64)NOT NULL COMMENT&#x27;事务Id&#x27;,</span><br><span class="line">    create time` datetime NOT NULL DEFAULT CURRENT TIMESTAMP COMMENT&#x27;创建时间,</span><br><span class="line">    PRIMARY KEY(&#x27;tx no&#x27;</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&#x27;事务记录表</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务提供者实现"><a href="#服务提供者实现" class="headerlink" title="服务提供者实现"></a>服务提供者实现</h2><p>业务服务类</p>
+<ul>
+<li>发送消息（到broker）</li>
+<li>执行本地事务，幂等处理<br>TransactionListener实现类</li>
+<li>（收到borker消息）事务执行（调用业务服务类）</li>
+<li>事务状态回查</li>
+</ul>
+<h2 id="服务消费者实现"><a href="#服务消费者实现" class="headerlink" title="服务消费者实现"></a>服务消费者实现</h2><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">public class customerTicketServiceImpl&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void generateTicket (AddCustomerTicketReqV0 addCustomerTicketReqVO)&#123;</span><br><span class="line">        //从VO中创建TicketGeneratedEvent</span><br><span class="line">        TicketGeneratedEvent ticketGeneratedEvent = createTicketGeneratedEvent (addCustomerTicketReqVO);</span><br><span class="line">        //将Event转为JSON对象</span><br><span class="line">        JSONObject jsonObject = new JSONObject();</span><br><span class="line">        jsonObject.put (&quot;ticketGeneratedEvent&quot;, ticketGeneratedEvent)</span><br><span class="line">        String isonString= isonObject.toJSONString():</span><br><span class="line">        //生成消息对象</span><br><span class="line">        Message&lt;String&gt; messageageBuilder.withPayload(jsonString).build();</span><br><span class="line">        //发送事务信息</span><br><span class="line">        rocketMgTemplate.sendMessageInTransaction(&quot;producer_group_ticket&quot;,&quot;topic_ticket&quot;,null);</span><br><span class="line">        //此时是半消息，消费者看不到,broker收到后需执行本地事务executeLocalTransaction</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private TicketGeneratedEvent createTicketGeneratedEvent (AddCustomerTicketReqVO addCustomerTicketReqVO) &#123;</span><br><span class="line">        TicketGeneratedEvent ticketGeneratedEvent = new TicketGeneratedEvent();</span><br><span class="line">        //创建一个全局事务</span><br><span class="line">        String txNo = &quot;TX-&quot; + DistributedId. getInstance().getFastSimpleUUID();</span><br><span class="line">        ticketGeneratedEvent.setTxNo(txNo);</span><br><span class="line">        //创建一个全局工单编号，和聊天记录进行关联</span><br><span class="line">        String ticketNo =&quot;TICKET-&quot; + DistributedId. getInstance().getFastSimpleUUID();</span><br><span class="line">        ticketGeneratedEvent.setTicketNo(ticketNo);        </span><br><span class="line">        ticketGeneratedEvent.setUserId(addCustomerTicketReqVO.getUserId());</span><br><span class="line">        ticketGeneratedEvent.setStaffId(addCustomerTicketReqVO.getStaffId());</span><br><span class="line">        ticketGeneratedEvent.setInquire(addCustomerTicketReqVO.getInquire());</span><br><span class="line">        return ticketGeneratedEvent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @Transactional //本地事务</span><br><span class="line">    public void doGenerateTicket (TicketGeneratedEvent ticketGeneratedEvent)&#123;</span><br><span class="line">        //幂等判断</span><br><span class="line">        if(Objects. nonNu11(txRecordMapper,findTxRecordByTxNo(ticketGeneratedEvent.getTxNo())))&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        //插入工单</span><br><span class="line">        CustomerTicket customerTicket = CustomerTicketConverter.INSTANE.convertEvent(ticketGeneratedEvent);</span><br><span class="line">        customerTicket.setStatus(1);</span><br><span class="line">        save(customerTicket);</span><br><span class="line">        //添加事务执行日志</span><br><span class="line">        txRecordMapper.addTxRecord(ticketGeneratedEvent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Evnet</span><br><span class="line">@Component</span><br><span class="line">@RocketMQTransactionListener(txProducerGroup =&quot;product_ group_ticket”)</span><br><span class="line">public class Productlistener implements RocketMGLocalTransactionlistener &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg)&#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            //解析消息，转化为Event对象</span><br><span class="line">            TicketGeneratedEvent ticketGeneratedEvent = convertEvent(msg):</span><br><span class="line">            //执行本地事务(插入工单记录) </span><br><span class="line">            customerTicketService.doGenerateTicket(ticketGeneratedEvent);、、</span><br><span class="line">            //提交Commit状态，确保对于消费者可见</span><br><span class="line">            return RocketMgLocalTransactionState.COMMIT;</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">            //如果本地事务执行失败，那么将消息设置为回滚状态，消费者就不可见            </span><br><span class="line">            return RocketMQLocalTransactionState.ROLLBACK;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public RocketMQLocalTransactionState checkLocalTransaction(Message msg)&#123;</span><br><span class="line">        //解析消息，转化为Event对象</span><br><span class="line">        TicketGeneratedEvent ticketGeneratedExent = convertEvent(msg);</span><br><span class="line">        Boolean isTxloExisted = Objects.nonNull(txRecordMapper. findTxRecordByTxNo(ticketGeneratedEvent.getTxNo()));</span><br><span class="line">        //如果事务已经执行则返回COMMIT，如果没有执行就返回UNKNOWN状态</span><br><span class="line">        if(isTxNoExisted)&#123;</span><br><span class="line">            return RocketMQLocalTransactionState.COMMIT;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return RocketMQLocalTransactionState.UNKNOWN;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TicketGeneratedEvent&#123;</span><br><span class="line">    private String ticketNo;</span><br><span class="line">    private long userId;</span><br><span class="line">    private Long staffld;</span><br><span class="line">    private Long content;</span><br><span class="line">    private Long txNo; //事务编号</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">//监听器</span><br><span class="line">@Component</span><br><span class="line">@Slf4j</span><br><span class="line">@RocketMGMessagelistener(consumerGroup = &quot;consumer_group_ticket&quot;, topic = &quot;topic_ticket”)</span><br><span class="line">public class Consumer implements RocketMQListener&lt;String&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onMessage(String message)&#123;</span><br><span class="line">        //解析消息</span><br><span class="line">        JSONObject jsonObject =JSONObject.parseObject(message);</span><br><span class="line">        String eventString = jsonObject.getString(&quot;ticketGeneratedEvent&quot;);</span><br><span class="line">        //转成Event</span><br><span class="line">        TicketGeneratedEvent ticketGeneratedEvent = jSONObject.parseObject(eventString, TicketGeneratedEvent.class);</span><br><span class="line">        //添加本地聊天记录</span><br><span class="line">        chatRecordService.generateChatRecord(ticketGeneratedEvent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//服务提供者 </span><br><span class="line">public class ChatRecordServiceImpl&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void generateChatRecord(TicketGeneratedEvent ticketGeneratedEvent)&#123;</span><br><span class="line">        //幂等判断</span><br><span class="line">        if (Objects.nonNull(txRecordMapper.findTxRecordByTxNo(ticketGeneratedEvent.getTxNo())))&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        //插入聊天记录</span><br><span class="line">        ChatRecord chatRecord = RecordConverter.INSTANCE.convertEvent(ticketGeneratedEvent);</span><br><span class="line">        save(chatRecord);</span><br><span class="line">        //添加事务执行日志</span><br><span class="line">        txRecordMapper.addTxRecord(ticketGeneratedEvent.getTxNo());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Mаpрer</span><br><span class="line">public interface ChatRecordConverter&#123;</span><br><span class="line">    ChatRecordConverter INSTANCE=Mappers.getMapper(ChatRecordConverter.class);</span><br><span class="line">    //Event-&gt;Entity</span><br><span class="line">    ChatRecord convertEvent(TicketGeneratedEvent event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>RocketMO事务消息如何确保消息发布和消息消费的事务性?</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/4Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%BC%8F%E9%80%89%E5%9E%8B/" rel="prev" title="4Seata分布式事务模式选型">
+                  <i class="fa fa-chevron-left"></i> 4Seata分布式事务模式选型
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B7%A5%E5%85%B7%E5%8C%85/" rel="next" title="第三方工具包">
+                  第三方工具包 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

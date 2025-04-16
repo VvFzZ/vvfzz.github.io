@@ -1,0 +1,163 @@
+<hr>
+<h2 id="title-7基于Sentinel实现服务降级01description-7基于Sentinel实现服务降级01date-2024-11-29-17-16-54tags"><a href="#title-7基于Sentinel实现服务降级01description-7基于Sentinel实现服务降级01date-2024-11-29-17-16-54tags" class="headerlink" title="title: 7基于Sentinel实现服务降级01description: 7基于Sentinel实现服务降级01date: 2024-11-29 17:16:54tags:"></a>title: 7基于Sentinel实现服务降级01<br>description: 7基于Sentinel实现服务降级01<br>date: 2024-11-29 17:16:54<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>理解服务熔断器的类型和结构</li>
+<li>掌握基于Sentinel的服务降级实现方法</li>
+<li>理解Spring Clouud Circuit Breaker抽象过程</li>
+</ul>
+<p>当系统资源出现瓶颈时，我们需要确保核心业务不受影响</p>
+<p>目录</p>
+<ul>
+<li>熔断器模型（基本结构）</li>
+<li>Sentinel降级机制（如何实现的，基本原理）</li>
+<li>Spring Cloud Circuit Breaker抽象</li>
+</ul>
+<h1 id="熔断器模型"><a href="#熔断器模型" class="headerlink" title="熔断器模型"></a>熔断器模型</h1><p>Closed、Open、HalfOpen三态转换</p>
+<h2 id="自定义熔断器"><a href="#自定义熔断器" class="headerlink" title="自定义熔断器"></a>自定义熔断器</h2><pre><code>//熔断器状态
+public enum State{
+    CLOSED,
+    OPEN,
+    HALFOPEN
+}
+
+//熔断器定义
+public interface CircuitBreaker {
+    //请求成功，重置熔断器
+    void recordSuccess();
+    //请求失败，处理结果并根据需要更新状态
+    void recordFailure(String response);
+
+    //获取熔断器当前状态
+    String getState();
+    //将熔断器设置到特定状态
+    void setState(State state);
+
+    // 对远程服务发起请求
+    String attemptRequest() throws RemoteServiceException;
+}
+
+public class DefaultCircuitBreaker implements CircuitBreaker{
+    //请求成功，设置熔断器状态
+    @Override    
+    public void recordSuccess(){
+        this.failureCount = 0;
+        this.lastFailureTime = System.nanoTime() + futureTime；
+        this.state = State.CLOSED;
+    }
+
+
+    //请求失败，更新统计数据
+    @Override
+    public void recordFailure(String response){
+        failureCount =failureCount +1;this,lastFailureTime =System.nanoTime();
+        //保存失败响应，作为熔断器打开状态下的默认返回值
+        this.lastFailureResponse=response;
+    }
+
+    public String attemptRequest()throws RemoteserviceException {
+        //发起请求，评估熔断器状态
+        evaluateState();
+        if(state == State.OPEN){
+            return this.lastFailureResponse;
+        } else {
+            try {
+                String response =service.call();
+                recordSuccess();
+                return response;
+            } catch(RemoteServiceException ex) {
+                recordFailure(ex.getMessage());
+                throw ex;
+            }
+        }
+    }
+
+
+    //根据失败次数、重试时间更新熔断器状态
+    protected void evaluatestate(){
+        if(failureCount &gt;= failureThreshold){
+            if((System.nanoTime()-lastFailureTime) &gt; retryTimePeriod){
+                state = State.HALF_OPEN;
+            } else {
+                state = State.OPEN;
+            }
+        } else {
+            state = state.CLOSDE;
+        }
+    }
+}
+</code></pre>
+<h1 id="Sentinel降级机制"><a href="#Sentinel降级机制" class="headerlink" title="Sentinel降级机制"></a>Sentinel降级机制</h1><h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><ul>
+<li>定义资源<br>通过代码嵌入和注解集成</li>
+<li>设置降级规则<br>指定熔断类型和控制行为</li>
+<li>编写降级逻辑<br>实现回退函数</li>
+<li>验证降级效果<br>通过测试工具执行验证</li>
+</ul>
+<h2 id="设置降级规则"><a href="#设置降级规则" class="headerlink" title="设置降级规则"></a>设置降级规则</h2><pre><code>public class DegradeRule extends AbstractRule {
+    //熔断策略
+    private int grade = RuleConstant.DEGRADE_GRADE_RT;
+    private double count;
+    //熔断时长，单位为s
+    private int timeWindow;
+    //熔断触发的最小请求数
+    private int minRequestAmount = RuleConstant.DEGRADE DEFAULT MIN REQUEST AMOUNT;
+    //慢调用比例阈值
+    private double slowRatioThreshold = 1.0D;
+    //统计时长
+    private int statIntervalMs = 1000;
+}
+</code></pre>
+<p>降级策略 按数量&#x2F;比例<br>DEGRADE GRADE RT 按平均响应耗时熔断<br>DEGRADE GRADE EXCEPTION RATIO 按失败比率熔断<br>DEGRADE GRADE EXCEPTION COUNT 按失败次数熔断</p>
+<p>配合降级策略使用<br>minRequestAmount 表示可触发熔断的最小请求数<br>slowRatioThreshold 表示超过限流阈值的慢请求数量</p>
+<p>原生代码实现指定降级规则</p>
+<pre><code>在一分钟内，请求数超过2次，并且当异常数大于2之后请求会被熔断;
+10s后断路器转换为半开状态，当再次请求又发生异常时会直接被熔断，之后重复。
+private void initDegradeRule(){
+    List&lt;DegradeRule&gt; rules = new ArrayList&lt;&gt;();
+    DegradeRule degradeRule = new DegradeRule();
+    //设置熔断降级资源名
+    deqradeRule.setResource(&quot;resourceName&quot;);
+    //设置降级规则:异常数
+    degradeRule.setGrade(RuleConstant,DEGRADE_GRADE_EXCEPTION_COUNT);
+    //阈值计数，这里是触发熔断异常数:2
+    degradeRule.setCount(2);
+    //可以触发熔断的最小请求数:2
+    degradeRule.setMinRequestAmount(2);
+    //统计时间间隔:1分钟
+    degradeRule.setstatIntervalMs(60*1000);
+    //熔断器打开时的恢复超时:10秒
+    degradeRule.setTimeWindow(10);
+    rules.add(degradeRule);DegradeRuleManager.loadRules(rules);
+}
+</code></pre>
+<h3 id="编码-注解"><a href="#编码-注解" class="headerlink" title="编码-注解"></a>编码-注解</h3><pre><code>public class BuyFallback {
+    // 回退方法
+    public static String buyFallback(@PathVariable String name,@PathVariable Integer countThrowable throwable){...}
+}
+public class BuyBlockHandler {
+    //异常处理
+    public static String buyBlock(@PathVariable String name, @PathVariable Integer count.BlockException e){...}
+}
+
+@SentinelResource(value =&quot;buy&quot;fallback = &quot;buyFallback&quot;
+    fallbackClass = BuyFallBack.class,
+    blockHandler =&quot;buyBlock&quot;,
+    blockHandlerClass =BuyBlockHandler.class,
+    exceptionsToIgnore =NullPointerException.class)
+</code></pre>
+<h3 id="CircuitBreaker"><a href="#CircuitBreaker" class="headerlink" title="CircuitBreaker"></a>CircuitBreaker</h3><p>熔断器实现</p>
+<pre><code>public interface CircuitBreaker {
+    DegradeRule getRule();
+    boolean tryPass(Context context);
+    CircuitBreaker,State currentState();
+    void onRequestComplete(Context context);public static enum State {OPEN ,HALF OPEN,CLOSED;}
+}
+</code></pre>
+<p>AbstractCircuitBreaker extends CircuitBreaker<br>ResponseTimeCircuitBreaker extends AbstractCircuitBreaker<br>ExceptionCircuitBreaker extends AbstractCircuitBreaker</p>
+<h1 id="Spring-Cloud-Circuit-Breaker抽象"><a href="#Spring-Cloud-Circuit-Breaker抽象" class="headerlink" title="Spring Cloud Circuit Breaker抽象"></a>Spring Cloud Circuit Breaker抽象</h1><p>Spring cloud Circuit Breaker内置熔断器</p>
+<ul>
+<li>Netflix Hystrix</li>
+<li>Resilience4J</li>
+<li>Sentinel</li>
+<li>Spring Retry</li>
+</ul>
+<p>针对不同的熔断器，如何设计统一的API？</p>

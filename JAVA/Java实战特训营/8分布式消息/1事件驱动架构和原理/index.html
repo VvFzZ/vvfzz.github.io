@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-11-04 17:09:44" itemprop="dateModified" datetime="2024-11-04T17:09:44+08:00">2024-11-04</time>
+      <time title="Modified: 2025-03-31 12:05:12" itemprop="dateModified" datetime="2025-03-31T12:05:12+08:00">2025-03-31</time>
     </span>
 
   
@@ -232,7 +232,7 @@
     <div class="post-body" itemprop="articleBody">
         <p>事件驱动架构是实现技术组件解耦的基础收手段<br>事件驱动架构核心价值：解耦（不再直接调用目标函数）<br>学习目标</p>
 <ul>
-<li>时间架构驱动基本概念和组成</li>
+<li>事件架构驱动基本概念和组成</li>
 <li>spring对事件驱动架构的抽象和实现原理</li>
 </ul>
 <p>目录</p>
@@ -241,14 +241,19 @@
 <li>spring事件驱动的应用</li>
 <li>spring事件驱动的实现原理</li>
 </ul>
-<h1 id="事件驱动架构的组成"><a href="#事件驱动架构的组成" class="headerlink" title="事件驱动架构的组成"></a>事件驱动架构的组成</h1><p>事件：业务状态变更动作抽象成一个对象<br>事件驱动架构：如何生成，发布，消费事件的架构<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/1%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/1-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E8%A7%92%E8%89%B2%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B.png"><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/1%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/1-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E7%B1%BB%E5%B1%82%E7%BB%93%E6%9E%84.png"></p>
+<h1 id="事件驱动架构的组成"><a href="#事件驱动架构的组成" class="headerlink" title="事件驱动架构的组成"></a>事件驱动架构的组成</h1><p>事件：业务状态变更动作抽象成一个对象<br>事件驱动架构：<br>发布者，事件中心，消费者</p>
+<!-- ![](1-事件驱动架构角色交互过程.png) -->
+<img src="1-事件驱动架构角色交互过程.png" width="300" height="180">
+<img src="1-事件驱动架构的类层结构.png" width="400" height="250">
+<!-- ![](1-事件驱动架构的类层结构.png) -->
+
 <h1 id="spring事件驱动的应用"><a href="#spring事件驱动的应用" class="headerlink" title="spring事件驱动的应用"></a>spring事件驱动的应用</h1><h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><h3 id="发布事件"><a href="#发布事件" class="headerlink" title="发布事件"></a>发布事件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private ApplicationEventPublisher publisher;</span><br><span class="line"></span><br><span class="line">  public void testCustomerEvent() &#123;</span><br><span class="line"></span><br><span class="line">    CustomerEvent customerEvent = new CustomerEvent();</span><br><span class="line">    publisher.publishEvent(customerEvent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@EventListener</span><br><span class="line">@Async</span><br><span class="line">public void consumEvent(CustomerEvent event) &#123;</span><br><span class="line">    System.out.println(&quot;CustomerEvent: &quot; + event.getEventContent());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@EventListener</span><br><span class="line">@Async //异步执行，和发布线程不同</span><br><span class="line">public void consumEvent(CustomerEvent event) &#123;</span><br><span class="line">    System.out.println(&quot;CustomerEvent: &quot; + event.getEventContent());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="内置事件监听"><a href="#内置事件监听" class="headerlink" title="内置事件监听"></a>内置事件监听</h2><p>扩展spring事件处理<br>针对spring容器启动、停止以及关闭等生命周期各阶段事件进行订阅,实现对spring的有效监听和处理</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@component</span><br><span class="line">public class TestApplicationListener implements ApplicationListener&lt;ContextStoppedEvent&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onApplicationEvent(ContextStoppedEvent contextStoppedEvent)&#123;</span><br><span class="line">        System.out.println(contextStoppedEvent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><em>如果是监听 Spring 应用上下文（ApplicationContext）创建之后的事件，可以直接在监听器上使用 @Component 注解即可，否则需要再配置文件中声明配置（如下），因为 ApplicationContext 并未创建，这时的 Bean 是不能被加载的。</em><br>在资源目录中的 META-INF&#x2F;spring.factories 文件中自动注册：</p>
+<p><em>如果是监听 Spring 应用上下文（ApplicationContext）创建之后的事件，可以直接在监听器上使用 @Component 注解即可，否则需要在配置文件中声明配置（如下），因为 ApplicationContext 并未创建，这时的 Bean 是不能被加载的。</em><br>在资源目录中的 META-INF&#x2F;spring.factories 文件中自动注册：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.context.ApplicationListener=\</span><br><span class="line">cn.javastack.springboot.features.listener.JavastackListener</span><br></pre></td></tr></table></figure>
 <h3 id="dubbo集成"><a href="#dubbo集成" class="headerlink" title="dubbo集成"></a>dubbo集成</h3><p>Dubbo框架基于ContextRefreshedEvent事件完成服务发布</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class ServiceBean&lt;T&gt; extends ServiceConfig&lt;T&gt; implements InitializingBean,DisposableBean,ApplicationContextAware，</span><br><span class="line">ApplicationListener&lt;ContextRefreshedEvent&gt;, BeanNameAware &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -265,7 +270,10 @@
 
 <h3 id="ApplicationListenerDetector初始化ApplicationListner（消费者）"><a href="#ApplicationListenerDetector初始化ApplicationListner（消费者）" class="headerlink" title="ApplicationListenerDetector初始化ApplicationListner（消费者）"></a>ApplicationListenerDetector初始化ApplicationListner（消费者）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class ApplicationListenerDetector implements DestructionAwareBeanPostProcessor</span><br><span class="line">public Object postProcessAfterInitialization(object bean, String beanName)&#123;</span><br><span class="line">    ...</span><br><span class="line">    applicationContext,addApplicationListener((ApplicationListener&lt;?&gt;) bean);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>轻量级，非分布式事件驱动框架<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/1%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/1-spring%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E6%80%BB%E7%BB%93.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>轻量级，非分布式事件驱动框架</p>
+<!-- ![](1-spring事件驱动架构总结.png) -->
+<img src="1-spring事件驱动架构总结.png" width="500px" height="400px">
+
 <h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>开发过程中，使用Spring事件实现事件驱动架构的具体业务场景有哪些?</p>
 
     </div>
@@ -308,7 +316,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

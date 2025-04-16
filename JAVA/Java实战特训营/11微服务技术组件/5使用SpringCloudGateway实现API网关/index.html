@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-11-07 17:22:23" itemprop="dateModified" datetime="2024-11-07T17:22:23+08:00">2024-11-07</time>
+      <time title="Modified: 2024-12-12 13:40:51" itemprop="dateModified" datetime="2024-12-12T13:40:51+08:00">2024-12-12</time>
     </span>
 
   
@@ -258,8 +258,7 @@
 <p><strong>查看路由</strong><br>添加actuator配置<br>查看路径：<a target="_blank" rel="noopener" href="http://localhost:18080/actuator/gateway/routes">http://localhost:18080/actuator/gateway/routes</a></p>
 <h1 id="Spring-Cloud-Gateway整合和扩展"><a href="#Spring-Cloud-Gateway整合和扩展" class="headerlink" title="Spring Cloud Gateway整合和扩展"></a>Spring Cloud Gateway整合和扩展</h1><p>GatewayFilter + GlobalFilter<br>GatewayFilter通过配置作用于每个路由，<br>GlobalFilter则作用于所有的请求当请求匹配到对应路由时</p>
 <h2 id="自定义GlobalFiler"><a href="#自定义GlobalFiler" class="headerlink" title="自定义GlobalFiler"></a>自定义GlobalFiler</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class JWTAuthFilter implements GlobalFilter &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;</span><br><span class="line">    ServerHttpRequest.Builder builder = exchange.getRequest().mutate();</span><br><span class="line">    builder.header(&quot;Authorization&quot;,&quot;JWTToken&quot;);</span><br><span class="line">    chain.filter(exchange.mutate().request(builder.build()).build());</span><br><span class="line">    return chain.filter(exchange.mutate().request(builder.build()).build());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="自定义GatewayFilter"><a href="#自定义GatewayFilter" class="headerlink" title="自定义GatewayFilter"></a>自定义GatewayFilter</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class PostGatewayFilterFactory extends AbstractGatewayFilterFactory &#123;</span><br><span class="line">  public PostGatewayFilterFactory() &#123;</span><br><span class="line">    super(Config.class);</span><br><span class="line">  &#125;</span><br><span class="line">  public GatewayFilter apply() &#123;</span><br><span class="line">    return apply(o -&gt; &#123;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  @Override</span><br><span class="line">  public GatewayFilter apply(Config config) &#123;</span><br><span class="line">    return (exchange, chain) -&gt; &#123;</span><br><span class="line">      return chain.filter(exchange).then(Mono.fromRunnable(() -&gt; &#123;</span><br><span class="line">        ServerHttpResponse response = exchange.getResponse();</span><br><span class="line">        //添加针对Response的各种处理</span><br><span class="line">      &#125;));</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  public static class Config &#123; //读取路由配置信息</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="自定义GatewayFilter"><a href="#自定义GatewayFilter" class="headerlink" title="自定义GatewayFilter"></a>自定义GatewayFilter</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class PostGatewayFilterFactory extends AbstractGatewayFilterFactory &#123;</span><br><span class="line">  public PostGatewayFilterFactory() &#123;</span><br><span class="line">    super(Config.class);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public GatewayFilter apply() &#123;</span><br><span class="line">    return apply(o -&gt; &#123;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public GatewayFilter apply(Config config) &#123;</span><br><span class="line">    return (exchange, chain) -&gt; &#123;</span><br><span class="line">      return chain.filter(exchange).then(Mono.fromRunnable(() -&gt; &#123;</span><br><span class="line">        ServerHttpResponse response = exchange.getResponse();</span><br><span class="line">        //添加针对Response的各种处理</span><br><span class="line">      &#125;));</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public static class Config &#123; //读取路由配置信息</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="内置过滤器"><a href="#内置过滤器" class="headerlink" title="内置过滤器"></a>内置过滤器</h2><h3 id="限流过滤器"><a href="#限流过滤器" class="headerlink" title="限流过滤器"></a>限流过滤器</h3><p>RequestRateLimiterGatewayFilter</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> cloud:</span><br><span class="line">  gateway:</span><br><span class="line">   routes:</span><br><span class="line">    - id: requestratelimiterroute</span><br><span class="line">     uri: lb://testservice</span><br><span class="line">     filters:</span><br><span class="line">      - name: RequestRateLimiter</span><br><span class="line">       args:</span><br><span class="line">        redis-rate-limiter.replenishRate: 50 # 流量速度(每秒请求数)</span><br><span class="line">        redis-rate-limiter.burstCapacity: 100 # 桶大小参数</span><br></pre></td></tr></table></figure>
@@ -316,7 +315,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

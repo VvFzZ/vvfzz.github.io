@@ -4,20 +4,49 @@
 <li>OpenFeign高级特性</li>
 </ul>
 <h1 id="OpenFeign开发模式"><a href="#OpenFeign开发模式" class="headerlink" title="OpenFeign开发模式"></a>OpenFeign开发模式</h1><h2 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h2><p>Feign到OpenFeign</p>
-<h3 id="OpenFeign开发模式-1"><a href="#OpenFeign开发模式-1" class="headerlink" title="OpenFeign开发模式"></a>OpenFeign开发模式</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/10%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%BD%93%E7%B3%BB/3%E4%BD%BF%E7%94%A8OpenFeign%E9%87%8D%E6%9E%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B/2-OpenFeign%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F.png"></p>
-<p><strong>@EnableFeignClients注解</strong><br>告诉系统扫描所有使用@FeignClient定义的Feign客户端</p>
-<pre><code>aSpringBootApplication(scanBasePackages = &quot;org.geekbang.projects.cs.frontend.business.*&quot;)
-@EnableFeignClients public class Application {
+<h3 id="OpenFeign开发模式-1"><a href="#OpenFeign开发模式-1" class="headerlink" title="OpenFeign开发模式"></a>OpenFeign开发模式</h3><!-- ![](2-OpenFeign开发模式.png) -->
+<ul>
+<li>消费者根据服务提供者暴露的API自定义FeignClient</li>
+<li>服务提供者提供Feign SDK<img src="2-OpenFeign开发模式.png" width="400" height="200"></li>
+</ul>
+<p><strong>@EnableFeignClients注解</strong><br>告诉系统扫描所有使用@FeignClient定义的Feign客户端<br>问题：配置到configuration类不生效？</p>
+<pre><code>@SpringBootApplication(scanBasePackages = &quot;org.geekbang.projects.cs.frontend.business.*&quot;)
+@EnableFeignClients 
+public class Application {
 public static void main(String[] args){
     SpringApplication.run(Application.class,args);
+    }
 }
 </code></pre>
-<p><strong>@FeignClient注解</strong><br>通过指定目标服务的名称或地址来发起远程调用</p>
-<pre><code>@ComponentaFeignClient(name =&quot;ticket-service&quot;)
+<p><strong>@FeignClient注解</strong><br>通过服务的名称或地址发起远程调用</p>
+<pre><code>@Component
+@FeignClient(name =&quot;ticket-service&quot;)
 public interface Ticketclient {
     @RequestMapping(value =&quot;/customerTickets/try&quot;,method = RequestMethod.Post)
     Result&lt;Boolean&gt; ticketTry(@RequestBody TccRequest&lt;AddTicketRegVO&gt; addTicketRegVO);
 }
+</code></pre>
+<p>依赖</p>
+<pre><code>&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;2021.0.1&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-loadbalancer&lt;/artifactId&gt;
+&lt;/dependency&gt;
 </code></pre>
 <h1 id="OpenFeign高级特性"><a href="#OpenFeign高级特性" class="headerlink" title="OpenFeign高级特性"></a>OpenFeign高级特性</h1><ul>
 <li>自动降级</li>
@@ -25,8 +54,10 @@ public interface Ticketclient {
 <li>日志控制</li>
 <li>错误解码</li>
 </ul>
-<h1 id="自动降级"><a href="#自动降级" class="headerlink" title="自动降级"></a>自动降级</h1><pre><code>@FeignClient(name = ApiConstants,SERVICE NAME, path = Apiconstants.PREFIX +&quot;/decryptionAuditRecords&quot;, fallbackFactory = DecryptionAuditRecordApiFallback.class)public interface DecryptionAuditRecordApi {
-    @RequestMapping(value=&quot;/&quot;,method = RequestMethod.POST)void addDecryptionAuditRecord(@RequestBody @Validated AddDecryptionAuditRecordRegaddDecryptionAuditRecordReg);
+<h2 id="自动降级"><a href="#自动降级" class="headerlink" title="自动降级"></a>自动降级</h2><pre><code>@FeignClient(name = ApiConstants,SERVICE NAME, path = Apiconstants.PREFIX +&quot;/decryptionAuditRecords&quot;, fallbackFactory = DecryptionAuditRecordApiFallback.class)
+public interface DecryptionAuditRecordApi {
+    @RequestMapping(value=&quot;/&quot;,method = RequestMethod.POST)
+    void addDecryptionAuditRecord(@RequestBody @Validated AddDecryptionAuditRecordRegaddDecryptionAuditRecordReg);
 }
 
 public class DecryptionAuditRecordApiFallback implements DecryptionAuditRecordApi {
@@ -34,17 +65,17 @@ public class DecryptionAuditRecordApiFallback implements DecryptionAuditRecordAp
     public void addDecryptionAuditRecord(AddDecryptionAuditRecordReg addDecryptionAuditRecordReq) {}
 }
 </code></pre>
-<h1 id="超时配置"><a href="#超时配置" class="headerlink" title="超时配置"></a>超时配置</h1><pre><code>feign:
+<h2 id="超时配置"><a href="#超时配置" class="headerlink" title="超时配置"></a>超时配置</h2><pre><code>feign:
  client:
   config:
    default:# 全局超时配置
     connectTimeout:1000 # 网络连接阶段1秒超时
     readTimeout:5000 # 服务请求响应阶段5秒超时
-   provider-service:# 针对特定服务的超时配置,优先级高于全局配置
+   provider-service:# 针对特定服务&quot;provider-service&quot;的超时配置,优先级高于全局配置
     connectTimeout:1000
     readTimeout:2000
 </code></pre>
-<h1 id="日志控制"><a href="#日志控制" class="headerlink" title="日志控制"></a>日志控制</h1><pre><code>@Configuration
+<h2 id="日志控制"><a href="#日志控制" class="headerlink" title="日志控制"></a>日志控制</h2><pre><code>@Configuration
 @EnableFeignclients()
 public class FeignConfiguration {
     @Bean
@@ -66,26 +97,37 @@ loggin:
 <li>NONE:不记录任何信息，这是OpenFeign默认的日志级别;</li>
 <li>BASIC:只记录服务请求的URL、HTTP Method、响应状态码(如 200、404等)和服务调用的执行时间:</li>
 <li>HEADERS:在BASIC的基础上，还记录了请求和响应中的HTTPHeaders;</li>
-<li>FULL:在HEADERS级别的基础上，还记录了服务请求和服务响应中的Body和metadata<br>FULL级别记录了最完整的调用信息。</li>
+<li>FULL:在HEADERS级别的基础上，还记录了服务请求和服务响应中的Body和metadata FULL级别记录了最完整的调用信息。</li>
 </ul>
-<h1 id="错误解码"><a href="#错误解码" class="headerlink" title="错误解码"></a>错误解码</h1><pre><code>@Confiquration
+<pre><code>@Configuration
+@EnableFeignclients()
+public class FeignConfiguration {
+    @Bean
+    Logger.Level feignLoggerlevel(){
+        return Logger.Level.FULL;
+    }
+}
+</code></pre>
+<h2 id="错误解码"><a href="#错误解码" class="headerlink" title="错误解码"></a>错误解码</h2><pre><code>@Confiquration
 @EnableFeianclients()
 public class FeignConfiguration {
     @Bean
     FeignErrorDecoder errorDecoder()
     return new FeignErrorDecoder();
 }
+
 public class FeignErrorDecoder extends ErrorDecoder Default {
     private static final Logger logger = LoggerFactory.getLogger(FeignErrorDecoder.class);
     @Override
     public Exception decode(String methodKey, Response response){
         Exception exception =super.decode(methodKey, response);
-        logger.error(exception.getMessage()，exception);return exception;
+        logger.error(exception.getMessage()，exception);
+        return exception;
     }
 }
 </code></pre>
 <h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><ol>
-<li><p>微服务为什么不用dobbu？<br>dubbo重在哪里？</p>
+<li><p>微服务为什么不用dobbu？<br>dubbo重在哪里？<br>spring cloud提供开箱即用解决方案<br>Dubbo额外集成网管，配置中心等。</p>
 </li>
 <li><p>OpenFeign在使用上与传统RestTemplate有什么区别？</p>
 </li>

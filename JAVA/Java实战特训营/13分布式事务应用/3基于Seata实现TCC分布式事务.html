@@ -1,0 +1,73 @@
+<hr>
+<h2 id="title-3基于Seata实现TCC分布式事务description-3基于Seata实现TCC分布式事务date-2024-11-24-15-35-40tags"><a href="#title-3基于Seata实现TCC分布式事务description-3基于Seata实现TCC分布式事务date-2024-11-24-15-35-40tags" class="headerlink" title="title: 3基于Seata实现TCC分布式事务description: 3基于Seata实现TCC分布式事务date: 2024-11-24 15:35:40tags:"></a>title: 3基于Seata实现TCC分布式事务<br>description: 3基于Seata实现TCC分布式事务<br>date: 2024-11-24 15:35:40<br>tags:</h2><ul>
+<li>TCC模式组成结构</li>
+<li>TCC模式实现方式</li>
+</ul>
+<h1 id="TCC模式组成结构"><a href="#TCC模式组成结构" class="headerlink" title="TCC模式组成结构"></a>TCC模式组成结构</h1><p>Try|Confirm|Cancel<br>包含一个主服务和若干从服务，主服务发起流程，从服务提供try,confirm,cancel三个接口</p>
+<p>try:预留业务资源，完成业务规则检查（预处理如检查库存有没有）<br>confirm:真正执行业务<br>cancel:释放try阶段预留的业务资源</p>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><ul>
+<li>资源是什么?<br>发生了变化的主体订单会新增，库存会扣减</li>
+<li>业务检查是什么?<br>订单新增:不需要检查库存扣减:判断是否足够</li>
+<li>如何预留资源?<br>订单:新增但不生效，如设置状态库存:对要扣减的库存进行冻结</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th></th>
+<th>订单</th>
+<th>库存</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>try</td>
+<td>新增但不生效，如设置状态</td>
+<td>对要扣减的库存进行冻结</td>
+</tr>
+<tr>
+<td>1</td>
+<td>confirm</td>
+<td>更新为已生效的状态，暴露给前端</td>
+<td>冻结的库存取消冻结，正式扣减</td>
+</tr>
+<tr>
+<td>2</td>
+<td>cancel</td>
+<td>更新为已失效的状态</td>
+<td>取消冻结的库存</td>
+</tr>
+</tbody></table>
+<h1 id="TCC模式实现方式"><a href="#TCC模式实现方式" class="headerlink" title="TCC模式实现方式"></a>TCC模式实现方式</h1><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/3%E5%9F%BA%E4%BA%8ESeata%E5%AE%9E%E7%8E%B0TCC%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/3-TCC%E6%A8%A1%E5%BC%8F%E8%A7%92%E8%89%B2%E4%BA%A4%E4%BA%92.png"></p>
+<ul>
+<li>TM<br>包含@GlobalTransactional注解定义全局事务的范围，启动、提交或回滚全局事务</li>
+<li>RM<br>提供TCC服务，与TC交互并注册分支事务并驱动分支事务的提交或回滚</li>
+<li>TC<br>维护全局和分支事务的状态驱动全局事务提交或回滚</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="核心注解"><a href="#核心注解" class="headerlink" title="核心注解"></a>核心注解</h3><pre><code>@LocalTCC
+public interface CreateChatTccAction{
+    @TwoPhaseBusinessAction(name =TccAction&quot;,commitMethod =&quot;commit&quot;,rollbackMethod =&quot;rollback&quot;)
+    boolean prepare(BusinessActionContext actionContext, @BusinessActionContextParameter(paramName =&quot;param&#39;&#39;)String param)throws BizException;
+
+    boolean commit(BusinessActionContext actionContext);
+     
+    boolean rollback(BusinessActionContext actionContext);
+}
+</code></pre>
+<p><code>@LocalTCC</code>注解，用来修饰实现了二阶段提交的本地TCC接口<br><code>@TwoPhaseBusinessAction</code>注解标识当前方法使用TCC模式管理事务提交<br><code>@BusinessActionContextParamete</code>注解，用来在上下文中传递参数</p>
+<p>业务表新增TCC状态列 初始化、确认、回滚</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>针对网络不可用或时延等不可控的异常情况：</p>
+<ul>
+<li>幂等操作 </li>
+<li>TCC空回滚</li>
+<li>TCC倒悬</li>
+</ul>
+<h4 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h4><p>在 commit&#x2F;cancel阶段，因为TC没有收到分支事务的响应会发起重试，这就需要RM支持幂等。如果二阶段接口不能保证幂等性，则会造成资源的重复使用或者重复释放。</p>
+<h4 id="TCC空回滚"><a href="#TCC空回滚" class="headerlink" title="TCC空回滚"></a>TCC空回滚</h4><p>TCC空回滚是在没有执行try方法的情况下，TC下发了回滚指令并执行了cancel逻辑</p>
+<p><strong>应对策略</strong></p>
+<ul>
+<li>简单应对策略<br>如果资源未被锁定或者压根不存在，可以认为try阶段没有执行成功</li>
+<li>正规应对策略<br>判断资源是否被锁定 引入独立的事务控制表，在try阶段中将XID和分支事务ID落表保存<br>如果查不到事务控制记录，那么就说明try阶段未被执行</li>
+</ul>
+<h4 id="TCC倒悬"><a href="#TCC倒悬" class="headerlink" title="TCC倒悬"></a>TCC倒悬</h4><p>又叫悬挂，三个阶段没有按照先后顺序执行<br>判断事务是否已执行（查询transaction表）</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>虽然TCC是一种常用的分布式事务模式，但你认为该模式存在哪些缺点?</p>

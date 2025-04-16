@@ -1,2 +1,134 @@
 <hr>
-<h2 id="title-3SpringSecurity扩展description-3SpringSecurity扩展date-2024-11-07-21-23-53tags"><a href="#title-3SpringSecurity扩展description-3SpringSecurity扩展date-2024-11-07-21-23-53tags" class="headerlink" title="title: 3SpringSecurity扩展description: 3SpringSecurity扩展date: 2024-11-07 21:23:53tags:"></a>title: 3SpringSecurity扩展<br>description: 3SpringSecurity扩展<br>date: 2024-11-07 21:23:53<br>tags:</h2>
+<h2 id="title-3SpringSecurity扩展description-3SpringSecurity扩展date-2024-11-07-21-23-53tags"><a href="#title-3SpringSecurity扩展description-3SpringSecurity扩展date-2024-11-07-21-23-53tags" class="headerlink" title="title: 3SpringSecurity扩展description: 3SpringSecurity扩展date: 2024-11-07 21:23:53tags:"></a>title: 3SpringSecurity扩展<br>description: 3SpringSecurity扩展<br>date: 2024-11-07 21:23:53<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>理解扩展Spring Security的常见场景和方法</li>
+<li>掌握自定义用户认证和多因子认证的实现原理和过程</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>实现定制化用户认证</li>
+<li>使用认证缓存</li>
+<li>实现多因子认证</li>
+</ul>
+<h1 id="实现定制化用户认证"><a href="#实现定制化用户认证" class="headerlink" title="实现定制化用户认证"></a>实现定制化用户认证</h1><ol>
+<li>扩展UserDetails</li>
+<li>扩展UserDetailsService</li>
+<li>扩展AuthenticationProvider</li>
+<li>整合定制化配置</li>
+</ol>
+<h2 id="扩展UserDetails"><a href="#扩展UserDetails" class="headerlink" title="扩展UserDetails"></a>扩展UserDetails</h2><pre><code>public class SpringUser implements UserDetails {
+private static final long serialVersionUID = 1L;
+private Long id;
+private final String username;
+private final String password;
+private final String phoneNumber;
+//省略getter/setter
+@Override
+public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {
+return Arrays.asList(new SimpleGrantedAuthority(&quot;ROLE_USER&quot;));
+}
+@Override
+public boolean isAccountNonExpired() {
+return true;
+}
+@Override
+public boolean isAccountNonLocked() {
+return true;
+}
+...
+}
+</code></pre>
+<h2 id="扩展UserDetailsService"><a href="#扩展UserDetailsService" class="headerlink" title="扩展UserDetailsService"></a>扩展UserDetailsService</h2><p>获取用户信息</p>
+<pre><code>//通过Spring Data JPA实现数据访问 
+public interface SpringUserRepository extends CrudRepository&lt;SpringUser, Long&gt; {
+SpringUser findByUsername(String username);
+}
+
+@Service
+public class SpringUserDetailsService implements UserDetailsService {
+@Autowired
+private SpringUserRepository repository;
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+SpringUser user = repository.findByUsername(username);
+if (user != null) {
+return user;
+}
+throw new UsernameNotFoundException( &quot;SpringUser &#39;&quot; + username + &quot;&#39; not found&quot;);
+}
+}
+</code></pre>
+<h2 id="扩展AuthenticationProvider"><a href="#扩展AuthenticationProvider" class="headerlink" title="扩展AuthenticationProvider"></a>扩展AuthenticationProvider</h2><pre><code>@Component
+public class SpringAuthenticationProvider implements AuthenticationProvider {
+@Autowired
+private UserDetailsService userDetailsService;
+@Autowired
+private PasswordEncoder passwordEncoder;
+@Override
+public Authentication authenticate(Authentication authentication) {
+String username = authentication.getName();
+String password = authentication.getCredentials().toString();
+UserDetails user = userDetailsService.loadUserByUsername(username);
+if (passwordEncoder.matches(password, user.getPassword())) {
+return new UsernamePasswordAuthenticationToken(username, password, u.getAuthorities());
+} else {
+throw new BadCredentialsException(&quot;The username or password is wrong!&quot;);
+}
+}
+@Override
+public boolean supports(Class&lt;?&gt; authenticationType) {
+return authenticationType.equals(UsernamePasswordAuthenticationToken.class);
+}
+}
+</code></pre>
+<h2 id="整合定制化配置"><a href="#整合定制化配置" class="headerlink" title="整合定制化配置"></a>整合定制化配置</h2><pre><code>@Configuration
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private UserDetailsService springUserDetailsService;
+    @Autowired
+    private AuthenticationProvider springAuthenticationProvider;
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(springUserDetailsService)
+        .authenticationProvider(springAuthenticationProvider);
+    }
+}
+</code></pre>
+<h1 id="使用认证缓存"><a href="#使用认证缓存" class="headerlink" title="使用认证缓存"></a>使用认证缓存</h1><h2 id="认证缓存定义"><a href="#认证缓存定义" class="headerlink" title="认证缓存定义"></a>认证缓存定义</h2><pre><code>public interface UserCache {
+    //从缓存获取用户信息
+    UserDetails getUserFromCache(String username);
+    //把用户信息放入缓存中
+    void putUserInCache(UserDetails user);
+    //从缓存中移除用户信息
+    void removeUserFromCache(String username);
+}
+</code></pre>
+<p>UserCache子类：</p>
+<ul>
+<li>EhCacheBasedUserCache</li>
+<li>NullUserCache</li>
+<li>SpringCacheBasedUserCache</li>
+</ul>
+<h3 id="SpringCacheBasedUserCache"><a href="#SpringCacheBasedUserCache" class="headerlink" title="SpringCacheBasedUserCache"></a>SpringCacheBasedUserCache</h3><pre><code>public class SpringCacheBasedUserCache implements UserCache {
+private final Cache cache;
+public UserDetails getUserFromCache(String username) {
+Cache.ValueWrapper element = username != null ? cache.get(username) : null;
+if (element == null) {
+return null;
+}
+else {
+return (UserDetails) element.get();
+}
+}
+public void putUserInCache(UserDetails user) {
+cache.put(user.getUsername(), user);
+}
+public void removeUserFromCache(UserDetails user) {
+this.removeUserFromCache(user.getUsername());
+}
+public void removeUserFromCache(String username) {
+cache.evict(username);
+}
+}
+</code></pre>
+<h2 id="认证缓存应用"><a href="#认证缓存应用" class="headerlink" title="认证缓存应用"></a>认证缓存应用</h2><h1 id="实现多因子认证"><a href="#实现多因子认证" class="headerlink" title="实现多因子认证"></a>实现多因子认证</h1>

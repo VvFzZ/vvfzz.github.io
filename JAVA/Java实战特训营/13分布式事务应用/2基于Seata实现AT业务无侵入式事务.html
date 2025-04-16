@@ -1,0 +1,59 @@
+<hr>
+<h2 id="title-2基于Seata实现AT业务无侵入式事务description-2基于Seata实现AT业务无侵入式事务date-2024-11-24-15-35-30tags"><a href="#title-2基于Seata实现AT业务无侵入式事务description-2基于Seata实现AT业务无侵入式事务date-2024-11-24-15-35-30tags" class="headerlink" title="title: 2基于Seata实现AT业务无侵入式事务description: 2基于Seata实现AT业务无侵入式事务date: 2024-11-24 15:35:30tags:"></a>title: 2基于Seata实现AT业务无侵入式事务<br>description: 2基于Seata实现AT业务无侵入式事务<br>date: 2024-11-24 15:35:30<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>了解Seata的架构和功能</li>
+<li>基于Seata实现AT模式的开发</li>
+</ul>
+<p>常见的分布式事务开发模式中，AT模式是开发成本最低的一种</p>
+<p>目录</p>
+<ul>
+<li>Seata框架简介<ul>
+<li>Seata框架总体架构</li>
+<li>Seata逻辑角色类型</li>
+<li>Seata部署架构</li>
+</ul>
+</li>
+<li>AT模式实现<ul>
+<li>AT模式的两阶段流程</li>
+<li>AT模式锁机制</li>
+<li>AT模式应用方式</li>
+</ul>
+</li>
+</ul>
+<h1 id="Seata框架简介"><a href="#Seata框架简介" class="headerlink" title="Seata框架简介"></a>Seata框架简介</h1><p>开源分布式事务解决方案框架，提供高性能，简单易用分布式事务服务。<br>提供AT、TCC、SAGA、XA事务模式</p>
+<p><strong>角色</strong></p>
+<ul>
+<li><p>TM<br>事务管理器 Transaction Manager，全局事务的管理者，或者说是全局事务的发起方<br>控制全局事务begin&#x2F;commit&#x2F;rollback，XID全局事务ID</p>
+</li>
+<li><p>RM<br>资源管理器 Resources Manager，负责分支(本地)事务注册、提交和回滚（分支事务没有begin）<br>regist branch、branch commit&#x2F;rollback<br>BranchID分支事务ID</p>
+</li>
+<li><p>TC<br>事务协调器 Transaction Coordinate，全局事务的协调者，TM&#x2F;RM启动时注册到TC</p>
+</li>
+</ul>
+<p><strong>角色交互</strong></p>
+<!-- ![](2-Seata角色交互.png) -->
+<p>TM 申请开启全局事务，注册TM到TC<br>TC 返回XID<br>TM 调用RM服务，附带XID<br>RM 向TC注册，附带XID，本地事务执行上报TC<br>TM 通知TC提交事务<br>TC 通知RM删除undolog<br>TC 通知TM全局事务完成</p>
+<h1 id="AT模式实现"><a href="#AT模式实现" class="headerlink" title="AT模式实现"></a>AT模式实现</h1><p>Auto Transaction 无代码入侵，注解即可<br>默认会读到脏数据，@GlobalLock注解实现读已提交（一阶段结束释放本地事务锁，本地事务可更新数据）</p>
+<h2 id="AT模式锁机制"><a href="#AT模式锁机制" class="headerlink" title="AT模式锁机制"></a>AT模式锁机制</h2><ul>
+<li>普通行锁的问题<br>行锁在本地事务提交时释放，若此时全局事务回滚，但本地数据已被修改，会存在找不到原始数据问题</li>
+<li>全局行锁<br>全局事务提交后释放，不会存在普通行锁的问题</li>
+</ul>
+<h2 id="AT模式执行流程"><a href="#AT模式执行流程" class="headerlink" title="AT模式执行流程"></a>AT模式执行流程</h2><ul>
+<li>阶段一<br>解析SQL<br>保存before image（快照） 生成undo_log<br>执行SQL<br>保存after image</li>
+<li>阶段二<ul>
+<li>事务成功<br>  删除锁和undo_log删除before image删除after image</li>
+<li>事务失败<br>  通过undo_log回退数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
+<li>配置undo log表</li>
+<li>启动seata服务</li>
+</ul>
+<p><strong>需要主事务的开启方business-service，调用业务提供方</strong><br><strong><code>@GlobalTransaction</code>注解</strong><br><code>@GlobalTransactional(name =&quot;XXX&quot;,rollbackFor=Exception.class)</code><br>只要在全局事务“开始”的地方把这个注解添加上去就好了，并不需要在每个分支事务中都声明它<br>碰到任何 Exception 异常，都会触发全局事务回滚操作，这个行为通过rollbackFor方法进展指定。</p>
+<p><strong>每个库都需，新建undo_log表</strong></p>
+<p>启动类排除DataSourceAutoConfiguration类<br><code>@SpringBootApplication(scanBasePackages=,exclude ={DataSourceAutoConfiguration.class})</code></p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>AT模式虽然使用方式非常简单，但你觉得它有什么缺点?</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><blockquote>
+<p><a href="https://seata.apache.org/zh-cn/docs/next/release-notes/">下载地址</a></p>
+</blockquote>

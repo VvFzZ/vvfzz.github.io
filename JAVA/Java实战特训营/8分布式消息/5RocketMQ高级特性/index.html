@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-10-31 12:17:14" itemprop="dateModified" datetime="2024-10-31T12:17:14+08:00">2024-10-31</time>
+      <time title="Modified: 2025-03-29 20:46:02" itemprop="dateModified" datetime="2025-03-29T20:46:02+08:00">2025-03-29</time>
     </span>
 
   
@@ -283,7 +283,7 @@
 <h2 id="Tag过滤"><a href="#Tag过滤" class="headerlink" title="Tag过滤"></a>Tag过滤</h2><p>broker、消费者都可过滤tag</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//Tag过滤:消息发送</span><br><span class="line">String[] tags = new string[]&#123;&quot;TagA&quot;, &quot;TagB&quot;, &quot;Tagc&quot;, &quot;TagD&quot;, &quot;TagE&quot;&#125;;</span><br><span class="line">for(int i=0;i&lt; 10;i++)&#123;</span><br><span class="line">    String tag = tags[i % tags.length];</span><br><span class="line">    String msg =&quot;hello，这是第&quot;+(i + 1)+“条消息&quot;;</span><br><span class="line">    Message message = new Message(&quot;FilterMessageTopic&quot;, tag,msg.getBytes(RemotingHelperDEFAULT CHARSET));SendResult sendResult = producer.send(message);</span><br><span class="line">    System.out.println(sendResult);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//Tag过滤:消息消费</span><br><span class="line">pushConsumer.subscribe(&quot;FilterMessageTopic&quot;, &quot;TagA | TagC | TagD&quot; );</span><br></pre></td></tr></table></figure>
 
-<h2 id="SQL过滤"><a href="#SQL过滤" class="headerlink" title="SQL过滤"></a>SQL过滤</h2><p>推才可用</p>
+<h2 id="SQL过滤"><a href="#SQL过滤" class="headerlink" title="SQL过滤"></a>SQL过滤</h2><p>推模式才可用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//生效配置</span><br><span class="line">conf/broker.confenablePropertyFilter=true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//SQL过滤:消息发送</span><br><span class="line">Message msg = new Message(&quot;topic a&quot;,(&quot;test&quot;).getBytes());“40&quot;);</span><br><span class="line">msg.putUserProperty(&quot;age&quot;msg.putUserProperty(&quot;name&quot;&quot;tianyalan&quot;);producer.send(msg);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//SQL过滤:消息消费</span><br><span class="line">consumer.subscribe(&quot;topic a&quot;, Messageselector,bySql(&quot;age &gt; 35 and name = &#x27;tianyalan&#x27;&quot;));</span><br></pre></td></tr></table></figure>
 
 <h2 id="Filter-Server过滤"><a href="#Filter-Server过滤" class="headerlink" title="Filter Server过滤"></a>Filter Server过滤</h2><p>在 Broker端运行1个或多个消息过滤服务器(FilterServer),RocketMQ允许消息消费者自定义消息过滤实现类并将其代码上传到 Filter Server 上。<br>消息消费者向 Filter Server拉取消息，Filterserver将消息消费者的拉取命令转发到Broker，然后对返回的消息执行消息过滤逻辑，最终将消息返回给消费端。<br>由于FilterServer与Broker运行在同一台机器上，消息的传输是通过本地回环通信，不会浪费Broker端的网络资源</p>
@@ -329,7 +329,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

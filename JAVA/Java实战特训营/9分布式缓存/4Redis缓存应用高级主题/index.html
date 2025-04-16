@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-10-31 15:30:57" itemprop="dateModified" datetime="2024-10-31T15:30:57+08:00">2024-10-31</time>
+      <time title="Modified: 2025-03-31 16:52:30" itemprop="dateModified" datetime="2025-03-31T16:52:30+08:00">2025-03-31</time>
     </span>
 
   
@@ -276,7 +276,7 @@
 <li>差异化缓存过期时间<br><code>setWithLogicalExpire</code></li>
 <li>服务容错<br>限流、熔断、降级<br>服务访问失败应对策略和Sentinel等开源框架</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void setWithLogicalExpire(String key, Object value, Long time, TimeUnit timeUnit)&#123;</span><br><span class="line">    RedisData redisData =new RedisData();redisData.setData(value);</span><br><span class="line">    redisData.setExpireTime(LocalDateTime.now().plusSeconds(timeUnit.toSeconds(time)));</span><br><span class="line">    stringRedisTemplate,opsForValue(),set(key, JSON.toJsonString(redisData));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void setWithLogicalExpire(String key, Object value, Long time, TimeUnit timeUnit)&#123;</span><br><span class="line">    RedisData redisData =new RedisData();</span><br><span class="line">    redisData.setData(value);</span><br><span class="line">    redisData.setExpireTime(LocalDateTime.now().plusSeconds(timeUnit.toSeconds(time)));</span><br><span class="line">    stringRedisTemplate.opsForValue(),set(key, JSON.toJsonString(redisData));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;guava&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
@@ -322,7 +322,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -485,3 +485,4 @@ class Counter extends RecursiveTask&lt;Integer&gt;
 <p>{todo} Phaser？？？</p>
 <h3 id="交换器"><a href="#交换器" class="headerlink" title="交换器"></a>交换器</h3><p><code>Exchanger</code> 两个线程间交换数据，当多个线程交换时，按顺序先到的两个先交换</p>
 <h3 id="同步队列"><a href="#同步队列" class="headerlink" title="同步队列"></a>同步队列</h3><p>当一个线程调用<code>SynchronousQueue</code>的<code>put</code>方法时，它会阻塞直到另一个线程调用<code>take</code>方法为止，反之亦然</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="LongAdder-AtomicLong"><a href="#LongAdder-AtomicLong" class="headerlink" title="LongAdder AtomicLong"></a>LongAdder AtomicLong</h3><p>AtomicLong 采用CAS，在高并发时性能不如LongAdder</p>

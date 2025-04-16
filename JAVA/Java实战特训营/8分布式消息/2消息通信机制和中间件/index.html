@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -201,9 +201,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-10-16 10:34:04 / Modified: 17:10:41" itemprop="dateCreated datePublished" datetime="2024-10-16T10:34:04+08:00">2024-10-16</time>
+      <time title="Created: 2024-10-16 10:34:04" itemprop="dateCreated datePublished" datetime="2024-10-16T10:34:04+08:00">2024-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-31 16:22:07" itemprop="dateModified" datetime="2025-03-31T16:22:07+08:00">2025-03-31</time>
     </span>
 
   
@@ -258,10 +264,23 @@
 <li>一对多<br>Subject主题</li>
 </ul>
 <h2 id="消息通信规范和框架"><a href="#消息通信规范和框架" class="headerlink" title="消息通信规范和框架"></a>消息通信规范和框架</h2><p>核心功能<br>消息发布：普通消息、顺序消息延迟消息、事务消息单向消息、批量<br>消息<br>消息消费：拉(PulI)模式消费、推(Push)模式消费、消息过滤(Filter)</p>
-<h3 id="JMS-ActiveMQ"><a href="#JMS-ActiveMQ" class="headerlink" title="JMS ActiveMQ"></a>JMS ActiveMQ</h3><p>JMS Java Messaging Service，Java消息服务<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/2%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%B6/2-%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1-JMS.png"></p>
-<h3 id="AMQP-RabbitMQ"><a href="#AMQP-RabbitMQ" class="headerlink" title="AMQP RabbitMQ"></a>AMQP RabbitMQ</h3><p>AMQP(Advanced Message Queuing Protocol，高级消息队列协议)<br>erlang开发<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/2%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%B6/2-%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1-AMQP.png"></p>
-<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><p>大数据，流式计算<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/2%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%B6/2-%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1-Kafka.png" alt="老图可能已不准确"><br>Scala开发<br>消费者只拉消息</p>
-<h3 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/8%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF/2%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%B6/2-%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1-RocketMQ.png"></p>
+<h3 id="JMS-ActiveMQ"><a href="#JMS-ActiveMQ" class="headerlink" title="JMS ActiveMQ"></a>JMS ActiveMQ</h3><p>JMS Java Messaging Service，Java消息服务<br>并发量不高，集群高可用配置复杂</p>
+<!-- ![](2-消息通信-JMS.png) -->
+<img src="2-消息通信-JMS.png" width="400" height="200">
+
+<h3 id="AMQP-RabbitMQ"><a href="#AMQP-RabbitMQ" class="headerlink" title="AMQP RabbitMQ"></a>AMQP RabbitMQ</h3><p>AMQP(Advanced Message Queuing Protocol，高级消息队列协议)<br>erlang开发,依赖erlang环境</p>
+<!-- ![](2-消息通信-AMQP.png) -->
+<img src="2-消息通信-AMQP.png" width="300" height="150">
+
+<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><p>大数据，流式计算</p>
+<!-- ![老图可能已不准确](2-消息通信-Kafka.png) -->
+<img src="2-消息通信-Kafka.png" height="150" width="300">
+
+<p>Scala开发<br>消费者只拉消息</p>
+<h3 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>java开发环境，支持事务消息，顺序消息，延迟消息，高性能，alibaba支持</p>
+<!-- ![](2-消息通信-RocketMQ.png) -->
+<img src="2-消息通信-RocketMQ.png" height="300" width="500">
+
 <h1 id="spring消息通信解决方案"><a href="#spring消息通信解决方案" class="headerlink" title="spring消息通信解决方案"></a>spring消息通信解决方案</h1><p>一套解决方案，三大组件：</p>
 <ul>
 <li>Spring Cloud Stream </li>
@@ -323,7 +342,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

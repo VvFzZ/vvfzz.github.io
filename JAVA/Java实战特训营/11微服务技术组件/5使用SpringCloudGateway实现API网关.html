@@ -60,10 +60,12 @@ public class JWTAuthFilter implements GlobalFilter {
   public PostGatewayFilterFactory() {
     super(Config.class);
   }
+
   public GatewayFilter apply() {
     return apply(o -&gt; {
     });
   }
+
   @Override
   public GatewayFilter apply(Config config) {
     return (exchange, chain) -&gt; {
@@ -73,6 +75,7 @@ public class JWTAuthFilter implements GlobalFilter {
       }));
     };
   }
+  
   public static class Config { //读取路由配置信息
   }
 }

@@ -92,7 +92,7 @@ list.get(n); //从头遍历链表
 }
 </code></pre>
 <h3 id="数组列表"><a href="#数组列表" class="headerlink" title="数组列表"></a>数组列表</h3><p>为什么要用ArrayList取代Vector呢？<br>Vector类的所有方法都是同步的。如果由一个线程访问Vector,代码要在同步操作上耗费大量的时间。</p>
-<h3 id="散列集-HashSet"><a href="#散列集-HashSet" class="headerlink" title="散列集 HashSet"></a>散列集 HashSet</h3><p>通过hashcode快速查找对象</p>
+<h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><h3 id="散列集-HashSet"><a href="#散列集-HashSet" class="headerlink" title="散列集 HashSet"></a>散列集 HashSet</h3><p>通过hashcode快速查找对象</p>
 <p>java实现</p>
 <ul>
 <li>链表数组（每个列表称为桶bucket，hashcode取余即为桶号）</li>
@@ -108,6 +108,10 @@ list.get(n); //从头遍历链表
 <p>性能：将元素添加到树中比添加到散列表中慢</p>
 <p>JavaSE6起，TreeSet类实现了NavigableSet接口。这个接口增加了几个便于定位元素以及反向遍历的方法。</p>
 <h3 id="队列与双端队列"><a href="#队列与双端队列" class="headerlink" title="队列与双端队列"></a>队列与双端队列</h3><p>JavaSE6中引人Deque接口<br>ArrayDeque、LinkedList实现此接口</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>add 满时异常<br>offer满时返回false</p>
+<p>poll 移除并返回，空时返回null<br>remove 移除并返回，空时异常</p>
+<p>peek 返回不移除，空时返回null<br>element 返回不移除，空时异常</p>
+<p>put 添加,满时阻塞<br>take 获取，空时阻塞</p>
 <h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><p>调用remove方法，总会获得当前优先级队列中最小的元素。但优先级队列并没有对所有的元素进行排序，而是使用堆结构实现。<br>对树执行添加（add)和删除（remore)操作，可以让最小的元素移动到根，而不必花费时间对元素进行排序。</p>
 <p>使用条件：实现Comparable接口或提供Comparator<br>应用：任务调度（任务优先级由1为最高，任务随机添加到队列中，启动新任务时，将优先级最高的任务从队列删除）。</p>
 <h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><pre><code>// 获取
@@ -252,3 +256,4 @@ String[] arrStr = set1.toArray(new String[set1.size()]);
 </ul>
 <h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>Stack类扩展为Vector类<br>Statck可以在非栈顶插入元素</p>
 <h3 id="位集"><a href="#位集" class="headerlink" title="位集"></a>位集</h3><p>BitSet</p>
+<h2 id="SkipList"><a href="#SkipList" class="headerlink" title="SkipList"></a>SkipList</h2><p>复杂度OLog(n)</p>

@@ -1,0 +1,154 @@
+<hr>
+<h2 id="title-10Sentinel限流和降级扩展01description-10Sentinel限流和降级扩展01date-2024-11-29-17-17-13tags"><a href="#title-10Sentinel限流和降级扩展01description-10Sentinel限流和降级扩展01date-2024-11-29-17-17-13tags" class="headerlink" title="title: 10Sentinel限流和降级扩展01description: 10Sentinel限流和降级扩展01date: 2024-11-29 17:17:13tags:"></a>title: 10Sentinel限流和降级扩展01<br>description: 10Sentinel限流和降级扩展01<br>date: 2024-11-29 17:17:13<br>tags:</h2><p>学习目标</p>
+<ul>
+<li>理解Sentinel内置扩展性组件和原理</li>
+<li>掌握Sentinel对于限流和降级的扩展性实现方法</li>
+</ul>
+<p>目录</p>
+<ul>
+<li>Sentinel扩展点分析</li>
+<li>Sentinel实现动态规则</li>
+<li>Sentinel实现定制化降级策略</li>
+</ul>
+<h1 id="Sentinel扩展点分析"><a href="#Sentinel扩展点分析" class="headerlink" title="Sentinel扩展点分析"></a>Sentinel扩展点分析</h1><p>JDK SPI机制实现过程</p>
+<ul>
+<li>设计一个服务接口并提供对应的实现类，可以根据扩展需求提供多种实现类</li>
+<li>在META-INF&#x2F;services目录中创建一个以服务接口命名的文件，配置实现该服务接口的具体实现类</li>
+<li>外部程序通过META-INF&#x2F;services&#x2F;目录下的配置文件找到具体的实现类名并实例化</li>
+</ul>
+<h2 id="Sentinel扩展点"><a href="#Sentinel扩展点" class="headerlink" title="Sentinel扩展点"></a>Sentinel扩展点</h2><table>
+<thead>
+<tr>
+<th>扩展点名称</th>
+<th>扩展点描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>InitFunc</td>
+<td>用来实现系统初始化</td>
+</tr>
+<tr>
+<td>SlotChainBuilder</td>
+<td>用于基于自定义SlotchainBuilder的实现来构造Slotchain</td>
+</tr>
+<tr>
+<td>ReadableDataSource</td>
+<td>用来实现规则持久化</td>
+</tr>
+<tr>
+<td>CommandHandler</td>
+<td>用于实现网络通信</td>
+</tr>
+</tbody></table>
+<h3 id="InitFunc"><a href="#InitFunc" class="headerlink" title="InitFunc"></a>InitFunc</h3><pre><code>public class FlowRuleInitFunc implements InitFunc{
+    @Override
+    public void init()throws Exception {
+        List&lt;FlowRule&gt; rules=new ArrayList&lt;&gt;();FlowRule rule=new FlowRule();
+        rule.setResource(&quot;doTest&quot;);
+        rule.setGrade(RuleConstant.FLOW GRADE QPS);
+        rule.setCount(5);
+        rules.add(rule);
+        FlowRuleManager.loadRules(rules);
+    }
+}
+</code></pre>
+<p>在META-INF&#x2F;services&#x2F;com.alibaba.csp.sentinel.init.InitFunc文件中，添加自定义扩展点的全路径</p>
+<h3 id="SlotChainBuilder"><a href="#SlotChainBuilder" class="headerlink" title="SlotChainBuilder"></a>SlotChainBuilder</h3><p>自定义Slot链</p>
+<pre><code>public class MySlotChainBuilder implements SlotchainBuilder {
+    @Override
+    public ProcessorSlotchain build(){
+        ProcessorSlotChain chain=DefaultSlotChainBuilder;chain.addLast(new NodeSelectorSlot());
+        chain.addLast(newClusterBuilderslot());
+        chain.addLast(new FlowSlot());
+        chain.addLast(newDegradeSlot());
+        return chain;
+    }
+}
+</code></pre>
+<p>在META-INF&#x2F;services&#x2F;com.alibaba.csp.sentinel.slotchain.SlotChainBuildel文件中，添加自定义扩展点的全路径</p>
+<h1 id="Sentinel实现动态规则"><a href="#Sentinel实现动态规则" class="headerlink" title="Sentinel实现动态规则"></a>Sentinel实现动态规则</h1><h2 id="规则管理"><a href="#规则管理" class="headerlink" title="规则管理"></a>规则管理</h2><ul>
+<li>API代码创建<br>缺乏动态灵活性</li>
+<li>Dashboard配置<br>无法持久化</li>
+<li>DataSource<br>适配不同数据源的修改</li>
+</ul>
+<p><strong>Zookeeper动态数据源管理实现</strong></p>
+<h1 id="Sentinel实现定制化降级策略"><a href="#Sentinel实现定制化降级策略" class="headerlink" title="Sentinel实现定制化降级策略"></a>Sentinel实现定制化降级策略</h1><p>实现降级开关</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li>定义和加载开关降级规则类 SwitchRule</li>
+<li>实现开关判断处理机制 SwitchSlot</li>
+<li>集成开关逻辑 SwitchChecker</li>
+<li>实现SPI扩展点 SlotChainBuilder</li>
+</ul>
+<h3 id="SwitchRule"><a href="#SwitchRule" class="headerlink" title="SwitchRule"></a>SwitchRule</h3><pre><code>public class SwitchRule {
+    public static final String SWITCH_KEY_OPEN = &quot;open&quot;;
+    public static final String SWITCH_KEY_CLOSE = &quot;close&quot;;
+    //开关状态
+    private String status = SWITCH_KEY_OPEN;
+    //开关控制的资源
+    private Resources resources;
+    @Data
+    @ToString
+    public static class Resources {
+        //包含的资源 一条规则对应多个资源
+        private Set&lt;String&gt; include;
+        //排除的资源
+        private Set&lt;String&gt; exclude;
+    }
+}
+</code></pre>
+<h3 id="SwitchRuleChecker"><a href="#SwitchRuleChecker" class="headerlink" title="SwitchRuleChecker"></a>SwitchRuleChecker</h3><p>开关判断处理机制</p>
+<ol>
+<li>如果资源不配置<br>开关不作用到任何资源 </li>
+<li>如果配置include<br>作用到include指定的所有资源</li>
+<li>如果不配置include且配置了exclude<br>除exclude指定的资源外，其它资源都受这个开关的控制</li>
+</ol>
+<pre><code>Set&lt;SwitchRule&gt; switchRuleSet = initSwitchRule();
+// 遍历规则
+for (SwitchRule rule : switchRuleSet) {
+    // 判断开关状态，开关未打开则跳过
+    if (!rule.getStatus().equalsIgnoreCase(SwitchRule.SWITCH_KEY_OPEN)) {
+        continue;
+    }
+    if (rule.getResources() == null) {
+        continue;
+    }
+    // 实现 include 语意
+    if (!CollectionUtils.isEmpty(rule.getResources().getInclude())) {
+        if (rule.getResources().getInclude().contains(resource.getName())) {
+            throw new SwitchException(resource.getName(),&quot;switch&quot;);
+        }
+    }
+    // 实现 exclude 语意
+    if (!CollectionUtils.isEmpty(rule.getResources().getExclude())) {
+        if (!rule.getResources().getExclude().contains(resource.getName())) {
+            throw new SwitchException(resource.getName(),&quot;switch&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="SwitchSlot"><a href="#SwitchSlot" class="headerlink" title="SwitchSlot"></a>SwitchSlot</h3><pre><code>public class SwitghSlot extends AbstractLinkedProcessorSlot&lt;Object&gt;{
+    @Override
+    public void entry(Context context, Resourcelrapper resourcelrapper, Object o, int i, boolean b, 0bject... objects) throws Throwabl{
+        //在调用资源时执行开发降级的判断
+        SwitchRuleChecker.checkSwitch(resourceWrapper, context)
+        fireEntry(context,resourceWrapper, o,i,b, objects)
+    }
+
+    @Override
+    public void exit (Context context, Resourcerapper resourceWrapper, int i, 0bject... objects){
+        fireExit(context, resourceWrapper, i, objects)
+    }
+}
+</code></pre>
+<h3 id="SlotChainBuilder-1"><a href="#SlotChainBuilder-1" class="headerlink" title="SlotChainBuilder"></a>SlotChainBuilder</h3><pre><code>public class SwitchSlotChainBuilder extends DefaultSlotChainBuilder{
+    
+    @Override
+    public ProcessorSlotChain build(){
+        ProcessorSlotChain chain = super.build():
+        chain.addLast(new SwitchSlot());
+        return chain;
+    }
+}
+</code></pre>
+<p>在META-INF.services目录中新建文件com.alibaba.csp.sentinel.slotd.chain.SlotchainBuilder<br>内容：实现类全路径</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>如果让你实现一个定制化的限流降级Slot，你需要设计并开发哪些核心组件?</p>

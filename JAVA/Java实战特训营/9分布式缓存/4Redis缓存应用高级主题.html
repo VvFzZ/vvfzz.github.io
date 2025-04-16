@@ -46,14 +46,15 @@
 <li>服务容错<br>限流、熔断、降级<br>服务访问失败应对策略和Sentinel等开源框架</li>
 </ul>
 <pre><code>public void setWithLogicalExpire(String key, Object value, Long time, TimeUnit timeUnit){
-    RedisData redisData =new RedisData();redisData.setData(value);
+    RedisData redisData =new RedisData();
+    redisData.setData(value);
     redisData.setExpireTime(LocalDateTime.now().plusSeconds(timeUnit.toSeconds(time)));
-    stringRedisTemplate,opsForValue(),set(key, JSON.toJsonString(redisData));
+    stringRedisTemplate.opsForValue(),set(key, JSON.toJsonString(redisData));
 }
 </code></pre>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><pre><code>        &lt;dependency&gt;
-            &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
-            &lt;artifactId&gt;guava&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
+    &lt;artifactId&gt;guava&lt;/artifactId&gt;
+&lt;/dependency&gt;
 </code></pre>
 <h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>应对缓存操作异常场景常见有哪些？有什么区别？</p>

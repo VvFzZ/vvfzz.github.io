@@ -1,3 +1,8 @@
 <hr>
 <h2 id="title-mavendate-2024-06-27-22-13-31tags-description"><a href="#title-mavendate-2024-06-27-22-13-31tags-description" class="headerlink" title="title: mavendate: 2024-06-27 22:13:31tags:description:"></a>title: maven<br>date: 2024-06-27 22:13:31<br>tags:<br>description:</h2><h1 id="POM"><a href="#POM" class="headerlink" title="POM"></a>POM</h1><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><p>？？？</p>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><p>mvn clean package -DskipTests</p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><p>mvn clean package -DskipTests<br>mvn clean install<br>mvn clean install -pl <module-name> -am</p>
+<pre><code>clean: 清理目标目录（通常是 target 目录）
+install: 将构建的 artifact 安装到本地仓库
+-pl 或 --projects: 指定要构建的模块列表（Project List）
+-am 或 --also-make: 同时构建指定模块依赖的其他模块（Also Make）
+</code></pre>

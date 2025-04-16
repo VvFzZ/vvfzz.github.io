@@ -114,7 +114,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -127,6 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">spring核心特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E6%8A%80%E6%9C%AF"><span class="nav-number">2.</span> <span class="nav-text">web技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-number">3.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88"><span class="nav-number">4.</span> <span class="nav-text">框架整合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text">spring事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%B1%E6%95%88"><span class="nav-number">6.1.</span> <span class="nav-text">多线程失效</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -139,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -208,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-05 20:45:26" itemprop="dateModified" datetime="2024-08-05T20:45:26+08:00">2024-08-05</time>
+      <time title="Modified: 2025-04-16 23:19:06" itemprop="dateModified" datetime="2025-04-16T23:19:06+08:00">2025-04-16</time>
     </span>
 
   
@@ -229,12 +230,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>PostProcessor<br>    - BeanFactoryPostProcessor 修改BeanDefinition信息<br>    - BeanPostProcessor 修改Bean信息<br>BeanFactory<br>    ignoreDependencyType<br>    ignoreDependencyInterface<br>创建实例(实例化+初始化)：<br>构造方法 -&gt; 设置属性 -&gt; setAware属性 -&gt; BeanFactory.Before -&gt; init-method -&gt; BeanFactory.After</p>
+        <ul>
+<li>spring核心特性</li>
+<li>web技术</li>
+<li>数据存储</li>
+<li>框架整合</li>
+<li>测试</li>
+</ul>
+<h1 id="spring核心特性"><a href="#spring核心特性" class="headerlink" title="spring核心特性"></a>spring核心特性</h1><p>IOC容器、AOP、Events、资源管理、校验、数据绑定、国际化、类型转换、SEL (spring express language spring表达式)</p>
+<h1 id="web技术"><a href="#web技术" class="headerlink" title="web技术"></a>web技术</h1><pre><code>1. Web Servlet技术
+    MVC、WebSocket
+2. Web Reactive技术 spring5引入
+    WebFlux、WebClient、WebSocket
+</code></pre>
+<h1 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h1><p>jdbc、事务抽象、DAO Support、O&#x2F;R Mapping、XML序列化 (XML Marshalling)</p>
+<h1 id="框架整合"><a href="#框架整合" class="headerlink" title="框架整合"></a>框架整合</h1><p>远程调用(Remoting) 同步调用<br>Java 消息服务(JMS) ActiveMQ异步调用（kafka、RocketMQ不是JMS规范）<br>Java 连接架构(JCA)<br>Java 管理扩展(JMX)<br>Java 邮件客户端(Email)<br>本地任务(Tasks)<br>本地调度(Scheduling)<br>缓存抽象(Caching)Spring<br>测试(Testing)</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>模拟对象 Mock Objects<br>TestContext框架（TestContext Framework）<br>Spring MVC测试<br>Web测试客户端 WebTestClien</p>
+<p>PostProcessor<br>    - BeanFactoryPostProcessor 修改BeanDefinition信息<br>    - BeanPostProcessor 修改Bean信息<br>BeanFactory<br>    ignoreDependencyType<br>    ignoreDependencyInterface<br>创建实例(实例化+初始化)：<br>构造方法 -&gt; 设置属性 -&gt; setAware属性 -&gt; BeanFactory.Before -&gt; init-method -&gt; BeanFactory.After</p>
 <p>Aware接口作用<br>需要其他Bean对象时可实现此接口，获取其他容器对象</p>
 <p>xml、json、yaml、properties文件<br>BeanDefinitionReader（定义读取规范，方便扩展）<br>BeanDefinition<br>BeanFactory-&gt;反射创建对象<br>    - 实例化<br>    - 初始化<br>        - 设置属性<br>        - 设置aware属性<br>        - BeanFactoryPostProcessor.before<br>        - ini-method<br>        - BeanFactoryPostProcessor.after</p>
 <p>BeanFactory<br>FactoryBean<br>Aware<br>BeanDefinition<br>BeanDefinitionReader<br>BeanFactoryPostProcessor<br>BeanPostProcessor<br>Environment</p>
 <p>BeanFactory与FactoryBean的区别：BeanFactory遵循spring对象的声明周期；FactoryBean通过getObject对象获取具体对象，创建过程由用户控制。</p>
-
+<h1 id="spring事务"><a href="#spring事务" class="headerlink" title="spring事务"></a>spring事务</h1><h2 id="多线程失效"><a href="#多线程失效" class="headerlink" title="多线程失效"></a>多线程失效</h2><p>原因：启动新线程找不到原线程的connection</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public void parentMethod() &#123;</span><br><span class="line">    TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);</span><br><span class="line">    </span><br><span class="line">    // 主线程事务</span><br><span class="line">    transactionTemplate.execute(status -&gt; &#123;</span><br><span class="line">        repository.save(entity1);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    // 子线程事务</span><br><span class="line">    new Thread(() -&gt; &#123;</span><br><span class="line">        transactionTemplate.execute(status -&gt; &#123;</span><br><span class="line">            repository.save(entity2);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -242,6 +260,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
 
         
 
@@ -275,7 +296,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

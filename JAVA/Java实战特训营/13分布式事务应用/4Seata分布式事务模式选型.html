@@ -1,0 +1,111 @@
+<hr>
+<h2 id="title-4Seata分布式事务模式选型description-4Seata分布式事务模式选型date-2024-11-24-15-35-47tags"><a href="#title-4Seata分布式事务模式选型description-4Seata分布式事务模式选型date-2024-11-24-15-35-47tags" class="headerlink" title="title: 4Seata分布式事务模式选型description: 4Seata分布式事务模式选型date: 2024-11-24 15:35:47tags:"></a>title: 4Seata分布式事务模式选型<br>description: 4Seata分布式事务模式选型<br>date: 2024-11-24 15:35:47<br>tags:</h2><ul>
+<li>Saga模式组成结构和实现方式</li>
+<li>XA模式组成结构和实现方式</li>
+<li>Seata分布式事务模式选型</li>
+</ul>
+<h1 id="Saga模式组成结构和实现方式"><a href="#Saga模式组成结构和实现方式" class="headerlink" title="Saga模式组成结构和实现方式"></a>Saga模式组成结构和实现方式</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>长事务</strong><br>长时间执行的事务，传统事务锁定资源不适合执行长事务<br><strong>Saga模式</strong><br>Saga模式由一串本地事务组成，每个本地事务都有自己回滚.数据的补偿事务（没有全局事务）。<br>事务之间串型执行，当正向执行的某一个事务出现报错，那么将执行这个事务的补偿事务，并且逆行执行之前的事务补偿。</p>
+<p><strong>优势</strong></p>
+<ul>
+<li>事务提交<br>一阶段直接提交事务</li>
+<li>加锁机制<br>没有锁等待，性能较高</li>
+<li>事务异步<br>结合事件驱动架构实现短事务异步执行</li>
+<li>补偿机制<br>补偿过程实现简单，实现正向事务的逆向补偿即可</li>
+<li>应用场景<br>更适用于遗留服务、第三方服务或无法改造的服务</li>
+</ul>
+<p><strong>问题</strong><br>不提供加锁机制，也就不具备原子性，因此数据隔离性的影响比较大</p>
+<h2 id="实现类型"><a href="#实现类型" class="headerlink" title="实现类型"></a>实现类型</h2><ul>
+<li>事件&#x2F;编排式<br>前一个服务执行完成后发送消息，后一个服务通过订阅消息的式来实现服务的协调。引入消息中间件来解决耦合性问题。<ul>
+<li>优势<br>  引入了消息订阅降低了耦合性;简单场景实现相对来说逻辑清晰</li>
+<li>劣势<br>  服务之间通过订阅消息来触发调用，处理不当容易造成循环消息;复杂场景不好处理</li>
+</ul>
+</li>
+<li>命令&#x2F;协同式<br>需要定义一个集中式的Saga协调器，负责告诉每一个服务应该做什么。Saga协调器以命令&#x2F;回复的方式与各个服务进行通信。<ul>
+<li>优势<br>  理解简单，业务逻辑实现流程更加清晰;调用是单向的，不会产生依赖循环问题</li>
+<li>劣势<br>  存在一定的设计以及相关API的学习成本</li>
+</ul>
+</li>
+</ul>
+<h1 id="XA模式组成结构和实现方式"><a href="#XA模式组成结构和实现方式" class="headerlink" title="XA模式组成结构和实现方式"></a>XA模式组成结构和实现方式</h1><h2 id="XA规范"><a href="#XA规范" class="headerlink" title="XA规范"></a>XA规范</h2><p>XA规范是X&#x2F;Open组织定义的分布式事务处理(DTP，DistributedTransaction Processing)标准XA规范描述了全局的事务管理器与局部的资源管理器之间的接口，目的是允许的多个资源(如数据库，应用服务器，消息队列等)在同一事务中访问，这样可以使 ACID 属性跨越应用程序而保持有效。XA规范使用两阶段提交来保证所有资源同时提交或回滚任何特定的事务。<br><strong>本质特性</strong><br>补偿型事务处理机制中的事务资源本身对分布式事务是无感知的，而XA协议要求事务资源本身提供对规范和协议的支持（偏底层），所以事务资源(如数据库)可以保障从任意视角对数据的访问有效隔离，满足全局数据一致性。（强一致性）</p>
+<p><strong>事务感知性案例</strong><br>例如，假设一条库存记录处在补偿型事务处理过程中，由100扣减为50。此时，系统管理人员访问数据库查询统计库存，就看到当前的 50。之后事务因为异常触发回滚，库存会被补偿回滚为 100。</p>
+<ul>
+<li>补偿模式<br>系统管理人员查询统计到的50就是脏数据，所以补偿型事务存在中间状态</li>
+<li>XA规范<br>数据中间状态50由数据库本身保证，系统管理人员无法查看</li>
+</ul>
+<p><strong>XA模式</strong><br>一阶段<br>    - TM 启动全局事务</p>
+<ul>
+<li>RM 注册分支事务到TC，汇报状态到TC<br>二阶段<ul>
+<li>TC 提交&#x2F;回滚RM事务<br><strong>两阶段说明</strong></li>
+</ul>
+</li>
+<li>执行阶段<ol>
+<li>可回滚:业务SQL操作放在XA分支中进行，基于资源对XA协议的支持来保证可回滚</li>
+<li>持久化:执行XA分支的prepare方法，同样基于资源对XA协议的支持来保证持久化</li>
+</ol>
+</li>
+<li>完成阶段<ol>
+<li>分支提交:执行XA分支的commit方法</li>
+<li>分支回滚:执行XA分支的rollback方法</li>
+</ol>
+</li>
+</ul>
+<h1 id="Seata分布式事务模式选型"><a href="#Seata分布式事务模式选型" class="headerlink" title="Seata分布式事务模式选型"></a>Seata分布式事务模式选型</h1><h2 id="AT"><a href="#AT" class="headerlink" title="AT"></a>AT</h2><ul>
+<li>特性<br>业务无侵入<br>性能满足普通业务</li>
+<li>应用场景<br>不希望对代码进行改造<br>数据库支持事务操作<br>对性能没有特别高的要求</li>
+</ul>
+<h2 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h2><ul>
+<li><p>特性<br>业务强侵入<br>没有用到锁，通过业务预留实现数据更新</p>
+</li>
+<li><p>应用场景<br>对性能有较高要求<br>无需依赖于数据库事务性<br>各种定制化场景</p>
+</li>
+</ul>
+<h2 id="Saga"><a href="#Saga" class="headerlink" title="Saga"></a>Saga</h2><ul>
+<li>特性<br>开发过程比较复杂<br>事务隔离性较差</li>
+<li>应用场景<br>适用于长事务业务场景<br>适用于遗留系统(可控性差)改造<br>操作多个分散服务的数据</li>
+</ul>
+<h2 id="XA"><a href="#XA" class="headerlink" title="XA"></a>XA</h2><ul>
+<li><p>特性<br>业务无侵入<br>并发性能低</p>
+</li>
+<li><p>应用场景<br>强一致，对性能要求低<br>使用较少</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选型维度</th>
+<th>业务侵入性</th>
+<th>开发友好性</th>
+<th>数据一致性</th>
+<th>性能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT</td>
+<td>无</td>
+<td>好</td>
+<td>较强 全局锁和本地锁组合</td>
+<td>稍差，全局锁和本地所组合</td>
+</tr>
+<tr>
+<td>TCC</td>
+<td>强</td>
+<td>较好 实现try&#x2F;confirm&#x2F;cancel三个方法</td>
+<td>没有全局锁，只本地锁</td>
+<td>高，短事务</td>
+</tr>
+<tr>
+<td>Saga</td>
+<td>弱</td>
+<td>相对复杂 事件驱动或集中式服务</td>
+<td>最弱，无锁，长事务，易脏读（最大问题）</td>
+<td>高，无锁，长事务，可并行</td>
+</tr>
+<tr>
+<td>XA</td>
+<td>无</td>
+<td>好</td>
+<td>强一致 所有事务执行完才释放本地锁</td>
+<td>差，所有事务完成才释放本地锁</td>
+</tr>
+</tbody></table>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>结合你日常开发过程中的一个具体场景，对分布式事务的模式进行合理选型？</p>

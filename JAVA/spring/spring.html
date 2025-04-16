@@ -1,6 +1,41 @@
 <hr>
-<h2 id="title-springdate-2024-07-21-21-07-15tags-description-spring"><a href="#title-springdate-2024-07-21-21-07-15tags-description-spring" class="headerlink" title="title: springdate: 2024-07-21 21:07:15tags:description: spring"></a>title: spring<br>date: 2024-07-21 21:07:15<br>tags:<br>description: spring</h2><p>PostProcessor<br>    - BeanFactoryPostProcessor 修改BeanDefinition信息<br>    - BeanPostProcessor 修改Bean信息<br>BeanFactory<br>    ignoreDependencyType<br>    ignoreDependencyInterface<br>创建实例(实例化+初始化)：<br>构造方法 -&gt; 设置属性 -&gt; setAware属性 -&gt; BeanFactory.Before -&gt; init-method -&gt; BeanFactory.After</p>
+<h2 id="title-springdate-2024-07-21-21-07-15tags-springdescription-spring"><a href="#title-springdate-2024-07-21-21-07-15tags-springdescription-spring" class="headerlink" title="title: springdate: 2024-07-21 21:07:15tags: springdescription: spring"></a>title: spring<br>date: 2024-07-21 21:07:15<br>tags: spring<br>description: spring</h2><ul>
+<li>spring核心特性</li>
+<li>web技术</li>
+<li>数据存储</li>
+<li>框架整合</li>
+<li>测试</li>
+</ul>
+<h1 id="spring核心特性"><a href="#spring核心特性" class="headerlink" title="spring核心特性"></a>spring核心特性</h1><p>IOC容器、AOP、Events、资源管理、校验、数据绑定、国际化、类型转换、SEL (spring express language spring表达式)</p>
+<h1 id="web技术"><a href="#web技术" class="headerlink" title="web技术"></a>web技术</h1><pre><code>1. Web Servlet技术
+    MVC、WebSocket
+2. Web Reactive技术 spring5引入
+    WebFlux、WebClient、WebSocket
+</code></pre>
+<h1 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h1><p>jdbc、事务抽象、DAO Support、O&#x2F;R Mapping、XML序列化 (XML Marshalling)</p>
+<h1 id="框架整合"><a href="#框架整合" class="headerlink" title="框架整合"></a>框架整合</h1><p>远程调用(Remoting) 同步调用<br>Java 消息服务(JMS) ActiveMQ异步调用（kafka、RocketMQ不是JMS规范）<br>Java 连接架构(JCA)<br>Java 管理扩展(JMX)<br>Java 邮件客户端(Email)<br>本地任务(Tasks)<br>本地调度(Scheduling)<br>缓存抽象(Caching)Spring<br>测试(Testing)</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>模拟对象 Mock Objects<br>TestContext框架（TestContext Framework）<br>Spring MVC测试<br>Web测试客户端 WebTestClien</p>
+<p>PostProcessor<br>    - BeanFactoryPostProcessor 修改BeanDefinition信息<br>    - BeanPostProcessor 修改Bean信息<br>BeanFactory<br>    ignoreDependencyType<br>    ignoreDependencyInterface<br>创建实例(实例化+初始化)：<br>构造方法 -&gt; 设置属性 -&gt; setAware属性 -&gt; BeanFactory.Before -&gt; init-method -&gt; BeanFactory.After</p>
 <p>Aware接口作用<br>需要其他Bean对象时可实现此接口，获取其他容器对象</p>
 <p>xml、json、yaml、properties文件<br>BeanDefinitionReader（定义读取规范，方便扩展）<br>BeanDefinition<br>BeanFactory-&gt;反射创建对象<br>    - 实例化<br>    - 初始化<br>        - 设置属性<br>        - 设置aware属性<br>        - BeanFactoryPostProcessor.before<br>        - ini-method<br>        - BeanFactoryPostProcessor.after</p>
 <p>BeanFactory<br>FactoryBean<br>Aware<br>BeanDefinition<br>BeanDefinitionReader<br>BeanFactoryPostProcessor<br>BeanPostProcessor<br>Environment</p>
 <p>BeanFactory与FactoryBean的区别：BeanFactory遵循spring对象的声明周期；FactoryBean通过getObject对象获取具体对象，创建过程由用户控制。</p>
+<h1 id="spring事务"><a href="#spring事务" class="headerlink" title="spring事务"></a>spring事务</h1><h2 id="多线程失效"><a href="#多线程失效" class="headerlink" title="多线程失效"></a>多线程失效</h2><p>原因：启动新线程找不到原线程的connection</p>
+<pre><code>public void parentMethod() {
+    TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+    
+    // 主线程事务
+    transactionTemplate.execute(status -&gt; {
+        repository.save(entity1);
+        return null;
+    });
+    
+    // 子线程事务
+    new Thread(() -&gt; {
+        transactionTemplate.execute(status -&gt; {
+            repository.save(entity2);
+            return null;
+        });
+    }).start();
+}
+</code></pre>

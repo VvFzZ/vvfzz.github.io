@@ -39,13 +39,19 @@
 <li>客户端分片<br>分片规则和逻辑在应用程序端实现。TDDL、ShardingSphere</li>
 <li>服务端分片<br>使用代理服务器，Cobar、Mycat、ShardingSphere</li>
 </ul>
-<h1 id="ShardingSphere简介"><a href="#ShardingSphere简介" class="headerlink" title="ShardingSphere简介"></a>ShardingSphere简介</h1><h2 id="ShardingSphere-JDBC"><a href="#ShardingSphere-JDBC" class="headerlink" title="ShardingSphere-JDBC"></a>ShardingSphere-JDBC</h2><p>轻量级Java框架，在Java的JDBC层提供的额外服务<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/6%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/1ShardingSphere/1-ShardingSphere-JDBC.png"></p>
+<h1 id="ShardingSphere简介"><a href="#ShardingSphere简介" class="headerlink" title="ShardingSphere简介"></a>ShardingSphere简介</h1><h2 id="ShardingSphere-JDBC"><a href="#ShardingSphere-JDBC" class="headerlink" title="ShardingSphere-JDBC"></a>ShardingSphere-JDBC</h2><p>轻量级Java框架，在Java的JDBC层提供的额外服务</p>
+<!-- ![]() -->
+<img src='1-ShardingSphere-JDBC.png' width='350px' height='200px'>
+
 <h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
 <li>ORM框架<br>JPA、Hibernate、MyBatis等</li>
 <li>数据库连接池<br>DBCP、C3P0、BoneCP、Druid、HikariCP等</li>
 <li>数据库<br>MySOL、Oracle、sOLServer、PostgresQL等</li>
 </ul>
-<h2 id="ShardingSphere-Proxy"><a href="#ShardingSphere-Proxy" class="headerlink" title="ShardingSphere-Proxy"></a>ShardingSphere-Proxy</h2><p>透明化的数据库代理端，通过实现数据库二进制协议，对异构语言提供支持<br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/6%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/1ShardingSphere/1-ShardingSphere-Proxy.png"></p>
+<h2 id="ShardingSphere-Proxy"><a href="#ShardingSphere-Proxy" class="headerlink" title="ShardingSphere-Proxy"></a>ShardingSphere-Proxy</h2><p>透明化的数据库代理端，通过实现数据库二进制协议，对异构语言提供支持</p>
+<!-- ![]() -->
+<img src='1-ShardingSphere-Proxy.png' width='450px' height='250px'>
+
 <h3 id="兼容性-1"><a href="#兼容性-1" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
 <li>异构语言<br>封装了数据库二进制协议的服务端版本</li>
 <li>数据库<br>MySOL和PostgresOL</li>
@@ -60,5 +66,5 @@
 <li>数据加密<br>提供完整、透明、安全、低成本的数据加密解决方案</li>
 <li>影子库<br>支持不同工作负载下的数据隔离，避免测试数据污染生产环境</li>
 </ul>
-<h1 id="JDBC规范与ShardingSphere原理分析"><a href="#JDBC规范与ShardingSphere原理分析" class="headerlink" title="JDBC规范与ShardingSphere原理分析"></a>JDBC规范与ShardingSphere原理分析</h1><p>Sharding-JDBC是如何做到能够完全兼容IDBC规范的？<br>从JDBC核心API进行切入？<br>智能，透明的分片引擎</p>
+<h1 id="JDBC规范与ShardingSphere原理分析"><a href="#JDBC规范与ShardingSphere原理分析" class="headerlink" title="JDBC规范与ShardingSphere原理分析"></a>JDBC规范与ShardingSphere原理分析</h1><p>Sharding-JDBC是如何做到能够完全兼容JDBC规范的？<br>JDBC规范：DataSource,Connection,Statement,exec sql,ResultSet,close resource<br>ShardingSphere对JDBC核心对象扩展注入分片处理<br>jdbc提供的扩展接口：Wrapper接口，ShardingSphere利用适配器模式封装分片对象</p>
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>列举分库分表框架，描述异同点？</p>

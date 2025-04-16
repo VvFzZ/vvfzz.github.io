@@ -1,13 +1,125 @@
 <hr>
 <h2 id="title-Java实战特训营-2-6SpringBoot测试解决方案和实践date-2024-09-07-09-23-09tags-description-SpringBoot测试解决方案和实践"><a href="#title-Java实战特训营-2-6SpringBoot测试解决方案和实践date-2024-09-07-09-23-09tags-description-SpringBoot测试解决方案和实践" class="headerlink" title="title: Java实战特训营-2.6SpringBoot测试解决方案和实践date: 2024-09-07 09:23:09tags:description: SpringBoot测试解决方案和实践"></a>title: Java实战特训营-2.6SpringBoot测试解决方案和实践<br>date: 2024-09-07 09:23:09<br>tags:<br>description: SpringBoot测试解决方案和实践</h2><h1 id="测试的类型和实施策略"><a href="#测试的类型和实施策略" class="headerlink" title="测试的类型和实施策略"></a>测试的类型和实施策略</h1><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB.png"><br>单元测试：类级别<br>集成测试：组件级别，模块间、服务间<br>端到端测试：服务级别，业务流程开展的测试，覆盖多服务（关注服务之间数据和状态传递）</p>
-<h1 id="Spring-Boot测试方案和流程"><a href="#Spring-Boot测试方案和流程" class="headerlink" title="Spring Boot测试方案和流程"></a>Spring Boot测试方案和流程</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-SpringBoot%E6%B5%8B%E8%AF%95%E4%BE%9D%E8%B5%96.png"></p>
-<h2 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h2><h3 id="SpringBootTest"><a href="#SpringBootTest" class="headerlink" title="@SpringBootTest"></a>@SpringBootTest</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-@SpringBootTest.png"></p>
-<h3 id="ExtendWith"><a href="#ExtendWith" class="headerlink" title="@ExtendWith"></a>@ExtendWith</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-@ExtendWith.png"><br>如果只想启用Spring环境进行简单测试，不想启用Spring Boot环境，可以配置扩展为：SpringExtension。</p>
-<h3 id="执行测试用例"><a href="#执行测试用例" class="headerlink" title="执行测试用例"></a>执行测试用例</h3><p><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/2%E7%B3%BB%E7%BB%9F%E6%89%A9%E5%B1%95%E6%B5%8B%E8%AF%95%E7%9B%91%E6%8E%A7/6SpringBoot%E6%B5%8B%E8%AF%95%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%92%8C%E5%AE%9E%E8%B7%B5/6-%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B.png"></p>
+<h1 id="Spring-Boot测试方案和流程"><a href="#Spring-Boot测试方案和流程" class="headerlink" title="Spring Boot测试方案和流程"></a>Spring Boot测试方案和流程</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><pre><code>&lt;dependency&gt;
+     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+     &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+     &lt;scope&gt;test&lt;/scope&gt;
+     &lt;exclusions&gt;
+         &lt;exclusion&gt;
+             &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+             &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+         &lt;/exclusion&gt;
+     &lt;/exclusions&gt;
+ &lt;/dependency&gt;
+ &lt;dependency&gt;
+     &lt;groupId&gt;org.junit.platform&lt;/groupId&gt;
+     &lt;artifactId&gt;junit-platform-launcher&lt;/artifactId&gt;
+     &lt;scope&gt;test&lt;/scope&gt;
+ &lt;/dependency&gt;
+</code></pre>
+<!-- ![](6-SpringBoot测试依赖.png) -->
+
+<h2 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h2><h3 id="SpringBootTest"><a href="#SpringBootTest" class="headerlink" title="@SpringBootTest"></a>@SpringBootTest</h3><pre><code>@SpringBootTest(classes = UserApplication.class, webEnvironment =SpringBootTest.WebEnvironment.MOCK)
+</code></pre>
+<ul>
+<li>MOCK<br>加载WebApplicationContext并提供一个Mock的Servlet环境，内置的Servlet容器并没有真实的启动</li>
+<li>RANDOM PORT<br>加载EmbeddedWebApplicationContext并提供一个真实的Servlet环境，也就是说会启动内置容器，然后使用的是随机端口</li>
+<li>DEFINED PORT<br>加载EmbeddedWebApplicationContext并提供一个真实的Servlet环境，但使用配置的端口(默认8080)</li>
+<li>NONE<br>加载ApplicationContext但并不提供任何真实的Servlet环境<!-- ![](6-@SpringBootTest.png) --></li>
+</ul>
+<h4 id="排除aop引入原生bean"><a href="#排除aop引入原生bean" class="headerlink" title="排除aop引入原生bean"></a>排除aop引入原生bean</h4><h5 id="SpringBootTest并排除AOP"><a href="#SpringBootTest并排除AOP" class="headerlink" title="@SpringBootTest并排除AOP"></a>@SpringBootTest并排除AOP</h5><pre><code>@SpringBootTest(properties = {
+    &quot;spring.aop.auto=false&quot;  // 禁用AOP自动配置
+})
+</code></pre>
+<h5 id="Import直接导入Controller类"><a href="#Import直接导入Controller类" class="headerlink" title="@Import直接导入Controller类"></a>@Import直接导入Controller类</h5><pre><code>@WebMvcTest
+@Import(MyController.class)  // 直接导入Controller类，不经过代理
+public class MyControllerTest {
+    @Autowired
+    private MyController myController;
+    
+    // 测试方法...
+}
+</code></pre>
+<h5 id="new创建实例并手动注入依赖"><a href="#new创建实例并手动注入依赖" class="headerlink" title="new创建实例并手动注入依赖"></a>new创建实例并手动注入依赖</h5><p>若依赖其他bean需手动mock</p>
+<pre><code>public class MyControllerTest {
+    private MyController myController;
+    
+    @BeforeEach
+    public void setup() {
+        // 手动创建实例并注入依赖
+        myController = new MyController();
+        // 手动注入依赖（如果有）
+        // myController.setSomeService(mockSomeService);
+    }
+    
+    // 测试方法...
+}
+</code></pre>
+<h5 id="TestConfiguration提供非代理Bean"><a href="#TestConfiguration提供非代理Bean" class="headerlink" title="@TestConfiguration提供非代理Bean"></a>@TestConfiguration提供非代理Bean</h5><pre><code>@SpringBootTest
+public class MyControllerTest {
+    @TestConfiguration
+    static class TestConfig {
+        @Bean
+        @Primary
+        public MyController myController() {
+            return new MyController();  // 返回原始对象
+        }
+    }
+    
+    @Autowired
+    private MyController myController;
+    
+    // 测试方法...
+}
+</code></pre>
+<h5 id="针对特定测试禁用AOP"><a href="#针对特定测试禁用AOP" class="headerlink" title="针对特定测试禁用AOP"></a>针对特定测试禁用AOP</h5><pre><code>@SpringBootTest
+public class MyControllerTest {
+    @Autowired
+    private ApplicationContext context;
+    
+    private MyController myController;
+    
+    @BeforeEach
+    public void setup() {
+        // 获取原始对象而非代理
+        myController = context.getBean(MyController.class);
+        if(AopUtils.isAopProxy(myController)) {
+            myController = (MyController) ((Advised) myController).getTargetSource().getTarget();
+        }
+    }
+    
+    // 测试方法...
+}
+</code></pre>
+<h3 id="ExtendWith"><a href="#ExtendWith" class="headerlink" title="@ExtendWith"></a>@ExtendWith</h3><p>@ExtendWith(SpringExtension)<br>连接 JUnit 5 和 Spring 测试框架,单独使用测试非springboot应用<br>不支持自动装配，手动加载配置文件，不启动servlet服务器</p>
+<!-- ![](6-@ExtendWith.png) -->
+<p>@SpringBootTest内置@ExtendWith</p>
+<h3 id="执行测试用例"><a href="#执行测试用例" class="headerlink" title="执行测试用例"></a>执行测试用例</h3><p>3A原则<br>Arrange:测试用例执行之前需要准备测试数据<br>Act:通过不同的参数来调用接口，并拿到返回结果<br>Assert:执行断言，判断执行结果是否符合预期</p>
+<pre><code>@ExtendWith(SpringExtension.class)
+public class UserTests {
+    private static final String USER NAME = &quot;tianyalan&quot;;
+    @Test
+    public void testUsernameIsMoreThan5Chars()throws Exception {
+        //ArrangeUser user = new User(&quot;001&quot;, USER NAME, 39, new Date(),&quot;china&quot;);
+        //Act + Assert
+        assertThat(user.getName()).isEqualTO(USER NAME);
+    }
+}
+</code></pre>
+<!-- ![](6-执行测试用例.png) -->
+
 <h1 id="数据访问层测试"><a href="#数据访问层测试" class="headerlink" title="数据访问层测试"></a>数据访问层测试</h1><h2 id="MybatisPlusTest注解"><a href="#MybatisPlusTest注解" class="headerlink" title="@MybatisPlusTest注解"></a>@MybatisPlusTest注解</h2><p>基于mybatis-plus框架，只验证数据访问层能力，不启动容器和controller层。<br>没有使用@SpringBootTest注解，不验证spring容器能力<br>前提：</p>
 <ul>
-<li>mybatis-plus-boot-starter-test</li>
-<li>在Test&#x2F;resource&#x2F;application.yaml中配置配置数据源</li>
+<li><p>mybatis-plus-boot-starter-test</p>
+</li>
+<li><p>在Test&#x2F;resource&#x2F;application.yaml中配置配置测试数据源<br>不依赖项目真实数据源，隔离真实数据源</p>
+</li>
+<li><p>Replace.AUTO_CONFIGURED (默认)自动用嵌入式DB替换</p>
+</li>
+<li><p>Replace.NONE 不替换，使用配置的真实DB<br>Test&#x2F;resource&#x2F;application.yaml中配置数据源时使用此配置数据源</p>
+</li>
+<li><p>Replace.ANY<br>替换所有数据源（包括嵌入式）</p>
+</li>
 </ul>
 <pre><code>@ExtendWith(SpringExtension.class)
 @MybatisPlusTest
@@ -107,29 +219,29 @@ public class CustomerStaffServiceTests {
 <p>也可mock其他Service层</p>
 <h1 id="测试Web-API层"><a href="#测试Web-API层" class="headerlink" title="测试Web API层"></a>测试Web API层</h1><ul>
 <li>TestRestTemplate</li>
-<li>@WebMvcTest注解</li>
+<li>@WebMvcTest注解<br>和SpringbootTest注解冲突，不可同时使用</li>
 <li>@AutoConfigureMockMvc</li>
 </ul>
-<pre><code>
-import org.geekbang.projects.cs.entity.staff.CustomerStaff;
-import org.geekbang.projects.cs.service.ICustomerStaffService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
+<pre><code>//WebMvcTest注解
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(UserController.class)
+public class UserControllerTestsWithMockMvc {
+    @Autowired
+    private MockMvc mvc
+    @MockBean
+    private UserService userService;
+    
+    @Test
+    public void testGetUserById()throws Exception {
+        String userId =&quot;001&quot;;
+        User user = new User(userId, &quot;tianyalan&quot;, 38, new Date(), &quot;china&quot;);
+        given(this.userService,findUserById(userId)).willReturn(user);
+        this.mvc.perform(get(&quot;/users/&quot; + userId).accept(MediaType.APPLICATION JSON)).andExpect(status().isOk());
+    }
+}
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+//SpringBootTest + AutoConfigureMockMvc
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc

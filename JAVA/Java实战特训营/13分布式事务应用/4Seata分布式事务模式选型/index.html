@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/4Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%BC%8F%E9%80%89%E5%9E%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/4Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%BC%8F%E9%80%89%E5%9E%8B/","path":"JAVA/Java实战特训营/13分布式事务应用/4Seata分布式事务模式选型/","title":"4Seata分布式事务模式选型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>4Seata分布式事务模式选型 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Saga%E6%A8%A1%E5%BC%8F%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84%E5%92%8C%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">Saga模式组成结构和实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">实现类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XA%E6%A8%A1%E5%BC%8F%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84%E5%92%8C%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">XA模式组成结构和实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XA%E8%A7%84%E8%8C%83"><span class="nav-number">2.1.</span> <span class="nav-text">XA规范</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%BC%8F%E9%80%89%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">Seata分布式事务模式选型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AT"><span class="nav-number">3.1.</span> <span class="nav-text">AT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCC"><span class="nav-number">3.2.</span> <span class="nav-text">TCC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Saga"><span class="nav-number">3.3.</span> <span class="nav-text">Saga</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XA"><span class="nav-number">3.4.</span> <span class="nav-text">XA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/4Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%BC%8F%E9%80%89%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="4Seata分布式事务模式选型 | VvfzZ">
+      <meta itemprop="description" content="4Seata分布式事务模式选型">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4Seata分布式事务模式选型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-24 15:35:47" itemprop="dateCreated datePublished" datetime="2024-11-24T15:35:47+08:00">2024-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-10 16:36:39" itemprop="dateModified" datetime="2025-04-10T16:36:39+08:00">2025-04-10</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">4Seata分布式事务模式选型</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>Saga模式组成结构和实现方式</li>
+<li>XA模式组成结构和实现方式</li>
+<li>Seata分布式事务模式选型</li>
+</ul>
+<h1 id="Saga模式组成结构和实现方式"><a href="#Saga模式组成结构和实现方式" class="headerlink" title="Saga模式组成结构和实现方式"></a>Saga模式组成结构和实现方式</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>长事务</strong><br>长时间执行的事务，传统事务锁定资源不适合执行长事务<br><strong>Saga模式</strong><br>Saga模式由一串本地事务组成，每个本地事务都有自己回滚.数据的补偿事务（没有全局事务）。<br>事务之间串型执行，当正向执行的某一个事务出现报错，那么将执行这个事务的补偿事务，并且逆行执行之前的事务补偿。</p>
+<p><strong>优势</strong></p>
+<ul>
+<li>事务提交<br>一阶段直接提交事务</li>
+<li>加锁机制<br>没有锁等待，性能较高</li>
+<li>事务异步<br>结合事件驱动架构实现短事务异步执行</li>
+<li>补偿机制<br>补偿过程实现简单，实现正向事务的逆向补偿即可</li>
+<li>应用场景<br>更适用于遗留服务、第三方服务或无法改造的服务</li>
+</ul>
+<p><strong>问题</strong><br>不提供加锁机制，也就不具备原子性，因此数据隔离性的影响比较大</p>
+<h2 id="实现类型"><a href="#实现类型" class="headerlink" title="实现类型"></a>实现类型</h2><ul>
+<li>事件&#x2F;编排式<br>前一个服务执行完成后发送消息，后一个服务通过订阅消息的式来实现服务的协调。引入消息中间件来解决耦合性问题。<ul>
+<li>优势<br>  引入了消息订阅降低了耦合性;简单场景实现相对来说逻辑清晰</li>
+<li>劣势<br>  服务之间通过订阅消息来触发调用，处理不当容易造成循环消息;复杂场景不好处理</li>
+</ul>
+</li>
+<li>命令&#x2F;协同式<br>需要定义一个集中式的Saga协调器，负责告诉每一个服务应该做什么。Saga协调器以命令&#x2F;回复的方式与各个服务进行通信。<ul>
+<li>优势<br>  理解简单，业务逻辑实现流程更加清晰;调用是单向的，不会产生依赖循环问题</li>
+<li>劣势<br>  存在一定的设计以及相关API的学习成本</li>
+</ul>
+</li>
+</ul>
+<h1 id="XA模式组成结构和实现方式"><a href="#XA模式组成结构和实现方式" class="headerlink" title="XA模式组成结构和实现方式"></a>XA模式组成结构和实现方式</h1><h2 id="XA规范"><a href="#XA规范" class="headerlink" title="XA规范"></a>XA规范</h2><p>XA规范是X&#x2F;Open组织定义的分布式事务处理(DTP，DistributedTransaction Processing)标准XA规范描述了全局的事务管理器与局部的资源管理器之间的接口，目的是允许的多个资源(如数据库，应用服务器，消息队列等)在同一事务中访问，这样可以使 ACID 属性跨越应用程序而保持有效。XA规范使用两阶段提交来保证所有资源同时提交或回滚任何特定的事务。<br><strong>本质特性</strong><br>补偿型事务处理机制中的事务资源本身对分布式事务是无感知的，而XA协议要求事务资源本身提供对规范和协议的支持（偏底层），所以事务资源(如数据库)可以保障从任意视角对数据的访问有效隔离，满足全局数据一致性。（强一致性）</p>
+<p><strong>事务感知性案例</strong><br>例如，假设一条库存记录处在补偿型事务处理过程中，由100扣减为50。此时，系统管理人员访问数据库查询统计库存，就看到当前的 50。之后事务因为异常触发回滚，库存会被补偿回滚为 100。</p>
+<ul>
+<li>补偿模式<br>系统管理人员查询统计到的50就是脏数据，所以补偿型事务存在中间状态</li>
+<li>XA规范<br>数据中间状态50由数据库本身保证，系统管理人员无法查看</li>
+</ul>
+<p><strong>XA模式</strong><br>一阶段<br>    - TM 启动全局事务</p>
+<ul>
+<li>RM 注册分支事务到TC，汇报状态到TC<br>二阶段<ul>
+<li>TC 提交&#x2F;回滚RM事务<br><strong>两阶段说明</strong></li>
+</ul>
+</li>
+<li>执行阶段<ol>
+<li>可回滚:业务SQL操作放在XA分支中进行，基于资源对XA协议的支持来保证可回滚</li>
+<li>持久化:执行XA分支的prepare方法，同样基于资源对XA协议的支持来保证持久化</li>
+</ol>
+</li>
+<li>完成阶段<ol>
+<li>分支提交:执行XA分支的commit方法</li>
+<li>分支回滚:执行XA分支的rollback方法</li>
+</ol>
+</li>
+</ul>
+<h1 id="Seata分布式事务模式选型"><a href="#Seata分布式事务模式选型" class="headerlink" title="Seata分布式事务模式选型"></a>Seata分布式事务模式选型</h1><h2 id="AT"><a href="#AT" class="headerlink" title="AT"></a>AT</h2><ul>
+<li>特性<br>业务无侵入<br>性能满足普通业务</li>
+<li>应用场景<br>不希望对代码进行改造<br>数据库支持事务操作<br>对性能没有特别高的要求</li>
+</ul>
+<h2 id="TCC"><a href="#TCC" class="headerlink" title="TCC"></a>TCC</h2><ul>
+<li><p>特性<br>业务强侵入<br>没有用到锁，通过业务预留实现数据更新</p>
+</li>
+<li><p>应用场景<br>对性能有较高要求<br>无需依赖于数据库事务性<br>各种定制化场景</p>
+</li>
+</ul>
+<h2 id="Saga"><a href="#Saga" class="headerlink" title="Saga"></a>Saga</h2><ul>
+<li>特性<br>开发过程比较复杂<br>事务隔离性较差</li>
+<li>应用场景<br>适用于长事务业务场景<br>适用于遗留系统(可控性差)改造<br>操作多个分散服务的数据</li>
+</ul>
+<h2 id="XA"><a href="#XA" class="headerlink" title="XA"></a>XA</h2><ul>
+<li><p>特性<br>业务无侵入<br>并发性能低</p>
+</li>
+<li><p>应用场景<br>强一致，对性能要求低<br>使用较少</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选型维度</th>
+<th>业务侵入性</th>
+<th>开发友好性</th>
+<th>数据一致性</th>
+<th>性能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AT</td>
+<td>无</td>
+<td>好</td>
+<td>较强 全局锁和本地锁组合</td>
+<td>稍差，全局锁和本地所组合</td>
+</tr>
+<tr>
+<td>TCC</td>
+<td>强</td>
+<td>较好 实现try&#x2F;confirm&#x2F;cancel三个方法</td>
+<td>没有全局锁，只本地锁</td>
+<td>高，短事务</td>
+</tr>
+<tr>
+<td>Saga</td>
+<td>弱</td>
+<td>相对复杂 事件驱动或集中式服务</td>
+<td>最弱，无锁，长事务，易脏读（最大问题）</td>
+<td>高，无锁，长事务，可并行</td>
+</tr>
+<tr>
+<td>XA</td>
+<td>无</td>
+<td>好</td>
+<td>强一致 所有事务执行完才释放本地锁</td>
+<td>差，所有事务完成才释放本地锁</td>
+</tr>
+</tbody></table>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>结合你日常开发过程中的一个具体场景，对分布式事务的模式进行合理选型？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/3%E5%9F%BA%E4%BA%8ESeata%E5%AE%9E%E7%8E%B0TCC%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" rel="prev" title="3基于Seata实现TCC分布式事务">
+                  <i class="fa fa-chevron-left"></i> 3基于Seata实现TCC分布式事务
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/13%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%BA%94%E7%94%A8/5%E5%9F%BA%E4%BA%8ERocketMQ%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F/" rel="next" title="5基于RocketMQ实现可靠事件模式">
+                  5基于RocketMQ实现可靠事件模式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

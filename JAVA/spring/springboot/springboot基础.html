@@ -1,0 +1,7 @@
+<hr>
+<h2 id="title-springboot基础tags-springdescription-springboot基础date-2025-03-29-15-25-28"><a href="#title-springboot基础tags-springdescription-springboot基础date-2025-03-29-15-25-28" class="headerlink" title="title: springboot基础tags: springdescription: springboot基础date: 2025-03-29 15:25:28"></a>title: springboot基础<br>tags: spring<br>description: springboot基础<br>date: 2025-03-29 15:25:28</h2><h1 id="参数解析"><a href="#参数解析" class="headerlink" title="参数解析"></a>参数解析</h1><p>&#x2F;&#x2F; <a href="http://localhost:8080/getStr/1?ipt=2">http://localhost:8080/getStr/1?ipt=2</a></p>
+<pre><code>@RequestMapping(&quot;/getStr/{ipt2}&quot;)
+public String getString(
+    @RequestParam(name = &quot;ipt&quot;) String ipt
+    , @PathVariable(name = &quot;ipt2&quot;) String ipt2)
+</code></pre>

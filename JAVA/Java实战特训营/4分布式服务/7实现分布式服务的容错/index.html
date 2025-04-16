@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-29 23:28:51" itemprop="dateModified" datetime="2024-09-29T23:28:51+08:00">2024-09-29</time>
+      <time title="Modified: 2024-12-12 13:40:40" itemprop="dateModified" datetime="2024-12-12T13:40:40+08:00">2024-12-12</time>
     </span>
 
   
@@ -246,12 +246,18 @@
 <li>服务降级<br>服务分级管理，必要时关闭不重要服务，给重要服务节省资源<br>伪装与存根</li>
 </ul>
 <h1 id="Dubbo集群容错"><a href="#Dubbo集群容错" class="headerlink" title="Dubbo集群容错"></a>Dubbo集群容错</h1><h2 id="容错机制"><a href="#容错机制" class="headerlink" title="容错机制"></a>容错机制</h2><ul>
-<li>Failover<br>失败转移 需设置转移上限</li>
-<li>Failfast<br>抛异常返回调用发起服务，考虑性能资源消耗，某些允许失败的场景可使用，节省资源</li>
-<li>Failsafe<br>失败记录日志</li>
-<li>Failback<br>定时重试</li>
-<li>Forking</li>
-<li>Broadcast</li>
+<li><p>Failover<br>失败转移 需设置转移上限</p>
+</li>
+<li><p>Failfast<br>抛异常返回调用发起服务，考虑性能资源消耗，某些允许失败的场景可使用，节省资源</p>
+</li>
+<li><p>Failsafe<br>失败记录日志</p>
+</li>
+<li><p>Failback<br>定时重试</p>
+</li>
+<li><p>Forking</p>
+</li>
+<li><p>Broadcast</p>
+</li>
 </ul>
 <h2 id="Dubbo集群容错策略使用方法"><a href="#Dubbo集群容错策略使用方法" class="headerlink" title="Dubbo集群容错策略使用方法"></a>Dubbo集群容错策略使用方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dubbo:reference id=&quot;userService&quot; check=&quot;false&quot; interface=&quot;....UserService&quot; 	loadbalance=&quot;roundrobin&quot; cluster=&quot;failover&quot; retries=&quot;2&quot;/&gt;</span><br></pre></td></tr></table></figure>
 <p>默认开启</p>
@@ -308,7 +314,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
