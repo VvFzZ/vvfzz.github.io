@@ -1,0 +1,87 @@
+<hr>
+<h2 id="title-25CompletionServicetags-description"><a href="#title-25CompletionServicetags-description" class="headerlink" title="title: 25CompletionServicetags:description:"></a>title: 25CompletionService<br>tags:<br>description:</h2><p>批量执行异步任务</p>
+<p>CompletionService将线程池和阻塞队列组合使用，让批量管理异步任务更简单，先执行完先进入阻塞队列。</p>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><pre><code>ExecutorCompletionService(Executor executor)；
+ExecutorCompletionService(Executor executor, BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue)。
+</code></pre>
+<p>自己创建线程池可提供线程池隔离特性，避免耗时任务拖垮系统。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><pre><code>Future&lt;V&gt; submit(Callable&lt;V&gt; task);
+Future&lt;V&gt; submit(Runnable task, V result);
+Future&lt;V&gt; take() throws InterruptedException;//空队列阻塞
+Future&lt;V&gt; poll();//空队列返回null
+Future&lt;V&gt; poll(long timeout, TimeUnit unit) throws InterruptedException;//等待unit时间仍空队列返回null
+</code></pre>
+<h2 id="实现Dubbo中的Forking-Cluster"><a href="#实现Dubbo中的Forking-Cluster" class="headerlink" title="实现Dubbo中的Forking Cluster"></a>实现Dubbo中的Forking Cluster</h2><p>Dubbo中有一种叫做Forking的集群模式，并行调用服务，一个返回结果，整个服务就返回<br>如地址转坐标服务，为保证服务高可用和性能，可以并行调用3个地图服务商API，只要有1个正确返回，那么地址转坐标这个服务就直接返回。这种集群模式可以容忍2个地图服务商服务异常，缺点是消耗的资源偏多。</p>
+<pre><code>public class _25CompletionService {
+    @Test
+    void do1() throws InterruptedException, ExecutionException {
+        ExecutorService pool = Executors.newFixedThreadPool(9);
+        ExecutorCompletionService service = new ExecutorCompletionService(pool, new ArrayBlockingQueue&lt;&gt;(10));
+        List&lt;Future&gt; list = new ArrayList&lt;&gt;();
+        Future&lt;String&gt; f1 = service.submit(() -&gt; {
+            return getPrice1Sleep10();
+        });
+        list.add(f1);
+        Future&lt;String&gt; f2 = service.submit(() -&gt; {
+            return getPrice2Sleep2();
+        });
+        list.add(f2);
+        Future&lt;String&gt; f3 = service.submit(() -&gt; {
+            return getPrice3Sleep5();
+        });
+        list.add(f3);
+
+        BlockingQueue&lt;String&gt; bq =
+                new LinkedBlockingQueue&lt;&gt;(10);
+
+        try {
+            for (int i = 0; i &lt; 3; i++) {
+                System.out.printf(&quot;take %s\r\n&quot;, i);
+                Future take = service.take();
+                String r = take.get().toString();
+                System.out.printf(&quot;take %s ok,r:%s\r\n&quot;, i, r);
+                if (r != null) {
+                    break;
+                }
+            }
+        }finally {
+            for (Future f : list) {
+                f.cancel(true);
+            }
+        }
+    }
+
+    private String getPrice1Sleep10() {
+        System.out.println(&quot;1-start will sleep 10s&quot;);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(&quot;1 sleep end&quot;);
+        return &quot;1-result&quot;;
+    }
+
+    private String getPrice2Sleep2() {
+        System.out.println(&quot;2-start will sleep 2s&quot;);
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(&quot;2 sleep end&quot;);
+        return &quot;2-result&quot;;
+    }
+
+    private String getPrice3Sleep5() {
+        System.out.println(&quot;3-start will sleep 5s&quot;);
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(&quot;3 sleep end&quot;);
+        return &quot;3-result&quot;;
+    }
+}
+</code></pre>

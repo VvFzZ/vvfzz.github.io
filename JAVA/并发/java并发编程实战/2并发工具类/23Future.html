@@ -1,0 +1,47 @@
+<hr>
+<h2 id="title-23Futuretags-description"><a href="#title-23Futuretags-description" class="headerlink" title="title: 23Futuretags:description:"></a>title: 23Future<br>tags:<br>description:</h2><p>void execute(Runnable command)方法无法获取线程执行结果</p>
+<h1 id="获取任务执行结果"><a href="#获取任务执行结果" class="headerlink" title="获取任务执行结果"></a>获取任务执行结果</h1><h2 id="submit方法"><a href="#submit方法" class="headerlink" title="submit方法"></a>submit方法</h2><p>Java通过ThreadPoolExecutor的3个submit()方法和1个FutureTask工具类支持获得任务执行结果</p>
+<pre><code>//提交Runnable任务,Future结果对象为空，可通过此对象判断任务是否结束
+Future&lt;?&gt; submit(Runnable task);
+//提交Runnable任务及结果引用，
+&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);
+
+//提交Callable任务
+&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);
+</code></pre>
+<h3 id="submit-Runnable-result"><a href="#submit-Runnable-result" class="headerlink" title="submit(Runnable,result)"></a>submit(Runnable,result)</h3><p><code>&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);</code><br>通过future.get获取的结果和submit参数result是一个对象。<br>经典用法：Runnable接口的实现类Task声明了一个有参构造函数Task(Result r)<br>创建Task对象的时传入了result对象，即可在类Task的run()方法中对result进行各种操作（即在子线程中操作）。<br>result相当于主线程和子线程之间的桥梁，通过它主子线程可以共享数据。</p>
+<h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>Future接口有5个方法<br>取消任务的方法 cancel()<br>判断任务是否已取消的方法 isCancelled()<br>判断任务是否已结束的方法 isDone()<br>获得任务执行结果2个 get()和get(timeout, unit)</p>
+<pre><code>//取消任务
+boolean cancel(boolean mayInterruptIfRunning);
+//判断是否已取消  
+boolean isCancelled();
+//判断是否已结束
+boolean isDone();
+//获得执行结果
+get();
+//获得执行结果，支持超时
+get(long timeout, TimeUnit unit);
+</code></pre>
+<h3 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h3><p>FutureTask实现了Runnable和Future接口<br>实现Runnable接口，所以可以将FutureTask提交给ThreadPoolExecutor执行，也可被Thread执行<br>实现Future接口，所以也能获得任务结果</p>
+<p>示例1.提交给ThreadPoolExecutor去执行</p>
+<pre><code>// 创建FutureTask
+FutureTask&lt;Integer&gt; futureTask
+  = new FutureTask&lt;&gt;(()-&gt; 1+2);
+// 创建线程池
+ExecutorService es = Executors.newCachedThreadPool();
+// 提交FutureTask 
+es.submit(futureTask);
+// 获取计算结果
+Integer result = futureTask.get();
+</code></pre>
+<p>示例2：Thread执行</p>
+<pre><code>// 创建FutureTask
+FutureTask&lt;Integer&gt; futureTask
+  = new FutureTask&lt;&gt;(()-&gt; 1+2);
+// 创建并启动线程
+Thread T1 = new Thread(futureTask);
+T1.start();
+// 获取计算结果
+Integer result = futureTask.get();
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Future可以很容易获得异步（线程池或新建线程）任务的执行结果<br>任务之间依赖关系，基本上可用Future来解决，可用有向图描述任务间的依赖关系，同时做好线程分工<br>多线程可将串行的任务并行化提高性能</p>

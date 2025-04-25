@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/20%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/20%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8/","path":"JAVA/并发/java并发编程实战/2并发工具类/20并发容器/","title":"20并发容器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>20并发容器 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#List"><span class="nav-number">1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">2.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set"><span class="nav-number">3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Queue"><span class="nav-number">4.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%AB%AF%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">4.1.</span> <span class="nav-text">单端阻塞队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SynchronousQueue"><span class="nav-number">4.1.1.</span> <span class="nav-text">SynchronousQueue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">4.2.</span> <span class="nav-text">双端阻塞队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%AB%AF%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">4.3.</span> <span class="nav-text">单端非阻塞队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%AB%AF%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">4.4.</span> <span class="nav-text">双端非阻塞队列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84Fail-Fast%EF%BC%88%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5%EF%BC%89%E6%9C%BA%E5%88%B6%E4%BB%80%E4%B9%88%E6%98%AF"><span class="nav-number">6.1.</span> <span class="nav-text">容器的Fail-Fast（快速失败）机制什么是</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#concurrentskiplistmap%E6%AF%94concurrenthashmap%E6%80%A7%E8%83%BD%E5%A5%BD"><span class="nav-number">6.2.</span> <span class="nav-text">concurrentskiplistmap比concurrenthashmap性能好</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/20%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="20并发容器 | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          20并发容器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-16 21:14:46" itemprop="dateModified" datetime="2025-02-16T21:14:46+08:00">2025-02-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>CopyOnWriteArrayList<br>写的时候将共享变量复制一份，好处是读操作完全无锁<br>写操作：新复制数组上增加元素后再将array指向这个新的数组</p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>ConcurrentHashMap key无序 k&#x2F;v都不可为空 线程安全<br>ConcurrentSkipListMap key有序 k&#x2F;v都不可为空 线程安全</p>
+<p>HashMap k&#x2F;v 都允许为空 线程不安全<br>TreeMap k&#x2F;v k不可空，v可空 线程不安全<br>HashTable k&#x2F;v 都不可空 线程安全</p>
+<p>SkipList 插入、删除、查询操作平均的时间复杂度是	O(logn)<br>理论上和并发线程数没关系，在并发度非常高时，若对ConcurrentHashMap性能不满意，可尝试ConcurrentSkipListMap。</p>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>CopyOnWriteArraySet	<br>ConcurrentSkipListSet<br>参考CopyOnWriteArrayList、ConcurrentSkipListMap原理一致</p>
+<h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><p>最复杂的并发容器类<br>分维度分类：</p>
+<ul>
+<li>维度1-阻塞&#x2F;非阻塞<br>队列满时入队是否阻塞，空时出队是否阻塞；阻塞队列都用Blocking关键字标识</li>
+<li>维度2-单端&#x2F;双端<br>单端指的是只能队尾入队，队首出队；Queue标识<br>双端指的是队首队尾皆可入队出队；Deque标识<br><strong>是否有界</strong>内部队列容量是否有限，无界队列易导致OOM不建议使用</li>
+</ul>
+<h2 id="单端阻塞队列"><a href="#单端阻塞队列" class="headerlink" title="单端阻塞队列"></a>单端阻塞队列</h2><p>数组实现 ArrayBlockingQueue 有锁结构<br>链表实现 LinkedBlockingQueue 有锁结构<br>无队列 SynchronousQueue<br>LinkedBlockingQueue + SynchronousQueue &#x3D;  LinkedTransferQueue ，CAS无锁结构<br>优先级队列 PriorityBlockingQUeue<br>延迟队列 DelayQueue</p>
+<h3 id="SynchronousQueue"><a href="#SynchronousQueue" class="headerlink" title="SynchronousQueue"></a>SynchronousQueue</h3><p>take线程阻塞直到有put的线程放入元素为止，反之亦然</p>
+<p>&#x2F;&#x2F;⽤于存储所有的数据库连接<br>CopyOnWriteArrayList<T>	sharedList;<br>&#x2F;&#x2F;线程本地存储中的数据库连接<br>ThreadLocal&lt;List<Object>&gt;	threadList;<br>&#x2F;&#x2F;等待数据库连接的线程数<br>AtomicInteger	waiters;<br>&#x2F;&#x2F;分配数据库连接的⼯具<br>SynchronousQueue<T>	handoffQueue;</p>
+<h2 id="双端阻塞队列"><a href="#双端阻塞队列" class="headerlink" title="双端阻塞队列"></a>双端阻塞队列</h2><p>LinkedBlockingDeque</p>
+<h2 id="单端非阻塞队列"><a href="#单端非阻塞队列" class="headerlink" title="单端非阻塞队列"></a>单端非阻塞队列</h2><p>ConcurrentLinkedQueue</p>
+<h2 id="双端非阻塞队列"><a href="#双端非阻塞队列" class="headerlink" title="双端非阻塞队列"></a>双端非阻塞队列</h2><p>ConcurrentLinkedDeque</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>理清楚每种容器的特性<br>ArrayBlockingQueue 和 LinkedBlockingQueue支持有界，其他无界，注意无界队列导致OOM</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="容器的Fail-Fast（快速失败）机制什么是"><a href="#容器的Fail-Fast（快速失败）机制什么是" class="headerlink" title="容器的Fail-Fast（快速失败）机制什么是"></a>容器的Fail-Fast（快速失败）机制什么是</h2><h2 id="concurrentskiplistmap比concurrenthashmap性能好"><a href="#concurrentskiplistmap比concurrenthashmap性能好" class="headerlink" title="concurrentskiplistmap比concurrenthashmap性能好"></a>concurrentskiplistmap比concurrenthashmap性能好</h2><p>concurrentskiplistmap没有key冲突问题，HashMap key冲突通过链表或者tree解决所以O(1)是理想状态。增删改操作也影响hashmap性能，要看冲突情况。所以hashmap的稳定性差，如果正好遇到稳定性问题无法接受可尝试ConcurrentSkipListMap</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/19CountDownLatch%E5%92%8CCyclicBarrier/" rel="prev" title="19CountDownLatch和CyclicBarrier">
+                  <i class="fa fa-chevron-left"></i> 19CountDownLatch和CyclicBarrier
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/21%E5%8E%9F%E5%AD%90%E7%B1%BB/" rel="next" title="21原子类">
+                  21原子类 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

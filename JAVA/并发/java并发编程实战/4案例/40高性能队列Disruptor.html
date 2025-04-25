@@ -1,0 +1,15 @@
+<hr>
+<h2 id="title-40高性能队列Disruptortags-description"><a href="#title-40高性能队列Disruptortags-description" class="headerlink" title="title: 40高性能队列Disruptortags:description:"></a>title: 40高性能队列Disruptor<br>tags:<br>description:</h2><p>高性能有界内存队列<br><strong>高性能原因</strong></p>
+<ul>
+<li>内存分配更加合理，RingBuffer结构，数组初始化一次性创建提升缓存命中，对象循环利用，避免GC</li>
+<li>避免伪共享</li>
+<li>无锁算法</li>
+<li>支持批量消费，消费者可无锁方式消费多个消息</li>
+</ul>
+<h1 id="避免为共享"><a href="#避免为共享" class="headerlink" title="避免为共享"></a>避免为共享</h1><p>由于共享缓存行导致缓存无效的场景<br>举例说明：<br>两个变量long l1 &#x3D; 1； long l2&#x3D;2；存储在数组中， CPU1、CPU2缓存行都加载了l1、l2，CPU1修改l1,CPU2缓存行 会失效，即使CPU2不操作l1也会失效，造成伪共享。</p>
+<p>避免缓存行失效，填充字节避免数据在一个缓存行<br>缺点：牺牲内存</p>
+<h1 id="无锁算法"><a href="#无锁算法" class="headerlink" title="无锁算法"></a>无锁算法</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>并发性能优化到极致，两个方向：</p>
+<ul>
+<li>无锁算法避免争用</li>
+<li>将CPU性能发挥到机制（填充方式避免伪共享就）</li>
+</ul>

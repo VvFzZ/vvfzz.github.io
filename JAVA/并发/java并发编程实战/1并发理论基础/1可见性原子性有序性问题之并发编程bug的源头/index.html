@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1%E5%8F%AF%E8%A7%81%E6%80%A7%E5%8E%9F%E5%AD%90%E6%80%A7%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98%E4%B9%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8Bbug%E7%9A%84%E6%BA%90%E5%A4%B4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1%E5%8F%AF%E8%A7%81%E6%80%A7%E5%8E%9F%E5%AD%90%E6%80%A7%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98%E4%B9%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8Bbug%E7%9A%84%E6%BA%90%E5%A4%B4/","path":"JAVA/并发/java并发编程实战/1并发理论基础/1可见性原子性有序性问题之并发编程bug的源头/","title":"1可见性原子性有序性问题之并发编程bug的源头"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>1可见性原子性有序性问题之并发编程bug的源头 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%A8%8B%E5%BA%8F%E5%B9%95%E5%90%8E"><span class="nav-number">1.</span> <span class="nav-text">并发程序幕后</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E5%A4%B4%E4%B8%80%EF%BC%9A%E7%BC%93%E5%AD%98%E5%AF%BC%E8%87%B4%E7%9A%84%E5%8F%AF%E8%A7%81%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">源头一：缓存导致的可见性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E5%A4%B4%E4%BA%8C%EF%BC%9A%E7%BA%BF%E7%A8%8B%E5%88%87%E6%8D%A2%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">源头二：线程切换带来的原子性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E5%A4%B4%E4%B8%89%EF%BC%9A%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">源头三：编译优化带来的有序性问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1%E5%8F%AF%E8%A7%81%E6%80%A7%E5%8E%9F%E5%AD%90%E6%80%A7%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98%E4%B9%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8Bbug%E7%9A%84%E6%BA%90%E5%A4%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="1可见性原子性有序性问题之并发编程bug的源头 | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1可见性原子性有序性问题之并发编程bug的源头
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-01-14 17:26:07" itemprop="dateModified" datetime="2025-01-14T17:26:07+08:00">2025-01-14</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="并发程序幕后"><a href="#并发程序幕后" class="headerlink" title="并发程序幕后"></a>并发程序幕后</h1><p>矛盾：CPU、内存、I&#x2F;O设备的速度差异</p>
+<p>为了合理利用CPU的高性能，平衡三者差异，计算机体系结构，操作系统，编译程序做出了贡献：</p>
+<ol>
+<li>CPU增加缓存，均衡与内存的速度差异</li>
+<li>操作系统增加进程、线程，以分时复用CPU，均衡CPU与I&#x2F;O设备的速度差异</li>
+<li>编译程序优化指令执行次序，使得缓存能够被更合理利用</li>
+</ol>
+<p>以上也是<strong>并发问题的根源</strong>所在。</p>
+<h2 id="源头一：缓存导致的可见性问题"><a href="#源头一：缓存导致的可见性问题" class="headerlink" title="源头一：缓存导致的可见性问题"></a>源头一：缓存导致的可见性问题</h2><p>一个线程对共享变量的修改，另外一个线程能够立刻看到，称为可见性<br>多核CPU，每个CPU有自己的缓存。并发执行i++,线程A在CPU1中执行，线程B在CPU2中执行，线程A对CPU2的缓存不具备可见性，就会导致并发问题。<br>并发执行1000次结果会小于2000。并发执行次数越高1亿次回趋近1亿而不是2亿，因为两个线程不是同时启动的，有一个时差。</p>
+<h2 id="源头二：线程切换带来的原子性问题"><a href="#源头二：线程切换带来的原子性问题" class="headerlink" title="源头二：线程切换带来的原子性问题"></a>源头二：线程切换带来的原子性问题</h2><p>我们把一个或者多个操作在CPU执行的过程中不被中断的特性称为原子性。<br>CPU能保证的原子操作是CPU指令级别的，而不是高级语言的操作符，<br>高级语言里一条语句往往需要多条 CPU 指令完成，如：<br><code>count += 1</code><br>需三条指令：</p>
+<ol>
+<li>把变量 count 从内存加载到 CPU 的寄存器</li>
+<li>在寄存器中执行 +1 操作</li>
+<li>将结果写入内存（缓存机制导致可能写入的是 CPU 缓存而不是内存）</li>
+</ol>
+<p>如下图，期望结果是1而不是2。<br><img src="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/1%E5%8F%AF%E8%A7%81%E6%80%A7%E5%8E%9F%E5%AD%90%E6%80%A7%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98%E4%B9%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8Bbug%E7%9A%84%E6%BA%90%E5%A4%B4/%E7%BA%BF%E7%A8%8B%E5%88%87%E6%8D%A2%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98.png"></p>
+<h2 id="源头三：编译优化带来的有序性问题"><a href="#源头三：编译优化带来的有序性问题" class="headerlink" title="源头三：编译优化带来的有序性问题"></a>源头三：编译优化带来的有序性问题</h2><p>DCL问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">  static Singleton instance;</span><br><span class="line">  static Singleton getInstance()&#123;</span><br><span class="line">    if (instance == null) &#123;</span><br><span class="line">      synchronized(Singleton.class) &#123;</span><br><span class="line">        if (instance == null)</span><br><span class="line">          instance = new Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>new操作是问题所在，我们以为的new操作：</p>
+<ol>
+<li>分配一块内存M；</li>
+<li>在内存M上初始化Singleton对象；</li>
+<li>然后M的地址赋值给instance变量。<br>指令优化后的却是：</li>
+<li>分配一块内存M；</li>
+<li>将M的地址赋值给instance变量；</li>
+<li>最后在内存M上初始化Singleton对象。</li>
+</ol>
+<p>假设线程A先执行 getInstance() 方法，执行完指令2发生线程切换，切换到线程B；如果此时线程B也执行getInstance()方法，那么线程B在执行第一个判断时会发现instance !&#x3D; null，所以直接返回 instance，而此时的 instance 是没有初始化过的，如果我们这个时候访问instance 的成员变量就可能触发空指针异常。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>缓存带来了可见性问题，线程切换带来了原子性问题，编译优化带来了有序性问题。三者提高程序性能，解决一个问题的同时带来另外问题，所以采用一项技术的同时，要清楚它带来的问题是什么，以及如何规避。</p>
+<p>volatile :禁止指令重排，禁用缓存保证可见性。<br>实现原理：内存屏障<br>四种屏障类型：LoadLoad,StoreStore,LoadStore,StoreLoad。<br>重排规则：</p>
+<ol>
+<li>第二个操作是volatile写时，不管第一个操作是什么，都不能重排序。这个规则确保volatile写之前的操作不会被编译器重排序到volatile写之后。</li>
+<li>第一个操作是volatile读时，不管第二个操作是什么，都不能重排序。这个规则确保volatile读之后的操作不会被编译器重排序到volatile读之前。</li>
+<li>当第一个操作是volatile写，第二个操作是volatile读时，不能重排序。</li>
+</ol>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li>在 32 位的机器上对 long 型变量进行加减操作存在并发隐患，到底是不是这样呢？<br>long是64位，32位操作系统字长是32位，一次加减操作分成了高32位和低32位操作，两个cpu指令操作不能保证原子性</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/13%E6%80%BB%E7%BB%93/" rel="prev" title="13总结">
+                  <i class="fa fa-chevron-left"></i> 13总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/2java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="next" title="2java内存模型">
+                  2java内存模型 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

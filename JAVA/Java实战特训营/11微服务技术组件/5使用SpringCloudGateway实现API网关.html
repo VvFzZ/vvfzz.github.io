@@ -13,8 +13,20 @@
 <li>Spring Cloud Gateway功能特性</li>
 <li>Spring Cloud Gateway整合和扩展</li>
 </ul>
-<h1 id="服务网关基本概念"><a href="#服务网关基本概念" class="headerlink" title="服务网关基本概念"></a>服务网关基本概念</h1><p><strong>服务网关结构和功能</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-%E7%BD%91%E5%85%B3%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84.png"></p>
-<h1 id="Spring-Cloud-Gateway功能特性"><a href="#Spring-Cloud-Gateway功能特性" class="headerlink" title="Spring Cloud Gateway功能特性"></a>Spring Cloud Gateway功能特性</h1><p><strong>整体架构</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-SpringCloudGateway%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png"><br>Filter 过滤<br>Predicate 谓词（判断）<br><strong>技术体系</strong><br>Spring Cloud Gateway的核心功能是对Web请求进行路由和过滤其内部大量依赖于Spring中的响应式Web框架WebFlux<br><strong>执行流程</strong><br><img src="/JAVA/Java%E5%AE%9E%E6%88%98%E7%89%B9%E8%AE%AD%E8%90%A5/11%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6/5%E4%BD%BF%E7%94%A8SpringCloudGateway%E5%AE%9E%E7%8E%B0API%E7%BD%91%E5%85%B3/5-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png"><br>DispatcherHander:分发请求<br>路由断言:判断路由逻辑<br>路由表:保存服务路由信息<br>过滤器链:执行过滤操作</p>
+<h1 id="服务网关基本概念"><a href="#服务网关基本概念" class="headerlink" title="服务网关基本概念"></a>服务网关基本概念</h1><p>服务入口，服务隔离（隔离客户端和服务端）<br>作用：解耦、适配</p>
+<p><strong>服务网关结构和功能</strong></p>
+<!-- ![](5-网关组成结构.png) -->
+<img src="5-网关组成结构.png" width="350px" height="250px">
+
+<h1 id="Spring-Cloud-Gateway功能特性"><a href="#Spring-Cloud-Gateway功能特性" class="headerlink" title="Spring Cloud Gateway功能特性"></a>Spring Cloud Gateway功能特性</h1><p><strong>整体架构</strong></p>
+<!-- ![](5-SpringCloudGateway整体架构.png) -->
+<img src="5-SpringCloudGateway整体架构.png" width="500px" height="200px">
+
+<p>Filter 过滤<br>Predicate 谓词（判断）<br><strong>技术体系</strong><br>Spring Cloud Gateway的核心功能是对Web请求进行路由和过滤其内部大量依赖于Spring中的响应式Web框架WebFlux<br><strong>执行流程</strong></p>
+<!-- ![](5-执行流程.png) -->
+<img src="5-执行流程.png" width="400px" height="500px">
+
+<p>DispatcherHander:分发请求<br>路由断言:判断路由逻辑<br>路由表:保存服务路由信息<br>过滤器链:执行过滤操作</p>
 <p><strong>配置组件</strong></p>
 <ul>
 <li>Route(路由)<br>网关的基本构建块，由ID、目标URL、谓词集合和过滤器集合定义</li>

@@ -1,0 +1,23 @@
+<p>堆整体分为Heap（堆区）和方法区<br>Heap包含新生代、老生代<br>方法区包含永久代存放常量池，静态变量，方法字节码等运行时常驻数据(JDK8及之前的HotSpotJVM中)<br><img src="/%E5%86%85%E5%AD%98.png"></p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="java-jar"><a href="#java-jar" class="headerlink" title="java -jar"></a>java -jar</h2><ul>
+<li><p>java -Dxxx&#x3D;test -DprocessType&#x3D;1 -jar xxx.jar<br>注意参数放在-jar参数前面<br>取值：System.getProperty(“propName”)</p>
+</li>
+<li><p>java -jar xxx.jar processType&#x3D;1 processType2&#x3D;2<br>参数就是jar包里主启动类中main方法的args参数</p>
+</li>
+<li><p>java -jar xxx.jar –key&#x3D;test<br>spring的@value(“${xxx}”)</p>
+</li>
+<li><p>java -jar test.jar &amp;<br>后台运行进程</p>
+</li>
+<li><p>nohup java -jar demo.jar &amp;<br>nohup是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行</p>
+</li>
+<li><p>nohup java -jar demo.jar &gt;1.txt &amp;<br>增加了&gt;1.txt ，将nohup java -jar demo.jar的运行内容重定向输出到1.txt文件中，即输出内容不打印到当前窗口上，而是输出到1.txt文件中</p>
+</li>
+<li><p>nohup java -jar demo.jar &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;<br>‘&gt;’ 代表重定向到哪里，例如：echo “123” &gt; &#x2F;home&#x2F;123.txt<br>&#x2F;dev&#x2F;null 代表空设备文件<br>2&gt; 表示stderr标准错误<br>1 表示stdout标准输出，系统默认值是1，所以”&gt;&#x2F;dev&#x2F;null”等同于 “1&gt;&#x2F;dev&#x2F;null”<br>&amp; 表示等同于的意思，2&gt;&amp;1，表示2的输出重定向等同于1</p>
+</li>
+</ul>
+<p>0 标准输入（一般是键盘）<br>1 标准输出（一般是显示屏，是用户终端控制台）<br>2 标准错误（错误信息输出）<br>&#x2F;dev&#x2F;null ：首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，说白了就是不显示任何信息。一般项目中定义中输出运行日志到指定地址，这样的话，就不需要再单独输出nohup.out文件，这种情况可以考虑使用这种。</p>
+<p>新建start.sh脚本，内容：nohup  java  -Xms515m -Xmx1024m -jar -Dfile.encoding&#x3D;UTF-8 demo.jar –spring.profiles.active&#x3D;prod &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</p>
+<ul>
+<li>nohup  java  -Xms515m -Xmx1024m -jar -Dfile.encoding&#x3D;UTF-8 demo.jar –spring.profiles.active&#x3D;prod &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;<br>-Xms 指定jvm运行最小运行堆内存，默认为物理内存1&#x2F;64，用法 ：-Xmx512m 注意：Xmx和512m中间不用添加空格<br>-Xmx 指定jvm运行最大运行堆内存，默认物理内存1&#x2F;4，用法： -Xmx1024m 注意：Xmx和1024m中间不用添加空格<br>–server.port 指定jar运行的port端口，用法：–server.port&#x3D;8085<br>–spring.profiles.active&#x3D;pro 指定运行的配置文件、环境，用法：–spring.profiles.active&#x3D;prod</li>
+</ul>
+<h2 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h2><p>jmap -heap  PID  查看堆信息</p>

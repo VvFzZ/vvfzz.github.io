@@ -1,0 +1,46 @@
+<hr>
+<h2 id="title-16Semaphoretags-description"><a href="#title-16Semaphoretags-description" class="headerlink" title="title: 16Semaphoretags:description:"></a>title: 16Semaphore<br>tags:<br>description:</h2><p>1965迪杰斯特拉提出，之后15年是并发编程领域的终结者，直到 1980年管程提出来，才有了第二选择</p>
+<h1 id="信号量模型"><a href="#信号量模型" class="headerlink" title="信号量模型"></a>信号量模型</h1><p>一个计数器，一个等待队列，三个方法（init、down、up）<br>计数器和等待队列对外是透明的，只能通过信号量模型提供的三个方法来访问它们</p>
+<ul>
+<li>init<br>设置计数器的初始值。</li>
+<li>down<br>计数器值减1，如果计数器的值小于0，则当前线程将被阻塞，否则继续执行。</li>
+<li>up<br>计数器值加1，如果计数器值小于或者等于0，则唤醒等待队列中的一个线程，并将其移除。</li>
+</ul>
+<h1 id="快速实现一个限流器"><a href="#快速实现一个限流器" class="headerlink" title="快速实现一个限流器"></a>快速实现一个限流器</h1><pre><code>class ObjPool&lt;T, R&gt; {
+  final List&lt;T&gt; pool;
+  // 用信号量实现限流器
+  final Semaphore sem;
+  // 构造函数
+  ObjPool(int size, T t){
+    pool = new Vector&lt;T&gt;(){};
+    for(int i=0; i&lt;size; i++){
+      pool.add(t);
+    }
+    sem = new Semaphore(size);
+  }
+  // 利用对象池的对象，调用 func
+  R exec(Function&lt;T,R&gt; func) {
+    T t = null;
+    sem.acquire();
+    try {
+      t = pool.remove(0);
+      return func.apply(t);
+    } finally {
+      pool.add(t);
+      sem.release();
+    }
+  }
+}
+// 创建对象池
+ObjPool&lt;Long, String&gt; pool = 
+  new ObjPool&lt;Long, String&gt;(10, 2);
+// 通过对象池获取 t，之后执行  
+pool.exec(t -&gt; {
+    System.out.println(t);
+    return t.toString();
+});
+</code></pre>
+<p>注意：Semaphore 可以允许多个线程访问一个临界区，所以在acquire后的操作要保证线程安全</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><ul>
+<li>对象保存在了 Vector 中，Vector 是 Java 提供的线程安全的容器，如果我们把 Vector 换成 ArrayList，是否可以呢？<br>不可，semophore允许多线程访问临界区，即多线程同时调用pool.remove方法时应保证线程安全</li>
+</ul>

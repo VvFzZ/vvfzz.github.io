@@ -1,0 +1,3 @@
+<hr>
+<h2 id="title-11为什么局部变量是线程安全的tags-description"><a href="#title-11为什么局部变量是线程安全的tags-description" class="headerlink" title="title: 11为什么局部变量是线程安全的tags:description:"></a>title: 11为什么局部变量是线程安全的<br>tags:<br>description:</h2><p>调用栈：CPU通过堆栈寄存器调用方法<br>调用栈保存方法的栈帧，栈帧包含方法参数、局部变量、返回地址<br>局部变量和方法同生共死，若变量想跨越方法边界需要创建在堆里。<br><strong>线程有独立的调用栈</strong>，保存自己的局部变量，所以局部变量不会有并发问题<br>没有共享，没有伤害</p>
+<p><strong>线程封闭</strong>仅在单线程内访问数据（方法的局部变量不和其他线程共享，没有并发问题）</p>

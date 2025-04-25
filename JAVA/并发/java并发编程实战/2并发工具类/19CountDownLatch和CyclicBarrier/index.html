@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/19CountDownLatch%E5%92%8CCyclicBarrier/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/19CountDownLatch%E5%92%8CCyclicBarrier/","path":"JAVA/并发/java并发编程实战/2并发工具类/19CountDownLatch和CyclicBarrier/","title":"19CountDownLatch和CyclicBarrier"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>19CountDownLatch和CyclicBarrier | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">串行方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E4%BC%98%E5%8C%96%E5%AF%B9%E8%B4%A6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">并行优化对账系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E5%92%8C%E6%B4%BE%E9%80%81%E5%8D%95"><span class="nav-number">2.1.</span> <span class="nav-text">并行查询订单和派送单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BC%98%E5%8C%96"><span class="nav-number">2.1.1.</span> <span class="nav-text">线程池优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CountDownLatch%E4%BC%98%E5%8C%96"><span class="nav-number">2.1.2.</span> <span class="nav-text">CountDownLatch优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">进一步性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%AE%A1%E6%95%B0%E5%99%A8%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.1.</span> <span class="nav-text">实现计数器优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CyclicBarrier"><span class="nav-number">2.2.2.</span> <span class="nav-text">CyclicBarrier</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%98%E5%8F%AF%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0Future%E4%BC%98%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">还可使用线程池Future优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/19CountDownLatch%E5%92%8CCyclicBarrier/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="19CountDownLatch和CyclicBarrier | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          19CountDownLatch和CyclicBarrier
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-15 15:49:24" itemprop="dateModified" datetime="2025-03-15T15:49:24+08:00">2025-03-15</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>让多线程步调一致</p>
+<p>业务介绍：<br>在线商城下单，生成电子订单，保存在订单库；<br>物流生成派送单发货，派送单保存在派送单库。<br>为防止漏派送或重复派送，对账系统每天还会校验是否存在异常订单。</p>
+<h1 id="串行方式"><a href="#串行方式" class="headerlink" title="串行方式"></a>串行方式</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  pos = getPOrders();</span><br><span class="line">  // 查询派送单</span><br><span class="line">  dos = getDOrders();</span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<img src="CountDownLatch串行.png" width="300" height="200">
+
+<h1 id="并行优化对账系统"><a href="#并行优化对账系统" class="headerlink" title="并行优化对账系统"></a>并行优化对账系统</h1><h2 id="并行查询订单和派送单"><a href="#并行查询订单和派送单" class="headerlink" title="并行查询订单和派送单"></a>并行查询订单和派送单</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  Thread T1 = new Thread(()-&gt;&#123;</span><br><span class="line">    pos = getPOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  T1.start();</span><br><span class="line">  // 查询派送单</span><br><span class="line">  Thread T2 = new Thread(()-&gt;&#123;</span><br><span class="line">    dos = getDOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  T2.start();</span><br><span class="line">  // 等待 T1、T2 结束</span><br><span class="line">  T1.join();</span><br><span class="line">  T2.join();</span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<img src="CountDownLatch并行1.png.png" width="300" height="200">
+
+<h3 id="线程池优化"><a href="#线程池优化" class="headerlink" title="线程池优化"></a>线程池优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 创建 2 个线程的线程池</span><br><span class="line">Executor executor = </span><br><span class="line">  Executors.newFixedThreadPool(2);</span><br><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    pos = getPOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  // 查询派送单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    dos = getDOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  /* ？？如何实现等待？？*/</span><br><span class="line">  </span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如下，使用线程池如何知道查询线程完成了呢</p>
+<ol>
+<li>可通过管程实现计数器，计数器初始2，查询完成–，计数器为0则重置为2并执行对对账入库</li>
+<li>使用CountDownLatch</li>
+</ol>
+<h3 id="CountDownLatch优化"><a href="#CountDownLatch优化" class="headerlink" title="CountDownLatch优化"></a>CountDownLatch优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 创建 2 个线程的线程池</span><br><span class="line">Executor executor = </span><br><span class="line">  Executors.newFixedThreadPool(2);</span><br><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 计数器初始化为 2</span><br><span class="line">  CountDownLatch latch = </span><br><span class="line">    new CountDownLatch(2);</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    pos = getPOrders();</span><br><span class="line">    latch.countDown();</span><br><span class="line">  &#125;);</span><br><span class="line">  // 查询派送单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    dos = getDOrders();</span><br><span class="line">    latch.countDown();</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  // 等待两个查询操作结束</span><br><span class="line">  latch.await();</span><br><span class="line">  </span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进一步性能优化"><a href="#进一步性能优化" class="headerlink" title="进一步性能优化"></a>进一步性能优化</h2><p>优化点：两个查询操作和对账操作check、save仍是串行</p>
+<p>需要引入订单队列和派送单队列，T1查询订单，T2查询派送单，T1T2各自生产1条数据后通知T3执行对账。（T1T2要互相等待）</p>
+<h3 id="实现计数器优化"><a href="#实现计数器优化" class="headerlink" title="实现计数器优化"></a>实现计数器优化</h3><p>可以利用一个计数器来解决这两个难点，计数器初始化为 2，线程 T1 和 T2 生产完一条数据都将计数器减 1，如果计数器大于 0 则线程 T1 或者 T2 等待。如果计数器等于 0，则通知线程 T3，并唤醒等待的线程 T1 或者 T2，与此同时，将计数器重置为 2，这样线程 T1 和线程 T2 生产下一条数据的时候就可以继续使用这个计数器了。</p>
+<p>但建议使用Java并发包工具类：CyclicBarrier。</p>
+<h3 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h3><img src="CountDownLatch并行2.png.png" width="300" height="200">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// 订单队列</span><br><span class="line">Vector&lt;P&gt; pos;</span><br><span class="line">// 派送单队列</span><br><span class="line">Vector&lt;D&gt; dos;</span><br><span class="line">// 执行回调的线程池 </span><br><span class="line">Executor executor = </span><br><span class="line">  Executors.newFixedThreadPool(1);</span><br><span class="line">final CyclicBarrier barrier =</span><br><span class="line">  new CyclicBarrier(2, ()-&gt;&#123;</span><br><span class="line">    executor.execute(()-&gt;check());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">void check()&#123;</span><br><span class="line">  P p = pos.remove(0);</span><br><span class="line">  D d = dos.remove(0);</span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(p, d);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">void checkAll()&#123;</span><br><span class="line">  // 循环查询订单库</span><br><span class="line">  Thread T1 = new Thread(()-&gt;&#123;</span><br><span class="line">    while(存在未对账订单)&#123;</span><br><span class="line">      // 查询订单库</span><br><span class="line">      pos.add(getPOrders());</span><br><span class="line">      // 等待</span><br><span class="line">      barrier.await();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  T1.start();  </span><br><span class="line">  // 循环查询运单库</span><br><span class="line">  Thread T2 = new Thread(()-&gt;&#123;</span><br><span class="line">    while(存在未对账订单)&#123;</span><br><span class="line">      // 查询运单库</span><br><span class="line">      dos.add(getDOrders());</span><br><span class="line">      // 等待</span><br><span class="line">      barrier.await();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  T2.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>CountDownLatch 主要用来解决一个线程等待多个线程的场景，计数器是不能循环利用的，计数器为0时await直接通过</p>
+<p>CyclicBarrier 是一组线程之间互相等待，计数器是可以循环利用的，可设置回调函数</p>
+<h2 id="还可使用线程池Future优化"><a href="#还可使用线程池Future优化" class="headerlink" title="还可使用线程池Future优化"></a>还可使用线程池Future优化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CompletableFuture&lt;List&gt; pOrderFuture = CompletableFuture.supplyAsync(this::getPOrders);</span><br><span class="line">CompletableFuture&lt;List&gt; dOrderFuture = CompletableFuture.supplyAsync(this::getDOrders);</span><br><span class="line">pOrderFuture.thenCombine(dOrderFuture, this::check).thenAccept(this::save);</span><br></pre></td></tr></table></figure>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>CyclicBarrier的回调函数我们使用了一个固定大小的线程池，有必要吗？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/18StampedLock/" rel="prev" title="18StampedLock">
+                  <i class="fa fa-chevron-left"></i> 18StampedLock
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/20%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8/" rel="next" title="20并发容器">
+                  20并发容器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

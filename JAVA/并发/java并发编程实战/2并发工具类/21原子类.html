@@ -1,0 +1,45 @@
+<hr>
+<h2 id="title-21原子类tags-description"><a href="#title-21原子类tags-description" class="headerlink" title="title: 21原子类tags:description:"></a>title: 21原子类<br>tags:<br>description:</h2><p>无锁工具类的典范</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>硬件支持CAS指令，作为一条CPU指令本身能保证原子性</p>
+<h2 id="原子类与锁比较"><a href="#原子类与锁比较" class="headerlink" title="原子类与锁比较"></a>原子类与锁比较</h2><p>加解锁本身消耗性能，获取不到锁的线程会阻塞出发线程切换，线程切换也消耗性能。<br>原子类无锁</p>
+<h2 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h2><p>解决：版本号，每次改变版本号自增，同时修改值时检查版本号<br>AtomicStampedReference<br>AtomicMarkableReference （boolean类型版本号）	</p>
+<h1 id="原子类分类"><a href="#原子类分类" class="headerlink" title="原子类分类"></a>原子类分类</h1><ul>
+<li>原子化基础数据类型</li>
+<li>原子化的对象引用类型</li>
+<li>原子化数组</li>
+<li>原子化对象属性更新器</li>
+<li>原子化的累加器</li>
+</ul>
+<h2 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h2><p>AtomicBoolean、AtomicInteger、AtomicLong<br>相关方法类似</p>
+<pre><code>getAndIncrement()	//	原⼦化	i++
+getAndDecrement()	//	原⼦化的	i--
+incrementAndGet()	//	原⼦化的	++i
+decrementAndGet()	//	原⼦化的	--i
+getAndAdd(delta)	//	当前值	+=delta，返回	+=	前的值
+addAndGet(delta)    //	当前值	+=delta，返回	+=	后的值
+compareAndSet(expect,update)   //CAS	操作，返回是否成功
+//以下四个⽅法 新值可以通过传⼊func函数来计算
+getAndUpdate(func)
+updateAndGet(func)
+getAndAccumulate(x,func)
+accumulateAndGet(x,func)
+</code></pre>
+<h2 id="对象引用类型"><a href="#对象引用类型" class="headerlink" title="对象引用类型"></a>对象引用类型</h2><p>AtomicReference、AtomicStampedReference、AtomicMarkableReference</p>
+<p>AtomicStampedReference实现的CAS方法就增加了版本号参数</p>
+<pre><code>boolean compareAndSet(
+V expectedReference,
+V newReference,
+int expectedStamp,
+int newStamp)
+</code></pre>
+<p>AtomicMarkableReference将版本号简化成了一个Boolean值</p>
+<pre><code>boolean compareAndSet(
+V expectedReference,
+V newReference,
+boolean expectedMark,
+boolean newMark)
+</code></pre>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray</p>
+<h2 id="对象属性更新器"><a href="#对象属性更新器" class="headerlink" title="对象属性更新器"></a>对象属性更新器</h2><p>AtomicIntegerFieldUpdater、AtomicLongFieldUpdater、AtomicReferenceFieldUpdater<br>可以原子化地更新对象的属性，对象属性必须是volatile类型，只有这样才能保证可见性；反<br>射机制实现</p>
+<h2 id="累加器"><a href="#累加器" class="headerlink" title="累加器"></a>累加器</h2><p>DoubleAccumulator、DoubleAdder、LongAccumulator、LongAdder<br>仅执行累加操作，相比原子化的基本数据类型，速度更快，不支持compareAndSet方法<br>若只需要累加操作，使用原子化的累加器性能会更好</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>相对于互斥锁方案性能好，不会死锁（但会饥饿、活锁，自旋重试）<br>只针对一个共享变量，对于多共享变量使用互斥锁</p>

@@ -1,0 +1,144 @@
+<hr>
+<h2 id="title-17ReadWriteLocktags-description"><a href="#title-17ReadWriteLocktags-description" class="headerlink" title="title: 17ReadWriteLocktags:description:"></a>title: 17ReadWriteLock<br>tags:<br>description:</h2><p>管程和信号量可以解决所有并发问题，java SDK提供其他工具类有什么用呢？分场景性能优化，提升易用性</p>
+<p>ReadWriteLock 读多写少场景</p>
+<p><strong>读写锁的原则</strong></p>
+<ol>
+<li>允许多线程读共享变量</li>
+<li>只允许一个线程写共享变量</li>
+<li>一个线程写时，其他线程禁止读写</li>
+</ol>
+<p>读多写少的情况下优于互斥锁</p>
+<h1 id="快速实现一个缓存"><a href="#快速实现一个缓存" class="headerlink" title="快速实现一个缓存"></a>快速实现一个缓存</h1><p>不支持懒加载，需一次性初始化</p>
+<pre><code>class Cache&lt;K,V&gt; {
+  final Map&lt;K, V&gt; m =
+    new HashMap&lt;&gt;();
+  final ReadWriteLock rwl =
+    new ReentrantReadWriteLock();
+  // 读锁
+  final Lock r = rwl.readLock();
+  // 写锁
+  final Lock w = rwl.writeLock();
+  // 读缓存
+  V get(K key) {
+    r.lock();
+    try { return m.get(key); }
+    finally { r.unlock(); }
+  }
+  // 写缓存
+  V put(String key, Data v) {
+    w.lock();
+    try { return m.put(key, v); }
+    finally { w.unlock(); }
+  }
+}
+</code></pre>
+<p>支持懒加载版本</p>
+<pre><code>class Cache&lt;K,V&gt; {
+  final Map&lt;K, V&gt; m =
+    new HashMap&lt;&gt;();
+  final ReadWriteLock rwl = 
+    new ReentrantReadWriteLock();
+  final Lock r = rwl.readLock();
+  final Lock w = rwl.writeLock();
+ 
+  V get(K key) {
+    V v = null;
+    // 读缓存
+    r.lock();         ①
+    try {
+      v = m.get(key); ②
+    } finally{
+      r.unlock();     ③
+    }
+    // 缓存中存在，返回
+    if(v != null) {   ④
+      return v;
+    }
+    // 缓存中不存在，查询数据库
+    w.lock();         ⑤
+    try {
+      // 再次验证
+      // 其他线程可能已经查询过数据库
+      v = m.get(key); ⑥
+      if(v == null){  ⑦
+        // 查询数据库
+        v= 省略代码无数
+        m.put(key, v);
+      }
+    } finally{
+      w.unlock();
+    }
+    return v; 
+  }
+}
+</code></pre>
+<p><strong>问题？？？？</strong><br>get方法读为什么加锁，只给写加锁不行吗？如下<br>V get(K key) {</p>
+<pre><code>v = m.get(key); ②
+
+// 缓存中存在，返回
+if(v != null) {   ④
+  return v;
+}
+// 缓存中不存在，查询数据库
+w.lock();         ⑤
+try {
+  // 再次验证
+  // 其他线程可能已经查询过数据库
+  v = m.get(key); ⑥
+  if(v == null){  ⑦
+    // 查询数据库
+    v= 省略代码无数
+    m.put(key, v);
+  }
+} finally{
+  w.unlock();
+}
+return v; 
+</code></pre>
+<p>  }</p>
+<h2 id="锁升级降级"><a href="#锁升级降级" class="headerlink" title="锁升级降级"></a>锁升级降级</h2><p>锁升级：先是获取读锁，再升级为写锁<br>ReadWriteLock不支持锁升级，支持降级<br>不支持升级原因：读锁未释放时获取写锁，导致写锁永久等待，线程阻塞无法被唤醒。</p>
+<pre><code>lass CachedData {
+  Object data;
+  volatile boolean cacheValid;
+  final ReadWriteLock rwl =
+    new ReentrantReadWriteLock();
+  // 读锁  
+  final Lock r = rwl.readLock();
+  // 写锁
+  final Lock w = rwl.writeLock();
+  
+  void processCachedData() {
+    // 获取读锁
+    r.lock();
+    if (!cacheValid) {
+      // 释放读锁，因为不允许读锁的升级
+      r.unlock();
+      // 获取写锁
+      w.lock();
+      try {
+        // 再次检查状态  并发很低可不检查
+        if (!cacheValid) {
+          data = ...
+          cacheValid = true;
+        }
+        // 释放写锁前，降级为读锁
+        // 降级是可以的
+        r.lock(); ①
+      } finally {
+        // 释放写锁
+        w.unlock(); 
+      }
+    }
+    // 此处仍然持有读锁
+    try {use(data);} 
+    finally {r.unlock();}
+  }
+}
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>读写锁的读锁不支持条件变量，写锁支持</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="如何保证缓存与数据库数据一致？"><a href="#如何保证缓存与数据库数据一致？" class="headerlink" title="如何保证缓存与数据库数据一致？"></a>如何保证缓存与数据库数据一致？</h2><ol>
+<li>延迟双删策略<br>先删除缓存，再更新数据库,更新数据库后，延迟一段时间再次删除缓存<br>减少高并发场景下的数据不一致问题，但仍然存在一些挑战，如延迟时间的选择和第二次删除缓存失败的处理</li>
+<li>加锁串行化<br>强一致实现方案，会导致性能下降</li>
+<li>订阅binlog<br>需要额外的系统支持，减少业务代码入侵</li>
+</ol>
+<h2 id="系统停止响应了，CPU-利用率很低，你怀疑有同学一不小心写出了读锁升级写锁的方案，那你该如何验证自己的怀疑呢？"><a href="#系统停止响应了，CPU-利用率很低，你怀疑有同学一不小心写出了读锁升级写锁的方案，那你该如何验证自己的怀疑呢？" class="headerlink" title="系统停止响应了，CPU 利用率很低，你怀疑有同学一不小心写出了读锁升级写锁的方案，那你该如何验证自己的怀疑呢？"></a>系统停止响应了，CPU 利用率很低，你怀疑有同学一不小心写出了读锁升级写锁的方案，那你该如何验证自己的怀疑呢？</h2><p>尝试获取读&#x2F;写锁看是否能获取到</p>

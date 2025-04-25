@@ -1,0 +1,19 @@
+<hr>
+<h2 id="title-20并发容器tags-description"><a href="#title-20并发容器tags-description" class="headerlink" title="title: 20并发容器tags:description:"></a>title: 20并发容器<br>tags:<br>description:</h2><h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>CopyOnWriteArrayList<br>写的时候将共享变量复制一份，好处是读操作完全无锁<br>写操作：新复制数组上增加元素后再将array指向这个新的数组</p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>ConcurrentHashMap key无序 k&#x2F;v都不可为空 线程安全<br>ConcurrentSkipListMap key有序 k&#x2F;v都不可为空 线程安全</p>
+<p>HashMap k&#x2F;v 都允许为空 线程不安全<br>TreeMap k&#x2F;v k不可空，v可空 线程不安全<br>HashTable k&#x2F;v 都不可空 线程安全</p>
+<p>SkipList 插入、删除、查询操作平均的时间复杂度是	O(logn)<br>理论上和并发线程数没关系，在并发度非常高时，若对ConcurrentHashMap性能不满意，可尝试ConcurrentSkipListMap。</p>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>CopyOnWriteArraySet	<br>ConcurrentSkipListSet<br>参考CopyOnWriteArrayList、ConcurrentSkipListMap原理一致</p>
+<h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><p>最复杂的并发容器类<br>分维度分类：</p>
+<ul>
+<li>维度1-阻塞&#x2F;非阻塞<br>队列满时入队是否阻塞，空时出队是否阻塞；阻塞队列都用Blocking关键字标识</li>
+<li>维度2-单端&#x2F;双端<br>单端指的是只能队尾入队，队首出队；Queue标识<br>双端指的是队首队尾皆可入队出队；Deque标识<br><strong>是否有界</strong>内部队列容量是否有限，无界队列易导致OOM不建议使用</li>
+</ul>
+<h2 id="单端阻塞队列"><a href="#单端阻塞队列" class="headerlink" title="单端阻塞队列"></a>单端阻塞队列</h2><p>数组实现 ArrayBlockingQueue 有锁结构<br>链表实现 LinkedBlockingQueue 有锁结构<br>无队列 SynchronousQueue<br>LinkedBlockingQueue + SynchronousQueue &#x3D;  LinkedTransferQueue ，CAS无锁结构<br>优先级队列 PriorityBlockingQUeue<br>延迟队列 DelayQueue</p>
+<h3 id="SynchronousQueue"><a href="#SynchronousQueue" class="headerlink" title="SynchronousQueue"></a>SynchronousQueue</h3><p>take线程阻塞直到有put的线程放入元素为止，反之亦然</p>
+<p>&#x2F;&#x2F;⽤于存储所有的数据库连接<br>CopyOnWriteArrayList<T>	sharedList;<br>&#x2F;&#x2F;线程本地存储中的数据库连接<br>ThreadLocal&lt;List<Object>&gt;	threadList;<br>&#x2F;&#x2F;等待数据库连接的线程数<br>AtomicInteger	waiters;<br>&#x2F;&#x2F;分配数据库连接的⼯具<br>SynchronousQueue<T>	handoffQueue;</p>
+<h2 id="双端阻塞队列"><a href="#双端阻塞队列" class="headerlink" title="双端阻塞队列"></a>双端阻塞队列</h2><p>LinkedBlockingDeque</p>
+<h2 id="单端非阻塞队列"><a href="#单端非阻塞队列" class="headerlink" title="单端非阻塞队列"></a>单端非阻塞队列</h2><p>ConcurrentLinkedQueue</p>
+<h2 id="双端非阻塞队列"><a href="#双端非阻塞队列" class="headerlink" title="双端非阻塞队列"></a>双端非阻塞队列</h2><p>ConcurrentLinkedDeque</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>理清楚每种容器的特性<br>ArrayBlockingQueue 和 LinkedBlockingQueue支持有界，其他无界，注意无界队列导致OOM</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="容器的Fail-Fast（快速失败）机制什么是"><a href="#容器的Fail-Fast（快速失败）机制什么是" class="headerlink" title="容器的Fail-Fast（快速失败）机制什么是"></a>容器的Fail-Fast（快速失败）机制什么是</h2><h2 id="concurrentskiplistmap比concurrenthashmap性能好"><a href="#concurrentskiplistmap比concurrenthashmap性能好" class="headerlink" title="concurrentskiplistmap比concurrenthashmap性能好"></a>concurrentskiplistmap比concurrenthashmap性能好</h2><p>concurrentskiplistmap没有key冲突问题，HashMap key冲突通过链表或者tree解决所以O(1)是理想状态。增删改操作也影响hashmap性能，要看冲突情况。所以hashmap的稳定性差，如果正好遇到稳定性问题无法接受可尝试ConcurrentSkipListMap</p>

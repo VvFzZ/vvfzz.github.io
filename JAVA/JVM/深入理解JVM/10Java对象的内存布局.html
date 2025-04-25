@@ -1,0 +1,11 @@
+<hr>
+<h2 id="title-10Java对象的内存布局tags-description-10Java对象的内存布局"><a href="#title-10Java对象的内存布局tags-description-10Java对象的内存布局" class="headerlink" title="title: 10Java对象的内存布局tags:description: 10Java对象的内存布局"></a>title: 10Java对象的内存布局<br>tags:<br>description: 10Java对象的内存布局</h2><p>new语句编译成字节码包含两部分：new指令请求内存空间，invokespecial指令调用构造器</p>
+<p>Java对象头，包含标记字段和类型指针</p>
+<ul>
+<li>标记字段 64位8字节<br>存储JVM有关该对象的运行数据，如哈希码、GC信息、锁信息</li>
+<li>类型指针（元数据指针） 64位8字节（开启压缩指针时32位4字节）<br>存储指向该对象的类</li>
+</ul>
+<p>每一个对象都有16字节额外开销，int占用4字节，Integer得对象额外增加400%内存开销，所以java引入基本类型<br><img src="对象内存布局.png" width="100px" height="200px"><br><img src="对象内存布局2.png" width="500px" height="200px"></p>
+<h2 id="压缩指针"><a href="#压缩指针" class="headerlink" title="压缩指针"></a>压缩指针</h2><p>为减少对象的内存使用量，64 位Java虚拟机引入了压缩指针的概念（对应虚拟机选项 -XX:+UseCompressedOops，默认开启），将堆中原本 64 位的 Java 对象指针压缩成32位。</p>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>默认8字节对其，引用起始地址为8的倍数，不足的填充<br>字段内存对齐的其中一个原因，是让字段只出现在同一CPU的缓存行中。若跨缓存行则读取需替换两个缓存行，存储会污染两个缓存行</p>
+<h2 id="字段重排列"><a href="#字段重排列" class="headerlink" title="字段重排列"></a>字段重排列</h2><p>JVM重新分配字段先后顺序，达到内存对齐<br>三种排列方法 JVM选项 -XX:FieldsAllocationStyle，默认 1</p>

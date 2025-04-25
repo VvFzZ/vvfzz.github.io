@@ -1,0 +1,27 @@
+<hr>
+<h2 id="title-28Immutability模式tags-description"><a href="#title-28Immutability模式tags-description" class="headerlink" title="title: 28Immutability模式tags:description:"></a>title: 28Immutability模式<br>tags:<br>description:</h2><p>解决并发问题最简单方法：只读<br>上升到解决并发问题的设计模式：不变性（Immutability）模式<br>不变性，简单讲，就是对象创建之后，状态不再发生变化</p>
+<h1 id="实现不变模式"><a href="#实现不变模式" class="headerlink" title="实现不变模式"></a>实现不变模式</h1><p>类、方法、属性设置成final</p>
+<p>String和Long、Integer、Double等基础类型的包装类都具备不可变性，这些对象的线程安全性都靠不可变性来保证</p>
+<h1 id="不可变性的类，提供修改功能"><a href="#不可变性的类，提供修改功能" class="headerlink" title="不可变性的类，提供修改功能"></a>不可变性的类，提供修改功能</h1><p>具备不可变性的类，需要提供类似修改的功能：创建一个新的不可变对象<br>如String.replace方法，String字符替换操作，没有修改源字符串，而是组合新字符串返回</p>
+<h1 id="避免创建重复对象：享元模式"><a href="#避免创建重复对象：享元模式" class="headerlink" title="避免创建重复对象：享元模式"></a>避免创建重复对象：享元模式</h1><p>Long、Integer、Short、Byte等基本数据类型的包装类用到了享元模式，减少创建对象的数量，减少内存占用</p>
+<p>享元模式本质：对象池<br>Long内部维护了一个静态的对象池，仅缓存了[-128,127]，对象池在JVM启动的时候就创建好了<br>Long对象的状态有264种,太多不宜全部缓存，[-128,127]利用率最高</p>
+<p>基本所有的基础类型应用享元模式，不适合作为锁对象，因为看上去私有的锁，其实是共有的</p>
+<h1 id="Immutability模式注意事项"><a href="#Immutability模式注意事项" class="headerlink" title="Immutability模式注意事项"></a>Immutability模式注意事项</h1><ul>
+<li>属性声明为final并不一定保证不可变</li>
+<li>不可变对象需要正确发布</li>
+</ul>
+<p>不可变对象线程安全，不意味着引用不可变对象的对象就是线程安全的</p>
+<pre><code>//Foo线程安全
+final class Foo{
+  final int age=0;
+  final int name=&quot;abc&quot;;
+}
+//Bar线程不安全
+class Bar {
+  Foo foo;
+  void setFoo(Foo f){
+    this.foo=f;
+  }
+}
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>具备不变性的对象，只有一种状态，状态由对象内部所有的不变属性共同决定<br>无状态对象内部没有属性，只有方法；还有无状态的服务、无状态的协议等。<br>多线程领域，无状态没有线程安全问题，不需处理线程同步，性能自然好<br>分布式领域，无状态可无限水平扩展，性能问题不会出现在无状态节点</p>

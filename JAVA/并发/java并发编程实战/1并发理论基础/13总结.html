@@ -1,0 +1,15 @@
+<hr>
+<h2 id="title-13总结tags-description"><a href="#title-13总结tags-description" class="headerlink" title="title: 13总结tags:description:"></a>title: 13总结<br>tags:<br>description:</h2><ul>
+<li>CPU 与内存、I&#x2F;O 的速度差异的优化引发可见性、原子性和有序性问题</li>
+<li>Java 内存模型和互斥锁方案解决三个问题</li>
+<li>互斥锁是解决并发问题的核心工具，会引发死锁</li>
+<li>死锁的原因、解决方案 以及 “等待-通知”机制 （synchronized，wait,notify(),notifyAll）</li>
+<li>宏观的角度重新审视并发问题：安全性、活跃性、性能</li>
+<li>管程，解决线程的互斥与同步问题；管程模型</li>
+<li>线程生命周期、内部如何执行、计算线程数</li>
+<li>面向对象编写并发程序</li>
+</ul>
+<pre><code>logger.debug(&quot;The var1：{}, var2:{}&quot;, var1, var2);
+logger.debug(&quot;The var1：&quot; +  var1 + &quot;, var2:&quot; + var2);
+</code></pre>
+<p>占位符写法仅仅是将参数压栈，而没有参数的计算。使用{}占位符是写日志的一个良好习惯。</p>

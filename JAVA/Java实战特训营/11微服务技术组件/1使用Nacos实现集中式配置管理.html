@@ -61,7 +61,7 @@ name: demo-service
     data-id: mysql.yaml
     refresh: true
    ...
-   extension-configs[3]: # 覆盖共享datald的属性可以使用
+   extension-configs[3]: # 扩展配置项，覆盖共享datald的属性时可以使用
     data-id: mysql.yaml
     group: demo #必须指定Group
     refresh: true
@@ -91,7 +91,7 @@ public class Customconfig {
     private int point;
 }
 </code></pre>
-<p><strong>@ConfigurationProperties</strong><br>自动支持热更新，不需代码改造</p>
+<p><strong>@ConfigurationProperties</strong> （推荐使用）<br>自动支持热更新，不需代码改造<br>自动批量提取内容</p>
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><ol>
 <li>新建<code>bootstrap.ymal</code><br>需引入依赖</li>
 </ol>

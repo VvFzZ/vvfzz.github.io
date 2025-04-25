@@ -1,0 +1,136 @@
+<hr>
+<h2 id="title-36生产者消费者模式tags-description"><a href="#title-36生产者消费者模式tags-description" class="headerlink" title="title: 36生产者消费者模式tags:description:"></a>title: 36生产者消费者模式<br>tags:<br>description:</h2><p>用流水线思想提高效率</p>
+<h1 id="生产消费模式优点"><a href="#生产消费模式优点" class="headerlink" title="生产消费模式优点"></a>生产消费模式优点</h1><p>解耦、异步削峰（异步平衡生产消费速度差）</p>
+<h1 id="支持批量执行以提升性能"><a href="#支持批量执行以提升性能" class="headerlink" title="支持批量执行以提升性能"></a>支持批量执行以提升性能</h1><p><strong>首先是以阻塞方式获取任务队列中的一条任务，而后则是以非阻塞的方式获取任务；</strong><br>阻塞方式如果任务队列中没有任务能够避免无谓的循环</p>
+<pre><code>//任务队列
+BlockingQueue&lt;Task&gt; bq = new LinkedBlockingQueue&lt;&gt;(2000);
+//启动5个消费者线程
+//执⾏批量任务
+void start () {
+    ExecutorService es = xecutors
+            .newFixedThreadPool(5);
+    for (int i = 0; i &lt; 5; i++) {
+        es.execute(() -&gt; {
+            try {
+                while (true) {
+                    //获取批量任务
+                    List&lt;Task&gt; ts = pollTasks(); //执⾏批量任务
+                    execTasks(ts);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+}
+//从任务队列中获取批量任务
+List&lt;Task&gt; pollTasks ()	
+        throws InterruptedException {
+    List&lt;Task&gt; ts = new LinkedList&lt;&gt;();
+    //阻塞式获取⼀条任务
+    Task t = bq.take();
+    while (t != null) {
+        ts.add(t);
+        //⾮阻塞式获取⼀条任务
+        t = bq.poll();
+    }
+    return ts;
+}
+//批量执⾏任务
+execTasks(List &lt; Task &gt; ts) {
+    //省略具体代码⽆数
+}
+</code></pre>
+<h1 id="支持分阶段提交以提升性能"><a href="#支持分阶段提交以提升性能" class="headerlink" title="支持分阶段提交以提升性能"></a>支持分阶段提交以提升性能</h1><p>自定义日志组件，采用异步刷盘方式，刷盘的时机：</p>
+<ol>
+<li>ERROR级别的日志需要立即刷盘；</li>
+<li>数据积累到500条需要立即刷盘；</li>
+<li>存在未刷盘数据，且5秒钟内未曾刷盘，需要立即刷盘。</li>
+</ol>
+<pre><code>class Logger {
+    //任务队列
+    final BlockingQueue&lt;LogMsg&gt; bq
+            = new BlockingQueue&lt;&gt;();
+    //flush批量
+    static final int batchSize = 500;
+    //只需要⼀个线程写⽇志
+    ExecutorService es =
+            Executors.newFixedThreadPool(1);
+
+    //启动写⽇志线程
+    void start() {
+        File file = File.createTempFile(&quot;foo&quot;, &quot;.log&quot;);
+        final FileWriter writer =
+                new FileWriter(file);
+        this.es.execute(() -&gt; {
+            try {
+                //未刷盘⽇志数量
+                int curIdx = 0;
+                long preFT = System.currentTimeMillis();
+                while (true) {
+                    LogMsg log = bq.poll(
+                            5, TimeUnit.SECONDS);
+                    //写⽇志
+                    if (log != null) {
+                        writer.write(log.toString());
+                        ++curIdx;
+                    }
+                    //如果不存在未刷盘数据，则⽆需刷盘
+                    if (curIdx &lt;= 0) {
+                        continue;
+                    }
+                    //根据规则刷盘
+                    if (log != null &amp;&amp; log.level == LEVEL.ERROR ||
+                            curIdx == batchSize ||
+                            System.currentTimeMillis() - preFT &gt; 5000) {
+                        writer.flush();
+                        curIdx = 0;
+                        preFT = System.currentTimeMillis();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    writer.flush();
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    //写INFO级别⽇志
+    void info(String msg) {
+        bq.put(new LogMsg(
+                LEVEL.INFO, msg));
+    }
+
+    //写ERROR级别⽇志
+    void error(String msg) {
+        bq.put(new LogMsg(
+                LEVEL.ERROR, msg));
+    }
+}
+
+//⽇志级别
+enum LEVEL {
+    INFO, ERROR
+}
+
+class LogMsg {
+    LEVEL level;
+    String msg;
+
+    //省略构造函数实现
+    LogMsg(LEVEL lvl, String msg) {
+    }
+
+    //省略toString()实现
+    String toString() {
+    }
+}
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Java线程池本身就是一种生产者-消费者模式的实现，每次只能从任务队列中消费一个任务来执行，批量执行以及分阶段提交的场景需自己实现。</p>
+<p>生产-消费模式在分布式场景下，借助消息队列实现。<br>MQ支持两种模型：一种是点对点模型，一种是发布订阅模型<br>点对点：一个消息只会被一个消费者消费<br>发布订阅：一个消息会被多个消费者消费，本质上是一种消息的广播</p>

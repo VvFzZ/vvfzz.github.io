@@ -1,0 +1,4 @@
+<hr>
+<h2 id="title-39高性能网络应用框架Nettytags-description"><a href="#title-39高性能网络应用框架Nettytags-description" class="headerlink" title="title: 39高性能网络应用框架Nettytags:description:"></a>title: 39高性能网络应用框架Netty<br>tags:<br>description:</h2><h1 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h1><p>核心逻辑<br>while(true){} 的方式调用事件多路选择器提供的select()方法监听网络事件，有就绪网络事件就绪遍历事件处理器处理。</p>
+<h1 id="Netty线程模型"><a href="#Netty线程模型" class="headerlink" title="Netty线程模型"></a>Netty线程模型</h1><h2 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h2><p>核心概念EventLoop事件循环 对应Reactor模式的reactor，负责网络事件监听和调用事件处理器处理。<br>多线程对应一个EventLoop，EventLoop和Java线程11对应，即一个网络连接只对应一个线程，避免并发问题</p>
+<h2 id="EventLoopGroup"><a href="#EventLoopGroup" class="headerlink" title="EventLoopGroup"></a>EventLoopGroup</h2><p>处理TCP连接请求和读写请求是两个不同的socket<br>bossGroup处理连接请求，workerGroup处理读写请求；bossGroup处理完连接请求后，会将连接提交给workerGroup，轮训选择其中一个EventLoop处理</p>

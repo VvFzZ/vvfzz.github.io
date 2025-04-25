@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/3%E4%BA%92%E6%96%A5%E9%94%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/3%E4%BA%92%E6%96%A5%E9%94%81/","path":"JAVA/并发/java并发编程实战/1并发理论基础/3互斥锁/","title":"3互斥锁"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>3互斥锁 | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%81"><span class="nav-number">2.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">2.1.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="nav-number">2.1.1.</span> <span class="nav-text">避免死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E5%9D%8F%E5%8D%A0%E7%94%A8%E5%88%87%E7%AD%89%E5%BE%85"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">破坏占用切等待</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AD%89%E5%BE%85%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">等待通知机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E5%9D%8F%E4%B8%8D%E5%8F%AF%E6%8A%A2%E5%8D%A0"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">破坏不可抢占</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E5%9D%8F%E5%BE%AA%E7%8E%AF%E7%AD%89%E5%BE%85"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">破坏循环等待</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/3%E4%BA%92%E6%96%A5%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="3互斥锁 | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3互斥锁
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-15 15:49:24" itemprop="dateModified" datetime="2025-03-15T15:49:24+08:00">2025-03-15</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h1><p>原子性问题的源头是线程切换<br>原子性外在表现为不可分割，本质是多个资源间有一致性的要求，操作的中间状态对外不可见。</p>
+<p><strong>如何解决原子性问题？</strong><br>禁用线程切换不就解决了吗？操作系统线程切换依赖CPU中断，所以禁用CPU发生中断就能禁用线程切换。</p>
+<p><strong>禁用中断不能保证多线程原子性</strong><br>单CPU禁止中断禁止切换线程单线程连续执行，可保证原子性。<br>多CPU只能保证CPU上线程连续执行，不能保证同一时刻只有一个线程执行，如果两个线程同时写long型变量高32位，就可能出现诡异BUG。</p>
+<p><strong>互斥可保证共享变量修改的原子性</strong><br>同一时刻只有一个线程执行成为互斥。</p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>锁模型</p>
+<ol>
+<li>创建保护资源R的锁:LR</li>
+<li>加锁操作:lock(LR)</li>
+<li>临界区:一段代码<ul>
+<li>受保护资源:R</li>
+</ul>
+</li>
+<li>解锁操作 :unlock(LR)</li>
+</ol>
+<p><strong>sychronized</strong><br>修饰静态方法锁住this.class<br>修饰实例方法锁住当前对象this</p>
+<p>Happens-before规则：对一个锁的解锁Happens-Before于后续对此锁的加锁，指的是前一个线程的解锁操作对后一个线程的加锁操作可见，传递性得出前一个线程对共享变量的修改对后一个线程可见。所以可以解决并发Count++问题。</p>
+<p><strong>细粒度锁</strong><br>细粒度的锁可提高并行度，是重要优化手段<br>细粒度锁导致死锁（竞争资源的线程因互相等待，导致永久阻塞的现象）</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>发生死锁的四个条件</p>
+<ol>
+<li>互斥，共享资源X和Y只能被一个线程占用；</li>
+<li>占有且等待，线程T1已经取得共享资源 X，在等待共享资源Y的时候，不释放共享资源 X；</li>
+<li>不可抢占，其他线程不能强行抢占线程T1占有的资源；</li>
+<li>循环等待，线程T1等待线程T2占有的资源，线程T2等待线程T1占有的资源，就是循环等待。</li>
+</ol>
+<h3 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h3><p>破坏其中一个即可避免死锁<br>锁本身互斥无法破坏，其他三个条件如何做呢？</p>
+<ol>
+<li>占用切等待，一次性申请所有资源，则不再存在等待</li>
+<li>不可抢占，申请其他资源时失败可主动释放</li>
+<li>循环等待，按序申请资源</li>
+</ol>
+<h4 id="破坏占用切等待"><a href="#破坏占用切等待" class="headerlink" title="破坏占用切等待"></a>破坏占用切等待</h4><p>一次性申请资源，需声明一个角色管理自愿申请（单例），如下转账操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//转账前申请到两个账户的锁</span><br><span class="line">class Allocator &#123;</span><br><span class="line">  private List&lt;Object&gt; als =</span><br><span class="line">    new ArrayList&lt;&gt;();</span><br><span class="line">  // 一次性申请所有资源</span><br><span class="line">  synchronized boolean apply(Object from, Object to)&#123;</span><br><span class="line">    if(als.contains(from)||als.contains(to))&#123;</span><br><span class="line">      return false;  </span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      als.add(from);</span><br><span class="line">      als.add(to);  </span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">  // 归还资源</span><br><span class="line">  synchronized void free(</span><br><span class="line">    Object from, Object to)&#123;</span><br><span class="line">    als.remove(from);</span><br><span class="line">    als.remove(to);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Account &#123;</span><br><span class="line">  // actr 应该为单例</span><br><span class="line">  private Allocator actr;</span><br><span class="line">  private int balance;</span><br><span class="line">  // 转账</span><br><span class="line">  void transfer(Account target, int amt)&#123;</span><br><span class="line">    // 一次性申请转出账户和转入账户，直到成功</span><br><span class="line">    while(!actr.apply(this, target))</span><br><span class="line">      ；</span><br><span class="line">    try&#123;</span><br><span class="line">      // 锁定转出账户</span><br><span class="line">      synchronized(this)&#123;              </span><br><span class="line">        // 锁定转入账户</span><br><span class="line">        synchronized(target)&#123;           </span><br><span class="line">          if (this.balance &gt; amt)&#123;</span><br><span class="line">            this.balance -= amt;</span><br><span class="line">            target.balance += amt;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      actr.free(this, target)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>存在问题</em><br>那在高并发下synchronized(Account.class)会使得所有转账串行化，使用apply方法能提高转账的吞吐量。<br>但apply方法也有问题，在同一个账户转账操作并发量高的场景下，apply方法频繁失败，转账的线程会不断的阻塞唤醒阻塞唤醒，开销大。<br>也许应该改进一下由Allocator负责在有资源的情况下唤醒调用apply的线程？</p>
+<h5 id="等待通知机制"><a href="#等待通知机制" class="headerlink" title="等待通知机制"></a>等待通知机制</h5><p>wait&#x2F;notify&#x2F;notifyAll，持有锁才可使用，且是同一把锁。<br>notify代表条件曾经满足，只能保证在通知时间点条件满足。而被通知线程的执行时间点和通知的时间点基本上不会重合，所以当线程执行的时候，很可能条件已经不满足了（保不齐有其他线程插队）。<br>notify有风险，可能导致某些线程永远不会被通知，尽量使用 notifyAll<br>如：<br>资源 A、B、C、D，线程1申请到AB，线程2申请到CD，此时线程3申请AB，线程4申请CD，线程3,4进入等待队列。<br>之后线程1归还AB，使用notify通知线程等待队列的线程，可能唤醒线程4，此时4继续等待，而3再也没有机会被唤醒了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while(条件不满足) &#123;</span><br><span class="line">    wait();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改进后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Allocator &#123;</span><br><span class="line">  private List&lt;Object&gt; als;</span><br><span class="line">  // 一次性申请所有资源</span><br><span class="line">  synchronized void apply(Object from, Object to)&#123;</span><br><span class="line">    // 经典写法</span><br><span class="line">    while(als.contains(from)||als.contains(to))&#123;</span><br><span class="line">      try&#123;</span><br><span class="line">        wait();</span><br><span class="line">      &#125;catch(Exception e)&#123;&#125;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    als.add(from);</span><br><span class="line">    als.add(to);  </span><br><span class="line">  &#125;</span><br><span class="line">  // 归还资源</span><br><span class="line">  synchronized void free(</span><br><span class="line">    Object from, Object to)&#123;</span><br><span class="line">    als.remove(from);</span><br><span class="line">    als.remove(to);</span><br><span class="line">    notifyAll();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>sleep，wait区别？<br>不同点</p>
+<ul>
+<li>wait 释放锁，sleep不释放</li>
+<li>wait只能在持有锁时可用</li>
+<li>wait无参调用进入waiting状态,需唤醒</li>
+<li>sleep(1000L),wait(1000L)进入time_waiting状态,不需唤醒</li>
+</ul>
+<p>相同点：都会让出CPU</p>
+<h4 id="破坏不可抢占"><a href="#破坏不可抢占" class="headerlink" title="破坏不可抢占"></a>破坏不可抢占</h4><h4 id="破坏循环等待"><a href="#破坏循环等待" class="headerlink" title="破坏循环等待"></a>破坏循环等待</h4><p>需要对资源进行排序，然后按序申请资源<br>如id 可以作为排序字段，申请的时候，我们可以按照从小到大的顺序来申请。<br>①~⑥处的代码对转出账户（this）和转入账户（target）排序，然后按照序号从小到大的顺序锁定账户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Account &#123;</span><br><span class="line">  private int id;</span><br><span class="line">  private int balance;</span><br><span class="line">  // 转账</span><br><span class="line">  void transfer(Account target, int amt)&#123;</span><br><span class="line">    Account left = this        ①</span><br><span class="line">    Account right = target;    ②</span><br><span class="line">    if (this.id &gt; target.id) &#123; ③</span><br><span class="line">      left = target;           ④</span><br><span class="line">      right = this;            ⑤</span><br><span class="line">    &#125;                          ⑥</span><br><span class="line">    // 锁定序号小的账户</span><br><span class="line">    synchronized(left)&#123;</span><br><span class="line">      // 锁定序号大的账户</span><br><span class="line">      synchronized(right)&#123; </span><br><span class="line">        if (this.balance &gt; amt)&#123;</span><br><span class="line">          this.balance -= amt;</span><br><span class="line">          target.balance += amt;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>预防死锁成本需要评估，选择成本最低的方案。<br> 破坏占用且等待条件，锁了所有的账户，且用了死循环，不过好在 apply() 这个方法基本不耗时。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>如何判断多线程的阻塞导致的问题呢？有什么工具吗?<br>可以用top命令查看Java线程的cpu利用率，用jstack来dump线程。<br>开发环境可以用java visualvm查看线程执行情况</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/2java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="prev" title="2java内存模型">
+                  <i class="fa fa-chevron-left"></i> 2java内存模型
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/7%E5%AE%89%E5%85%A8%E6%80%A7%E6%B4%BB%E8%B7%83%E6%80%A7%E5%8F%8A%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98/" rel="next" title="7安全性活跃性及性能问题">
+                  7安全性活跃性及性能问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

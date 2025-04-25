@@ -1,0 +1,81 @@
+<hr>
+<h2 id="title-42Actor模型tags-description"><a href="#title-42Actor模型tags-description" class="headerlink" title="title: 42Actor模型tags:description:"></a>title: 42Actor模型<br>tags:<br>description:</h2><p>Actor模型本质：以Actor作为基本计算单元的计算模型<br>在面向对象编程里面，一切都是对象；<br>在Actor模型里，一切都是Actor，并且Actor之间是完全隔离的，<strong>不会共享任何变量</strong>。</p>
+<p>Actor异步模型缺点：</p>
+<ul>
+<li>理论上不保证消息百分百送达</li>
+<li>不保证消息送达和发送顺序一致 </li>
+<li>无法保证消息会被百分百处理</li>
+</ul>
+<p>Java需要借助第三方类库使用Actor模型，如Akka、Vert.x</p>
+<pre><code>    //该Actor当收到消息message后，
+    //会打印Hello message
+    static class HelloActor extends UntypedActor {
+        @Override
+        public void onReceive(Object message) {
+            System.out.println(&quot;Hello	&quot; + message);
+        }
+    }
+
+    public static void main(String[] args) {
+        //创建Actor系统
+        ActorSystem system = ActorSystem.create(&quot;HelloSystem&quot;);
+        //创建HelloActor
+        ActorRef helloActor = system.actorOf(Props.create(HelloActor.class));
+        //发送消息给HelloActor
+        helloActor.tell(&quot;Actor&quot;, ActorRef.noSender());
+    }
+</code></pre>
+<h1 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h1><p>Actor模型异步消息机制：发送消息仅仅是发送出去，接收到后可能不会立即处理</p>
+<p>内部可保存消息表，接收到消息放入消息表，如果消息表中有数据则新消息不会马上得到处理<br>单线程处理消息,无并发问题</p>
+<p><strong>Actor不仅适用于并发计算，且适用于分布式计算</strong><br>发送消息和接收消息的Actor可以不在一个进程中，也可以不在同一台机器上，只需要知道对方的地址。</p>
+<h1 id="Actor的规范化定义？？？"><a href="#Actor的规范化定义？？？" class="headerlink" title="Actor的规范化定义？？？"></a>Actor的规范化定义？？？</h1><p>基础的计算单元，具体来讲包括三部分能力</p>
+<ol>
+<li>处理能力，处理接收到的消息。</li>
+<li>存储能力，Actor可以存储自己的内部状态，并且内部状态在不同Actor之间是绝对隔离的。</li>
+<li>通信能力，Actor可以和其他Actor之间通信。<br>当一个Actor接收的一条消息之后，这个Actor可以做以下三件事：</li>
+<li>创建更多的Actor；</li>
+<li>发消息给其他Actor；</li>
+<li>确定如何处理下一条消息。</li>
+</ol>
+<h1 id="Actor实现累加器"><a href="#Actor实现累加器" class="headerlink" title="Actor实现累加器"></a>Actor实现累加器</h1><pre><code> //累加器
+    static class CounterActor extends UntypedActor {
+        private int counter = 0;
+
+        @Override
+        public void onReceive(Object message) {
+        //如果接收到的消息是数字类型，执⾏累加操作，
+        //否则打印counter的值
+            if (message instanceof Number) {
+                counter += ((Number) message).intValue();
+            } else {
+                System.out.println(counter);
+            }
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        //创建Actor系统
+        ActorSystem system = ActorSystem.create(&quot;HelloSystem&quot;);
+        //4个线程⽣产消息
+        ExecutorService es = Executors.newFixedThreadPool(4);
+        //创建CounterActor	
+        ActorRef counterActor =
+                system.actorOf(Props.create(CounterActor.class));
+        //⽣产4*100000个消息
+        for (int i = 0; i &lt; 4; i++) {
+            es.execute(() -&gt; {
+                for (int j = 0; j &lt; 100000; j++) {
+                    counterActor.tell(1, ActorRef.noSender());
+                }
+            });
+        }
+        //关闭线程池
+        es.shutdown();
+        //等待CounterActor处理完所有消息
+        Thread.sleep(1000);
+        //打印结果
+        counterActor.tell(&quot;&quot;, ActorRef.noSender());
+        //关闭Actor系统
+        system.shutdown();
+    }
+</code></pre>

@@ -12,18 +12,40 @@
 <h1 id="强制路由"><a href="#强制路由" class="headerlink" title="强制路由"></a>强制路由</h1><p>（不建议使用）<br>不使用分片键和分片策略实现路由访问某张表<br>关系型数据库中，Hint允许用户通过相关语法改变SQL的执行计划而实现对SQL进行特殊的优化。很多数据库工具也提供了特殊的Hint语法。<br>举例说明：<br>MySQL为例，对索引的强制和忽略机制。<br>强制使用索引<code>SELECT*FROM TABLE1 FORCE INDEX(FIELD1)</code><br>强制取消索引<code>SELECT*FROM TABLE1 IGNORE INDEX(FIELD1,FIELD2)</code></p>
 <p><code>HintManager</code><br><code>HintShardingAlgorithm</code></p>
 <h1 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h1><p>负载均衡策略完成从库选取并读取<br>当主从数据不一致时，采用强制路由访问主库 <code>HintManager.masterRouteOnly</code>设置强制访问主库<br><em>ShardingSphere不能支持主从数据同步，数据同步需数据库实现</em></p>
-<h2 id="未分库主从读写分离配置"><a href="#未分库主从读写分离配置" class="headerlink" title="未分库主从读写分离配置"></a>未分库主从读写分离配置</h2><pre><code>spring.shardingsphere.rules.readwrite-splitting.data-sources.readwrite_ds.type=Static 
-## 写库配置
+<h2 id="未分库主从读写分离配置"><a href="#未分库主从读写分离配置" class="headerlink" title="未分库主从读写分离配置"></a>未分库主从读写分离配置</h2><pre><code>
+spring.shardingsphere.datasource.names=dswrite,dsread0,dsread1
+
+spring.shardingsphere.datasource.dswrite.url=jdbc:mysql://127.0.0.1:3306/dswrite?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
+spring.shardingsphere.datasource.dswrite.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dswrite.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dswrite.username=root
+spring.shardingsphere.datasource.dswrite.password=root
+
+spring.shardingsphere.datasource.dsread0.url=jdbc:mysql://127.0.0.1:3306/dsread0?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
+spring.shardingsphere.datasource.dsread0.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dsread0.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dsread0.username=root
+spring.shardingsphere.datasource.dsread0.password=root
+
+spring.shardingsphere.datasource.dsread1.url=jdbc:mysql://127.0.0.1:3306/dsread1?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
+spring.shardingsphere.datasource.dsread1.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dsread1.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dsread1.username=root
+spring.shardingsphere.datasource.dsread1.password=root
+
+spring.shardingsphere.rules.readwrite-splitting.data-sources.readwrite_ds.type=Static
+# 写库配置
 spring.shardingsphere.rules.readwrite-splitting.data-sources.readwrite_ds.props.write-data-source-name=dswrite
-## 读库配置
+# 读库配置
 spring.shardingsphere.rules.readwrite-splitting.data-sources.readwrite_ds.props.read-data-source-names=dsread0,dsread1
 # 从库轮训读取
-spring.shardingsphere.rules.readwrite-splitting.data-sources,readwrite_dsload-balancer-name=round_robin
-spring.shardingsphere.rules.readwrite-splitting.load-balancers.round robin.type=ROUND_ROBIN
+spring.shardingsphere.rules.readwrite-splitting.data-sources.readwrite_ds.load-balancer-name=round_robin
+spring.shardingsphere.rules.readwrite-splitting.load-balancers.round_robin.type=ROUND_ROBIN
+
+spring.shardingsphere.props.sql-show=true
 </code></pre>
 <p><code>readwrite-splitting</code> 读写分离配置结点<br><code>Static</code> 一主多从</p>
-<h2 id="分库主从读写分离配置"><a href="#分库主从读写分离配置" class="headerlink" title="分库主从读写分离配置"></a>分库主从读写分离配置</h2><pre><code>
-spring.shardingsphere.datasource.names=dswrite0,dswrite1,dswrite0read0,dswrite0read1,dswrite1read0,dswrite1read1
+<h2 id="分库主从读写分离配置"><a href="#分库主从读写分离配置" class="headerlink" title="分库主从读写分离配置"></a>分库主从读写分离配置</h2><pre><code>spring.shardingsphere.datasource.names=dswrite0,dswrite1,dswrite0read0,dswrite0read1,dswrite1read0,dswrite1read1
 
 spring.shardingsphere.datasource.dswrite0.url=jdbc:mysql://127.0.0.1:3306/dswrite0?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
 spring.shardingsphere.datasource.dswrite0.type=com.alibaba.druid.pool.DruidDataSource
@@ -72,14 +94,15 @@ spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding
 spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name=database-inline
 spring.shardingsphere.rules.sharding.broadcast-tables=im_business_type
 
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type=INLINE
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression=ds$-&gt;{to_user_id % 2}
+
 spring.shardingsphere.rules.sharding.tables.im_message.actual-data-nodes=ds$-&gt;{0..1}.im_message
 spring.shardingsphere.rules.sharding.tables.im_message.key-generate-strategy.column=id
 spring.shardingsphere.rules.sharding.tables.im_message.key-generate-strategy.key-generator-name=snowflake
 
 spring.shardingsphere.rules.sharding.key-generators.snowflake.type=SNOWFLAKE
 
-spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type=INLINE
-spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression=ds$-&gt;{to_user_id % 2}
 
 # 配置逻辑数据源ds0 ds1与物理数据源的对应关系
 spring.shardingsphere.rules.readwrite-splitting.data-sources.ds0.type=Static

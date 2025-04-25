@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+
+
+<link rel="canonical" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/14Lock%E5%92%8CCondition/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/14Lock%E5%92%8CCondition/","path":"JAVA/并发/java并发编程实战/2并发工具类/14Lock和Condition/","title":"14Lock和Condition"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>14Lock和Condition | VvfzZ</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">VvfzZ</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%8D%E9%80%A0%E7%AE%A1%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">为什么再造管程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReentrantLock"><span class="nav-number">1.1.</span> <span class="nav-text">ReentrantLock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lock%E3%80%81Condition"><span class="nav-number">2.</span> <span class="nav-text">Lock、Condition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E4%B8%A4%E4%B8%AA%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">利用两个条件变量快速实现阻塞队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5"><span class="nav-number">2.2.</span> <span class="nav-text">同步与异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dubbo%E5%90%8C%E6%AD%A5%E8%BD%AC%E5%BC%82%E6%AD%A5"><span class="nav-number">2.3.</span> <span class="nav-text">Dubbo同步转异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">VvfzZ</p>
+  <div class="site-description" itemprop="description">寂寞不耐亦得耐</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/14Lock%E5%92%8CCondition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="14Lock和Condition | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          14Lock和Condition
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-09 16:53:58" itemprop="dateModified" datetime="2025-03-09T16:53:58+08:00">2025-03-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Java SDK并发包实现管程：Lock、Condition接口来<br>Lock解决互斥问题，Condition解决同步问题</p>
+<h1 id="为什么再造管程"><a href="#为什么再造管程" class="headerlink" title="为什么再造管程"></a>为什么再造管程</h1><p>java语言层面synchronized实现管程为什么还提供SDK并发包里的实现呢？性能不是原因那是什么？<br>重新设计一把互斥锁解决不可抢占的问题</p>
+<ol>
+<li>能够响应中断<br><code>void lockInterruptibly() </code></li>
+<li>支持超时<br><code>boolean tryLock(long time, TimeUnit unit) </code></li>
+<li>非阻塞地获取锁<br><code>boolean tryLock();</code></li>
+</ol>
+<p>synchronized阻塞状态调用线程的interrupt方法不会中断</p>
+<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><p>volatile&#x2F;CAS&#x2F;AQS</p>
+<p>AQS 同步队列 FIFO 双向链表<br>实现条件变量的条件队列 单向链表 用于支持await&#x2F;signal<br>调用await时，释放锁进入条件队列，调用signal时，从条件队列迁移至同步队列，重新竞争锁。</p>
+<p><strong>同步队列为什么使用双向链表</strong><br>为了支持高效的线程管理和同步操作，</p>
+<ul>
+<li>高效删除任意节点，单链表需遍历<br>如超时，取消等待，迁移到条件队列</li>
+</ul>
+<p><strong>ReentrantLock 如何保证可见性</strong><br>关键点：volatile state<br>获取锁时先读写state，释放锁时再次读写state，happens-before传递性保证可见</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class SampleLock &#123;</span><br><span class="line">  volatile int state;</span><br><span class="line">  // 加锁</span><br><span class="line">  lock() &#123;</span><br><span class="line">    // 省略代码无数</span><br><span class="line">    state = 1;</span><br><span class="line">  &#125;</span><br><span class="line">  // 解锁</span><br><span class="line">  unlock() &#123;</span><br><span class="line">    // 省略代码无数</span><br><span class="line">    state = 0;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>可重入</strong><br>可重入锁<br>可重入函数，指的是多个线程可以同时调用该函数,每个线程都能得到正确结果:线程安全</p>
+<p><strong>公平&#x2F;非公平</strong></p>
+<h1 id="Lock、Condition"><a href="#Lock、Condition" class="headerlink" title="Lock、Condition"></a>Lock、Condition</h1><h2 id="利用两个条件变量快速实现阻塞队列"><a href="#利用两个条件变量快速实现阻塞队列" class="headerlink" title="利用两个条件变量快速实现阻塞队列"></a>利用两个条件变量快速实现阻塞队列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class BlockedQueue&lt;T&gt;&#123;</span><br><span class="line">  final Lock lock =</span><br><span class="line">    new ReentrantLock();</span><br><span class="line">  // 条件变量：队列不满  </span><br><span class="line">  final Condition notFull =</span><br><span class="line">    lock.newCondition();</span><br><span class="line">  // 条件变量：队列不空  </span><br><span class="line">  final Condition notEmpty =</span><br><span class="line">    lock.newCondition();</span><br><span class="line"> </span><br><span class="line">  // 入队</span><br><span class="line">  void enq(T x) &#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">      while (队列已满)&#123;</span><br><span class="line">        // 等待队列不满</span><br><span class="line">        notFull.await();</span><br><span class="line">      &#125;  </span><br><span class="line">      // 省略入队操作...</span><br><span class="line">      // 入队后, 通知可出队</span><br><span class="line">      notEmpty.signal();</span><br><span class="line">    &#125;finally &#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  // 出队</span><br><span class="line">  void deq()&#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">      while (队列已空)&#123;</span><br><span class="line">        // 等待队列不空</span><br><span class="line">        notEmpty.await();</span><br><span class="line">      &#125;  </span><br><span class="line">      // 省略出队操作...</span><br><span class="line">      // 出队后，通知可入队</span><br><span class="line">      notFull.signal();</span><br><span class="line">    &#125;finally &#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h2><p>如何实现异步</p>
+<ul>
+<li>异步调用<br>调用方创建一个子线程，在子线程中执行方法调用</li>
+<li>异步方法<br>方法实现的时候，创建一个新的线程执行主要逻辑，主线程直接 return</li>
+</ul>
+<h2 id="Dubbo同步转异步"><a href="#Dubbo同步转异步" class="headerlink" title="Dubbo同步转异步"></a>Dubbo同步转异步</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">public class DubboInvoker&#123;</span><br><span class="line">  Result doInvoke(Invocation inv)&#123;</span><br><span class="line">    // 下面这行就是源码中 108 行</span><br><span class="line">    // 为了便于展示，做了修改</span><br><span class="line">    return currentClient </span><br><span class="line">      .request(inv, timeout) //DefaultFuture</span><br><span class="line">      .get();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 创建锁与条件变量</span><br><span class="line">private final Lock lock </span><br><span class="line">    = new ReentrantLock();</span><br><span class="line">private final Condition done </span><br><span class="line">    = lock.newCondition();</span><br><span class="line"> </span><br><span class="line">// 调用方通过该方法等待结果</span><br><span class="line">Object get(int timeout)&#123;</span><br><span class="line">  long start = System.nanoTime();</span><br><span class="line">  lock.lock();</span><br><span class="line">  try &#123;</span><br><span class="line">	while (!isDone()) &#123;</span><br><span class="line">	  done.await(timeout);</span><br><span class="line">      long cur=System.nanoTime();</span><br><span class="line">	  if (isDone() || </span><br><span class="line">          cur-start &gt; timeout)&#123;</span><br><span class="line">	    break;</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">  &#125; finally &#123;</span><br><span class="line">	lock.unlock();</span><br><span class="line">  &#125;</span><br><span class="line">  if (!isDone()) &#123;</span><br><span class="line">	throw new TimeoutException();</span><br><span class="line">  &#125;</span><br><span class="line">  return returnFromResponse();</span><br><span class="line">&#125;</span><br><span class="line">// RPC 结果是否已经返回</span><br><span class="line">boolean isDone() &#123;</span><br><span class="line">  return response != null;</span><br><span class="line">&#125;</span><br><span class="line">// RPC 结果返回时调用该方法   </span><br><span class="line">private void doReceived(Response res) &#123;</span><br><span class="line">  lock.lock();</span><br><span class="line">  try &#123;</span><br><span class="line">    response = res;</span><br><span class="line">    if (done != null) &#123;</span><br><span class="line">      done.signal();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; finally &#123;</span><br><span class="line">    lock.unlock();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获取结果时await，等待doReceived调用signal唤醒</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Lock&amp;Condition实现的管程相对于synchronized更灵活、功能更丰富</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/1%E5%B9%B6%E5%8F%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/9%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="prev" title="9线程的生命周期">
+                  <i class="fa fa-chevron-left"></i> 9线程的生命周期
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/16Semaphore/" rel="next" title="16Semaphore">
+                  16Semaphore <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">VvfzZ</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

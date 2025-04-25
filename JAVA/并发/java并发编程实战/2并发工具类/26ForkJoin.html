@@ -1,0 +1,50 @@
+<hr>
+<h2 id="title-26ForkJointags-description"><a href="#title-26ForkJointags-description" class="headerlink" title="title: 26ForkJointags:description:"></a>title: 26ForkJoin<br>tags:<br>description:</h2><p>Fork&#x2F;Join并行计算框架，支持分治任务模型<br>解决复杂问题的思维方法和模式<br>分治：复杂问题分解成相似子问题，直到子问题简单到可直接求解</p>
+<h1 id="分治任务模型"><a href="#分治任务模型" class="headerlink" title="分治任务模型"></a>分治任务模型</h1><p>两阶段：Fork任务分解、Join结果合并<br>两部分：分治任务线程池ForkJoinPool，分治任务ForkJoinTask<br>类似ThreadPoolExecutor和Runnable的关系，都可以理解为提交任务到线程池，不过分治任务有自己独特类型ForkJoinTask。</p>
+<h1 id="Fork-Join使用"><a href="#Fork-Join使用" class="headerlink" title="Fork&#x2F;Join使用"></a>Fork&#x2F;Join使用</h1><p>ForkJoinTask是一个抽象类包含两个方法：</p>
+<ul>
+<li>fork()方法会异步地执行一个子任务</li>
+<li>join()方法则会阻塞当前线程等待子任务执行结果<br>ForkJoinTask两个子抽象类，定义了compute方法</li>
+<li>RecursiveAction<br>compute方法没有返回</li>
+<li>RecursiveTask<br>compute方法有返回</li>
+</ul>
+<pre><code>//Fork/Join这个并行计算框架计算斐波那契数列
+static void main(String[] args){
+  //创建分治任务线程池  
+  ForkJoinPool fjp = 
+    new ForkJoinPool(4);
+  //创建分治任务
+  Fibonacci fib = 
+    new Fibonacci(30);   
+  //启动分治任务  
+  Integer result = 
+    fjp.invoke(fib);
+  //输出结果  
+  System.out.println(result);
+}
+//递归任务
+static class Fibonacci extends 
+    RecursiveTask&lt;Integer&gt;{
+  final int n;
+  Fibonacci(int n){this.n = n;}
+  protected Integer compute(){
+    if (n &lt;= 1)
+      return n;
+    Fibonacci f1 = 
+      new Fibonacci(n - 1);
+    //创建子任务  
+    f1.fork();
+    Fibonacci f2 = 
+      new Fibonacci(n - 2);
+    //等待子任务结果，并合并结果  
+    return f2.compute() + f1.join();
+  }
+}
+</code></pre>
+<h1 id="ForkJoinPool工作原理"><a href="#ForkJoinPool工作原理" class="headerlink" title="ForkJoinPool工作原理"></a>ForkJoinPool工作原理</h1><ul>
+<li>ThreadPoolExecutor<br>生产者-消费者模式，内部一个任务队列是生产者和消费者通信的媒介<br>多个工作线程共享一个任务队列（双端队列）。</li>
+<li>ThreadPoolExecutor</li>
+</ul>
+<p>内部多个任务队列，通过ForkJoinPool的invoke()或者submit()方法提交任务时，ForkJoinPool根据一定的路由规则把任务提交到一个任务队列中，如果任务在执行过程中会创建出子任务，子任务会提交到工作线程对应的任务队列中。</p>
+<p><strong>“任务窃取”机制</strong>让所有线程的工作量基本均衡,不会出现忙线程和闲线程，性能很好。<br>工作线程正常获取任务和“窃取任务”是从任务队列不同的端消费，这样能避免很多不必要的数据竞争。</p>
+<h1 id="Stream-API应用ForkJoinPool"><a href="#Stream-API应用ForkJoinPool" class="headerlink" title="Stream API应用ForkJoinPool"></a>Stream API应用ForkJoinPool</h1><p>Stream API并行流以ForkJoinPool为基础，默认所有并行流计算共享一个ForkJoinPool，默认的线程数是CPU的核数。<br>并行流计算都是CPU密集型计算完全没有问题，但存在I&#x2F;O密集型的并行流计算，可能会因为慢的I&#x2F;O计算而拖慢系统性能。<strong>建议用不同的ForkJoinPool执行不同类型的计算任务。</strong></p>

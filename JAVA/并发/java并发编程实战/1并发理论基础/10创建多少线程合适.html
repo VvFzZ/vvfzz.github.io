@@ -1,0 +1,22 @@
+<hr>
+<h2 id="title-10创建多少线程合适tags-description"><a href="#title-10创建多少线程合适tags-description" class="headerlink" title="title: 10创建多少线程合适tags:description:"></a>title: 10创建多少线程合适<br>tags:<br>description:</h2><h1 id="创建多少线程合适"><a href="#创建多少线程合适" class="headerlink" title="创建多少线程合适"></a>创建多少线程合适</h1><p>要解决这个问题，首先要分析以下两个问题：</p>
+<ol>
+<li>为什么要使用多线程？</li>
+<li>多线程的应用场景有哪些？</li>
+</ol>
+<h2 id="为什么使用多线程"><a href="#为什么使用多线程" class="headerlink" title="为什么使用多线程"></a>为什么使用多线程</h2><p>为了快，快如何度量？<br>两个核心指标：延迟、吞吐量（时间维度、空间维度）<br>延迟：发出请求到收到响应这个过程的时间<br>吞吐量：单位时间内能处理请求的数量</p>
+<p>提升性能就需从降低延时、提升吞吐量思考。</p>
+<h2 id="多线程使用场景"><a href="#多线程使用场景" class="headerlink" title="多线程使用场景"></a>多线程使用场景</h2><p>两个方向降低延迟、提升吞吐量：</p>
+<ol>
+<li>优化算法</li>
+<li>将硬件性能发挥到极致<br>并发编程领域提升性能本质是提升硬件的利用率，即提升I&#x2F;O利用率和CPU综合利用率</li>
+</ol>
+<p>假设程序按照CPU计算和I&#x2F;O操作交叉执行<br>CPU计算和I&#x2F;O操作的耗时是1:1<br>单线程时CPU计算时I&#x2F;O空闲，CPU和I&#x2F;O利用率都是50%<br>2个线程，CPU和I&#x2F;O利用率100%，单位时间处理请求量翻倍，吞吐量提升一倍<br>以上反推，CPU和I&#x2F;O利用率很低时可尝试增加线程提升吞吐量</p>
+<p>单核，多线程可平衡CPU和I&#x2F;O设备。若程序只有CPU计算，多线程会增加线程切换使性能更差。<br>多核，纯CPU计算程序可利用多核并行计算,多线程提升性能。。</p>
+<h2 id="创建多少线程合适-1"><a href="#创建多少线程合适-1" class="headerlink" title="创建多少线程合适"></a>创建多少线程合适</h2><p>一般程序是CPU计算和I&#x2F;O计算交叉执行<br>I&#x2F;O计算时间相对来说很长称为I&#x2F;O密集型，相反CPU密集型</p>
+<h3 id="CPU密集型"><a href="#CPU密集型" class="headerlink" title="CPU密集型"></a>CPU密集型</h3><p>线程的数量 &#x3D; CPU核数 +1<br>当线程因为偶尔的内存页失效或其他原因导致阻塞时，额外的线程可以顶上，从而保证CPU利用率。</p>
+<h3 id="I-O密集型"><a href="#I-O密集型" class="headerlink" title="I&#x2F;O密集型"></a>I&#x2F;O密集型</h3><p>最佳线程数 &#x3D; CPU核数 * [ 1 +（I&#x2F;O耗时 &#x2F; CPU耗时）]</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上给出了理论上的线程数，可将硬件性能发挥到极致。<br>实际生产中，I&#x2F;O密集型，I&#x2F;O 耗时和CPU耗时的比值这个关键参数是未知且动态变化的，我们需要通过不同场景的压测验证估计。关注CPU、I&#x2F;O利用率和性能指标（响应时间、吞吐量）的关系</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>测试io耗时与cpu耗时工具：apm工具</p>
+<p>在4核8线程的处理器使用Runtime.availableProcessors()结果是8，从cpu硬件来看是一个物理核心有两个逻辑核心，但因为缓存、执行资源等存在共享和竞争，所以两个核心并不能并行工作。超线程技术统计性能提升大概是30%左右，并不是100%。现代操作系统层面的调度应该是按逻辑核心数，也就是8来调度的（除非禁用超线程技术）。理论值和经验值只是提供个指导，实际上还是要靠压测。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p><a href="https://blog.csdn.net/qq754772661/article/details/106996288">I&#x2F;O控制方式——轮询，中断，DMA，通道</a></p>

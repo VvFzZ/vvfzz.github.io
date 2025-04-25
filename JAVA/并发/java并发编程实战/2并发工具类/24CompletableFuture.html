@@ -1,0 +1,61 @@
+<hr>
+<h2 id="title-24CompletableFuturetags-description"><a href="#title-24CompletableFuturetags-description" class="headerlink" title="title: 24CompletableFuturetags:description:"></a>title: 24CompletableFuture<br>tags:<br>description:</h2><p>CompletableFuture异步编程（java1.8）</p>
+<h1 id="创建CompletableFuture对象"><a href="#创建CompletableFuture对象" class="headerlink" title="创建CompletableFuture对象"></a>创建CompletableFuture对象</h1><ul>
+<li>两个基础接口：<br><code>runAsync(Runnable runnable) 与 supplyAsync(Supplier&lt;U&gt; supplier)</code>区别:是否有返回值</li>
+<li>两个重载接口-可自定义线程池：<br><code>runAsync(Runnable runnable, Executor executor)、supplyAsync(Supplier&lt;U&gt; supplier, Executor executor) </code><br>CompletableFuture 实现 Future<T>和CompletionStage<T>，Futrue接口可获取线程运行状态和结果</li>
+</ul>
+<h1 id="如何理解CompletionStage接口"><a href="#如何理解CompletionStage接口" class="headerlink" title="如何理解CompletionStage接口"></a>如何理解CompletionStage接口</h1><p>描述任务间的时序关系</p>
+<h2 id="串行"><a href="#串行" class="headerlink" title="串行"></a>串行</h2><ul>
+<li>thenApply<br>有参数和返回值</li>
+<li>thenAccept<br>有参数无返回值</li>
+<li>thenRun<br>无参数无返回值</li>
+<li>thenCompose</li>
+</ul>
+<p>以上接口区别：fn、consumer、action这三个核心参数不同</p>
+<p>*Async版本接口在ForkjoinPool线程池中获取一个线程继续执行</p>
+<pre><code>CompletableFuture&lt;String&gt; f0 = 
+  CompletableFuture.supplyAsync(
+    () -&gt; &quot;Hello World&quot;)      //①
+  .thenApply(s -&gt; s + &quot; QQ&quot;)  //②
+  .thenApply(String::toUpperCase);//③
+
+System.out.println(f0.join());
+//输出结果
+HELLO WORLD QQ
+</code></pre>
+<p>supplyAsync启动一个异步流程，之后是两个串行操作,任务①②③串行执行。</p>
+<h2 id="AND汇聚关系"><a href="#AND汇聚关系" class="headerlink" title="AND汇聚关系"></a>AND汇聚关系</h2><ul>
+<li>thenCombine<br>有参数有返回值</li>
+<li>thenAcceptBoth<br>有参数无返回值</li>
+<li>runAfterBoth<br>无参数无返回值</li>
+</ul>
+<h2 id="OR汇聚关系"><a href="#OR汇聚关系" class="headerlink" title="OR汇聚关系"></a>OR汇聚关系</h2><ul>
+<li>applyToEither<br>有参数有返回值</li>
+<li>acceptEither<br>有参数无返回值</li>
+<li>runAfterEither<br>无参数无返回值</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>注意：外部无法自动捕获异常，需使用以下方法</p>
+<ol>
+<li>catch<ul>
+<li>exceptionally(ex)</li>
+</ul>
+</li>
+<li>finally<ul>
+<li>handle(result,ex)<br> 有返回值</li>
+<li>whenComplete(result,ex)<br> 无返回值</li>
+</ul>
+</li>
+</ol>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="以下代码是否有问题？"><a href="#以下代码是否有问题？" class="headerlink" title="以下代码是否有问题？"></a>以下代码是否有问题？</h2><pre><code>//采购订单
+PurchersOrder po;
+CompletableFuture&lt;Boolean&gt; cf = 
+  CompletableFuture.supplyAsync(()-&gt;{
+    //在数据库中查询规则
+    return findRuleByJdbc();
+  }).thenApply(r -&gt; {
+    //规则校验
+    return check(po, r);
+});
+Boolean isOk = cf.join();
+</code></pre>
+<p>答：findRuleByJdbc方法隐藏着阻塞式I&#x2F;O，这意味着会阻塞调用线程。<br>默认情况下所有的CompletableFuture共享一个ForkJoinPool，当有阻塞式I&#x2F;O时，可能导致所有的ForkJoinPool线程都阻塞，进而影响整个系统的性能。<br>利用共享往往能让我们快速实现功能，有福同享，代价就是有难要同当。强调高可用的今天，大多数人更倾向于隔离方案。</p>

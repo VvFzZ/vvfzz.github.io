@@ -1,0 +1,42 @@
+<hr>
+<h2 id="title-34WorkerThread模式tags-description"><a href="#title-34WorkerThread模式tags-description" class="headerlink" title="title: 34WorkerThread模式tags:description:"></a>title: 34WorkerThread模式<br>tags:<br>description:</h2><h1 id="正确地创建线程池"><a href="#正确地创建线程池" class="headerlink" title="正确地创建线程池"></a>正确地创建线程池</h1><ul>
+<li>使用有界队列</li>
+<li>指明拒绝策略</li>
+<li>业务相关的名字</li>
+</ul>
+<h1 id="线程死锁的场景"><a href="#线程死锁的场景" class="headerlink" title="线程死锁的场景"></a>线程死锁的场景</h1><p>现象：应用每运行一段时间偶尔就会处于无响应的状态，监控数据看上去一切都正常，但是实际上已经不能正常工作。</p>
+<pre><code>//L1、L2两阶段任务共用一个线程池
+ExecutorService es = Executors.
+  newFixedThreadPool(2);
+//L1阶段的闭锁    
+CountDownLatch l1=new CountDownLatch(2);
+for (int i=0; i&lt;2; i++){
+  System.out.println(&quot;L1&quot;);
+  //执行L1阶段任务
+  es.execute(()-&gt;{
+    //L2阶段的闭锁 
+    CountDownLatch l2=new CountDownLatch(2);
+    //执行L2阶段子任务
+    for (int j=0; j&lt;2; j++){
+      es.execute(()-&gt;{
+        System.out.println(&quot;L2&quot;);
+        l2.countDown();
+      });
+    }
+    //等待L2阶段任务执行完
+    l2.await();
+    l1.countDown();
+  });
+}
+//等着L1阶段任务执行完
+l1.await();
+System.out.println(&quot;end&quot;);
+</code></pre>
+<p>两个线程全部都阻塞在 l2.await();没有空闲的线程执行L2阶段的任务了.<br>解决办法：不同阶段任务使用不同线程池</p>
+<p><strong>提交到相同线程池中的任务一定是相互独立的，否则就一定要慎重</strong></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>正确创建线程池<br>使用有界队列<br>指明拒绝策略<br>业务相关的名字</li>
+<li>避免死锁</li>
+<li>ThreadLocal内存泄露问题</li>
+<li>异常处理</li>
+</ul>

@@ -1,0 +1,75 @@
+<hr>
+<h2 id="title-31GuardedSuspension模式tags-description"><a href="#title-31GuardedSuspension模式tags-description" class="headerlink" title="title: 31GuardedSuspension模式tags:description:"></a>title: 31GuardedSuspension模式<br>tags:<br>description:</h2><p>等待唤醒机制的规范实现<br>GuardedObject<br>obj持有的受保护对象（回复消息）<br>调用者get() 获取受保护对象（回复消息），检查条件等待<br>消费者fireEvent()</p>
+<pre><code>class GuardedObject&lt;T&gt;{
+  //持有受保护的对象
+  T obj;
+  final Lock lock = new ReentrantLock();
+  final Condition done =lock.newCondition();
+  final int timeout=2;
+  //保存所有GuardedObject
+  final static Map&lt;Object, GuardedObject&gt; gos=new ConcurrentHashMap&lt;&gt;();
+  //静态方法创建GuardedObject
+  static &lt;K&gt; GuardedObject create(K key){
+    GuardedObject go=new GuardedObject();
+    gos.put(key, go);
+    return go;
+  }
+
+  
+  static &lt;K, T&gt; void fireEvent(K key, T obj){
+    GuardedObject go=gos.remove(key);
+    if (go != null){
+      go.onChanged(obj);
+    }
+  }
+  //事件通知方法
+  void onChanged(T obj) {
+    lock.lock();
+    try {
+      this.obj = obj;
+      done.signalAll();
+    } finally {
+      lock.unlock();
+    }
+  }
+
+  //获取受保护对象  
+  T get(Predicate&lt;T&gt; p) {
+    lock.lock();
+    try {
+      //MESA管程推荐写法
+      while(!p.test(obj)){
+        done.await(timeout, TimeUnit.SECONDS);
+      }
+    }catch(InterruptedException e){
+      throw new RuntimeException(e);
+    }finally{
+      lock.unlock();
+    }
+    //返回非空的受保护对象
+    return obj;
+  }
+}
+
+
+//处理浏览器发来的请求
+Respond handleWebReq(){
+  int id=序号生成器.get();
+  //创建一消息
+  Message msg1 = new 
+    Message(id,&quot;{...}&quot;);
+  //创建GuardedObject实例
+  GuardedObject&lt;Message&gt; go=
+    GuardedObject.create(id);  
+  //发送消息
+  send(msg1);
+  //等待MQ消息
+  Message r = go.get(
+    t-&gt;t != null);  
+}
+void onMessage(Message msg){
+  //唤醒等待的线程
+  GuardedObject.fireEvent(
+    msg.id, msg);
+}
+</code></pre>
