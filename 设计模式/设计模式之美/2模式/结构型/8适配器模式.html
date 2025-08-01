@@ -1,0 +1,21 @@
+<hr>
+<h2 id="title-8适配器模式description-8适配器模式date-2025-06-27-10-58-06tags"><a href="#title-8适配器模式description-8适配器模式date-2025-06-27-10-58-06tags" class="headerlink" title="title: 8适配器模式description: 8适配器模式date: 2025-06-27 10:58:06tags:"></a>title: 8适配器模式<br>description: 8适配器模式<br>date: 2025-06-27 10:58:06<br>tags:</h2><p>类适配器，继承实现<br>对象适配器，组合实现</p>
+<p>如何选择？</p>
+<ol>
+<li>Adaptee接口的个数</li>
+<li>Adaptee、ITarget契合程度<br>Adaptee被适配者、ITarget目标接口</li>
+</ol>
+<ul>
+<li>如果 Adaptee 接口并不多，那两种实现方式都可以</li>
+<li>Adaptee接口很多，而且 Adaptee 和 ITarget 接口定义大部分都相同，那我们推荐使用类适配器。Adaptor 复用父类 Adaptee 的接口，比起对象适配器的实现方式，Adaptor 的代码量要少一些。</li>
+<li>Adaptee 接口很多，而且 Adaptee 和 ITarget 接口定义大部分都不相同，那我们推荐使用对象适配器，因为组合结构相对于继承更加灵活。</li>
+</ul>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ul>
+<li>封装有缺陷的接口设计</li>
+<li>统一多个类的接口设计</li>
+<li>替换依赖的外部系统</li>
+<li>兼容老版本接口</li>
+<li>适配不同格式的数据</li>
+</ul>
+<h2 id="slf4j应用"><a href="#slf4j应用" class="headerlink" title="slf4j应用"></a>slf4j应用</h2><p>Slf4j 的出现晚于 JUL、JCL、log4j 等日志框架，这些日志框架也不可能牺牲掉版本兼容性，将接口改造成符合 Slf4j 接口规范。<br>slf4j提供了针对不同日志框架的适配器。对不同日志框架的接口进行二次封装，适配成统一的Slf4j接口定义</p>
+<p>代理模式：不改变原始类接口的条件下，为原始类定义一个代理类，主要目的是控制访问，而非加强功能，这是它跟装饰器模式最大的不同<br>桥接模式：目的是将接口部分和实现部分分离，从而让它们可以较为容易、也相对独立地加以改变。<br>装饰器模式：装饰者模式在不改变原始类接口的情况下，对原始类功能进行增强，并且支持多个装饰器的嵌套使用。<br>适配器模式：事后的补救策略。适配器提供跟原始类不同的接口，而代理模式、装饰器模式提供的都是跟原始类相同的接口</p>

@@ -1,0 +1,32 @@
+<hr>
+<h2 id="title-11享元模式description-11享元模式date-2025-06-28-11-46-33tags"><a href="#title-11享元模式description-11享元模式date-2025-06-28-11-46-33tags" class="headerlink" title="title: 11享元模式description: 11享元模式date: 2025-06-28 11:46:33tags:"></a>title: 11享元模式<br>description: 11享元模式<br>date: 2025-06-28 11:46:33<br>tags:</h2><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>共享单元<br>保留一份实例，供不同其他对象复用，减少内存开销<br>相同对象可以设计成享元，相似对象，也可以将对象中相同的部分（字段），提取出来设计成享元</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>通过工厂模式通过Map或Listh缓存创建好的享元</p>
+<h1 id="享元模式-VS-单例、缓存、对象池"><a href="#享元模式-VS-单例、缓存、对象池" class="headerlink" title="享元模式 VS 单例、缓存、对象池"></a>享元模式 VS 单例、缓存、对象池</h1><p>虽然都有复用但实际概念不同</p>
+<p>单例，多例：为了控制实例个数<br>缓存：提高访问效率<br>池资源：减少创建释放开销</p>
+<h1 id="享元模式在Integer中的应用"><a href="#享元模式在Integer中的应用" class="headerlink" title="享元模式在Integer中的应用"></a>享元模式在Integer中的应用</h1><pre><code>Integer i1 = 56;
+Integer i2 = 56;
+Integer i3 = 129;
+Integer i4 = 129;
+System.out.println(i1 == i2);
+System.out.println(i3 == i4);
+</code></pre>
+<p>输出结果:true false</p>
+<p>要点：自动装箱，&#x3D;&#x3D;比较引用地址</p>
+<pre><code>Integer i1 = 56; --&gt;&gt; Integer i1 = Integer.valueOf(56);
+
+public static Integer valueOf(int i) {
+        if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
+            return IntegerCache.cache[i + (-IntegerCache.low)];
+        return new Integer(i);
+}
+
+IntegerCache类加载时默认缓存-128~127
+所以56装箱后是同一个对象，被缓存了；129没有被缓存是不同对象
+</code></pre>
+<h1 id="享元模式在String中的应用"><a href="#享元模式在String中的应用" class="headerlink" title="享元模式在String中的应用"></a>享元模式在String中的应用</h1><pre><code>String s1 = &quot;小争哥&quot;;
+String s2 = &quot;小争哥&quot;;
+String s3 = new String(&quot;小争哥&quot;);
+System.out.println(s1 == s2);
+System.out.println(s1 == s3);
+</code></pre>
+<p>输出结果：true，false</p>

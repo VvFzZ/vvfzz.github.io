@@ -1,0 +1,122 @@
+<hr>
+<h2 id="title-12观察者模式description-12观察者模式date-2025-06-28-17-03-39tags-设计模式"><a href="#title-12观察者模式description-12观察者模式date-2025-06-28-17-03-39tags-设计模式" class="headerlink" title="title: 12观察者模式description: 12观察者模式date: 2025-06-28 17:03:39tags: 设计模式"></a>title: 12观察者模式<br>description: 12观察者模式<br>date: 2025-06-28 17:03:39<br>tags: 设计模式</h2><p>一个对象以来多个对象，一个对象状态改变时，通知多个对象<br>一个对象成为被观察者，多个对象称为观察者</p>
+<p>不同实现方式：<br>进程内实现：同步阻塞、异步非阻塞（Google Guava EventBus事件总线）<br>跨进程实现：消息队列</p>
+<p>经典实现</p>
+<pre><code>public interface Subject {
+  
+  void registerObserver(Observer observer);//attach
+  void removeObserver(Observer observer);//detach
+  void notifyObservers(Message message);
+}
+public interface Observer {
+  void update(Message message);
+}
+public class ConcreteSubject implements Subject {
+  private List&lt;Observer&gt; observers = new ArrayList&lt;Observer&gt;();
+  @Override
+  public void registerObserver(Observer observer) {
+    observers.add(observer);
+  }
+  @Override
+  public void removeObserver(Observer observer) {
+    observers.remove(observer);
+  }
+  @Override
+  public void notifyObservers(Message message) {
+    for (Observer observer : observers) {
+      observer.update(message);
+    }
+  }
+}
+public class ConcreteObserverOne implements Observer {
+  @Override
+  public void update(Message message) {
+    //TODO: 获取消息通知，执行自己的逻辑...
+    System.out.println(&quot;ConcreteObserverOne is notified.&quot;);
+  }
+}
+public class ConcreteObserverTwo implements Observer {
+  @Override
+  public void update(Message message) {
+    //TODO: 获取消息通知，执行自己的逻辑...
+    System.out.println(&quot;ConcreteObserverTwo is notified.&quot;);
+  }
+}
+public class Demo {
+  public static void main(String[] args) {
+    ConcreteSubject subject = new ConcreteSubject();
+    subject.registerObserver(new ConcreteObserverOne());
+    subject.registerObserver(new ConcreteObserverTwo());
+    subject.notifyObservers(new Message());
+  }
+}
+</code></pre>
+<h2 id="EventBus使用"><a href="#EventBus使用" class="headerlink" title="EventBus使用"></a>EventBus使用</h2><p>EventBus、AsyncEventBus<br>EventBus#register()注册<br>EventBus#unregister()删除某个观察者<br>EventBus#post()发消息<br>@Subscribe注解，定义接收事件类型</p>
+<pre><code>public DObserver {
+  //...省略其他属性和方法...
+  
+  @Subscribe
+  public void f1(PMsg event) { //... }
+  
+  @Subscribe
+  public void f2(QMsg event) { //... }
+}
+</code></pre>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Subscribe"><a href="#Subscribe" class="headerlink" title="Subscribe"></a>Subscribe</h3><p>标明观察者中的哪个函数可以接收消息</p>
+<pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Beta
+public @interface Subscribe {}
+</code></pre>
+<h3 id="ObserverAction"><a href="#ObserverAction" class="headerlink" title="ObserverAction"></a>ObserverAction</h3><p>表示@Subscribe 注解的方法<br>target表示观察者类，method表示方法。主要用在ObserverRegistry观察者注册表中。</p>
+<pre><code>public class ObserverAction {
+  private Object target;
+  private Method method;
+  public ObserverAction(Object target, Method method) {
+    this.target = Preconditions.checkNotNull(target);
+    this.method = method;
+    this.method.setAccessible(true);
+  }
+  public void execute(Object event) { // event是method方法的参数
+    try {
+      method.invoke(target, event);
+    } catch (InvocationTargetException | IllegalAccessException e) {
+      e.printStackTrace();
+    }
+  }
+}
+</code></pre>
+<h3 id="ObserverRegistry"><a href="#ObserverRegistry" class="headerlink" title="ObserverRegistry"></a>ObserverRegistry</h3><p>Observer注册表<br>CopyOnWriteArraySet解决并发写问题</p>
+<h3 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h3><p>实现阻塞同步的观察者模式<br>MoreExecutors.directExecutor()是Google Guava提供的工具类是单线程。这么实现是为了跟AsyncEventBus统一代码逻辑，代码复用</p>
+<pre><code>public class EventBus {
+  private Executor executor;
+  private ObserverRegistry registry = new ObserverRegistry();
+  public EventBus() {
+    this(MoreExecutors.directExecutor());
+  }
+  protected EventBus(Executor executor) {
+    this.executor = executor;
+  }
+  public void register(Object object) {
+    registry.register(object);
+  }
+  public void post(Object event) {
+    List&lt;ObserverAction&gt; observerActions = registry.getMatchedObserverActions(event);
+    for (ObserverAction observerAction : observerActions) {
+      executor.execute(new Runnable() {
+        @Override
+        public void run() {
+          observerAction.execute(event);
+        }
+      });
+    }
+  }
+}
+</code></pre>
+<h3 id="AsyncEventBus"><a href="#AsyncEventBus" class="headerlink" title="AsyncEventBus"></a>AsyncEventBus</h3><p>实现异步非阻塞的观察者模式</p>
+<pre><code>public class AsyncEventBus extends EventBus {
+  public AsyncEventBus(Executor executor) {
+    super(executor);
+  }
+}
+</code></pre>

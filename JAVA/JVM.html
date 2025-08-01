@@ -1,3 +1,11 @@
+<h1 id="深入理解JVM"><a href="#深入理解JVM" class="headerlink" title="深入理解JVM"></a>深入理解JVM</h1><ul>
+<li>{%post_link JAVA&#x2F;JVM&#x2F;深入理解JVM&#x2F;1Java代码怎么运行的 ‘1Java代码怎么运行的’ %}</li>
+<li>{%post_link JAVA&#x2F;JVM&#x2F;深入理解JVM&#x2F;2虚拟机如何加载类 ‘2虚拟机如何加载类’ %}</li>
+<li>{%post_link JAVA&#x2F;JVM&#x2F;深入理解JVM&#x2F;3JVM是如何执行方法调用的 ‘3JVM是如何执行方法调用的’ %}</li>
+<li>{%post_link JAVA&#x2F;JVM&#x2F;深入理解JVM&#x2F;5JVM如何处理异常 ‘5JVM如何处理异常’ %}</li>
+<li>{%post_link JAVA&#x2F;JVM&#x2F;深入理解JVM&#x2F;10Java对象的内存布局 ‘10Java对象的内存布局’ %}</li>
+<li>{%post_link JAVA&#x2F;JVM&#x2F;深入理解JVM&#x2F;11垃圾回收 ‘11垃圾回收’ %}</li>
+</ul>
 <p>堆整体分为Heap（堆区）和方法区<br>Heap包含新生代、老生代<br>方法区包含永久代存放常量池，静态变量，方法字节码等运行时常驻数据(JDK8及之前的HotSpotJVM中)<br><img src="/%E5%86%85%E5%AD%98.png"></p>
 <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="java-jar"><a href="#java-jar" class="headerlink" title="java -jar"></a>java -jar</h2><ul>
 <li><p>java -Dxxx&#x3D;test -DprocessType&#x3D;1 -jar xxx.jar<br>注意参数放在-jar参数前面<br>取值：System.getProperty(“propName”)</p>

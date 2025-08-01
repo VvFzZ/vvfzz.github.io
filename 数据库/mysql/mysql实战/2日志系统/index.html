@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-20 10:54:55" itemprop="dateModified" datetime="2025-03-20T10:54:55+08:00">2025-03-20</time>
+      <time title="Modified: 2025-05-25 16:25:18" itemprop="dateModified" datetime="2025-05-25T16:25:18+08:00">2025-05-25</time>
     </span>
 
   
@@ -245,11 +245,14 @@
 <h2 id="更新语句执行流程"><a href="#更新语句执行流程" class="headerlink" title="更新语句执行流程"></a>更新语句执行流程</h2><ol>
 <li>执行器从引擎获取id&#x3D;1的行，引擎根据索引找到数据所在数据页，加载到内存，返回给执行器</li>
 <li>执行器执行++操作，调用引擎写入接口</li>
-<li>引擎将数据跟新到内存，记录更新操作到redo log，此时redo log处于prepare状态。返回执行器执行完成了，可随时提交事务</li>
-<li>执行器生成binlog写入磁盘</li>
+<li>引擎将数据跟新到内存（若内存没有该数据，记录到change buffer），记录更新操作到redo log，此时redo log处于prepare状态。返回执行器执行完成了，可随时提交事务<ul>
+<li>redo log写入<br> innodb_flush_log_at_trx_commit：0 每次事务提交 redo log 写入buffer<br> innodb_flush_log_at_trx_commit：1 每次事务提交 redo log 写入磁盘，prepare阶段就写入磁盘，commit不再fsync，只写入pagechache<br> innodb_flush_log_at_trx_commit：2 每次事务提交 redo log 写入page cache</li>
+</ul>
+</li>
+<li>执行器生成binlog写入磁盘<br> sync_binlog：0 Filesystem决定同步时机或cache满后写入磁盘<br> sync_binlog：1 每次事务提交写（fsync）入磁盘<br> sync_binlog：大于1 多次事务提交后写（fsync）入磁盘</li>
 <li>执行器调用引擎事务提交接口</li>
 <li>引擎把redo log状态改为commit，更新完成。</li>
-<li>空闲后将redo log flush到磁盘</li>
+<li>空闲后将redo log flush到磁盘（数据页更新）</li>
 </ol>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>两阶段提交保证redo log &#x2F; bin log 一致性</p>
 <h2 id="redo-log、bin-log如何关联"><a href="#redo-log、bin-log如何关联" class="headerlink" title="redo log、bin log如何关联"></a>redo log、bin log如何关联</h2><p>XID 崩溃恢复的时候，会按顺序扫描redo log：<br>如果碰到既有prepare、又有commit的redo log，就直接提交；<br>如果碰到只有parepare、而没有commit的redo log，就拿着XID去binlog找对应的事务。</p>

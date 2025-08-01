@@ -1,5 +1,5 @@
 <hr>
-<h2 id="title-注解date-2024-06-27-08-08-01tags-注解description"><a href="#title-注解date-2024-06-27-08-08-01tags-注解description" class="headerlink" title="title: 注解date: 2024-06-27 08:08:01tags: 注解description: "></a>title: 注解<br>date: 2024-06-27 08:08:01<br>tags: 注解<br>description: </h2><ul>
+<h2 id="title-注解date-2024-06-27-08-08-01tags-注解-自定义注解description"><a href="#title-注解date-2024-06-27-08-08-01tags-注解-自定义注解description" class="headerlink" title="title: 注解date: 2024-06-27 08:08:01tags:    注解    自定义注解description: "></a>title: 注解<br>date: 2024-06-27 08:08:01<br>tags:<br>    注解<br>    自定义注解<br>description: </h2><ul>
 <li>元注解</li>
 <li>自定义注解</li>
 <li>@ConditionalOn</li>
@@ -31,7 +31,6 @@
 @Inherited
 public @interface myannotation {
     String attr() default &quot;&quot;;
-
 }
 
 class Ps1 {
@@ -40,7 +39,8 @@ class Ps1 {
 }
 </code></pre>
 <h2 id="ConditionalOn"><a href="#ConditionalOn" class="headerlink" title="@ConditionalOn"></a>@ConditionalOn</h2><p>???？？？</p>
-<h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><pre><code>@FunctionalInterface
+<h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="@FunctionalInterface"></a>@FunctionalInterface</h2><p>只能有一个抽象方法</p>
+<pre><code>@FunctionalInterface
 public interface MyIntf1 {
     MyIntf1 DEFAULT = (sss) -&gt; {
         return new MyImp1(sss);
@@ -81,5 +81,84 @@ class MyImp1 implements MyIntf1 {
 //调用
 MyIntf1 myImp1 = MyIntf1.DEFAULT.create12(&quot;hello vvf&quot;);
 </code></pre>
-<h2 id="Import"><a href="#Import" class="headerlink" title="@Import"></a>@Import</h2><p>？？？???</p>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="ConfigurationProperties注解"><a href="#ConfigurationProperties注解" class="headerlink" title="ConfigurationProperties注解"></a>ConfigurationProperties注解</h3><p>@RefreshScope # 热更新<br>@ConfigurationProperties(prefix&#x3D;”elasticsearch.info”){<br>    private String username;<br>    private String password;<br>    private String hostname;<br>    private int port;<br>    private String scheme;<br>}</p>
+<h2 id="Import"><a href="#Import" class="headerlink" title="@Import"></a>@Import</h2><p>倒入类到容器，使其成为bean</p>
+<h3 id="导入一个或多个配置类（-Configuration-类）或普通的组件类（如-Component、-Service-等）。"><a href="#导入一个或多个配置类（-Configuration-类）或普通的组件类（如-Component、-Service-等）。" class="headerlink" title="导入一个或多个配置类（@Configuration 类）或普通的组件类（如 @Component、@Service 等）。"></a>导入一个或多个配置类（@Configuration 类）或普通的组件类（如 @Component、@Service 等）。</h3><pre><code>@Configuration
+public class ConfigA {
+    @Bean
+    public BeanA beanA() {
+        return new BeanA();
+    }
+}
+
+@Configuration
+@Import(ConfigA.class) // 导入 ConfigA，使其 Bean 定义生效
+public class ConfigB {
+    @Bean
+    public BeanB beanB() {
+        return new BeanB();
+    }
+}
+</code></pre>
+<h3 id="导入普通类"><a href="#导入普通类" class="headerlink" title="导入普通类"></a>导入普通类</h3><pre><code>public class ServiceA {
+    public void doSomething() {
+        System.out.println(&quot;ServiceA works!&quot;);
+    }
+}
+
+@Configuration
+@Import(ServiceA.class) // 直接导入 ServiceA，使其成为一个 Bean
+public class AppConfig {
+}
+</code></pre>
+<p>ServiceA 会被 Spring 容器管理，可以通过 @Autowired 注入。</p>
+<h3 id="导入-ImportSelector-实现类"><a href="#导入-ImportSelector-实现类" class="headerlink" title="导入 ImportSelector 实现类"></a>导入 ImportSelector 实现类</h3><pre><code>public class MyImportSelector implements ImportSelector {
+    @Override
+    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+        // 返回需要导入的配置类全限定名
+        return new String[] { &quot;com.example.ConfigA&quot;, &quot;com.example.ConfigB&quot; };
+    }
+}
+
+@Configuration
+@Import(MyImportSelector.class) // 动态导入配置类
+public class AppConfig {
+}
+</code></pre>
+<h3 id="导入-ImportBeanDefinitionRegistrar-实现类-ImportBeanDefinitionRegistrar-允许以编程方式注册-Bean-定义。"><a href="#导入-ImportBeanDefinitionRegistrar-实现类-ImportBeanDefinitionRegistrar-允许以编程方式注册-Bean-定义。" class="headerlink" title="导入 ImportBeanDefinitionRegistrar 实现类 ImportBeanDefinitionRegistrar 允许以编程方式注册 Bean 定义。"></a>导入 ImportBeanDefinitionRegistrar 实现类 ImportBeanDefinitionRegistrar 允许以编程方式注册 Bean 定义。</h3><pre><code>public class MyBeanRegistrar implements ImportBeanDefinitionRegistrar {
+    @Override
+    public void registerBeanDefinitions(
+        AnnotationMetadata importingClassMetadata,
+        BeanDefinitionRegistry registry
+    ) {
+        // 手动注册一个 Bean
+        RootBeanDefinition beanDefinition = new RootBeanDefinition(MyBean.class);
+        registry.registerBeanDefinition(&quot;myBean&quot;, beanDefinition);
+    }
+}
+
+@Configuration
+@Import(MyBeanRegistrar.class) // 动态注册 Bean
+public class AppConfig {
+}
+</code></pre>
+<p>常用于框架集成（如 MyBatis、Spring Boot 自动配置）</p>
+<h3 id="与-ComponentScan-结合使用"><a href="#与-ComponentScan-结合使用" class="headerlink" title="与 @ComponentScan 结合使用"></a>与 @ComponentScan 结合使用</h3><p>@ComponentScan 负责扫描包，而 @Import 负责显式引入额外的配置</p>
+<pre><code>@Configuration
+@ComponentScan(&quot;com.example.services&quot;) // 扫描包
+@Import(ConfigA.class) // 额外导入配置类
+public class AppConfig {
+}
+</code></pre>
+<h3 id="在-Spring-Boot-中的应用"><a href="#在-Spring-Boot-中的应用" class="headerlink" title="在 Spring Boot 中的应用"></a>在 Spring Boot 中的应用</h3><ul>
+<li>引入第三方库的配置（如 @EnableXXX 注解底层通常使用 @Import）</li>
+<li>模块化配置，拆分多个 @Configuration 类并按需导入。</li>
+</ul>
+<pre><code>@SpringBootApplication
+@Import({ SecurityConfig.class, DatabaseConfig.class }) // 导入多个配置类
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+</code></pre>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="ConfigurationProperties注解"><a href="#ConfigurationProperties注解" class="headerlink" title="ConfigurationProperties注解"></a>ConfigurationProperties注解</h3><p>@RefreshScope &#x2F;&#x2F;热更新<br>@ConfigurationProperties(prefix&#x3D;”elasticsearch.info”){<br>    private String username;<br>    private String password;<br>    private String hostname;<br>    private int port;<br>    private String scheme;<br>}</p>

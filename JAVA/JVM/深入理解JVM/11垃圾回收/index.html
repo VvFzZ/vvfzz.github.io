@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-15 15:49:24" itemprop="dateModified" datetime="2025-03-15T15:49:24+08:00">2025-03-15</time>
+      <time title="Modified: 2025-05-05 21:38:12" itemprop="dateModified" datetime="2025-05-05T21:38:12+08:00">2025-05-05</time>
     </span>
 
   
@@ -270,7 +270,7 @@
 <li>Survivor区对象来回复制15次晋升到老生代（复制次数参数 -XX:+MaxTenuringThreshold）</li>
 <li>单个Survivor占用超50%，也会复制高次数对象到老生代 （比例参数 XX:TargetSurvivorRatio）</li>
 </ol>
-<h3 id="卡表"><a href="#卡表" class="headerlink" title="卡表"></a>卡表</h3><p>将堆划分为一个个512字节的卡，并且维护卡表来存储每张卡的标识位。标识位代表对应卡可能存在指向新生代对象的引用。<br>将卡表中的脏卡中的对象加入MinorGC的GC Root列表，而不用扫描老生代，扫描完成后将表示为清零。</p>
+<h3 id="卡表"><a href="#卡表" class="headerlink" title="卡表"></a>卡表</h3><p>将堆划分为一个个512字节的卡，并且维护卡表来存储每张卡的标识位。标识位代表对应卡是否可能存在指向新生代对象的引用。<br>将卡表中的脏卡中的对象加入MinorGC的GC Root列表，而不用扫描老生代，扫描完成后将表示为清零。</p>
 <h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>堆分为新生代和老年代，不同代采用不同的垃圾回收算法。<br>新生代分为Eden区和两个大小一致的Survivor区，其中一个是空的。<br>新生代Minor GC中，Eden区和非空Survivor区的存活对象会被复制到空的Survivor区中，当 Survivor区中的存活对象复制次数超过一定数值时，晋升至老年代。、</p>
 <p>Minor GC只针对新生代垃圾回收，所以在枚举GC Roots时候，老年代到新生代的引用。为了避免扫描整个老年代，引入了名为卡表的技术，大致地标出可能存在老年代到新生代引用的内存区域。</p>
 
@@ -291,6 +291,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E5%9E%8B/1%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="1单例模式">
+                  1单例模式 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

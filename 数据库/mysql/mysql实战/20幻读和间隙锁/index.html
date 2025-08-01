@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-16 23:15:07" itemprop="dateModified" datetime="2025-04-16T23:15:07+08:00">2025-04-16</time>
+      <time title="Modified: 2025-05-26 11:54:21" itemprop="dateModified" datetime="2025-05-26T11:54:21+08:00">2025-05-26</time>
     </span>
 
   
@@ -230,11 +230,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h1><p>定义：新插入的数据导致事务前后读取到的数据不一致<br>幻读解决数据和binlog日志一致性问题</p>
+        <h1 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h1><p>定义：新插入的数据导致事务前后读取到的数据不一致<br>幻读解决数据和binlog日志一致性问题<br>可重复读隔离级别下使用当前读（for update、lock in share mode）会有幻读问题</p>
 <p>特点：</p>
 <ol>
-<li>可重复度级别下自动启动间隙锁<br>事务A begin;select * from t where c&#x3D;7 lock in share mode,<br>事务B begin;select * from t where c&#x3D;7 for update;<br>都会加间隙锁但不冲突，他们都没有插入数据。</li>
-<li>锁定行间的间隙</li>
+<li>可重复读级别下自动启动间隙锁<br>事务A begin;select * from t where c&#x3D;7 lock in share mode,<br>事务B begin;select * from t where c&#x3D;7 for update;<br>都会加间隙锁但不冲突，他们都没有插入数据。</li>
+<li>锁定行间的间隙<br>前开后闭</li>
 <li>引入更大范围锁定影响并发，增加锁分析的复杂度<br>使用已提交读+binlog_format&#x3D;row模式<br>读已提交不会加间隙锁<br>row模式解决主从同步数据不一致问题<br>但会有幻读问题！！</li>
 </ol>
 <h1 id="next-key-lock"><a href="#next-key-lock" class="headerlink" title="next-key lock"></a>next-key lock</h1><p>间隙锁和行锁合称<br>举例：</p>

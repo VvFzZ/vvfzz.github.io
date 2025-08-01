@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-20 16:56:00" itemprop="dateModified" datetime="2025-03-20T16:56:00+08:00">2025-03-20</time>
+      <time title="Modified: 2025-05-25 16:20:10" itemprop="dateModified" datetime="2025-05-25T16:20:10+08:00">2025-05-25</time>
     </span>
 
   
@@ -230,19 +230,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="binlog的写入机制"><a href="#binlog的写入机制" class="headerlink" title="binlog的写入机制"></a>binlog的写入机制</h1><p>事务执行过程中，先把日志写到binlog cache，事务提交的时候，再把binlog cache写到 binlog 文件中。<br>每个线程分配binlog cache内存，binlog_cache_size控制大小，超过了这个参数规定的大小，就要暂存到磁盘。</p>
+        <h1 id="binlog的写入机制"><a href="#binlog的写入机制" class="headerlink" title="binlog的写入机制"></a>binlog的写入机制</h1><p>事务执行过程中，先把日志写到binlog cache，事务提交，binlog cache写入文件。<br>每个线程分配binlog cache内存，binlog_cache_size控制大小，超过了这个参数规定的大小，就要暂存到磁盘。</p>
 <h2 id="sync-binlog"><a href="#sync-binlog" class="headerlink" title="sync_binlog"></a>sync_binlog</h2><ol>
 <li>sync_binlog&#x3D;0的时候，表示每次提交事务都只write（写缓存），不fsync（写磁盘）</li>
 <li>sync_binlog&#x3D;1的时候，表示每次提交事务都会执行 fsync；</li>
 <li>sync_binlog&#x3D;N(N&gt;1) 的时候，表示每次提交事务都write，但累积N个事务后才fsync。</li>
 </ol>
 <p>将sync_binlog设置较大值可提升性能，但主机异常重启会丢失binlog<br>实际业务场景，考虑到丢失日志量的可控性，一般不建议将这个参数设成0，比较常见的是将其设置为100~1000</p>
-<p>binlog 时mysql高可用方案的基础：如多节点、半同步、MySQL group replication等</p>
+<p>binlog 是mysql高可用方案的基础：如多节点、半同步、MySQL group replication等</p>
 <h1 id="redo-log的写入机制"><a href="#redo-log的写入机制" class="headerlink" title="redo log的写入机制"></a>redo log的写入机制</h1><p>redo log buffer多线程共享，bin log buffer 每个线程一份</p>
 <h2 id="redo-log三种存储状态"><a href="#redo-log三种存储状态" class="headerlink" title="redo log三种存储状态"></a>redo log三种存储状态</h2><ul>
-<li>redo logbuffer<br>write进入pagecache</li>
-<li>磁盘pagecache<br>fsync 持久化到物理文件<br>写入速度和内存差不多</li>
-<li>磁盘物理文件<br>慢得多</li>
+<li>redo logbuffer</li>
+<li>磁盘pagecache<br>write命令 从 redo log buffer 写入pagecache<br>不是写入磁盘速度较快</li>
+<li>磁盘物理文件<br>fsync命令从pagecache 持久化到物理文件<br>慢得多</li>
 </ul>
 <h2 id="innodb-flush-log-at-trx-commit"><a href="#innodb-flush-log-at-trx-commit" class="headerlink" title="innodb_flush_log_at_trx_commit"></a>innodb_flush_log_at_trx_commit</h2><ol>
 <li>0，事务提交只写入redo log buffer;  后台线程处理 风险：mysql重启会丢失数据</li>
@@ -261,7 +261,7 @@
 <li>binlog_group_commit_sync_delay 参数，表示延迟多少微秒后才调用fsync;</li>
 <li>binlog_group_commit_sync_no_delay_count 参数，表示累积多少次以后才调用fsync。</li>
 </ol>
-<p>WAL 机制主要得益于两个方面：</p>
+<p>WAL机制主要得益于两个方面：</p>
 <ol>
 <li>redo log和 binlog顺序写，磁盘的顺序写比随机写速度要快；</li>
 <li>组提交机制，可以大幅度降低磁盘的IOPS消耗。</li>

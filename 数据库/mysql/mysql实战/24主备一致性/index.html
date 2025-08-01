@@ -127,7 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E5%A4%87%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">主备过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#binlog-%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A0%BC%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">binlog 的三种格式对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%A4%8D%E5%88%B6%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">循环复制问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binlog-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">binlog 操作</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E5%A4%87%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">主备过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%A4%87%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">主备配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#binlog-%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A0%BC%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">binlog 的三种格式对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%A4%8D%E5%88%B6%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">循环复制问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binlog-%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">binlog 操作</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-16 23:15:07" itemprop="dateModified" datetime="2025-04-16T23:15:07+08:00">2025-04-16</time>
+      <time title="Modified: 2025-05-25 18:21:10" itemprop="dateModified" datetime="2025-05-25T18:21:10+08:00">2025-05-25</time>
     </span>
 
   
@@ -231,12 +231,22 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="主备过程"><a href="#主备过程" class="headerlink" title="主备过程"></a>主备过程</h1><ol>
-<li>备库B 通过change master命令，设置主库A的IP、端口、用户名、密码，binlog文件名和日志偏移量。</li>
-<li>在备库B上执行start slave命令，启动IO_thread和sql_thread<br> io_thread 负责与主库建立连接</li>
+<li>备库B执行change master命令，设置主库A的IP、端口、用户名、密码，binlog文件名和日志偏移量。</li>
+<li>备库B上执行start slave命令，启动IO_thread（负责与主库建立连接）、sql_thread（读取relay log解析出命令并执行）</li>
 <li>主库A校验完用户名、密码后，按照要求发送binlog</li>
 <li>备库B接收binlog，写到本地文件，称为中转日志（relay log）</li>
 <li>sql_thread读取中转日志，解析日志命令并执行</li>
 </ol>
+<h2 id="主备配置"><a href="#主备配置" class="headerlink" title="主备配置"></a>主备配置</h2><ul>
+<li>修改主配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server_id = 1</span><br><span class="line">log_bin = mysql-bin</span><br><span class="line">binlog_formate = ROW</span><br><span class="line">binlog_do_db = 需复制的库名称 //默认全部</span><br></pre></td></tr></table></figure></li>
+<li>重启主</li>
+<li>创建账号<br><code>GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &#39;repl&#39;@&#39;192.168.0.%&#39; IDENTIFIED BY &#39;password&#39;;</code></li>
+<li>获取主服务bin log 偏移量<br> <code>show master status; </code></li>
+<li>修改从库配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server_id = 2</span><br><span class="line">relay_log = mysql-relay-bin</span><br><span class="line">log_bin = mysql-bin</span><br><span class="line">binlog_formate = ROW</span><br><span class="line">read_only = 1</span><br></pre></td></tr></table></figure></li>
+<li>重启从</li>
+<li>从库执行change master to、start slave命令<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">change master to</span><br><span class="line"> master_host = &#x27;172.168.120.149&#x27;,</span><br><span class="line"> master_user = &#x27;user_sync&#x27;,</span><br><span class="line"> master_password = &#x27;mypassword&#x27;,</span><br><span class="line">  #主服务器数据库上的file值(不能有空格)</span><br><span class="line"> master_log_file = &#x27;mysql-bin.000006&#x27;,</span><br><span class="line">  #主服务器数据库的Position值</span><br><span class="line"> master_log_pos = 156,</span><br><span class="line"> get_master_public_key=1;</span><br><span class="line"></span><br><span class="line">start slave;</span><br></pre></td></tr></table></figure></li>
+<li>查询从库状态<br><code>show slave status;</code><br><code>Slave_IO_Running</code>、<code>Slave_SQL_Running</code> Yes，代表保持同步</li>
+</ul>
 <h1 id="binlog-的三种格式对比"><a href="#binlog-的三种格式对比" class="headerlink" title="binlog 的三种格式对比"></a>binlog 的三种格式对比</h1><ul>
 <li>statement<br>可能会导致主备不一致</li>
 <li>row<br>占用空间，有利于恢复数据</li>

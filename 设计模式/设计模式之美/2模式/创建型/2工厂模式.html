@@ -1,0 +1,145 @@
+<hr>
+<h2 id="title-2工厂模式description-2工厂模式date-2025-06-10-12-03-09tags-设计模式"><a href="#title-2工厂模式description-2工厂模式date-2025-06-10-12-03-09tags-设计模式" class="headerlink" title="title: 2工厂模式description: 2工厂模式date: 2025-06-10 12:03:09tags: 设计模式"></a>title: 2工厂模式<br>description: 2工厂模式<br>date: 2025-06-10 12:03:09<br>tags: 设计模式</h2><p>将复杂对象创建逻辑抽离出来，使逻辑更清晰</p>
+<h1 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h1><ol>
+<li>静态方法if判断</li>
+<li>静态类hashmap缓存&#x2F;获取</li>
+</ol>
+<p>if分支不多，改动不频繁不需要优化<br>设计模式优化if，引入类，提高扩展性，符合开闭原则，牺牲了可读性</p>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><pre><code>public class RuleConfigSource {
+  public RuleConfig load(String ruleConfigFilePath) {
+    String ruleConfigFileExtension = getFileExtension(ruleConfigFilePath);
+    IRuleConfigParser parser = null;
+    if (&quot;json&quot;.equalsIgnoreCase(ruleConfigFileExtension)) {
+      parser = new JsonRuleConfigParser();
+    } else if (&quot;xml&quot;.equalsIgnoreCase(ruleConfigFileExtension)) {
+      parser = new XmlRuleConfigParser();
+    } else if (&quot;yaml&quot;.equalsIgnoreCase(ruleConfigFileExtension)) {
+      parser = new YamlRuleConfigParser();
+    } else if (&quot;properties&quot;.equalsIgnoreCase(ruleConfigFileExtension)) {
+      parser = new PropertiesRuleConfigParser();
+    } else {
+      throw new InvalidRuleConfigException(
+             &quot;Rule config file format is not supported: &quot; + ruleConfigFilePath);
+    }
+    String configText = &quot;&quot;;
+    //从ruleConfigFilePath文件中读取配置文本到configText中
+    RuleConfig ruleConfig = parser.parse(configText);
+    return ruleConfig;
+  }
+  private String getFileExtension(String filePath) {
+    //...解析文件名获取扩展名，比如rule.json，返回json
+    return &quot;json&quot;;
+  }
+}
+</code></pre>
+<h3 id="抽离方法"><a href="#抽离方法" class="headerlink" title="抽离方法"></a>抽离方法</h3><pre><code>public RuleConfig load(String ruleConfigFilePath) {
+    String ruleConfigFileExtension = getFileExtension(ruleConfigFilePath);
+    IRuleConfigParser parser = createParser(ruleConfigFileExtension);
+    if (parser == null) {
+      throw new InvalidRuleConfigException(
+              &quot;Rule config file format is not supported: &quot; + ruleConfigFilePath);
+    }
+    String configText = &quot;&quot;;
+    //从ruleConfigFilePath文件中读取配置文本到configText中
+    RuleConfig ruleConfig = parser.parse(configText);
+    return ruleConfig;
+}
+private String getFileExtension(String filePath) {
+    //...解析文件名获取扩展名，比如rule.json，返回json
+    return &quot;json&quot;;
+}
+private IRuleConfigParser createParser(String configFormat) {
+    IRuleConfigParser parser = null;
+    if (&quot;json&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new JsonRuleConfigParser();
+    } else if (&quot;xml&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new XmlRuleConfigParser();
+    } else if (&quot;yaml&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new YamlRuleConfigParser();
+    } else if (&quot;properties&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new PropertiesRuleConfigParser();
+    }
+    return parser;
+}
+</code></pre>
+<h3 id="简单工厂1（抽离方法到类）"><a href="#简单工厂1（抽离方法到类）" class="headerlink" title="简单工厂1（抽离方法到类）"></a>简单工厂1（抽离方法到类）</h3><pre><code>public class RuleConfigSource {
+  public RuleConfig load(String ruleConfigFilePath) {
+    String ruleConfigFileExtension = getFileExtension(ruleConfigFilePath);
+    IRuleConfigParser parser = RuleConfigParserFactory.createParser(ruleConfigFileExtension);
+    if (parser == null) {
+      throw new InvalidRuleConfigException(
+              &quot;Rule config file format is not supported: &quot; + ruleConfigFilePath);
+    }
+    String configText = &quot;&quot;;
+    //从ruleConfigFilePath文件中读取配置文本到configText中
+    RuleConfig ruleConfig = parser.parse(configText);
+    return ruleConfig;
+  }
+  private String getFileExtension(String filePath) {
+    //...解析文件名获取扩展名，比如rule.json，返回json
+    return &quot;json&quot;;
+  }
+}
+public class RuleConfigParserFactory {
+  public static IRuleConfigParser createParser(String configFormat) {
+    IRuleConfigParser parser = null;
+    if (&quot;json&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new JsonRuleConfigParser();
+    } else if (&quot;xml&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new XmlRuleConfigParser();
+    } else if (&quot;yaml&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new YamlRuleConfigParser();
+    } else if (&quot;properties&quot;.equalsIgnoreCase(configFormat)) {
+      parser = new PropertiesRuleConfigParser();
+    }
+    return parser;
+  }
+}
+</code></pre>
+<h3 id="简单工厂2"><a href="#简单工厂2" class="headerlink" title="简单工厂2"></a>简单工厂2</h3><pre><code>public class RuleConfigParserFactory {
+  private static final Map&lt;String, RuleConfigParser&gt; cachedParsers = new HashMap&lt;&gt;();
+  static {
+    cachedParsers.put(&quot;json&quot;, new JsonRuleConfigParser());
+    cachedParsers.put(&quot;xml&quot;, new XmlRuleConfigParser());
+    cachedParsers.put(&quot;yaml&quot;, new YamlRuleConfigParser());
+    cachedParsers.put(&quot;properties&quot;, new PropertiesRuleConfigParser());
+  }
+  public static IRuleConfigParser createParser(String configFormat) {
+    if (configFormat == null || configFormat.isEmpty()) {
+      return null;//返回null还是IllegalArgumentException全凭你自己说了算
+    }
+    IRuleConfigParser parser = cachedParsers.get(configFormat.toLowerCase());
+    return parser;
+  }
+}
+</code></pre>
+<h1 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h1><pre><code>public interface IRuleConfigParserFactory {
+  IRuleConfigParser createParser();
+}
+public class JsonRuleConfigParserFactory implements IRuleConfigParserFactory {
+  @Override
+  public IRuleConfigParser createParser() {
+    return new JsonRuleConfigParser();
+  }
+}
+public class XmlRuleConfigParserFactory implements IRuleConfigParserFactory {
+  @Override
+  public IRuleConfigParser createParser() {
+    return new XmlRuleConfigParser();
+  }
+}
+public class YamlRuleConfigParserFactory implements IRuleConfigParserFactory {
+  @Override
+  public IRuleConfigParser createParser() {
+    return new YamlRuleConfigParser();
+  }
+}
+public class PropertiesRuleConfigParserFactory implements IRuleConfigParserFactory {
+  @Override
+  public IRuleConfigParser createParser() {
+    return new PropertiesRuleConfigParser();
+  }
+}
+</code></pre>
+<p>剥离复杂代码逻辑，使逻辑清晰，若本身代码不复杂则使用简单工厂即可。</p>
+<h1 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h1><p>提供一组对象创建的抽象接口</p>

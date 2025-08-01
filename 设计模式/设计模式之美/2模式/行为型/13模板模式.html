@@ -1,0 +1,14 @@
+<hr>
+<h2 id="title-13模板模式description-13模板模式date-2025-07-25-21-15-17tags-设计模式"><a href="#title-13模板模式description-13模板模式date-2025-07-25-21-15-17tags-设计模式" class="headerlink" title="title: 13模板模式description: 13模板模式date: 2025-07-25 21:15:17tags:  设计模式"></a>title: 13模板模式<br>description: 13模板模式<br>date: 2025-07-25 21:15:17<br>tags:  设计模式</h2><p>定义算法的骨架，让子类在不改变算法整体结构的情况下，重新定义算法中的某些步骤。</p>
+<p>解决问题：复用、扩展</p>
+<ul>
+<li>复用：<br>Java InputStream<br>Java AbstractList</li>
+<li>扩展:<br>Java Servlet<br>JUnit TestCase</li>
+</ul>
+<p>模板模式经典实现，模板方法定义为final，避免子类重写。需重写的方法定义为abstract，强迫子类实现。</p>
+<h1 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h1><p>与模板模式相同都是定义算法骨架，替换其中的某个步骤，起到代码复用和扩展的目的<br>同步回调，更像模板模式<br>异步回调，更像观察者模式<br>模板基于继承，回调基于组合更灵活</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
+<li>xxxTemplate<br>JdbcTemplate、RedisTemplate、RestTemplate<br>JdbcTemplate#excute定义固定流程，可变的部分设计成回调StatementCallback<br>JdbcTemplate#query()是对execute()的二次封装</li>
+<li>控件<br>客户端应用中点击事件回调</li>
+<li>Hook<br>Hook， Tomcat和JVM的shutdown hook<br>JVM的Runtime.addShutdownHook(Thread hook)方法，可以注册一个JVM关闭的Hook。当应用程序关闭的时候，JVM会自动调用Hook代码</li>
+</ul>

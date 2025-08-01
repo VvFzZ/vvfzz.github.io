@@ -139,13 +139,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -171,7 +171,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/34WorkerThread%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/JVM/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM/2%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -189,7 +189,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/34WorkerThread%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">34WorkerThread模式</a>
+          <a href="/JAVA/JVM/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM/2%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E7%B1%BB/" class="post-title-link" itemprop="url">2虚拟机如何加载类</a>
         </h2>
 
         <div class="post-meta-container">
@@ -200,14 +200,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+      <time title="Created: 2025-04-24 22:53:30" itemprop="dateCreated datePublished" datetime="2025-04-24T22:53:30+08:00">2025-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-01 15:37:01" itemprop="dateModified" datetime="2025-02-01T15:37:01+08:00">2025-02-01</time>
+      <time title="Modified: 2025-04-16 23:11:37" itemprop="dateModified" datetime="2025-04-16T23:11:37+08:00">2025-04-16</time>
     </span>
 
   
@@ -220,21 +220,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="正确地创建线程池"><a href="#正确地创建线程池" class="headerlink" title="正确地创建线程池"></a>正确地创建线程池</h1><ul>
-<li>使用有界队列</li>
-<li>指明拒绝策略</li>
-<li>业务相关的名字</li>
+          <p>三大步骤：加载、链接、初始化<br>基本数据类型由Java虚拟机原先定义好，引用数据类型，泛型会被擦除，数组由虚拟机直接生成，类和接口对应字节流。</p>
+<h1 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h1><p>定义：查找字节流并创建类结构<br>数据源：jar文件、class文件、网络数据源等</p>
+<p>数组没有字节流由Java虚拟机直接生成，其他类需借助类加载器完成查找字节流过程。</p>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>功能：加载类，提供命名空间<br>类的唯一性是由类加载器实例以及类的全名确定。<br>同一串字节流由不同的类加载器加载，会得到两个不同的类。可借此，来运行同一个类的不同版本。</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>启动类加载器boot class loader<br>最为基础、最为重要的类，如JRE lib目录下jar包中的类以及Xbootclasspath制定的类</li>
+<li>扩展类加载器 extension class loader<br>boot class loader的子类<br>负责相对次要又通用类的加载，如JRE lib&#x2F;ext目录下jar包中的类以及由系统变量java.ext.dirs制定的类<br>Java 9 改名为平台类加载器 platform class loader</li>
+<li>应用加载器 application class loader<br>extension class loader的子类<br>加载应用程序路径下的类，(应用程序路径指虚拟机参数 -cp&#x2F;-classpath、系统变量 java.class.path 或环境变量 CLASSPATH 所指定的路径)<br>默认应用程序中包含的类由应用类加载器加载</li>
+<li>自定义类加载器<br>如实现class文件加密，加载时解密</li>
 </ul>
-<h1 id="线程死锁的场景"><a href="#线程死锁的场景" class="headerlink" title="线程死锁的场景"></a>线程死锁的场景</h1><p>现象：应用每运行一段时间偶尔就会处于无响应的状态，监控数据看上去一切都正常，但是实际上已经不能正常工作。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//L1、L2两阶段任务共用一个线程池</span><br><span class="line">ExecutorService es = Executors.</span><br><span class="line">  newFixedThreadPool(2);</span><br><span class="line">//L1阶段的闭锁    </span><br><span class="line">CountDownLatch l1=new CountDownLatch(2);</span><br><span class="line">for (int i=0; i&lt;2; i++)&#123;</span><br><span class="line">  System.out.println(&quot;L1&quot;);</span><br><span class="line">  //执行L1阶段任务</span><br><span class="line">  es.execute(()-&gt;&#123;</span><br><span class="line">    //L2阶段的闭锁 </span><br><span class="line">    CountDownLatch l2=new CountDownLatch(2);</span><br><span class="line">    //执行L2阶段子任务</span><br><span class="line">    for (int j=0; j&lt;2; j++)&#123;</span><br><span class="line">      es.execute(()-&gt;&#123;</span><br><span class="line">        System.out.println(&quot;L2&quot;);</span><br><span class="line">        l2.countDown();</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    //等待L2阶段任务执行完</span><br><span class="line">    l2.await();</span><br><span class="line">    l1.countDown();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">//等着L1阶段任务执行完</span><br><span class="line">l1.await();</span><br><span class="line">System.out.println(&quot;end&quot;);</span><br></pre></td></tr></table></figure>
-<p>两个线程全部都阻塞在 l2.await();没有空闲的线程执行L2阶段的任务了.<br>解决办法：不同阶段任务使用不同线程池</p>
-<p><strong>提交到相同线程池中的任务一定是相互独立的，否则就一定要慎重</strong></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>正确创建线程池<br>使用有界队列<br>指明拒绝策略<br>业务相关的名字</li>
-<li>避免死锁</li>
-<li>ThreadLocal内存泄露问题</li>
-<li>异常处理</li>
+<h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>类加载器接收到加载请求时，先将请求转发给父类加载器，附加在其没有找到该类时，它再尝试加载。避免重复加载。</p>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>三个阶段：验证、准备、解析</p>
+<ul>
+<li>验证<br>确保加载类满足JVM约束</li>
+<li>准备<ol>
+<li>为加载类的静态字段分配内存，静态字段初始化在初始化阶段进行</li>
+<li>构造跟其他和类层次相关的数据结构，如动态绑定方法表</li>
+</ol>
+</li>
+<li>解析<br>将常量池中的符号引用替换为直接引语</li>
 </ul>
+<p>.class文件加载到JVM前，类不知道其他类及其他类的方法、字段对应的具体地址，若引用其他类成员时，JAVA编译器会生成一个符号引用指代目标方法类名、方法名、参数类型、返回值类型<br>解析目的就是将指代符号解析为实际引用，若引用的类未加载则触发加载此类（但未必链接及初始化它）</p>
+<p>JVM规范要求在执行前完成引用符号的解析，没有要求连接过程中完成解析</p>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>为常量值的字段赋值，执行clinit方法<br>clinit方法：Java编译器会把所有final静态字段赋值和静态代码块中的代码置于clinit方法中</p>
+<p><strong>初始化触发时机</strong></p>
+<ul>
+<li>虚拟机启动时，初始化用户指定的主类；</li>
+<li>初始化 new 指令的目标类；</li>
+<li>调用静态方法的指令时，初始化该静态方法所在的类；</li>
+<li>访问静态字段的指令时，初始化该静态字段所在的类；</li>
+<li>子类的初始化会触发父类的初始化；</li>
+<li>如果一个接口定义了 default 方法，那么直接实现或者间接实现该接口的类的初始化，会触发该接口的初始化；</li>
+<li>使用反射API对某个类进行反射调用时，初始化这个类；</li>
+<li>当初次调用 MethodHandle 实例时，初始化该 MethodHandle 指向的方法所在的类。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>加载是指查找字节流，并且据此创建类的过程。加载需要借助类加载器，在Java虚拟机中，类加载器使用了双亲委派模型，即接收到加载请求时，会先将请求转发给父类加载器。</p>
+<p>链接，是指将创建成的类合并至Java虚拟机中，使之能够执行的过程。链接还分验证、准备和解析三个阶段。其中，解析阶段为非必须的。</p>
+<p>初始化，则是为标记为常量值的字段赋值，以及执行 &lt; clinit &gt; 方法的过程。类的初始化仅会被执行一次，这个特性被用来实现单例的延迟初始化。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static Object getInstance(boolean flag) &#123;</span><br><span class="line">    if (flag) return new LazyHolder[2]; //会加载、链接、初始化LazyHolder吗?</span><br><span class="line">    return LazyHolder.INSTANCE;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>会加载，不会链接、初始化。flag&#x3D;true时链接、初始化。</p>
 
       
     </div>
@@ -261,7 +287,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/33ThreadPerMessage%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/JVM/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM/1Java%E4%BB%A3%E7%A0%81%E6%80%8E%E4%B9%88%E8%BF%90%E8%A1%8C%E7%9A%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -279,7 +305,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/33ThreadPerMessage%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">33ThreadPerMessage模式</a>
+          <a href="/JAVA/JVM/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM/1Java%E4%BB%A3%E7%A0%81%E6%80%8E%E4%B9%88%E8%BF%90%E8%A1%8C%E7%9A%84/" class="post-title-link" itemprop="url">1Java代码怎么运行的</a>
         </h2>
 
         <div class="post-meta-container">
@@ -290,14 +316,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+      <time title="Created: 2025-04-24 22:53:30" itemprop="dateCreated datePublished" datetime="2025-04-24T22:53:30+08:00">2025-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-15 15:49:24" itemprop="dateModified" datetime="2025-03-15T15:49:24+08:00">2025-03-15</time>
+      <time title="Modified: 2025-02-17 15:55:15" itemprop="dateModified" datetime="2025-02-17T15:55:15+08:00">2025-02-17</time>
     </span>
 
   
@@ -310,8 +336,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>线程实现成本高，频繁创建销毁成本高，无限创建OOM<br>轻量级线程:协程</p>
-<p>OpenJDK Loom项目，解决Java语言的轻量级线程问题，轻量级线程被叫做Fiber</p>
+          <h1 id="为什么在虚拟机里运行？"><a href="#为什么在虚拟机里运行？" class="headerlink" title="为什么在虚拟机里运行？"></a>为什么在虚拟机里运行？</h1><ol>
+<li>高级语言语法复杂，抽象程度高，不能直接在硬件上运行（需转换成java字节码）。<br>Java字节码指令的操作码（opcode）被固定为一个字节，所以取名java字节码</li>
+<li>虚拟机带来了另一个好处：托管环境，可处理内存管理、垃圾回收，数组越界检查、动态类型、安全权限的动态检查，聚焦于业务代码处理。</li>
+</ol>
+<h1 id="Java虚拟机具体是怎样运行Java字节码的？"><a href="#Java虚拟机具体是怎样运行Java字节码的？" class="headerlink" title="Java虚拟机具体是怎样运行Java字节码的？"></a>Java虚拟机具体是怎样运行Java字节码的？</h1><h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><p>5部分</p>
+<ul>
+<li>方法区<br>JVM加载class文件到方法区</li>
+<li>堆</li>
+<li>线程私有区域<ul>
+<li>线程方法栈</li>
+<li>本地方法栈</li>
+<li>PC寄存器（计数器） 存放线程执行位置（线程执行的字节码指令地址）</li>
+</ul>
+</li>
+</ul>
+<h2 id="解释执行-编译执行"><a href="#解释执行-编译执行" class="headerlink" title="解释执行&#x2F;编译执行"></a>解释执行&#x2F;编译执行</h2><p>HotSpot为例，JVM需将方法去的字节码文件转换为机器码文件，两种方式</p>
+<ol>
+<li>解释执行<br>逐条将字节码翻译为机器码并执行</li>
+<li>即时编译<br>将方法中所有字节码编译成机器码后执行</li>
+</ol>
+<p>解释执行快不需等待，即时编译实际运行速度快。HotSpot默认采用混合模式，结合两者有点，先解释执行字节码，后将热点代码以方法为代码即时编译。</p>
+<h1 id="Java虚拟机的运行效率究竟是怎么样的？"><a href="#Java虚拟机的运行效率究竟是怎么样的？" class="headerlink" title="Java虚拟机的运行效率究竟是怎么样的？"></a>Java虚拟机的运行效率究竟是怎么样的？</h1><p>HotSpot JVM采用多技术提升启动性能及峰值性能，重要手段：即时编译。<br>20%代码占用80%计算资源，二八原则。80%不常用代码采用解释执行，20%热点代码即时编译。</p>
+<p>HotSpot内置多个即时编译器：C1 、C2 、 Graal<br>在编译时间和生成代码的执行效率取舍</p>
+<ul>
+<li>C1 Client编译器<br>优化手段简，编译快，启动快，面向客户端程序</li>
+<li>C2 Server编译器<br>优化手段复杂，编译较慢，但生成代码执行效率高。面向对峰值性能有要求的服务器端程序。</li>
+</ul>
+<p>JAVA7开始HosPot默认采用分次编译：热点代码首先C1编译，之后热点中的热点C2编译<br>HosPot即时编译在额外的编译线程中进行，为了不干扰应用正常运行。根据CPU数目设置线程数，按1:2配置C1、C2</p>
+<p>计算资源充足的情况下，解释执行和编译执行同时进行，下次调用该方法时替换解释执行。<br>即时编译器因为有程序的运行时信息，优化效果更好，代码效率更高，程序峰值性更好</p>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="对于发布不频繁程序，运行时性能要求高，为什么不全部编译成机器码呢？"><a href="#对于发布不频繁程序，运行时性能要求高，为什么不全部编译成机器码呢？" class="headerlink" title="对于发布不频繁程序，运行时性能要求高，为什么不全部编译成机器码呢？"></a>对于发布不频繁程序，运行时性能要求高，为什么不全部编译成机器码呢？</h2><ol>
+<li>AOT能够在线下将Java字节码编译成机器码，主要是用来解决启动性能不好的问题。</li>
+<li>对于发布不频繁(也就是长时间运行吧？)的程序，选择线下编译和即时编译一样，因为至多一两个小时即时编译就完成了。</li>
+<li>即时编译器有根据运行时信息优化，效果更好，峰值性能更好</li>
+<li>线下编译和即时编译在峰值性能差不多的这个前提下，线下编译和即时编译就是两种选项，各有优缺点。JVM这样做，主要也是看重字节码的可移植性，而牺牲了启动性能。</li>
+</ol>
 
       
     </div>
@@ -338,7 +397,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/32Balking%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%BC%80%E7%AF%87%E8%AF%8D/%E5%BC%80%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -356,7 +415,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/32Balking%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">32Balking模式</a>
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%BC%80%E7%AF%87%E8%AF%8D/%E5%BC%80%E7%AF%87/" class="post-title-link" itemprop="url">开篇</a>
         </h2>
 
         <div class="post-meta-container">
@@ -367,14 +426,178 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-01 14:44:28" itemprop="dateModified" datetime="2025-02-01T14:44:28+08:00">2025-02-01</time>
+      <time title="Modified: 2025-01-07 11:01:41" itemprop="dateModified" datetime="2025-01-07T11:01:41+08:00">2025-01-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>主要内容</strong><br>java并发编程核心原理<br>12并发工具类<br>9中并发设计模式<br>4大并发实战案例</p>
+<p><strong>学习目标</strong><br>从单一的知识和技术中“跳出来”，高屋建瓴地看问题，并逐步建立自己的知识体系。<br>掌握java并发编程技术背后的逻辑关系以及应用场景。（建立并发问题的全景图，理解并发问题本质。）</p>
+<h1 id="开篇词"><a href="#开篇词" class="headerlink" title="开篇词"></a>开篇词</h1><p>推荐《操作系统原理》，并发编程最早的应用领域就是操作系统</p>
+<p>synchronized、wait()、notify() 不过是操作系统领域里管程模型的一种实现，条件变量 Condition也是管程里的概念。单独理解管中窥豹，站在理论模型高度会发现知识原来如此简单。</p>
+<p><strong>什么是管程？</strong><br>管程作为一种解决并发问题的模型，是继信号量模型之后的一项重大创新，它与信号量在逻辑上是等价的（可以用管程实现信号量，也可以用信号量实现管程），但是相比之下管程更易用。</p>
+<p><strong>并发编程三个核心问题：分工、同步、互斥。</strong><br>分工指的是如何高效地拆解任务并分配给线程，而同步指的是线程之间如何协作，互斥则是保证同一时刻只允许一个线程访问共享资源。<br>Java SDK 并发包很大部分内容都是按照这三个维度组织的，例如 Fork&#x2F;Join 框架就是一种分工模式，CountDownLatch 就是一种典型的同步方式，而可重入锁则是一种互斥手段。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/6%E7%BB%93%E6%9D%9F%E8%AF%AD/46%E7%BB%93%E6%9D%9F%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/6%E7%BB%93%E6%9D%9F%E8%AF%AD/46%E7%BB%93%E6%9D%9F%E8%AF%AD/" class="post-title-link" itemprop="url">46结束语</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-09 11:06:57" itemprop="dateModified" datetime="2025-02-09T11:06:57+08:00">2025-02-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li><p>选择，永远比努力更重要。选择拼搏于细分行业里的夕阳产业，是多么愚蠢。</p>
+</li>
+<li><p>找到自己的问题，才是最重要的。<br>这三年属于被“骂”的最多的三年，做的东西被同行“骂”，汇报被领导“骂”，被“骂”的多了，渐渐就意识到自己的问题了。</p>
+</li>
+<li><p>驱除虚妄，才能进步<br>所有的失败都可以归结为“错估了形势，低估了敌人，高估了自己”。<br>《驱除虚妄，才能进步》</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/45CSP%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/45CSP%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">45CSP模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-08 11:19:45" itemprop="dateModified" datetime="2025-02-08T11:19:45+08:00">2025-02-08</time>
     </span>
 
   
@@ -413,7 +636,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/31GuardedSuspension%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/44%E5%8D%8F%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -431,7 +654,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/31GuardedSuspension%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">31GuardedSuspension模式</a>
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/44%E5%8D%8F%E7%A8%8B/" class="post-title-link" itemprop="url">44协程</a>
         </h2>
 
         <div class="post-meta-container">
@@ -442,14 +665,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-01 10:49:20" itemprop="dateModified" datetime="2025-02-01T10:49:20+08:00">2025-02-01</time>
+      <time title="Modified: 2025-02-08 21:15:47" itemprop="dateModified" datetime="2025-02-08T21:15:47+08:00">2025-02-08</time>
     </span>
 
   
@@ -462,93 +685,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>等待唤醒机制的规范实现<br>GuardedObject<br>obj持有的受保护对象（回复消息）<br>调用者get() 获取受保护对象（回复消息），检查条件等待<br>消费者fireEvent()</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">class GuardedObject&lt;T&gt;&#123;</span><br><span class="line">  //持有受保护的对象</span><br><span class="line">  T obj;</span><br><span class="line">  final Lock lock = new ReentrantLock();</span><br><span class="line">  final Condition done =lock.newCondition();</span><br><span class="line">  final int timeout=2;</span><br><span class="line">  //保存所有GuardedObject</span><br><span class="line">  final static Map&lt;Object, GuardedObject&gt; gos=new ConcurrentHashMap&lt;&gt;();</span><br><span class="line">  //静态方法创建GuardedObject</span><br><span class="line">  static &lt;K&gt; GuardedObject create(K key)&#123;</span><br><span class="line">    GuardedObject go=new GuardedObject();</span><br><span class="line">    gos.put(key, go);</span><br><span class="line">    return go;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  static &lt;K, T&gt; void fireEvent(K key, T obj)&#123;</span><br><span class="line">    GuardedObject go=gos.remove(key);</span><br><span class="line">    if (go != null)&#123;</span><br><span class="line">      go.onChanged(obj);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  //事件通知方法</span><br><span class="line">  void onChanged(T obj) &#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">      this.obj = obj;</span><br><span class="line">      done.signalAll();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //获取受保护对象  </span><br><span class="line">  T get(Predicate&lt;T&gt; p) &#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">      //MESA管程推荐写法</span><br><span class="line">      while(!p.test(obj))&#123;</span><br><span class="line">        done.await(timeout, TimeUnit.SECONDS);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;catch(InterruptedException e)&#123;</span><br><span class="line">      throw new RuntimeException(e);</span><br><span class="line">    &#125;finally&#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    //返回非空的受保护对象</span><br><span class="line">    return obj;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//处理浏览器发来的请求</span><br><span class="line">Respond handleWebReq()&#123;</span><br><span class="line">  int id=序号生成器.get();</span><br><span class="line">  //创建一消息</span><br><span class="line">  Message msg1 = new </span><br><span class="line">    Message(id,&quot;&#123;...&#125;&quot;);</span><br><span class="line">  //创建GuardedObject实例</span><br><span class="line">  GuardedObject&lt;Message&gt; go=</span><br><span class="line">    GuardedObject.create(id);  </span><br><span class="line">  //发送消息</span><br><span class="line">  send(msg1);</span><br><span class="line">  //等待MQ消息</span><br><span class="line">  Message r = go.get(</span><br><span class="line">    t-&gt;t != null);  </span><br><span class="line">&#125;</span><br><span class="line">void onMessage(Message msg)&#123;</span><br><span class="line">  //唤醒等待的线程</span><br><span class="line">  GuardedObject.fireEvent(</span><br><span class="line">    msg.id, msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/30%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/30%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">30线程本地存储模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-31 19:53:08" itemprop="dateModified" datetime="2025-01-31T19:53:08+08:00">2025-01-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>没有共享，就没有伤害</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">static class SafeDateFormat &#123;</span><br><span class="line">  //定义ThreadLocal变量</span><br><span class="line">  static final ThreadLocal&lt;DateFormat&gt;</span><br><span class="line">  tl=ThreadLocal.withInitial(()-&gt; new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">      </span><br><span class="line">  static DateFormat get()&#123;</span><br><span class="line">    return tl.get();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//不同线程执行下面代码 返回的df是不同的</span><br><span class="line">DateFormat df = SafeDateFormat.get()；</span><br></pre></td></tr></table></figure>
-
-<h1 id="ThreadLocal的工作原理"><a href="#ThreadLocal的工作原理" class="headerlink" title="ThreadLocal的工作原理"></a>ThreadLocal的工作原理</h1><p>ThreadLocalMap,key:WeakReference<ThreadLocal>,value:Value</p>
-<h1 id="ThreadLocal与内存泄露"><a href="#ThreadLocal与内存泄露" class="headerlink" title="ThreadLocal与内存泄露"></a>ThreadLocal与内存泄露</h1><p>线程池中线程的存活时间长，往往和程序同生共死的，则Thread持有的ThreadLocalMap一直都不会被回收。<br>ThreadLocalMap中的Entry对ThreadLocal是弱引用（WeakReference），所以只要ThreadLocal结束了自己的生命周期是可以被回收掉的。但是Entry中的Value却是被Entry强引用的，所以即便Value的生命周期结束了，Value也是无法被回收的，从而导致内存泄露。</p>
-<p>解决办法：手动释放</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService es;</span><br><span class="line">ThreadLocal tl;</span><br><span class="line">es.execute(()-&gt;&#123;</span><br><span class="line">  //ThreadLocal增加变量</span><br><span class="line">  tl.set(obj);</span><br><span class="line">  try &#123;</span><br><span class="line">    // 省略业务逻辑代码</span><br><span class="line">  &#125;finally &#123;</span><br><span class="line">    //手动清理ThreadLocal </span><br><span class="line">    tl.remove();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h1 id="InheritableThreadLocal与继承性"><a href="#InheritableThreadLocal与继承性" class="headerlink" title="InheritableThreadLocal与继承性"></a>InheritableThreadLocal与继承性</h1><p>通过ThreadLocal创建的线程变量，其子线程是无法继承的(无法访问)</p>
-<p>不建议使用：线程池中线程的创建是动态的，很容易导致继承关系错乱，若业务逻辑依赖InheritableThreadLocal，那么很可能导致业务逻辑计算错误。</p>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>实际工作中，有很多平台型的技术方案都是采用ThreadLocal来传递一些上下文信息，例如Spring使用ThreadLocal来传递事务信息。我们曾经说过，异步编程已经很成熟了，那你觉得在异步场景中，是否可以使用Spring的事务管理器呢？<br>？？？</p>
+          <p>一种轻量级的线程<br>协程是在用户态调度切换的成本更低,线程是在内核态中调度<br>协程比线程栈要小得多,协程栈的大小往往只有几K或者几十K，线程栈大小差不多有1M</p>
+<p>线程同步意味着等待，线程等待是严重浪费。协程等待成本没那么高。</p>
 
       
     </div>
@@ -575,7 +713,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/29CopyonWrite%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/43%E8%BD%AF%E4%BB%B6%E4%BA%8B%E5%8A%A1%E5%86%85%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -593,7 +731,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/29CopyonWrite%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">29CopyonWrite模式</a>
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/43%E8%BD%AF%E4%BB%B6%E4%BA%8B%E5%8A%A1%E5%86%85%E5%AD%98/" class="post-title-link" itemprop="url">43软件事务内存</a>
         </h2>
 
         <div class="post-meta-container">
@@ -604,88 +742,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-31 16:47:45" itemprop="dateModified" datetime="2025-01-31T16:47:45+08:00">2025-01-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>不可变对象的写操作往往都是使用Copy-on-Write方法解决的<br>COW 写时复制</p>
-<p>CopyOnWriteArrayList和CopyOnWriteArraySet这两个Copy-on-Write容器在修改时复制整个数组，所以如果容器经常被修改或者这个数组本身就非常大的时候，不建议使用的。修改非常少、数组数量也不大，并且对读性能要求苛刻的场景，使用Copy-on-Write容器效果就非常好了。</p>
-<h1 id="Copy-on-Write模式的应用领域"><a href="#Copy-on-Write模式的应用领域" class="headerlink" title="Copy-on-Write模式的应用领域"></a>Copy-on-Write模式的应用领域</h1><p>CopyOnWriteArrayList和CopyOnWriteArraySet这两个Copy-on-Write容器,读操无锁,性能极好<br><strong>创建进程</strong><br>类Unix的操作系统中创建进程的API是fork()，传统的fork()函数会创建父进程的一个完整副本，例如父进程的地址空间现在用到了1G的内存，那么fork()子进程的时候要复制父进程整个进程的地址空间（占有1G内存）给子进程，这个过程是很耗时的。而Linux中的fork()函数就聪明得多了，fork()子进程的时候，并不复制整个进程的地址空间，而是让父子进程共享同一个地址空间；<strong>只用在父进程或者子进程需要写入的时候才会复制地址空间，从而使父子进程拥有各自的地址空间。</strong><br><strong>文件系统</strong><br>Btrfs (B-Tree File System)、aufs（advanced multi-layered unification filesystem）等</p>
-<h1 id="设计路由表"><a href="#设计路由表" class="headerlink" title="设计路由表"></a>设计路由表</h1><p>对读的性能要求很高，读多写少，弱一致性</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">//路由信息</span><br><span class="line">public final class Router&#123;</span><br><span class="line">  private final String  ip;</span><br><span class="line">  private final Integer port;</span><br><span class="line">  private final String  iface;</span><br><span class="line">  //构造函数</span><br><span class="line">  public Router(String ip, </span><br><span class="line">      Integer port, String iface)&#123;</span><br><span class="line">    this.ip = ip;</span><br><span class="line">    this.port = port;</span><br><span class="line">    this.iface = iface;</span><br><span class="line">  &#125;</span><br><span class="line">  //重写equals方法</span><br><span class="line">  public boolean equals(Object obj)&#123;</span><br><span class="line">    if (obj instanceof Router) &#123;</span><br><span class="line">      Router r = (Router)obj;</span><br><span class="line">      return iface.equals(r.iface) &amp;&amp;</span><br><span class="line">             ip.equals(r.ip) &amp;&amp;</span><br><span class="line">             port.equals(r.port);</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  public int hashCode() &#123;</span><br><span class="line">    //省略hashCode相关代码</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//路由表信息</span><br><span class="line">public class RouterTable &#123;</span><br><span class="line">  //Key:接口名</span><br><span class="line">  //Value:路由集合</span><br><span class="line">  ConcurrentHashMap&lt;String, CopyOnWriteArraySet&lt;Router&gt;&gt; </span><br><span class="line">    rt = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line">  //根据接口名获取路由表</span><br><span class="line">  public Set&lt;Router&gt; get(String iface)&#123;</span><br><span class="line">    return rt.get(iface);</span><br><span class="line">  &#125;</span><br><span class="line">  //删除路由</span><br><span class="line">  public void remove(Router router) &#123;</span><br><span class="line">    Set&lt;Router&gt; set=rt.get(router.iface);</span><br><span class="line">    if (set != null) &#123;</span><br><span class="line">      set.remove(router);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  //增加路由</span><br><span class="line">  public void add(Router router) &#123;</span><br><span class="line">    Set&lt;Router&gt; set = rt.computeIfAbsent(</span><br><span class="line">      route.iface, r -&gt; </span><br><span class="line">        new CopyOnWriteArraySet&lt;&gt;());</span><br><span class="line">    set.add(router);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="设计思考"><a href="#设计思考" class="headerlink" title="设计思考"></a>设计思考</h2><p>服务提供方上线、下线都会更新路由信息，这时有两种选择。<br>一种通过更新Router的状态位来标识，这样做所有访问该状态位的地方都需要同步访问，很影响性能。<br>一种采用Immutability模式，每次上线、下线创建新的Router对象或者删除对应的Router对象。由于上线、下线的频率很低，所以后者是最好的选择。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/28Immutability%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/28Immutability%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">28Immutability模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -705,21 +762,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>解决并发问题最简单方法：只读<br>上升到解决并发问题的设计模式：不变性（Immutability）模式<br>不变性，简单讲，就是对象创建之后，状态不再发生变化</p>
-<h1 id="实现不变模式"><a href="#实现不变模式" class="headerlink" title="实现不变模式"></a>实现不变模式</h1><p>类、方法、属性设置成final</p>
-<p>String和Long、Integer、Double等基础类型的包装类都具备不可变性，这些对象的线程安全性都靠不可变性来保证</p>
-<h1 id="不可变性的类，提供修改功能"><a href="#不可变性的类，提供修改功能" class="headerlink" title="不可变性的类，提供修改功能"></a>不可变性的类，提供修改功能</h1><p>具备不可变性的类，需要提供类似修改的功能：创建一个新的不可变对象<br>如String.replace方法，String字符替换操作，没有修改源字符串，而是组合新字符串返回</p>
-<h1 id="避免创建重复对象：享元模式"><a href="#避免创建重复对象：享元模式" class="headerlink" title="避免创建重复对象：享元模式"></a>避免创建重复对象：享元模式</h1><p>Long、Integer、Short、Byte等基本数据类型的包装类用到了享元模式，减少创建对象的数量，减少内存占用</p>
-<p>享元模式本质：对象池<br>Long内部维护了一个静态的对象池，仅缓存了[-128,127]，对象池在JVM启动的时候就创建好了<br>Long对象的状态有264种,太多不宜全部缓存，[-128,127]利用率最高</p>
-<p>基本所有的基础类型应用享元模式，不适合作为锁对象，因为看上去私有的锁，其实是共有的</p>
-<h1 id="Immutability模式注意事项"><a href="#Immutability模式注意事项" class="headerlink" title="Immutability模式注意事项"></a>Immutability模式注意事项</h1><ul>
-<li>属性声明为final并不一定保证不可变</li>
-<li>不可变对象需要正确发布</li>
-</ul>
-<p>不可变对象线程安全，不意味着引用不可变对象的对象就是线程安全的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//Foo线程安全</span><br><span class="line">final class Foo&#123;</span><br><span class="line">  final int age=0;</span><br><span class="line">  final int name=&quot;abc&quot;;</span><br><span class="line">&#125;</span><br><span class="line">//Bar线程不安全</span><br><span class="line">class Bar &#123;</span><br><span class="line">  Foo foo;</span><br><span class="line">  void setFoo(Foo f)&#123;</span><br><span class="line">    this.foo=f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>具备不变性的对象，只有一种状态，状态由对象内部所有的不变属性共同决定<br>无状态对象内部没有属性，只有方法；还有无状态的服务、无状态的协议等。<br>多线程领域，无状态没有线程安全问题，不需处理线程同步，性能自然好<br>分布式领域，无状态可无限水平扩展，性能问题不会出现在无状态节点</p>
+          <p>软件事务内存（Software Transactional Memory，简称STM）<br>数据库事务 MVCC Multi-Version Concurrency Control 多版本并发控制</p>
+<p>读未提交，也就是允许读到未提交的数据，这种情况下查询是不会使用锁的，可能会产生脏读、不可重复读、幻读等情况。</p>
+<p>读已提交就是只能读到已经提交的内容，可以避免脏读的产生，属于 RDBMS 中常见的默认隔离级别（比如说 Oracle 和 SQL Server），但如果想要避免不可重复读或者幻读，就需要我们在 SQL 查询的时候编写带加锁的 SQL 语句（我会在进阶篇里讲加锁）。</p>
+<p>可重复读，保证一个事务在相同查询条件下两次查询得到的数据结果是一致的，可以避免不可重复读和脏读，但无法避免幻读。MySQL 默认的隔离级别就是可重复读。</p>
+<p>可串行化，将事务进行串行化，也就是在一个队列中按照顺序执行，可串行化是最高级别的隔离等级，可以解决事务读取中所有可能出现的异常情况，但是它牺牲了系统的并发性。</p>
 
       
     </div>
@@ -746,7 +793,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/26ForkJoin/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/42Actor%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -764,7 +811,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/26ForkJoin/" class="post-title-link" itemprop="url">26ForkJoin</a>
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/5%E5%85%B6%E4%BB%96%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/42Actor%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">42Actor模型</a>
         </h2>
 
         <div class="post-meta-container">
@@ -775,14 +822,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-16 23:08:48" itemprop="dateModified" datetime="2025-02-16T23:08:48+08:00">2025-02-16</time>
+      <time title="Modified: 2025-02-08 12:32:36" itemprop="dateModified" datetime="2025-02-08T12:32:36+08:00">2025-02-08</time>
     </span>
 
   
@@ -795,224 +842,210 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Fork&#x2F;Join并行计算框架，支持分治任务模型<br>解决复杂问题的思维方法和模式<br>分治：复杂问题分解成相似子问题，直到子问题简单到可直接求解</p>
-<h1 id="分治任务模型"><a href="#分治任务模型" class="headerlink" title="分治任务模型"></a>分治任务模型</h1><p>两阶段：Fork任务分解、Join结果合并<br>两部分：分治任务线程池ForkJoinPool，分治任务ForkJoinTask<br>类似ThreadPoolExecutor和Runnable的关系，都可以理解为提交任务到线程池，不过分治任务有自己独特类型ForkJoinTask。</p>
-<h1 id="Fork-Join使用"><a href="#Fork-Join使用" class="headerlink" title="Fork&#x2F;Join使用"></a>Fork&#x2F;Join使用</h1><p>ForkJoinTask是一个抽象类包含两个方法：</p>
+          <p>Actor模型本质：以Actor作为基本计算单元的计算模型<br>在面向对象编程里面，一切都是对象；<br>在Actor模型里，一切都是Actor，并且Actor之间是完全隔离的，<strong>不会共享任何变量</strong>。</p>
+<p>Actor异步模型缺点：</p>
 <ul>
-<li>fork()方法会异步地执行一个子任务</li>
-<li>join()方法则会阻塞当前线程等待子任务执行结果<br>ForkJoinTask两个子抽象类，定义了compute方法</li>
-<li>RecursiveAction<br>compute方法没有返回</li>
-<li>RecursiveTask<br>compute方法有返回</li>
+<li>理论上不保证消息百分百送达</li>
+<li>不保证消息送达和发送顺序一致 </li>
+<li>无法保证消息会被百分百处理</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//Fork/Join这个并行计算框架计算斐波那契数列</span><br><span class="line">static void main(String[] args)&#123;</span><br><span class="line">  //创建分治任务线程池  </span><br><span class="line">  ForkJoinPool fjp = </span><br><span class="line">    new ForkJoinPool(4);</span><br><span class="line">  //创建分治任务</span><br><span class="line">  Fibonacci fib = </span><br><span class="line">    new Fibonacci(30);   </span><br><span class="line">  //启动分治任务  </span><br><span class="line">  Integer result = </span><br><span class="line">    fjp.invoke(fib);</span><br><span class="line">  //输出结果  </span><br><span class="line">  System.out.println(result);</span><br><span class="line">&#125;</span><br><span class="line">//递归任务</span><br><span class="line">static class Fibonacci extends </span><br><span class="line">    RecursiveTask&lt;Integer&gt;&#123;</span><br><span class="line">  final int n;</span><br><span class="line">  Fibonacci(int n)&#123;this.n = n;&#125;</span><br><span class="line">  protected Integer compute()&#123;</span><br><span class="line">    if (n &lt;= 1)</span><br><span class="line">      return n;</span><br><span class="line">    Fibonacci f1 = </span><br><span class="line">      new Fibonacci(n - 1);</span><br><span class="line">    //创建子任务  </span><br><span class="line">    f1.fork();</span><br><span class="line">    Fibonacci f2 = </span><br><span class="line">      new Fibonacci(n - 2);</span><br><span class="line">    //等待子任务结果，并合并结果  </span><br><span class="line">    return f2.compute() + f1.join();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="ForkJoinPool工作原理"><a href="#ForkJoinPool工作原理" class="headerlink" title="ForkJoinPool工作原理"></a>ForkJoinPool工作原理</h1><ul>
-<li>ThreadPoolExecutor<br>生产者-消费者模式，内部一个任务队列是生产者和消费者通信的媒介<br>多个工作线程共享一个任务队列（双端队列）。</li>
-<li>ThreadPoolExecutor</li>
-</ul>
-<p>内部多个任务队列，通过ForkJoinPool的invoke()或者submit()方法提交任务时，ForkJoinPool根据一定的路由规则把任务提交到一个任务队列中，如果任务在执行过程中会创建出子任务，子任务会提交到工作线程对应的任务队列中。</p>
-<p><strong>“任务窃取”机制</strong>让所有线程的工作量基本均衡,不会出现忙线程和闲线程，性能很好。<br>工作线程正常获取任务和“窃取任务”是从任务队列不同的端消费，这样能避免很多不必要的数据竞争。</p>
-<h1 id="Stream-API应用ForkJoinPool"><a href="#Stream-API应用ForkJoinPool" class="headerlink" title="Stream API应用ForkJoinPool"></a>Stream API应用ForkJoinPool</h1><p>Stream API并行流以ForkJoinPool为基础，默认所有并行流计算共享一个ForkJoinPool，默认的线程数是CPU的核数。<br>并行流计算都是CPU密集型计算完全没有问题，但存在I&#x2F;O密集型的并行流计算，可能会因为慢的I&#x2F;O计算而拖慢系统性能。<strong>建议用不同的ForkJoinPool执行不同类型的计算任务。</strong></p>
+<p>Java需要借助第三方类库使用Actor模型，如Akka、Vert.x</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//该Actor当收到消息message后，</span><br><span class="line">//会打印Hello message</span><br><span class="line">static class HelloActor extends UntypedActor &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onReceive(Object message) &#123;</span><br><span class="line">        System.out.println(&quot;Hello	&quot; + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //创建Actor系统</span><br><span class="line">    ActorSystem system = ActorSystem.create(&quot;HelloSystem&quot;);</span><br><span class="line">    //创建HelloActor</span><br><span class="line">    ActorRef helloActor = system.actorOf(Props.create(HelloActor.class));</span><br><span class="line">    //发送消息给HelloActor</span><br><span class="line">    helloActor.tell(&quot;Actor&quot;, ActorRef.noSender());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/25CompletionService/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/25CompletionService/" class="post-title-link" itemprop="url">25CompletionService</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-29 16:14:32" itemprop="dateModified" datetime="2025-01-29T16:14:32+08:00">2025-01-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>批量执行异步任务</p>
-<p>CompletionService将线程池和阻塞队列组合使用，让批量管理异步任务更简单，先执行完先进入阻塞队列。</p>
-<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ExecutorCompletionService(Executor executor)；</span><br><span class="line">ExecutorCompletionService(Executor executor, BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue)。</span><br></pre></td></tr></table></figure>
-<p>自己创建线程池可提供线程池隔离特性，避免耗时任务拖垮系统。</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;V&gt; submit(Callable&lt;V&gt; task);</span><br><span class="line">Future&lt;V&gt; submit(Runnable task, V result);</span><br><span class="line">Future&lt;V&gt; take() throws InterruptedException;//空队列阻塞</span><br><span class="line">Future&lt;V&gt; poll();//空队列返回null</span><br><span class="line">Future&lt;V&gt; poll(long timeout, TimeUnit unit) throws InterruptedException;//等待unit时间仍空队列返回null</span><br></pre></td></tr></table></figure>
-<h2 id="实现Dubbo中的Forking-Cluster"><a href="#实现Dubbo中的Forking-Cluster" class="headerlink" title="实现Dubbo中的Forking Cluster"></a>实现Dubbo中的Forking Cluster</h2><p>Dubbo中有一种叫做Forking的集群模式，并行调用服务，一个返回结果，整个服务就返回<br>如地址转坐标服务，为保证服务高可用和性能，可以并行调用3个地图服务商API，只要有1个正确返回，那么地址转坐标这个服务就直接返回。这种集群模式可以容忍2个地图服务商服务异常，缺点是消耗的资源偏多。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">public class _25CompletionService &#123;</span><br><span class="line">    @Test</span><br><span class="line">    void do1() throws InterruptedException, ExecutionException &#123;</span><br><span class="line">        ExecutorService pool = Executors.newFixedThreadPool(9);</span><br><span class="line">        ExecutorCompletionService service = new ExecutorCompletionService(pool, new ArrayBlockingQueue&lt;&gt;(10));</span><br><span class="line">        List&lt;Future&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        Future&lt;String&gt; f1 = service.submit(() -&gt; &#123;</span><br><span class="line">            return getPrice1Sleep10();</span><br><span class="line">        &#125;);</span><br><span class="line">        list.add(f1);</span><br><span class="line">        Future&lt;String&gt; f2 = service.submit(() -&gt; &#123;</span><br><span class="line">            return getPrice2Sleep2();</span><br><span class="line">        &#125;);</span><br><span class="line">        list.add(f2);</span><br><span class="line">        Future&lt;String&gt; f3 = service.submit(() -&gt; &#123;</span><br><span class="line">            return getPrice3Sleep5();</span><br><span class="line">        &#125;);</span><br><span class="line">        list.add(f3);</span><br><span class="line"></span><br><span class="line">        BlockingQueue&lt;String&gt; bq =</span><br><span class="line">                new LinkedBlockingQueue&lt;&gt;(10);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            for (int i = 0; i &lt; 3; i++) &#123;</span><br><span class="line">                System.out.printf(&quot;take %s\r\n&quot;, i);</span><br><span class="line">                Future take = service.take();</span><br><span class="line">                String r = take.get().toString();</span><br><span class="line">                System.out.printf(&quot;take %s ok,r:%s\r\n&quot;, i, r);</span><br><span class="line">                if (r != null) &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            for (Future f : list) &#123;</span><br><span class="line">                f.cancel(true);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String getPrice1Sleep10() &#123;</span><br><span class="line">        System.out.println(&quot;1-start will sleep 10s&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(10);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;1 sleep end&quot;);</span><br><span class="line">        return &quot;1-result&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String getPrice2Sleep2() &#123;</span><br><span class="line">        System.out.println(&quot;2-start will sleep 2s&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(2);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;2 sleep end&quot;);</span><br><span class="line">        return &quot;2-result&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String getPrice3Sleep5() &#123;</span><br><span class="line">        System.out.println(&quot;3-start will sleep 5s&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(5);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;3 sleep end&quot;);</span><br><span class="line">        return &quot;3-result&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/24CompletableFuture/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/24CompletableFuture/" class="post-title-link" itemprop="url">24CompletableFuture</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-31 17:33:18" itemprop="dateModified" datetime="2025-01-31T17:33:18+08:00">2025-01-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>CompletableFuture异步编程（java1.8）</p>
-<h1 id="创建CompletableFuture对象"><a href="#创建CompletableFuture对象" class="headerlink" title="创建CompletableFuture对象"></a>创建CompletableFuture对象</h1><ul>
-<li>两个基础接口：<br><code>runAsync(Runnable runnable) 与 supplyAsync(Supplier&lt;U&gt; supplier)</code>区别:是否有返回值</li>
-<li>两个重载接口-可自定义线程池：<br><code>runAsync(Runnable runnable, Executor executor)、supplyAsync(Supplier&lt;U&gt; supplier, Executor executor) </code><br>CompletableFuture 实现 Future<T>和CompletionStage<T>，Futrue接口可获取线程运行状态和结果</li>
-</ul>
-<h1 id="如何理解CompletionStage接口"><a href="#如何理解CompletionStage接口" class="headerlink" title="如何理解CompletionStage接口"></a>如何理解CompletionStage接口</h1><p>描述任务间的时序关系</p>
-<h2 id="串行"><a href="#串行" class="headerlink" title="串行"></a>串行</h2><ul>
-<li>thenApply<br>有参数和返回值</li>
-<li>thenAccept<br>有参数无返回值</li>
-<li>thenRun<br>无参数无返回值</li>
-<li>thenCompose</li>
-</ul>
-<p>以上接口区别：fn、consumer、action这三个核心参数不同</p>
-<p>*Async版本接口在ForkjoinPool线程池中获取一个线程继续执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CompletableFuture&lt;String&gt; f0 = </span><br><span class="line">  CompletableFuture.supplyAsync(</span><br><span class="line">    () -&gt; &quot;Hello World&quot;)      //①</span><br><span class="line">  .thenApply(s -&gt; s + &quot; QQ&quot;)  //②</span><br><span class="line">  .thenApply(String::toUpperCase);//③</span><br><span class="line"></span><br><span class="line">System.out.println(f0.join());</span><br><span class="line">//输出结果</span><br><span class="line">HELLO WORLD QQ</span><br></pre></td></tr></table></figure>
-<p>supplyAsync启动一个异步流程，之后是两个串行操作,任务①②③串行执行。</p>
-<h2 id="AND汇聚关系"><a href="#AND汇聚关系" class="headerlink" title="AND汇聚关系"></a>AND汇聚关系</h2><ul>
-<li>thenCombine<br>有参数有返回值</li>
-<li>thenAcceptBoth<br>有参数无返回值</li>
-<li>runAfterBoth<br>无参数无返回值</li>
-</ul>
-<h2 id="OR汇聚关系"><a href="#OR汇聚关系" class="headerlink" title="OR汇聚关系"></a>OR汇聚关系</h2><ul>
-<li>applyToEither<br>有参数有返回值</li>
-<li>acceptEither<br>有参数无返回值</li>
-<li>runAfterEither<br>无参数无返回值</li>
-</ul>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>注意：外部无法自动捕获异常，需使用以下方法</p>
+<h1 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h1><p>Actor模型异步消息机制：发送消息仅仅是发送出去，接收到后可能不会立即处理</p>
+<p>内部可保存消息表，接收到消息放入消息表，如果消息表中有数据则新消息不会马上得到处理<br>单线程处理消息,无并发问题</p>
+<p><strong>Actor不仅适用于并发计算，且适用于分布式计算</strong><br>发送消息和接收消息的Actor可以不在一个进程中，也可以不在同一台机器上，只需要知道对方的地址。</p>
+<h1 id="Actor的规范化定义？？？"><a href="#Actor的规范化定义？？？" class="headerlink" title="Actor的规范化定义？？？"></a>Actor的规范化定义？？？</h1><p>基础的计算单元，具体来讲包括三部分能力</p>
 <ol>
-<li>catch<ul>
-<li>exceptionally(ex)</li>
-</ul>
-</li>
-<li>finally<ul>
-<li>handle(result,ex)<br> 有返回值</li>
-<li>whenComplete(result,ex)<br> 无返回值</li>
-</ul>
-</li>
+<li>处理能力，处理接收到的消息。</li>
+<li>存储能力，Actor可以存储自己的内部状态，并且内部状态在不同Actor之间是绝对隔离的。</li>
+<li>通信能力，Actor可以和其他Actor之间通信。<br>当一个Actor接收的一条消息之后，这个Actor可以做以下三件事：</li>
+<li>创建更多的Actor；</li>
+<li>发消息给其他Actor；</li>
+<li>确定如何处理下一条消息。</li>
 </ol>
-<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><h2 id="以下代码是否有问题？"><a href="#以下代码是否有问题？" class="headerlink" title="以下代码是否有问题？"></a>以下代码是否有问题？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//采购订单</span><br><span class="line">PurchersOrder po;</span><br><span class="line">CompletableFuture&lt;Boolean&gt; cf = </span><br><span class="line">  CompletableFuture.supplyAsync(()-&gt;&#123;</span><br><span class="line">    //在数据库中查询规则</span><br><span class="line">    return findRuleByJdbc();</span><br><span class="line">  &#125;).thenApply(r -&gt; &#123;</span><br><span class="line">    //规则校验</span><br><span class="line">    return check(po, r);</span><br><span class="line">&#125;);</span><br><span class="line">Boolean isOk = cf.join();</span><br></pre></td></tr></table></figure>
+<h1 id="Actor实现累加器"><a href="#Actor实现累加器" class="headerlink" title="Actor实现累加器"></a>Actor实现累加器</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//累加器</span><br><span class="line">   static class CounterActor extends UntypedActor &#123;</span><br><span class="line">       private int counter = 0;</span><br><span class="line"></span><br><span class="line">       @Override</span><br><span class="line">       public void onReceive(Object message) &#123;</span><br><span class="line">       //如果接收到的消息是数字类型，执⾏累加操作，</span><br><span class="line">       //否则打印counter的值</span><br><span class="line">           if (message instanceof Number) &#123;</span><br><span class="line">               counter += ((Number) message).intValue();</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               System.out.println(counter);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">       //创建Actor系统</span><br><span class="line">       ActorSystem system = ActorSystem.create(&quot;HelloSystem&quot;);</span><br><span class="line">       //4个线程⽣产消息</span><br><span class="line">       ExecutorService es = Executors.newFixedThreadPool(4);</span><br><span class="line">       //创建CounterActor	</span><br><span class="line">       ActorRef counterActor =</span><br><span class="line">               system.actorOf(Props.create(CounterActor.class));</span><br><span class="line">       //⽣产4*100000个消息</span><br><span class="line">       for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">           es.execute(() -&gt; &#123;</span><br><span class="line">               for (int j = 0; j &lt; 100000; j++) &#123;</span><br><span class="line">                   counterActor.tell(1, ActorRef.noSender());</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;);</span><br><span class="line">       &#125;</span><br><span class="line">       //关闭线程池</span><br><span class="line">       es.shutdown();</span><br><span class="line">       //等待CounterActor处理完所有消息</span><br><span class="line">       Thread.sleep(1000);</span><br><span class="line">       //打印结果</span><br><span class="line">       counterActor.tell(&quot;&quot;, ActorRef.noSender());</span><br><span class="line">       //关闭Actor系统</span><br><span class="line">       system.shutdown();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p>答：findRuleByJdbc方法隐藏着阻塞式I&#x2F;O，这意味着会阻塞调用线程。<br>默认情况下所有的CompletableFuture共享一个ForkJoinPool，当有阻塞式I&#x2F;O时，可能导致所有的ForkJoinPool线程都阻塞，进而影响整个系统的性能。<br>利用共享往往能让我们快速实现功能，有福同享，代价就是有难要同当。强调高可用的今天，大多数人更倾向于隔离方案。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/41%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0HiKariCP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/41%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0HiKariCP/" class="post-title-link" itemprop="url">41高性能数据库连接池HiKariCP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-07 22:31:26" itemprop="dateModified" datetime="2025-02-07T22:31:26+08:00">2025-02-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="什么是数据库连接池"><a href="#什么是数据库连接池" class="headerlink" title="什么是数据库连接池"></a>什么是数据库连接池</h1><p>作用：避免重量级资源（数据库连接）频繁创建和销毁</p>
+<p>HiKariCP性能高 微观上在字节码角度优化java代码，编译出的字节码更高效<br>宏观上和两个数据结构有关：FastList、ConcurrentBag</p>
+<h1 id="FastList解决了哪些性能问题"><a href="#FastList解决了哪些性能问题" class="headerlink" title="FastList解决了哪些性能问题"></a>FastList解决了哪些性能问题</h1><h2 id="查找顺序变逆序查找"><a href="#查找顺序变逆序查找" class="headerlink" title="查找顺序变逆序查找"></a>查找顺序变逆序查找</h2><p>假设一个Connection依次创建6个Statement，分别是S1、S2、S3、S4、S5、S6，按照正常的编码习惯，关闭Statement的顺序一般是逆序的，关闭的顺序是：S6、S5、S4、S3、S2、S1，而ArrayList的remove(Object	o)方法是顺序遍历查找，逆序删除而顺序查找，这样的查找效率就太慢了。如何优化呢？很简单，优化成逆序查找就可以了。</p>
+<h2 id="优化越界检查"><a href="#优化越界检查" class="headerlink" title="优化越界检查"></a>优化越界检查</h2><p>保证不会越界，不需要每次进行越界检查</p>
+<h1 id="ConcurrentBag"><a href="#ConcurrentBag" class="headerlink" title="ConcurrentBag"></a>ConcurrentBag</h1><h2 id="add方法"><a href="#add方法" class="headerlink" title="add方法"></a>add方法</h2><p>创建一个数据库连接，add方法加入到ConcurrentBag中<br>逻辑说明：将连接加入共享队列sharedList中，如果此时有线程在等待数据库连接，那么就通过handoffQueue将其分配给等待的线程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//将空闲连接添加到队列</span><br><span class="line">void	add(final	T	bagEntry)&#123;</span><br><span class="line">    //加⼊共享队列</span><br><span class="line">    sharedList.add(bagEntry);</span><br><span class="line">    //如果有等待连接的线程，</span><br><span class="line">    //则通过handoffQueue直接分配给等待的线程</span><br><span class="line">    while(waiters.get()	&gt;	0</span><br><span class="line">    &amp;&amp;	bagEntry.getState()	==	STATE_NOT_IN_USE	</span><br><span class="line">    &amp;&amp;	!handoffQueue.offer(bagEntry))	&#123;</span><br><span class="line">        yield();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="borrow方法，获取空闲数据库连接"><a href="#borrow方法，获取空闲数据库连接" class="headerlink" title="borrow方法，获取空闲数据库连接"></a>borrow方法，获取空闲数据库连接</h2><ol>
+<li>优先从线程本地存储获取空闲连接<ul>
+<li>需要用CAS方法防止重复分配,因为本地存储中的连接是可以被其他线程窃取</li>
+</ul>
+</li>
+<li>没有，则到共享队列获取(CAS获取)</li>
+<li>共享队列中没有，则请求线程等待</li>
+</ol>
+<h2 id="requite-释放连接"><a href="#requite-释放连接" class="headerlink" title="requite 释放连接"></a>requite 释放连接</h2><p>连接状态更改为STATE_NOT_IN_USE<br>有等待线程则分配给它，没有则保存到线程本地存储</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>HiKariCP中的FastList和ConcurrentBag这两个数据结构设计巧妙，适用于数据库连接池这个特定的场景。<br>FastList适用于逆序删除场景<br>ConcurrentBag通过ThreadLocal做一次预分配，避免直接竞争共享资源，非常适合池化资源的分配。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/40%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/40%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/" class="post-title-link" itemprop="url">40高性能队列Disruptor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-16 21:19:48" itemprop="dateModified" datetime="2025-02-16T21:19:48+08:00">2025-02-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>高性能有界内存队列<br><strong>高性能原因</strong></p>
+<ul>
+<li>内存分配更加合理，RingBuffer结构，数组初始化一次性创建提升缓存命中，对象循环利用，避免GC</li>
+<li>避免伪共享</li>
+<li>无锁算法</li>
+<li>支持批量消费，消费者可无锁方式消费多个消息</li>
+</ul>
+<h1 id="避免为共享"><a href="#避免为共享" class="headerlink" title="避免为共享"></a>避免为共享</h1><p>由于共享缓存行导致缓存无效的场景<br>举例说明：<br>两个变量long l1 &#x3D; 1； long l2&#x3D;2；存储在数组中， CPU1、CPU2缓存行都加载了l1、l2，CPU1修改l1,CPU2缓存行 会失效，即使CPU2不操作l1也会失效，造成伪共享。</p>
+<p>避免缓存行失效，填充字节避免数据在一个缓存行<br>缺点：牺牲内存</p>
+<h1 id="无锁算法"><a href="#无锁算法" class="headerlink" title="无锁算法"></a>无锁算法</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>并发性能优化到极致，两个方向：</p>
+<ul>
+<li>无锁算法避免争用</li>
+<li>将CPU性能发挥到机制（填充方式避免伪共享就）</li>
+</ul>
 
       
     </div>
@@ -1032,7 +1065,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

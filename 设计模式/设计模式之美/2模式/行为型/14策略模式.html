@@ -1,0 +1,46 @@
+<hr>
+<h2 id="title-14策略模式description-14策略模式date-2025-07-27-10-35-50tags-设计模式"><a href="#title-14策略模式description-14策略模式date-2025-07-27-10-35-50tags-设计模式" class="headerlink" title="title: 14策略模式description: 14策略模式date: 2025-07-27 10:35:50tags: 设计模式"></a>title: 14策略模式<br>description: 14策略模式<br>date: 2025-07-27 10:35:50<br>tags: 设计模式</h2><p>常见应用场景：避免冗长的if-else或switch分支判断<br>解耦策略的定义、创建、使用三部分</p>
+<pre><code>对不同大小文件进行排序
+public class Sorter {
+  private static final long GB = 1000 * 1000 * 1000;
+  private static final List&lt;AlgRange&gt; algs = new ArrayList&lt;&gt;();
+  static {
+    algs.add(new AlgRange(0, 6*GB, SortAlgFactory.getSortAlg(&quot;QuickSort&quot;)));
+    algs.add(new AlgRange(6*GB, 10*GB, SortAlgFactory.getSortAlg(&quot;ExternalSort&quot;)));
+    algs.add(new AlgRange(10*GB, 100*GB, SortAlgFactory.getSortAlg(&quot;ConcurrentExternalSort&quot;)));
+    algs.add(new AlgRange(100*GB, Long.MAX_VALUE, SortAlgFactory.getSortAlg(&quot;MapReduceSort&quot;)));
+  }
+
+  public void sortFile(String filePath) {
+    // 省略校验逻辑
+    File file = new File(filePath);
+    long fileSize = file.length();
+    ISortAlg sortAlg = null;
+    for (AlgRange algRange : algs) {
+      if (algRange.inRange(fileSize)) {
+        sortAlg = algRange.getAlg();
+        break;
+      }
+    }
+    sortAlg.sort(filePath);
+  }
+
+
+  private static class AlgRange {
+    private long start;
+    private long end;
+    private ISortAlg alg;
+    public AlgRange(long start, long end, ISortAlg alg) {
+      this.start = start;
+      this.end = end;
+      this.alg = alg;
+    }
+    public ISortAlg getAlg() {
+      return alg;
+    }
+    public boolean inRange(long size) {
+      return size &gt;= start &amp;&amp; size &lt; end;
+    }
+  }
+}
+</code></pre>

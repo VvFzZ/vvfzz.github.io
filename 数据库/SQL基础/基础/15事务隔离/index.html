@@ -140,13 +140,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">240</span>
+          <span class="site-state-item-count">255</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-13 18:12:09" itemprop="dateModified" datetime="2025-03-13T18:12:09+08:00">2025-03-13</time>
+      <time title="Modified: 2025-05-26 15:08:46" itemprop="dateModified" datetime="2025-05-26T15:08:46+08:00">2025-05-26</time>
     </span>
 
   
@@ -233,22 +233,22 @@
         <ul>
 <li><p>读未提交<br>允许读到未提交数据，查询不使用锁，可能会产生脏读、不可重复读、幻读等情况。</p>
 </li>
-<li><p>读已提交<br>就是只能读到已经提交的内容，可以避免脏读的产生，属于RDBMS中常见的默认隔离级别（比如说 Oracle和SQL Server），但如果想要避免不可重复读或者幻读，就需要我们在 SQL 查询的时候编写带加锁的 SQL 语句（我会在进阶篇里讲加锁）。</p>
+<li><p>读已提交<br>就是只能读到已经提交的内容，可以避免脏读的产生，属于RDBMS中常见的默认隔离级别（比如说 Oracle和SQL Server），但如果想要避免不可重复读或者幻读，就需要我们在SQL查询的时候编写带加锁的SQL语句（我会在进阶篇里讲加锁）。</p>
 </li>
-<li><p>可重复读（默认）<br>保证一个事务在相同查询条件下两次查询得到的数据结果是一致的，可以避免不可重复读和脏读，但无法避免幻读。MySQL默认的隔离级别就是可重复读。</p>
+<li><p>可重复读（MySQL默认）<br>保证一个事务在相同查询条件下两次查询得到的数据结果是一致的，可以避免不可重复读和脏读，但无法避免幻读。</p>
 </li>
 <li><p>可串行化<br>将事务进行串行化，也就是在一个队列中按照顺序执行，可串行化是最高级别的隔离等级，可以解决事务读取中所有可能出现的异常情况，但是它牺牲了系统的并发性。</p>
 </li>
 </ul>
-<p>三个隐藏列：<br>DB_TRX_ID 操作这个数据的事务ID，最后一个对该数据进行插入或更新的事务ID<br>DB_ROLL_PTR：旧数据指针，指向undolog；<br>ROW_ID没有主键列时</p>
+<p>三个隐藏列：<br>DB_TRX_ID 事务ID，最后一个对该数据进行插入或更新的事务ID<br>DB_ROLL_PTR：旧数据指针，指向undolog；<br>ROW_ID没有主键列时</p>
 <p>undolog：记录事务id、对应的操作、当前值</p>
-<p>读已提交不是行锁实现的，是MVCC通过事务日志undolog实现的，每次查询数据创建ReadView(相同查询也创建新的)，通过undolog查询到已提交的数据<br>ReadView包含三个字段creator_trx_id当前事务，min_trx_id未提交事务， max_trx_id未开始事务，trx_ids当前活跃的事务</p>
+<p>读已提交不是行锁实现的，是MVCC通过undolog实现的，每次查询数据创建ReadView(相同查询也创建新的)，通过undolog查询到已提交的数据<br>ReadView包含三个字段creator_trx_id当前事务，min_trx_id未提交事务， max_trx_id未开始事务，trx_ids当前活跃的事务列表</p>
 <p>可见性规则：</p>
 <ul>
 <li>undolog_trx_id &lt; min_trx_id 可见</li>
 <li>undolog_trx_id &gt; max_trx_id 不可见</li>
 <li>min_trx_id &lt; undolog_trx_id &lt; max_trx_id<ul>
-<li>若undolog_trx_id是自己，可见</li>
+<li>若undolog_trx_id是creator_trx_id，可见</li>
 <li>若undolog_trx_id在活跃事务数组中，表示事务未提交，不可见</li>
 <li>若undolog_trx_id不在活跃事务数组中，表示事务已提交，可见</li>
 </ul>
@@ -258,8 +258,8 @@
 <p>串行化：表锁</p>
 <h1 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h1><p>通过undolog+readview实现<br>有隐藏数据行指向undolog，每次启动事务读创建readview指向对应的undolog节点</p>
 <h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><ul>
-<li>读写阻塞<br>通过 MVCC 可以让读写互相不阻塞，即读不阻塞写，写不阻塞读，这样就可以提升事务并发处理能力。</li>
-<li>降低死锁概率<br>MVCC 采用了乐观锁的方式，读取数据时并不需要加锁，对于写操作，也只锁定必要的行。</li>
+<li>读写阻塞<br>通过MVCC可以让读写互相不阻塞，即读不阻塞写，写不阻塞读，这样就可以提升事务并发处理能力。</li>
+<li>降低死锁概率<br>MVCC采用了乐观锁的方式，读取数据时并不需要加锁，对于写操作，也只锁定必要的行。</li>
 <li>解决一致性读的问题<br>一致性读也被称为快照读，当我们查询数据库在某个时间点的快照时，只能看到这个时间点之前事务提交更新的结果，而不能看到这个时间点之后事务提交的更新结果。</li>
 </ul>
 <h2 id="快照读、当前读"><a href="#快照读、当前读" class="headerlink" title="快照读、当前读"></a>快照读、当前读</h2><p>快照读：不加锁的简单select都属于快照读<br>如：select * from player where</p>

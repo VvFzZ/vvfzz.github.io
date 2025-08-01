@@ -1,0 +1,13 @@
+<hr>
+<h2 id="title-1单例模式description-1单例模式date-2025-06-10-12-03-03tags-设计模式"><a href="#title-1单例模式description-1单例模式date-2025-06-10-12-03-03tags-设计模式" class="headerlink" title="title: 1单例模式description: 1单例模式date: 2025-06-10 12:03:03tags: 设计模式"></a>title: 1单例模式<br>description: 1单例模式<br>date: 2025-06-10 12:03:03<br>tags: 设计模式</h2><p>保存一份避免资源浪费(池资源)<br>避免资源冲突（日志）</p>
+<p>Java单例类对象的唯一性的作用范围并非进程，而是类加载器（Class Loader）<br>Java类加载器和类全名确定类唯一性</p>
+<h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><p>饿汉<br>懒汉  支持延迟加载（加锁保证线程安全单例）<br>DCL<br>静态内部类<br>枚举方式</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ul>
+<li>数据库池不推荐单例，对于耗时sql单独线程池</li>
+<li>文件管理器</li>
+<li>配置类</li>
+<li>spring<br>解决循环依赖时使用DCL获取单例对象，但DefaultListableBeanFactory并不是单例对象<br>检查选存对象是否存在，不存在DCL检查earlySingletonObjects是否存在</li>
+</ul>
+<h1 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h1><p>OOP支持不友好，放弃了继承和多态<br>于扩展不友好<br>测试性不友好<br>不支持有参构造函数</p>
+<h2 id="替代方案"><a href="#替代方案" class="headerlink" title="替代方案"></a>替代方案</h2><p>工厂模式、IOC容器、程序员自己保证不会创建多个对象</p>
+<h1 id="多例"><a href="#多例" class="headerlink" title="多例"></a>多例</h1><p>多例，一个类创建的多个实例<br>工厂，多个不同子类的实例</p>

@@ -146,4 +146,10 @@ public class JDBCPropertiesUtil {
 </code></pre>
 <h5 id="isAssignableFrom"><a href="#isAssignableFrom" class="headerlink" title="isAssignableFrom"></a>isAssignableFrom</h5><p><code>ClassA.isAssignableFrom(ClassB)==true</code>  B继承或实现A</p>
 <h5 id="Java内省Introspector"><a href="#Java内省Introspector" class="headerlink" title="Java内省Introspector"></a>Java内省Introspector</h5><p><a href="https://fangshixiang.blog.csdn.net/article/details/95907073?spm=1001.2101.3001.6650.17&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&utm_relevant_index=20">https://fangshixiang.blog.csdn.net/article/details/95907073?spm=1001.2101.3001.6650.17&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-17-95907073-blog-139313514.235%5Ev43%5Epc_blog_bottom_relevance_base2&amp;utm_relevant_index=20</a></p>
-<h5 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h5><h5 id="x"><a href="#x" class="headerlink" title="x"></a>x</h5>
+<h5 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h5><p>接口：vvf.ln.spi.SPIService<br>实现：vvf.ln.spi.imp.SPIServiceImpl1、vvf.ln.spi.imp.SPIServiceImpl2<br>在目录&#x2F;resources&#x2F;META-INF&#x2F;services&#x2F;中新建文件 vvf.ln.spi.SPIService<br>文件内容：vvf.ln.spi.imp.SPIServiceImpl1<br>使用：</p>
+<pre><code>ServiceLoader&lt;SPIService&gt; load = ServiceLoader.load(SPIService.class);
+for (SPIService it : load) {
+    it.doSomething();
+}
+</code></pre>
+<h5 id="x"><a href="#x" class="headerlink" title="x"></a>x</h5>

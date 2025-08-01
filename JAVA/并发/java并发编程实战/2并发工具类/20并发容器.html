@@ -2,7 +2,7 @@
 <h2 id="title-20并发容器tags-description"><a href="#title-20并发容器tags-description" class="headerlink" title="title: 20并发容器tags:description:"></a>title: 20并发容器<br>tags:<br>description:</h2><h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>CopyOnWriteArrayList<br>写的时候将共享变量复制一份，好处是读操作完全无锁<br>写操作：新复制数组上增加元素后再将array指向这个新的数组</p>
 <h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>ConcurrentHashMap key无序 k&#x2F;v都不可为空 线程安全<br>ConcurrentSkipListMap key有序 k&#x2F;v都不可为空 线程安全</p>
 <p>HashMap k&#x2F;v 都允许为空 线程不安全<br>TreeMap k&#x2F;v k不可空，v可空 线程不安全<br>HashTable k&#x2F;v 都不可空 线程安全</p>
-<p>SkipList 插入、删除、查询操作平均的时间复杂度是	O(logn)<br>理论上和并发线程数没关系，在并发度非常高时，若对ConcurrentHashMap性能不满意，可尝试ConcurrentSkipListMap。</p>
+<p>SkipList 插入、删除、查询操作平均的时间复杂度是	O(logn)<br>跳表理论上和并发线程数没关系，在并发度非常高时，若对ConcurrentHashMap性能不满意，可尝试ConcurrentSkipListMap,并发线程数越高跳表结构的优势越明显.</p>
 <h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>CopyOnWriteArraySet	<br>ConcurrentSkipListSet<br>参考CopyOnWriteArrayList、ConcurrentSkipListMap原理一致</p>
 <h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><p>最复杂的并发容器类<br>分维度分类：</p>
 <ul>

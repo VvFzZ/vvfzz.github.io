@@ -6,3 +6,18 @@ install: 将构建的 artifact 安装到本地仓库
 -pl 或 --projects: 指定要构建的模块列表（Project List）
 -am 或 --also-make: 同时构建指定模块依赖的其他模块（Also Make）
 </code></pre>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="配置java版本"><a href="#配置java版本" class="headerlink" title="配置java版本"></a>配置java版本</h2><p>spring 默认编译级别java 1.5 修改为1.8</p>
+<pre><code>&lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;configuration&gt;
+                    &lt;source&gt;1.8&lt;/source&gt;
+                    &lt;target&gt;1.8&lt;/target&gt;
+                    &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;            
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+</code></pre>
