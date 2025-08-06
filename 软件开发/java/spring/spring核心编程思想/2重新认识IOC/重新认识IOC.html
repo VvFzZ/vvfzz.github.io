@@ -1,0 +1,58 @@
+<hr>
+<h2 id="title-重新认识IOCtags-IOCdescription-重新认识IOC"><a href="#title-重新认识IOCtags-IOCdescription-重新认识IOC" class="headerlink" title="title: 重新认识IOCtags: IOCdescription: 重新认识IOC"></a>title: 重新认识IOC<br>tags: IOC<br>description: 重新认识IOC</h2><h1 id="IOC主要实现策略"><a href="#IOC主要实现策略" class="headerlink" title="IOC主要实现策略"></a>IOC主要实现策略</h1><ul>
+<li>依赖查找</li>
+<li>依赖注入</li>
+</ul>
+<h1 id="容器的职责"><a href="#容器的职责" class="headerlink" title="容器的职责"></a>容器的职责</h1><p>依赖处理： 依赖查找、依赖注入<br>生命周期管理：容器生命周期、托管资源生命周期<br>配置管理：容器配置、外部化配置（xml）、托管资源配置</p>
+<h1 id="IOC实现"><a href="#IOC实现" class="headerlink" title="IOC实现"></a>IOC实现</h1><h1 id="传统IOC容器实现-JavaBeans"><a href="#传统IOC容器实现-JavaBeans" class="headerlink" title="传统IOC容器实现 JavaBeans"></a>传统IOC容器实现 JavaBeans</h1><p>PropertyDescriptor</p>
+<pre><code>import java.beans.*;
+
+public class BeanIntegration {
+    public static class User {
+        private LocalDate birthDate;
+        // getter/setter...
+    }
+
+    public static void main(String[] args) throws Exception {
+        // 获取 BeanInfo
+        BeanInfo beanInfo = Introspector.getBeanInfo(User.class);
+        
+        // 找到目标属性描述符
+        for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
+            if (&quot;birthDate&quot;.equals(pd.getName())) {
+                // 设置自定义编辑器
+                pd.setPropertyEditorClass(LocalDateEditor.class);
+                
+                // 使用编辑器
+                PropertyEditor editor = pd.createPropertyEditor(null);
+                editor.setAsText(&quot;1990-01-01&quot;);
+                System.out.println(&quot;Birth date: &quot; + editor.getValue());
+            }
+        }
+    }
+}
+
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+// 自定义 LocalDate 编辑器
+public class LocalDateEditor extends PropertyEditorSupport {
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);
+    
+    @Override
+    public void setAsText(String text) throws IllegalArgumentException {
+        setValue(LocalDate.parse(text, formatter));
+    }
+    
+    @Override
+    public String getAsText() {
+        LocalDate date = (LocalDate) getValue();
+        return date != null ? date.format(formatter) : &quot;&quot;;
+    }
+}
+</code></pre>
+<h1 id="轻量级容器"><a href="#轻量级容器" class="headerlink" title="轻量级容器"></a>轻量级容器</h1><p>快速启动（需要的功能，依赖的资源）<br>有无复杂配置？<br>轻量级内存占用，最小API依赖</p>
+<h1 id="依赖查找和依赖注入对比"><a href="#依赖查找和依赖注入对比" class="headerlink" title="依赖查找和依赖注入对比"></a>依赖查找和依赖注入对比</h1><p>依赖查找主动获取，实现相对复杂，代码入侵性强，依赖容器API，可读性良好<br>依赖注入被动提供，实现便利，地入侵性，不依赖容器API，可读性一般</p>
+<p>没有绝对好坏，只有相对合理；互补使用。</p>
+<h1 id="构造器注入-vs-setter注入"><a href="#构造器注入-vs-setter注入" class="headerlink" title="构造器注入 vs setter注入"></a>构造器注入 vs setter注入</h1><p>必须的依赖使用构造器<br>可选依赖使用setter</p>

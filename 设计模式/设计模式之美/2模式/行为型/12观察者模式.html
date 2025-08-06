@@ -1,8 +1,7 @@
 <hr>
 <h2 id="title-12观察者模式description-12观察者模式date-2025-06-28-17-03-39tags-设计模式"><a href="#title-12观察者模式description-12观察者模式date-2025-06-28-17-03-39tags-设计模式" class="headerlink" title="title: 12观察者模式description: 12观察者模式date: 2025-06-28 17:03:39tags: 设计模式"></a>title: 12观察者模式<br>description: 12观察者模式<br>date: 2025-06-28 17:03:39<br>tags: 设计模式</h2><p>一个对象以来多个对象，一个对象状态改变时，通知多个对象<br>一个对象成为被观察者，多个对象称为观察者</p>
 <p>不同实现方式：<br>进程内实现：同步阻塞、异步非阻塞（Google Guava EventBus事件总线）<br>跨进程实现：消息队列</p>
-<p>经典实现</p>
-<pre><code>public interface Subject {
+<h2 id="经典实现"><a href="#经典实现" class="headerlink" title="经典实现"></a>经典实现</h2><pre><code>public interface Subject {
   
   void registerObserver(Observer observer);//attach
   void removeObserver(Observer observer);//detach

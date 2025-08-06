@@ -1,0 +1,139 @@
+<hr>
+<h2 id="title-SpringBean基础tags-SpringBeandescription-SpringBean基础"><a href="#title-SpringBean基础tags-SpringBeandescription-SpringBean基础" class="headerlink" title="title: SpringBean基础tags: SpringBeandescription: SpringBean基础"></a>title: SpringBean基础<br>tags: SpringBean<br>description: SpringBean基础</h2><ul>
+<li>定义<ul>
+<li><p>BeanDefination 元信息<br>  Bean的配置元信息：bean类名；bean行为配置（作用域，自动绑定模式，生命周期回调）；其他Bean引用（依赖或合作者）；配置设置（Properties）<br>  两种BeanDefinition实例化方式：BeanDefinitionBuilder、AbstractBeanDefinition(GenericBeanDefinition)</p>
+</li>
+<li><p>命名<br>  xml：DefaultBeanNameGenerator<br>  注解：AnnotationBeanNameGenerator</p>
+</li>
+<li><p>别名<br>  <code>&lt;alias name=&quot;user&quot; alias=&quot;xiaomage-user&quot;/&gt;</code></p>
+</li>
+</ul>
+</li>
+<li>加载（注册）<ol>
+<li>xml配置</li>
+<li>java注解<ul>
+<li>@Bean</li>
+<li>@Componet</li>
+<li>@Import</li>
+</ul>
+</li>
+<li>JAVA API<ul>
+<li>命名方式 BeanDefinitionRegistry#registerBeanDefinition(String,BeanDefinition)</li>
+<li>非命名方式 BeanDefinitionReaderUtils#registerWithGeneratedName(AbstractBeanDefinition,BeadefinitionRegistry)</li>
+<li>AnnotatedBeanDefinitionReader#Register(Class…)</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>//2通过 AbstractBeanDefinition 以及派生类
+
+
+//JAVA API
+public static void registerUserBeanDefinition(BeanDefinitionRegistry registry, String beanName){
+
+    //GenericBeanDefinition genericBeanDefinition = new GenericBeanDefinition();
+    //genericBeanDefinition.setBeanClass(User.class);
+    //MutablePropertyValues propertyValues = new MutablePropertyValues();
+    //propertyValues.add( &quot;id&quot;, 1).add( &quot;name&quot;,&quot;小马哥&quot;);
+    //genericBeanDefinition.setPropertyValues(propertyValues);
+
+    BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(User.class);
+    beanDefinitionBuilder
+        .addPropertyValue( name:&quot;id&quot;,value:1L)
+        .addPropertyValue( name:&quot;name&quot;,value:&quot;小马哥&quot;);
+    //判断如果 beanName 参数存在时
+    if(StringUtils.hasText(beanName)){
+        // 注册 BeanDefinition
+        registry.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
+    } else {
+        // 非命名 Bean 注册方法
+        BeanDefinitionReaderUtils.registerWithGeneratedName(beanDefinitionBuilder.getBeanDefinition(),registry);
+    }
+}
+
+
+AnnotationconfigApplicationcontext applicationcontext = new AnnotationconfigApplicationcontext();
+//注册Configuration Class(配置类)
+applicationContext.register(AnnotationBeanDefinitionDemo.class);
+
+class AnnotationBeanDefinitionDemo{
+    @Bean
+    public User user(){
+        return new user();
+    }
+}
+</code></pre>
+<ul>
+<li><p>实例化</p>
+<ol>
+<li><p>构造器（配置元信息：xml，注解，API）</p>
+</li>
+<li><p>静态工厂方法（配置元信息：xml，API）</p>
+<pre><code>&lt;bean id=&quot;user-by-static-method&quot; factory-bean=&quot;userFactory&quot; factory-method=&quot;createUser&quot;/&gt;
+</code></pre>
+</li>
+<li><p>通过Bean工厂方法（配置元信息：xml，API）</p>
+<pre><code>&lt;bean id=&quot;user-by-instance-method&quot; factory-bean=&quot;userFactory&quot; factory-method=&quot;createUser&quot;/&gt;
+&lt;bean id=&quot;userFactory&quot; class=&quot;org.geekbang.thinking.in.spring.bean.factory.DefaultUserFactory&quot;/&gt;
+</code></pre>
+</li>
+<li><p>通过FactoryBean（配置元信息：xml，注解，API）</p>
+<pre><code>&lt;bean id=&quot;user-by-factory-bean&quot; class=&quot;org.geekbang,thinking.in.spring.bean,factory.UserFactoryBean&quot; /&gt;
+</code></pre>
+</li>
+<li><p>ServiceLoaderFactoryBean<br> SPI方式,新建UserFactory文件，写入其实现类</p>
+<pre><code>&lt;bean id=&quot;userFactoryserviceLoader&quot; class=&quot;org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean&gt;
+    &lt;property name=&quot;serviceType&quot; value=&quot;org.geekbang .thinking.in.spring.bean.factory.UserFactory&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+</li>
+<li><p>AutowireCapableBeanFacotry#createBean(java.lang.class,int,boolean)</p>
+<pre><code>ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;&quot;);
+AutowireCapableBeanFactory beanFactory = applicationContext.getAutowireCapableBeanFactory();
+userFactory userFactory = beanFactory.createBean(DefaultUserFactory.class);//使用抽象类会异常
+User user = userFactory.createUser();
+</code></pre>
+</li>
+<li><p>BeanDefinitionRegistry#registerBeanDefinition(String,BeanDefinition)</p>
+</li>
+</ol>
+</li>
+<li><p>初始化<br>  三种方式 ，以下三种方式执行顺序依次</p>
+<ol>
+<li>@PostConstruct</li>
+<li>接口InitializingBean#afterPropertiesSet()</li>
+<li>自定义<ul>
+<li>XML <bean init-method = "init" /></li>
+<li>注解 @Bean(initMethod&#x3D;”init)</li>
+<li>API AbstractBeanDefinition#setInitMehtodName(String)</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>延迟初始化</p>
+<ul>
+<li>使用<br>  依赖查找<br>  依赖注入</li>
+<li>销毁<ol>
+<li>@PreDestroy</li>
+<li>DisposableBean接口destroy方法</li>
+<li>自定义 <ul>
+<li>注解@Bean(destryoMethod&#x3D;””)</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>回收<ol>
+<li>关闭Spring容器（应用上下文）</li>
+<li>执行GC</li>
+<li>Spring Bean覆盖的finalize方法被回调</li>
+</ol>
+</li>
+</ul>
+<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><h2 id="如何注册一个Spring-Bean"><a href="#如何注册一个Spring-Bean" class="headerlink" title="如何注册一个Spring Bean"></a>如何注册一个Spring Bean</h2><ul>
+<li>通过BeanDefinition</li>
+<li>外部单体对象注册<br>AnnotationConfigApplicationContext applicationContext &#x3D; new AnnotationConfigApplicationContext();<br>UserFactory userFactory &#x3D; new DefaultUserFactory();<br>&#x2F;&#x2F; ConfigurableListableBeanFactory beanFactory &#x3D; applicationContext.getBeanfactory();<br>SingletonBeanRegistry SingletonBeanRegistry  &#x3D; applicationContext.getBeanfactory();<br>SingletonBeanRegistry.registersingleton(“userFactory”,userFactory);<br>applicationContext.refresh();<br>applicationContext.getBean(“userFactory”);</li>
+</ul>
+<h2 id="什么是BeanDefinition"><a href="#什么是BeanDefinition" class="headerlink" title="什么是BeanDefinition"></a>什么是BeanDefinition</h2><p>定义Bean元信息：<br>SCOPE作用域<br>懒加载<br>dependsOn<br>primary<br>initmehtod<br>destroymethod</p>
+<h2 id="Spring容器怎么管理注册Bean"><a href="#Spring容器怎么管理注册Bean" class="headerlink" title="Spring容器怎么管理注册Bean"></a>Spring容器怎么管理注册Bean</h2><p>Bean生命周期<br>配置元信息读取、解析<br>依赖查找和注入<br>等。</p>

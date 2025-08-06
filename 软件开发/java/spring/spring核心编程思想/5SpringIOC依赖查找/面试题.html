@@ -1,0 +1,5 @@
+<hr>
+<h2 id="title-面试题tags-description-面试题"><a href="#title-面试题tags-description-面试题" class="headerlink" title="title: 面试题tags:description: 面试题"></a>title: 面试题<br>tags:<br>description: 面试题</h2><h1 id="ObjectFactory-与-BeanFactory的区别"><a href="#ObjectFactory-与-BeanFactory的区别" class="headerlink" title="ObjectFactory 与 BeanFactory的区别"></a>ObjectFactory 与 BeanFactory的区别</h1><p>都提供依赖查找能力；<br>ObjectFactory本身不具备以来查找能力，依靠BeanFactory提供，且仅提供一个或一种类型Bean依赖查找<br>BeanFactory提供单个，集合，层次性多种以来查找方式</p>
+<p>ObjectFactory实例：<code>org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean</code></p>
+<h1 id="BeanFactory-getBean是否线程安全"><a href="#BeanFactory-getBean是否线程安全" class="headerlink" title="BeanFactory.getBean是否线程安全"></a>BeanFactory.getBean是否线程安全</h1><p>安全,DefaultListableBeanFactory实现会加锁</p>
+<h1 id="Spring依赖查找和依赖注入来源有什么区别？"><a href="#Spring依赖查找和依赖注入来源有什么区别？" class="headerlink" title="Spring依赖查找和依赖注入来源有什么区别？"></a>Spring依赖查找和依赖注入来源有什么区别？</h1>

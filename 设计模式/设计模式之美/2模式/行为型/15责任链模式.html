@@ -1,2 +1,202 @@
 <hr>
-<h2 id="title-15责任链模式tags-设计模式description-15责任链模式date-2025-07-27-11-00-08"><a href="#title-15责任链模式tags-设计模式description-15责任链模式date-2025-07-27-11-00-08" class="headerlink" title="title: 15责任链模式tags: 设计模式description: 15责任链模式date: 2025-07-27 11:00:08"></a>title: 15责任链模式<br>tags: 设计模式<br>description: 15责任链模式<br>date: 2025-07-27 11:00:08</h2>
+<h2 id="title-15责任链模式tags-设计模式description-15责任链模式date-2025-07-27-11-00-08"><a href="#title-15责任链模式tags-设计模式description-15责任链模式date-2025-07-27-11-00-08" class="headerlink" title="title: 15责任链模式tags: 设计模式description: 15责任链模式date: 2025-07-27 11:00:08"></a>title: 15责任链模式<br>tags: 设计模式<br>description: 15责任链模式<br>date: 2025-07-27 11:00:08</h2><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>两种实现方式：链表、数组</p>
+<h2 id="链表存储处理器"><a href="#链表存储处理器" class="headerlink" title="链表存储处理器"></a>链表存储处理器</h2><pre><code>public abstract class Handler {
+  protected Handler successor = null;
+  public void setSuccessor(Handler successor) {
+    this.successor = successor;
+  }
+  public final void handle() {
+    boolean handled = doHandle();
+    if (successor != null &amp;&amp; !handled) {
+      successor.handle();
+    }
+  }
+  protected abstract boolean doHandle();
+}
+public class HandlerA extends Handler {
+  @Override
+  protected boolean doHandle() {
+    boolean handled = false;
+    //...
+    return handled;
+  }
+}
+public class HandlerB extends Handler {
+  @Override
+  protected boolean doHandle() {
+    boolean handled = false;
+    //...
+    return handled;
+  }
+}
+
+public class HandlerChain {
+  private Handler head = null;
+  private Handler tail = null;
+  public void addHandler(Handler handler) {
+    handler.setSuccessor(null);
+    if (head == null) {
+      head = handler;
+      tail = handler;
+      return;
+    }
+    tail.setSuccessor(handler);
+    tail = handler;
+  }
+  public void handle() {
+    if (head != null) {
+      head.handle();
+    }
+  }
+}
+
+// 使用举例
+public class Application {
+  public static void main(String[] args) {
+    HandlerChain chain = new HandlerChain();
+    chain.addHandler(new HandlerA());
+    chain.addHandler(new HandlerB());
+    chain.handle();
+  }
+}
+</code></pre>
+<h2 id="数组存储处理器"><a href="#数组存储处理器" class="headerlink" title="数组存储处理器"></a>数组存储处理器</h2><pre><code>public interface IHandler {
+  boolean handle();
+}
+
+public class HandlerA implements IHandler {
+  @Override
+  public boolean handle() {
+    boolean handled = false;
+    //...
+    return handled;
+  }
+}
+
+public class HandlerB implements IHandler {
+  @Override
+  public boolean handle() {
+    boolean handled = false;
+    //...
+    return handled;
+  }
+}
+
+public class HandlerChain {
+  private List&lt;IHandler&gt; handlers = new ArrayList&lt;&gt;();
+  public void addHandler(IHandler handler) {
+    this.handlers.add(handler);
+  }
+  public void handle() {
+    for (IHandler handler : handlers) {
+      boolean handled = handler.handle();
+      if (handled) {
+        break;
+      }
+    }
+  }
+}
+
+// 使用举例
+public class Application {
+  public static void main(String[] args) {
+    HandlerChain chain = new HandlerChain();
+    chain.addHandler(new HandlerA());
+    chain.addHandler(new HandlerB());
+    chain.handle();
+  }
+}
+</code></pre>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>过滤器、拦截器</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Servlet Filter</td>
+<td>→</td>
+<td>→</td>
+<td>Servlet.service()</td>
+<td>→</td>
+<td>SpringMVC dispatcher</td>
+<td>→</td>
+<td>preHandle</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>↓</td>
+<td></td>
+</tr>
+<tr>
+<td>Servlet Filter</td>
+<td>←</td>
+<td>afterCompletion</td>
+<td>渲染视图</td>
+<td>←</td>
+<td>postHandle</td>
+<td>←</td>
+<td>Controller业务代码</td>
+</tr>
+</tbody></table>
+<p>Spring框架中，DispatcherServlet.doDispatch()方法来分发请求，它在真正的业务逻辑执行前后，执行HandlerExecutionChain中applyPreHandle()和applyPostHandle()函数，用来实现拦截的功能</p>
+<h2 id="Spring-Interceptor底层实现"><a href="#Spring-Interceptor底层实现" class="headerlink" title="Spring Interceptor底层实现"></a>Spring Interceptor底层实现</h2><p>Servlet Filter是Servlet规范的一部分，实现依赖于Web容器，如：ApplicationFilterChain类（Tomcat提供的FilterChain 的实现类）<br>Spring Interceptor是SpringMVC框架的一部分，由SpringMVC框架来提供实现。<br>Interceptor只能处理进入mvc的请求，不能处理静态资源</p>
+<pre><code>//简化后代码
+public class HandlerExecutionChain {
+ private final Object handler;
+ private HandlerInterceptor[] interceptors;
+ 
+ public void addInterceptor(HandlerInterceptor interceptor) {
+  initInterceptorList().add(interceptor);
+ }
+ boolean applyPreHandle(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  HandlerInterceptor[] interceptors = getInterceptors();
+  if (!ObjectUtils.isEmpty(interceptors)) {
+   for (int i = 0; i &lt; interceptors.length; i++) {
+    HandlerInterceptor interceptor = interceptors[i];
+    if (!interceptor.preHandle(request, response, this.handler)) {
+     triggerAfterCompletion(request, response, null);
+     return false;
+    }
+   }
+  }
+  return true;
+ }
+ void applyPostHandle(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws Exception {
+  HandlerInterceptor[] interceptors = getInterceptors();
+  if (!ObjectUtils.isEmpty(interceptors)) {
+   for (int i = interceptors.length - 1; i &gt;= 0; i--) {
+    HandlerInterceptor interceptor = interceptors[i];
+    interceptor.postHandle(request, response, this.handler, mv);
+   }
+  }
+ }
+ void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse response, Exception ex)
+   throws Exception {
+  HandlerInterceptor[] interceptors = getInterceptors();
+  if (!ObjectUtils.isEmpty(interceptors)) {
+   for (int i = this.interceptorIndex; i &gt;= 0; i--) {
+    HandlerInterceptor interceptor = interceptors[i];
+    try {
+     interceptor.afterCompletion(request, response, this.handler, ex);
+    } catch (Throwable ex2) {
+     logger.error(&quot;HandlerInterceptor.afterCompletion threw exception&quot;, ex2);
+    }
+   }
+  }
+ }
+}
+</code></pre>

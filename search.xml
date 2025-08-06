@@ -9,6 +9,9 @@
 <li><a href="/JAVA/%E9%9D%A2%E8%AF%95/" title="面试">后端技术面试38讲</a></li>
 <li><a href="/JAVA/JVM/" title="">JVM</a></li>
 <li><a href="/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/mysql/" title="mysql">mysql</a></li>
+<li><a href="/nginx/index/" title="nginx">nginx</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index/" title="设计模式">设计模式</a></li>
+<li><a href="/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/java/spring/spring%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" title="spring核心编程思想">spring核心编程思想</a></li>
 </ul>
 ]]></content>
   </entry>
@@ -1352,7 +1355,7 @@ buffer 减少磁头旋转，减少寻址时间
 <h1 id="SOLID"><a href="#SOLID" class="headerlink" title="SOLID"></a>SOLID</h1><p>单一职责 ：模块，接口，类设计职责单一<br>开放封闭 ：扩展开放修改封闭<br>里氏替换 ：子类替换父类<br>接口隔离 ：（接口中不应包含调用者不需要的接口，把不同功能拆分）区别单一职责，它通过调用者如何使用接口来间接地判定<br>依赖倒置 ：依赖抽象不依赖具体，具体实现依赖抽象；高层模块不依赖低层模块，它们共同依赖同一个抽象。</p>
 <p>迪米特法则 Law of Demeter 最小知道原则<br>不该有直接依赖关系的类之间，不要有依赖；有依赖关系的类之间，尽量只依赖必要的接口。高内聚，低耦合。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>设计模式主要目的:解藕</p>
-<p>创建型，将对象的创建和使用解藕<br>结构型，将不同功能代码解藕<br>行为型，将不同行为代码解藕</p>
+<p>创建型，将对象的创建和使用解藕<br>结构型，将不同功能代码解藕<br>行为型，将不同行为代码解藕<br>观察者模式将观察者和被观察者的行为解藕</p>
 ]]></content>
       <tags>
         <tag>设计模式</tag>
@@ -10721,8 +10724,7 @@ return v;
     <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/12%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<p>一个对象以来多个对象，一个对象状态改变时，通知多个对象<br>一个对象成为被观察者，多个对象称为观察者</p>
 <p>不同实现方式：<br>进程内实现：同步阻塞、异步非阻塞（Google Guava EventBus事件总线）<br>跨进程实现：消息队列</p>
-<p>经典实现</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Subject &#123;</span><br><span class="line">  </span><br><span class="line">  void registerObserver(Observer observer);//attach</span><br><span class="line">  void removeObserver(Observer observer);//detach</span><br><span class="line">  void notifyObservers(Message message);</span><br><span class="line">&#125;</span><br><span class="line">public interface Observer &#123;</span><br><span class="line">  void update(Message message);</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteSubject implements Subject &#123;</span><br><span class="line">  private List&lt;Observer&gt; observers = new ArrayList&lt;Observer&gt;();</span><br><span class="line">  @Override</span><br><span class="line">  public void registerObserver(Observer observer) &#123;</span><br><span class="line">    observers.add(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  @Override</span><br><span class="line">  public void removeObserver(Observer observer) &#123;</span><br><span class="line">    observers.remove(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  @Override</span><br><span class="line">  public void notifyObservers(Message message) &#123;</span><br><span class="line">    for (Observer observer : observers) &#123;</span><br><span class="line">      observer.update(message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteObserverOne implements Observer &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void update(Message message) &#123;</span><br><span class="line">    //TODO: 获取消息通知，执行自己的逻辑...</span><br><span class="line">    System.out.println(&quot;ConcreteObserverOne is notified.&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteObserverTwo implements Observer &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void update(Message message) &#123;</span><br><span class="line">    //TODO: 获取消息通知，执行自己的逻辑...</span><br><span class="line">    System.out.println(&quot;ConcreteObserverTwo is notified.&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Demo &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    ConcreteSubject subject = new ConcreteSubject();</span><br><span class="line">    subject.registerObserver(new ConcreteObserverOne());</span><br><span class="line">    subject.registerObserver(new ConcreteObserverTwo());</span><br><span class="line">    subject.notifyObservers(new Message());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="经典实现"><a href="#经典实现" class="headerlink" title="经典实现"></a>经典实现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Subject &#123;</span><br><span class="line">  </span><br><span class="line">  void registerObserver(Observer observer);//attach</span><br><span class="line">  void removeObserver(Observer observer);//detach</span><br><span class="line">  void notifyObservers(Message message);</span><br><span class="line">&#125;</span><br><span class="line">public interface Observer &#123;</span><br><span class="line">  void update(Message message);</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteSubject implements Subject &#123;</span><br><span class="line">  private List&lt;Observer&gt; observers = new ArrayList&lt;Observer&gt;();</span><br><span class="line">  @Override</span><br><span class="line">  public void registerObserver(Observer observer) &#123;</span><br><span class="line">    observers.add(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  @Override</span><br><span class="line">  public void removeObserver(Observer observer) &#123;</span><br><span class="line">    observers.remove(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  @Override</span><br><span class="line">  public void notifyObservers(Message message) &#123;</span><br><span class="line">    for (Observer observer : observers) &#123;</span><br><span class="line">      observer.update(message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteObserverOne implements Observer &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void update(Message message) &#123;</span><br><span class="line">    //TODO: 获取消息通知，执行自己的逻辑...</span><br><span class="line">    System.out.println(&quot;ConcreteObserverOne is notified.&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteObserverTwo implements Observer &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void update(Message message) &#123;</span><br><span class="line">    //TODO: 获取消息通知，执行自己的逻辑...</span><br><span class="line">    System.out.println(&quot;ConcreteObserverTwo is notified.&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Demo &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    ConcreteSubject subject = new ConcreteSubject();</span><br><span class="line">    subject.registerObserver(new ConcreteObserverOne());</span><br><span class="line">    subject.registerObserver(new ConcreteObserverTwo());</span><br><span class="line">    subject.notifyObservers(new Message());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="EventBus使用"><a href="#EventBus使用" class="headerlink" title="EventBus使用"></a>EventBus使用</h2><p>EventBus、AsyncEventBus<br>EventBus#register()注册<br>EventBus#unregister()删除某个观察者<br>EventBus#post()发消息<br>@Subscribe注解，定义接收事件类型</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public DObserver &#123;</span><br><span class="line">  //...省略其他属性和方法...</span><br><span class="line">  </span><br><span class="line">  @Subscribe</span><br><span class="line">  public void f1(PMsg event) &#123; //... &#125;</span><br><span class="line">  </span><br><span class="line">  @Subscribe</span><br><span class="line">  public void f2(QMsg event) &#123; //... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -10767,7 +10769,59 @@ return v;
   <entry>
     <title>15责任链模式</title>
     <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/15%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>两种实现方式：链表、数组</p>
+<h2 id="链表存储处理器"><a href="#链表存储处理器" class="headerlink" title="链表存储处理器"></a>链表存储处理器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public abstract class Handler &#123;</span><br><span class="line">  protected Handler successor = null;</span><br><span class="line">  public void setSuccessor(Handler successor) &#123;</span><br><span class="line">    this.successor = successor;</span><br><span class="line">  &#125;</span><br><span class="line">  public final void handle() &#123;</span><br><span class="line">    boolean handled = doHandle();</span><br><span class="line">    if (successor != null &amp;&amp; !handled) &#123;</span><br><span class="line">      successor.handle();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  protected abstract boolean doHandle();</span><br><span class="line">&#125;</span><br><span class="line">public class HandlerA extends Handler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  protected boolean doHandle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class HandlerB extends Handler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  protected boolean doHandle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerChain &#123;</span><br><span class="line">  private Handler head = null;</span><br><span class="line">  private Handler tail = null;</span><br><span class="line">  public void addHandler(Handler handler) &#123;</span><br><span class="line">    handler.setSuccessor(null);</span><br><span class="line">    if (head == null) &#123;</span><br><span class="line">      head = handler;</span><br><span class="line">      tail = handler;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    tail.setSuccessor(handler);</span><br><span class="line">    tail = handler;</span><br><span class="line">  &#125;</span><br><span class="line">  public void handle() &#123;</span><br><span class="line">    if (head != null) &#123;</span><br><span class="line">      head.handle();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用举例</span><br><span class="line">public class Application &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    HandlerChain chain = new HandlerChain();</span><br><span class="line">    chain.addHandler(new HandlerA());</span><br><span class="line">    chain.addHandler(new HandlerB());</span><br><span class="line">    chain.handle();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组存储处理器"><a href="#数组存储处理器" class="headerlink" title="数组存储处理器"></a>数组存储处理器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface IHandler &#123;</span><br><span class="line">  boolean handle();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerA implements IHandler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public boolean handle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerB implements IHandler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public boolean handle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerChain &#123;</span><br><span class="line">  private List&lt;IHandler&gt; handlers = new ArrayList&lt;&gt;();</span><br><span class="line">  public void addHandler(IHandler handler) &#123;</span><br><span class="line">    this.handlers.add(handler);</span><br><span class="line">  &#125;</span><br><span class="line">  public void handle() &#123;</span><br><span class="line">    for (IHandler handler : handlers) &#123;</span><br><span class="line">      boolean handled = handler.handle();</span><br><span class="line">      if (handled) &#123;</span><br><span class="line">        break;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用举例</span><br><span class="line">public class Application &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    HandlerChain chain = new HandlerChain();</span><br><span class="line">    chain.addHandler(new HandlerA());</span><br><span class="line">    chain.addHandler(new HandlerB());</span><br><span class="line">    chain.handle();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>过滤器、拦截器</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Servlet Filter</td>
+<td>→</td>
+<td>→</td>
+<td>Servlet.service()</td>
+<td>→</td>
+<td>SpringMVC dispatcher</td>
+<td>→</td>
+<td>preHandle</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>↓</td>
+<td></td>
+</tr>
+<tr>
+<td>Servlet Filter</td>
+<td>←</td>
+<td>afterCompletion</td>
+<td>渲染视图</td>
+<td>←</td>
+<td>postHandle</td>
+<td>←</td>
+<td>Controller业务代码</td>
+</tr>
+</tbody></table>
+<p>Spring框架中，DispatcherServlet.doDispatch()方法来分发请求，它在真正的业务逻辑执行前后，执行HandlerExecutionChain中applyPreHandle()和applyPostHandle()函数，用来实现拦截的功能</p>
+<h2 id="Spring-Interceptor底层实现"><a href="#Spring-Interceptor底层实现" class="headerlink" title="Spring Interceptor底层实现"></a>Spring Interceptor底层实现</h2><p>Servlet Filter是Servlet规范的一部分，实现依赖于Web容器，如：ApplicationFilterChain类（Tomcat提供的FilterChain 的实现类）<br>Spring Interceptor是SpringMVC框架的一部分，由SpringMVC框架来提供实现。<br>Interceptor只能处理进入mvc的请求，不能处理静态资源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//简化后代码</span><br><span class="line">public class HandlerExecutionChain &#123;</span><br><span class="line"> private final Object handler;</span><br><span class="line"> private HandlerInterceptor[] interceptors;</span><br><span class="line"> </span><br><span class="line"> public void addInterceptor(HandlerInterceptor interceptor) &#123;</span><br><span class="line">  initInterceptorList().add(interceptor);</span><br><span class="line"> &#125;</span><br><span class="line"> boolean applyPreHandle(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">  HandlerInterceptor[] interceptors = getInterceptors();</span><br><span class="line">  if (!ObjectUtils.isEmpty(interceptors)) &#123;</span><br><span class="line">   for (int i = 0; i &lt; interceptors.length; i++) &#123;</span><br><span class="line">    HandlerInterceptor interceptor = interceptors[i];</span><br><span class="line">    if (!interceptor.preHandle(request, response, this.handler)) &#123;</span><br><span class="line">     triggerAfterCompletion(request, response, null);</span><br><span class="line">     return false;</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line"> &#125;</span><br><span class="line"> void applyPostHandle(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws Exception &#123;</span><br><span class="line">  HandlerInterceptor[] interceptors = getInterceptors();</span><br><span class="line">  if (!ObjectUtils.isEmpty(interceptors)) &#123;</span><br><span class="line">   for (int i = interceptors.length - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">    HandlerInterceptor interceptor = interceptors[i];</span><br><span class="line">    interceptor.postHandle(request, response, this.handler, mv);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse response, Exception ex)</span><br><span class="line">   throws Exception &#123;</span><br><span class="line">  HandlerInterceptor[] interceptors = getInterceptors();</span><br><span class="line">  if (!ObjectUtils.isEmpty(interceptors)) &#123;</span><br><span class="line">   for (int i = this.interceptorIndex; i &gt;= 0; i--) &#123;</span><br><span class="line">    HandlerInterceptor interceptor = interceptors[i];</span><br><span class="line">    try &#123;</span><br><span class="line">     interceptor.afterCompletion(request, response, this.handler, ex);</span><br><span class="line">    &#125; catch (Throwable ex2) &#123;</span><br><span class="line">     logger.error(&quot;HandlerInterceptor.afterCompletion threw exception&quot;, ex2);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>设计模式</tag>
       </tags>
@@ -10790,7 +10844,6 @@ return v;
 ]]></content>
       <tags>
         <tag>设计模式</tag>
-        <tag>组合模式</tag>
       </tags>
   </entry>
   <entry>
@@ -10860,6 +10913,9 @@ return v;
 <h2 id="slf4j应用"><a href="#slf4j应用" class="headerlink" title="slf4j应用"></a>slf4j应用</h2><p>Slf4j 的出现晚于 JUL、JCL、log4j 等日志框架，这些日志框架也不可能牺牲掉版本兼容性，将接口改造成符合 Slf4j 接口规范。<br>slf4j提供了针对不同日志框架的适配器。对不同日志框架的接口进行二次封装，适配成统一的Slf4j接口定义</p>
 <p>代理模式：不改变原始类接口的条件下，为原始类定义一个代理类，主要目的是控制访问，而非加强功能，这是它跟装饰器模式最大的不同<br>桥接模式：目的是将接口部分和实现部分分离，从而让它们可以较为容易、也相对独立地加以改变。<br>装饰器模式：装饰者模式在不改变原始类接口的情况下，对原始类功能进行增强，并且支持多个装饰器的嵌套使用。<br>适配器模式：事后的补救策略。适配器提供跟原始类不同的接口，而代理模式、装饰器模式提供的都是跟原始类相同的接口</p>
 ]]></content>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
   </entry>
   <entry>
     <title>9门面器模式</title>
@@ -10870,6 +10926,59 @@ return v;
 <li>易用性</li>
 <li>性能</li>
 <li>分布式事务</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>私有云搭建博客-hexo</title>
+    <url>/%E5%85%B6%E4%BB%96/%E7%A7%81%E6%9C%89%E4%BA%91%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2-hexo/</url>
+    <content><![CDATA[<h1 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h1><p>新建并配置root目录 &#x2F;home&#x2F;data&#x2F;hexo</p>
+<h1 id="服务器初始化仓库"><a href="#服务器初始化仓库" class="headerlink" title="服务器初始化仓库"></a>服务器初始化仓库</h1><p>[root] mkdir -p ~&#x2F;repositories<br>useradd git 添加git账号<br>passwd git 设置密码<br>su - git<br>[git]cd  ~&#x2F;repositories # &#x2F;home&#x2F;git&#x2F;repositories<br>[git]git init –bare blog.git<br>[git]cd blog.git&#x2F;hooks<br>[git]vi post-receive &#x2F;&#x2F; 创建 hook 钩子函数，输入了内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">git --work-tree=/home/data/hexo --git-dir=/home/git/repositories/blog.git checkout -f</span><br></pre></td></tr></table></figure>
+<p>[root]chmod +x ~&#x2F;repositoreis&#x2F;blog.git&#x2F;hooks&#x2F;post-receive<br>[root]chown -R git:git &#x2F;home&#x2F;git&#x2F;repos&#x2F;blog.git<br>[root]chmod -R 777 &#x2F;data&#x2F;hexo</p>
+<h1 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h1><p>[git]mkdir -p ~&#x2F;.ssh<br>touch ~&#x2F;.ssh&#x2F;authorized_keys<br>chmod 700 ~&#x2F;.ssh<br>chmod 600 ~&#x2F;.ssh&#x2F;authorized_keys<br>cat id_rsa.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys #写入公钥</p>
+<h1 id="初始化本地环境"><a href="#初始化本地环境" class="headerlink" title="初始化本地环境"></a>初始化本地环境</h1><p>修改_config.yml配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: &#x27;git&#x27;</span><br><span class="line">  repo: &#x27;git@115.190.116.6:repositories/blog.git&#x27;</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/82437065">1</a> 、<a href="https://www.cnblogs.com/cheyaoyao/p/17836522.html">2</a></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计模式</title>
+    <url>/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index/</url>
+    <content><![CDATA[<h1 id="设计模式之美"><a href="#设计模式之美" class="headerlink" title="设计模式之美"></a>设计模式之美</h1><ul>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%BC%80%E7%AF%87%E8%AF%8D/" title="开篇词">开篇词</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/" title="设计模式之美">设计模式之美</a></li>
+</ul>
+<h2 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h2><ul>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E5%9E%8B/1%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="1单例模式">单例模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E5%9E%8B/2%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="2工厂模式">工厂模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E5%9E%8B/3%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" title="3建造者模式">建造者模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E5%9E%8B/4%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="4原型模式">原型模式</a></li>
+</ul>
+<h2 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h2><ul>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/5%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="5代理模式">代理模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/6%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" title="6桥接模式">桥接模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/7%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="7装饰器模式">装饰器模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/8%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="8适配器模式">适配器模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/9%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F/" title="9门面器模式">门面模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/10%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="10组合器模式">组合模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B/11%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/" title="11享元模式">享元模式</a></li>
+</ul>
+<h2 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h2><ul>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/12%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" title="12观察者模式">观察者模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/13%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/" title="13模板模式">模板模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/14%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" title="14策略模式">策略模式</a></li>
+<li><a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E/2%E6%A8%A1%E5%BC%8F/%E8%A1%8C%E4%B8%BA%E5%9E%8B/15%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" title="15责任链模式">责任链模式</a></li>
 </ul>
 ]]></content>
       <tags>

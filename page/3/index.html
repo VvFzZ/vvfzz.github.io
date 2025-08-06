@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-count">257</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -162,6 +162,109 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/JVM/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM/3JVM%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/JVM/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM/3JVM%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84/" class="post-title-link" itemprop="url">3JVM是如何执行方法调用的</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:53:30" itemprop="dateCreated datePublished" datetime="2025-04-24T22:53:30+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-15 15:49:24" itemprop="dateModified" datetime="2025-03-15T15:49:24+08:00">2025-03-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>静态绑定：解析时能识别具体的目标方法（重载）<br>动态绑定：运行过程中根据调用者的动态类型来识别目标方法的情况。<br>执行时根据实际类型在其方法表中根据索引值获取目标方法。索引值是链接时的指代符号。（重写）</p>
+<p>动态绑定与静态绑定相比，仅多出几个内存解引用操作：</p>
+<ul>
+<li>访问栈上的调用者</li>
+<li>读取调用者的动态类型</li>
+<li>读取该类型的方法表</li>
+<li>读取方法表中某个索引值所对应的目标方法。</li>
+</ul>
+<p>调用指令，5种</p>
+<ol>
+<li>invokestatic：用于调用静态方法。</li>
+<li>invokespecial：用于调用私有实例方法、构造器，以及使用 super 关键字调用父类的实例方法或构造器，和所实现接口的默认方法。</li>
+<li>invokevirtual：用于调用非私有实例方法。</li>
+<li>invokeinterface：用于调用接口方法。</li>
+<li>invokedynamic：用于调用动态方法。</li>
+</ol>
+<p>即时编译优化手段：内联缓存、方法内联</p>
+<p>方法内联：将方法体编译进来取代方法调用，减少了压栈帧，访问，弹出栈帧操作</p>
+<h1 id="内联缓存"><a href="#内联缓存" class="headerlink" title="内联缓存"></a>内联缓存</h1><p>一种加快动态绑定的优化技术<br>缓存虚方法调用者类型及其目标方法，以后直接调用该类型对应方法（没有方法内联，还是方法调用），没有缓存则退化为方法表动态绑定。</p>
+<ul>
+<li>单态内联：只缓存了一种动态类型以及它所对应的目标方法<br>命中，则直接调用对应的目标方法<br>为了节省内存空间，Java 虚拟机只采用单态内联缓存<br>大部分的虚方法调用均是单态的</li>
+<li>多态内联：<br>最坏情况，两个实例交替执行调用，每次缓存都不会命中，执行动态链接且每次都会替换缓存。只有写缓存的额外开销，而没有用缓存的性能提升</li>
+<li>超多态内联：</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>虚方法调用包括 invokevirtual 指令和 invokeinterface 指令。如果这两种指令所声明的目标方法被标记为 final，那么 Java 虚拟机会采用静态绑定。否则，Java 虚拟机将采用动态绑定，在运行过程中根据调用者的动态类型，来决定具体的目标方法。</p>
+<p>Java 虚拟机的动态绑定是通过方法表这一数据结构来实现的。方法表中每一个重写方法的索引值，与父类方法表中被重写的方法的索引值一致。在解析虚方法调用时，Java 虚拟机会纪录下所声明的目标方法的索引值，并且在运行过程中根据这个索引值查找具体的目标方法。</p>
+<p>Java 虚拟机中的即时编译器会使用内联缓存来加速动态绑定。Java 虚拟机所采用的单态内联缓存将纪录调用者的动态类型，以及它所对应的目标方法。</p>
+<p>当碰到新的调用者时，如果其动态类型与缓存中的类型匹配，则直接调用缓存的目标方法。否则，Java 虚拟机将该内联缓存劣化为超多态内联缓存，在今后的执行过程中直接使用方法表进行动态绑定。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -957,95 +1060,6 @@
 </ol>
 <h2 id="requite-释放连接"><a href="#requite-释放连接" class="headerlink" title="requite 释放连接"></a>requite 释放连接</h2><p>连接状态更改为STATE_NOT_IN_USE<br>有等待线程则分配给它，没有则保存到线程本地存储</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>HiKariCP中的FastList和ConcurrentBag这两个数据结构设计巧妙，适用于数据库连接池这个特定的场景。<br>FastList适用于逆序删除场景<br>ConcurrentBag通过ThreadLocal做一次预分配，避免直接竞争共享资源，非常适合池化资源的分配。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/40%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/40%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/" class="post-title-link" itemprop="url">40高性能队列Disruptor</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-16 21:19:48" itemprop="dateModified" datetime="2025-02-16T21:19:48+08:00">2025-02-16</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>高性能有界内存队列<br><strong>高性能原因</strong></p>
-<ul>
-<li>内存分配更加合理，RingBuffer结构，数组初始化一次性创建提升缓存命中，对象循环利用，避免GC</li>
-<li>避免伪共享</li>
-<li>无锁算法</li>
-<li>支持批量消费，消费者可无锁方式消费多个消息</li>
-</ul>
-<h1 id="避免为共享"><a href="#避免为共享" class="headerlink" title="避免为共享"></a>避免为共享</h1><p>由于共享缓存行导致缓存无效的场景<br>举例说明：<br>两个变量long l1 &#x3D; 1； long l2&#x3D;2；存储在数组中， CPU1、CPU2缓存行都加载了l1、l2，CPU1修改l1,CPU2缓存行 会失效，即使CPU2不操作l1也会失效，造成伪共享。</p>
-<p>避免缓存行失效，填充字节避免数据在一个缓存行<br>缺点：牺牲内存</p>
-<h1 id="无锁算法"><a href="#无锁算法" class="headerlink" title="无锁算法"></a>无锁算法</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>并发性能优化到极致，两个方向：</p>
-<ul>
-<li>无锁算法避免争用</li>
-<li>将CPU性能发挥到机制（填充方式避免伪共享就）</li>
-</ul>
 
       
     </div>

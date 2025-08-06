@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-count">257</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -162,6 +162,92 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/30%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/30%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">30线程本地存储模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-01-31 19:53:08" itemprop="dateModified" datetime="2025-01-31T19:53:08+08:00">2025-01-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>没有共享，就没有伤害</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">static class SafeDateFormat &#123;</span><br><span class="line">  //定义ThreadLocal变量</span><br><span class="line">  static final ThreadLocal&lt;DateFormat&gt;</span><br><span class="line">  tl=ThreadLocal.withInitial(()-&gt; new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">      </span><br><span class="line">  static DateFormat get()&#123;</span><br><span class="line">    return tl.get();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//不同线程执行下面代码 返回的df是不同的</span><br><span class="line">DateFormat df = SafeDateFormat.get()；</span><br></pre></td></tr></table></figure>
+
+<h1 id="ThreadLocal的工作原理"><a href="#ThreadLocal的工作原理" class="headerlink" title="ThreadLocal的工作原理"></a>ThreadLocal的工作原理</h1><p>ThreadLocalMap,key:WeakReference<ThreadLocal>,value:Value</p>
+<h1 id="ThreadLocal与内存泄露"><a href="#ThreadLocal与内存泄露" class="headerlink" title="ThreadLocal与内存泄露"></a>ThreadLocal与内存泄露</h1><p>线程池中线程的存活时间长，往往和程序同生共死的，则Thread持有的ThreadLocalMap一直都不会被回收。<br>ThreadLocalMap中的Entry对ThreadLocal是弱引用（WeakReference），所以只要ThreadLocal结束了自己的生命周期是可以被回收掉的。但是Entry中的Value却是被Entry强引用的，所以即便Value的生命周期结束了，Value也是无法被回收的，从而导致内存泄露。</p>
+<p>解决办法：手动释放</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService es;</span><br><span class="line">ThreadLocal tl;</span><br><span class="line">es.execute(()-&gt;&#123;</span><br><span class="line">  //ThreadLocal增加变量</span><br><span class="line">  tl.set(obj);</span><br><span class="line">  try &#123;</span><br><span class="line">    // 省略业务逻辑代码</span><br><span class="line">  &#125;finally &#123;</span><br><span class="line">    //手动清理ThreadLocal </span><br><span class="line">    tl.remove();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="InheritableThreadLocal与继承性"><a href="#InheritableThreadLocal与继承性" class="headerlink" title="InheritableThreadLocal与继承性"></a>InheritableThreadLocal与继承性</h1><p>通过ThreadLocal创建的线程变量，其子线程是无法继承的(无法访问)</p>
+<p>不建议使用：线程池中线程的创建是动态的，很容易导致继承关系错乱，若业务逻辑依赖InheritableThreadLocal，那么很可能导致业务逻辑计算错误。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>实际工作中，有很多平台型的技术方案都是采用ThreadLocal来传递一些上下文信息，例如Spring使用ThreadLocal来传递事务信息。我们曾经说过，异步编程已经很成熟了，那你觉得在异步场景中，是否可以使用Spring的事务管理器呢？<br>？？？</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -983,109 +1069,6 @@
 <h2 id="双端非阻塞队列"><a href="#双端非阻塞队列" class="headerlink" title="双端非阻塞队列"></a>双端非阻塞队列</h2><p>ConcurrentLinkedDeque</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>理清楚每种容器的特性<br>ArrayBlockingQueue 和 LinkedBlockingQueue支持有界，其他无界，注意无界队列导致OOM</p>
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="容器的Fail-Fast（快速失败）机制什么是"><a href="#容器的Fail-Fast（快速失败）机制什么是" class="headerlink" title="容器的Fail-Fast（快速失败）机制什么是"></a>容器的Fail-Fast（快速失败）机制什么是</h2><h2 id="concurrentskiplistmap比concurrenthashmap性能好"><a href="#concurrentskiplistmap比concurrenthashmap性能好" class="headerlink" title="concurrentskiplistmap比concurrenthashmap性能好"></a>concurrentskiplistmap比concurrenthashmap性能好</h2><p>concurrentskiplistmap没有key冲突问题，HashMap key冲突通过链表或者tree解决所以O(1)是理想状态。增删改操作也影响hashmap性能，要看冲突情况。所以hashmap的稳定性差，如果正好遇到稳定性问题无法接受可尝试ConcurrentSkipListMap</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/19CountDownLatch%E5%92%8CCyclicBarrier/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/2%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/19CountDownLatch%E5%92%8CCyclicBarrier/" class="post-title-link" itemprop="url">19CountDownLatch和CyclicBarrier</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-15 15:49:24" itemprop="dateModified" datetime="2025-03-15T15:49:24+08:00">2025-03-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>让多线程步调一致</p>
-<p>业务介绍：<br>在线商城下单，生成电子订单，保存在订单库；<br>物流生成派送单发货，派送单保存在派送单库。<br>为防止漏派送或重复派送，对账系统每天还会校验是否存在异常订单。</p>
-<h1 id="串行方式"><a href="#串行方式" class="headerlink" title="串行方式"></a>串行方式</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  pos = getPOrders();</span><br><span class="line">  // 查询派送单</span><br><span class="line">  dos = getDOrders();</span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<img src="CountDownLatch串行.png" width="300" height="200">
-
-<h1 id="并行优化对账系统"><a href="#并行优化对账系统" class="headerlink" title="并行优化对账系统"></a>并行优化对账系统</h1><h2 id="并行查询订单和派送单"><a href="#并行查询订单和派送单" class="headerlink" title="并行查询订单和派送单"></a>并行查询订单和派送单</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  Thread T1 = new Thread(()-&gt;&#123;</span><br><span class="line">    pos = getPOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  T1.start();</span><br><span class="line">  // 查询派送单</span><br><span class="line">  Thread T2 = new Thread(()-&gt;&#123;</span><br><span class="line">    dos = getDOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  T2.start();</span><br><span class="line">  // 等待 T1、T2 结束</span><br><span class="line">  T1.join();</span><br><span class="line">  T2.join();</span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<img src="CountDownLatch并行1.png.png" width="300" height="200">
-
-<h3 id="线程池优化"><a href="#线程池优化" class="headerlink" title="线程池优化"></a>线程池优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 创建 2 个线程的线程池</span><br><span class="line">Executor executor = </span><br><span class="line">  Executors.newFixedThreadPool(2);</span><br><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    pos = getPOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  // 查询派送单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    dos = getDOrders();</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  /* ？？如何实现等待？？*/</span><br><span class="line">  </span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如下，使用线程池如何知道查询线程完成了呢</p>
-<ol>
-<li>可通过管程实现计数器，计数器初始2，查询完成–，计数器为0则重置为2并执行对对账入库</li>
-<li>使用CountDownLatch</li>
-</ol>
-<h3 id="CountDownLatch优化"><a href="#CountDownLatch优化" class="headerlink" title="CountDownLatch优化"></a>CountDownLatch优化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 创建 2 个线程的线程池</span><br><span class="line">Executor executor = </span><br><span class="line">  Executors.newFixedThreadPool(2);</span><br><span class="line">while(存在未对账订单)&#123;</span><br><span class="line">  // 计数器初始化为 2</span><br><span class="line">  CountDownLatch latch = </span><br><span class="line">    new CountDownLatch(2);</span><br><span class="line">  // 查询未对账订单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    pos = getPOrders();</span><br><span class="line">    latch.countDown();</span><br><span class="line">  &#125;);</span><br><span class="line">  // 查询派送单</span><br><span class="line">  executor.execute(()-&gt; &#123;</span><br><span class="line">    dos = getDOrders();</span><br><span class="line">    latch.countDown();</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  // 等待两个查询操作结束</span><br><span class="line">  latch.await();</span><br><span class="line">  </span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(pos, dos);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="进一步性能优化"><a href="#进一步性能优化" class="headerlink" title="进一步性能优化"></a>进一步性能优化</h2><p>优化点：两个查询操作和对账操作check、save仍是串行</p>
-<p>需要引入订单队列和派送单队列，T1查询订单，T2查询派送单，T1T2各自生产1条数据后通知T3执行对账。（T1T2要互相等待）</p>
-<h3 id="实现计数器优化"><a href="#实现计数器优化" class="headerlink" title="实现计数器优化"></a>实现计数器优化</h3><p>可以利用一个计数器来解决这两个难点，计数器初始化为 2，线程 T1 和 T2 生产完一条数据都将计数器减 1，如果计数器大于 0 则线程 T1 或者 T2 等待。如果计数器等于 0，则通知线程 T3，并唤醒等待的线程 T1 或者 T2，与此同时，将计数器重置为 2，这样线程 T1 和线程 T2 生产下一条数据的时候就可以继续使用这个计数器了。</p>
-<p>但建议使用Java并发包工具类：CyclicBarrier。</p>
-<h3 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h3><img src="CountDownLatch并行2.png.png" width="300" height="200">
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">// 订单队列</span><br><span class="line">Vector&lt;P&gt; pos;</span><br><span class="line">// 派送单队列</span><br><span class="line">Vector&lt;D&gt; dos;</span><br><span class="line">// 执行回调的线程池 </span><br><span class="line">Executor executor = </span><br><span class="line">  Executors.newFixedThreadPool(1);</span><br><span class="line">final CyclicBarrier barrier =</span><br><span class="line">  new CyclicBarrier(2, ()-&gt;&#123;</span><br><span class="line">    executor.execute(()-&gt;check());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">void check()&#123;</span><br><span class="line">  P p = pos.remove(0);</span><br><span class="line">  D d = dos.remove(0);</span><br><span class="line">  // 执行对账操作</span><br><span class="line">  diff = check(p, d);</span><br><span class="line">  // 差异写入差异库</span><br><span class="line">  save(diff);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">void checkAll()&#123;</span><br><span class="line">  // 循环查询订单库</span><br><span class="line">  Thread T1 = new Thread(()-&gt;&#123;</span><br><span class="line">    while(存在未对账订单)&#123;</span><br><span class="line">      // 查询订单库</span><br><span class="line">      pos.add(getPOrders());</span><br><span class="line">      // 等待</span><br><span class="line">      barrier.await();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  T1.start();  </span><br><span class="line">  // 循环查询运单库</span><br><span class="line">  Thread T2 = new Thread(()-&gt;&#123;</span><br><span class="line">    while(存在未对账订单)&#123;</span><br><span class="line">      // 查询运单库</span><br><span class="line">      dos.add(getDOrders());</span><br><span class="line">      // 等待</span><br><span class="line">      barrier.await();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  T2.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>CountDownLatch 主要用来解决一个线程等待多个线程的场景，计数器是不能循环利用的，计数器为0时await直接通过</p>
-<p>CyclicBarrier 是一组线程之间互相等待，计数器是可以循环利用的，可设置回调函数</p>
-<h2 id="还可使用线程池Future优化"><a href="#还可使用线程池Future优化" class="headerlink" title="还可使用线程池Future优化"></a>还可使用线程池Future优化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CompletableFuture&lt;List&gt; pOrderFuture = CompletableFuture.supplyAsync(this::getPOrders);</span><br><span class="line">CompletableFuture&lt;List&gt; dOrderFuture = CompletableFuture.supplyAsync(this::getDOrders);</span><br><span class="line">pOrderFuture.thenCombine(dOrderFuture, this::check).thenAccept(this::save);</span><br></pre></td></tr></table></figure>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>CyclicBarrier的回调函数我们使用了一个固定大小的线程池，有必要吗？</p>
 
       
     </div>

@@ -1,0 +1,329 @@
+<hr>
+<h2 id="title-SpringIoC依赖注入tags-SpringIoC依赖注入description-SpringIoC依赖注入"><a href="#title-SpringIoC依赖注入tags-SpringIoC依赖注入description-SpringIoC依赖注入" class="headerlink" title="title: SpringIoC依赖注入tags: SpringIoC依赖注入description: SpringIoC依赖注入"></a>title: SpringIoC依赖注入<br>tags: SpringIoC依赖注入<br>description: SpringIoC依赖注入</h2><h1 id="依赖注入类型和模式"><a href="#依赖注入类型和模式" class="headerlink" title="依赖注入类型和模式"></a>依赖注入类型和模式</h1><p>模式：手动，自动</p>
+<table>
+<thead>
+<tr>
+<th>依赖注入类型</th>
+<th>配置元数据举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Setter方法</td>
+<td>&lt;proeprty name&#x3D;”user” ref&#x3D;”userBean”</td>
+</tr>
+<tr>
+<td>构造器</td>
+<td><constructor-arg name="user" ref="userBean" /></td>
+</tr>
+<tr>
+<td>字段</td>
+<td>@Autowired User user;</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>@Autowired public void user(User user) { … }</td>
+</tr>
+<tr>
+<td>接口回调</td>
+<td>class MyBean implements BeanFactoryAware { … }</td>
+</tr>
+</tbody></table>
+<h1 id="自动绑定-Autowaring"><a href="#自动绑定-Autowaring" class="headerlink" title="自动绑定 Autowaring"></a>自动绑定 Autowaring</h1><h2 id="为什么引入自动绑定"><a href="#为什么引入自动绑定" class="headerlink" title="为什么引入自动绑定"></a>为什么引入自动绑定</h2><h2 id="自动绑定模式"><a href="#自动绑定模式" class="headerlink" title="自动绑定模式"></a>自动绑定模式</h2><ul>
+<li>no 默认值</li>
+<li>byName</li>
+<li>byType</li>
+<li>constructor （特殊byType类型）</li>
+</ul>
+<p>参考枚举：org.springframework.beans.factory.annotation.Autowire</p>
+<h2 id="自动绑定的限制和不足"><a href="#自动绑定的限制和不足" class="headerlink" title="自动绑定的限制和不足"></a>自动绑定的限制和不足</h2><h1 id="Setter方法注入"><a href="#Setter方法注入" class="headerlink" title="Setter方法注入"></a>Setter方法注入</h1><ul>
+<li>手动<br>  xml配置、注解配置、API<br>  <code>   //xml   &lt;bean class=&quot;*.user&quot; &gt;       &lt;property name=&quot;user&quot; ref=&quot;superUser&quot;&gt;   &lt;/bean&gt;    //注解   @Bean   public UserHolder userHOlder(User user){       UserHolder userHolder = new UserHolder();       userHolder.setUser(user);       return userHolder;   }     //API    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();   //生成UserHolder的BeanDefinition   BeanDefinition userHolderBeanDefinition = createUserHolderBeanDefinition();   //注册UserHolder的BeanDefinition   applicationContext.registerBeanDefinition( beanName: &quot;userHolder&quot;, userHolderBeanDefinition);    private static BeanDefinition createUserHolderBeanDefinition(){       BeanDefinitionBuilder definitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(UserHlder. class);definitionBuilder.addPropertyReference( name: &quot;user&quot;, beanName: &quot;superUser&quot;);       return definitionBuilder.getBeanDefinition();   }   </code></li>
+<li>自动<br>  byName、byType<br>  <code>&lt;bean autowire=&quot;byType&quot;&gt;</code></li>
+</ul>
+<h1 id="构造器注入"><a href="#构造器注入" class="headerlink" title="构造器注入"></a>构造器注入</h1><ul>
+<li>手动</li>
+</ul>
+<pre><code>    //xml配置
+    &lt;bean class=&quot;org.geekbang.thinking.in.spring.ioc.dependency.injection.UserHolder&quot;&gt;
+        &lt;constructor-arg name=&quot;user&quot; ref=&quot;superUser&quot; /&gt;
+    &lt;/bean&gt;
+
+    //注解
+    @Bean
+    public UserHolder userHOlder(User user){
+        return new UserHolder(user);;
+    }
+
+    //API 
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+    //生成UserHolder的BeanDefinition
+    BeanDefinition userHolderBeanDefinition = createUserHolderBeanDefinition();
+    //注册UserHolder的BeanDefinition
+    applicationContext.registerBeanDefinition( beanName: &quot;userHolder&quot;, userHolderBeanDefinition);
+
+    private static BeanDefinition createUserHolderBeanDefinition(){
+        BeanDefinitionBuilder definitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(UserHlder. class);definitionBuilder.addConstructorArgReference( name: &quot;superUser&quot;);
+        return definitionBuilder.getBeanDefinition();
+    }
+</code></pre>
+<ul>
+<li>自动</li>
+</ul>
+<pre><code>&lt;bean class=&quot;org.geekbang.thinking.in.spring.ioc.dependency.injection.UserHolder&quot; autowire=&quot;constructor&quot;/&gt;
+</code></pre>
+<h1 id="字段注入"><a href="#字段注入" class="headerlink" title="字段注入"></a>字段注入</h1><p>手动模式</p>
+<ul>
+<li><p>@Autowired (byName)<br>不支持静态字段</p>
+</li>
+<li><p>@Resource (byType)</p>
+</li>
+<li><p>@Inject</p>
+</li>
+</ul>
+<h1 id="方法注入"><a href="#方法注入" class="headerlink" title="方法注入"></a>方法注入</h1><p>手动模式</p>
+<ul>
+<li>@Autowired </li>
+<li>@Resource </li>
+<li>@Inject</li>
+<li>@Bean</li>
+</ul>
+<pre><code>@Autowired
+public void init1(UserHolder userHolder){
+    this.userHolder =userHolder;
+}
+
+@Resource
+public void init2(UserHolder userHolder2){
+    this,userHolder2= userHolder2;
+}
+
+@Bean
+public UserHolder(User user){
+    return new UserHolder(user);
+}
+</code></pre>
+<h1 id="接口回调注入"><a href="#接口回调注入" class="headerlink" title="接口回调注入"></a>接口回调注入</h1><table>
+<thead>
+<tr>
+<th>内建接口</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BeanFactoryAware</td>
+<td>获取 loC 容器-BeanFactory</td>
+</tr>
+<tr>
+<td>ApplicationContextAware</td>
+<td>获取 Spring 应用上下文-ApplicationContext 对象</td>
+</tr>
+<tr>
+<td>EnvironmentAware</td>
+<td>获取 Environment 对象</td>
+</tr>
+<tr>
+<td>ResourceLoaderAware</td>
+<td>获取资源加载器 对象-ResourceLoader</td>
+</tr>
+<tr>
+<td>BeanClassLoaderAware</td>
+<td>获取加载当前 Bean Class 的 ClassLoader</td>
+</tr>
+<tr>
+<td>BeanNameAware</td>
+<td>获取当前 Bean 的名称</td>
+</tr>
+<tr>
+<td>MessageSourceAware</td>
+<td>获取 MessageSource 对象，用于 Spring 国际化</td>
+</tr>
+<tr>
+<td>ApplicationEventPublisherAware</td>
+<td>获取 ApplicationEventPublishAware 对象，用于 Spring 事件</td>
+</tr>
+<tr>
+<td>EmbeddedValueResolverAware</td>
+<td>获取 StringValueResolver 对象，用于占位符处理</td>
+</tr>
+</tbody></table>
+<h1 id="基础类型注入"><a href="#基础类型注入" class="headerlink" title="基础类型注入"></a>基础类型注入</h1><p>枚举、Resource</p>
+<p>Resource<br><bean><br>    <property name="configFileLocation" value="classpath:/META-INF/user-config.properties" /><br></bean></p>
+<h1 id="集合类型注入"><a href="#集合类型注入" class="headerlink" title="集合类型注入"></a>集合类型注入</h1><p>数组类型(Array):原生类型、标量类型、常规类型、Spring 类型<br>集合类型(Collection)<br>Collection:List、Set(SortedSet、NavigableSet、EnumSet)<br>Map:Properties</p>
+<pre><code>class User{
+    privatLonC
+    private String name;
+    private city city;
+    private City[]workcities;
+    private List&lt;City&gt;lifecities
+    private Resource configFileLocation;
+}
+
+&lt;bean id=&quot;user&quot; class=&quot;org.geekbang.thinking.in.spring.ioc.overview.domain.User&quot;&gt;
+    &lt;property name=&quot;id&quot; value=&quot;1&quot;/&gt;
+    &lt;property name=&quot;name&quot; value=&quot;小马哥&quot;/&gt;
+    &lt;property name=&quot;city&quot; value=&quot;HANGZHOU&quot;/&gt;
+    &lt;property name=&quot;workcities&quot; value=&quot;BEIJING,HANGZHOU&quot; /&gt;
+    &lt;property name=&quot;lifecities&quot; &gt;
+        &lt;list&gt;
+            &lt;value&gt;BEIJING&lt;/value&gt;
+            &lt;value&gt;HANGZH0U&lt;/value&gt;
+        &lt;/list&gt;
+    &lt;/property&gt;
+    &lt;property name=&quot;map&quot; &gt;
+        &lt;map&gt;
+            &lt;entry key=&quot;1&quot; value=&quot;1&quot;/&gt;
+            &lt;entry key=&quot;1&quot; value-ref=&quot;&quot;/&gt;
+        &lt;/map&gt;
+    &lt;/property&gt;
+    &lt;property name=&quot;configFileLocation&quot; value=&quot;classpath:/META-INF/user-config.properties&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+<h1 id="限定注入"><a href="#限定注入" class="headerlink" title="限定注入"></a>限定注入</h1><ul>
+<li>@Qualifier限定<ol>
+<li>名称限定<br> @Qualifier(“name”)</li>
+<li>分组限定<br> 是否标注@Qualifier</li>
+</ol>
+</li>
+<li>基于@qualifier扩展限定<br>自定义注解，如：Spring Cloud @LOadBalanced</li>
+</ul>
+<pre><code>@Target({ElementType.FIELD,ElementType.METHOD,ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+@Qualifier
+public @interface UserGroup {}
+
+
+@Autowired
+private User user; //注入primary的SuperUser
+
+@Autowired
+@Qualifier(&quot;user&quot;)
+private User namedUser;
+
+@Autowired
+private Collection&lt;User&gt; allUsers; //注入两个Bean：user,namedUser （标注了@qualifier的bean不会注入）
+
+@Autowired
+@Qualifier
+private Collection&lt;User&gt; qualifiedUsers; //注入4个Bean：user1-4
+
+@Autowired
+@UserGroup
+private Collection&lt;User&gt; qualifiedUsers; //注入2个Bean：user3，user4
+
+@Bean
+@Qualifier // 进行逻辑分组
+public User user1(){return createUser(7L);}
+@Bean
+@Qualifier // 进行逻辑分组
+public User user2(){return createUser(8L);}
+
+@Bean
+@UserGroup
+public User user3(){return createUser(9L);}
+
+@Bean
+@UserGroup
+public User user4(){return createUser(10L);}
+
+private static User createUser(Long id){User user=new User(); user.setId(id); return user;}
+</code></pre>
+<h1 id="延迟注入"><a href="#延迟注入" class="headerlink" title="延迟注入"></a>延迟注入</h1><ul>
+<li>ObjectFactory</li>
+<li>ObjectProvider 推荐</li>
+</ul>
+<pre><code>@Autowired
+private ObjectProvider&lt;User&gt; userObjectProvider;//延迟注入
+@Autowired
+private ObjectFactory&lt;Set&lt;User&gt;&gt; usersObjectFactory;
+
+userObjectProvider.getObject() //输出SuperUser
+userObjectProvider.stream().foreach(system.out::println) //输出 superUser和User
+</code></pre>
+<h1 id="依赖处理过程"><a href="#依赖处理过程" class="headerlink" title="依赖处理过程"></a>依赖处理过程</h1><p>基础知识</p>
+<ul>
+<li>入口-DefaultListableBeanFactory#resolveDependency</li>
+<li>依赖描述符-DependencyDescriptor<br>declaringClass 所属容器类<br>methodName; 方法注入的方法名<br>parameterTypes; 方法参数&#x2F;构造器参数&#x2F;字段类型<br>parameterIndex; 构造方法注入的下标<br>bool eaneager; true时 lazy false；</li>
+<li>自定绑定候选对象处理器-AutowireCandidateResolver</li>
+</ul>
+<h1 id="Autowired注入"><a href="#Autowired注入" class="headerlink" title="@Autowired注入"></a>@Autowired注入</h1><p>@Autowired注入的规则和原理有哪些？</p>
+<ul>
+<li><p>元信息解析<br>先执行AutowiredAnnotationBeanPostProcessor.postProcessMergedBeanDefinition 合并父类属性<br>AutowiredAnnotationBeanPostProcessor.postProcessProperties 中再调用metadata.inject(bean, beanName, pvs)注入依赖<br>inject方法中包含依赖查找过程</p>
+</li>
+<li><p>依赖查找</p>
+</li>
+<li><p>依赖注入</p>
+</li>
+</ul>
+<h1 id="JSR-330-Inject注入"><a href="#JSR-330-Inject注入" class="headerlink" title="JSR-330 @Inject注入"></a>JSR-330 @Inject注入</h1><p>@Inject与@Autowired的注入原理有怎样的联系<br>如果JSR-330存在于ClassPath中，复用AutowiredAnnotationBeanPostProcessor实现，如下<br>构造方法中定义解析哪些注解到autowiredAnnotationTypes字段<br>findAutowiredAnnotation方法中查找是否存在autowiredAnnotationTypes定义的注解</p>
+<pre><code>public AutowiredAnnotationBeanPostProcessor() {
+    this.autowiredAnnotationTypes.add(Autowired.class);
+    this.autowiredAnnotationTypes.add(Value.class);
+    try {
+        this.autowiredAnnotationTypes.add((Class&lt;? extends Annotation&gt;)
+                ClassUtils.forName(&quot;javax.inject.Inject&quot;, AutowiredAnnotationBeanPostProcessor.class.getClassLoader()));
+        logger.trace(&quot;JSR-330 &#39;javax.inject.Inject&#39; annotation found and supported for autowiring&quot;);
+    }
+    catch (ClassNotFoundException ex) {
+        // JSR-330 API not available - simply skip.
+    }
+}
+
+@Nullable
+private MergedAnnotation&lt;?&gt; findAutowiredAnnotation(AccessibleObject ao) {
+    MergedAnnotations annotations = MergedAnnotations.from(ao);
+    for (Class&lt;? extends Annotation&gt; type : this.autowiredAnnotationTypes) {
+        MergedAnnotation&lt;?&gt; annotation = annotations.get(type);
+        if (annotation.isPresent()) {
+            return annotation;
+        }
+    }
+    return null;
+}
+</code></pre>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code>&lt;!-- https://mvnrepository.com/artifact/javax.inject/javax.inject --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.inject&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.inject&lt;/artifactId&gt;
+    &lt;version&gt;1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="添加注解"><a href="#添加注解" class="headerlink" title="添加注解"></a>添加注解</h3><pre><code>@Inject
+private User injectedUser
+</code></pre>
+<h1 id="Java通用注解注入原理"><a href="#Java通用注解注入原理" class="headerlink" title="Java通用注解注入原理"></a>Java通用注解注入原理</h1><p>Spring是如何实现@Resource和@EJB等注解注入的<br><code>CommonAnnotationBeanPostProcessor</code></p>
+<h1 id="自定义依赖注入注解"><a href="#自定义依赖注入注解" class="headerlink" title="自定义依赖注入注解"></a>自定义依赖注入注解</h1><h2 id="基于AutowiredAnnotationBeanPostProcessor实现"><a href="#基于AutowiredAnnotationBeanPostProcessor实现" class="headerlink" title="基于AutowiredAnnotationBeanPostProcessor实现"></a>基于AutowiredAnnotationBeanPostProcessor实现</h2><pre><code>@Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Autowired
+public @interface MyAutowired {
+    boolean required() default true;
+}
+</code></pre>
+<h1 id="自定义实现"><a href="#自定义实现" class="headerlink" title="自定义实现"></a>自定义实现</h1><pre><code>/*
+* 自定义依赖注入注解
+*/
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@documented
+public @interface InjectedUser{}
+
+@Bean
+@Order(Ordered.LOWEST_PRECEDENCE-3)
+public static AutowiredAnnotationBeanPostProcessor beanPostProcessor(){ //静态
+    AutowiredAnnotationBeanPostProcessor beanPostProcessor = new AutowiredAnnotationBeanPostProcessor();
+    beanPostProcessor.setAutowiredAnnotationType(InjectedUser.class);
+    return beanPostProcessor;
+}
+
+优先级说明：    
+数值越小越先加载 
+`AutowiredAnnotationBeanPostProcessor`的优先级(Ordered.LOWEST_PRECEDENCE-2) 
+AnnotationConfigUtils中判断若已加载AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME（AutowiredAnnotationBeanPostProcessor）则不在重复加载，源码如下：
+
+if (!registry.containsBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME)) {
+    RootBeanDefinition def = new RootBeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
+    def.setSource(source);
+    beanDefs.add(registerPostProcessor(registry, def, AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME));
+}
+</code></pre>

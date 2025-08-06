@@ -114,7 +114,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -127,6 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E5%AD%98%E5%82%A8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">链表存储处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">数组存储处理器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Interceptor%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">Spring Interceptor底层实现</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -139,7 +140,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-count">257</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -203,6 +204,13 @@
 
       <time title="Created: 2025-07-27 11:00:08" itemprop="dateCreated datePublished" datetime="2025-07-27T11:00:08+08:00">2025-07-27</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-04 16:04:30" itemprop="dateModified" datetime="2025-08-04T16:04:30+08:00">2025-08-04</time>
+    </span>
 
   
     <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
@@ -222,7 +230,59 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>两种实现方式：链表、数组</p>
+<h2 id="链表存储处理器"><a href="#链表存储处理器" class="headerlink" title="链表存储处理器"></a>链表存储处理器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Handler &#123;</span><br><span class="line">  protected Handler successor = null;</span><br><span class="line">  public void setSuccessor(Handler successor) &#123;</span><br><span class="line">    this.successor = successor;</span><br><span class="line">  &#125;</span><br><span class="line">  public final void handle() &#123;</span><br><span class="line">    boolean handled = doHandle();</span><br><span class="line">    if (successor != null &amp;&amp; !handled) &#123;</span><br><span class="line">      successor.handle();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  protected abstract boolean doHandle();</span><br><span class="line">&#125;</span><br><span class="line">public class HandlerA extends Handler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  protected boolean doHandle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class HandlerB extends Handler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  protected boolean doHandle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerChain &#123;</span><br><span class="line">  private Handler head = null;</span><br><span class="line">  private Handler tail = null;</span><br><span class="line">  public void addHandler(Handler handler) &#123;</span><br><span class="line">    handler.setSuccessor(null);</span><br><span class="line">    if (head == null) &#123;</span><br><span class="line">      head = handler;</span><br><span class="line">      tail = handler;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    tail.setSuccessor(handler);</span><br><span class="line">    tail = handler;</span><br><span class="line">  &#125;</span><br><span class="line">  public void handle() &#123;</span><br><span class="line">    if (head != null) &#123;</span><br><span class="line">      head.handle();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用举例</span><br><span class="line">public class Application &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    HandlerChain chain = new HandlerChain();</span><br><span class="line">    chain.addHandler(new HandlerA());</span><br><span class="line">    chain.addHandler(new HandlerB());</span><br><span class="line">    chain.handle();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组存储处理器"><a href="#数组存储处理器" class="headerlink" title="数组存储处理器"></a>数组存储处理器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">public interface IHandler &#123;</span><br><span class="line">  boolean handle();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerA implements IHandler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public boolean handle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerB implements IHandler &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public boolean handle() &#123;</span><br><span class="line">    boolean handled = false;</span><br><span class="line">    //...</span><br><span class="line">    return handled;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HandlerChain &#123;</span><br><span class="line">  private List&lt;IHandler&gt; handlers = new ArrayList&lt;&gt;();</span><br><span class="line">  public void addHandler(IHandler handler) &#123;</span><br><span class="line">    this.handlers.add(handler);</span><br><span class="line">  &#125;</span><br><span class="line">  public void handle() &#123;</span><br><span class="line">    for (IHandler handler : handlers) &#123;</span><br><span class="line">      boolean handled = handler.handle();</span><br><span class="line">      if (handled) &#123;</span><br><span class="line">        break;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用举例</span><br><span class="line">public class Application &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    HandlerChain chain = new HandlerChain();</span><br><span class="line">    chain.addHandler(new HandlerA());</span><br><span class="line">    chain.addHandler(new HandlerB());</span><br><span class="line">    chain.handle();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>过滤器、拦截器</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Servlet Filter</td>
+<td>→</td>
+<td>→</td>
+<td>Servlet.service()</td>
+<td>→</td>
+<td>SpringMVC dispatcher</td>
+<td>→</td>
+<td>preHandle</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>↓</td>
+<td></td>
+</tr>
+<tr>
+<td>Servlet Filter</td>
+<td>←</td>
+<td>afterCompletion</td>
+<td>渲染视图</td>
+<td>←</td>
+<td>postHandle</td>
+<td>←</td>
+<td>Controller业务代码</td>
+</tr>
+</tbody></table>
+<p>Spring框架中，DispatcherServlet.doDispatch()方法来分发请求，它在真正的业务逻辑执行前后，执行HandlerExecutionChain中applyPreHandle()和applyPostHandle()函数，用来实现拦截的功能</p>
+<h2 id="Spring-Interceptor底层实现"><a href="#Spring-Interceptor底层实现" class="headerlink" title="Spring Interceptor底层实现"></a>Spring Interceptor底层实现</h2><p>Servlet Filter是Servlet规范的一部分，实现依赖于Web容器，如：ApplicationFilterChain类（Tomcat提供的FilterChain 的实现类）<br>Spring Interceptor是SpringMVC框架的一部分，由SpringMVC框架来提供实现。<br>Interceptor只能处理进入mvc的请求，不能处理静态资源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">//简化后代码</span><br><span class="line">public class HandlerExecutionChain &#123;</span><br><span class="line"> private final Object handler;</span><br><span class="line"> private HandlerInterceptor[] interceptors;</span><br><span class="line"> </span><br><span class="line"> public void addInterceptor(HandlerInterceptor interceptor) &#123;</span><br><span class="line">  initInterceptorList().add(interceptor);</span><br><span class="line"> &#125;</span><br><span class="line"> boolean applyPreHandle(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">  HandlerInterceptor[] interceptors = getInterceptors();</span><br><span class="line">  if (!ObjectUtils.isEmpty(interceptors)) &#123;</span><br><span class="line">   for (int i = 0; i &lt; interceptors.length; i++) &#123;</span><br><span class="line">    HandlerInterceptor interceptor = interceptors[i];</span><br><span class="line">    if (!interceptor.preHandle(request, response, this.handler)) &#123;</span><br><span class="line">     triggerAfterCompletion(request, response, null);</span><br><span class="line">     return false;</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return true;</span><br><span class="line"> &#125;</span><br><span class="line"> void applyPostHandle(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws Exception &#123;</span><br><span class="line">  HandlerInterceptor[] interceptors = getInterceptors();</span><br><span class="line">  if (!ObjectUtils.isEmpty(interceptors)) &#123;</span><br><span class="line">   for (int i = interceptors.length - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">    HandlerInterceptor interceptor = interceptors[i];</span><br><span class="line">    interceptor.postHandle(request, response, this.handler, mv);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse response, Exception ex)</span><br><span class="line">   throws Exception &#123;</span><br><span class="line">  HandlerInterceptor[] interceptors = getInterceptors();</span><br><span class="line">  if (!ObjectUtils.isEmpty(interceptors)) &#123;</span><br><span class="line">   for (int i = this.interceptorIndex; i &gt;= 0; i--) &#123;</span><br><span class="line">    HandlerInterceptor interceptor = interceptors[i];</span><br><span class="line">    try &#123;</span><br><span class="line">     interceptor.afterCompletion(request, response, this.handler, ex);</span><br><span class="line">    &#125; catch (Throwable ex2) &#123;</span><br><span class="line">     logger.error(&quot;HandlerInterceptor.afterCompletion threw exception&quot;, ex2);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -243,6 +303,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index/" rel="next" title="设计模式">
+                  设计模式 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

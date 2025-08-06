@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">255</span>
+          <span class="site-state-item-count">257</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -162,6 +162,95 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/40%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="VvfzZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VvfzZ">
+      <meta itemprop="description" content="寂寞不耐亦得耐">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | VvfzZ">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/4%E6%A1%88%E4%BE%8B/40%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor/" class="post-title-link" itemprop="url">40高性能队列Disruptor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-24 22:49:27" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:27+08:00">2025-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-16 21:19:48" itemprop="dateModified" datetime="2025-02-16T21:19:48+08:00">2025-02-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>高性能有界内存队列<br><strong>高性能原因</strong></p>
+<ul>
+<li>内存分配更加合理，RingBuffer结构，数组初始化一次性创建提升缓存命中，对象循环利用，避免GC</li>
+<li>避免伪共享</li>
+<li>无锁算法</li>
+<li>支持批量消费，消费者可无锁方式消费多个消息</li>
+</ul>
+<h1 id="避免为共享"><a href="#避免为共享" class="headerlink" title="避免为共享"></a>避免为共享</h1><p>由于共享缓存行导致缓存无效的场景<br>举例说明：<br>两个变量long l1 &#x3D; 1； long l2&#x3D;2；存储在数组中， CPU1、CPU2缓存行都加载了l1、l2，CPU1修改l1,CPU2缓存行 会失效，即使CPU2不操作l1也会失效，造成伪共享。</p>
+<p>避免缓存行失效，填充字节避免数据在一个缓存行<br>缺点：牺牲内存</p>
+<h1 id="无锁算法"><a href="#无锁算法" class="headerlink" title="无锁算法"></a>无锁算法</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>并发性能优化到极致，两个方向：</p>
+<ul>
+<li>无锁算法避免争用</li>
+<li>将CPU性能发挥到机制（填充方式避免伪共享就）</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -899,92 +988,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>等待唤醒机制的规范实现<br>GuardedObject<br>obj持有的受保护对象（回复消息）<br>调用者get() 获取受保护对象（回复消息），检查条件等待<br>消费者fireEvent()</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">class GuardedObject&lt;T&gt;&#123;</span><br><span class="line">  //持有受保护的对象</span><br><span class="line">  T obj;</span><br><span class="line">  final Lock lock = new ReentrantLock();</span><br><span class="line">  final Condition done =lock.newCondition();</span><br><span class="line">  final int timeout=2;</span><br><span class="line">  //保存所有GuardedObject</span><br><span class="line">  final static Map&lt;Object, GuardedObject&gt; gos=new ConcurrentHashMap&lt;&gt;();</span><br><span class="line">  //静态方法创建GuardedObject</span><br><span class="line">  static &lt;K&gt; GuardedObject create(K key)&#123;</span><br><span class="line">    GuardedObject go=new GuardedObject();</span><br><span class="line">    gos.put(key, go);</span><br><span class="line">    return go;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  static &lt;K, T&gt; void fireEvent(K key, T obj)&#123;</span><br><span class="line">    GuardedObject go=gos.remove(key);</span><br><span class="line">    if (go != null)&#123;</span><br><span class="line">      go.onChanged(obj);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  //事件通知方法</span><br><span class="line">  void onChanged(T obj) &#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">      this.obj = obj;</span><br><span class="line">      done.signalAll();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //获取受保护对象  </span><br><span class="line">  T get(Predicate&lt;T&gt; p) &#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">      //MESA管程推荐写法</span><br><span class="line">      while(!p.test(obj))&#123;</span><br><span class="line">        done.await(timeout, TimeUnit.SECONDS);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;catch(InterruptedException e)&#123;</span><br><span class="line">      throw new RuntimeException(e);</span><br><span class="line">    &#125;finally&#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    //返回非空的受保护对象</span><br><span class="line">    return obj;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//处理浏览器发来的请求</span><br><span class="line">Respond handleWebReq()&#123;</span><br><span class="line">  int id=序号生成器.get();</span><br><span class="line">  //创建一消息</span><br><span class="line">  Message msg1 = new </span><br><span class="line">    Message(id,&quot;&#123;...&#125;&quot;);</span><br><span class="line">  //创建GuardedObject实例</span><br><span class="line">  GuardedObject&lt;Message&gt; go=</span><br><span class="line">    GuardedObject.create(id);  </span><br><span class="line">  //发送消息</span><br><span class="line">  send(msg1);</span><br><span class="line">  //等待MQ消息</span><br><span class="line">  Message r = go.get(</span><br><span class="line">    t-&gt;t != null);  </span><br><span class="line">&#125;</span><br><span class="line">void onMessage(Message msg)&#123;</span><br><span class="line">  //唤醒等待的线程</span><br><span class="line">  GuardedObject.fireEvent(</span><br><span class="line">    msg.id, msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/30%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="VvfzZ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="VvfzZ">
-      <meta itemprop="description" content="寂寞不耐亦得耐">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | VvfzZ">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/JAVA/%E5%B9%B6%E5%8F%91/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%E5%B9%B6%E5%8F%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/30%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">30线程本地存储模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-04-24 22:49:26" itemprop="dateCreated datePublished" datetime="2025-04-24T22:49:26+08:00">2025-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-01-31 19:53:08" itemprop="dateModified" datetime="2025-01-31T19:53:08+08:00">2025-01-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>没有共享，就没有伤害</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">static class SafeDateFormat &#123;</span><br><span class="line">  //定义ThreadLocal变量</span><br><span class="line">  static final ThreadLocal&lt;DateFormat&gt;</span><br><span class="line">  tl=ThreadLocal.withInitial(()-&gt; new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">      </span><br><span class="line">  static DateFormat get()&#123;</span><br><span class="line">    return tl.get();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">//不同线程执行下面代码 返回的df是不同的</span><br><span class="line">DateFormat df = SafeDateFormat.get()；</span><br></pre></td></tr></table></figure>
-
-<h1 id="ThreadLocal的工作原理"><a href="#ThreadLocal的工作原理" class="headerlink" title="ThreadLocal的工作原理"></a>ThreadLocal的工作原理</h1><p>ThreadLocalMap,key:WeakReference<ThreadLocal>,value:Value</p>
-<h1 id="ThreadLocal与内存泄露"><a href="#ThreadLocal与内存泄露" class="headerlink" title="ThreadLocal与内存泄露"></a>ThreadLocal与内存泄露</h1><p>线程池中线程的存活时间长，往往和程序同生共死的，则Thread持有的ThreadLocalMap一直都不会被回收。<br>ThreadLocalMap中的Entry对ThreadLocal是弱引用（WeakReference），所以只要ThreadLocal结束了自己的生命周期是可以被回收掉的。但是Entry中的Value却是被Entry强引用的，所以即便Value的生命周期结束了，Value也是无法被回收的，从而导致内存泄露。</p>
-<p>解决办法：手动释放</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService es;</span><br><span class="line">ThreadLocal tl;</span><br><span class="line">es.execute(()-&gt;&#123;</span><br><span class="line">  //ThreadLocal增加变量</span><br><span class="line">  tl.set(obj);</span><br><span class="line">  try &#123;</span><br><span class="line">    // 省略业务逻辑代码</span><br><span class="line">  &#125;finally &#123;</span><br><span class="line">    //手动清理ThreadLocal </span><br><span class="line">    tl.remove();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h1 id="InheritableThreadLocal与继承性"><a href="#InheritableThreadLocal与继承性" class="headerlink" title="InheritableThreadLocal与继承性"></a>InheritableThreadLocal与继承性</h1><p>通过ThreadLocal创建的线程变量，其子线程是无法继承的(无法访问)</p>
-<p>不建议使用：线程池中线程的创建是动态的，很容易导致继承关系错乱，若业务逻辑依赖InheritableThreadLocal，那么很可能导致业务逻辑计算错误。</p>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>实际工作中，有很多平台型的技术方案都是采用ThreadLocal来传递一些上下文信息，例如Spring使用ThreadLocal来传递事务信息。我们曾经说过，异步编程已经很成熟了，那你觉得在异步场景中，是否可以使用Spring的事务管理器呢？<br>？？？</p>
-
       
     </div>
 

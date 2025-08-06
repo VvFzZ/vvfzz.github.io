@@ -1,0 +1,184 @@
+<hr>
+<h2 id="title-SpringIOC依赖查找tags-依赖查找description-SpringIOC依赖查找"><a href="#title-SpringIOC依赖查找tags-依赖查找description-SpringIOC依赖查找" class="headerlink" title="title: SpringIOC依赖查找tags: 依赖查找description: SpringIOC依赖查找"></a>title: SpringIOC依赖查找<br>tags: 依赖查找<br>description: SpringIOC依赖查找</h2><h1 id="单一类型依赖查找"><a href="#单一类型依赖查找" class="headerlink" title="单一类型依赖查找"></a>单一类型依赖查找</h1><p>单一类型查找接口 - BeanFactory</p>
+<ul>
+<li>根据名称查找</li>
+<li>根据类型查找<ul>
+<li>延迟查找<br>  getBeanProvider(Class)<br>  getBeanProvider(ResolvableType)</li>
+</ul>
+</li>
+<li>根据类型+名称查找</li>
+</ul>
+<pre><code>public class ObiectProviderDemo {
+    public static void main(String[]args){
+        // 创建 BeanFactory 容器
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+        //将当前类 ObjectProviderDemo 作为配置类(Configuration.Class)
+        applicationContext.register(ObjectProviderDemo.class);// 启动应用上下文
+        applicationContext.refresh();
+        // 依赖查找集合对象
+        lookupByObjectProvider(applicationContext);
+        // 关闭应用上下文
+        applicationContext.close();
+    }
+
+    @Bean
+    public String helloWorld(){ 
+        //方法名就是 Bean 名称=&quot;helloWorld&quot;
+        return &quot;Hello,World&quot;;
+    }
+
+    private static void lookupByObjectProvider(AnnotationConfigApplicationContext applicationcontext) {
+        ObiectProvider&lt;String&gt; objectProvider = applicationContext.getBeanProvider(String.class);
+        System.out.println(objectProvider.getObject());
+    }
+    
+}
+</code></pre>
+<h1 id="集合类型查找"><a href="#集合类型查找" class="headerlink" title="集合类型查找"></a>集合类型查找</h1><p>ListableBeanFactory<br>注：判断bean是否存在时使用Bean实例判断是否存在可能会使bean提前初始化，出现不可预料的问题<br>最好是判断BeanDefinition是否存在或使用Bean名称判断</p>
+<h1 id="层次性查找"><a href="#层次性查找" class="headerlink" title="层次性查找"></a>层次性查找</h1><h2 id="HierarchicalBeanFactory"><a href="#HierarchicalBeanFactory" class="headerlink" title="HierarchicalBeanFactory"></a>HierarchicalBeanFactory</h2><p>层次性依赖查找接口：<code>HierarchicalBeanFactory</code></p>
+<pre><code>interface HierarchicalBeanFactory extends BeanFactory {
+    BeanFactory getParentBeanFactory(); //设置父容器在ConfigurableBeanFactory#setParentBeanFactory
+    boolean containsLocalBean(String name); //查找本地Bean忽略父容器定义的bean，区别containsBean
+}
+</code></pre>
+<p><code>HierarchicalBeanFactory &lt;- ConfigurableBeanFactory &lt;- ConfigurableListableBeanFactory</code></p>
+<h2 id="BeanFactoryUtils"><a href="#BeanFactoryUtils" class="headerlink" title="BeanFactoryUtils"></a>BeanFactoryUtils</h2><ul>
+<li>查找实例<br>单一类型查找：BeanFactoryUtils#beanOfType<br>集合类型查找：BeanFactoryUtils#beanOfTypeIncludingAncestors</li>
+<li>查找名称<br>根据注解查找名称列表：beanNamesForTypeIncludingAncestors</li>
+</ul>
+<h1 id="延迟依赖查找"><a href="#延迟依赖查找" class="headerlink" title="延迟依赖查找"></a>延迟依赖查找</h1><p>相关接口</p>
+<ol>
+<li>ObjectFactory</li>
+<li>ObjectProvider extends ObjectFactory<br>spring 5 对java8特性扩展<ul>
+<li>函数式接口<br>  getAvailable(Supplier)<br>  ifAvailable(Consumer)</li>
+<li>stream扩展<br>  stream()</li>
+</ul>
+</li>
+</ol>
+<h1 id="安全依赖查找"><a href="#安全依赖查找" class="headerlink" title="安全依赖查找"></a>安全依赖查找</h1><p>不安全原因会爆异常：NoSuchBeanDefinitionException 或 BeanNotOfRequiredTypeException<br>单一类型查找</p>
+<ul>
+<li>BeanFactory#getBean  不安全</li>
+<li>ObjectFactory#getObject 不安全</li>
+<li>ObjectProvider#getlfAvailable 安全 （延迟加载推荐使用）</li>
+</ul>
+<p>集合类型查找</p>
+<ul>
+<li>ListableBeanFactory#getBeansOfType 安全</li>
+<li>ObjectProvider#stream 安全</li>
+</ul>
+<p>ObjectProvider支持单一和集合类型查找，推荐使用</p>
+<h1 id="内建可查依赖"><a href="#内建可查依赖" class="headerlink" title="内建可查依赖"></a>内建可查依赖</h1><p>AbstractApplicationContext内建可查依赖</p>
+<table>
+<thead>
+<tr>
+<th>Bean名称</th>
+<th>Bean实例</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>evironment</td>
+<td>Environment对象</td>
+<td>外部化配置(-D参数)及Profiles</td>
+</tr>
+<tr>
+<td>systemProperties</td>
+<td>java.util.Properties 对象</td>
+<td>Java 系统属性（如user.home用户目录）</td>
+</tr>
+<tr>
+<td>systemEnvironment</td>
+<td>java.util.Map 对象</td>
+<td>操作系统环境变量</td>
+</tr>
+<tr>
+<td>messageSource</td>
+<td>MessageSource 对象</td>
+<td>国际化文案</td>
+</tr>
+<tr>
+<td>lifecycleProcessor</td>
+<td>LifecycleProcessor 对象</td>
+<td>Lifecycle Bean 处理器</td>
+</tr>
+<tr>
+<td>applicationEventMulticaster</td>
+<td>ApplicationEventMulticaster 对象</td>
+<td>Spring 事件广播器</td>
+</tr>
+</tbody></table>
+<p>注解驱动 Spring 应用上下文内建可查找的依赖<br>源码查看<code>AnnotationConfigUtils</code></p>
+<table>
+<thead>
+<tr>
+<th>Bean名称</th>
+<th>Bean实例</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>org.springframework.context.annotation.internalConfigurationAnnotationProcessor</td>
+<td>ConfigurationClassPostProcessor对象</td>
+<td>处理Spring 配置类</td>
+</tr>
+<tr>
+<td>org.springframework.contextannotation.internalAutowiredAnnotationProcessor</td>
+<td>AutowiredAnnotationBeanPostProcessor 对象</td>
+<td>处理@Autowired 以及 @Value注解</td>
+</tr>
+<tr>
+<td>org.springframework.contextannotation.internalCommonAnnotationProcessor</td>
+<td>CommonAnnotationBeanPostProcessor对象</td>
+<td>(条件激活)处理 JSR-250 注解，如@PostConstruct等</td>
+</tr>
+<tr>
+<td>org.springframework.contextevent.internalEventListenerProcessor</td>
+<td>EventListenerMethodProcessor对象</td>
+<td>处理标注@EventListener的Spring 事件监听方法</td>
+</tr>
+<tr>
+<td>org.springframework.context.event.internalEventListenerFactory</td>
+<td>DefaultEventListenerFactory对象</td>
+<td>@EventListener事件监听方法适配为ApplicationListener</td>
+</tr>
+<tr>
+<td>org.springframework.context.annotation.internalPersistenceAnnotationProcessor</td>
+<td>PersistenceAnnotationBeanPostProcessor 对象</td>
+<td>(条件激活)处理JPA注解场景</td>
+</tr>
+</tbody></table>
+<h1 id="依赖查找中的经典异常"><a href="#依赖查找中的经典异常" class="headerlink" title="依赖查找中的经典异常"></a>依赖查找中的经典异常</h1><p>BeansException 子类型</p>
+<table>
+<thead>
+<tr>
+<th>异常类型</th>
+<th>触发条件(举例)</th>
+<th>场景举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NoSuchBeanDefinitionException</td>
+<td>当查找 Bean 不存在于 loC 容器时</td>
+<td>BeanFactory#getBeanObiectFactory#getObiect</td>
+</tr>
+<tr>
+<td>NoUniqueBeanDefinitionException</td>
+<td>类型依赖查找时，IoC容器存在多个 Bean 实例</td>
+<td>BeanFactory#getBean(Class)</td>
+</tr>
+<tr>
+<td>BeanInstantiationException</td>
+<td>当 Bean 所对应的类型非具体类时(如抽象类)</td>
+<td>BeanFactory#getBean</td>
+</tr>
+<tr>
+<td>BeanCreationException</td>
+<td>当Bean 初始化过程中(如@PostPostConstruct)</td>
+<td>Bean 初始化方法执行异常</td>
+</tr>
+<tr>
+<td>BeanDefinitionStoreException</td>
+<td>当 BeanDefinition 配置元信息非法时</td>
+<td>XML配置资源无法打开时</td>
+</tr>
+</tbody></table>
